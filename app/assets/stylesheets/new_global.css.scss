@@ -1,0 +1,84 @@
+/* BUTTONS */
+
+  /*grey_button*/
+.button_gray {
+  & > div {
+    float:left;
+    height: 21px;
+  }
+  .left {
+    background: url("/assets/global/gray_button/left.png") no-repeat scroll left top transparent;
+    width: 6px;
+  }
+  .middle {
+    background: url("/assets/global/gray_button/middle.png") repeat-x scroll left top transparent;
+    padding: 0px 4px 0px 2px;
+    span {
+      background: url("/assets/search_map/sm_arrow_down.png") no-repeat scroll 0px 0px transparent;
+      height: 3px;
+      width: 5px;
+      margin-left:5px;
+      margin-top:8px;
+      float:left;
+    }
+    a {
+      color: #EEEEEE;
+      display: block;
+      font-family: Arial;
+      font-size: 11px;
+      padding-top: 4px;
+      height:78%;
+      float:left;
+    }
+  }
+  .right {
+    background: url("/assets/global/gray_button/right.png") no-repeat scroll right top transparent;
+    height: 21px;
+    width: 4px;
+  }
+}
+
+.button_gray.active {
+  .left {
+    background: url("/assets/global/gray_button/active/left.png") no-repeat scroll left top transparent;
+    width:7px;
+  }
+  .middle {
+    background:url("/assets/global/gray_button/active/middle.png") repeat-x scroll left top transparent;
+    padding-right:1px;
+    a {
+      font-weight: bold;
+    }
+  }
+  .right {
+    background: url("/assets/global/gray_button/active/right.png") no-repeat scroll right top transparent;
+    width:8px;
+  }
+}
+  /*end grey_button*/
+
+  /*square_grey_button*/
+.button_gray_square {
+  background: url("/assets/global/square_button/button.png") no-repeat scroll 0 0 transparent;
+  cursor:pointer;
+  width:23px;
+  height:22px;
+  .sign.map {
+    background: url("/assets/global/square_button/map_black.png") no-repeat scroll 5px 4px transparent;
+    width:100%;
+    height:100%;
+  }
+  &:hover {
+    .sign.map {
+      background: url("/assets/global/square_button/map_white.png") no-repeat scroll 5px 4px transparent;
+    }
+
+  }
+}
+
+.button_gray_square.active {
+  background: url("/assets/global/square_button/button_active.png") no-repeat scroll 0px 0px transparent;
+  .sign.map {
+    background: url("/assets/global/square_button/map_white.png") no-repeat scroll 6px 4px transparent;
+  }
+}

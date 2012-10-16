@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  start_at: 
+  picture: 
+  kind: 
+  title: 
+  place: 
+
+two:
+  start_at: 
+  picture: 
+  kind: 
+  title: 
+  place: 

@@ -1,0 +1,32 @@
+- if @place.near.present? and @place.near.size > 0
+  .sidebar.sidebar_stars.near_place{:style => 'width:300px;margin-bottom:20px;'}
+    .header_gray
+      %span.title
+        Места поблизости
+      .buttom_second.map
+        .back_left
+          .back_right
+            .back_center
+              %img{:src => '/assets/global/map.png'}
+      .buttom_second.list.active
+        .back_left
+          .back_right
+            .back_center
+              %img{:src => '/assets/global/list.png'}
+    .points_bottom.cf.first
+      %img{src: @place.near[0].picture}
+      .description
+        .header_blue= link_to @place.near[0].name, place_path(@place.near[0])
+        .big_numb_stars
+          .big_stars{:class => "stars#{@place.near[0].rating.to_i}"}
+          .number= @place.near[0].reviews.count
+        .text= @place.near[0].address
+    - @place.near[1..(@place.near.length)].each do |place|
+      .points_bottom
+        =link_to place.name, place_path(place), class: 'header_blue'
+        .numb_stars
+          .small_stars{:class => "stars#{place.rating.to_i}"}
+          .number= place.reviews.count
+        .text= place.address
+    .link_gray.cf
+      %a{:href => '#'} Показать все

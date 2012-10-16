@@ -1,0 +1,50 @@
+= form_tag places_path(params), method: 'get', id: 'filter', remote: true do
+  #filtres
+    .sidebar
+      .header_gray.cf
+        %span.title= @what
+        .sity_map= @where
+        - @entities.each do |entity|
+          .buttom_second.active
+            .back_left
+              .back_right
+                .back_center
+                  %span= entity[:label]
+    .choice
+      %ul.mainchoice
+        %li.col
+          %ul.category
+            %li.header Категория
+            - @categories.each do |cat|
+              %li.element
+                %label
+                  %input.filter_val{type: 'checkbox', name: "category[#{cat.id}]", value: cat.name }
+                  %span= cat.name
+            %li.more
+              %span.more_category_btn Еще
+        %li.col
+          %ul.kitchen
+            %li.header Кухня
+            - @kitchens.each do |kitchen|
+              %li.element
+                %label
+                  %input.filter_val{:type => 'checkbox', name: "kitchen[#{kitchen.id}]", value: kitchen.name }
+                  %span= kitchen.name
+            %li.more
+              %span.more_kitchen_btn Еще
+        %li.col
+          %ul
+            %li.header Средний чек
+            - @avgbills.each do |avgbill|
+              %li
+                %label
+                  %input.filter_val{:type => 'checkbox', name: "avgbill[#{avgbill[:value]}]", value: avgbill[:value] }
+                  %span= avgbill[:labels][0]
+        %li.col
+          %ul
+            %li.header Расстояние
+            - @distances.each do |distance|
+              %li
+                %label
+                  %input.filter_val{type: 'checkbox', name: "distance[#{distance[:value]}]", value: distance[:value] }
+                  %span= distance[:labels][0]

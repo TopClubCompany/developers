@@ -1,0 +1,230 @@
+
+/**/
+.super_list {
+  float:left;/*time!!!!*/
+  .direction {
+    padding-right: 15px;
+    min-height: 21px;
+    background: url(/assets/global/buttom_second/direction.png) right 9px no-repeat;
+    position:relative;
+  }
+  &.active {
+    .black_list{
+      display:block;
+    }
+  }
+  .black_list{
+    display:none;
+    background:#000;
+    min-height: 20px;
+    min-width: 30px;
+    position:absolute;
+    top:25px;
+    left: -3px;
+    @include rounded_corners(3px);
+    background:url(/assets/global/super_list/back_super_list.png) left top repeat;
+  }
+}
+/*Блок "Места по близости"*/
+.sidebar {
+  .points_bottom {
+    padding-bottom: 6px;
+  }
+  .numb_stars {
+    float:right;
+  }
+  .header_blue{
+    font-size:12px;
+  }
+  .buttom_second,.gray_button{
+    float:right;
+    margin:0px 5px 0px 0px
+  }
+  .text {
+    float:none;
+    clear:both;
+  }
+}
+.sidebar_stars{
+  .stars_mini{
+    float:right;
+  }
+  .small_stars{
+    float:right;
+  }
+  .header_blue{
+    float:left;
+  }
+}
+/*tape_menu and modiff tape_menu*/
+.tape_menu{
+  .foto{
+    float:left;
+    margin: 0 7px 0 0;
+    img{
+      margin: 10px 0 0 1px
+    }
+  }
+  .points_bottom {
+    padding-bottom: 5px;
+  }
+  .description{
+    float:left;
+    margin-top: 8px;
+    .name,.date,.sity{
+      font-size: 10px;
+      float:left;
+    }
+    .name{
+      color:#666;
+      letter-spacing: -0.2px;
+    }
+    .date{
+      color:#999;
+      letter-spacing: -0.3px;
+      padding-left: 9px;
+      background:url(/assets/global/sidebar/point.jpg) 4px 5px no-repeat;
+    }
+    .sity{
+      color:#ff8120;
+      padding-left: 8px;
+      background:url(/assets/global/sidebar/point.jpg) 3px 5px no-repeat;
+    }
+  }
+  .header_blue{
+    line-height: 1.5em;
+    margin-left: 51px;
+    margin-top: 0;
+    padding-top: 20px;
+    display:block;
+    }
+}
+
+/*near_place menu*/
+.near_place{
+  .first{
+    img{
+      float:left;
+      position:relative;
+      top:1px;
+    }
+    .description{
+      float:left;
+      padding-left: 6px;
+      .big_numb_stars{
+        margin-top: 5px;
+      }
+      .text{
+        top:0;
+        margin-top: 3px;
+      }
+    }
+    .header_blue{
+      float:none;
+      font-size:14px;
+      margin-left:1px;
+    }
+  }
+  .points_bottom{
+    padding-top: 9px;
+    padding-bottom: 11px;
+  }
+  .text {
+    color:#999;
+    font-size:10px;
+    position: relative;
+    top: -1px;
+  }
+  .buttom_second{
+    border:none;
+    &.map{
+      margin-right: 7px;
+    }
+    img{
+      margin: 2px 1px 0;
+    }
+  }
+}
+
+/*steam*/
+.activity_feed{
+  .big_stars{
+    float:right;
+    margin: 3px -1px 0 0;
+  }
+  .foto_feed{
+    margin:0 10px;
+  }
+  .short{
+    color: #666;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1.4em;
+    margin:5px 10px 0 10px;
+    .name{
+      color:#0086df;
+    }
+  }
+  .date{
+    color:#333;
+    font-size: 11px;
+    margin:5px 10px 0 10px;
+  }
+  .rating{
+    margin: 7px 10px 0 10px;
+    .goodAmap{
+      float:left;
+      margin:1px 0 0 1px;
+    }
+  }
+  .comm_border{
+    border-top: 1px solid #d5d5d5;
+  }
+  .comment_user{
+    margin-top: 9px;
+  }
+  .place_event{
+      border:none !important;
+      .name{
+        color:#666;
+        font-weight: normal !important;
+      }
+      .comment{
+        color:#666;
+      }
+  }
+  .comments{
+    font-size: 11px;
+    padding: 9px 10px 9px;
+    border-top:1px solid #fff;
+    .avatar{
+      float:left;
+      width: 29px;
+      img{
+        margin:1px 0 0 -1px;
+      }
+    }
+    .mesage{
+      float:left;
+      input{
+        border: 1px solid #D5D5D5;
+        color: #999999;
+        font-size: 9px;
+        margin-top: 1px;
+        padding: 5px 0 10px 5px;
+        width: 134px;
+      }
+    }
+    .name{
+      color:#333;
+      font-weight: bold;
+    }
+    .comment{
+      color:#666;
+      margin-top: 5px;
+    }
+  }
+}
+
+
+/*steam end*/

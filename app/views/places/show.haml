@@ -1,0 +1,141 @@
+.central_module.place
+  .left_module
+    .page_navigation
+      .beginning
+        %a{:href => '/'} &nbsp;
+      .transition
+      .middle
+        %a{:href => '#'} Киев
+      .transition
+      .middle
+        %a{:href => '#'} Путеводитель
+      .transition
+      .middle
+        %a{:href => '#'} Рестораны
+      .transition
+      .middle
+        %span= @place.name
+      .end
+    .facility
+      .fac_type
+      .fac_info
+        %h1= @place.name
+        %p.descr= @place.description
+        %p.addr
+          =@place.phone
+          =@place.address
+        =link_to @place.url, @place.url
+      .fac_label
+    .review
+      .orange_button
+        .left
+        .middle
+          %a{:href => '#'} Добавить резензию
+        .right
+      #rating.stars
+      %p.amnt 21 рецензия
+      %p.ur_rate Ваша оценка:
+      #user_rating.stars
+      .rating_result &nbsp;
+    .action_btns
+      .act_btn.favorits
+        .left
+        .middle
+          .lft_icon
+          =link_to 'Добавить в избранное', favorite_place_path(@place), class: 'add_to favorite',  remote: true, method: 'post'
+          .rght_icon
+        .right
+      .act_btn.add_plans
+        .left
+        .middle
+          .lft_icon
+          =link_to 'Добавить в планы', planned_place_path(@place), class: 'add_to planned', remote: true, method: 'post'
+          .rght_icon
+        .right
+      .act_btn.check_in
+        .left
+        .middle
+          .lft_icon
+          =link_to 'Отметиться', visited_place_path(@place), class: 'add_to visited', remote: true, method: 'post'
+          .rght_icon
+        .right
+      .act_btn.share
+        .left
+        .middle
+          .lft_icon
+          %a.addthis_button{href:"http://www.addthis.com/bookmark.php?v=250", style: 'display:none;'}
+          %script{type: "text/javascript", src: "http://s7.addthis.com/js/250/addthis_widget.js"}
+          %a#at_button Поделиться
+          .rght_icon
+        .right
+    .map#map
+    .facil_lists
+      %ul.left_list
+        %li График работы: <span>11:00 - 24:00</span>
+        %li
+          Кухня:
+          %span= @place.kitchen.name
+        %li Платежные карты: <span>MasterCard/EuroCard, Visa</span>
+        %li Развлечения: <span>TV/Video, Wi-Fi, Презентации</span>
+        %li Музыка: <span>фоновая</span>
+        %li Парковка: <span>охраняемая, уличная</span>
+      %ul.right_list
+        %li
+          Ценовая политика:
+          - dols = ""; @place.avgbill.to_i.times{ dols << "$" }
+          %span.dol= dols
+        %li Предложения: <span>банкеты, бесплатный Wi-Fi, бизнес-ланч,<br/>десерт-меню, карта вин</span>
+        %li Платежные карты: <span>MasterCard/EuroCard, Visa</span>
+        %li Развлечения: <span> TV/Video, Wi-Fi, презентации</span>
+        %li Дополнительно: <span> банетный звл,кальян, летняя веранда,<br />столики для некурящих</span>
+    .photos_module
+      %h1.title Фотографии
+      .btn
+        .action_btns
+          .act_btn
+            .left
+            .middle
+              %a{:href => '#'} Добавить фото
+            .right
+      .photos
+        .photo_wrap
+          %img{:src => '/assets/places/photo4.png'}
+        .photo_wrap
+          %img{:src => '/assets/places/photo3.png'}
+        .photo_wrap.vert
+          %img{:src => '/assets/places/photo2.png'}
+        .photo_wrap
+          %img{:src => '/assets/places/photo1.png'}
+        .all_photo
+          %a{:href => '#'} Все фото
+    .tabs_module
+      %ul
+        %li.eage
+        %li{:block =>'review_block'} Заметки и рецензии
+        %li{:block =>'about_block'}  О заведении
+        %li{:block =>'event_block'}  События
+        %li{:block =>'news_block'}   Новости
+        %li.last{:block =>'menu_block'} Меню
+      =render 'reviews'
+      =render 'about'
+      =render 'events'
+      =render 'notes'
+      =render 'menu'
+  .right_module
+    .statistic_module
+      .wrap
+        .favr
+          %img{:src => '/assets/global/b_favr.png'}
+          %p Добавили<br /> в избранное
+          %h1#favorite= @place.in_favorites.count
+        .plan_visit
+          %img{:src => '/assets/global/b_plan_visit.png'}
+          %p Планируют<br /> посетить
+          %h1#planned= @place.in_planes.count
+        .checked_in
+          %img{:src => '/assets/global/b_check_in.png'}
+          %p Отметились<br /> в заведении
+          %h1#visited= @place.in_visited.count
+    = render 'near'
+    = render :partial => "shared/advertising", :locals => {}
+    = render 'selections'

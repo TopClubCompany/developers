@@ -1,0 +1,52 @@
+.central_module.explorer
+  .places
+    .black_module
+      %h1 Места
+      .buttons
+        .button_gray.active
+          .left
+          .middle
+            %a{:href => '#'} Рекомендуемые
+          .right
+        .button_gray
+          .left
+          .middle
+            %a{:href => '#'} По местоположению
+          .right
+        .button_gray
+          .left
+          .middle
+            %a{:href => '#'} По интересам
+          .right
+        .to_big_map
+          %a{:href => '/search_map'} &nbsp;
+    = render 'recomended'
+    .bdy#map
+  = render :partial => "shared/advertising", :locals => {}
+  .border
+  .middle_module
+    .three_blocks
+      - @categories.first(3).each do |cat|
+        = render 'category', cat: cat
+    .border
+      .entertain_module
+        .header_grey Все развлечения
+        %table{:border => "0", :cellspacing => "0", :cellpadding => "0", class: 'all_categories'}
+          %tbody
+            - @categories.first(19).each_slice(4) do |cat_slice|
+              %tr
+                - cat_slice.each do |cat|
+                  %td
+                    .icon{class: cat.icon }
+                    =link_to cat.name, '#'
+    .border
+    .three_blocks.bottom
+      - @categories.offset(3).first(3).each do |cat|
+        =render 'category', cat: cat
+  .right_module
+    = render 'reviews'
+    = render 'selections'
+
+  .four_rect
+    - 4.times do
+      .round_rect

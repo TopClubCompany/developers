@@ -1,0 +1,25 @@
+.entertain_block
+  .header_grey
+    = header
+  %img{:src => main[:image_path]}
+  .description
+    %a{:href=> main[:link]}
+      = main[:name]
+    .big_stars{:class => "stars#{main[:stars]}"}
+    .beg_time
+      = main[:address]
+  .other_facils
+    %table{:border => "0", :cellspacing => "0", :cellpadding => "0"}
+      %tbody
+        - others.each do |key, value|
+          %tr
+            %td
+              %a.header_blue{:href => value[:link]}
+                = value[:name]
+              %p.text_grey
+                = value[:address]
+            %td.al_right
+              .small_stars{:class => "stars#{value[:stars]}"}
+    .arrow_right
+    %a.footer_ref{:href => footer[:link]}
+      = footer[:name]

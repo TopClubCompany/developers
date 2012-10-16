@@ -1,0 +1,364 @@
+.stream{
+  padding-top: 9px;
+}
+.narrow_floated {
+  width:620px !important;
+  float:left !important;
+}
+.stream.list{
+  .mainsteam{
+    width: 620px;
+    float: left;
+  }
+  .right_feed,.feed_event_list{
+    display:block;
+  }
+  .feed_event_blocks{
+    display:none;
+  }
+}
+.stream.blocks{
+  .mainsteam{
+    width: auto;
+    float: none;
+  }
+  .right_feed,.feed_event_list{
+
+  }
+  .feed_event_blocks{
+    display:block;
+  }
+}
+.central_module.stream{
+  .pointer {
+    display: block;
+    cursor: pointer;
+    width: 16px;
+    height: 18px;
+  }
+  .sidebar{
+    .list{ 
+      margin-right:7px;
+      .pointer{
+        background: url(/assets/global/sprites/list_black.png) 1px 3px no-repeat;
+      }
+    }
+    .block{
+      margin-right: 7px;
+      .pointer{
+        background: url(/assets/global/sprites/blocks_black.png) 1px 2px no-repeat;
+        width:15px;
+      }
+    }
+    .map .pointer{
+      background: url(/assets/global/sprites/map_black.png) 1px 3px no-repeat;
+      width:15px;
+    }
+    .active.list,.list:hover{
+      .pointer{
+        background: url(/assets/global/sprites/list_white.png) 1px 3px no-repeat;
+      }
+    }
+    .active.map,.map:hover{
+      .pointer{background: url(/assets/global/sprites/map_white.png) 1px 3px no-repeat;}
+    }
+    .active.block,.block:hover{
+      .pointer{
+        background: url(/assets/global/sprites/blocks_white.png) 1px 2px no-repeat;
+      }
+    }
+  }
+  .nav{
+    float: left;
+    width: 139px;
+    padding-right:1px;
+    background:url(/assets/stream/back_nav.png) top right no-repeat;
+    min-height: 500px;
+    margin-top: 10px;
+    li {
+      cursor: pointer;
+    }
+    a:hover{
+      text-decoration: none;
+    }
+    span{
+      display: block;
+      float: left;
+      height: 13px;
+      margin: 9px 7px 0 8px;
+      width: 13px;
+      background-image:url(/assets/global/sprites/small_stars_sprite.png);
+      background-position: -41px 0;
+    }
+    a{
+      color:#555;
+      display: block;
+      font-size: 11px;
+      padding: 11px 0 7px;
+      float:left;
+    }
+    .active{
+      background:url(/assets/stream/back_li.png) top right repeat-y;
+      a{
+        color:#333;
+        font-weight: bold;
+      }
+    }
+    li{
+      border-bottom: 1px dotted #ccc;
+      min-height: 20px; 
+    }
+    li:hover {
+      background:url(/assets/stream/back_li.png) top right repeat-y;
+    }
+    .feed{
+      span{
+        height: 12px;
+      }
+    }
+    .attains{
+      span{
+        margin: 10px 7px 0 8px;
+        background-position: -41px -12px;
+        height: 11px;
+      }
+    }
+    .friends{
+      .number{
+        float:right;
+        margin: 7px 7px 0 0;
+        .buttom{
+          cursor:default;
+        }
+        .back_left{
+          background:url(/assets/global/friend/left.png) top left no-repeat;
+        }
+        .back_right{
+          background:url(/assets/global/friend/right.png) top right no-repeat;
+        }
+        .back_center{
+          background:url(/assets/global/friend/middle.png) top left repeat-x;
+          min-height:14px;
+          font-size: 11px;
+          color:#999;
+          text-align: center;
+          font-weight: bold;
+          margin:0 6px;
+          padding-top: 3px;
+        }
+      }
+      span{
+        margin: 10px 7px 0 8px;
+        background-position: -41px -23px;
+        height: 11px;
+      }
+    }
+    .interest{
+      span{
+        margin: 10px 7px 0 8px;
+        background-position: -41px -34px;
+        height: 10px;
+      }
+    }
+    .plan{
+      span{
+        margin: 9px 8px 0 7px;
+        background-position: -41px -44px;
+        height: 12px;
+      }
+    }
+    .selection a,.foto a,.history a,.elect a,.add a{
+      color:#999;
+    }
+    .selection{
+      span{
+        margin: 11px 8px 0 7px;
+        background-position: -41px -56px;
+        height: 9px;
+      }
+    }
+    .foto{
+      span{
+        margin: 12px 8px 0 7px;
+        background-position: -41px -65px;
+        height: 7px;
+      }
+    }
+    .history{
+      span{
+        margin: 11px 8px 0 7px;
+        background-position: -41px -72px;
+        height: 11px;
+      }
+    } 
+    .elect{
+      span{
+        margin: 10px 8px 0 7px;
+        background-position: -41px -83px;
+        height: 11px;
+      }
+    }
+    .add{
+      span{
+        background-position: -41px -94px;
+        height: 13px;
+      }
+    }
+  }
+  .feed_event_blocks{
+    float: left;
+    left: 2px;
+    margin: 8px 0 0 0;
+    position: relative;
+    vertical-align: top;
+    .column_feed{
+      float:left;
+      margin: 0 0 0 6px;
+    }
+  }
+  .activity_feed{
+    margin-bottom: 4px;
+  }
+  .loader_feed{
+    color:#999;
+    font-size: 11px;
+    text-align:center;
+    clear: both;
+    padding-top:16px;
+    padding-bottom: 60px;
+    padding:16px 0 60px 0;
+    .loader_feed_text{
+      padding-top:10px;
+      border-top: 1px solid #d5d5d5;
+      margin: 0 2px 0 7px;
+    }
+  }
+  .right_feed{
+    float:left;
+    margin: 0 0 0 20px;
+    .tape_menu{
+      margin: 18px 0 0;
+      .header_blue a{
+        color:#0086DF;
+      }
+    }
+  }
+  .feed_event_list{
+    overflow: hidden;
+    float:left;
+    width:460px;
+    margin: -15px 0 0 20px;
+    .i_go_number{
+      float:right;
+      margin-top: -1px;
+    }
+    .event{
+      border-top: 1px dotted #CCCCCC;
+      width:100%;
+      margin-top: 11px;
+      padding: 16px 0 0px;
+      .second{
+        vertical-align: top;
+        white-space: nowrap;
+        width: 21%;
+      }
+      .fotouser{
+        float:left;
+      }
+      .topic{
+        float:left;
+        width:400px;
+        margin-left:10px;
+        table.head_date{
+          width: 100%;
+          td{
+            vertical-align: top;
+          }
+        }
+        .name{
+          color:#0086df;
+          font-weight: bold;
+        }
+        .header {
+          color:#999;
+          font-size: 13px;
+          line-height: 1.4em;
+          margin-top: -5px;
+        }
+        .date{
+          color:#333;
+          font-size: 11px;
+          margin-top: 3px;
+          margin-bottom: 7px;
+        }
+        .address{
+          color:#999;
+          font-size: 11px;
+          margin-top: 5px;
+        }
+        .username{
+          color:#666;
+          font-size: 11px;
+          float:left;
+          padding-right:6px;
+          background:url(/assets/global/sidebar/point_two.jpg) right 4px  no-repeat;
+          margin-right:4px;
+        }
+        .usermesage{
+          margin: 9px 0 0;
+          color:#333;
+          font-size: 12px;
+          td{
+            vertical-align:top;
+          }
+        }
+        .goodAmap{
+          margin-top: -1px;
+        }
+        .big_stars{
+          margin:0 0 0 27px;
+        }
+        .live{
+          float:left;
+          margin-right: 10px;
+        }
+        .description{
+          line-height: 1.5em;
+        }
+        .fotomesage {
+        float:left;
+          img{
+            margin-bottom: 11px;
+          }
+        }
+        .textuser{
+          float:left;
+          line-height:1.5;
+          margin-left:10px;
+        }
+      }
+    }
+
+    .event_bottom{
+      border-top:1px solid #ccc;
+      font-size: 12px;
+      color:#666;
+      margin-top: 15px;
+      .invite_friends{
+        line-height: 1.6em;
+        margin-top: 16px;
+        float:left;
+        a{
+          color:#0086df;
+        }
+      }
+      .ready{
+        font-weight: bold;
+      }
+      .invite{
+        float:right;
+        margin-top: 20px;
+      }
+    }
+  }
+}

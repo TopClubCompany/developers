@@ -1,0 +1,20 @@
+.entertain_block
+  .header_grey= cat.name
+  - main_place = cat.places.first(5)[0]
+  %img{src: main_place.picture}
+  .description
+    = link_to main_place.name, place_path(main_place)
+    .big_stars{:class => "stars#{main_place.rating.to_i}"}
+    .beg_time= main_place.address
+  .other_facils
+    %table{:border => "0", :cellspacing => "0", :cellpadding => "0"}
+      %tbody
+        - cat.places.first(5)[1..4].each do |place|
+          %tr
+            %td
+              =link_to place.name, place_path(place), class: 'header_blue'
+              %p.text_grey= place.address
+            %td.al_right
+              .small_stars{:class => "stars#{place.rating.to_i}"}
+    .arrow_right
+    =link_to cat.name, '#', class: 'footer_ref'

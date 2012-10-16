@@ -1,0 +1,40 @@
+@mixin gradient($start, $stop) {
+  background: $start;
+  background: -moz-linear-gradient(top, $start 0%, $stop 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $start), color-stop(100%, $stop));
+  background: -webkit-linear-gradient(top, $start 0%, $stop 100%);
+  background: -o-linear-gradient(top, $start 0%, $stop 100%);
+  background: -ms-linear-gradient(top, $start 0%, $stop 100%);
+  background: linear-gradient(top, $start 0%, $stop 100%);
+  -pie-background: linear-gradient(top, $start 0%, $stop 100%);
+  behavior: url(/assets/modules/PIE.htc);
+}
+
+@mixin gradient_radial($start, $stop) {
+  background: $start;
+  background: -webkit-gradient(radial, 40% 40%, 0, 40% 40%, 60, from($start), to($stop));
+  background: -moz-radial-gradient(40% 40%, farthest-side, $start, $stop);
+  background-image: -webkit-radial-gradient(center 45deg, circle closest-side, $start 0%, $stop 100%);
+  background-image: -moz-radial-gradient(center 45deg, circle closest-side, $start 0%, $stop 100%);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient (GradientType=1, startColorstr="$start", endColorstr="$stop")";
+}
+
+@mixin centred_block($wdth) {
+  width:$wdth;
+  margin:0 auto;
+}
+
+@mixin rounded_corners($radius)
+{
+  @include border-radius($radius);
+  behavior: url(/assets/modules/PIE.htc);
+}
+
+@mixin no_text_selection {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
