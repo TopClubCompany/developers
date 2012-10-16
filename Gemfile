@@ -50,6 +50,7 @@ group :development, :test do
     gem 'growl_notify'
   end
 
+  gem 'database_cleaner'
   gem 'simplecov', :require => false
   gem "rspec-rails", ">= 2.10.1"
   gem "factory_girl_rails", ">= 3.3.0"
