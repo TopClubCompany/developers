@@ -27,3 +27,4 @@ gem 'devise'
 
 gem 'kaminari'
 gem 'unicode_utils' # For unicode-strings downcase method o_O !!!
+gem 'unicorn'
