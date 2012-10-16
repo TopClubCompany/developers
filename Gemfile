@@ -21,7 +21,7 @@ gem 'machinist'
 
 gem 'geokit'
 gem 'geokit-rails3'
-gem 'geokit-nominatim', :git => 'git://github.com/sobakasu/geokit-nominatim.git'
+gem 'geokit-nominatim'#, :git => 'git://github.com/sobakasu/geokit-nominatim.git'
 gem 'tire'
 gem 'devise'
 

@@ -22,3 +22,7 @@
 .idea/workspace.xml
 workspace.xml
 /app/assets/javascripts/front/templates/pages/sandbox/.idea
+.rvmrc
+vendor/bundle/
+Gemfile.lock
+bin/

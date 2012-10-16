@@ -20,7 +20,7 @@
 //=require jquery.raty
 //=require html5
 //=require textshadow
-//=require visual
+//q=require visual
 //=require custom_elements
 //=require waypoints
 //=require styx
