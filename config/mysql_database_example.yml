@@ -20,4 +20,5 @@ production:
 
 #for cucumber
 cucumber:
-  <<: *test
+  <<: *common
+  database: top_c_test
