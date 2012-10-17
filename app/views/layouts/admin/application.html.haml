@@ -1,0 +1,32 @@
+!!!
+%html{:id => "controller_#{controller_name}"}
+  %head
+    %meta{:charset => "utf-8"}
+    %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1"}
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1"}
+    %title= @page_title || "Admin"
+    = stylesheet_link_tag "admin/application", :media => "all"
+    %script(src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js")
+    %script(src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js")
+    = javascript_include_tag "admin/application"
+    -#= javascript_include_tag "/assets/ckeditor/init" unless collection_action?
+    = csrf_meta_tags
+    = yield(:head)
+  %body{:id => "action_#{action_name}"}
+    #loading.label.label-warning= t 'admin.loading'
+    = render 'admin/shared/navigation'
+
+    #main{:role => "main"}
+      .container-fluid
+        .row-fluid
+          = flash_block
+          .wrap_content
+            - css_classes = collection_action? ? "#{'content_with_sidebar' if settings[:sidebar]} #{'well' if settings[:well]}" : ''
+            .clearfix{'data-pjax-container' => true, :class => css_classes}
+              = render :template => 'layouts/admin/pjax'
+          - if collection_action? && settings[:search]
+            .sidebar.well= render 'search_layout'
+    = cache [I18n.locale, 'admin', 'footer'] do
+      = render 'admin/fileupload/tmpl'
+      = render 'admin/fileupload/ftmpl'
+

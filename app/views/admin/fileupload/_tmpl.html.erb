@@ -1,0 +1,16 @@
+<script id="fileupload_tmpl" type="text/x-jquery-tmpl" xmlns="http://www.w3.org/1999/html">
+<div class="asset ill" data-id="${id}" id="asset_${id}">
+  <%= link_to image_tag("/images/admin/empty.gif", :alt => t('admin.fileupload.delete'), :title => t('admin.fileupload.delete')),
+          "/admin/assets/${id}", 
+          :remote => true,
+          :method => :delete, 
+          :data => {:confirm => t('admin.delete_confirmation')},
+          :class => "fileupload-cancel del" %>
+
+  <span class="main_image" data-id="${id}"><%= t('admin.set_main') %></span>
+
+  <a href="${url}" class="fileupload-file fancybox" target="_blank">
+    <img src="${thumb_url}" title="${filename}">
+  </a>
+</div>
+</script>

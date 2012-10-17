@@ -1,0 +1,15 @@
+<script id="fileupload_ftmpl" type="text/x-jquery-tmpl" xmlns="http://www.w3.org/1999/html">
+  <div class="asset ill" id="asset_${id}">
+    <%= link_to image_tag("/images/admin/empty.gif", :alt => t('admin.fileupload.delete'), :title => t('admin.fileupload.delete')),
+                "/admin/assets/${id}",
+                :remote => true,
+                :method => :delete,
+                :data => {:confirm => t('admin.delete_confirmation')},
+                :class => "fileupload-cancel del",
+                :style => 'left: 0;'%>
+
+
+      <img width="80" height="80" src="${thumb_url}" title="${filename}">
+    <span> ${filename} </span>
+  </div>
+</script>

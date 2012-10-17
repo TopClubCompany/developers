@@ -15,7 +15,11 @@ module Topclub
     # -- all .rb files in that directory are automatically loaded.
 
     # Custom directories with classes and modules you want to be autoloadable.
-    # config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += %W(#{config.root}/app/models/type_models
+                                #{config.root}/app/models/user_models
+                                #{config.root}/app/models/asset_models
+                                #{config.root}/app/models/defaults
+                                #{config.root}/lib)
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -48,6 +52,10 @@ module Topclub
     # in your app. As such, your models will need to explicitly whitelist or blacklist accessible
     # parameters by using an attr_accessible or attr_protected declaration.
     # config.active_record.whitelist_attributes = true
+    # back
+    config.assets.precompile += %w(admin/application.js jquery.ui.nestedSortable.js)
+
+    config.assets.precompile += %w(admin/application.css nested_set.css the_sortable_tree.css)
 
     # Enable the asset pipeline
     config.assets.enabled = true

@@ -24,4 +24,13 @@ Topclub::Application.routes.draw do
       get :stream
     end
   end
+
+  namespace :admin do
+    root :to => "dashboards#index"
+    resources :dashboards
+    resources(:users) do
+      post :batch, :on => :collection
+      post :activate, :suspend, :on => :member
+  end
+  end
 end

@@ -1,0 +1,37 @@
+%table.table.table-striped.index_table#list
+  %thead
+    %tr.pjax_links
+      = batch_action_toggle
+      %th= sort_link(@search, :id)
+      %th= ha :avatar
+      %th= sort_link(@search, :email)
+      %th= sort_link(@search, :user_role_id)
+      %th= sort_link(@search, :trust_state)
+      %th= sort_link(@search, :first_name)
+      %th= sort_link(@search, :last_name)
+      %th= sort_link(@search, :patronymic)
+      %th= sort_link(@search, :phone)
+      %th= sort_link(@search, :created_at)
+      %th=t 'admin.table.actions'
+  %tbody
+    - collection.each do |item|
+      %tr
+        = batch_action_item(item)
+        %td= id_link(item)
+        %td= item_img(item, :avatar)
+        %td= pretty_data item.email
+        %td= pretty_data item.user_role_type.try(:title)
+        %td= pretty_data item.trust_state_type.try(:title)
+        %td= pretty_data item.first_name
+        %td= pretty_data item.last_name
+        %td= pretty_data item.patronymic
+        %td= pretty_data item.phone
+        %td= pretty_data item.created_at
+        %td.actions
+          - index_actions.each do |act|
+            = short_action_link(act, item)
+          - if item.active_for_authentication?
+            = link_to t('admin.actions.suspend.link'), suspend_admin_user_path(item), :method => :post, :class => 'btn btn-warning'
+          - else
+            = link_to icon('ok', true), activate_admin_user_path(item), :method => :post,
+            :class => 'btn btn-success', :title => t('admin.actions.activate.link')

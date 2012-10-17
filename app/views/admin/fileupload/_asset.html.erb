@@ -1,0 +1,15 @@
+<%= content_tag(:div, :class => "asset ill", :"data-id" => asset.id, :id => "asset_#{asset.id}") do %>
+  <%= link_to image_tag("/images/admin/empty.gif", :alt => t('admin.delete'), :title => t('admin.delete')),
+              admin_asset_path(asset),
+              :remote => true,
+              :method => :delete,
+              :data => {:confirm => t('admin.delete_confirmation')},
+              :class => "del" %>
+
+    <% unless asset.is_main %>
+        <span class="main_image" data-id="<%= asset.id %>"><%= t('admin.set_main') %></span>
+    <% end %>
+
+  <%= link_to image_tag(asset.thumb_url, :title => asset.filename),
+              asset.url, :class => "fileupload-file fancybox", :target => '_blank' %>
+<% end %>

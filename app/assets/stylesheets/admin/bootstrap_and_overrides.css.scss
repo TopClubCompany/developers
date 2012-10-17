@@ -1,0 +1,201 @@
+// Set the correct sprite paths
+$iconSpritePath: asset-url('glyphicons-halflings.png', image);
+$iconWhiteSpritePath: asset-url('glyphicons-halflings-white.png', image);
+@import "bootstrap";
+@import "bootstrap-responsive";
+@import "admin/components/colored_tabs";
+@import "admin/components/tables";
+@import "admin/components/locale_tabs";
+@import "admin/components/translations";
+@import "admin/components/perms";
+@import "admin/components/geo_input";
+
+//.well {
+//  border-color: #C4C4C4;
+//}
+.downloads {
+  margin-top: 9px;
+  a {
+    font-size: 14px;
+    text-transform: uppercase;
+    i {
+      padding-right: 5px;
+    }
+  }
+}
+.well-small {
+  margin-bottom: 15px;
+}
+ul.nav li.dropdown:hover ul.dropdown-menu {
+  display: block;
+  margin: 0;
+}
+
+#list input.toggle {
+  margin-left: -4px;
+}
+#main {
+  clear: both;
+  .wrap_content {
+    width: 100%;
+    float: left;
+  }
+  .sidebar {
+    width: 265px;
+    margin: 0 0 20px -315px;
+    float: left;
+  }
+  .content_with_sidebar {
+    margin-right: 330px;
+    overflow-x: auto;
+  }
+  .row-fluid .alert {
+    max-width: 1000px;
+  }
+}
+
+#loading {
+  display: none;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 100000;
+}
+.order_indicator {
+  color: gray;
+  font-size: 10px;
+}
+.pagination {
+  margin: 0;
+}
+.navbar-inner {
+  @include border-radius(0);
+}
+
+.top_bar {
+  padding: 5px 10px 10px;
+}
+.batch_actions {
+  margin-bottom: 10px;
+  margin-left: -30px;
+  .btn-group {
+    float: left;
+    margin-left: 30px;
+  }
+}
+.index_table .toggle_box {
+  padding: 8px;
+}
+
+.container-fluid {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.alert-notice {
+  background-color: #DFF0D8;
+  border-color: #D6E9C6;
+  color: #468847;
+}
+
+.navbar {
+  margin-bottom: 5px;
+}
+
+.breadcrumb {
+  margin-bottom: 5px;
+}
+
+.resource_actions {
+  float: left;
+}
+
+.resource_title {
+  margin-left: 50px;
+  float: left;
+  h1 {
+    color: #333;
+  }
+}
+
+// forms
+.simple_form {
+  input, textarea {
+    width: auto;
+  }
+}
+.datepicker {
+  margin-top: 0;
+}
+#search_form {
+  select.input-small {
+    margin-right: 30px;
+  }
+  .right-label {
+    padding: 5px 0 0 130px;
+  }
+  #search_cancel {
+    margin-left: 40px;
+  }
+  label {
+    margin-top: 5px;
+  }
+}
+label.input_set, label.label-large {
+  font-size: 15px;
+  padding: 4px 10px 6px;
+}
+
+label.label-med {
+  font-size: 12px;
+  padding: 2px 8px 6px;
+  margin: 10px 0;
+}
+label.control-label.label-reset {
+  float: none;
+  width: auto;
+  padding-top: 3px;
+  text-align: left;
+}
+.simple_form {
+  .fields {
+    .second_nest {
+      display: inline-block;
+    }
+    hr {
+      margin: 10px 0;
+    }
+  }
+  select {
+    width: 350px;
+  }
+  .tab-content {
+    position: relative;
+  }
+}
+.form_block {
+  width: 700px;
+}
+td.actions {
+  min-width: 150px;
+  padding-top: 0;
+  a {
+    margin-top: 5px;
+  }
+}
+
+.fileupload {
+  position: relative;
+}
+.fileupload-drop-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 70px;
+  z-index: 2;
+  text-align: center;
+  color: #999;
+  font-size: 36px;
+}

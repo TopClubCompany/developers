@@ -11,7 +11,7 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'compass-rails'
   gem 'coffee-rails', '~> 3.2.1'
-  gem 'therubyracer', :platforms => :ruby
+  #gem 'therubyracer', :platforms => :ruby
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -41,6 +41,25 @@ gem 'unicorn'
 group :development do
   gem 'annotate', :git => 'git://github.com/vlado/annotate_models.git', :ref => '562970b'
 end
+
+
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem "bootstrap-sass", ">= 2.0.3"
+gem "simple_form"
+gem "will_paginate", ">= 3.0.3"
+gem 'bootstrap-datepicker-rails'
+gem 'bootstrap-timepicker-rails'
+gem 'will_paginate-bootstrap'
+gem 'the_sortable_tree', '~> 1.8.0'
+gem 'inherited_resources', '~> 1.3.0'
+gem 'therubyracer', '~> 0.10.2'
+
+
+#AR
+gem 'has_scope'
+gem 'awesome_nested_set'
+gem 'galetahub-enum_field', "~> 0.2.0", :require => 'enum_field'
+gem 'activerecord-import'
 
 group :development, :test do
   if RUBY_PLATFORM.downcase.include?("darwin")
