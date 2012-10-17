@@ -17,13 +17,9 @@ Feature: Search
       When a user submit find button
       Then user sees best match results sort by recommended
       And matched category selected
-<<<<<<< HEAD
       And related categories shown
 
     Scenario 4: "Where" field contain wrong city name
       Given a user trying to enter wrong a city, state, street name
       When a user entered few symbols
       Then user sees autocomplete tips
-=======
-      And related categories shown
->>>>>>> 3eba94ec68eb865778fc3893aa9058fe86228ba7
