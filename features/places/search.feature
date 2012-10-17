@@ -19,3 +19,7 @@ Feature: Search
       And matched category selected
       And related categories shown
 
+    Scenario 4: "Where" field contain wrong city name
+      Given a user trying to enter wrong a city, state, street name
+      When a user entered few symbols
+      Then user sees autocomplete tips
