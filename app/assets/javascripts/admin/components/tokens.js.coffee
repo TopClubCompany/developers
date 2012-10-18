@@ -39,5 +39,5 @@ window.initImageToken = (el) ->
   $el.tokenInput("/admin/autocomplete?" + $.param({class: $el.data('class'), token: 1}), opts)
 
 $ ->
-  window.initTokens()
-  window.initImageToken()
+#  window.initTokens()
+#  window.initImageToken()
