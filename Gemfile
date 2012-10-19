@@ -39,11 +39,11 @@ gem 'unicode_utils' # For unicode-strings downcase method o_O !!!
 gem 'unicorn'
 
 group :development do
-  gem 'annotate', :git => 'git://github.com/vlado/annotate_models.git', :ref => '562970b'
+  gem 'annotate'#, :git => 'git://github.com/vlado/annotate_models.git', :ref => '562970b'
 end
 
 
-gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'twitter-bootstrap-rails'
 gem "bootstrap-sass", ">= 2.0.3"
 gem "simple_form"
 gem "will_paginate", ">= 3.0.3"
