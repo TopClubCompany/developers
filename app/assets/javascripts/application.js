@@ -25,4 +25,4 @@
 //=require waypoints
 //=require styx
 
-//=require_tree .
+//=require_tree ./frontend
