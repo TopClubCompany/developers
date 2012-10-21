@@ -14,7 +14,7 @@
                 = t 'admin.navigation.system'
                 %b.caret
               -#%ul.dropdown-menu
-                -#-[Structure, Locator, UserMail].each do |m|
+                -[Category].each do |m|
                   =admin_menu_link(m)
 
 
@@ -24,6 +24,8 @@
                 = "TOP CLUB"
                 %b.caret
               %ul.dropdown-menu
+                -[Category].each do |m|
+                  =admin_menu_link(m)
             -#- if admin?
               %li.dropdown
                 %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
