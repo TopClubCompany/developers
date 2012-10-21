@@ -1,5 +1,5 @@
 //= require i18n
-//q= require i18n/translations
+//= require i18n/translations
 //= require jquery-ui
 //= require jquery_ujs
 //= require underscore-min
