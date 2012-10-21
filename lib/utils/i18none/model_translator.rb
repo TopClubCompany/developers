@@ -6,7 +6,7 @@ module Utils
     class ModelTranslator
 
       MODELS = [
-          AdminComment, Asset, Header, Locator, StaticPage, Structure, User, Account, Category
+          Asset, Header, StaticPage, Structure, User, Category
 
       ]
 
@@ -26,10 +26,11 @@ module Utils
 
             models_hash = @models.each_with_object({}) do |model, h|
               model_i18n = {
+                  'other' => model.model_name.human(:count => 0),
                   'zero' => model.model_name.human(:count => 0),
                   'one' => model.model_name.human(:count => 1),
-                  'few' => model.model_name.human(:count => 2),
-                  'many' => model.model_name.human(:count => 9)
+                  'few' => model.model_name.human(:count => 0),
+                  'many' => model.model_name.human(:count => 0)
               }
               @models_i18n_hash[locale]['activerecord']['models'][model.model_name.i18n_key.to_s]= model_i18n
               attributes = model.columns.map(&:name)

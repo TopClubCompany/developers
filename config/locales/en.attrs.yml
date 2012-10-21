@@ -1,5 +1,5 @@
 --- 
-ru: 
+en: 
   activerecord: 
     attributes: 
       asset: 
@@ -165,8 +165,8 @@ ru:
         few: User
         many: User
       category: 
-        other: Категории
-        zero: Категорий
-        one: Категория
-        few: Категории
-        many: Категорий
+        other: Category
+        zero: Category
+        one: Category
+        few: Category
+        many: Category
