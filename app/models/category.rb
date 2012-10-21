@@ -31,6 +31,6 @@ class Category < ActiveRecord::Base
   include Utils::Models::AdminAdds
 
 
-
+  default_scope reversed_nested_set.includes(:translations)
 
 end
