@@ -6,9 +6,6 @@ module Utils
       def method_missing(sym, *args, &block)
         return self.send(sym.to_s.first(-6).concat('_type'), *args, &block).try(:title) if sym.to_s =~ /_title$/
         return self.send(sym.to_s.first(-5)) ? '+' : '-' if sym.to_s =~ /_bool$/
-        if sym.to_s =~ /_bool_icon$/
-          return ActiveAdmin::Iconic.icon((self.send(sym.to_s.first(-10)) ? :plus : :minus), :width => 16, :height => 16)
-        end
         return self.send(sym.to_s.first(-8)) if sym.to_s =~ /_no_html$/
         return self.pictures.map { |p| p.url($1) } if sym.to_s =~ /^pictures_(.*)$/
         return self.photo.try(:url, $1) if sym.to_s =~ /^photo_(.*)$/

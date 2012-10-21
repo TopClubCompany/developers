@@ -11,15 +11,82 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120531125804) do
+ActiveRecord::Schema.define(:version => 20121021134919) do
 
-  create_table "categories", :force => true do |t|
+  create_table "asset_translations", :force => true do |t|
+    t.integer  "asset_id"
+    t.string   "locale"
     t.string   "name"
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    t.string   "icon"
   end
+
+  add_index "asset_translations", ["asset_id"], :name => "index_asset_translations_on_asset_id"
+  add_index "asset_translations", ["locale"], :name => "index_asset_translations_on_locale"
+
+  create_table "assets", :force => true do |t|
+    t.string   "data_file_name",                                     :null => false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id",                                       :null => false
+    t.string   "assetable_type",    :limit => 25,                    :null => false
+    t.string   "type",              :limit => 25
+    t.string   "guid",              :limit => 10
+    t.integer  "locale",            :limit => 1,  :default => 0
+    t.integer  "user_id"
+    t.integer  "sort_order",                      :default => 0
+    t.boolean  "is_main",                         :default => false
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
+  end
+
+  add_index "assets", ["assetable_type", "assetable_id"], :name => "index_assets_on_assetable_type_and_assetable_id"
+  add_index "assets", ["assetable_type", "type", "assetable_id"], :name => "index_assets_on_assetable_type_and_type_and_assetable_id"
+  add_index "assets", ["user_id"], :name => "index_assets_on_user_id"
+
+  create_table "categories", :force => true do |t|
+    t.string   "slug",                         :null => false
+    t.integer  "user_id"
+    t.boolean  "is_visible", :default => true, :null => false
+    t.integer  "parent_id"
+    t.integer  "lft",        :default => 0
+    t.integer  "rgt",        :default => 0
+    t.integer  "depth",      :default => 0
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
+
+  add_index "categories", ["lft", "rgt"], :name => "index_categories_on_lft_and_rgt"
+  add_index "categories", ["parent_id"], :name => "index_categories_on_parent_id"
+  add_index "categories", ["slug"], :name => "index_categories_on_slug", :unique => true
+  add_index "categories", ["user_id"], :name => "index_categories_on_user_id"
+
+  create_table "category_translations", :force => true do |t|
+    t.integer  "category_id"
+    t.string   "locale"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "category_translations", ["category_id"], :name => "index_category_translations_on_category_id"
+  add_index "category_translations", ["locale"], :name => "index_category_translations_on_locale"
+
+  create_table "ckeditor_assets", :force => true do |t|
+    t.string   "data_file_name",                  :null => false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    :limit => 30
+    t.string   "type",              :limit => 30
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
   create_table "events", :force => true do |t|
     t.datetime "start_at"
@@ -32,6 +99,28 @@ ActiveRecord::Schema.define(:version => 20120531125804) do
   end
 
   add_index "events", ["place_id"], :name => "index_events_on_place_id"
+
+  create_table "header_translations", :force => true do |t|
+    t.integer  "header_id"
+    t.string   "locale"
+    t.string   "title"
+    t.string   "keywords"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "header_translations", ["header_id"], :name => "index_header_translations_on_header_id"
+  add_index "header_translations", ["locale"], :name => "index_header_translations_on_locale"
+
+  create_table "headers", :force => true do |t|
+    t.string   "headerable_type", :limit => 30, :null => false
+    t.integer  "headerable_id",                 :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "headers", ["headerable_type", "headerable_id"], :name => "fk_headerable", :unique => true
 
   create_table "kitchens", :force => true do |t|
     t.string   "name"
@@ -92,6 +181,62 @@ ActiveRecord::Schema.define(:version => 20120531125804) do
   end
 
   add_index "selections", ["user_id"], :name => "index_selections_on_user_id"
+
+  create_table "static_page_translations", :force => true do |t|
+    t.integer  "static_page_id"
+    t.string   "locale"
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "static_page_translations", ["locale"], :name => "index_static_page_translations_on_locale"
+  add_index "static_page_translations", ["static_page_id"], :name => "index_static_page_translations_on_static_page_id"
+
+  create_table "static_pages", :force => true do |t|
+    t.integer  "structure_id",                   :null => false
+    t.integer  "user_id"
+    t.boolean  "is_visible",   :default => true, :null => false
+    t.boolean  "delta",        :default => true, :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
+  add_index "static_pages", ["structure_id"], :name => "fk_pages"
+  add_index "static_pages", ["user_id"], :name => "index_static_pages_on_user_id"
+
+  create_table "structure_translations", :force => true do |t|
+    t.integer  "structure_id"
+    t.string   "locale"
+    t.string   "title"
+    t.string   "redirect_url"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "structure_translations", ["locale"], :name => "index_structure_translations_on_locale"
+  add_index "structure_translations", ["structure_id"], :name => "index_structure_translations_on_structure_id"
+
+  create_table "structures", :force => true do |t|
+    t.string   "slug",       :limit => 50,                   :null => false
+    t.integer  "kind",       :limit => 1,  :default => 1
+    t.integer  "position",   :limit => 2,  :default => 1
+    t.integer  "user_id"
+    t.boolean  "is_visible",               :default => true, :null => false
+    t.boolean  "delta",                    :default => true, :null => false
+    t.integer  "parent_id"
+    t.integer  "lft",                      :default => 0
+    t.integer  "rgt",                      :default => 0
+    t.integer  "depth",                    :default => 0
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+  end
+
+  add_index "structures", ["kind", "slug"], :name => "index_structures_on_kind_and_slug", :unique => true
+  add_index "structures", ["lft", "rgt"], :name => "index_structures_on_lft_and_rgt"
+  add_index "structures", ["parent_id"], :name => "index_structures_on_parent_id"
+  add_index "structures", ["user_id"], :name => "index_structures_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name",                   :default => "", :null => false

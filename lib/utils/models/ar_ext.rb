@@ -63,7 +63,7 @@ module Utils
             else
               assoc_count = assoc
               add_from = ''
-              add_cond = '1=1'
+              add_cond = assoc.sanitized_conditions || '1=1'
             end
             count_klass = assoc_count.klass
             query = <<-SQL

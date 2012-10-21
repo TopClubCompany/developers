@@ -7,9 +7,26 @@ if defined?(Bundler)
   # If you want your assets lazily compiled in production, use this line
   # Bundler.require(:default, :assets, Rails.env)
 end
+module Ckeditor; def self.assets; []; end; end if File.exists?(File.expand_path('../../public/assets/ckeditor/config.js', __FILE__))
 
 module Topclub
   class Application < Rails::Application
+    config.middleware.use Rack::Pjax
+
+    config.generators do |g|
+      g.test_framework :rspec
+      g.template_engine :slim
+    end
+
+    # don't generate RSpec tests for views and helpers
+    config.generators do |g|
+      g.view_specs false
+      g.helper_specs false
+      # rails generate controller controller_name --assets=false
+      g.stylesheets = false
+      g.javascripts = false
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -62,6 +79,8 @@ module Topclub
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    config.assets.precompile += Ckeditor.assets
 
   end
 end
+module Ckeditor; def self.assets; []; end; end if File.exists?(Rails.root.join('public/assets/ckeditor/config.js'))

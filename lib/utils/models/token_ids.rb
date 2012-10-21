@@ -27,34 +27,24 @@ module Utils
             end
           end
 
-          unless self.is_a?(ClassMethods)
-            include InstanceMethods
-            extend ClassMethods
-          end
         end
       end
 
-      module ClassMethods
+      def token_single(assoc)
+        rec = self.send(assoc)
+        rec ? [rec.for_input_token] : []
       end
 
-      module InstanceMethods
-        def token_single(assoc)
-          rec = self.send(assoc)
-          rec ? [rec.for_input_token] : []
-        end
-
-        def token_data(method, options={})
-          assoc = self.class.reflect_on_association(method)
-          records = self.send(method)
-          data = Array(records).map(&:for_input_token)
-          options.reverse_merge!(
-              class: 'ac_token',
-              data: {
-                  pre: data.to_json,
-                  class: assoc.klass.name,
-                  limit: (1 unless assoc.collection?)
-              })
-        end
+      def token_data(method, options={})
+        assoc = self.class.reflect_on_association(method)
+        records = self.send(method)
+        data = Array(records).map(&:for_input_token)
+        {class: 'ac_token',
+        data: {
+            pre: data.to_json,
+            class: assoc.klass.name,
+            limit: (1 unless assoc.collection?)
+        }}.deep_merge(options)
       end
     end
   end

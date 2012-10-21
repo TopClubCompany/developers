@@ -29,10 +29,6 @@ module Utils
       
       module InstanceMethods
 
-        def file_css_class
-          MIME::Type.new(data_content_type).try(:sub_type).gsub('.', '_')
-        end
-
         def dimensions_color
           'grey'
         end
@@ -65,7 +61,7 @@ module Utils
           options = {
             :only => [:id, :guid, :assetable_id, :assetable_type, :user_id, :data_file_size, :data_content_type, :is_main],
             :root => 'asset',
-            :methods => [:filename, :url, :preview_url, :thumb_url, :width, :height, :dimensions_color, :file_css_class]
+            :methods => [:filename, :url, :preview_url, :thumb_url, :width, :height, :dimensions_color]
           }.merge(options || {})
           
           super

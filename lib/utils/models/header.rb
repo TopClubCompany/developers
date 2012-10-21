@@ -6,7 +6,7 @@ module Utils
         base.send :include, InstanceMethods
         base.send :extend,  ClassMethods
       end
-
+      
       module ClassMethods
         def self.extended(base)
           base.class_eval do
@@ -14,7 +14,7 @@ module Utils
           end
         end
       end
-
+      
       module InstanceMethods
         def empty?
           [keywords, description, title].map(&:blank?).all?

@@ -14,7 +14,7 @@
         %img{ src: review.user.photo, alt: 'foto', width: '43px', height: '30px' }
       .description
         .name= review.user.name
-        .date= l review.created_at, format: :date_default
+        -#.date= l review.created_at, format: :date_default
         -#.sity= review.kind
       = link_to review.place.name, '#', class: 'header_blue'
   .link_gray=link_to 'Все рецензии', '#'

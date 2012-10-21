@@ -4,7 +4,6 @@ require 'machinist/active_record'
 
 Category.blueprint {
   name        { ['Рестораны', 'Проведение событий', 'Автомобили', 'Доставка еды', 'Ночная жизнь', 'Краcота и здоровье', 'Здоровье и медицина', 'Азартные игры', 'Еда', 'Искусство', 'Домашние животные', 'Родители и дети', 'Покупки', 'Спортивные события', 'Недвижимость', 'Образование', 'Гостиницы и туризм', 'Локальные сервисы', 'Финансы'].sample }
-  icon        { ['restor', 'hold_events', 'auto', 'food_deliv', 'night_life', 'beauty_health', 'health_med', 'gambling', 'food', 'art', 'home_animals', 'parents_childr', 'purchases', 'sport_events', 'real_estate', 'educat', 'hotels_tourism', 'local_services', 'finaces'].sample }
   description { Faker::Lorem.sentence }
 }
 

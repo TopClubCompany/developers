@@ -6,7 +6,7 @@ module Utils
     class ModelTranslator
 
       MODELS = [
-          AdminComment, Asset, Header, Locator, StaticPage, Structure, User, Account, BeerBike, BeerQuote, BeerQuoteAuthor, BType, BeerTag, UserMail, Status, Company
+          AdminComment, Asset, Header, Locator, StaticPage, Structure, User, Account, Category
 
       ]
 

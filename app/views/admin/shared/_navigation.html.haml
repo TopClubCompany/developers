@@ -1,4 +1,4 @@
-%header.navbar
+%header.navbar.revers
   %nav.navbar-inner
     .container
       %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
@@ -7,7 +7,7 @@
         %span.icon-bar
       %a.brand{:href => root_path}= t 'admin.title'
       .nav-collapse.in.collapse{:style => "max-height: 626px; "}
-        - cache [I18n.locale, controller_name, action_name, current_user] do
+        - cache [I18n.locale, controller_name, action_name, current_user, rand_str] do
           %ul.nav
             %li.dropdown
               -#%a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
@@ -25,13 +25,13 @@
                 %b.caret
               %ul.dropdown-menu
             -#- if admin?
-            %li.dropdown
-              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                = t 'admin.navigation.users'
-                %b.caret
-              %ul.dropdown-menu
-                -[User].each do |m|
-                  =admin_menu_link(m)
+              %li.dropdown
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                  = t 'admin.navigation.users'
+                  %b.caret
+                %ul.dropdown-menu
+                  -[User].each do |m|
+                    =admin_menu_link(m)
 
 
               -#%li.dropdown

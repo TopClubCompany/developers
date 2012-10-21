@@ -9,7 +9,7 @@
     %script(src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js")
     %script(src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js")
     = javascript_include_tag "admin/application"
-    -#= javascript_include_tag "/assets/ckeditor/init" unless collection_action?
+    = javascript_include_tag "/assets/ckeditor/init" unless collection_action?
     = csrf_meta_tags
     = yield(:head)
   %body{:id => "action_#{action_name}"}

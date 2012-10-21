@@ -42,6 +42,16 @@ module Utils
           all_columns_names.without('id', 'created_at', 'updated_at')
         end
 
+        def all_column_names
+          @all_column_names ||= begin
+            if translates?
+              column_names + translated_attribute_names.map(&:to_s)
+            else
+              column_names
+            end
+          end
+        end
+
       end
     end
   end

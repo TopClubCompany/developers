@@ -1,195 +1,158 @@
+--- 
 ru:
-  locale:
-    native_name: Русский
-  date:
-    abbr_day_names:
-      - вс
-      - пн
-      - вт
-      - ср
-      - чт
-      - пт
-      - сб
-    abbr_month_names:
-      - ~
-      - янв
-      - фев
-      - мар
-      - апр
-      - мая
-      - июн
-      - июл
-      - авг
-      - сен
-      - окт
-      - ноя
-      - дек
-    day_names:
-      - воскресенье
-      - понедельник
-      - вторник
-      - среда
-      - четверг
-      - пятница
-      - суббота
-    formats:
-      default: "%d.%m.%Y"
-      long: "%d %B %Y"
-      short: "%d %b"
-    month_names:
-      - ~
-      - января
-      - февраля
-      - марта
-      - апреля
-      - мая
-      - июня
-      - июля
-      - августа
-      - сентября
-      - октября
-      - ноября
-      - декабря
-    order:
-      - :day
-      - :month
-      - :year
-
-  datetime:
-    distance_in_words:
-      about_x_hours:
-        one:   "около %{count} часа"
-        few:   "около %{count} часов"
-        many:  "около %{count} часов"
-        other: "около %{count} часа"
-      about_x_months:
-        one:   "около %{count} месяца"
-        few:   "около %{count} месяцев"
-        many:  "около %{count} месяцев"
-        other: "около %{count} месяца"
-      about_x_years:
-        one:   "около %{count} года"
-        few:   "около %{count} лет"
-        many:  "около %{count} лет"
-        other: "около %{count} лет"
-      almost_x_years:
-        one:   "почти %{count} год"
-        few:   "почти %{count} года"
-        many:  "почти %{count} лет"
-        other: "почти %{count} лет"
-      half_a_minute: "меньше минуты"
-      less_than_x_minutes:
-        one:   "меньше %{count} минуты"
-        few:   "меньше %{count} минут"
-        many:  "меньше %{count} минут"
-        other: "меньше %{count} минуты"
-      less_than_x_seconds:
-        one:   "меньше %{count} секунды"
-        few:   "меньше %{count} секунд"
-        many:  "меньше %{count} секунд"
-        other: "меньше %{count} секунды"
-      over_x_years:
-        one:   "больше %{count} года"
-        few:   "больше %{count} лет"
-        many:  "больше %{count} лет"
-        other: "больше %{count} лет"
-      x_days:
-        one:   "%{count} день"
-        few:   "%{count} дня"
-        many:  "%{count} дней"
-        other: "%{count} дня"
-      x_minutes:
-        one:   "%{count} минута"
-        few:   "%{count} минуты"
-        many:  "%{count} минут"
-        other: "%{count} минуты"
-      x_months:
-        one:   "%{count} месяц"
-        few:   "%{count} месяца"
-        many:  "%{count} месяцев"
-        other: "%{count} месяца"
-      x_seconds:
-        one:   "%{count} секунда"
-        few:   "%{count} секунды"
-        many:  "%{count} секунд"
-        other: "%{count} секунды"
-    prompts:
-      day: День
-      hour: Часов
-      minute: Минут
-      month: Месяц
-      second: Секунд
-      year: Год
-  helpers:
-    select:
-      prompt: "Выберите: "
-    submit:
-      create: "Создать %{model}"
-      submit: "Сохранить %{model}"
-      update: "Изменить %{model}"
-  number:
-    currency:
-      format:
-        delimiter: " "
-        format: "%n %u"
-        precision: 2
-        separator: "."
-        significant: false
-        strip_insignificant_zeros: false
-        unit: руб.
-    format:
-      delimiter: " "
-      precision: 3
-      separator: "."
-      significant: false
-      strip_insignificant_zeros: false
-    human:
-      decimal_units:
-        format: "%n %u"
-        units:
-          billion: Триллионов
-          million: Миллионов
-          quadrillion: Квадрильонов
-          thousand: Тысяч
-          trillion: Триллионов
-          unit: ""
-      format:
-        delimiter: ""
-        precision: 1
-        significant: true
-        strip_insignificant_zeros: true
-      storage_units:
-        format: "%n %u"
-        units:
-          byte:
-            one:   "байт"
-            few:   "байта"
-            many:  "байт"
-            other: "байта"
-          gb: "ГБ"
-          kb: "КБ"
-          mb: "МБ"
-          tb: "ТБ"
-    percentage:
-      format:
-        delimiter: ""
-    precision:
-      format:
-        delimiter: ""
-  support:
-    array:
-      last_word_connector: " и "
-      two_words_connector: " и "
-      words_connector: ", "
-  time:
+  activerecord: 
+    attributes: 
+      user: 
+        password: "Пароль"
+        password_confirmation: "Подтверждение пароля"
+        remember_me: "Запомнить"
+  auth: 
+    edit_passwords: 
+      confirm_new_password: "Подтвердите пароль"
+      new_password: "Новый пароль"
+    links: 
+      receive_confirmation: "Не получили письма с подтверждением регистрации?"
+      recover_password: "Забыли пароль?"
+      sign_in: "Вход в систему"
+      sign_out: "Выход из системы"
+      sign_up: "Регистрация"
+    links_short: 
+      sign_in: "Вход"
+      sign_out: "Выход"
+      cabinet: "Кабинет"
+      sign_up: "Регистрация"
+    mailer: 
+      confirmation: 
+        after_notes: "C уважением,  Всегда рады приветствовать Вас на страницах нашего ресурса! <br/>Полезная информация <br/>- При регистрации, подтверждая ее, вы принимаете Соглашение (ссылка на соглашение). <br/>- Если у вас возникли проблемы с регистрацией, пожалуйста, свяжитесь с администратором (ссылка на форму) или ознакомьтесь с разделом «Помощь» (начинаем раздел «Помощь» со страницы с кратким «FAQ»)»."
+        body: "Мы рады приветствовать Вас на ABITANT.com. Еще один шаг и Вы завершите регистрацию.<br/> Для подтверждения регистрации Вам необходимо перейти по указанной ниже ссылке, после чего ваша учетная запись будет активирована, а Вы будете перенаправлены на страницу редактирования Ваших личных данных."
+        confirm_link: "Подтвердить регистрацию"
+        confirm_notes: "Ссылка действительна в течении 72 часов"
+        title: "Здравствуйте, %{name}."
+      passwords: 
+        after_notes: "C уважением,<br/> Команда  Всегда рады приветствовать Вас на страницах нашего ресурса!»"
+        body: "Вы отправили запрос на смену/напоминание пароля. Вы можете сменить пароль, перейдя по ссылке: «Ссылка» (ссылка на форму изменения пароля с повторением пароля).<br/><br/> Если Вы не запрашивали смену пароля, или запрос был сделан по ошибке, пожалуйста, игнорируйте данное сообщение. Ваш пароль останется без изменений."
+        confirm_link: "Изменить пароль"
+        confirm_notes: "Ссылка действительна в течении 72 часов"
+        title: "Здравствуйте, %{name}."
+      welcome: 
+        after_notes: "C уважением,<br/> Команда Всегда рады приветствовать Вас на страницах нашего ресурса!<br/><br/> Полезная информация<br/><br/> - При регистрации, подтверждая ее, вы принимаете Соглашение (ссылка на соглашение).<br/> - Если у вас возникли проблемы с регистрацией, пожалуйста, свяжитесь с администратором (ссылка на форму) или ознакомьтесь с разделом «Помощь» (начинаем раздел «Помощь» со страницы с кратким «FAQ»).»"
+        body: "Уточните, пожалуйста, данные о себе, отредактировав свой профайл (ссылка на профайл пользователя), если вы еще не успели его заполнить ранее. Там же вы можете сменить свой пароль.<br/><br/> ABITANT.com всегда рад помочь Вам сориентироваться в ярком и разнообразном мире архитектуры и дизайна!<br/><br/> Далее будут анонсы функционала разделов сайта с перечнем функций."
+        subject: "Поздравляем! Вы успешно прошли регистрацию на , используя почтовый ящик «%{email}»."
+        title: "Поздравляем! Вы успешно прошли регистрацию на, используя почтовый ящик «%{email}»."
+    submit: 
+      change_password: "Изменить пароль"
+      receive_confirmation: "Выслать подтверждение"
+      recover_password: "Восстановить"
+      sign_in: "Войти"
+      sign_out: "Выйти"
+      sign_up: "Зарегистрироваться"
+    title: 
+      change_password: "Изменение пароля"
+      receive_confirmation: "Не получили письма с подтверждением регистрации?"
+      recover_password: "Забыли пароль?"
+      sign_in: "Вход в систему"
+      sign_out: "Выход из системы"
+      sign_up: "Регистрация"
+  collections: 
+    about: "Общая"
+    desc: "Описание"
+    details: "Детали"
+    series: "Серии"
+    styles: "Стили"
+    trade_mark: "Торговая марка:"
+  comments: 
+    add_comment: "Создать"
+    comment: "Комментировать"
+    confirm_delete: "Вы уверены что хотите удалить?"
+    create: "Комментировать"
+    delete_comment: "Удалить"
+    edit_comment: "Редактировать"
+  flash: 
+    auth: 
+      failure: "Ошибка авторизации"
+      logout: "Вы успешно вышли из системы"
+      success: "Вы успешно вошли в систему"
+      success_again: "Мы рады видеть Вас снова"
+    users: 
+      update: 
+        error: "При обновлении данных возникли ошибки"
+        notice: "Данные успешно обновлены"
+  front_js: 
+    comments: 
+      confirm: "Вы уверены что хотите удалить комментарий?"
+      typing: " пишет сообщение..."
+      chat_title: "Переписка"
+      left: "покинул(а) переписку"
+      joined: "присоединился(лась) к переписке"
+      said: "написал(а):"
+      title: "Консультант"
+      new_message: "Новое сообщение! - Консультант"
+      placeholder: "Напишите сообщение и нажмите enter..."
+      in_chat_already: "Вы уже открыли консультант на другой странице"
+    fileupload:
+      messages:
+        typeError: "{file} имеет не правильное расширение. Только {extensions} разрешены."
+        sizeError: "{file} очень большой, максимальный размер файла {sizeLimit}."
+        minSizeError: "{file} очень маленький, минимальный размер {minSizeLimit}."
+        emptyError: "{file} пустой, выберите другой файл."
+        onLeave: "Файлы загружаются, файлы не загрузятся если Вы покинете страницу."
+  label:
+    close: "Закрыть"
+  langs: 
+    en: eng
+    ru: rus
+    uk: uk
+  language_title: 
+    en: English
+    uk: "Украинский"
+    ru: "Русский"
+  links: 
+    en: eng
+    ru: "рус"
+    uk: "укр"
+  search:
+    found_message: 
+      few: "По запросу <span class='txt_blue'>%{search_text}</span> найдено <strong>%{count}</strong> совпадения."
+      many: "По запросу <span class='txt_blue'>%{search_text}</span> найдено <strong>%{count}</strong> совпадений."
+      one: "По запросу <span class='txt_blue'>%{search_text}</span> найдено <strong>%{count}</strong> совпадение."
+      other: "По запросу <span class='txt_blue'>%{search_text}</span> найдено <strong>%{count}</strong> совпадений."
+    not_found: "По Вашему запросу ничего не найдено. "
+    placeholder: "Найти..."
+    placeholder1: "Найти..."
+    placeholder2: "Найти..."
+    title: "Результаты поиска"
+  styles: 
+    show: 
+      about: "Описание"
+  time: 
     am: "утра"
-    formats:
-      default: "%a, %d %b %Y, %H:%M:%S %z"
-      date_default: "%d.%m.%Y"
-      simple: "%d %B, %H:%M"
-      long: "%d %B %Y, %H:%M"
-      short: "%d %b, %H:%M"
-      only_time: "%H:%M"
-      only_wday: "%A"
-      only_month: "%B"
+    formats: 
+      article_date: "%d.%m.%Y"
+      datepicker: "%d-%m-%Y"
+      day: "%d"
+      dm: "%d.%m"
+      month: "%B"
+      year: "%Y"
+      ymd: "%d %B %Y"
     pm: "вечера"
+  unauthorized: 
+    default: "Нет прав для просмотра"
+  update: "редактирование"
+  views: 
+    pagination: 
+      first: "Первая"
+      last: "Последняя"
+      next: "След &raquo;"
+      previous: "&laquo; Пред"
+      truncate: ...
+
+  simple_form:
+    error_notification:
+      default_message: "При сохранении возникли ошибки"
+
+
+  uploader:
+    upload_avatar: "Загрузите фото"
+    max_size: "Макс.р."
+    upload_image: "Загрузите фото"
+    add_file: "Добавить файл"

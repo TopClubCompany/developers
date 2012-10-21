@@ -6,7 +6,7 @@ module Utils
         base.send :include, InstanceMethods
         base.send :extend,  ClassMethods
       end
-
+      
       module ClassMethods
         def self.extended(base)
           base.class_eval do
@@ -15,7 +15,7 @@ module Utils
           end
         end
       end
-
+      
       module InstanceMethods
         def content_without_html
           return nil if self.content.blank?
