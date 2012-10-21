@@ -71,5 +71,5 @@ class GoogleLocaleTabs
                 google_t($el_from.ck_val(), $el_to, from, to)
 
 $ ->
-  if $('.locale_tabs')[0]
-    new GoogleLocaleTabs()
+#  if $('.locale_tabs')[0]
+#    new GoogleLocaleTabs()
