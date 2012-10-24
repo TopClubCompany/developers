@@ -24,7 +24,7 @@
                 = "System"
                 %b.caret
               %ul.dropdown-menu
-                -[Category].each do |m|
+                -[Category, Kitchen].each do |m|
                   =admin_menu_link(m)
             -#- if admin?
               %li.dropdown

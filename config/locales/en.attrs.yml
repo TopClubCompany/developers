@@ -133,6 +133,23 @@ en:
         updated_at: Updated at
         user: User
         user_id: User
+      kitchen: 
+        created_at: Created at
+        description: Description
+        description_en: "Description (анг.)"
+        description_ru: "Description (рус.)"
+        description_uk: "Description (укр.)"
+        image: Image
+        is_visible: Is visible
+        name: Name
+        name_en: "Name (анг.)"
+        name_ru: "Name (рус.)"
+        name_uk: "Name (укр.)"
+        pictures: Pictures
+        slug: Slug
+        updated_at: Updated at
+        user: User
+        user_id: User
     models: 
       asset: 
         other: Asset
@@ -170,3 +187,9 @@ en:
         one: Category
         few: Category
         many: Category
+      kitchen: 
+        other: Kitchen
+        zero: Kitchen
+        one: Kitchen
+        few: Kitchen
+        many: Kitchen

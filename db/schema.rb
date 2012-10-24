@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121021134919) do
+ActiveRecord::Schema.define(:version => 20121024180743) do
 
   create_table "asset_translations", :force => true do |t|
     t.integer  "asset_id"
@@ -122,12 +122,28 @@ ActiveRecord::Schema.define(:version => 20121021134919) do
 
   add_index "headers", ["headerable_type", "headerable_id"], :name => "fk_headerable", :unique => true
 
-  create_table "kitchens", :force => true do |t|
+  create_table "kitchen_translations", :force => true do |t|
+    t.integer  "kitchen_id"
+    t.string   "locale"
     t.string   "name"
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  add_index "kitchen_translations", ["kitchen_id"], :name => "index_kitchen_translations_on_kitchen_id"
+  add_index "kitchen_translations", ["locale"], :name => "index_kitchen_translations_on_locale"
+
+  create_table "kitchens", :force => true do |t|
+    t.string   "slug",                         :null => false
+    t.integer  "user_id"
+    t.boolean  "is_visible", :default => true, :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
+
+  add_index "kitchens", ["slug"], :name => "index_kitchens_on_slug", :unique => true
+  add_index "kitchens", ["user_id"], :name => "index_kitchens_on_user_id"
 
   create_table "notes", :force => true do |t|
     t.integer  "place_id"

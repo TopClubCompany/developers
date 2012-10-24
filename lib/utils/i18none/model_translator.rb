@@ -6,7 +6,7 @@ module Utils
     class ModelTranslator
 
       MODELS = [
-          Asset, Header, StaticPage, Structure, User, Category
+          Asset, Header, StaticPage, Structure, User, Category, Kitchen
 
       ]
 
