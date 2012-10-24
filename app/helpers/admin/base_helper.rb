@@ -319,48 +319,12 @@ module Admin::BaseHelper
     keys.inject('') { |res, key| res << "[#{key}]" }
   end
 
-  def translate_select
-    #models = [
-    #    Post, Structure, User,
-    #    Catalogue, PStatus, Profession, Style,
-    #    Company, Batch, Collection, Country, Region,
-    #    Designer, MGroup, Material,
-    #    Product, PGroup, Section, Tag
-    #]
-    models = [Post, Product]
-    select('select_resource do_chosen', '', models.map{|m|[m.model_name.human, m.model_name]},{:include_blank => true}, {:class => 'without_form do_chosen'})
-  end
 
-  def html_textures
-    Rails.cache.fetch('admin_html_textures', :expires => 3600) do
-      Texture.includes(:texture_image).each_with_object({}) do |r, h|
-        h[r.id] = if r.is_color
-                    "<span class='color' style='background-color:#{r.rgb_css}'}></span>"
-                  else
-                    "<span class='color' style ='background-image: url(#{r.texture_image.try(:url, :thumb)})'></span>"
-                  end
-      end
-    end
-  end
 
-  def html_material_textures
-    Rails.cache.fetch('admin_html_material_textures', :expires => 3600) do
-      MaterialTexture.includes(:material_image).each_with_object({}) do |r, h|
-        h[r.id] = "<span class='color' style ='background-image: url(#{r.material_image.try(:url, :thumb)})'></span>"
-      end
-    end
-  end
 
-  def color_span(obj)
-    html_textures.values_at(*obj.asset_textures.pluck(:texture_id)).join(" ").html_safe
-  end
 
-  def material_span(obj)
-    m_ids = obj.product_material_textures.pluck(:material_texture_id)
-    return if m_ids.empty?
-    html_material_textures.values_at(*m_ids).join(" ").html_safe
-    #obj.material_textures.includes(:material_image).map{|t| "<span class='color' style ='background-image: url(#{t.material_image.try(:url, :thumb)})'></span>"  }.uniq.join(" ").html_safe
-  end
+
+
 
   def node_path(node)
     case node
