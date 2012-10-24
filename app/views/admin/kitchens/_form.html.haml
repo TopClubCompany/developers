@@ -7,8 +7,6 @@
 
   = input_set t('admin.pictures') do
     = f.attach_file_field :pictures, :file_max_size => 2
-  = input_set t('admin.image') do
-    = f.attach_file_field :image, :file_max_size => 2
 
   = f.hidden_field :fileupload_guid if f.object.new_record?
 
