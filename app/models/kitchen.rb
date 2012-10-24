@@ -19,7 +19,7 @@ class Kitchen < ActiveRecord::Base
   has_many :pictures, :as => :assetable, :dependent => :destroy
   #has_one :image, :as => :assetable, :dependent => :destroy
 
-  fileuploads :pictures, :image
+  fileuploads :pictures
 
   translates :name, :description
 
