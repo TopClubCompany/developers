@@ -22,7 +22,9 @@
 #
 
 class Category < ActiveRecord::Base
-  has_many :places
+
+  has_many :place_categories, :dependent => :destroy
+  has_many :places, :through => :place_categories
 
   attr_accessible :is_visible, :parent_id, :name, :description
 

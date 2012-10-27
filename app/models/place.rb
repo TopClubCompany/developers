@@ -34,6 +34,9 @@ class Place < ActiveRecord::Base
   has_many :place_categories, :dependent => :destroy
   has_many :categories, :through => :place_categories
 
+  has_many :place_kitchens, :dependent => :destroy
+  has_many :kitchens, :through => :place_kitchens
+
   has_many :notes
   has_many :events
   has_many :reviews

@@ -26,7 +26,7 @@ Kitchen.blueprint {
 }
 
 User.blueprint {
-  firts_name                  { 'Other user' }
+  first_name                  { 'Other user' }
   email                 { 'hello@example.com' }
   photo                 { 'http://lorempixel.com/50/50/people/' }
   password              { 'password' }

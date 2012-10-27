@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121027083010) do
+ActiveRecord::Schema.define(:version => 20121027100118) do
 
   create_table "asset_translations", :force => true do |t|
     t.integer  "asset_id"
@@ -163,6 +163,16 @@ ActiveRecord::Schema.define(:version => 20121027083010) do
 
   add_index "place_categories", ["category_id"], :name => "index_place_categories_on_category_id"
   add_index "place_categories", ["place_id"], :name => "index_place_categories_on_place_id"
+
+  create_table "place_kitchens", :force => true do |t|
+    t.integer  "place_id"
+    t.integer  "kitchen_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "place_kitchens", ["kitchen_id"], :name => "index_place_kitchens_on_kitchen_id"
+  add_index "place_kitchens", ["place_id"], :name => "index_place_kitchens_on_place_id"
 
   create_table "place_translations", :force => true do |t|
     t.integer  "place_id"

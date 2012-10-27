@@ -9,4 +9,5 @@ class CreatePlaceCategories < ActiveRecord::Migration
     add_index :place_categories, :category_id
     add_index :place_categories, :place_id
   end
+
 end
