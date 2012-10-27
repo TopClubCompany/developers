@@ -1,9 +1,0 @@
-#model_confirmation.modal.hide
-  .modal-header
-    %button.close{"data-dismiss" => "modal", :type => "button"} ×
-    %h3= t 'admin.actions.batch_destroy.title'
-  .modal-body
-    %p= t 'admin.actions.batch_destroy.confirmation'
-  .modal-footer
-    %a.btn{"data-dismiss" => "modal", :href => "#"}= t 'admin.close'
-    %a.btn.btn-danger#confirm_delete{:href => "#"}= t 'admin.actions.batch_destroy.link'

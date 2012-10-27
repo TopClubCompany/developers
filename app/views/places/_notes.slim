@@ -1,0 +1,12 @@
+.news_block.tabs_block style='display:none;'
+  h1.title Новости
+  table border="0" cellspacing="0" cellpadding="0"
+    tbody
+      - @place.notes.each do |note|
+        tr
+          td.image
+            img.algn_rght src: note.picture 
+          td.info
+            = link_to note.title, '#'
+            p.beg_time= l note.created_at, format: :simple
+            p.descr= note.body
