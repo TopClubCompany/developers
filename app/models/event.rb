@@ -28,4 +28,11 @@ class Event < ActiveRecord::Base
     "event:#{self.id}:attenders"
   end
 
+  #alias_attribute :name, :title
+
+  #include Utils::Models::Base
+  include Utils::Models::AdminAdds
+
+
+
 end

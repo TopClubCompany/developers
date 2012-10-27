@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require_relative "../spec/blueprints"
 
-user = User.make! name: 'Happy user', email: 'admin@example.com', password: 'password', password_confirmation: 'password'
+user = User.make! first_name: 'Happy user', email: 'admin@example.com', password: 'password', password_confirmation: 'password'
 other_user = User.make!
 
 23.times do
