@@ -1,6 +1,6 @@
 require 'configatron'
 
-class Configuration < ActiveRecord::Base
+class Configuration
   attr_accessor :data, :file
 
   def initialize
@@ -25,12 +25,4 @@ class Configuration < ActiveRecord::Base
 
 end
 
-# == Schema Information
-#
-# Table name: configurations
-#
-#  id         :integer(4)      not null, primary key
-#  created_at :datetime        not null
-#  updated_at :datetime        not null
-#
 

@@ -294,6 +294,16 @@ ActiveRecord::Schema.define(:version => 20121027100118) do
   add_index "structures", ["parent_id"], :name => "index_structures_on_parent_id"
   add_index "structures", ["user_id"], :name => "index_structures_on_user_id"
 
+  create_table "user_roles", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_roles", ["role_id"], :name => "index_user_roles_on_role_id"
+  add_index "user_roles", ["user_id"], :name => "index_user_roles_on_user_id"
+
   create_table "users", :force => true do |t|
     t.string   "login",                  :limit => 20
     t.integer  "user_role_id",           :limit => 1,  :default => 1

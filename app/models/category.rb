@@ -24,6 +24,7 @@ class Category < ActiveRecord::Base
   default_scope reversed_nested_set.includes(:translations)
 
 end
+
 # == Schema Information
 #
 # Table name: categories

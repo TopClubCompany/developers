@@ -44,7 +44,7 @@ group :development do
   if File.exists?('/var/www/top_club/developers/.local_gems')
     gem 'annotate', :path => '/var/www/gems/annotate_models'
   else
-    gem 'annotate', :git => 'git://github.com/OpakAlex/annotate_models.git', ref: '478fd7cdcc'
+    gem 'annotate', :git => 'git://github.com/OpakAlex/annotate_models.git', ref: '584889179e'
   end
 end
 
