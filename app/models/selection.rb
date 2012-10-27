@@ -1,3 +1,7 @@
+class Selection < ActiveRecord::Base
+  belongs_to :user
+  has_and_belongs_to_many :places
+end
 # == Schema Information
 #
 # Table name: selections
@@ -10,8 +14,8 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+# Indexes
+#
+#  index_selections_on_user_id  (user_id)
+#
 
-class Selection < ActiveRecord::Base
-  belongs_to :user
-  has_and_belongs_to_many :places
-end
