@@ -1,25 +1,18 @@
-# == Schema Information
-#
-# Table name: kitchens
-#
-#  id          :integer          not null, primary key
-#  name        :string(255)
-#  description :text
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#
-
 class Kitchen < ActiveRecord::Base
   #has_many :places
+
+  has_many :place_kitchens, :dependent => :destroy
+  has_many :places, :through => :place_kitchens
+
 
   attr_accessible :is_visible, :name, :description
 
   belongs_to :user
 
   has_many :pictures, :as => :assetable, :dependent => :destroy
-  has_one :image, :as => :assetable, :dependent => :destroy
+  #has_one :image, :as => :assetable, :dependent => :destroy
 
-  fileuploads :pictures, :image
+  fileuploads :pictures
 
   translates :name, :description
 
@@ -28,3 +21,20 @@ class Kitchen < ActiveRecord::Base
   include Utils::Models::AdminAdds
 
 end
+# == Schema Information
+#
+# Table name: kitchens
+#
+#  id         :integer          not null, primary key
+#  slug       :string(255)      not null
+#  user_id    :integer
+#  is_visible :boolean          default(TRUE), not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_kitchens_on_slug     (slug) UNIQUE
+#  index_kitchens_on_user_id  (user_id)
+#
+

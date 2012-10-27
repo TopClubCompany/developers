@@ -2,7 +2,7 @@ class Admin::BaseController < ::InheritedResources::Base
   include Utils::Controllers::Callbacks
 
   before_filter :authenticate_user!
-  #before_filter :check_admin, :unless =>
+  before_filter :check_admin, :unless => :admin?
   before_filter :add_breadcrumbs, :set_title, :set_user_vars, :unless => :xhr?
 
   class_attribute :csv_builder
@@ -193,6 +193,10 @@ class Admin::BaseController < ::InheritedResources::Base
 
   def check_admin
     redirect_to user_signed_in? ? root_path : new_user_session_path
+  end
+
+  def admin?
+    current_user.admin?
   end
 
   def bind_current_user(*args)

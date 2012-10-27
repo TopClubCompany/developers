@@ -127,13 +127,13 @@ ru:
   time: 
     am: "утра"
     formats: 
-      article_date: "%d.%m.%Y"
       datepicker: "%d-%m-%Y"
       day: "%d"
       dm: "%d.%m"
       month: "%B"
       year: "%Y"
       ymd: "%d %B %Y"
+      long: "%d-%m-%Y"
     pm: "вечера"
   unauthorized: 
     default: "Нет прав для просмотра"

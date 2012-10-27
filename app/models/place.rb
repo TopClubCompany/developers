@@ -1,38 +1,41 @@
-# == Schema Information
-#
-# Table name: places
-#
-#  id          :integer          not null, primary key
-#  category_id :integer
-#  name        :string(255)
-#  description :text
-#  address     :text
-#  lat         :float
-#  lng         :float
-#  phone       :string(255)
-#  url         :string(255)
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  kitchen_id  :integer
-#  avgbill     :integer
-#  picture     :string(255)
-#
 
 #coding: utf-8
 
 class Place < ActiveRecord::Base
 
-  has_and_belongs_to_many :selections
+  attr_accessible :lat, :lng, :phone, :zoom, :is_visible, :user_id, :url
+
+  belongs_to :user
+
+  has_many :place_categories, :dependent => :destroy
+  has_many :categories, :through => :place_categories
+
+  has_many :place_kitchens, :dependent => :destroy
+  has_many :kitchens, :through => :place_kitchens
+
   has_many :notes
   has_many :events
   has_many :reviews
-  accepts_nested_attributes_for :reviews
+  has_many :price_ranges
 
-  belongs_to :category
-  belongs_to :kitchen
+  accepts_nested_attributes_for :reviews, :price_ranges
+
+  #belongs_to :category
+  #belongs_to :kitchen
+
+  has_one :place_image, :as => :assetable, :dependent => :destroy, :conditions => {:is_main => true}
+  has_many :place_images, :as => :assetable, :dependent => :destroy, :conditions => {:is_main => false}
+
+  translates :name, :description, :address
+
+  fileuploads :place_image, :place_images
 
   include Tire::Model::Search
   include Tire::Model::Callbacks
+
+  include Utils::Models::Base
+  include Utils::Models::Translations
+  include Utils::Models::AdminAdds
 
   PER_PAGE = 10
 
@@ -117,3 +120,28 @@ class Place < ActiveRecord::Base
   end
 
 end
+# == Schema Information
+#
+# Table name: places
+#
+#  id         :integer          not null, primary key
+#  slug       :string(255)      not null
+#  user_id    :integer
+#  is_visible :boolean          default(TRUE), not null
+#  lat        :float
+#  lng        :float
+#  zoom       :float
+#  phone      :string(255)
+#  url        :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  kitchen_id :integer
+#  avgbill    :integer
+#  picture    :string(255)
+#
+# Indexes
+#
+#  index_places_on_slug     (slug) UNIQUE
+#  index_places_on_user_id  (user_id)
+#
+

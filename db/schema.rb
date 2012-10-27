@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121024180743) do
+ActiveRecord::Schema.define(:version => 20121027100118) do
 
   create_table "asset_translations", :force => true do |t|
     t.integer  "asset_id"
@@ -154,27 +154,70 @@ ActiveRecord::Schema.define(:version => 20121024180743) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "places", :force => true do |t|
+  create_table "place_categories", :force => true do |t|
     t.integer  "category_id"
+    t.integer  "place_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "place_categories", ["category_id"], :name => "index_place_categories_on_category_id"
+  add_index "place_categories", ["place_id"], :name => "index_place_categories_on_place_id"
+
+  create_table "place_kitchens", :force => true do |t|
+    t.integer  "place_id"
+    t.integer  "kitchen_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "place_kitchens", ["kitchen_id"], :name => "index_place_kitchens_on_kitchen_id"
+  add_index "place_kitchens", ["place_id"], :name => "index_place_kitchens_on_place_id"
+
+  create_table "place_translations", :force => true do |t|
+    t.integer  "place_id"
+    t.string   "locale"
     t.string   "name"
     t.text     "description"
     t.text     "address"
-    t.float    "lat"
-    t.float    "lng"
-    t.string   "phone"
-    t.string   "url"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  add_index "place_translations", ["locale"], :name => "index_place_translations_on_locale"
+  add_index "place_translations", ["place_id"], :name => "index_place_translations_on_place_id"
+
+  create_table "places", :force => true do |t|
+    t.string   "slug",                         :null => false
+    t.integer  "user_id"
+    t.boolean  "is_visible", :default => true, :null => false
+    t.float    "lat"
+    t.float    "lng"
+    t.float    "zoom"
+    t.string   "phone"
+    t.string   "url"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.integer  "kitchen_id"
     t.integer  "avgbill"
     t.string   "picture"
   end
 
-  add_index "places", ["category_id"], :name => "index_places_on_category_id"
+  add_index "places", ["slug"], :name => "index_places_on_slug", :unique => true
+  add_index "places", ["user_id"], :name => "index_places_on_user_id"
 
   create_table "places_selections", :id => false, :force => true do |t|
     t.integer "place_id"
     t.integer "selection_id"
+  end
+
+  create_table "price_ranges", :force => true do |t|
+    t.float    "min_price"
+    t.float    "max_price"
+    t.float    "avg_price"
+    t.integer  "place_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "reviews", :force => true do |t|
@@ -255,23 +298,43 @@ ActiveRecord::Schema.define(:version => 20121024180743) do
   add_index "structures", ["user_id"], :name => "index_structures_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "name",                   :default => "", :null => false
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "login",                  :limit => 20
+    t.integer  "user_role_id",           :limit => 1,  :default => 1
+    t.integer  "trust_state",            :limit => 1,  :default => 1
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "patronymic"
+    t.string   "phone"
+    t.string   "address"
+    t.datetime "birthday"
+    t.integer  "account_id"
+    t.string   "email"
+    t.string   "encrypted_password",                   :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
+    t.integer  "sign_in_count",                        :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.string   "password_salt"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.integer  "failed_attempts",                      :default => 0
+    t.string   "unlock_token"
+    t.datetime "locked_at"
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
     t.string   "photo"
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
+  add_index "users", ["email", "account_id"], :name => "index_users_on_email_and_account_id"
+  add_index "users", ["last_name", "first_name", "patronymic"], :name => "index_users_on_last_name_and_first_name_and_patronymic"
+  add_index "users", ["login"], :name => "index_users_on_login"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

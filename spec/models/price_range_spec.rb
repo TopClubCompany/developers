@@ -1,17 +1,17 @@
+require 'spec_helper'
 
-class Note < ActiveRecord::Base
-  belongs_to :place
-
+describe PriceRange do
+  pending "add some examples to (or delete) #{__FILE__}"
 end
 # == Schema Information
 #
-# Table name: notes
+# Table name: price_ranges
 #
 #  id         :integer          not null, primary key
+#  min_price  :float
+#  max_price  :float
+#  avg_price  :float
 #  place_id   :integer
-#  picture    :string(255)
-#  title      :string(255)
-#  body       :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

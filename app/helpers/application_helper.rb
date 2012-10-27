@@ -7,7 +7,7 @@ module ApplicationHelper
 
   def remote_image_if(image, options={})
     return unless image
-    image_tag "//#{options[:host] || 'www.abitant.com'}/#{image}", options
+    image_tag "//#{options[:host] || 'www.top_club.com'}/#{image}", options
   end
 
   def image_tag_if(image, options={})
