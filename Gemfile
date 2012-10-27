@@ -42,7 +42,11 @@ gem 'cancan'
 gem 'unicode_utils' # For unicode-strings downcase method o_O !!!
 
 group :development do
-  gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
+  if File.exists?('/var/www/top_club/developers/.local_gems')
+    gem 'annotate', :path => '/var/www/gems/annotate_models'
+  else
+    gem 'annotate', :git => 'git://github.com/OpakAlex/annotate_models.git'
+  end
 end
 
 
