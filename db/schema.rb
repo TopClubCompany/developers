@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121024180743) do
+ActiveRecord::Schema.define(:version => 20121027082142) do
 
   create_table "asset_translations", :force => true do |t|
     t.integer  "asset_id"
@@ -154,27 +154,50 @@ ActiveRecord::Schema.define(:version => 20121024180743) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "places", :force => true do |t|
-    t.integer  "category_id"
+  create_table "place_translations", :force => true do |t|
+    t.integer  "place_id"
+    t.string   "locale"
     t.string   "name"
     t.text     "description"
     t.text     "address"
-    t.float    "lat"
-    t.float    "lng"
-    t.string   "phone"
-    t.string   "url"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  add_index "place_translations", ["locale"], :name => "index_place_translations_on_locale"
+  add_index "place_translations", ["place_id"], :name => "index_place_translations_on_place_id"
+
+  create_table "places", :force => true do |t|
+    t.string   "slug",                         :null => false
+    t.integer  "user_id"
+    t.boolean  "is_visible", :default => true, :null => false
+    t.float    "lat"
+    t.float    "lng"
+    t.float    "zoom"
+    t.string   "phone"
+    t.string   "url"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.integer  "kitchen_id"
     t.integer  "avgbill"
     t.string   "picture"
   end
 
-  add_index "places", ["category_id"], :name => "index_places_on_category_id"
+  add_index "places", ["slug"], :name => "index_places_on_slug", :unique => true
+  add_index "places", ["user_id"], :name => "index_places_on_user_id"
 
   create_table "places_selections", :id => false, :force => true do |t|
     t.integer "place_id"
     t.integer "selection_id"
+  end
+
+  create_table "price_ranges", :force => true do |t|
+    t.float    "min_price"
+    t.float    "max_price"
+    t.float    "avg_price"
+    t.integer  "place_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "reviews", :force => true do |t|

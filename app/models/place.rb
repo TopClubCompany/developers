@@ -22,17 +22,31 @@
 
 class Place < ActiveRecord::Base
 
-  has_and_belongs_to_many :selections
+  attr_accessible :lat, :lng, :phone, :zoom, :is_visible, :user_id, :url
+
+  belongs_to :user
+
+  #has_and_belongs_to_many :selections
   has_many :notes
   has_many :events
   has_many :reviews
-  accepts_nested_attributes_for :reviews
+  has_many :price_ranges
 
-  belongs_to :category
-  belongs_to :kitchen
+  accepts_nested_attributes_for :reviews, :price_ranges
+
+  #belongs_to :category
+  #belongs_to :kitchen
+
+  translates :name, :description, :address
 
   include Tire::Model::Search
   include Tire::Model::Callbacks
+
+
+  include Utils::Models::Base
+  include Utils::Models::Translations
+  include Utils::Models::AdminAdds
+
 
   PER_PAGE = 10
 
