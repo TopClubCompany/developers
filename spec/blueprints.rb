@@ -13,7 +13,7 @@ Place.blueprint {
   description { Faker::Lorem.sentence }
   address     { Faker::Address.street_address }
   lat         { Faker::Geolocation.lat }
-  lng         { Faker::Geolocation.lng }
+  lon         { Faker::Geolocation.lng }
   phone       { Faker::PhoneNumber.phone_number }
   url         { Faker::Internet.http_url }
 }

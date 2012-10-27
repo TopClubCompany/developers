@@ -44,11 +44,11 @@ class Place < ActiveRecord::Base
   end
 
   def lat_lng
-    [lat, lng].join(',')
+    [lat, lon].join(',')
   end
 
   def to_indexed_json
-    to_json except: ['lat', 'lng'], methods: ['lat_lng']
+    to_json except: ['lat', 'lon'], methods: ['lat_lng']
   end
 
   def near

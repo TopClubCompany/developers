@@ -7,7 +7,7 @@ table.table.table-striped.index_table#list
       th= sort_link(@search, :user_id)
       th= sort_link(@search, :is_visible)
       th= sort_link(@search, :lat)
-      th= sort_link(@search, :lng)
+      th= sort_link(@search, :lon)
       th= sort_link(@search, :zoom)
       th= sort_link(@search, :phone)
       th= sort_link(@search, :url)
@@ -22,7 +22,7 @@ table.table.table-striped.index_table#list
         td= pretty_data item.user_id
         td= pretty_data item.is_visible
         td= pretty_data item.lat
-        td= pretty_data item.lng
+        td= pretty_data item.lon
         td= pretty_data item.zoom
         td= pretty_data item.phone
         td= pretty_data item.url
