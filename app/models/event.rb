@@ -1,17 +1,3 @@
-# == Schema Information
-#
-# Table name: events
-#
-#  id         :integer          not null, primary key
-#  start_at   :datetime
-#  picture    :string(255)
-#  kind       :string(255)
-#  title      :string(255)
-#  place_id   :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-
 class Event < ActiveRecord::Base
   belongs_to :place
 
@@ -36,3 +22,21 @@ class Event < ActiveRecord::Base
 
 
 end
+# == Schema Information
+#
+# Table name: events
+#
+#  id         :integer          not null, primary key
+#  start_at   :datetime
+#  picture    :string(255)
+#  kind       :string(255)
+#  title      :string(255)
+#  place_id   :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_events_on_place_id  (place_id)
+#
+
