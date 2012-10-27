@@ -192,7 +192,7 @@ ActiveRecord::Schema.define(:version => 20121027100118) do
     t.integer  "user_id"
     t.boolean  "is_visible", :default => true, :null => false
     t.float    "lat"
-    t.float    "lng"
+    t.float    "lon"
     t.float    "zoom"
     t.string   "phone"
     t.string   "url"
