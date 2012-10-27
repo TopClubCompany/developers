@@ -7,7 +7,7 @@ if(Rails.env.development?)
     # same name.
     Annotate.set_defaults({
       'position_in_routes'   => "after",
-      'position_in_class'    => "before",
+      'position_in_class'    => "after",
       'position_in_test'     => "after",
       'position_in_fixture'  => "after",
       'position_in_factory'  => "before",

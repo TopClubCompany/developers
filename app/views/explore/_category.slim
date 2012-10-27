@@ -2,7 +2,7 @@
   .header_grey= cat.name
   - main_place = cat.places.first(5)[0]
   - if main_place
-    img src="#{main_place.picture}"
+    /img src="#{main_place.picture}"
     .description
       = link_to main_place.name, place_path(main_place)
       .big_stars class="stars#{main_place.rating.to_i}"

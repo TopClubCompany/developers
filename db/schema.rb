@@ -198,9 +198,6 @@ ActiveRecord::Schema.define(:version => 20121027100118) do
     t.string   "url"
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
-    t.integer  "kitchen_id"
-    t.integer  "avgbill"
-    t.string   "picture"
   end
 
   add_index "places", ["slug"], :name => "index_places_on_slug", :unique => true
@@ -328,7 +325,6 @@ ActiveRecord::Schema.define(:version => 20121027100118) do
     t.datetime "locked_at"
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
-    t.string   "photo"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
