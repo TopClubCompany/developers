@@ -1,28 +1,28 @@
 .central_module.explorer
   .places
     .black_module
-      %h1 Места
+      h1 Места
       .buttons
         .button_gray.active
           .left
           .middle
-            %a{:href => '#'} Рекомендуемые
+            a href='#' Рекомендуемые
           .right
         .button_gray
           .left
           .middle
-            %a{:href => '#'} По местоположению
+            a href='#' По местоположению
           .right
         .button_gray
           .left
           .middle
-            %a{:href => '#'} По интересам
+            a href='#' По интересам
           .right
         .to_big_map
-          %a{:href => '/search_map'} &nbsp;
+          a href='/search_map' &nbsp;
     = render 'recomended'
     .bdy#map
-  = render :partial => "shared/advertising", :locals => {}
+  = render partial: "shared/advertising", locals: {}
   .border
   .middle_module
     .three_blocks
@@ -31,12 +31,12 @@
     .border
       .entertain_module
         .header_grey Все развлечения
-        %table{:border => "0", :cellspacing => "0", :cellpadding => "0", class: 'all_categories'}
-          %tbody
+        table border="0" cellspacing="0" cellpadding="0" class='all_categories'
+          tbody
             - @categories.first(19).each_slice(4) do |cat_slice|
-              %tr
+              tr
                 - cat_slice.each do |cat|
-                  %td
+                  td
                     -#.icon{class: cat.icon }
                     =link_to cat.name, '#'
     .border
