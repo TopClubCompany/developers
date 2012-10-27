@@ -26,6 +26,8 @@ $iconWhiteSpritePath: asset-url('glyphicons-halflings-white.png', image);
 .well-small {
   margin-bottom: 15px;
 }
+ul.nav li.dropdown.open ul.dropdown-menu,
+ul.nav li.dropdown.active ul.dropdown-menu, 
 ul.nav li.dropdown:hover ul.dropdown-menu {
   display: block;
   margin: 0;
@@ -204,9 +206,45 @@ td.actions {
   padding: 6px;
   min-height: 23px;
 }
-.navbar-inner {
 
-  background-color: #2C2C2C;
+.navbar {
+  a{
+    text-shadow: none !important;
+  }
+	.brand {
+		color: #999 !important;
+	}
+  .nav > li.dropdown{
+    a.dropdown-toggle {
+      color: #999;
+      background-color: transparent;  
+    }
+    a.dropdown-toggle > .caret{
+      border-top-color: #999 !important;
+      border-bottom-color: #999 !important;
+      opacity: 1;
+    }
+   &.open, &:hover{
+    a.dropdown-toggle {
+      color: #fff;
+            background-color: transparent;  
+    }
+    a.dropdown-toggle > .caret{
+      border-top-color: #fff !important;
+      border-bottom-color: #fff  !important;
+      opacity: 1;
+    }
+   } /*   .nav > li.dropdown.open   .nav > li.dropdown:hover */
+  }  /*   .nav > li.dropdown */
+
+
+} /* navbar */
+.pagination_info{
+  margin-left: -10px;
+}
+
+.navbar-inner {
+    background-color: #2C2C2C;
   background-image: -moz-linear-gradient(top, #333, #222);
   background-image: -ms-linear-gradient(top, #333, #222);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#333), to(#222));
@@ -214,20 +252,11 @@ td.actions {
   background-image: -o-linear-gradient(top, #333, #222);
   background-image: linear-gradient(top, #333, #222);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF333333', endColorstr='#FF222222', GradientType=0);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF333333',   endColorstr='#FF222222', GradientType=0);
   -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25),inset 0 -1px 0 rgba(0,0,0,0.1);
   -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.25),inset 0 -1px 0 rgba(0,0,0,0.1);
   box-shadow: 0 1px 3px rgba(0,0,0,0.25),inset 0 -1px 0 rgba(0,0,0,0.1);
 }
-.navbar {
-	.brand {
-		color: white;
-	}
-	.navbar .nav > li > a {
-		color: #999;
-		text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);	
-	}
-}
-.pagination_info{
-  margin-left: -10px;
-}
+
+
