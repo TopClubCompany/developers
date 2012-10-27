@@ -3,7 +3,7 @@
 
 class Place < ActiveRecord::Base
 
-  attr_accessible :lat, :lng, :phone, :zoom, :is_visible, :user_id, :url
+  attr_accessible :lat, :lon, :phone, :zoom, :is_visible, :user_id, :url
 
   belongs_to :user
 
