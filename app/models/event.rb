@@ -22,6 +22,7 @@ class Event < ActiveRecord::Base
 
 
 end
+
 # == Schema Information
 #
 # Table name: events
