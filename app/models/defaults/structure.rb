@@ -1,3 +1,29 @@
+# == Schema Information
+#
+# Table name: structures
+#
+#  id         :integer          not null, primary key
+#  slug       :string(50)       not null
+#  kind       :integer          default(1)
+#  position   :integer          default(1)
+#  user_id    :integer
+#  is_visible :boolean          default(TRUE), not null
+#  delta      :boolean          default(TRUE), not null
+#  parent_id  :integer
+#  lft        :integer          default(0)
+#  rgt        :integer          default(0)
+#  depth      :integer          default(0)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_structures_on_kind_and_slug  (kind,slug) UNIQUE
+#  index_structures_on_lft_and_rgt    (lft,rgt)
+#  index_structures_on_parent_id      (parent_id)
+#  index_structures_on_user_id        (user_id)
+#
+
 # -*- encoding : utf-8 -*-
 class Structure < ActiveRecord::Base
   include Utils::Models::Structure
@@ -72,27 +98,3 @@ class Structure < ActiveRecord::Base
     slug.blank? && new_record?
   end
 end
-
-# == Schema Information
-#
-# Table name: structures
-#
-#  id          :integer(4)      not null, primary key
-#  slug        :string(50)      not null
-#  kind        :integer(1)      default(1)
-#  position    :integer(2)      default(1)
-#  user_id     :integer(4)
-#  is_visible  :boolean(1)      default(TRUE), not null
-#  delta       :boolean(1)      default(TRUE), not null
-#  parent_id   :integer(4)
-#  lft         :integer(4)      default(0)
-#  rgt         :integer(4)      default(0)
-#  depth       :integer(4)      default(0)
-#  created_at  :datetime        not null
-#  updated_at  :datetime        not null
-#  import_id   :integer(4)
-#  linked_id   :integer(4)
-#  linked_type :string(50)
-#  is_hidden   :boolean(1)      default(FALSE), not null
-#
-

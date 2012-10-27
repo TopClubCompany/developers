@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: headers
+#
+#  id              :integer          not null, primary key
+#  headerable_type :string(30)       not null
+#  headerable_id   :integer          not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+# Indexes
+#
+#  fk_headerable  (headerable_type,headerable_id) UNIQUE
+#
+
 # -*- encoding : utf-8 -*-
 class Header < ActiveRecord::Base
 
@@ -9,15 +24,3 @@ class Header < ActiveRecord::Base
   include Utils::Models::Header
 
 end
-
-# == Schema Information
-#
-# Table name: headers
-#
-#  id              :integer(4)      not null, primary key
-#  headerable_type :string(30)      not null
-#  headerable_id   :integer(4)      not null
-#  created_at      :datetime        not null
-#  updated_at      :datetime        not null
-#
-
