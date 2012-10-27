@@ -34,6 +34,11 @@ Topclub::Application.routes.draw do
       post :rebuild, :on => :collection
     end
 
+    resources :events do
+      post :batch, :on => :collection
+      post :rebuild, :on => :collection
+    end
+
     resources :assets, :only => [:create, :destroy] do
       post :sort, :on => :collection
       get :description, :on => :collection

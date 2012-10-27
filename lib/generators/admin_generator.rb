@@ -14,9 +14,9 @@ class AdminGenerator < Rails::Generators::Base
   end
 
   def create_views_files
-    template('form.erb', "app/views/admin/#{controller_file_name}/_form.html.haml") unless options.no_form?
-    template('table.erb', "app/views/admin/#{controller_file_name}/_table.html.haml") unless options.no_table?
-    template('search_form.erb', "app/views/admin/#{controller_file_name}/_search_form.html.haml") unless options.no_search_form?
+    template('form.erb', "app/views/admin/#{controller_file_name}/_form.html.slim") unless options.no_form?
+    template('table.erb', "app/views/admin/#{controller_file_name}/_table.html.slim") unless options.no_table?
+    template('search_form.erb', "app/views/admin/#{controller_file_name}/_search_form.html.slim") unless options.no_search_form?
   end
 
   def model_key

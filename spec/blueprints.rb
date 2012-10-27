@@ -25,13 +25,13 @@ Kitchen.blueprint {
   description { Faker::Lorem.sentence }
 }
 
-User.blueprint {
-  name                  { 'Other user' }
-  email                 { 'hello@example.com' }
-  photo                 { 'http://lorempixel.com/50/50/people/' }
-  password              { 'password' }
-  password_confirmation { 'password' }
-}
+#User.blueprint {
+#  first_name                  { 'Other user' }
+#  email                 { 'hello@example.com' }
+#  photo                 { 'http://lorempixel.com/50/50/people/' }
+#  password              { 'password' }
+#  password_confirmation { 'password' }
+#}
 
 Note.blueprint {
   picture     { 'http://www.dummyimage.com/101x72/0a0dcc/fff.png&text=PlaceNoteImage' }

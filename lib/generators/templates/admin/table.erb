@@ -1,19 +1,19 @@
-%table.table.table-striped.index_table#list
-  %thead
-    %tr.pjax_links
+table.table.table-striped.index_table#list
+  thead
+    tr.pjax_links
       = batch_action_toggle
 <% attrs = model.attributes.keys.without(*(translated_columns + %w(updated_at)).map(&:to_s)) -%>
 <% attrs.each do |attribute| -%>
-      %th= sort_link(@search, :<%= attribute -%>)
+      th= sort_link(@search, :<%= attribute -%>)
 <% end -%>
-      %th=t 'admin.table.actions'
-  %tbody
+      th=t 'admin.table.actions'
+  tbody
     - collection.each do |item|
-      %tr
+      tr
         = batch_action_item(item)
-        %td= id_link(item)
+        td= id_link(item)
 <% attrs.without('id').each do |attribute| -%>
-        %td= pretty_data item.<%= attribute %>
+        td= pretty_data item.<%= attribute %>
 <% end -%>
-        %td.actions= item_index_actions(item)
+        td.actions= item_index_actions(item)
 

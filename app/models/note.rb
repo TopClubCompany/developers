@@ -1,3 +1,8 @@
+
+class Note < ActiveRecord::Base
+  belongs_to :place
+
+end
 # == Schema Information
 #
 # Table name: notes
@@ -11,7 +16,3 @@
 #  updated_at :datetime         not null
 #
 
-class Note < ActiveRecord::Base
-  belongs_to :place
-
-end

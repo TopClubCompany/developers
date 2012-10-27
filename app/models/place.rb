@@ -1,27 +1,3 @@
-# == Schema Information
-#
-# Table name: places
-#
-#  id         :integer          not null, primary key
-#  slug       :string(255)      not null
-#  user_id    :integer
-#  is_visible :boolean          default(TRUE), not null
-#  lat        :float
-#  lng        :float
-#  zoom       :float
-#  phone      :string(255)
-#  url        :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  kitchen_id :integer
-#  avgbill    :integer
-#  picture    :string(255)
-#
-# Indexes
-#
-#  index_places_on_slug     (slug) UNIQUE
-#  index_places_on_user_id  (user_id)
-#
 
 #coding: utf-8
 
@@ -33,6 +9,9 @@ class Place < ActiveRecord::Base
 
   has_many :place_categories, :dependent => :destroy
   has_many :categories, :through => :place_categories
+
+  has_many :place_kitchens, :dependent => :destroy
+  has_many :kitchens, :through => :place_kitchens
 
   has_many :notes
   has_many :events
@@ -141,3 +120,28 @@ class Place < ActiveRecord::Base
   end
 
 end
+# == Schema Information
+#
+# Table name: places
+#
+#  id         :integer          not null, primary key
+#  slug       :string(255)      not null
+#  user_id    :integer
+#  is_visible :boolean          default(TRUE), not null
+#  lat        :float
+#  lng        :float
+#  zoom       :float
+#  phone      :string(255)
+#  url        :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  kitchen_id :integer
+#  avgbill    :integer
+#  picture    :string(255)
+#
+# Indexes
+#
+#  index_places_on_slug     (slug) UNIQUE
+#  index_places_on_user_id  (user_id)
+#
+

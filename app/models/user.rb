@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
 
   attr_accessible :login, :email, :password, :password_confirmation, :remember_me,
-                  :first_name, :last_name, :patronymic, :phone, :address, :birthday, :user_type_id
+                  :first_name, :last_name, :patronymic, :phone, :address, :birthday
 
   attr_accessible :gender, :kind, :time_zone, :locale
 
@@ -18,7 +18,6 @@ class User < ActiveRecord::Base
   enumerated_attribute :gender_type, :id_attribute => :gender, :class => ::GenderType
   enumerated_attribute :user_role_type, :id_attribute => :user_role_id, :class => ::UserRoleType
   enumerated_attribute :trust_state_type, :id_attribute => :trust_state, :class => ::UserState
-  enumerated_attribute :user_type, :id_attribute => :user_type_id, :class => ::UserType
 
   has_one :avatar, :as => :assetable, :dependent => :destroy, :autosave => true
   #has_many :accounts, :dependent => :destroy
@@ -66,7 +65,7 @@ class User < ActiveRecord::Base
   end
 
   def password_required?
-    return false if accounts.any?
+    #return false if accounts.any?
     return true if password.present?
     return false if pending?
     return true if new_record? && !pending?
@@ -96,7 +95,8 @@ class User < ActiveRecord::Base
   end
 
   def deleted?
-    trust_state == ::UserS
+    trust_state == ::UserState.deleted.id
+  end
 
   def default?
     has_role?(:default)
@@ -166,6 +166,7 @@ class User < ActiveRecord::Base
   end
 
 end
+
 # == Schema Information
 #
 # Table name: users
@@ -211,4 +212,6 @@ end
 #  index_users_on_login                                    (login)
 #  index_users_on_reset_password_token                     (reset_password_token) UNIQUE
 #
+
+
 
