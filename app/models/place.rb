@@ -26,7 +26,9 @@ class Place < ActiveRecord::Base
 
   belongs_to :user
 
-  #has_and_belongs_to_many :selections
+  has_many :place_categories, :dependent => :destroy
+  has_many :categories, :through => :place_categories
+
   has_many :notes
   has_many :events
   has_many :reviews
@@ -37,16 +39,19 @@ class Place < ActiveRecord::Base
   #belongs_to :category
   #belongs_to :kitchen
 
+  has_one :place_image, :as => :assetable, :dependent => :destroy, :conditions => {:is_main => true}
+  has_many :place_images, :as => :assetable, :dependent => :destroy, :conditions => {:is_main => false}
+
   translates :name, :description, :address
+
+  fileuploads :place_image, :place_images
 
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
-
   include Utils::Models::Base
   include Utils::Models::Translations
   include Utils::Models::AdminAdds
-
 
   PER_PAGE = 10
 
