@@ -6,11 +6,13 @@
 
   = f.input :is_visible
 
-  = f.input :lat
-  = f.input :lng
-  = f.input :zoom
+  /= f.input :lat
+  /= f.input :lng
+  /= f.input :zoom
   = f.input :phone
   = f.input :url
+
+  = geo_input 'place'
 
   = input_set t('admin.place_image') do
     = f.attach_file_field :place_image, :file_max_size => 2
