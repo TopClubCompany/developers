@@ -9,10 +9,37 @@ $iconWhiteSpritePath: asset-url('glyphicons-halflings-white.png', image);
 @import "admin/components/translations";
 @import "admin/components/perms";
 @import "admin/components/geo_input";
+@import "admin/checkbox";
+$default-prefixes: webkit moz ms o;
 
-//.well {
-//  border-color: #C4C4C4;
-//}
+@mixin build-prefix-values($property, $value, $prefixes: $default-prefixes) {
+    @each $prefix in $prefixes {
+        -#{$prefix}-#{$property}: #{$value};
+    }
+    #{$property}: #{$value};
+} 
+
+@mixin transition($property: all, $delay: 1s, $timing: linear) {
+    $value: $property $delay $timing;
+    // use default prefixes
+    @include build-prefix-values('transition', $value);
+}
+/* TODO 
+-webkit-appearance
+-webkit-border-radius
+-webkit-animation-timing-function
+        -webkit-animation-duration
+-webkit-animation-name
+mixins
+*/
+ 
+
+
+.well {
+  padding-bottom: 40px;
+  overflow-y: hidden;
+}
+
 .downloads {
   margin-top: 9px;
   a {
@@ -236,12 +263,12 @@ td.actions {
     }
    } /*   .nav > li.dropdown.open   .nav > li.dropdown:hover */
   }  /*   .nav > li.dropdown */
-
-
 } /* navbar */
+
 .pagination_info{
   margin-left: -10px;
 }
+
 
 .navbar-inner {
     background-color: #2C2C2C;
