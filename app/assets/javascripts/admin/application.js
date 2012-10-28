@@ -7,7 +7,12 @@
 //= require jquery.pjax
 //= require jquery.scrollTo
 //= require chosen
-//= require bootstrap-datepicker
+//q= require bootstrap-datepicker
+
+//= require bootstrap-datepicker/core
+//q= require bootstrap-datepicker/locales/bootstrap-datepicker.ru
+//q= require bootstrap-datepicker/locales/bootstrap-datepicker.en
+
 //= require bootstrap-timepicker
 //= require fileupload/fileuploader.js
 //= require fileupload/fileuploader-input.js
