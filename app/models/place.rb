@@ -18,7 +18,7 @@ class Place < ActiveRecord::Base
   has_many :reviews
   has_many :price_ranges
 
-  accepts_nested_attributes_for :reviews, :price_ranges
+  accepts_nested_attributes_for :reviews, :price_ranges, :allow_destroy => true, :reject_if => :all_blank
 
   #belongs_to :category
   #belongs_to :kitchen
@@ -37,7 +37,10 @@ class Place < ActiveRecord::Base
   include Utils::Models::Translations
   include Utils::Models::AdminAdds
 
-  PER_PAGE = 10
+
+  as_token_ids :category
+
+  PER_PAGE = 25
 
   mapping do
     indexes :lat_lng, type: 'geo_point'

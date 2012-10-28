@@ -26,6 +26,10 @@ Topclub::Application.routes.draw do
   end
 
   namespace :admin do
+
+    match 'main_image' => AdminMainImageApp
+    match 'autocomplete' => AdminAutocompleteApp
+
     get 'static_pages/:structure_id' => 'static_pages#show'
     root :to => "dashboards#index"
     resources :dashboards

@@ -98,6 +98,7 @@ gem 'truncate_html'
 #gem 'geocoder'
 #gem 'geoip'
 gem 'auto_html'
+gem 'jbuilder'
 #gem 'ancestry
 
 #for uploads
