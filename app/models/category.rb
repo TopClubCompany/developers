@@ -23,6 +23,39 @@ class Category < ActiveRecord::Base
 
   default_scope reversed_nested_set.includes(:translations)
 
+  ac_field
+
+  self.per_page = 1000
+
+
+  def self.paginate(options = {})
+    includes(:parent).paginate(:page => options[:page], :per_page => options[:per_page]).to_a
+  end
+
+  def root_id
+    root.try(:id)
+  end
+
+  def to_indexed_json
+    attrs = [:id, :slug, :created_at, :parent_id, :root_id, :lft, :for_input_token, :depth]
+    Jbuilder.encode do |json|
+      json.(self, *attrs)
+      json.(self, *self.class.ac_search_attrs)
+      json.parent_name parent.try(:name)
+    end
+  end
+
+  def self.for_input_token(r, attr='name')
+    r.for_input_token
+  end
+
+  def for_input_token
+    input_name = self_and_ancestors.map{|r| r.try(:name)}
+    input_name[-1] = "<b>#{input_name.last}</b>"
+    {:name => input_name.join(' - '), :id => self.id}
+  end
+
+
 end
 
 # == Schema Information
