@@ -10,8 +10,8 @@
               .black_list
   - @selections.first(4).each do |selection|
     .points_bottom
-      .foto
-        img src=selection.picture alt='foto' width: '43px' height='30px'
+      .foto.lol
+        img alt='foto' width='43px' height='30px' src=selection.picture
       .description
         .name= selection.user.full_name
         /.date= l selection.created_at, format: :date_default
