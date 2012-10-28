@@ -122,7 +122,7 @@ group :development, :test do
   gem 'jasmine-rails'
   gem "guard-rspec"
   gem "capybara"
-  gem 'capybara-webkit'
+  gem 'capybara-webkit' if Rails.env.development?
   gem 'cucumber-rails', :require => false
   gem "spork"
   gem 'guard-spork'
