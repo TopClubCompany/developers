@@ -1,0 +1,29 @@
+.sidebar.tape_menu.cf
+  .header_gray
+    span.title
+      = header[:title]
+    - header[:buttons].each do |key, value|
+      .buttom_second class=(value[:class])
+        .back_left
+          .back_right
+            .back_center
+              .direction
+                a href=(value[:link])
+                  = value[:name]
+                .black_list
+  - body.each do |key, value|
+    .points_bottom
+      .foto
+        img src=value[:image_path],:alt='foto'
+      .description
+        .name
+          = value[:name]
+        .date
+          = value[:date]
+        .sity
+          = value[:type]
+      a.header_blue href=(value[:link])
+        = value[:description]
+  .link_gray
+    a href=(footer[:link])
+      = footer[:name]

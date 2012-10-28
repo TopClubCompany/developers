@@ -1,0 +1,24 @@
+= admin_form_for @place do |f|
+  = f.locale_tabs do |l|
+    = f.input :name, :locale => l
+    = f.input :description, :locale => l, :as => :ckeditor
+    = f.input :address, :locale => l, :as => :ckeditor
+
+  = f.input :is_visible
+
+  = f.input :lat, :as => :hidden
+  = f.input :lon, :as => :hidden
+  = f.input :zoom, :as => :hidden
+  = f.input :phone
+  = f.input :url
+
+  = geo_input 'place'
+
+  = input_set t('admin.place_image') do
+    = f.attach_file_field :place_image, :file_max_size => 2
+  = input_set t('admin.place_images') do
+    = f.attach_file_field :place_images, :file_max_size => 2
+
+  = f.hidden_field :fileupload_guid if f.object.new_record?
+
+  = f.save_buttons

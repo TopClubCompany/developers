@@ -48,6 +48,9 @@ Topclub::Application.routes.draw do
     resources(:kitchens) do
       post :batch, :on => :collection
     end
+    resources(:places) do
+      post :batch, :on => :collection
+    end
   end
   mount Ckeditor::Engine => "/ckeditor"
 end

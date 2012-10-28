@@ -1,0 +1,20 @@
+.sidebar.tape_menu.cf
+  .header_gray
+    span.title Подборки
+    .buttom_second.super_list
+      .back_left
+        .back_right
+          .back_center
+            .direction
+              a href='#'
+              .black_list
+  - @selections.first(4).each do |selection|
+    .points_bottom
+      .foto
+        img  src: selection.picture, alt: 'foto', width: '43px', height: '30px' 
+      .description
+        .name= selection.user.full_name
+        /.date= l selection.created_at, format: :date_default
+        .sity= selection.kind
+      = link_to selection.description, '#', class: 'header_blue'
+  .link_gray=link_to 'Все подборки', '#'

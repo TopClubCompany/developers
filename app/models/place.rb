@@ -3,7 +3,7 @@
 
 class Place < ActiveRecord::Base
 
-  attr_accessible :lat, :lng, :phone, :zoom, :is_visible, :user_id, :url
+  attr_accessible :lat, :lon, :phone, :zoom, :is_visible, :user_id, :url
 
   belongs_to :user
 
@@ -44,11 +44,11 @@ class Place < ActiveRecord::Base
   end
 
   def lat_lng
-    [lat, lng].join(',')
+    [lat, lon].join(',')
   end
 
   def to_indexed_json
-    to_json except: ['lat', 'lng'], methods: ['lat_lng']
+    to_json except: ['lat', 'lon'], methods: ['lat_lng']
   end
 
   def near
@@ -129,15 +129,12 @@ end
 #  user_id    :integer
 #  is_visible :boolean          default(TRUE), not null
 #  lat        :float
-#  lng        :float
+#  lon        :float
 #  zoom       :float
 #  phone      :string(255)
 #  url        :string(255)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  kitchen_id :integer
-#  avgbill    :integer
-#  picture    :string(255)
 #
 # Indexes
 #

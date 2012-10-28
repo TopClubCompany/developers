@@ -11,11 +11,9 @@ Category.blueprint {
 Place.blueprint {
   name        { Faker::Company.name }
   description { Faker::Lorem.sentence }
-  picture     { "http://lorempixel.com/98/73/food" }
   address     { Faker::Address.street_address }
   lat         { Faker::Geolocation.lat }
-  lng         { Faker::Geolocation.lng }
-  avgbill     { rand 4 }
+  lon         { Faker::Geolocation.lng }
   phone       { Faker::PhoneNumber.phone_number }
   url         { Faker::Internet.http_url }
 }

@@ -3,7 +3,6 @@ source 'http://rubygems.org'
 gem 'rails', '3.2.8'
 gem 'mysql2'
 gem 'redis'
-gem 'haml'
 gem 'slim'
 gem 'styx'
 
@@ -45,7 +44,7 @@ group :development do
   if File.exists?('/var/www/top_club/developers/.local_gems')
     gem 'annotate', :path => '/var/www/gems/annotate_models'
   else
-    gem 'annotate', :git => 'git://github.com/OpakAlex/annotate_models.git', ref: '478fd7cdcc'
+    gem 'annotate', :git => 'git://github.com/OpakAlex/annotate_models.git', ref: '568b3b4a76'
   end
 end
 
@@ -122,6 +121,7 @@ group :development, :test do
   gem 'jasmine-rails'
   gem "guard-rspec"
   gem "capybara"
+  gem 'capybara-webkit'
   gem 'cucumber-rails', :require => false
   gem "spork"
   gem 'guard-spork'

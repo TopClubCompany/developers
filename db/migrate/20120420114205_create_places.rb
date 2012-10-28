@@ -5,7 +5,7 @@ class CreatePlaces < ActiveRecord::Migration
       t.references :user
       t.boolean :is_visible, :default => true, :null => false
       t.float      :lat
-      t.float      :lng
+      t.float      :lon
       t.float      :zoom
       t.string     :phone
       t.string     :url

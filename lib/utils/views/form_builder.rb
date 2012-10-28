@@ -28,7 +28,7 @@ module Utils
       def locale_tabs(options={}, &block)
         loc_html = {}
         Globalize.available_locales.each do |l|
-          loc_html[l] = template.capture_haml { block.call(l) }
+          loc_html[l] = template.capture { block.call(l) }
         end
         template.render 'admin/shared/locale_tabs', :loc_html => loc_html
       end

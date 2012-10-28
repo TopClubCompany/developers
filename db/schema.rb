@@ -192,15 +192,12 @@ ActiveRecord::Schema.define(:version => 20121027100118) do
     t.integer  "user_id"
     t.boolean  "is_visible", :default => true, :null => false
     t.float    "lat"
-    t.float    "lng"
+    t.float    "lon"
     t.float    "zoom"
     t.string   "phone"
     t.string   "url"
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
-    t.integer  "kitchen_id"
-    t.integer  "avgbill"
-    t.string   "picture"
   end
 
   add_index "places", ["slug"], :name => "index_places_on_slug", :unique => true
@@ -297,6 +294,16 @@ ActiveRecord::Schema.define(:version => 20121027100118) do
   add_index "structures", ["parent_id"], :name => "index_structures_on_parent_id"
   add_index "structures", ["user_id"], :name => "index_structures_on_user_id"
 
+  create_table "user_roles", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_roles", ["role_id"], :name => "index_user_roles_on_role_id"
+  add_index "user_roles", ["user_id"], :name => "index_user_roles_on_user_id"
+
   create_table "users", :force => true do |t|
     t.string   "login",                  :limit => 20
     t.integer  "user_role_id",           :limit => 1,  :default => 1
@@ -328,7 +335,6 @@ ActiveRecord::Schema.define(:version => 20121027100118) do
     t.datetime "locked_at"
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
-    t.string   "photo"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
