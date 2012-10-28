@@ -11,7 +11,7 @@
   - @selections.first(4).each do |selection|
     .points_bottom
       .foto
-        img  src: selection.picture, alt: 'foto', width: '43px', height: '30px' 
+        img src=selection.picture alt='foto' width: '43px' height='30px'
       .description
         .name= selection.user.full_name
         /.date= l selection.created_at, format: :date_default

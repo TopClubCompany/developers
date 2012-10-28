@@ -85,7 +85,7 @@
           | Рекомендуемые места
       - @recomended_places.each do |place|
         .points_bottom.cf
-          img src: place.picture, width: '43px', height: '30px' 
+          img src= place.picture, width: '43px', height: '30px'
           .description.cf
             .header_blue= link_to place.name, place_path(place)
             .numb_stars

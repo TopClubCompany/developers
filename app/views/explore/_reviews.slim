@@ -11,7 +11,7 @@
   - @reviews.first(4).each do |review|
     .points_bottom
       .foto
-        img  src: review.user.photo, alt: 'foto', width: '43px', height: '30px' 
+        img src=review.user.photo alt='foto' width='43px' height='30px'
       .description
         .name= review.user.full_name
         /.date= l review.created_at, format: :date_default
