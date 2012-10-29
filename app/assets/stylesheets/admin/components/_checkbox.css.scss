@@ -34,11 +34,7 @@ $default-prefixes: webkit moz ms o;
 }
 
 .preload {
-    -webkit-animation: none !important;
-    -moz-animation: none !important;
-    -ms-animation: none !important;
-    -o-animation: none !important;
-    animation: none !important;
+  @include build-prefix-values('animation', none !important);
 }
 
 input.pretty-slide-checkbox[type=checkbox] {
