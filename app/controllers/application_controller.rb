@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :login_happy_user
 
   def login_happy_user
-    sign_in User.last unless current_user
+    #sign_in User.first unless current_user
     @current_point ||= "50.4, 30.5"
   end
 

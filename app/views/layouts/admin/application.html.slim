@@ -12,7 +12,7 @@ html id="controller_#{controller_name}"
     = javascript_include_tag "/assets/ckeditor/init" unless collection_action?
     = csrf_meta_tags
     = yield(:head)
-  body id="action_#{action_name}"
+  body.preload id="action_#{action_name}"
     #loading.label.label-warning
       = t 'admin.loading'
     = render 'admin/shared/navigation'

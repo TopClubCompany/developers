@@ -7,6 +7,7 @@
 //= require jquery.pjax
 //= require jquery.scrollTo
 //= require chosen
+
 //q= require bootstrap-datepicker
 
 //= require bootstrap-datepicker/core
@@ -35,5 +36,5 @@
 //= require admin/components/tokens
 //= require admin/components/confirmation
 //= require admin/components/gmaps
-
+//= require admin/pretty-slide-checkbox
 //= require admin/main
