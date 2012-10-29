@@ -38,7 +38,7 @@ class Place < ActiveRecord::Base
   include Utils::Models::AdminAdds
 
 
-  as_token_ids :category
+  as_token_ids :category, :kitchen
 
   PER_PAGE = 25
 

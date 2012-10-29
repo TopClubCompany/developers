@@ -20,6 +20,8 @@ class Kitchen < ActiveRecord::Base
   include Utils::Models::Translations
   include Utils::Models::AdminAdds
 
+  ac_field
+
 end
 # == Schema Information
 #
