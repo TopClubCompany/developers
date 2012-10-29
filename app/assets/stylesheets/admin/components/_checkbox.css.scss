@@ -1,0 +1,80 @@
+$default-prefixes: webkit moz ms o;
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+      @content;
+    }
+  @-moz-keyframes #{$name} {
+      @content;
+    }
+  @-ms-keyframes #{$name} {
+      @content;
+    }
+  @keyframes #{$name} {
+      @content;
+    }
+}
+
+@mixin build-prefix-values($property, $value, $prefixes: $default-prefixes) {
+  @each $prefix in $prefixes {
+    -#{$prefix}-#{$property}: #{$value};
+  }
+  #{$property}: #{$value};
+}
+
+@mixin transition($property: all, $delay: 1s, $timing: linear) {
+  $value: $property $delay $timing;
+  @include build-prefix-values('transition', $value);
+}
+
+
+
+@mixin animation-name($value) {
+  @include build-prefix-values('animation-name', $value);
+}
+
+.preload {
+    -webkit-animation: none !important;
+    -moz-animation: none !important;
+    -ms-animation: none !important;
+    -o-animation: none !important;
+    animation: none !important;
+}
+
+input.pretty-slide-checkbox[type=checkbox] {
+    border: 1px solid #686868;
+    height: 27px;
+    width: 79px;
+    @include build-prefix-values('appearance', 'none !important');
+    @include build-prefix-values('border-radius', '13px');
+    background-image: url(image_path('checkbox-background.png'));
+    background-position: -52px 0;
+    background-repeat: no-repeat;
+    @include build-prefix-values('animation-timing-function', 'ease-in-out');
+    @include build-prefix-values('animation-duration', '400ms');
+    @include animation-name(checkbox-switch-off);
+
+}
+
+input.pretty-slide-checkbox:checked[type=checkbox] {
+    background-position: 0 0;
+    @include animation-name(checkbox-switch-on);
+}
+
+@include keyframes(checkbox-switch-on) {
+  from {
+    background-position: -52px 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+@include keyframes(checkbox-switch-off) {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -52px 0;
+  }
+}
