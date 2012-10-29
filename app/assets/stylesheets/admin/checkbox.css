@@ -12,21 +12,23 @@
     transition: none !important;
 }
 
-input.pretty-slide-checkbox[type=checkbox] {
-    border: 1px solid #686868;
-    height: 27px;
-    width: 79px;
-    -webkit-appearance: none;
-    -webkit-border-radius: 13px;
-    background-image: url(image_path('checkbox-background.png'));
+
+
+
+@-webkit-keyframes checkbox-switch-on {
+  from {
     background-position: -52px 0;
-    background-repeat: no-repeat;
-    -webkit-animation-timing-function: ease-in-out;
-    -webkit-animation-duration: 400ms;
-    -webkit-animation-name: checkbox-switch-off;
+  }
+  to {
+    background-position: 0 0;
+  }
 }
 
-input.pretty-slide-checkbox:checked[type=checkbox] {
+@-webkit-keyframes checkbox-switch-off {
+  from {
     background-position: 0 0;
-    -webkit-animation-name: checkbox-switch-on;
+  }
+  to {
+    background-position: -52px 0;
+  }
 }
