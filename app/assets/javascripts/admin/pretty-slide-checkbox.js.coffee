@@ -1,7 +1,7 @@
 $ ->
-  setTimeout ( ->
-    $("body").removeClass('preload')
-  ), 1000
+  $(".pretty-slide-checkbox").change ->
+    $(this).removeClass('preload')
+
 
 
 
