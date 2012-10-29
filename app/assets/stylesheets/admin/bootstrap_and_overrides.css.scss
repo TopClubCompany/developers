@@ -17,7 +17,7 @@ $default-prefixes: webkit moz ms o;
         -#{$prefix}-#{$property}: #{$value};
     }
     #{$property}: #{$value};
-} 
+}
 
 @mixin transition($property: all, $delay: 1s, $timing: linear) {
     $value: $property $delay $timing;
