@@ -4,7 +4,7 @@
     = f.input :description, :locale => l, :as => :ckeditor
     = f.input :address, :locale => l, :as => :ckeditor
 
-  = f.input :is_visible
+  = f.input :is_visible, input_html: {class: "pretty-slide-checkbox"}
   = f.input :token_category_ids, as: :string, label: Place.han(:categories), input_html: @place.token_data(:categories)
 
   = f.input :lat, :as => :hidden
