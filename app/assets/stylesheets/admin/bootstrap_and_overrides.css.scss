@@ -9,6 +9,7 @@ $iconWhiteSpritePath: asset-url('glyphicons-halflings-white.png', image);
 @import "admin/components/translations";
 @import "admin/components/perms";
 @import "admin/components/geo_input";
+
 $default-prefixes: webkit moz ms o;
 
 @mixin build-prefix-values($property, $value, $prefixes: $default-prefixes) {
@@ -31,8 +32,8 @@ $default-prefixes: webkit moz ms o;
 //-webkit-animation-name
 //mixins
 //
- 
 
+@import "admin/components/checkbox";
 
 .well {
   padding-bottom: 40px;
