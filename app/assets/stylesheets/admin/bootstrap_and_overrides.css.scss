@@ -9,30 +9,6 @@ $iconWhiteSpritePath: asset-url('glyphicons-halflings-white.png', image);
 @import "admin/components/translations";
 @import "admin/components/perms";
 @import "admin/components/geo_input";
-
-$default-prefixes: webkit moz ms o;
-
-@mixin build-prefix-values($property, $value, $prefixes: $default-prefixes) {
-    @each $prefix in $prefixes {
-        -#{$prefix}-#{$property}: #{$value};
-    }
-    #{$property}: #{$value};
-}
-
-@mixin transition($property: all, $delay: 1s, $timing: linear) {
-    $value: $property $delay $timing;
-    // use default prefixes
-    @include build-prefix-values('transition', $value);
-}
-// TODO
-//-webkit-appearance
-//-webkit-border-radius
-//-webkit-animation-timing-function
-//        -webkit-animation-duration
-//-webkit-animation-name
-//mixins
-//
-
 @import "admin/components/checkbox";
 
 .well {
@@ -54,7 +30,7 @@ $default-prefixes: webkit moz ms o;
   margin-bottom: 15px;
 }
 ul.nav li.dropdown.open ul.dropdown-menu,
-ul.nav li.dropdown.active ul.dropdown-menu, 
+ul.nav li.dropdown.active ul.dropdown-menu,
 ul.nav li.dropdown:hover ul.dropdown-menu {
   display: block;
   margin: 0;
@@ -238,30 +214,30 @@ td.actions {
   a{
     text-shadow: none !important;
   }
-	.brand {
-		color: #999 !important;
-	}
+  .brand {
+    color: #999 !important;
+  }
   .nav > li.dropdown{
     a.dropdown-toggle {
       color: #999;
-      background-color: transparent;  
+      background-color: transparent;
     }
     a.dropdown-toggle > .caret{
       border-top-color: #999 !important;
       border-bottom-color: #999 !important;
       opacity: 1;
     }
-   &.open, &:hover{
-    a.dropdown-toggle {
-      color: #fff;
-      background-color: transparent;  
-    }
-    a.dropdown-toggle > .caret{
-      border-top-color: #fff !important;
-      border-bottom-color: #fff  !important;
-      opacity: 1;
-    }
-   } /*   .nav > li.dropdown.open   .nav > li.dropdown:hover */
+    &.open, &:hover{
+      a.dropdown-toggle {
+        color: #fff;
+        background-color: transparent;
+      }
+      a.dropdown-toggle > .caret{
+        border-top-color: #fff !important;
+        border-bottom-color: #fff  !important;
+        opacity: 1;
+      }
+    } /*   .nav > li.dropdown.open   .nav > li.dropdown:hover */
   }  /*   .nav > li.dropdown */
 } /* navbar */
 
@@ -271,7 +247,7 @@ td.actions {
 
 
 .navbar-inner {
-    background-color: #2C2C2C;
+  background-color: #2C2C2C;
   background-image: -moz-linear-gradient(top, #333, #222);
   background-image: -ms-linear-gradient(top, #333, #222);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#333), to(#222));
