@@ -1,20 +1,5 @@
 $default-prefixes: webkit moz ms o;
 
-@mixin keyframes($name) {
-  @-webkit-keyframes #{$name} {
-      @content;
-    }
-  @-moz-keyframes #{$name} {
-      @content;
-    }
-  @-ms-keyframes #{$name} {
-      @content;
-    }
-  @keyframes #{$name} {
-      @content;
-    }
-}
-
 @mixin build-prefix-values($property, $value, $prefixes: $default-prefixes) {
   @each $prefix in $prefixes {
     -#{$prefix}-#{$property}: #{$value};
@@ -57,19 +42,97 @@ input.pretty-slide-checkbox:checked[type=checkbox] {
     @include animation-name(checkbox-switch-on);
 }
 
-@include keyframes(checkbox-switch-on) {
+@-webkit-keyframes checkbox-switch-on {
+  /* line 60, ../../../app/assets/stylesheets/admin/components/_checkbox.css.scss */
   from {
     background-position: -52px 0;
   }
+
+  /* line 63, ../../../app/assets/stylesheets/admin/components/_checkbox.css.scss */
   to {
     background-position: 0 0;
   }
 }
 
-@include keyframes(checkbox-switch-off) {
+@-moz-keyframes checkbox-switch-on {
+  /* line 60, ../../../app/assets/stylesheets/admin/components/_checkbox.css.scss */
+  from {
+    background-position: -52px 0;
+  }
+
+  /* line 63, ../../../app/assets/stylesheets/admin/components/_checkbox.css.scss */
+  to {
+    background-position: 0 0;
+  }
+}
+
+@-ms-keyframes checkbox-switch-on {
+  /* line 60, ../../../app/assets/stylesheets/admin/components/_checkbox.css.scss */
+  from {
+    background-position: -52px 0;
+  }
+
+  /* line 63, ../../../app/assets/stylesheets/admin/components/_checkbox.css.scss */
+  to {
+    background-position: 0 0;
+  }
+}
+
+@keyframes checkbox-switch-on {
+  /* line 60, ../../../app/assets/stylesheets/admin/components/_checkbox.css.scss */
+  from {
+    background-position: -52px 0;
+  }
+
+  /* line 63, ../../../app/assets/stylesheets/admin/components/_checkbox.css.scss */
+  to {
+    background-position: 0 0;
+  }
+}
+
+@-webkit-keyframes checkbox-switch-off {
+  /* line 69, ../../../app/assets/stylesheets/admin/components/_checkbox.css.scss */
   from {
     background-position: 0 0;
   }
+
+  /* line 72, ../../../app/assets/stylesheets/admin/components/_checkbox.css.scss */
+  to {
+    background-position: -52px 0;
+  }
+}
+
+@-moz-keyframes checkbox-switch-off {
+  /* line 69, ../../../app/assets/stylesheets/admin/components/_checkbox.css.scss */
+  from {
+    background-position: 0 0;
+  }
+
+  /* line 72, ../../../app/assets/stylesheets/admin/components/_checkbox.css.scss */
+  to {
+    background-position: -52px 0;
+  }
+}
+
+@-ms-keyframes checkbox-switch-off {
+  /* line 69, ../../../app/assets/stylesheets/admin/components/_checkbox.css.scss */
+  from {
+    background-position: 0 0;
+  }
+
+  /* line 72, ../../../app/assets/stylesheets/admin/components/_checkbox.css.scss */
+  to {
+    background-position: -52px 0;
+  }
+}
+
+@keyframes checkbox-switch-off {
+  /* line 69, ../../../app/assets/stylesheets/admin/components/_checkbox.css.scss */
+  from {
+    background-position: 0 0;
+  }
+
+  /* line 72, ../../../app/assets/stylesheets/admin/components/_checkbox.css.scss */
   to {
     background-position: -52px 0;
   }
