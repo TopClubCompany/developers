@@ -21,16 +21,20 @@
             input.hdr type='text' name='what' value="#{@what if @what.present?}"
             input.hdr.second type='text' name='where' value="#{@where if @where.present?}"
         .srch_btn Найти
-    .user_module
-      .ava
-      .user_hello
-        p
-          |Привет,  &nbsp;
-        span
-          = current_user.full_name
-        .user_arrow
-      .num_frnds
-        .digits 10
+    - if user_signed_in?
+      .user_module
+        .ava
+        .user_hello
+          p
+            |Привет,  &nbsp;
+          span
+            = current_user.email + " !"
+          = link_to 'logout', quit_path, method: 'delete'
+          .user_arrow
+        .num_frnds
+          .digits 10
+
+
 nav
   .menu_wrap
     ul.menu-list.g-clearfix

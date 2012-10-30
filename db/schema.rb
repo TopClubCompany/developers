@@ -11,7 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121027100118) do
+ActiveRecord::Schema.define(:version => 20121029221648) do
+
+  create_table "accounts", :force => true do |t|
+    t.string   "provider",      :limit => 100,                :null => false
+    t.string   "name"
+    t.string   "nickname"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "photo"
+    t.string   "url"
+    t.string   "address"
+    t.string   "language"
+    t.string   "birthday"
+    t.string   "token"
+    t.string   "refresh_token"
+    t.string   "secret"
+    t.integer  "gender",        :limit => 1,   :default => 2
+    t.integer  "uid",           :limit => 8,                  :null => false
+    t.integer  "user_id"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+  end
+
+  add_index "accounts", ["email"], :name => "index_accounts_on_email"
+  add_index "accounts", ["provider", "uid"], :name => "idx_accounts_provider_uid"
+  add_index "accounts", ["user_id"], :name => "index_accounts_on_user_id"
 
   create_table "asset_translations", :force => true do |t|
     t.integer  "asset_id"
@@ -99,6 +126,18 @@ ActiveRecord::Schema.define(:version => 20121027100118) do
   end
 
   add_index "events", ["place_id"], :name => "index_events_on_place_id"
+
+  create_table "friends", :force => true do |t|
+    t.string   "social_id",  :null => false
+    t.string   "name"
+    t.string   "type"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "friends", ["social_id"], :name => "index_friends_on_social_id"
+  add_index "friends", ["user_id"], :name => "index_friends_on_user_id"
 
   create_table "header_translations", :force => true do |t|
     t.integer  "header_id"

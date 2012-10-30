@@ -1,0 +1,54 @@
+.well.sidebar-nav
+  - if !user_signed_in?
+    = form_for :user, url: new_user_session_path do |f|
+      legend Войти
+      div
+        = f.label :email
+        = f.email_field :email
+      div
+        = f.label :password
+        = f.password_field :password
+        p
+          small
+            = link_to 'Забыли пароль?', '#'
+      div
+        label.checkbox
+          = f.check_box :remember_me
+          |Запомнить меня
+      br
+      div align='center'
+        = f.submit 'Войти', class: 'btn btn-success'
+      br
+      |Войти через:
+      p.social_icons
+        = link_to image_tag('/images/vkontakte.jpg'), user_omniauth_authorize_path(:vkontakte), title: 'Vkontakte'
+        = link_to image_tag('/images/facebook.png'), user_omniauth_authorize_path(:facebook), title: 'Facebook'
+        = link_to image_tag('/images/google.png'), '#', title: 'Google+'
+        = link_to image_tag('/images/twitter.png'), '#', title: 'Twitter'
+
+      p
+        |Еще не заригестрированы?
+        small
+          a href='/'
+            |  Регистрация
+  /- else
+  /  img.img-polaroid src="#{current_user.respond_to?(:avatar) ? current_user.avatar : '/images/noavatar.gif'}" width='100%' height='100%'
+  /  br
+  /  br
+  /  div.btn-group
+  /    a.btn.btn-primary href="#"
+  /      i.icon-user.icon-white
+  /      = current_user.email
+  /    a.btn.btn-primary.dropdown-toggle data-toggle="dropdown" href="#"
+  /      span.caret
+  /    ul.dropdown-menu
+  /      li
+  /        a href="#{edit_user_path(current_user)}"
+  /          i.i
+  /          |Edit
+  /      li.divider
+  /      li
+  /        a href="#{destroy_user_session_path}"
+  /          i.i
+  /          |logout
+  /  br
