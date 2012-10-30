@@ -18,6 +18,9 @@ Devise.setup do |config|
   # available as additional gems.
   require 'devise/orm/active_record'
 
+
+  config.omniauth :facebook, '373546769386190', '02cb9f38727064442c8b9fa8815c88d8'
+  config.omniauth :vkontakte, '3162988', '7w7xzxl3qUqt72xkbFTT'
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
   # just :email. You can configure it to use [:username, :subdomain], so for

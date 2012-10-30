@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.2.9.rc1'
 gem 'mysql2'
 gem 'redis'
-gem 'slim'
+gem 'slim-rails'
 gem 'styx'
 
 gem 'globalize3', :git => 'git://github.com/leschenko/globalize3.git', :ref => '586ccbd'
@@ -28,7 +28,7 @@ gem 'geokit-nominatim'#, :git => 'git://github.com/sobakasu/geokit-nominatim.git
 gem 'tire'
 
 
-#authentication
+#authentication && social
 gem 'devise'
 gem 'devise-encryptable'
 gem 'omniauth'
@@ -36,6 +36,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
 gem 'cancan'
+gem 'fb_graph'
 
 #gem 'kaminari'
 gem 'unicode_utils' # For unicode-strings downcase method o_O !!!

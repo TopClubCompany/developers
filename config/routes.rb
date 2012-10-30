@@ -1,6 +1,8 @@
 Topclub::Application.routes.draw do
 
-  devise_for :users
+  delete '/sign_out' => 'users/omniauth_callbacks#destroy_user_session', as: 'quit'
+
+  devise_for :users, :controllers => { omniauth_callbacks: "users/omniauth_callbacks" }
 
   root :to => 'explore#index'
 

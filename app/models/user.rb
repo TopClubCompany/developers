@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :confirmable, :lockable,
          :rememberable, :trackable, :validatable, :registerable, :recoverable,
-         :encryptable, :encryptor => :sha512
+         :encryptable, :omniauthable, :encryptor => :sha512
 
 
 
@@ -78,6 +78,10 @@ class User < ActiveRecord::Base
 
 
   has_many :reviews
+
+  has_many :facebook_friends, :dependent => :destroy
+  has_many :vk_friends, :dependent => :destroy
+
 
 
   def activate
