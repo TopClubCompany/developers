@@ -36,4 +36,8 @@ Topclub::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  #for more readable log
+  config.assets.logger = false
+  config.active_record.logger = false
 end

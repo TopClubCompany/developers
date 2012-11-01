@@ -7,17 +7,34 @@ class Account < ::ActiveRecord::Base
 
   attr_accessible :provider, :uid, :name, :first_name, :last_name, :email, :photo,
                   :gender, :address, :language, :birthday, :url, :banned_at, :phone, :nickname,
-                  :token, :refresh_token, :secret
+                  :token, :refresh_token, :secret, :user
 
   enumerated_attribute :gender_type, :id_attribute => :gender, :class => ::GenderType
 
 
-  def self.create_or_find_by_oauth_token access_token
-    account = Accoutn.find_or_create_by_url( url: access_token.info.urls.Facebook, nickname: access_token.extra.raw_info.username,
+  def self.create_or_find_by_oauth_token access_token#, provider
+
+    account = Account.find_or_create_by_url( url: access_token.info.urls.Facebook, nickname: access_token.extra.raw_info.username,
                                              email: access_token.extra.raw_info.email,provider: access_token.provider,
-                                             user: User.new(password: Devise.friendly_token[0,20]) )
+                                             user: prepare_user_for_account(generate_user_email(url)) )
     account.user
   end
+
+
+  def prepare_user_for_account(email)
+    password            = Devise.friendly_token[0,20]
+    user                = User.new(email: email, password: password, password_confirmation: password)
+    user.user_role_type = UserRoleType.default
+    user.trust_state    = UserState.active.id
+
+    user.skip_confirmation!
+    user.save!
+  end
+
+  def generate_user_email(user_info)
+
+  end
+
 end
 # == Schema Information
 #

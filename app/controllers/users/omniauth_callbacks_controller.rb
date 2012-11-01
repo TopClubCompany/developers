@@ -1,8 +1,10 @@
 class Users::OmniauthCallbacksController < ApplicationController
   def facebook
+    raise request.env["omniauth.auth"].to_yaml
     user = Account.create_or_find_by_oauth_token request.env["omniauth.auth"]
+
     if user.persisted?
-      flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Facebook"
+      flash[:notice] = I18n.t "devise.omniauth_callbacks.success"
       sign_in user
       redirect_to root_path
     else
@@ -12,6 +14,7 @@ class Users::OmniauthCallbacksController < ApplicationController
   end
 
   def vkontakte
+    raise request.env["omniauth.auth"].to_yaml
   end
 
 

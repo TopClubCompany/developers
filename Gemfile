@@ -26,7 +26,7 @@ gem 'geokit'
 gem 'geokit-rails3'
 gem 'geokit-nominatim'#, :git => 'git://github.com/sobakasu/geokit-nominatim.git'
 gem 'tire'
-
+gem 'figaro'
 
 #authentication && social
 gem 'devise'
