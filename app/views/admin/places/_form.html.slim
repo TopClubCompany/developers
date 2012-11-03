@@ -1,11 +1,18 @@
-= admin_form_for @place do |f|
+= admin_form_for @place, {nested: true} do |f|
   = f.locale_tabs do |l|
     = f.input :name, :locale => l
     = f.input :description, :locale => l, :as => :ckeditor
 
-  = f.input :is_visible, input_html: {class: "pretty-slide-checkbox"}
+  = f.input :is_visible, input_html: {class: "pretty-slide-checkbox preload"}
   = f.input :token_category_ids, as: :string, label: Place.han(:categories), input_html: @place.token_data(:categories)
   = f.input :token_kitchen_ids, as: :string, label: Place.han(:kitchens), input_html: @place.token_data(:kitchens)
+
+  |Цены
+  .nested_fields
+    = f.simple_fields_for :price_ranges do |object|
+      = render 'price_ranges', :f => object
+    = f.link_to_add t('admin.add'), :price_ranges, :class => 'btn btn-primary'
+
 
   .nested_fields
     - @place.location ||= Location.new()
