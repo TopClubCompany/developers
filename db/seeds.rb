@@ -27,8 +27,8 @@ def add_test_stuff
         pl.phone       = Faker::PhoneNumber.phone_number
         pl.url         = Faker::Internet.http_url
       end
-      #place.location = Location.create!({latitude:  Faker::Geolocation.lat, longitude: Faker::Geolocation.lng,
-      #                                locationable_id: place.id, locationable_type: 'Place'})
+      place.location = Location.create!({latitude:  Faker::Geolocation.lat, longitude: Faker::Geolocation.lng,
+                                      locationable_id: place.id, locationable_type: 'Place'})
       place.save!
 
       place.categories << category
