@@ -35,6 +35,8 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
+gem 'omniauth-openid'
+gem 'omniauth-google-oauth2'
 gem 'cancan'
 gem 'fb_graph'
 

@@ -12,28 +12,29 @@ class Account < ::ActiveRecord::Base
   enumerated_attribute :gender_type, :id_attribute => :gender, :class => ::GenderType
 
 
-  def self.create_or_find_by_oauth_token access_token#, provider
-
-    account = Account.find_or_create_by_url( url: access_token.info.urls.Facebook, nickname: access_token.extra.raw_info.username,
-                                             email: access_token.extra.raw_info.email,provider: access_token.provider,
-                                             user: prepare_user_for_account(generate_user_email(url)) )
+  def self.create_or_find_by_oauth_data data
+    data_for_account = data.except(:patronymic)
+    data_for_user    = data.except(:uid, :gender, :url, :photo, :name, :provider, :secret, :refresh_token, :language, :token)
+    account          = (Account.find_by_uid_and_provider(data_for_account[:uid], data_for_account[:provider]) or Account.create(data_for_account))
+    return account.user if account.user
+    account.user     = prepare_user_for_account(data_for_user)
+    account.save!
     account.user
   end
 
 
-  def prepare_user_for_account(email)
-    password            = Devise.friendly_token[0,20]
-    user                = User.new(email: email, password: password, password_confirmation: password)
+  def self.prepare_user_for_account(data)
+    data[:password]     = Devise.friendly_token[0,20]
+    user                = User.new(data)
     user.user_role_type = UserRoleType.default
     user.trust_state    = UserState.active.id
-
     user.skip_confirmation!
     user.save!
+    user
   end
 
-  def generate_user_email(user_info)
 
-  end
+
 
 end
 # == Schema Information

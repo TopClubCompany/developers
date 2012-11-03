@@ -1,6 +1,8 @@
 Topclub::Application.routes.draw do
 
   delete '/sign_out' => 'users/omniauth_callbacks#destroy_user_session', as: 'quit'
+  match '/enter_email/' => 'users/omniauth_callbacks#enter_email', as: 'enter_email'
+
 
   devise_for :users, :controllers => { omniauth_callbacks: "users/omniauth_callbacks" }
 

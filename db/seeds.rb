@@ -3,7 +3,7 @@ require_relative "../spec/blueprints"
 
 def insert_default_user(email, admin = true)
   password            = Rails.env.production? ? Devise.friendly_token.first(6) : (1..6).to_a.join
-  user                = User.new(emil: email, password: password, :password_confirmation => password)
+  user                = User.new(email: email, password: password, password_confirmation: password)
   user.login          = admin ? 'admin' : 'user'
   user.user_role_type = admin ? UserRoleType.admin : UserRoleType.default
   user.trust_state    = UserState.active.id
@@ -32,6 +32,7 @@ def add_test_stuff
     end
   end
 end
+
 
 User.full_truncate
 insert_default_user('admin@adm.com')

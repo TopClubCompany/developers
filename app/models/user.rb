@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
   enumerated_attribute :trust_state_type, :id_attribute => :trust_state, :class => ::UserState
 
   has_one :avatar, :as => :assetable, :dependent => :destroy, :autosave => true
-  #has_many :accounts, :dependent => :destroy
+  has_many :accounts, :dependent => :destroy
 
   alias_attribute :name, :title
 

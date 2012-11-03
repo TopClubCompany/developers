@@ -1,5 +1,7 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
+require 'openid/store/filesystem'
+#require "omniauth-google-oauth2"
 Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -19,8 +21,11 @@ Devise.setup do |config|
   require 'devise/orm/active_record'
 
 
-  config.omniauth :facebook,  Figaro.env.facebook_app_id, Figaro.env.facebook_app_secret
+  config.omniauth :facebook,  Figaro.env.facebook_app_id, Figaro.env.facebook_app_secret, { scope: 'user_birthday, email' }
   config.omniauth :vkontakte, Figaro.env.vk_app_id, Figaro.env.vk_app_secret
+  config.omniauth :twitter, Figaro.env.twitter_app_id, Figaro.env.twitter_app_secret
+  config.omniauth :open_id, :store => OpenID::Store::Filesystem.new('/tmp'), :name => :google, :identifier => 'https://www.google.com/accounts/o8/id', :require => 'omniauth-openid'
+  #config.omniauth :google_oauth2, "APP_ID", "APP_SECRET", { access_type: "online", approval_prompt: "" }
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
   # just :email. You can configure it to use [:username, :subdomain], so for
