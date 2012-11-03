@@ -3,7 +3,7 @@ table.table.table-striped.index_table#list
     tr.pjax_links
       = batch_action_toggle
       th= sort_link(@search, :id)
-      th= sort_link(@search, :slug)
+      th= sort_link(@search, :name)
       th= sort_link(@search, :user_id)
       th= sort_link(@search, :is_visible)
       th= sort_link(@search, :phone)
@@ -15,7 +15,7 @@ table.table.table-striped.index_table#list
       tr
         = batch_action_item(item)
         td= id_link(item)
-        td= pretty_data item.slug
+        td= pretty_data item.name
         td= pretty_data item.user_id
         td= pretty_data item.is_visible
         td= pretty_data item.phone

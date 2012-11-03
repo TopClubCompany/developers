@@ -19,6 +19,10 @@ class Location < ActiveRecord::Base
     self.country = geo_res.country
   end
 
+  def address
+    self.street
+  end
+
 end
 # == Schema Information
 #
