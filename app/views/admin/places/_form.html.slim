@@ -16,7 +16,6 @@
   = f.input :phone
   = f.input :url
 
-  = geo_input 'place_location_attributes'
 
   = input_set t('admin.place_image') do
     = f.attach_file_field :place_image, :file_max_size => 2
@@ -24,5 +23,7 @@
     = f.attach_file_field :place_images, :file_max_size => 2
 
   = f.hidden_field :fileupload_guid if f.object.new_record?
+
+  = geo_input 'place_location_attributes'
 
   = f.save_buttons
