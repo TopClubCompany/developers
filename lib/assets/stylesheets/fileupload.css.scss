@@ -123,11 +123,11 @@
     margin-left: 10px;
   }
   .asset > span:first-of-type {
-    text-color: transparent;
+    text-indent: 9000px;
     background: transparent -50px -50px no-repeat asset-url("main_img.png", image);
-    padding: 5px;
+    padding-left: 5px;
     //display: inline-block;
-    //border-bottom: 1px blue dashed;
+    border-bottom: 1px blue dashed;
     &:hover {
       cursor: pointer;
       //font-style: italic;
