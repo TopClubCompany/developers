@@ -21,6 +21,8 @@ def add_test_stuff
     kitchen   = Kitchen.make!
     10.times do
       place = Place.make!
+      place.location = Location.create!({latitude:  Faker::Geolocation.lat, longitude: Faker::Geolocation.lng,
+                                        locationable_id: place.id, locationable_type: 'Place'})
       place.categories << category
       place.kitchens << kitchen
       3.times do
