@@ -2,19 +2,21 @@
   = f.locale_tabs do |l|
     = f.input :name, :locale => l
     = f.input :description, :locale => l, :as => :ckeditor
-    = f.input :address, :locale => l, :as => :ckeditor
 
   = f.input :is_visible, input_html: {class: "pretty-slide-checkbox"}
   = f.input :token_category_ids, as: :string, label: Place.han(:categories), input_html: @place.token_data(:categories)
   = f.input :token_kitchen_ids, as: :string, label: Place.han(:kitchens), input_html: @place.token_data(:kitchens)
 
-  = f.input :lat, :as => :hidden
-  = f.input :lon, :as => :hidden
-  = f.input :zoom, :as => :hidden
+  .nested_fields
+    - @place.location ||= Location.new()
+    = f.simple_fields_for :location do |object|
+      = object.input :latitude, :as => :hidden
+      = object.input :longitude, :as => :hidden
+
   = f.input :phone
   = f.input :url
 
-  = geo_input 'place'
+  = geo_input 'place_location_attributes'
 
   = input_set t('admin.place_image') do
     = f.attach_file_field :place_image, :file_max_size => 2

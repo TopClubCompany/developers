@@ -22,6 +22,16 @@ class Kitchen < ActiveRecord::Base
 
   ac_field
 
+  def to_indexed_json
+    attrs = [:id, :slug, :created_at, :for_input_token]
+    Jbuilder.encode do |json|
+      json.(self, *attrs)
+      json.(self, *self.class.ac_search_attrs)
+    end
+  end
+
+
+
 end
 # == Schema Information
 #
