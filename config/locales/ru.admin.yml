@@ -115,6 +115,7 @@ ru:
       title: "Редактирование локализации"
       update_file: "Обновить файл"
     main_image: "Сделать главным"
+    main: "Главным"
     max_size: "Макс разм."
     navigation: 
       option_data: "Данные опций"
