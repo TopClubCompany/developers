@@ -18,7 +18,6 @@ class Place < ActiveRecord::Base
   has_many :reviews
   has_many :price_ranges
 
-  accepts_nested_attributes_for :reviews, :price_ranges, :allow_destroy => true, :reject_if => :all_blank
 
   #belongs_to :category
   #belongs_to :kitchen
@@ -26,7 +25,11 @@ class Place < ActiveRecord::Base
   has_one :place_image, :as => :assetable, :dependent => :destroy, :conditions => {:is_main => true}
   has_many :place_images, :as => :assetable, :dependent => :destroy, :conditions => {:is_main => false}
 
-  translates :name, :description, :address
+  has_one :locations, :as => :locationable, :dependent => :destroy
+
+  accepts_nested_attributes_for :reviews, :price_ranges, :locations, :allow_destroy => true, :reject_if => :all_blank
+
+  translates :name, :description
 
   fileuploads :place_image, :place_images
 
