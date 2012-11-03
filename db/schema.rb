@@ -194,6 +194,7 @@ ActiveRecord::Schema.define(:version => 20121103105415) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "country"
+    t.float    "distance"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
   end
@@ -234,7 +235,6 @@ ActiveRecord::Schema.define(:version => 20121103105415) do
     t.string   "locale"
     t.string   "name"
     t.text     "description"
-    t.text     "address"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -246,9 +246,6 @@ ActiveRecord::Schema.define(:version => 20121103105415) do
     t.string   "slug",                         :null => false
     t.integer  "user_id"
     t.boolean  "is_visible", :default => true, :null => false
-    t.float    "lat"
-    t.float    "lon"
-    t.float    "zoom"
     t.string   "phone"
     t.string   "url"
     t.datetime "created_at",                   :null => false

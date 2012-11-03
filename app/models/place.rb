@@ -50,7 +50,7 @@ class Place < ActiveRecord::Base
   end
 
   def lat_lng
-    [location.latitude, location.longitude].join(',')
+    [location.try(:latitude), location.try(:longitude)].join(',')
   end
 
   def to_indexed_json
@@ -136,9 +136,6 @@ end
 #  slug       :string(255)      not null
 #  user_id    :integer
 #  is_visible :boolean          default(TRUE), not null
-#  lat        :float
-#  lon        :float
-#  zoom       :float
 #  phone      :string(255)
 #  url        :string(255)
 #  created_at :datetime         not null

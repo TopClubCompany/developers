@@ -8,12 +8,12 @@ Category.blueprint {
 }
 
 
-Place.blueprint {
-  name        { Faker::Company.name }
-  description { Faker::Lorem.sentence }
-  phone       { Faker::PhoneNumber.phone_number }
-  url         { Faker::Internet.http_url }
-}
+#Place.blueprint {
+#  name        { Faker::Company.name }
+#  description { Faker::Lorem.sentence }
+#  phone       { Faker::PhoneNumber.phone_number }
+#  url         { Faker::Internet.http_url }
+#}
 
 Kitchen.blueprint {
   name        { %w(Английская Австрийская Бельгийская Болгарская Валлийская Венгерская Голландская Греческая Датская Итальянская Испанская Ирландская Немецкая Луизианская Польская Португальская Румынская Финская Французская Чешская Швейцарская Шведская Шотландская Югославская Норвежская Вьетнамская Индийская Китайская Корейская Малайзийская Монгольская Тайская Турецкая Японская).sample }

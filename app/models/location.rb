@@ -34,6 +34,7 @@ end
 #  latitude          :float
 #  longitude         :float
 #  country           :string(255)
+#  distance          :float
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #

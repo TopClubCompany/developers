@@ -16,13 +16,21 @@ end
 #user = User.make! first_name: 'Happy user', email: 'admin@example.com', password: 'password', password_confirmation: 'password'
 #other_user = User.make!
 def add_test_stuff
-  23.times do
+  5.times do
     category  = Category.make!
     kitchen   = Kitchen.make!
     10.times do
-      place = Place.make!
-      place.location = Location.create!({latitude:  Faker::Geolocation.lat, longitude: Faker::Geolocation.lng,
-                                        locationable_id: place.id, locationable_type: 'Place'})
+
+      place = Place.create! do |pl|
+        pl.name        = Faker::Company.name
+        pl.description = Faker::Lorem.sentence
+        pl.phone       = Faker::PhoneNumber.phone_number
+        pl.url         = Faker::Internet.http_url
+      end
+      #place.location = Location.create!({latitude:  Faker::Geolocation.lat, longitude: Faker::Geolocation.lng,
+      #                                locationable_id: place.id, locationable_type: 'Place'})
+      place.save!
+
       place.categories << category
       place.kitchens << kitchen
       3.times do
