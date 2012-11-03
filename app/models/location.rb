@@ -12,7 +12,11 @@ class Location < ActiveRecord::Base
   before_save :prepere_location
 
   def prepere_location
-
+    geo_res = Geokit::Geocoders::GoogleGeocoder.reverse_geocode "#{latitude}, #{longitude}"
+    self.street = geo_res.street_address
+    self.city = geo_res.city
+    self.zip = geo_res.zip
+    self.country = geo_res.country
   end
 
 end

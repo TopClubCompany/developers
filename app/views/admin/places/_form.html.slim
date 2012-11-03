@@ -7,14 +7,16 @@
   = f.input :token_category_ids, as: :string, label: Place.han(:categories), input_html: @place.token_data(:categories)
   = f.input :token_kitchen_ids, as: :string, label: Place.han(:kitchens), input_html: @place.token_data(:kitchens)
 
-  = f.simple_fields_for :locations do |object|
-    = object.input :latitude, :as => :hidden
-    = object.input :longitude, :as => :hidden
+  .nested_fields
+    - @place.location ||= Location.new()
+    = f.simple_fields_for :location do |object|
+      = object.input :latitude, :as => :hidden
+      = object.input :longitude, :as => :hidden
 
   = f.input :phone
   = f.input :url
 
-  = geo_input 'place'
+  = geo_input 'place_location_attributes'
 
   = input_set t('admin.place_image') do
     = f.attach_file_field :place_image, :file_max_size => 2

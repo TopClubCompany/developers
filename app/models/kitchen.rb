@@ -22,6 +22,21 @@ class Kitchen < ActiveRecord::Base
 
   ac_field
 
+  def self.paginate(options = {})
+    self.paginate(:page => options[:page], :per_page => options[:per_page]).to_a
+  end
+
+  def to_indexed_json
+    attrs = [:id, :slug, :created_at, :for_input_token]
+    Jbuilder.encode do |json|
+      json.(self, *attrs)
+      json.(self, *self.class.ac_search_attrs)
+      json.parent_name parent.try(:name)
+    end
+  end
+
+
+
 end
 # == Schema Information
 #

@@ -3,7 +3,7 @@
 
 class Place < ActiveRecord::Base
 
-  attr_accessible :lat, :lon, :phone, :zoom, :is_visible, :user_id, :url
+  attr_accessible :lat, :lon, :phone, :zoom, :is_visible, :user_id, :url, :location_attributes, :price_ranges_attributes
 
   belongs_to :user
 
@@ -25,9 +25,9 @@ class Place < ActiveRecord::Base
   has_one :place_image, :as => :assetable, :dependent => :destroy, :conditions => {:is_main => true}
   has_many :place_images, :as => :assetable, :dependent => :destroy, :conditions => {:is_main => false}
 
-  has_one :locations, :as => :locationable, :dependent => :destroy
+  has_one :location, :as => :locationable, :dependent => :destroy, :autosave => true
 
-  accepts_nested_attributes_for :reviews, :price_ranges, :locations, :allow_destroy => true, :reject_if => :all_blank
+  accepts_nested_attributes_for :location, :reviews, :price_ranges, :allow_destroy => true, :reject_if => :all_blank
 
   translates :name, :description
 
@@ -50,7 +50,7 @@ class Place < ActiveRecord::Base
   end
 
   def lat_lng
-    [lat, lon].join(',')
+    [location.latitude, location.longitude].join(',')
   end
 
   def to_indexed_json
@@ -124,6 +124,8 @@ class Place < ActiveRecord::Base
     $redis.lrange(self.redis_key(:in_visited),
                        0, $redis.llen(self.redis_key(:in_visited)).to_i)
   end
+
+
 
 end
 # == Schema Information
