@@ -235,7 +235,8 @@ ru:
       modified_by: "Редактировал(а)"
       title: "История"
       type: "Тип"
-  admin_js: 
+  admin_js:
+    set_img: "Главным"
     add_link: "Создать?"
     button_description: "Описание"
     button_name_add: "Добавить"
