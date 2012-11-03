@@ -65,5 +65,5 @@ class window.GeoInput
         e.preventDefault()
 
 window.initGeoInput = (prefix, autocomplete = true) ->
-  gmaps = new GeoInput("#{prefix}_lat", "#{prefix}_lon", "#{prefix}_zoom", {doom_map: "#{prefix}_map"})
+  gmaps = new GeoInput("#{prefix}_latitude", "#{prefix}_longitude", "#{prefix}_zoom", {doom_map: "#{prefix}_map"})
   gmaps.initAutocomplete("#{prefix}_geo_autocomplete")
