@@ -3,20 +3,27 @@ class Users::OmniauthCallbacksController < ApplicationController
 
   def auth
     data = get_data_from_callback request.env["omniauth.auth"]
-    if data[:email].nil?
-      account = Account.find_by_uid_and_provider((data[:id] or data[:uid]), data[:provider])
-      if account.nil?
-        session[:user_data] = data
-        redirect_to enter_email_path, flash: { notice: 'To finish creation of account - need to enter email' }
-      else
-        sign_in account.user
-        redirect_to root_path, flash: { success: 'Successfully sign in' }
-      end
-    else
-      user = Account.create_or_find_by_oauth_data data
-      sign_in user
-      redirect_to root_path, flash: { success: 'Successfully sign in' }
-    end
+    data[:email].present? ? auth_with_email(data) : auth_without_email(data)
+  end
+
+  def auth_without_email data
+    account = Account.find_by_uid_and_provider((data[:id] or data[:uid]), data[:provider])
+    account.present? ? auth_user account.user : get_user_email data
+  end
+
+  def auth_with_email data
+    user = Account.create_or_find_by_oauth_data data
+    auth_user user
+  end
+
+  def auth_user user
+    sign_in user
+    redirect_to root_path, flash: { success: 'Successfully sign in' }
+  end
+
+  def get_user_email data
+    session[:user_data] = data
+    redirect_to enter_email_path, flash: { notice: 'To finish creation of account - need to enter email' }
   end
 
 
@@ -30,11 +37,10 @@ class Users::OmniauthCallbacksController < ApplicationController
         data[:email] = email
         user = (Account.create_or_find_by_oauth_data data)
         session[:user_data] = nil
-        sign_in user
-        redirect_to root_path, flash: { success: 'Successfully sign in' }
+        auth_user user
       else
         redirect_to enter_email_path, flash: { error: "Already exist user with that email" }
-    end
+      end
     end
   end
 
