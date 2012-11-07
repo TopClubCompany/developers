@@ -18,7 +18,7 @@ class CreateAccounts < ActiveRecord::Migration
       t.string :secret
 
       t.integer :gender, :limit => 1, :default => 2
-      t.integer :uid, :limit => 8, :null => false
+      t.string :uid, :null => false
 
       t.references :user
 

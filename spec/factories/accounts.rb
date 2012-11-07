@@ -19,7 +19,7 @@
 #  refresh_token :string(255)
 #  secret        :string(255)
 #  gender        :integer          default(2)
-#  uid           :integer          not null
+#  uid           :string(255)      not null
 #  user_id       :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null

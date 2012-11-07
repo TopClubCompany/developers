@@ -52,7 +52,8 @@ group :development do
 end
 
 
-gem 'twitter-bootstrap-rails'#, :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :ref => '86cffd5'
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'less-rails'
 gem "bootstrap-sass", ">= 2.0.3"
 gem "simple_form"
 gem "will_paginate", ">= 3.0.3"

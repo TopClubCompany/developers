@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20121103105415) do
     t.string   "refresh_token"
     t.string   "secret"
     t.integer  "gender",        :limit => 1,   :default => 2
-    t.integer  "uid",           :limit => 8,                  :null => false
+    t.string   "uid",                                         :null => false
     t.integer  "user_id"
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
