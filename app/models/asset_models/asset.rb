@@ -36,15 +36,6 @@ class Asset < ActiveRecord::Base
 
   validates_presence_of :data
 
-  has_many :asset_tags, :dependent => :destroy
-  has_many :tags, :through => :asset_tags, :uniq => true
-
-  #has_many :asset_p_colors, :dependent => :destroy
-  #has_many :p_colors, :through => :asset_p_colors
-  #has_many :color_textures, :through => :p_colors, :source => :texture
-
-  has_many :asset_textures, :dependent => :destroy
-  has_many :textures, :through => :asset_textures
 
   #default_scope includes(:translations)
   translates :name, :description
@@ -52,15 +43,6 @@ class Asset < ActiveRecord::Base
 
   default_scope order("#{quoted_table_name}.sort_order")
 
-  def add_color(params)
-    color = asset_p_colors.new(params)
-    color.save
-    color.id
-  end
-
-  def remove_color(color_id)
-    asset_p_colors.find(color_id).destroy
-  end
 
   def self.thumb_size
     :thumb

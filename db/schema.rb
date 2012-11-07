@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121029221648) do
+ActiveRecord::Schema.define(:version => 20121103105415) do
 
   create_table "accounts", :force => true do |t|
     t.string   "provider",      :limit => 100,                :null => false
@@ -184,6 +184,23 @@ ActiveRecord::Schema.define(:version => 20121029221648) do
   add_index "kitchens", ["slug"], :name => "index_kitchens_on_slug", :unique => true
   add_index "kitchens", ["user_id"], :name => "index_kitchens_on_user_id"
 
+  create_table "locations", :force => true do |t|
+    t.integer  "locationable_id",                 :null => false
+    t.string   "locationable_type", :limit => 50, :null => false
+    t.string   "street"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "country"
+    t.float    "distance"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  add_index "locations", ["locationable_id", "locationable_type"], :name => "index_locations_on_locationable_id_and_locationable_type"
+
   create_table "notes", :force => true do |t|
     t.integer  "place_id"
     t.string   "picture"
@@ -218,7 +235,6 @@ ActiveRecord::Schema.define(:version => 20121029221648) do
     t.string   "locale"
     t.string   "name"
     t.text     "description"
-    t.text     "address"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -230,9 +246,6 @@ ActiveRecord::Schema.define(:version => 20121029221648) do
     t.string   "slug",                         :null => false
     t.integer  "user_id"
     t.boolean  "is_visible", :default => true, :null => false
-    t.float    "lat"
-    t.float    "lon"
-    t.float    "zoom"
     t.string   "phone"
     t.string   "url"
     t.datetime "created_at",                   :null => false

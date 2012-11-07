@@ -7,7 +7,8 @@
               :class => "del" %>
 
     <% unless asset.is_main %>
-        <span class="main_image" data-id="<%= asset.id %>"><%= t('admin.set_main') %></span>
+        <span class="main_image" data-id="<%= asset.id %>" title="<%= t('admin.set_main') %>"><%= t('admin.main') %></span>
+
     <% end %>
 
   <%= link_to image_tag(asset.thumb_url, :title => asset.filename),

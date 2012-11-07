@@ -36,5 +36,6 @@
 //= require admin/components/tokens
 //= require admin/components/confirmation
 //= require admin/components/gmaps
+//= require admin/components/nested_filelds_adder.js
 //= require admin/pretty-slide-checkbox
 //= require admin/main

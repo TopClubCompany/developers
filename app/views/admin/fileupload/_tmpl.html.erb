@@ -7,8 +7,10 @@
           :data => {:confirm => t('admin.delete_confirmation')},
           :class => "fileupload-cancel del" %>
 
-  <span class="main_image" data-id="${id}"><%= t('admin.set_main') %></span>
-
+{{if is_main}}
+  {{else}}
+   <span class="main_image" data-id="${id}" title=<%= "#{t('admin.set_main')}" %>><%= t('admin.main')  %></span>
+{{/if}}
   <a href="${url}" class="fileupload-file fancybox" target="_blank">
     <img src="${thumb_url}" title="${filename}">
   </a>

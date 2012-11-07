@@ -1,20 +1,28 @@
-= admin_form_for @place do |f|
+= admin_form_for @place, {nested: true} do |f|
   = f.locale_tabs do |l|
     = f.input :name, :locale => l
     = f.input :description, :locale => l, :as => :ckeditor
-    = f.input :address, :locale => l, :as => :ckeditor
 
-  = f.input :is_visible, input_html: {class: "pretty-slide-checkbox"}
+  = f.input :is_visible, input_html: {class: "pretty-slide-checkbox preload"}
   = f.input :token_category_ids, as: :string, label: Place.han(:categories), input_html: @place.token_data(:categories)
   = f.input :token_kitchen_ids, as: :string, label: Place.han(:kitchens), input_html: @place.token_data(:kitchens)
 
-  = f.input :lat, :as => :hidden
-  = f.input :lon, :as => :hidden
-  = f.input :zoom, :as => :hidden
+  |Цены
+  .nested_fields
+    = f.simple_fields_for :price_ranges do |object|
+      = render 'price_ranges', :f => object
+    = f.link_to_add t('admin.add'), :price_ranges, :class => 'btn btn-primary'
+
+
+  .nested_fields
+    - @place.location ||= Location.new()
+    = f.simple_fields_for :location do |object|
+      = object.input :latitude, :as => :hidden
+      = object.input :longitude, :as => :hidden
+
   = f.input :phone
   = f.input :url
 
-  = geo_input 'place'
 
   = input_set t('admin.place_image') do
     = f.attach_file_field :place_image, :file_max_size => 2
@@ -22,5 +30,7 @@
     = f.attach_file_field :place_images, :file_max_size => 2
 
   = f.hidden_field :fileupload_guid if f.object.new_record?
+
+  = geo_input 'place_location_attributes'
 
   = f.save_buttons

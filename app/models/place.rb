@@ -3,7 +3,7 @@
 
 class Place < ActiveRecord::Base
 
-  attr_accessible :lat, :lon, :phone, :zoom, :is_visible, :user_id, :url
+  attr_accessible :lat, :lon, :phone, :zoom, :is_visible, :user_id, :url, :location_attributes, :price_ranges_attributes
 
   belongs_to :user
 
@@ -18,7 +18,6 @@ class Place < ActiveRecord::Base
   has_many :reviews
   has_many :price_ranges
 
-  accepts_nested_attributes_for :reviews, :price_ranges, :allow_destroy => true, :reject_if => :all_blank
 
   #belongs_to :category
   #belongs_to :kitchen
@@ -26,7 +25,11 @@ class Place < ActiveRecord::Base
   has_one :place_image, :as => :assetable, :dependent => :destroy, :conditions => {:is_main => true}
   has_many :place_images, :as => :assetable, :dependent => :destroy, :conditions => {:is_main => false}
 
-  translates :name, :description, :address
+  has_one :location, :as => :locationable, :dependent => :destroy, :autosave => true
+
+  accepts_nested_attributes_for :location, :reviews, :price_ranges, :allow_destroy => true, :reject_if => :all_blank
+
+  translates :name, :description
 
   fileuploads :place_image, :place_images
 
@@ -47,7 +50,7 @@ class Place < ActiveRecord::Base
   end
 
   def lat_lng
-    [lat, lon].join(',')
+    [location.try(:latitude), location.try(:longitude)].join(',')
   end
 
   def to_indexed_json
@@ -122,6 +125,8 @@ class Place < ActiveRecord::Base
                        0, $redis.llen(self.redis_key(:in_visited)).to_i)
   end
 
+
+
 end
 # == Schema Information
 #
@@ -131,9 +136,6 @@ end
 #  slug       :string(255)      not null
 #  user_id    :integer
 #  is_visible :boolean          default(TRUE), not null
-#  lat        :float
-#  lon        :float
-#  zoom       :float
 #  phone      :string(255)
 #  url        :string(255)
 #  created_at :datetime         not null
