@@ -7,6 +7,8 @@ class Users::OmniauthCallbacksController < ApplicationController
     data[:email].present? ? auth_with_email(data) : auth_without_email(data)
   end
 
+  [:facebook, :vkontakte, :google, :twitter].each { |provider| alias_method provider, :auth }
+
   def enter_email
     data =  session[:user_data]
     redirect_to root_path, flash: { error: "You try to access to admin page"} unless data
@@ -21,7 +23,6 @@ class Users::OmniauthCallbacksController < ApplicationController
     redirect_to root_path
   end
 
-  [:facebook, :vkontakte, :google, :twitter].each { |provider| alias_method provider, :auth }
 
   private
 
