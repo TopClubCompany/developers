@@ -13,7 +13,7 @@
       .foto
         /img src=review.user.photo alt='foto' width='43px' height='30px'
       .description
-        .name= review.user.full_name
+        .name= review.user.try(:full_name)
         /.date= l review.created_at, format: :date_default
         /.sity= review.kind
       = link_to review.place.name, '#', class: 'header_blue'
