@@ -49,6 +49,8 @@ group :development do
   else
     gem 'annotate', :git => 'git://github.com/OpakAlex/annotate_models.git', ref: '568b3b4a76'
   end
+  gem 'pry-rails'
+  gem 'pry-doc'
 end
 
 
