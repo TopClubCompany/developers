@@ -2,7 +2,6 @@
 class Users::OmniauthCallbacksController < ApplicationController
 
   def auth
-
     #raise request.env["omniauth.auth"].to_hash.inspect
     data = Account.get_data_from_callback request.env["omniauth.auth"]
     data[:email].present? ? auth_with_email(data) : auth_without_email(data)
