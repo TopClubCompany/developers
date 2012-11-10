@@ -21,10 +21,10 @@
       br
       |Войти через:
       p.social_icons
-        = link_to image_tag('/images/vkontakte.jpg'), user_omniauth_authorize_path(:vkontakte), title: 'Vkontakte'
-        = link_to image_tag('/images/facebook.png'), user_omniauth_authorize_path(:facebook), title: 'Facebook'
-        = link_to image_tag('/images/google.png'), user_omniauth_authorize_path(:google), title: 'Google'
-        = link_to image_tag('/images/twitter.png'), user_omniauth_authorize_path(:twitter), title: 'Twitter'
+        = link_to image_tag('/images/vkontakte.jpg'), user_omniauth_authorize_path(:vkontakte), title: 'Vkontakte', id: 'vkontakte_btn'
+        = link_to image_tag('/images/facebook.png'), user_omniauth_authorize_path(:facebook), title: 'Facebook', id: 'facebook_btn'
+        = link_to image_tag('/images/google.png'), user_omniauth_authorize_path(:google), title: 'Google', id: 'google_btn'
+        = link_to image_tag('/images/twitter.png'), user_omniauth_authorize_path(:twitter), title: 'Twitter', id: 'twitter_btn'
 
       p
         |Еще не заригестрированы?

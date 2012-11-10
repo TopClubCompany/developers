@@ -1,4 +1,4 @@
-require 'hashie'
+# -*- encoding : utf-8 -*-'
 module Utils
   module Auth
     module SocCallbackParser
@@ -9,6 +9,7 @@ module Utils
         data.secret     = raw_data.credentials!.secret
         data.url        = (raw_data.extra!.response!.identity_url or raw_data.urls![data.provider.to_sym.capitalize])
         google_uid      = raw_data.uid.to_s.match(/id=(?<id>\w+)/)
+        puts raw_data.to_hash.deep_symbolize_keys.inspect
         raw_data        = (data.provider == 'google' ? raw_data.info : (raw_data.info.merge raw_data.extra.raw_info))
         data.photo      = (raw_data.photo_big or raw_data.image)
         data.patronymic = raw_data.middle_name

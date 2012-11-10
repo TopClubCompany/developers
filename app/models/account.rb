@@ -13,6 +13,7 @@ class Account < ::ActiveRecord::Base
 
 
   def self.create_or_find_by_oauth_data data
+    #raise data.to_hash.deep_symbolize_keys.inspect
     data_for_account = data.except(:patronymic)
     data_for_user    = data.except(:uid, :gender, :url, :photo, :name, :provider, :secret, :refresh_token, :language, :token)
     account          = (Account.find_by_uid_and_provider(data_for_account[:uid], data_for_account[:provider]) or Account.create(data_for_account))

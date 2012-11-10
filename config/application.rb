@@ -8,10 +8,10 @@ if defined?(Bundler)
 end
 module Ckeditor; def self.assets; []; end; end if File.exists?(File.expand_path('../../public/assets/ckeditor/config.js', __FILE__))
 
+
 module Topclub
   class Application < Rails::Application
     config.middleware.use Rack::Pjax
-
     config.generators do |g|
       g.test_framework :rspec
       g.template_engine :slim

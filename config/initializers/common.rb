@@ -21,7 +21,15 @@ I18n.available_locales = Globalize.available_locales = [:ru, :en, :uk]
 I18n.locale = Rails.application.config.i18n.default_locale
 I18n::Backend::Simple.send(:include, I18n::Backend::Fallbacks)
 I18n.fallbacks.map(:uk => :en, :en => :ru)
-ActionView::Base::InstanceTag::DEFAULT_TEXT_AREA_OPTIONS = {"cols" => 93, "rows" => 5}
+module ActionView
+  module Helpers
+    class InstanceTag
+      DEFAULT_TEXT_AREA_OPTIONS = { :cols => 93, :rows => 5 }.freeze unless const_defined?(:DEFAULT_TEXT_AREA_OPTIONS)
+    end
+  end
+end
+
+#ActionView::Base::InstanceTag::DEFAULT_TEXT_AREA_OPTIONS = {"cols" => 93, "rows" => 5}
 
 RoutingFilter::Locale.include_default_locale = false
 
