@@ -3,14 +3,12 @@ class CreateLocations < ActiveRecord::Migration
     create_table :locations do |t|
       t.integer :locationable_id, :null => false
       t.string  :locationable_type, :limit => 50, :null => false
-      t.string :street
-      t.string :city
-      t.string :state
       t.string :zip
       t.float :latitude
       t.float :longitude
-      t.string :country
       t.float :distance
+      t.string :house_number
+      t.string :country_code
 
       t.timestamps
     end

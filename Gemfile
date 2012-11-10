@@ -107,6 +107,8 @@ gem 'auto_html'
 gem 'jbuilder'
 #gem 'ancestry
 
+gem 'curb'
+
 #for uploads
 gem 'sunrise-file-upload', :git => 'git://github.com/leschenko/sunrise-file-upload.git', :ref => '4d4722c'
 

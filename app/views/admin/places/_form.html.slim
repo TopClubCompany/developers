@@ -7,11 +7,11 @@
   = f.input :token_category_ids, as: :string, label: Place.han(:categories), input_html: @place.token_data(:categories)
   = f.input :token_kitchen_ids, as: :string, label: Place.han(:kitchens), input_html: @place.token_data(:kitchens)
 
-  |Цены
-  .nested_fields
-    = f.simple_fields_for :price_ranges do |object|
-      = render 'price_ranges', :f => object
-    = f.link_to_add t('admin.add'), :price_ranges, :class => 'btn btn-primary'
+  /|Цены
+  /.nested_fields
+  /  = f.simple_fields_for :price_ranges do |object|
+  /    = render 'price_ranges', :f => object
+  /  = f.link_to_add t('admin.add'), :price_ranges, :class => 'btn btn-primary'
 
 
   .nested_fields
@@ -19,6 +19,12 @@
     = f.simple_fields_for :location do |object|
       = object.input :latitude, :as => :hidden
       = object.input :longitude, :as => :hidden
+      = object.input :street
+      = object.input :city
+      = object.input :name_countries, :input_html => {:name => "place[location_attributes][country]"}
+      = object.input :county
+      = object.input :zip
+      = object.input :house_number
 
   = f.input :phone
   = f.input :url
