@@ -1,7 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Users::OmniauthCallbacksController < ApplicationController
 
-
   def auth
 
     #raise request.env["omniauth.auth"].to_hash.inspect
