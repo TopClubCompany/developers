@@ -2,7 +2,6 @@
 class Users::OmniauthCallbacksController < ApplicationController
 
   def auth
-    #raise request.env["omniauth.auth"].to_hash.inspect
     data = Account.get_data_from_callback request.env["omniauth.auth"]
     data[:email].present? ? auth_with_email(data) : auth_without_email(data)
   end
@@ -15,7 +14,6 @@ class Users::OmniauthCallbacksController < ApplicationController
     check_email(email, data) unless email.nil?
     redirect_to root_path, flash: { error: "You try to access to admin page"} unless data.present?
   end
-
 
   def destroy_user_session
     sign_out current_user

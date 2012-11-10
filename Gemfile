@@ -135,6 +135,7 @@ group :development, :test do
   gem "spork"
   gem 'guard-spork'
   gem 'guard-coffeescript'
+  gem 'guard-cucumber'
   gem 'rb-inotify' if RUBY_PLATFORM.downcase.include?("linux")
   gem 'guard-livereload'
   gem 'guard-jasmine'

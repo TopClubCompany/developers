@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'spork'
+require 'capybara/rails'
 
 Spork.prefork do
   unless ENV['DRB']

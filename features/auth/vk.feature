@@ -4,5 +4,4 @@ Feature: Sing in vk
     And I Confirmed the app
     Then I must write my email
     And confirm the email for registration
-    Then I am a site user
-    because I give my email and confirm for email
+    Then I am a site user because I give my email and confirm for email
