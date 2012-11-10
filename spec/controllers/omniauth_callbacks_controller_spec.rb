@@ -10,6 +10,22 @@ describe Users::OmniauthCallbacksController do
     visit root_path
   end
 
+  it 'should register user from vk' do
+      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:vkontakte]
+      Account.find_by_uid_and_provider('vk_id', 'vkontakte').should be_false
+      click_on "vkontakte_btn"
+      #response.should redirect_to
+      #page.should have_selector("a", text: "Журнал")
+      fill_in 'email_for_registration', :with => 'vkontakte@email.com'
+      click_on 'enter_email_button'
+      account = Account.find_by_uid_and_provider('vk_id', 'vkontakte')
+      puts account.email
+      account.should be_true
+      account.first_name = 'test'
+      account.save.should be_true
+      page.has_selector?("a", text: "logout").should be_true
+      click_on 'logout_link'
+  end
   it 'should register new user from facebook' do
     #visit root_path
     #puts page.html
@@ -55,27 +71,16 @@ describe Users::OmniauthCallbacksController do
     click_on 'logout_link'
   end
 
-  it 'should register user from vk' do
 
-    request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:vkontakte]
-    Account.find_by_uid_and_provider('vk_id', 'vkontakte').should be_false
-    click_on "vkontakte_btn"
-    puts page.html
-    #puts response.body
-    #page.should have_selector("input", text: "create")
-    #response.should redirect_to
-    #visit enter_email_path
-    page.should have_selector("a", text: "Журнал")
-    fill_in 'email_for_registration', :with => 'vkontakte@email.com'
-    click_on 'enter_email_button'
-    account = Account.find_by_uid_and_provider('vk_id', 'vkontakte')
-    puts account.email
-    account.should be_true
-    account.first_name = 'test'
-    account.save.should be_true
-    page.has_selector?("a", text: "logout").should be_true
-    click_on 'logout_link'
-  end
+
+  #it 'should visit email path and have form tag' do
+  #  request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:vkontakte]
+  #  visit enter_email_path
+  #  puts page.html
+  #  fill_in 'email_for_registration', :with => 'vkontakte@email.com'
+  #end
+
+
 
   it 'should only sign in if vkontakte user already exist' do
     #visit root_path

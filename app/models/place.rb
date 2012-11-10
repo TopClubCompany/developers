@@ -43,7 +43,7 @@ class Place < ActiveRecord::Base
 
   as_token_ids :category, :kitchen
 
-  PER_PAGE = 25
+  #PER_PAGE = 25
 
   mapping do
     indexes :lat_lng, type: 'geo_point'

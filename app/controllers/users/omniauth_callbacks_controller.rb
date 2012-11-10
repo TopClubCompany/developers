@@ -3,6 +3,7 @@ class Users::OmniauthCallbacksController < ApplicationController
 
 
   def auth
+
     #raise request.env["omniauth.auth"].to_hash.inspect
     data = Account.get_data_from_callback request.env["omniauth.auth"]
     data[:email].present? ? auth_with_email(data) : auth_without_email(data)
@@ -11,18 +12,11 @@ class Users::OmniauthCallbacksController < ApplicationController
   [:facebook, :vkontakte, :google, :twitter].each { |provider| alias_method provider, :auth }
 
   def enter_email
-    puts '--------------'
-    puts session[:user_data]
     data =  session[:user_data]
-    puts data
-    puts '-------------'
-    redirect_to root_path, flash: { error: "You try to access to admin page"} unless data.present?
     email = params[:email]
-
     check_email(email, data) unless email.nil?
-
+    redirect_to root_path, flash: { error: "You try to access to admin page"} unless data.present?
   end
-
 
 
   def destroy_user_session

@@ -6,7 +6,7 @@
 #   git config --global core.excludesfile ~/.gitignore_global
 
 .DS_Store
-
+public/javascripts
 # Ignore bundler config
 /.bundle
 .local_gems
