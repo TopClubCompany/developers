@@ -23,5 +23,9 @@
 
 FactoryGirl.define do
   factory :location do
+    locationable_type "Place"
+    locationable_id 1
+    latitude 50.4419
+    longitude 30.4977
   end
 end

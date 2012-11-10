@@ -3,14 +3,11 @@ require 'spec_helper'
 
 describe Location do
   before (:each) do
-    @location = described_class.new({locationable_type: "Place", locationable_id: 1})
+    @location = FactoryGirl.create(:location)
   end
 
   context 'get all data from coordinates' do
     it 'should get all data' do
-      @location.latitude = 50.4419
-      @location.longitude = 30.4977
-      @location.save!
       @location.street.should eq "Саксаганского улица"
       @location.country.should eq "Украина"
       @location.county.should eq "Шевченковский район"
