@@ -3,6 +3,7 @@
 Given /^I click facebook icon then Site redirect me into facebook app where i confirmed app$/ do
   visit root_path
   @account = Account.find_by_uid_and_provider('fb_id', 'facebook').should be_false
+  page.driver.request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook]
   click_on "facebook_btn"
   @account = Account.find_by_uid_and_provider('fb_id', 'facebook')
   @account.should be_true

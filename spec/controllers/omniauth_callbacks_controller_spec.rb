@@ -27,9 +27,6 @@ describe Users::OmniauthCallbacksController do
   end
 
   it 'should register new user from facebook' do
-    #visit root_path
-    #puts page.html
-    #puts page.current_url
     request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook]
     Account.find_by_uid_and_provider('fb_id', 'facebook').should be_false
     click_on "facebook_btn"
@@ -42,7 +39,6 @@ describe Users::OmniauthCallbacksController do
   end
 
   it 'should only sign in if facebook user already exist' do
-    #visit root_path
     click_on "facebook_btn"
     account = Account.find_by_uid_and_provider('fb_id', 'facebook')
     account.first_name.should eq 'test'
@@ -51,7 +47,6 @@ describe Users::OmniauthCallbacksController do
 
 
   it 'should register new user from google' do
-    #visit root_path
     request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:google]
     Account.find_by_uid_and_provider('google_id', 'google').should be_false
     click_on "google_btn"
@@ -64,7 +59,6 @@ describe Users::OmniauthCallbacksController do
   end
 
   it 'should only sign in if google user already exist' do
-    #visit root_path
     click_on "google_btn"
     account = Account.find_by_uid_and_provider('google_id', 'google')
     account.first_name.should eq 'test'
