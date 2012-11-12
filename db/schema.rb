@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121110160527) do
+ActiveRecord::Schema.define(:version => 20121112215314) do
 
   create_table "accounts", :force => true do |t|
     t.string   "provider",      :limit => 100,                :null => false
@@ -127,6 +127,26 @@ ActiveRecord::Schema.define(:version => 20121110160527) do
 
   add_index "events", ["place_id"], :name => "index_events_on_place_id"
 
+  create_table "feature_item_translations", :force => true do |t|
+    t.integer  "feature_item_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "feature_item_translations", ["feature_item_id"], :name => "index_3de1035375aafd880dbde54fdecda400f771e7e7"
+  add_index "feature_item_translations", ["locale"], :name => "index_feature_item_translations_on_locale"
+
+  create_table "feature_items", :force => true do |t|
+    t.boolean  "is_visible",       :default => true
+    t.integer  "group_feature_id"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
+
+  add_index "feature_items", ["group_feature_id"], :name => "index_feature_items_on_group_feature_id"
+
   create_table "friends", :force => true do |t|
     t.string   "social_id",  :null => false
     t.string   "name"
@@ -138,6 +158,34 @@ ActiveRecord::Schema.define(:version => 20121110160527) do
 
   add_index "friends", ["social_id"], :name => "index_friends_on_social_id"
   add_index "friends", ["user_id"], :name => "index_friends_on_user_id"
+
+  create_table "group_feature_categories", :force => true do |t|
+    t.integer  "group_feature_id"
+    t.integer  "category_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "group_feature_categories", ["category_id"], :name => "index_group_feature_categories_on_category_id"
+  add_index "group_feature_categories", ["group_feature_id"], :name => "index_group_feature_categories_on_group_feature_id"
+
+  create_table "group_feature_translations", :force => true do |t|
+    t.integer  "group_feature_id"
+    t.string   "locale"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "group_feature_translations", ["group_feature_id"], :name => "index_e9eef5999879b3140148a9dd0a0303483b07b08e"
+  add_index "group_feature_translations", ["locale"], :name => "index_group_feature_translations_on_locale"
+
+  create_table "group_features", :force => true do |t|
+    t.boolean  "is_visible", :default => true
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
 
   create_table "header_translations", :force => true do |t|
     t.integer  "header_id"
@@ -232,6 +280,16 @@ ActiveRecord::Schema.define(:version => 20121110160527) do
   add_index "place_categories", ["category_id"], :name => "index_place_categories_on_category_id"
   add_index "place_categories", ["place_id"], :name => "index_place_categories_on_place_id"
 
+  create_table "place_feature_items", :force => true do |t|
+    t.integer  "place_id"
+    t.integer  "feature_item_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "place_feature_items", ["feature_item_id"], :name => "index_place_feature_items_on_feature_item_id"
+  add_index "place_feature_items", ["place_id"], :name => "index_place_feature_items_on_place_id"
+
   create_table "place_kitchens", :force => true do |t|
     t.integer  "place_id"
     t.integer  "kitchen_id"
@@ -260,6 +318,7 @@ ActiveRecord::Schema.define(:version => 20121110160527) do
     t.boolean  "is_visible", :default => true, :null => false
     t.string   "phone"
     t.string   "url"
+    t.integer  "avg_bill"
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
   end

@@ -59,6 +59,14 @@ Topclub::Application.routes.draw do
     resources(:places) do
       post :batch, :on => :collection
     end
+    resources(:group_features) do
+      post :batch, :on => :collection
+    end
+
+    resources(:feature_items) do
+      post :batch, :on => :collection
+    end
+
   end
   mount Ckeditor::Engine => "/ckeditor"
 end

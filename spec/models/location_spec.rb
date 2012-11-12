@@ -12,7 +12,6 @@ describe Location do
       @location.country.should eq "Украина"
       @location.county.should eq "Шевченковский район"
     end
-
   end
 end
 # == Schema Information

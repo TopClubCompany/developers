@@ -7,9 +7,13 @@ ru:
       product: 
         title: title
   admin:
-    user_type:
-      architect: "Архитектор"
-      designer: "Дизайнер"
+    bill:
+      kind:
+        cheap: "Under $10"
+        moderate: "$11 - $3"
+        spendy: "$31 - $60"
+        splurge: "> $61"
+
     avatar: "Аватар"
     actions:
       action: 

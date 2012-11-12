@@ -1,0 +1,9 @@
+= admin_form_for @feature_item do |f|
+  = f.locale_tabs do |l|
+    = f.input :name, :locale => l
+
+  = f.input :is_visible, input_html: {class: 'pretty-slide-checkbox'}
+  = f.association :group_feature
+
+
+  = f.save_buttons

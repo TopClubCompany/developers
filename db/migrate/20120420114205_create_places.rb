@@ -6,6 +6,7 @@ class CreatePlaces < ActiveRecord::Migration
       t.boolean :is_visible, :default => true, :null => false
       t.string     :phone
       t.string     :url
+      t.integer    :avg_bill
 
       t.timestamps
     end
