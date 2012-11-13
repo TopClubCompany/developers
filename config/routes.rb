@@ -33,6 +33,7 @@ Topclub::Application.routes.draw do
 
     match 'main_image' => AdminMainImageApp
     match 'autocomplete' => AdminAutocompleteApp
+    match 'place_feature' => PlaceFeatureApp
 
     get 'static_pages/:structure_id' => 'static_pages#show'
     root :to => "dashboards#index"

@@ -16,6 +16,17 @@ class GroupFeature < ActiveRecord::Base
 
   as_token_ids :category
 
+  def self.place_feature_groups(place_id, category_id)
+    group_features = Category.find(category_id).group_features
+    if place_id.present?
+      place_group_features = Place.find(place_id).group_features.uniq
+      (group_features - place_group_features).map { |group_feature| group_feature.feature_items }.flatten
+    else
+      group_features.map { |group_feature| group_feature.feature_items }.flatten
+    end
+  end
+
+
 end
 # == Schema Information
 #
