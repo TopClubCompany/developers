@@ -18,6 +18,10 @@
         input name="place[feature_item_ids][]" type="hidden" value=""
         = check_box_tag "place_feature_item_id_#{item.id}", item.id, (feature_item_ids.include?(item.id)), {:class => 'check_boxes optional text', :name => "place[feature_item_ids][]"}
         label for="place_feature_item_id_#{item.id}"=  item.title
+  = input_set t('admin.administrators') do
+    = f.simple_fields_for :place_administrators do |object|
+      = render 'place_administrators', :f => object
+    = f.link_to_add t('admin.add'), :place_administrators, :class => 'btn btn-primary'
 
   .nested_fields
     - @place.location ||= Location.new()
