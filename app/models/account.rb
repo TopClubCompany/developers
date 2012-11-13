@@ -13,18 +13,13 @@ class Account < ActiveRecord::Base
 
 
   def self.create_or_find_by_oauth_data data
-    #raise data.to_hash.deep_symbolize_keys.inspect
+    account = Account.find_by_uid_and_provider(data[:uid], data[:provider])
+    return account.user if account
     data_for_account = data.except(:patronymic)
     data_for_user    = data.except(:uid, :gender, :url, :photo, :name, :provider, :secret, :refresh_token, :language, :token)
-    if (account = Account.find_by_uid_and_provider(data[:uid], data[:provider])).present?
-      return account.user
-    end
-    if (user = User.find_by_email(data[:email])).present? && user.accounts.pluck(:provider).include?(data[:provider])
-      user.accounts.pluck(:provider).include?(data[:provider])
-    end
-    account          = (Account.find_by_uid_and_provider(data[:uid], data[:provider]) or Account.create(data_for_account))
-    return account.user if account.user
-    account.user     = prepare_user_for_account(data_for_user)
+    user             = User.find_by_email(data[:email])
+    account          = Account.create(data_for_account)
+    account.user     = (user or prepare_user_for_account(data_for_user))
     account.save!
     account.user
   end

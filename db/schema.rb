@@ -215,14 +215,12 @@ ActiveRecord::Schema.define(:version => 20121112224902) do
   create_table "locations", :force => true do |t|
     t.integer  "locationable_id",                 :null => false
     t.string   "locationable_type", :limit => 50, :null => false
-    t.string   "street"
-    t.string   "city"
-    t.string   "state"
     t.string   "zip"
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "country"
     t.float    "distance"
+    t.string   "house_number"
+    t.string   "country_code"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
   end

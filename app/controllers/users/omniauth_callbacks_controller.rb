@@ -3,8 +3,6 @@ class Users::OmniauthCallbacksController < ApplicationController
 
 
   def auth
-
-    #raise request.env["omniauth.auth"].to_hash.inspect
     data = Account.get_data_from_callback request.env["omniauth.auth"]
     data[:email].present? ? auth_with_email(data) : auth_without_email(data)
   end
@@ -14,8 +12,7 @@ class Users::OmniauthCallbacksController < ApplicationController
   def enter_email
     data =  session[:user_data]
     email = params[:email]
-    merge(data, email) if params[:merge]
-    #render text: params.to_yaml if params[:merge]
+    return merge(data, email) if params[:merge]
     check_email(email, data) unless email.nil?
     redirect_to root_path, flash: { error: "You try to access to admin page"} unless data.present?
   end
@@ -26,11 +23,28 @@ class Users::OmniauthCallbacksController < ApplicationController
     redirect_to root_path
   end
 
+  def confirm_account
+     token = params[:token]
+     response = AccountEmailConfirmation.check_token(token)
+     aut_user response.user
+     redirect_to root_path, flash: { notice: "Merge success" }
+
+  end
 
   private
 
   def merge(data, email)
-    raise 'wow'.inspect
+    if (user = User.find_by_email(email)).present? && !user.accounts.pluck(:provider).include?(data[:provider])
+      data[:email] = email
+      token = (AccountEmailConfirmation.generate_email_confirm(email, data)).confirmation_token
+      AccountMailer.confirm_email(email, token).deliver
+      user = Account.create_or_find_by_oauth_data data
+      auth_user user
+    else
+      redirect_to enter_email_path(email.gsub('.','#')), flash: { error: "Already exist user with that email and social provider" }
+    end
+
+
   end
 
   def auth_without_email data
@@ -60,7 +74,6 @@ class Users::OmniauthCallbacksController < ApplicationController
       user = Account.create_or_find_by_oauth_data data
       auth_user user
     else
-
       redirect_to enter_email_path(email.gsub('.','#')), flash: { error: "Already exist user with that email" }
     end
   end
