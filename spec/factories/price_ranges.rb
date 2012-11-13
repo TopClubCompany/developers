@@ -15,5 +15,6 @@
 
 FactoryGirl.define do
   factory :price_range do
+    name ""
   end
 end
