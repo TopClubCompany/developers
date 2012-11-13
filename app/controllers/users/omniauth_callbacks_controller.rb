@@ -14,6 +14,8 @@ class Users::OmniauthCallbacksController < ApplicationController
   def enter_email
     data =  session[:user_data]
     email = params[:email]
+    merge(data, email) if params[:merge]
+    #render text: params.to_yaml if params[:merge]
     check_email(email, data) unless email.nil?
     redirect_to root_path, flash: { error: "You try to access to admin page"} unless data.present?
   end
@@ -26,6 +28,10 @@ class Users::OmniauthCallbacksController < ApplicationController
 
 
   private
+
+  def merge(data, email)
+    raise 'wow'.inspect
+  end
 
   def auth_without_email data
     account = Account.find_by_uid_and_provider((data[:id] or data[:uid]), data[:provider])
@@ -54,7 +60,8 @@ class Users::OmniauthCallbacksController < ApplicationController
       user = Account.create_or_find_by_oauth_data data
       auth_user user
     else
-      redirect_to enter_email_path, flash: { error: "Already exist user with that email" }
+
+      redirect_to enter_email_path(email.gsub('.','#')), flash: { error: "Already exist user with that email" }
     end
   end
 

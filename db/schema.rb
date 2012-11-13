@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121110160527) do
+ActiveRecord::Schema.define(:version => 20121112224902) do
+
+  create_table "account_email_confirmations", :force => true do |t|
+    t.string   "confirmation_token"
+    t.string   "unconfirmed_email"
+    t.datetime "confirmed_sent_at"
+    t.datetime "confirmed_at"
+    t.integer  "account_id"
+    t.integer  "failed_attempts",    :default => 0
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+  end
+
+  add_index "account_email_confirmations", ["account_id"], :name => "index_account_email_confirmations_on_account_id"
+  add_index "account_email_confirmations", ["confirmation_token"], :name => "index_account_email_confirmations_on_confirmation_token"
 
   create_table "accounts", :force => true do |t|
     t.string   "provider",      :limit => 100,                :null => false
@@ -201,12 +215,14 @@ ActiveRecord::Schema.define(:version => 20121110160527) do
   create_table "locations", :force => true do |t|
     t.integer  "locationable_id",                 :null => false
     t.string   "locationable_type", :limit => 50, :null => false
+    t.string   "street"
+    t.string   "city"
+    t.string   "state"
     t.string   "zip"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "country"
     t.float    "distance"
-    t.string   "house_number"
-    t.string   "country_code"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
   end

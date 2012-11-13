@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class Account < ::ActiveRecord::Base
+class Account < ActiveRecord::Base
   extend Utils::Auth::SocCallbackParser
   belongs_to :user
 
@@ -16,7 +16,13 @@ class Account < ::ActiveRecord::Base
     #raise data.to_hash.deep_symbolize_keys.inspect
     data_for_account = data.except(:patronymic)
     data_for_user    = data.except(:uid, :gender, :url, :photo, :name, :provider, :secret, :refresh_token, :language, :token)
-    account          = (Account.find_by_uid_and_provider(data_for_account[:uid], data_for_account[:provider]) or Account.create(data_for_account))
+    if (account = Account.find_by_uid_and_provider(data[:uid], data[:provider])).present?
+      return account.user
+    end
+    if (user = User.find_by_email(data[:email])).present? && user.accounts.pluck(:provider).include?(data[:provider])
+      user.accounts.pluck(:provider).include?(data[:provider])
+    end
+    account          = (Account.find_by_uid_and_provider(data[:uid], data[:provider]) or Account.create(data_for_account))
     return account.user if account.user
     account.user     = prepare_user_for_account(data_for_user)
     account.save!
