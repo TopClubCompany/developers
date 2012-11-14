@@ -2,12 +2,13 @@
 class Account < ActiveRecord::Base
   extend Utils::Auth::SocCallbackParser
   belongs_to :user
+  belongs_to :account_email_confirmation
 
   validates_presence_of :provider, :uid
 
   attr_accessible :provider, :uid, :name, :first_name, :last_name, :email, :photo,
                   :gender, :address, :language, :birthday, :url, :banned_at, :phone, :nickname,
-                  :token, :refresh_token, :secret, :user
+                  :token, :refresh_token, :secret, :user, :user_id
 
   enumerated_attribute :gender_type, :id_attribute => :gender, :class => ::GenderType
 
@@ -35,6 +36,10 @@ class Account < ActiveRecord::Base
     user
   end
 
+  def create_user_from_account
+    data_for_user  = attributes.symbolize_keys.slice(:first_name, :last_name, :email, :address, :phone, :birthday)
+    Account.prepare_user_for_account(data_for_user)
+  end
 
 
 

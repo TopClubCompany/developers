@@ -14,10 +14,10 @@ Topclub::Application.configure do
       address:              "smtp.gmail.com",
       port:                  587,
       domain:               'baci.lindsaar.net',
-      user_name:            'anton.z@randrmusic.com',
-      password:             'sk2121212121',
+      user_name:             Figaro.env.app_email.username,
+      password:              Figaro.env.app_email.password,
       authentication:       'plain',
-      enable_starttls_auto: true }
+      enable_starttls_auto:  true }
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true

@@ -24,32 +24,30 @@ class Users::OmniauthCallbacksController < ApplicationController
   end
 
   def confirm_account
-     token = params[:token]
-     response = AccountEmailConfirmation.check_token(token)
-     aut_user response.user
-     redirect_to root_path, flash: { notice: "Merge success" }
-
+    token = params[:token]
+    response = AccountEmailConfirmation.check_token(token)
+    redirect_to root_path, flash: { notice: response }
   end
-
   private
 
   def merge(data, email)
     if (user = User.find_by_email(email)).present? && !user.accounts.pluck(:provider).include?(data[:provider])
       data[:email] = email
-      token = (AccountEmailConfirmation.generate_email_confirm(email, data)).confirmation_token
-      AccountMailer.confirm_email(email, token).deliver
-      user = Account.create_or_find_by_oauth_data data
-      auth_user user
+      send_letter_for_confirm_email(data)
     else
       redirect_to enter_email_path(email.gsub('.','#')), flash: { error: "Already exist user with that email and social provider" }
     end
+  end
 
-
+  def send_letter_for_confirm_email(data)
+    token = AccountEmailConfirmation.generate_email_confirm(data).confirmation_token
+    AccountMailer.confirm_email(data[:email], token).deliver
+    redirect_to root_path, flash: { notice: "the letter with confirm information send on your email" }
   end
 
   def auth_without_email data
     account = Account.find_by_uid_and_provider((data[:id] or data[:uid]), data[:provider])
-    account.present? ? auth_user(account.user) : get_user_email(data)
+    (account.present? && account.email.present?) ? auth_user(account.user) : get_user_email(data)
   end
 
   def auth_with_email data
@@ -71,8 +69,7 @@ class Users::OmniauthCallbacksController < ApplicationController
   def check_email email, data
     if User.find_by_email(email).nil?
       data[:email] = email
-      user = Account.create_or_find_by_oauth_data data
-      auth_user user
+      send_letter_for_confirm_email(data)
     else
       redirect_to enter_email_path(email.gsub('.','#')), flash: { error: "Already exist user with that email" }
     end
