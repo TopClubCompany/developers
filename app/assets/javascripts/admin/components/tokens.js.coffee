@@ -19,10 +19,15 @@ window.initToken = (el) ->
     prePopulate: $el.data("pre")
     customFilterParams: $el.data("c")
     tokenLimit: $el.data("limit")
+    token_add_function: $el.data("token_add_function")
+    token_delete_function: $el.data("token_delete_function")
     animateDropdown: false
-  if token_add_function?
+  if options.token_add_function?
     options.addInputCollback = true
-    options.onAdd = token_add_function
+    options.onAdd = ( (item) -> window[options.token_add_function].add(item))
+  if options.token_delete_function?
+    options.addDeleteCollback = true
+    options.onDelete = ((item) -> window[options.token_delete_function].remove(item))
   $el.tokenInput("/admin/autocomplete?" + $.param({class: $el.data('class'), token: 1}), options)
 
 window.initImageToken = (el) ->

@@ -4,15 +4,24 @@
     = f.input :description, :locale => l, :as => :ckeditor
 
   = f.input :is_visible, input_html: {class: "pretty-slide-checkbox preload"}
-  = f.input :token_category_ids, as: :string, label: Place.han(:categories), input_html: @place.token_data(:categories)
+  - input_html = @place.token_data(:categories).update({:"data-token_add_function" => "PlaceForm", :"data-token_delete_function" => "PlaceForm"})
+  = f.input :token_category_ids, as: :string, label: Place.han(:categories), input_html: input_html
   = f.input :token_kitchen_ids, as: :string, label: Place.han(:kitchens), input_html: @place.token_data(:kitchens)
+  = f.input :avg_bill, :collection => BillType.all, :include_blank => false
+  = f.input :id, :as => :hidden
 
-  /|Цены
-  /.nested_fields
-  /  = f.simple_fields_for :price_ranges do |object|
-  /    = render 'price_ranges', :f => object
-  /  = f.link_to_add t('admin.add'), :price_ranges, :class => 'btn btn-primary'
-
+  = input_set t('admin.attributes') do
+    - feature_item_ids = @place.feature_item_ids
+    - @place.group_features.includes(:feature_items).uniq.each do |group_feature|
+      h4= group_feature.name
+      - group_feature.feature_items.each do |item|
+        input name="place[feature_item_ids][]" type="hidden" value=""
+        = check_box_tag "place_feature_item_id_#{item.id}", item.id, (feature_item_ids.include?(item.id)), {:class => 'check_boxes optional text', :name => "place[feature_item_ids][]"}
+        label for="place_feature_item_id_#{item.id}"=  item.title
+  = input_set t('admin.administrators') do
+    = f.simple_fields_for :place_administrators do |object|
+      = render 'place_administrators', :f => object
+    = f.link_to_add t('admin.add'), :place_administrators, :class => 'btn btn-primary'
 
   .nested_fields
     - @place.location ||= Location.new()

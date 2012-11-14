@@ -20,26 +20,24 @@ class Location < ActiveRecord::Base
 
   alias_method :name_countries, :country
 
+
+  private
+
   def prepare_location
     if self.latitude_changed? || self.longitude_changed?
-      #begin
       languages = I18n.available_locales.map(&:to_s)
       geo_res = Utils::Maps::OpenStreetMap.reverse_geocode({:lat => latitude, :lon => longitude, :"accept-language" => languages})
 
       languages.each do |language|
-        self.send("street_#{language}=", geo_res.send(language).address.try(:road))
         self.send("city_#{language}=", geo_res.send(language).address.try(:state))
+        self.send("street_#{language}=", geo_res.send(language).address.try(:road))
         self.send("country_#{language}=", geo_res.send(language).address.try(:country))
         self.send("county_#{language}=", geo_res.send(language).address.try(:county))
       end
 
-      zip = geo_res.send(languages[0]).address.try(:postcode)
-      house_number = geo_res.send(languages[0]).address.try(:house_number)
-      country_code = geo_res.send(languages[0]).address.try(:country_code)
-
-      #rescue => e
-
-      #end
+      self.zip = geo_res.send(languages[0]).address.try(:postcode)
+      self.house_number = geo_res.send(languages[0]).address.try(:house_number)
+      self.country_code = geo_res.send(languages[0]).address.try(:country_code)
     end
   end
 
@@ -55,14 +53,12 @@ end
 #  id                :integer          not null, primary key
 #  locationable_id   :integer          not null
 #  locationable_type :string(50)       not null
-#  street            :string(255)
-#  city              :string(255)
-#  state             :string(255)
 #  zip               :string(255)
 #  latitude          :float
 #  longitude         :float
-#  country           :string(255)
 #  distance          :float
+#  house_number      :string(255)
+#  country_code      :string(255)
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #

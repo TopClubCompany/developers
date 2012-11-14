@@ -13,7 +13,7 @@
 //=require jquery
 //=require jquery-ui
 //=require jquery_ujs
-//= require twitter/bootstrap
+//q= require twitter/bootstrap
 //=require jquery.browser
 //=require jquery.extend
 //=require jquery.lionbars.0.3

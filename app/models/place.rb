@@ -3,7 +3,8 @@
 
 class Place < ActiveRecord::Base
 
-  attr_accessible :lat, :lon, :phone, :zoom, :is_visible, :user_id, :url, :location_attributes, :price_ranges_attributes
+  attr_accessible :phone, :is_visible, :user_id, :url, :location_attributes,
+                  :avg_bill, :feature_item_ids, :place_administrators_attributes
 
   belongs_to :user
 
@@ -13,11 +14,17 @@ class Place < ActiveRecord::Base
   has_many :place_kitchens, :dependent => :destroy
   has_many :kitchens, :through => :place_kitchens
 
+  has_many :place_feature_items
+  has_many :feature_items, :through => :place_feature_items
+
+  has_many :group_features, :through => :feature_items
+  has_many :place_administrators, :dependent => :destroy
+
   has_many :notes
   has_many :events
   has_many :reviews
-  has_many :price_ranges
 
+  enumerated_attribute :bill, :id_attribute => :avg_bill, :class => ::BillType
 
   #belongs_to :category
   #belongs_to :kitchen
@@ -27,7 +34,7 @@ class Place < ActiveRecord::Base
 
   has_one :location, :as => :locationable, :dependent => :destroy, :autosave => true
 
-  accepts_nested_attributes_for :location, :reviews, :price_ranges, :allow_destroy => true, :reject_if => :all_blank
+  accepts_nested_attributes_for :location, :reviews, :place_administrators, :allow_destroy => true, :reject_if => :all_blank
 
   translates :name, :description
 
@@ -138,6 +145,7 @@ end
 #  is_visible :boolean          default(TRUE), not null
 #  phone      :string(255)
 #  url        :string(255)
+#  avg_bill   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #

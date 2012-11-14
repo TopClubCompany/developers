@@ -43,9 +43,14 @@
 #  index_users_on_reset_password_token                     (reset_password_token) UNIQUE
 #
 
+
 FactoryGirl.define do
+  sequence :email do |n|
+    "email#{n}@factory.com"
+  end
+
   factory :user do
-    email 'admin@adm.com'
+    email
     first_name 'Bro'
     last_name 'Pro '
     password 'password'

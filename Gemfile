@@ -128,15 +128,16 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'forgery', '0.3.12'
   gem 'jasmine-rails'
-  gem "guard-rspec"
   gem "capybara"
   gem 'capybara-webkit'
   gem 'cucumber-rails', :require => false
   gem "spork"
+  gem "guard-rspec"
   gem 'guard-spork'
   gem 'guard-coffeescript'
-  gem 'rb-inotify' if RUBY_PLATFORM.downcase.include?("linux")
+  gem 'guard-cucumber'
   gem 'guard-livereload'
   gem 'guard-jasmine'
   gem 'jasminerice'
+  gem 'rb-inotify' if RUBY_PLATFORM.downcase.include?("linux")
 end

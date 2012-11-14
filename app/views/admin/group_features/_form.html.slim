@@ -1,0 +1,14 @@
+= admin_form_for @group_feature, {nested: true} do |f|
+  = f.locale_tabs do |l|
+    = f.input :name, :locale => l
+    = f.input :description, :locale => l, :as => :ckeditor
+
+  = f.input :is_visible, input_html: {class: 'pretty-slide-checkbox'}
+  = f.input :token_category_ids, as: :string, label: GroupFeature.han(:categories), input_html: @group_feature.token_data(:categories)
+
+  .nested_fields
+    = f.simple_fields_for :feature_items do |object|
+      = render 'feature_item', :f => object
+    = f.link_to_add t('admin.add'), :feature_items, :class => 'btn btn-primary'
+
+  = f.save_buttons

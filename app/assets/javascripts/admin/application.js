@@ -39,3 +39,4 @@
 //= require admin/components/nested_filelds_adder.js
 //= require admin/pretty-slide-checkbox
 //= require admin/main
+//= require_tree ./place

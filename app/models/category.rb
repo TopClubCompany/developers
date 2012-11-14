@@ -10,6 +10,9 @@ class Category < ActiveRecord::Base
   has_many :pictures, :as => :assetable, :dependent => :destroy
   has_one :category_image, :as => :assetable, :dependent => :destroy
 
+  has_many :group_feature_categories, :dependent => :destroy
+  has_many :group_features, :through => :group_feature_categories
+
   fileuploads :pictures, :category_image
   translates :name, :description
 
