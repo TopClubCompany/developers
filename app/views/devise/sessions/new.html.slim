@@ -1,0 +1,71 @@
+.content
+  .row
+    .span8
+      .heading
+        h1 Become a member
+        | or
+        strong
+          a href="#"
+      #sign_up_page.page_content
+        h2
+          | Sign up and
+          a href="#"
+          | for successfully reservations!
+        = simple_form_for User.new, url: user_registration_path, method: 'POST' do |f|
+          label
+            | Diner name:
+            b *
+          = f.input :first_name, placeholder: "First name", label: false
+          = f.input :last_name, placeholder: "Last name",label: false
+          .clear
+          label
+            | Phone:
+            b *
+          = f.input :phone, placeholder: "+38 ( _ _ _ ) _ _ _ - _ _ - _ _", label: false
+          .clear
+          label
+            | Email:
+            b *
+          = f.input :email, label: false
+          .clear
+          label
+            | Password:
+            b *
+          = f.input :password, label: false
+          .clear
+          label
+            | Confirm password:
+            b *
+          = f.input :password_confirmation, label: false
+          .clear
+          label
+            | City:
+          = f.input :address, label: false
+          .clear
+          label Gender:
+          select name="gender"
+            option value="Female"
+            option value="Male"
+          .clear
+          label Birthday:
+          select name="month"
+            option value="9"
+          select name="day"
+            option value="31"
+          select name="year"
+            option value="1986"
+          .clear
+          label Profile photo:
+          input name="profile_photo" type="file"
+            .clear
+            p
+              | By clicking “Join Reserve” you confirm that you accept
+              = link_to ' Terms and conditions', '#'
+              |.
+            = f.submit "Join Reserve"
+    #social_login.span4
+      h3 Sign in with another account
+      a#fb_login href=user_omniauth_authorize_path(:facebook)
+      a#vk_login href=user_omniauth_authorize_path(:vkontakte)
+      a#gp_login href=user_omniauth_authorize_path(:google)
+      a#tw_login href=user_omniauth_authorize_path(:twitter)

@@ -1,8 +1,8 @@
 @font-face{
   font-family: 'univers_condensedmedium';
-  src: url('css/13947-WebFont.eot?#iefix') format('embedded-opentype'),
-  url('css/13947-WebFont.woff') format('woff'),
-  url('css/13947-WebFont.ttf') format('truetype');
+  src: url('3947-WebFont.eot?#iefix') format('embedded-opentype'),
+  url('front/13947-webfont.woff') format('woff'),
+  url('front/13947-webfont.ttf') format('truetype');
 }
 
 body {
@@ -85,14 +85,14 @@ ul, li {
 }
 
 #fixed ul li.active a {
-  background: url('../images/arr1.gif') right 5px no-repeat;
+  background: url('arr1.gif') right 5px no-repeat;
   padding: 0 10px 0 0;
   color: #fff;
 }
 
-#fixed #language #eng { background: url('../images/language.png') 0 4px no-repeat; }
-#fixed #language #rus { background: url('../images/language.png') 0 -16px no-repeat; }
-#fixed #language #ukr { background: url('../images/language.png') 0 -38px no-repeat; }
+#fixed #language #eng { background: url('language.png') 0 4px no-repeat; }
+#fixed #language #rus { background: url('language.png') 0 -16px no-repeat; }
+#fixed #language #ukr { background: url('language.png') 0 -38px no-repeat; }
 
 #fixed #location { margin: -5px 0 0 10px; }
 
@@ -279,7 +279,7 @@ ul, li {
   height: 37px;
   display: block;
   margin: 0 0 10px 0;
-  background-image: url('images/social_login.png');
+  background-image: url('social_login.png');
 }
 
 #vk_login { background-position: 0 -47px; }
