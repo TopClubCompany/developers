@@ -43,11 +43,36 @@ def add_test_stuff
   end
 end
 
+def insert_group_feature
+  GroupFeature.all.map(&:destroy)
+  groups_features = [{name: "Wi-Fi", features: %w(Free Paid)},
+                     {name: "Parking", features: %w(Street Garage Valet Private\ Lot Validated)},
+                     {name: "Meals Served", features: %w(Breakfast Brunch Lunch Dinner Dessert Late\ Night)},
+                     {name: "Alcohol", features: %w(Full\ Bar Beer\ &\ Wine\ Only Happy\ Hour)},
+                     {name: "General features", features: %w(Offering\ a\ Deal Open\ Now\ (11:18\ am) Good\ for\ Kids
+                                                Take-out Open\ Now\ (11:18\ am) Takes\ Reservations Accepts\ Credit\ Cards
+                                                Delivery Outdoor\ Seating Good\ for\ Groups Waiter\ Service Wheelchair\ Accessible Has\ TV)},
+                     {name: "Ambience", features: %w(Authentic\ Favorites Cozy\ &\ Casual Dating\ Destination)}
+                    ]
 
-User.full_truncate
-insert_default_user('admin@adm.com')
-insert_default_user('user@usr.com', false)
-add_test_stuff
+  groups_features.each do |group_feature|
+    g = GroupFeature.create({name_ru: group_feature[:name]})
+    g.category_ids = [Category.all.sample.id]
+    g.save!
+    group_feature[:features].each do |item|
+      FeatureItem.create({name_ru: item, group_feature_id: g.id})
+    end
+  end
+
+
+end
+
+#User.full_truncate
+#insert_default_user('admin@adm.com')
+#insert_default_user('user@usr.com', false)
+#add_test_stuff
+insert_group_feature
+
 
 #10.times do
 #  s = Selection.make! user: User.first

@@ -1,0 +1,10 @@
+script
+  |
+    <div class="group_feature container" data-id="{{id}}">
+      <div class="group_feature">{{name}}</div>
+      {{#each items}}
+        <input name="place[feature_item_ids][]" type="hidden" value="">
+        <input class="check_boxes optional text" id="place_feature_item_id_#{id}" name="place[feature_item_ids][]" type="checkbox" value="#{id}">
+        <label for="place_feature_item_id_#{id}">#{name}</label>
+      {{/each}}
+    </div>

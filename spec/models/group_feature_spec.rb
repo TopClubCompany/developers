@@ -26,15 +26,16 @@ describe GroupFeature do
     place.save!
 
     feature_items = GroupFeature.place_feature_groups(place.id, category_2.id)
-    feature_items_test = (category_2.group_features.map{|g_f| g_f.feature_items.map(&:id)}.flatten - category_1.group_features.map{|g_f| g_f.feature_items.map(&:id)}.flatten)
-    feature_items.map(&:id).should eq feature_items_test
+    feature_items_test = (category_2.group_features.map{|g_f| g_f.feature_items}.flatten - category_1.group_features.map{|g_f| g_f.feature_items}.flatten)
+
+    feature_items.should eq feature_items_test.group_by{|f_i| [f_i.group_feature.name, f_i.group_feature.id]}
   end
 
   it 'should work with new place create' do
     category_1 = FactoryGirl.create(:category, group_features: 2)
     feature_items = GroupFeature.place_feature_groups(nil, category_1.id)
-    feature_items_test = category_1.group_features.map{|g_f| g_f.feature_items.map(&:id)}.flatten
-    feature_items.map(&:id).should eq feature_items_test
+    feature_items_test = category_1.group_features.map{|g_f| g_f.feature_items}.flatten
+    feature_items.should eq feature_items_test.group_by{|f_i| [f_i.group_feature.name, f_i.group_feature.id]}
   end
 
 end

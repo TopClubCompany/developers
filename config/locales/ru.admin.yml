@@ -7,6 +7,7 @@ ru:
       product: 
         title: title
   admin:
+    features: "Атрибутты"
     bill:
       kind:
         cheap: "Under $10"
