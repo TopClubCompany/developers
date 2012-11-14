@@ -24,7 +24,6 @@ class @PlaceForm
     @query(params)
 
   remove: (item) =>
-    log item
     $(".group_feature.container[data-id='#{item.id}'] :checked").click()
     $(".group_feature.container[data-id='#{item.id}']").hide()
 
@@ -32,7 +31,6 @@ class @PlaceForm
     $.getJSON '/admin/place_feature', params, ((data) => @render(data))
 
   render: (data) =>
-    console.log @
     _.each data, (obj) =>
       obj.category_id = @category_id
       $('.features').append(@template(obj))
