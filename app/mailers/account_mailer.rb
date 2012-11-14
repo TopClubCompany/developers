@@ -3,7 +3,7 @@ class AccountMailer < ActionMailer::Base
 
   def confirm_email(email, token)
      mail(to: email, subject: 'test') do |format|
-       format.text { render text: "#{confirm_account_path(token)}" }
+       format.text { render text: "#{confirm_account_url(token)}" }
      end
   end
 
