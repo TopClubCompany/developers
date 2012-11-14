@@ -1,8 +1,8 @@
 class @PlaceForm
   @self = undefined
 
-  initialize: ->
-    @template = ""
+  constructor: ->
+    @template = Handlebars.compile($("#feature_group").html())
 
   @add: (item) =>
     @instance().add item
@@ -17,17 +17,22 @@ class @PlaceForm
 
   add: (item) =>
     place_id = $("#place_id").val()
+    @category_id = item.id
     params =
       category_id: item.id
     params.place_id = place_id if place_id
     @query(params)
 
   remove: (item) =>
-    log 'remove'
+    log item
+    $(".group_feature.container[data-id='#{item.id}'] :checked").click()
+    $(".group_feature.container[data-id='#{item.id}']").hide()
 
   query: (params) =>
     $.getJSON '/admin/place_feature', params, ((data) => @render(data))
 
   render: (data) =>
-    log 'g'
-    log data
+    console.log @
+    _.each data, (obj) =>
+      obj.category_id = @category_id
+      $('.features').append(@template(obj))

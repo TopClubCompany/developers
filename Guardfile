@@ -47,7 +47,7 @@ guard 'rspec', :cli => "-f d --drb" do
 end
 
 
-#guard 'coffeescript', :input => 'app/assets/javascripts', :output => 'public/javascripts/compiled'
+#guard 'coffeescript', :input => 'app/assets/javascripts', :output => 'public/compiled'
 
 guard :jasmine, :port => '3434' do
   watch(%r{spec/javascripts/spec\.(js\.coffee|js|coffee)$}) { 'spec/javascripts' }

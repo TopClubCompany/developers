@@ -7,7 +7,6 @@
 //= require jquery.pjax
 //= require jquery.scrollTo
 //= require chosen
-
 //q= require bootstrap-datepicker
 
 //= require bootstrap-datepicker/core
@@ -23,11 +22,14 @@
 //= require jquery.ui.nestedSortable
 //= require jquery_nested_form
 //= require jquery.tokeninput
+
+//= require handlebars
+
 //= require admin/components/utils
 //= require admin/components/datetime_input
 //= require admin/components/batch_actions
 //= require admin/components/pjax
-//q= require admin/components/search
+//= require admin/components/search
 //= require admin/components/search_form
 //= require admin/components/main_image
 //= require admin/components/init_assets

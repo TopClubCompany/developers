@@ -12,14 +12,15 @@
 
   = input_set t('admin.attributes') do
     - feature_item_ids = @place.feature_item_ids
-    - @place.group_features.includes(:feature_items).uniq.each do |group_feature|
-      .group_feature.container data-id=group_feature.id
-        .group_feature
-          = group_feature.name
-        - group_feature.feature_items.each do |item|
-          input name="place[feature_item_ids][]" type="hidden" value=""
-          = check_box_tag "place_feature_item_id_#{item.id}", item.id, (feature_item_ids.include?(item.id)), {:class => 'check_boxes optional text', :name => "place[feature_item_ids][]"}
-          label for="place_feature_item_id_#{item.id}"=  item.title
+    .features
+      - @place.group_features.includes(:feature_items, :categories).each do |group_feature|
+        .group_feature.container data-id=group_feature.categories.map(&:id).join()
+          .group_feature
+            = group_feature.name
+          - group_feature.feature_items.each do |item|
+            input name="place[feature_item_ids][]" type="hidden" value=""
+            = check_box_tag "place_feature_item_id_#{item.id}", item.id, (feature_item_ids.include?(item.id)), {:class => 'check_boxes optional text', :name => "place[feature_item_ids][]"}
+            label for="place_feature_item_id_#{item.id}"=  item.title
   = input_set t('admin.administrators') do
     = f.simple_fields_for :place_administrators do |object|
       = render 'place_administrators', :f => object
@@ -51,3 +52,4 @@
   = geo_input 'place_location_attributes'
 
   = f.save_buttons
+= render 'group_feature'
