@@ -53,14 +53,12 @@ end
 #  id                :integer          not null, primary key
 #  locationable_id   :integer          not null
 #  locationable_type :string(50)       not null
-#  street            :string(255)
-#  city              :string(255)
-#  state             :string(255)
 #  zip               :string(255)
 #  latitude          :float
 #  longitude         :float
-#  country           :string(255)
 #  distance          :float
+#  house_number      :string(255)
+#  country_code      :string(255)
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
