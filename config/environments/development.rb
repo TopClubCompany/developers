@@ -14,8 +14,8 @@ Topclub::Application.configure do
       address:              "smtp.gmail.com",
       port:                  587,
       domain:               'baci.lindsaar.net',
-      user_name:             Figaro.env.app_email.username,
-      password:              Figaro.env.app_email.password,
+      user_name:             Figaro.env.app_email_username,
+      password:              Figaro.env.app_email_password,
       authentication:       'plain',
       enable_starttls_auto:  true }
 
