@@ -26,6 +26,22 @@ class Users::OmniauthCallbacksController < ApplicationController
     response = AccountEmailConfirmation.check_token(token)
     redirect_to root_path, flash: { notice: response }
   end
+
+  def user_registration
+    #raise params[:user].to_yaml
+    user = params[:user]
+    birthday = "#{user[:year]}.#{user[:day]}.#{user[:month]}"
+    data_for_user = user.except(:year, :day, :month)
+    data_for_user[:birthday] = birthday
+    user = User.new(params[:user])
+    if user.save
+      AccountMailer.confirm_email(data[:email], token).deliver
+      redirect_to root_path, flash: { success: "for end of registration you need to confirm you email." }
+    else
+      redirect_to sign_in_path, flash: { error: user.errors }
+    end
+  end
+
   private
 
   def merge(data, email)

@@ -29,7 +29,7 @@
       p
         |Еще не заригестрированы?
         small
-          a href='/'
+          a href=new_user_session_path
             |  Регистрация
   /- else
   /  img.img-polaroid src="#{current_user.respond_to?(:avatar) ? current_user.avatar : '/images/noavatar.gif'}" width='100%' height='100%'
