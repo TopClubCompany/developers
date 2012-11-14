@@ -1,24 +1,26 @@
 # -*- encoding : utf-8 -*-
-class Account < ::ActiveRecord::Base
+class Account < ActiveRecord::Base
   extend Utils::Auth::SocCallbackParser
   belongs_to :user
+  belongs_to :account_email_confirmation
 
   validates_presence_of :provider, :uid
 
   attr_accessible :provider, :uid, :name, :first_name, :last_name, :email, :photo,
                   :gender, :address, :language, :birthday, :url, :banned_at, :phone, :nickname,
-                  :token, :refresh_token, :secret, :user
+                  :token, :refresh_token, :secret, :user, :user_id
 
   enumerated_attribute :gender_type, :id_attribute => :gender, :class => ::GenderType
 
 
   def self.create_or_find_by_oauth_data data
-    #raise data.to_hash.deep_symbolize_keys.inspect
+    account = Account.find_by_uid_and_provider(data[:uid], data[:provider])
+    return account.user if account
     data_for_account = data.except(:patronymic)
     data_for_user    = data.except(:uid, :gender, :url, :photo, :name, :provider, :secret, :refresh_token, :language, :token)
-    account          = (Account.find_by_uid_and_provider(data_for_account[:uid], data_for_account[:provider]) or Account.create(data_for_account))
-    return account.user if account.user
-    account.user     = prepare_user_for_account(data_for_user)
+    user             = User.find_by_email(data[:email])
+    account          = Account.create(data_for_account)
+    account.user     = (user or prepare_user_for_account(data_for_user))
     account.save!
     account.user
   end
@@ -34,6 +36,10 @@ class Account < ::ActiveRecord::Base
     user
   end
 
+  def create_user_from_account
+    data_for_user  = attributes.symbolize_keys.slice(:first_name, :last_name, :email, :address, :phone, :birthday)
+    Account.prepare_user_for_account(data_for_user)
+  end
 
 
 

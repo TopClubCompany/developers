@@ -30,6 +30,13 @@ describe GroupFeature do
     feature_items.map(&:id).should eq feature_items_test
   end
 
+  it 'should work with new place create' do
+    category_1 = FactoryGirl.create(:category, group_features: 2)
+    feature_items = GroupFeature.place_feature_groups(nil, category_1.id)
+    feature_items_test = category_1.group_features.map{|g_f| g_f.feature_items.map(&:id)}.flatten
+    feature_items.map(&:id).should eq feature_items_test
+  end
+
 end
 # == Schema Information
 #
