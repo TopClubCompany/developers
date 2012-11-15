@@ -29,16 +29,17 @@ class Users::OmniauthCallbacksController < ApplicationController
 
   def user_registration
     #raise params[:user].to_yaml
-    user = params[:user]
-    birthday = "#{user[:year]}.#{user[:day]}.#{user[:month]}"
-    data_for_user = user.except(:year, :day, :month)
-    data_for_user[:birthday] = birthday
+    #user = params[:user]
+    #birthday = "#{user[:year]}.#{user[:day]}.#{user[:month]}"
+    #raise birthday.inspect
+    #data_for_user = user.except(:year, :day, :month)
+    #data_for_user[:birthday] = birthday
     user = User.new(params[:user])
+    user.activate
     if user.save
-      AccountMailer.confirm_email(data[:email], token).deliver
       redirect_to root_path, flash: { success: "for end of registration you need to confirm you email." }
     else
-      redirect_to sign_in_path, flash: { error: user.errors }
+      redirect_to root_path, flash: { error: user.errors.full_messages }
     end
   end
 

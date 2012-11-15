@@ -48,6 +48,7 @@
             option value="Male"
           .clear
           label Birthday:
+          /= f.select 'month', collection: 1..12
           select name="month"
             option value="9"
           select name="day"

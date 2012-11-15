@@ -2,9 +2,8 @@ class AccountMailer < ActionMailer::Base
   default from: "from@example.com"
 
   def confirm_email(email, token)
-     mail(to: email, subject: 'test') do |format|
-       format.text { render text: "#{confirm_account_url(token)}" }
-     end
+    @token = token
+     mail(to: email, subject: 'Account confirmation')
   end
 
 end
