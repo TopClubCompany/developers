@@ -74,12 +74,12 @@ add_test_stuff
 insert_group_feature
 
 
-10.times do
-  s = Selection.make! user: User.first
-  rand_place = Place.find_by_id rand(Place.last.id)
-  if (rand_place.id.to_i - 10) > 0
-    start_place_id = rand_place.id.to_i - 10
-    places = [start_place_id..rand_place.id]
-    Place.where(id: places).all.map{ |pl| s.places << pl}
-  end
-end
+#10.times do
+#  s = Selection.make! user: User.first
+#  rand_place = Place.find_by_id rand(Place.last.id)
+#  if (rand_place.id.to_i - 10) > 0
+#    start_place_id = rand_place.id.to_i - 10
+#    places = [start_place_id..rand_place.id]
+#    Place.where(id: places).all.map{ |pl| s.places << pl}
+#  end
+#end
