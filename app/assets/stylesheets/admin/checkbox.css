@@ -1,0 +1,42 @@
+/* CHECKBOX SLIDE */
+
+        .clearfix.content_with_sidebar.well input#test_slide {
+        border: 1px solid #686868;
+        height: 27px;
+        width: 79px;
+        -webkit-appearance: none;
+        -webkit-border-radius: 13px;
+        background-image: url(image_path('slide.png'));
+        background-position: -52px 0;
+        background-repeat: no-repeat;
+        -webkit-animation-timing-function: ease-in-out;
+
+        -webkit-animation-duration: 400ms !important;
+        -webkit-animation-name: checkbox-switch-off;
+      }
+
+      .clearfix.content_with_sidebar.well input#test_slide:checked{
+        background-position: 0 0;
+        -webkit-animation-name: checkbox-switch-on;
+      }
+
+
+      @-webkit-keyframes checkbox-switch-on {
+        from {
+          background-position: -52px 0;
+        }
+        to {
+          background-position: 0 0;
+        }
+      }
+
+      @-webkit-keyframes checkbox-switch-off {
+        from {
+          background-position: 0 0;
+        }
+        to {
+          background-position: -52px 0;
+        }
+      } 
+
+/* end CHECKBOX SLIDE*/
