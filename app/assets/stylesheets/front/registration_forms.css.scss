@@ -322,7 +322,22 @@ ul, li {
 #footer #footer_nav li a:hover {
   color: #df5b49;
 }
+//form stuff
+.one-liner {
+  width: 150px;
+  display: inline-block;
+}
+.one-liner + .one-liner {
+  margin-left: 5px;
+}
 
+.control-group {
+  width: auto;
+  display: inline-block;
+  input {
+    width: 150px;
+  }
+}
 
 
 
