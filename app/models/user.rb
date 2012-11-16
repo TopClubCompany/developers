@@ -60,6 +60,8 @@ class User < ActiveRecord::Base
 
   #attr_accessible :user_role_id, :trust_state
 
+  validates_presence_of :email, :password, :first_name, :last_name
+
   enumerated_attribute :gender_type, :id_attribute => :gender, :class => ::GenderType
   enumerated_attribute :user_role_type, :id_attribute => :user_role_id, :class => ::UserRoleType
   enumerated_attribute :trust_state_type, :id_attribute => :trust_state, :class => ::UserState
@@ -120,6 +122,11 @@ class User < ActiveRecord::Base
     return false if persisted? && password.blank?
     super
     #(persisted? && !password.blank?) && super
+  end
+
+  def generate_default_fields
+    first_name = (first_name or 'Anonym first name')
+    last_name = (last_name or 'Anonym first name')
   end
 
   def email_required?

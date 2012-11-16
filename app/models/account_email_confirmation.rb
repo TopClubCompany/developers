@@ -8,7 +8,6 @@ class AccountEmailConfirmation < ActiveRecord::Base
     if result
       if (Time.now.to_i - result.confirmed_sent_at.to_i) < 7200
         result.confirm_account
-        "successfully merged accounts"
       else
         "expired time for confirm"
       end
@@ -30,6 +29,7 @@ class AccountEmailConfirmation < ActiveRecord::Base
     user ? (account.user  = user) : (account.user = account.create_user_from_account)
     account.save!
     destroy
+    account.user
   end
 
 

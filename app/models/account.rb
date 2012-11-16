@@ -31,10 +31,12 @@ class Account < ActiveRecord::Base
     user                = User.new(data)
     user.user_role_type = UserRoleType.default
     user.trust_state    = UserState.active.id
+    user.generate_default_fields
     user.skip_confirmation!
     user.save!
     user
   end
+
 
   def create_user_from_account
     data_for_user  = attributes.symbolize_keys.slice(:first_name, :last_name, :email, :address, :phone, :birthday)

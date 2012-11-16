@@ -6,11 +6,24 @@
           a href="/"
             img src="/images/logo.png"
           a.by_topclub href="http://topclub.ua" by TOPCLUB
-        span.few-words
-          | Restaurant&nbsp;Reservations.&nbsp;Free&nbsp;·&nbsp;Instant&nbsp;·&nbsp;Save&nbsp;money&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        /span.few-words
+        /  | Restaurant&nbsp;Reservations.&nbsp;Free&nbsp;·&nbsp;Instant&nbsp;·&nbsp;Save&nbsp;money&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       .span4
-        a.sign_up href="#" Sign up
-        a.sign_in href="/users/sign_in" Sign in
+        - if user_signed_in?
+          .user_module
+            .ava
+            .user_hello
+              p
+                |Привет,  &nbsp;
+              span
+                = current_user.email + " !"
+              = link_to 'logout', quit_path, method: 'delete', id: 'logout_link'
+              .user_arrow
+            .num_frnds
+              .digits 10
+        - else
+          a.sign_up href=new_user_registration_path Sign up
+          a.sign_in href=new_user_session_path Sign in
 /.top_module
 /  .logo_grad
 /  .top_module_wrap

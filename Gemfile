@@ -6,6 +6,7 @@ gem 'redis'
 gem 'slim-rails'
 gem 'styx'
 
+
 gem 'globalize3', :git => 'git://github.com/leschenko/globalize3.git', :ref => '586ccbd'
 
 
