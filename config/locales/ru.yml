@@ -11,12 +11,12 @@ ru:
       confirm_new_password: "Подтвердите пароль"
       new_password: "Новый пароль"
     links: 
+      join_reserve: "Войти"
       receive_confirmation: "Не получили письма с подтверждением регистрации?"
       recover_password: "Забыли пароль?"
       sign_in: "Вход в систему"
       sign_out: "Выход из системы"
       sign_up: "Регистрация"
-      join_reserve: "Войти"
     links_short: 
       cabinet: "Кабинет"
       sign_in: "Вход"

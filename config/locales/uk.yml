@@ -11,6 +11,7 @@ uk:
       confirm_new_password: ""
       new_password: ""
     links: 
+      join_reserve: ""
       receive_confirmation: ""
       recover_password: ""
       sign_in: ""
