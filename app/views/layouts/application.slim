@@ -21,5 +21,6 @@ html
       .content
         = bootstrap_flash
         = yield
+        /= render "shared/social_links"
     = render "layouts/footer"
 /! render "layouts/footer_include" for js include for non-blocking pages

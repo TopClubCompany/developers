@@ -19,8 +19,5 @@
           = link_to t('auth.links.recover_password'), new_user_password_path, class: 'forgot_password'
     #social_login.span4
       h3 Sign in with another account
-      a#fb_login href=user_omniauth_authorize_path(:facebook)
-      a#vk_login href=user_omniauth_authorize_path(:vkontakte)
-      a#gp_login href=user_omniauth_authorize_path(:google)
-      a#tw_login href=user_omniauth_authorize_path(:twitter)
+      = render 'shared/social_links'
 
