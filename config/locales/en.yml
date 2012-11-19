@@ -3,3 +3,25 @@
 
 en:
   hello: "Hello world"
+
+  sign_up:
+    become_member: Become a member
+    or: ' or '
+    sign_in: Sign in
+    sign_up_and: 'Sign up and '
+    earn_points: earn points
+    for_suc_reserv: ' for successfully reservations! '
+    diner_name: 'Diner name:'
+    profile_photo: 'Profile photo:'
+    by_click: 'By clicking “Join Reserve” you confirm that you accept '
+    term_cond: Terms and conditions
+    join_reserve: Join Reserve
+    sign_in_acc: Sign in with another account
+
+  sign_in:
+    forgot_pass: 'Forgot password?'
+
+  forgot_password:
+    resset_pass: 'Reset password'
+    description: If you forgot your password, please enter your e-mail address. After that we will email you alink to reset your password and set a new one.
+    your_email: 'Your email:'

@@ -2,29 +2,21 @@
   .row
     .span8
       .heading
-        h1 Sign in
+        h1
+          = t('sign_up.sign_in')
         '  or
         strong
-          = link_to 'Become a member', new_user_registration_path
+          = link_to t('sign_up.become_member'), new_user_registration_path
       #sign_up_page.page_content
-        = simple_form_for :user, url: new_user_session_path do |f|
-          label
-            | Email:
-            b  *
-          = f.input :email, label: false
+        = simple_form_for :user, url: new_user_session_path, :wrapper => :front_reg_form do |f|
+          = f.input :email, label: get_reg_form_attr_name(:email, true)
           .clear
-            label
-              | Password:
-              b  *
-          = f.input :password, label: false, require: true
+          = f.input :password, label: get_reg_form_attr_name(:password, true)
           .clear
-          = f.check_box :remember_me, label: 'Remember me'
-          label
-            |  Remember me
+          = f.input :remember_me, :as => :boolean, label_html: { class: 'checkbox' }
           .clear
-          = f.submit "Sign in"
-          a.forgot_password href=new_user_password_path
-            |  Forgot password?
+          = f.submit t('sign_up.sign_in')
+          = link_to t('sign_in.forgot_pass'), new_user_password_path, class: 'forgot_password'
     #social_login.span4
       h3 Sign in with another account
       a#fb_login href=user_omniauth_authorize_path(:facebook)

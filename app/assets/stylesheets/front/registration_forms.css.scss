@@ -5,6 +5,22 @@
   url('front/13947-webfont.ttf') format('truetype');
 }
 
+.control-group label abbr {
+  display: none;
+}
+
+#user_birthday_1i {
+  width: auto !important;
+}
+
+#user_birthday_2i {
+  width: auto !important;
+}
+
+#user_birthday_3i {
+  width: auto !important;
+}
+
 body {
   background: #f2f0ea;
 }

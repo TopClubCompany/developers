@@ -1,28 +1,19 @@
-/h2 Forgot your password?
-/= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
-/  = f.error_notification
-/  .form-inputs
-/    = f.input :email, :required => true
-/  .form-actions
-/    = f.button :submit, "Send me reset password instructions"
-/= render "devise/shared/links"
-
 .content
   .row
     .span8
       .heading
-        h1 Forgot password?
+        h1
+          = t('sign_in.forgot_pass')
       #sign_up_page.page_content
-        p If you forgot your password, please enter your e-mail address. After that we will email you alink to reset your password and set a new one.
-        = simple_form_for :user, url: user_password_path do |f|
-          label
-            | Your email:
-            b *
-          = f.input :email, label: false
+        p
+          = t('forgot_password.description')
+        = simple_form_for :user, url: user_password_path, :wrapper => :front_reg_form do |f|
+          = f.input :email, label: 'Your email' + ':<b> *</b>'.html_safe
           .clear
-          = f.submit 'Reset password'
+          = f.submit t('forgot_password.resset_pass')
     #social_login.span4
-      h3 Sign in with another account
+      h3
+        = t('sign_up.sign_in_acc')
       a#fb_login href=user_omniauth_authorize_path(:facebook)
       a#vk_login href=user_omniauth_authorize_path(:vkontakte)
       a#gp_login href=user_omniauth_authorize_path(:google)

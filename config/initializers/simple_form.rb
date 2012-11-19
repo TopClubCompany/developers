@@ -56,6 +56,15 @@ SimpleForm.setup do |config|
     end
   end
 
+  config.wrappers :front_reg_form, :tag => 'div', :class => 'control-group', :error_class => 'error', :item_wrapper_class => 'inline' do |b|
+    b.use :html5
+    b.use :placeholder
+    b.use :label
+    b.use :input
+    b.use :error, :wrap_with => {:tag => 'span', :class => 'help-inline'}
+    b.use :hint, :wrap_with => {:tag => 'p', :class => 'help-block'}
+  end
+
   config.wrappers :prepend, :tag => 'div', :class => "control-group", :error_class => 'error' do |b|
     b.use :html5
     b.use :placeholder
@@ -85,7 +94,7 @@ SimpleForm.setup do |config|
   # Wrappers for forms and inputs using the Twitter Bootstrap toolkit.
   # Check the Bootstrap docs (http://twitter.github.com/bootstrap)
   # to learn about the different styles for forms and inputs,
-  # buttons and other elements.
+  # buttons and other elements.                           title
   config.default_wrapper = :bootstrap
 
   # Define the way to render check boxes / radio buttons with labels.
