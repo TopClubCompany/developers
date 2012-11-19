@@ -24,22 +24,19 @@ class Users::OmniauthCallbacksController < ApplicationController
   def confirm_account
     token = params[:token]
     response = AccountEmailConfirmation.check_token(token)
-    redirect_to root_path, flash: { notice: response }
+    response.kind_of?(User) ? auth_user(response) : (redirect_to root_path, flash: { notice: response })
   end
 
   def user_registration
-    #raise params[:user].to_yaml
-    #user = params[:user]
-    #birthday = "#{user[:year]}.#{user[:day]}.#{user[:month]}"
-    #raise birthday.inspect
-    #data_for_user = user.except(:year, :day, :month)
-    #data_for_user[:birthday] = birthday
-    user = User.new(params[:user])
-    user.activate
-    if user.save
-      redirect_to root_path, flash: { success: "for end of registration you need to confirm you email." }
+    user = params[:user]
+    user[:birthday] = (3.times.map { |n| user.delete("birthday(#{n + 1}i)") }).reverse.join('.')
+    @user = User.new(user).activate
+    @user.skip_confirmation! #remove for normal registration with confirm email
+    if @user.save
+      auth_user @user  #remove for normal registration with confirm email
+      #redirect_to root_path, flash: { success: "for end of registration you need to confirm you email." } #uncoment for normal registration with confirm email
     else
-      redirect_to root_path, flash: { error: user.errors.full_messages }
+      redirect_to new_user_registration_path(@user), flash: { error: @user.errors.full_messages.join(', ') }
     end
   end
 
@@ -84,7 +81,8 @@ class Users::OmniauthCallbacksController < ApplicationController
   def check_email email, data
     if User.find_by_email(email).nil?
       data[:email] = email
-      send_letter_for_confirm_email(data)
+      #send_letter_for_confirm_email(data) #uncoment for normal registration with confirm email
+      auth_with_email data
     else
       redirect_to enter_email_path(email.gsub('.','#')), flash: { error: "Already exist user with that email" }
     end

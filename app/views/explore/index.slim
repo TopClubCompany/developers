@@ -22,7 +22,8 @@
           a href='/search_map' &nbsp;
     = render 'recomended'
     .bdy#map
-  = user_signed_in? ? (render partial: "shared/advertising") : (render partial: "shared/auth")
+  /= user_signed_in? ? (render partial: "shared/advertising") : (render partial: "shared/auth")
+  = render partial: 'shared/advertising'
   .border
   .middle_module
     .three_blocks

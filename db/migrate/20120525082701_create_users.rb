@@ -10,7 +10,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :patronymic
       t.string :phone
       t.string :address
-      t.datetime :birthday
+      t.integer :gender, :limit => 1, :default => 2
+      t.date :birthday
 
       t.references :account
 

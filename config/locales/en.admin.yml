@@ -1,0 +1,319 @@
+--- 
+en: 
+  _no: ""
+  _yes: ""
+  activerecord: 
+    attributes: 
+      product: 
+        title: ""
+  admin: 
+    actions: 
+      action: 
+        link: ""
+        title: ""
+      activate: 
+        link: ""
+      batch_destroy: 
+        confirmation: ""
+        link: ""
+        title: ""
+      batch_publish: 
+        link: ""
+        title: ""
+      batch_un_publish: 
+        link: ""
+        title: ""
+      destroy: 
+        link: ""
+        title: ""
+      edit: 
+        link: ""
+        title: ""
+      history: 
+        link: ""
+        title: ""
+      index: 
+        link: ""
+        title: ""
+      new: 
+        link: ""
+        title: ""
+      perms: 
+        link: ""
+        title: ""
+      preview: 
+        link: ""
+      show: 
+        link: ""
+        title: ""
+      suspend: 
+        link: ""
+    add: ""
+    auth: 
+      profile: ""
+      sign_out: ""
+    avatar: ""
+    batch_actions: ""
+    bill: 
+      kind: 
+        cheap: ""
+        moderate: ""
+        spendy: ""
+        splurge: ""
+    cant_be_deleted: ""
+    choose: ""
+    clear_cache: ""
+    close: ""
+    companies: 
+      form: 
+        contacts: ""
+        form: ""
+        info: ""
+    delete: ""
+    delete_confirmation: ""
+    details: ""
+    empty: ""
+    exit: ""
+    features: ""
+    fileupload: 
+      button: ""
+      buttons: ""
+      delete: ""
+      drop_here: ""
+      max_size: ""
+    form: 
+      add_bank: ""
+      add_contact: ""
+      add_info: ""
+      add_option: ""
+      add_site: ""
+      cancel: ""
+      save: ""
+      save_and_add_another: ""
+      save_and_edit: ""
+    gender: 
+      female: ""
+      male: ""
+    geo_autocomplete: ""
+    group: 
+      kind: 
+        admin: ""
+        default: ""
+        private: ""
+        public: ""
+    keywords: ""
+    langs: 
+      en: ""
+      it: ""
+      ru: ""
+      uk: ""
+    loading: ""
+    locators: 
+      cache_clear: ""
+      edit_file: ""
+      edit_files: ""
+      file: ""
+      locale: ""
+      prepare: ""
+      restart: ""
+      title: ""
+      update_file: ""
+    main: ""
+    main_image: ""
+    max_size: ""
+    navigation: 
+      beer_bike: ""
+      beer_quotes: ""
+      companies: ""
+      option_data: ""
+      system: ""
+      users: ""
+    no_results_text: ""
+    permissions: 
+      actions: 
+        create: ""
+        delete: ""
+        publish: ""
+        read: ""
+        update: ""
+      assocs: 
+        company: ""
+      form: 
+        actions: ""
+        add: ""
+        assoc: ""
+        assoc_ids: ""
+        context: ""
+        destroy: ""
+        includes: ""
+        is_own: ""
+        is_visibility: ""
+        is_work: ""
+        per_resource: ""
+        resource: ""
+        resources: ""
+        subject: ""
+    perms: 
+      actions: 
+        add_styles: ""
+        create: ""
+        delete: ""
+        import: ""
+        journalist: ""
+        moderator: ""
+        publish: ""
+        publish_BeerBike: ""
+        read: ""
+        update: ""
+      assocs: 
+        catalogues: ""
+        company: ""
+        group: ""
+        groups: ""
+      form: 
+        actions: ""
+        add: ""
+        assoc: ""
+        assoc_ids: ""
+        context: ""
+        destroy: ""
+        includes: ""
+        is_own: ""
+        is_visibility: ""
+        is_work: ""
+        per_resource: ""
+        resource: ""
+        resources: ""
+        subject: ""
+    photo: ""
+    pictures: ""
+    preview: ""
+    products: 
+      form: 
+        form: ""
+        options: ""
+      options_form: 
+        prices: ""
+        quantity: ""
+        warehouse: ""
+    role: 
+      kind: 
+        admin: ""
+        default: ""
+        group: ""
+        user: ""
+    save: ""
+    scopes: 
+      un_visible: ""
+      visible: ""
+    search: 
+      cancel: ""
+      submit: ""
+      title: ""
+    select_all: ""
+    select_nothing: ""
+    set_main: ""
+    show: 
+      attr: ""
+      value: ""
+    sort: ""
+    table: 
+      actions: ""
+    title: ""
+    user: 
+      role: 
+        admin: ""
+        default: ""
+        guest: ""
+        moderator: ""
+        redactor: ""
+      state: 
+        active: ""
+        deleted: ""
+        pending: ""
+        suspended: ""
+    versions: 
+      current: ""
+      item: ""
+      modified_at: ""
+      modified_by: ""
+      title: ""
+      type: ""
+  admin_js: 
+    add_link: ""
+    button_description: ""
+    button_name_add: ""
+    button_name_cancel: ""
+    button_name_remove: ""
+    cancel: ""
+    clear: ""
+    confirm: ""
+    create_product: ""
+    day: ""
+    delete_nested_elements: ""
+    edit: ""
+    month: ""
+    name: ""
+    no_results: ""
+    search: ""
+    set_img: ""
+    value: ""
+  attrs: 
+    en: ""
+    it: ""
+    ru: ""
+    uk: ""
+  flash: 
+    admin: 
+      actions: 
+        create: 
+          error: ""
+          notice: ""
+        destroy: 
+          error: ""
+          notice: ""
+        update: 
+          error: ""
+          notice: ""
+      controller_name: 
+        update: 
+          success: ""
+      locators: 
+        prepared: ""
+        restart: ""
+        update_error: ""
+        updated: ""
+      permissions: 
+        failure: ""
+        success: ""
+  simple_form: 
+    buttons: 
+      cancel: ""
+    creating: ""
+    error_notification: 
+      default_message: ""
+    "no": ""
+    required: 
+      mark: ""
+      text: ""
+    updating: ""
+    "yes": ""
+  will_paginate: 
+    next_label: ""
+    page_entries_info: 
+      multi_page: ""
+      multi_page_html: ""
+      single_page: 
+        few: ""
+        many: ""
+        one: ""
+        other: ""
+        zero: ""
+      single_page_html: 
+        few: ""
+        many: ""
+        one: ""
+        other: ""
+        zero: ""
+    page_gap: ""
+    previous_label: ""

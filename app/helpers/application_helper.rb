@@ -1,6 +1,10 @@
 # -*- encoding : utf-8 -*-
 module ApplicationHelper
 
+  def get_reg_form_attr_name(attr, require = false)
+    (User.han(attr) + ':') + (' <b>*</b>'.html_safe if require).to_s
+  end
+
   def rand_str
     Rails.env.development? ? rand(9999) : ''
   end

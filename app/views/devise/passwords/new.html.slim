@@ -1,0 +1,21 @@
+.content
+  .row
+    .span8
+      .heading
+        h1
+          = t('sign_in.forgot_pass')
+      #sign_up_page.page_content
+        p
+          = t('forgot_password.description')
+        = simple_form_for :user, url: user_password_path, :wrapper => :front_reg_form do |f|
+          = f.input :email, label: 'Your email' + ':<b> *</b>'.html_safe
+          .clear
+          = f.submit t('forgot_password.resset_pass')
+    #social_login.span4
+      h3
+        = t('sign_up.sign_in_acc')
+      a#fb_login href=user_omniauth_authorize_path(:facebook)
+      a#vk_login href=user_omniauth_authorize_path(:vkontakte)
+      a#gp_login href=user_omniauth_authorize_path(:google)
+      a#tw_login href=user_omniauth_authorize_path(:twitter)
+

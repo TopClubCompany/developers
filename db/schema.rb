@@ -452,7 +452,8 @@ ActiveRecord::Schema.define(:version => 20121113190049) do
     t.string   "patronymic"
     t.string   "phone"
     t.string   "address"
-    t.datetime "birthday"
+    t.integer  "gender",                 :limit => 1,  :default => 2
+    t.date     "birthday"
     t.integer  "account_id"
     t.string   "email"
     t.string   "encrypted_password",                   :default => "", :null => false
