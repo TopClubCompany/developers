@@ -1,5 +1,5 @@
 --- 
-ru:
+ru: 
   activerecord: 
     attributes: 
       user: 
@@ -17,9 +17,9 @@ ru:
       sign_out: "Выход из системы"
       sign_up: "Регистрация"
     links_short: 
+      cabinet: "Кабинет"
       sign_in: "Вход"
       sign_out: "Выход"
-      cabinet: "Кабинет"
       sign_up: "Регистрация"
     mailer: 
       confirmation: 
@@ -79,24 +79,24 @@ ru:
         notice: "Данные успешно обновлены"
   front_js: 
     comments: 
-      confirm: "Вы уверены что хотите удалить комментарий?"
-      typing: " пишет сообщение..."
       chat_title: "Переписка"
-      left: "покинул(а) переписку"
+      confirm: "Вы уверены что хотите удалить комментарий?"
+      in_chat_already: "Вы уже открыли консультант на другой странице"
       joined: "присоединился(лась) к переписке"
-      said: "написал(а):"
-      title: "Консультант"
+      left: "покинул(а) переписку"
       new_message: "Новое сообщение! - Консультант"
       placeholder: "Напишите сообщение и нажмите enter..."
-      in_chat_already: "Вы уже открыли консультант на другой странице"
-    fileupload:
-      messages:
-        typeError: "{file} имеет не правильное расширение. Только {extensions} разрешены."
-        sizeError: "{file} очень большой, максимальный размер файла {sizeLimit}."
-        minSizeError: "{file} очень маленький, минимальный размер {minSizeLimit}."
+      said: "написал(а):"
+      title: "Консультант"
+      typing: " пишет сообщение..."
+    fileupload: 
+      messages: 
         emptyError: "{file} пустой, выберите другой файл."
+        minSizeError: "{file} очень маленький, минимальный размер {minSizeLimit}."
         onLeave: "Файлы загружаются, файлы не загрузятся если Вы покинете страницу."
-  label:
+        sizeError: "{file} очень большой, максимальный размер файла {sizeLimit}."
+        typeError: "{file} имеет не правильное расширение. Только {extensions} разрешены."
+  label: 
     close: "Закрыть"
   langs: 
     en: eng
@@ -104,13 +104,13 @@ ru:
     uk: uk
   language_title: 
     en: English
-    uk: "Украинский"
     ru: "Русский"
+    uk: "Украинский"
   links: 
     en: eng
     ru: "рус"
     uk: "укр"
-  search:
+  search: 
     found_message: 
       few: "По запросу <span class='txt_blue'>%{search_text}</span> найдено <strong>%{count}</strong> совпадения."
       many: "По запросу <span class='txt_blue'>%{search_text}</span> найдено <strong>%{count}</strong> совпадений."
@@ -121,6 +121,9 @@ ru:
     placeholder1: "Найти..."
     placeholder2: "Найти..."
     title: "Результаты поиска"
+  simple_form: 
+    error_notification: 
+      default_message: "При сохранении возникли ошибки"
   styles: 
     show: 
       about: "Описание"
@@ -130,14 +133,19 @@ ru:
       datepicker: "%d-%m-%Y"
       day: "%d"
       dm: "%d.%m"
+      long: "%d-%m-%Y"
       month: "%B"
       year: "%Y"
       ymd: "%d %B %Y"
-      long: "%d-%m-%Y"
     pm: "вечера"
   unauthorized: 
     default: "Нет прав для просмотра"
   update: "редактирование"
+  uploader: 
+    add_file: "Добавить файл"
+    max_size: "Макс.р."
+    upload_avatar: "Загрузите фото"
+    upload_image: "Загрузите фото"
   views: 
     pagination: 
       first: "Первая"
@@ -145,15 +153,3 @@ ru:
       next: "След &raquo;"
       previous: "&laquo; Пред"
       truncate: ...
-
-  simple_form:
-    error_notification:
-      default_message: "При сохранении возникли ошибки"
-
-
-  uploader:
-    upload_avatar: "Загрузите фото"
-    max_size: "Макс.р."
-    upload_image: "Загрузите фото"
-    add_file: "Добавить файл"
-

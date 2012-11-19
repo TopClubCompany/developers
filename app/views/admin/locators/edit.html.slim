@@ -1,0 +1,21 @@
+.well.clearfix(style='min-width: 1220px;')
+  #edit_locale.locale_wrapper
+    = hidden_field_tag :edit_locale_name, @locator.locale
+    div style="font-size:16px;padding:5px;text-align:center;" "Edited locale <b>#{@locator.locale}</b>".html_safe
+    = form_tag(admin_locator_path(params[:id]), :method => :put) do
+      = hidden_field_tag :file, params[:id]
+      div style="margin-left:-30px"
+        = nested_inputs(@locale_hash)
+        .clearfix
+      = submit_tag(t("admin.form.save"), :class => 'btn btn-primary')
+
+  #main_locale.locale_wrapper
+    = hidden_field_tag :main_locale_name, I18n.default_locale.to_s
+    div style="font-size:16px;padding:5px;text-align:center;" "Main locale <b>#{I18n.default_locale}</b>".html_safe
+    = form_tag '' do
+      div style="margin-left:-30px"
+        = nested_inputs(@main_locale_hash, [], :prefix => 'main_hash')
+
+coffee:
+  $ -> new Locator()
+

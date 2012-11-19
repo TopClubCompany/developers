@@ -6,20 +6,13 @@ ru:
     attributes: 
       product: 
         title: title
-  admin:
-    features: "Атрибутты"
-    bill:
-      kind:
-        cheap: "Under $10"
-        moderate: "$11 - $3"
-        spendy: "$31 - $60"
-        splurge: "> $61"
-
-    avatar: "Аватар"
-    actions:
+  admin: 
+    actions: 
       action: 
         link: "Изменить"
         title: "Редактировение"
+      activate: 
+        link: "Активировать"
       batch_destroy: 
         confirmation: "Вы уверены что хотите удалить выбранные записи?"
         link: "Удалить выбранные"
@@ -53,15 +46,20 @@ ru:
       show: 
         link: "Просмотр"
         title: "Детали"
-      suspend:
+      suspend: 
         link: "Бан"
-      activate:
-        link: "Активировать"
     add: "Добавить"
     auth: 
       profile: "Профиль"
       sign_out: "Выход"
+    avatar: "Аватар"
     batch_actions: "Действия"
+    bill: 
+      kind: 
+        cheap: Under $10
+        moderate: $11 - $3
+        spendy: $31 - $60
+        splurge: "> $61"
     cant_be_deleted: "Удаление невозможно"
     choose: "Выберите %{attr}"
     clear_cache: "Очистить кеш"
@@ -76,12 +74,13 @@ ru:
     details: "Подробнее"
     empty: "Пусто"
     exit: "Выход"
+    features: "Атрибутты"
     fileupload: 
       button: "Выберите файл"
       buttons: "Выберите файлы"
       delete: "Удалить файл"
-      max_size: "Макс. р."
       drop_here: "Перетащите файлы сюда"
+      max_size: "Макс. р."
     form: 
       add_bank: "Добавить банковские реквизиты"
       add_contact: "Добавить контакт"
@@ -110,25 +109,25 @@ ru:
       uk: Uk
     loading: "Загрузка..."
     locators: 
+      cache_clear: "Очистить кеш"
       edit_file: "Редактировать файл"
       edit_files: "Редактировать файлы"
       file: "Файл"
       locale: "Локаль"
       prepare: "Подготовить файлы локализации"
       restart: "Обновить локализацию"
-      cache_clear: Очистить кеш
       title: "Редактирование локализации"
       update_file: "Обновить файл"
-    main_image: "Сделать главным"
     main: "Главным"
+    main_image: "Сделать главным"
     max_size: "Макс разм."
     navigation: 
-      option_data: "Данные опций"
+      beer_bike: "Бирбайки"
       beer_quotes: "Пивные цитаты"
+      companies: "Компании"
+      option_data: "Данные опций"
       system: "Система"
       users: "Пользователи"
-      beer_bike: "Бирбайки"
-      companies: Компании
     no_results_text: "Ничего не найдено"
     permissions: 
       actions: 
@@ -240,25 +239,25 @@ ru:
       modified_by: "Редактировал(а)"
       title: "История"
       type: "Тип"
-  admin_js:
-    set_img: "Главным"
+  admin_js: 
     add_link: "Создать?"
     button_description: "Описание"
     button_name_add: "Добавить"
     button_name_cancel: "Сбросить"
     button_name_remove: "Удалить"
+    cancel: "Отмена"
+    clear: "Сброс"
+    confirm: "Подвердить"
     create_product: "Создать новый товар"
+    day: "Воскресенье,Понедельник,Вторник,Среда,Четверг,Пятница,Суббота"
     delete_nested_elements: "Невозможно удалить"
     edit: "Редактировать"
+    month: "Январь,Февраль,Март,Апрель,Май,Июнь,Июль,Август,Сентябрь,Октябрь,Ноябрь,Декабрь"
     name: "Название"
     no_results: "Ничего не найдено"
     search: "Идет поиск..."
+    set_img: "Главным"
     value: "Значение"
-    confirm: "Подвердить"
-    cancel: "Отмена"
-    month: "Январь,Февраль,Март,Апрель,Май,Июнь,Июль,Август,Сентябрь,Октябрь,Ноябрь,Декабрь"
-    day: "Воскресенье,Понедельник,Вторник,Среда,Четверг,Пятница,Суббота"
-    clear: "Сброс"
   attrs: 
     en: "анг."
     it: "итал."
@@ -299,23 +298,22 @@ ru:
       text: "обязательное"
     updating: "Обновление..."
     "yes": "Да"
-
-  will_paginate:
-    previous_label: "&#8592; Пред."
+  will_paginate: 
     next_label: "След. &#8594;"
-    page_gap: "&hellip;"
-    page_entries_info:
-      single_page:
-        zero:  "Ничего не найдено"
-        one:   "Показано 1 %{model}"
-        many:   "Показано %{count} %{model}"
-        few: "Показано все %{count} %{model}"
-        other: "Показано все %{count} %{model}"
-      single_page_html:
-        zero:  "Ничего не найдено"
-        one:   "Показано <b>1</b> %{model}"
-        many:   "Показано %{count} %{model}"
-        few: "Показано <b>все&nbsp;%{count}</b> %{model}"
-        other: "Показано <b>все&nbsp;%{count}</b> %{model}"
+    page_entries_info: 
       multi_page: "Показано %{model} %{from} - %{to} из %{count} всего"
       multi_page_html: "Показано %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> из <b>%{count}</b> всего"
+      single_page: 
+        few: "Показано все %{count} %{model}"
+        many: "Показано %{count} %{model}"
+        one: "Показано 1 %{model}"
+        other: "Показано все %{count} %{model}"
+        zero: "Ничего не найдено"
+      single_page_html: 
+        few: "Показано <b>все&nbsp;%{count}</b> %{model}"
+        many: "Показано %{count} %{model}"
+        one: "Показано <b>1</b> %{model}"
+        other: "Показано <b>все&nbsp;%{count}</b> %{model}"
+        zero: "Ничего не найдено"
+    page_gap: "&hellip;"
+    previous_label: "&#8592; Пред."
