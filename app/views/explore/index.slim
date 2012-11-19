@@ -1,53 +1,183 @@
-.central_module.explorer
-  .places
-    .black_module
-      h1 Места
-      .buttons
-        .button_gray.active
-          .left
-          .middle
-            a href='#' Рекомендуемые
-          .right
-        .button_gray
-          .left
-          .middle
-            a href='#' По местоположению
-          .right
-        .button_gray
-          .left
-          .middle
-            a href='#' По интересам
-          .right
-        .to_big_map
-          a href='/search_map' &nbsp;
-    = render 'recomended'
-    .bdy#map
-  /= user_signed_in? ? (render partial: "shared/advertising") : (render partial: "shared/auth")
-  = render partial: 'shared/advertising'
-  .border
-  .middle_module
-    .three_blocks
-      - @categories.first(3).each do |cat|
-        = render 'category', cat: cat
-    .border
-      .entertain_module
-        .header_grey Все развлечения
-        table border="0" cellspacing="0" cellpadding="0" class='all_categories'
-          tbody
-            - @categories.first(19).each_slice(4) do |cat_slice|
-              tr
-                - cat_slice.each do |cat|
-                  td
-                    -#.icon{class: cat.icon }
-                    =link_to cat.name, '#'
-    .border
-    .three_blocks.bottom
-      - @categories.offset(3).first(3).each do |cat|
-        =render 'category', cat: cat
-  .right_module
-    = render 'reviews'
-    = render 'selections'
-
-  .four_rect
-    - 4.times do
-      .round_rect
+#search_results.content
+  .row
+    .span12
+      #search_form
+        h1 Free reservations at 38 restaurants in Kiev
+        form
+          input name="title_or_location" placeholder="title or location" type="text"
+          label for="reserve_date"
+          input name="reserve_date" type="text" value="11/07/2012"
+          label for="reserve_time"
+          input name="reserve_time" type="text" value="7:00 PM"
+          label for="number_of_people"
+            nobr Number of people
+          input name="number_of_people" type="text" value="2"
+          input type="submit" value="Find a table"
+          .clear
+        #view_switch
+          a#grid_view href="#"
+            nobr Grid view
+          a#map_view.current href="#"
+            nobr Map view
+  .row
+    .span2
+      #refine
+        h2 Refine your results
+        h4 Category
+        label.checkbox
+          input type="checkbox"
+        label.checkbox
+          input type="checkbox"
+        label.checkbox
+          input type="checkbox"
+        label.checkbox
+          input type="checkbox"
+        .clear
+        a.more href="#"
+        h4 Price
+        label.checkbox
+          input type="checkbox"
+            | Cheap
+            b $
+        label.checkbox
+          input type="checkbox"
+            | Medium
+            b $$
+        label.checkbox
+          input type="checkbox"
+            | Reasonable
+            b $$$
+        label.checkbox
+          input type="checkbox"
+            | Premium
+            b $$$
+        .clear
+        a.more href="#"
+        h4 Kitchen
+        label.checkbox
+          input type="checkbox"
+        label.checkbox
+          input type="checkbox"
+        label.checkbox
+          input type="checkbox"
+        label.checkbox
+          input type="checkbox"
+        .clear
+        a.more href="#"
+    #listing.span10
+      h3 Results for 11/07/2012, 7:00 PM for 2 people
+      #map
+        iframe frameborder="0" height="450" marginheight="0" marginwidth="0" scrolling="no" src="https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=%D0%BA%D0%B8%D0%B5%D0%B2&aq=&sll=37.0625,-95.677068&sspn=50.557552,93.955078&ie=UTF8&hq=&hnear=Kiev,+Kiev+city,+Kyiv+city,+Ukraine&t=m&z=10&ll=50.4501,30.5234&output=embed" width="510"
+      #map_details
+        .place
+          h4
+            a href="#"
+          .rating
+            .stars
+              .stars_overlay
+              .stars_bar
+              .stars_bg
+            small 1 review
+          .timing
+            a href="#"
+            a href="#"
+            a.bold href="#"
+            a href="#"
+            a href="#"
+            .clear
+        .place
+          h4
+            a href="#"
+          .rating
+            .stars
+              .stars_overlay
+              .stars_bar
+              .stars_bg
+            small 1 review
+          .timing
+            a href="#"
+            a href="#"
+            a.bold href="#"
+            a href="#"
+            a href="#"
+            .clear
+        .place
+          h4
+            a href="#"
+          .rating
+            .stars
+              .stars_overlay
+              .stars_bar
+              .stars_bg
+            small 1 review
+          .timing
+            a href="#"
+            a href="#"
+            a.bold href="#"
+            a href="#"
+            a href="#"
+            .clear
+        .place
+          h4
+            a href="#"
+          .rating
+            .stars
+              .stars_overlay
+              .stars_bar
+              .stars_bg
+            small 1 review
+          .timing
+            a href="#"
+            a href="#"
+            a.bold href="#"
+            a href="#"
+            a href="#"
+            .clear
+        .place
+          h4
+            a href="#"
+          .rating
+            .stars
+              .stars_overlay
+              .stars_bar
+              .stars_bg
+            small 1 review
+          .timing
+            a href="#"
+            a href="#"
+            a.bold href="#"
+            a href="#"
+            a href="#"
+            .clear
+        .place
+          h4
+            a href="#"
+          .rating
+            .stars
+              .stars_overlay
+              .stars_bar
+              .stars_bg
+            small 1 review
+          .timing
+            a href="#"
+            a href="#"
+            a.bold href="#"
+            a href="#"
+            a href="#"
+            .clear
+        .place
+          h4
+            a href="#"
+          .rating
+            .stars
+              .stars_overlay
+              .stars_bar
+              .stars_bg
+            small 1 review
+          .timing
+            a href="#"
+            a href="#"
+            a.bold href="#"
+            a href="#"
+            a href="#"
+            .clear
