@@ -1,7 +1,7 @@
-class Locator < ActiveRecord::Base
+class Locator
   # attr_accessible :title, :body
   def self.find(*args)
-    first
+
   end
 
   def title

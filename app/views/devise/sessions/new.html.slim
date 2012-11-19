@@ -15,8 +15,8 @@
           .clear
           = f.input :remember_me, :as => :boolean, label_html: { class: 'checkbox' }
           .clear
-          = f.submit t('sign_up.sign_in')
-          = link_to t('sign_in.forgot_pass'), new_user_password_path, class: 'forgot_password'
+          = f.submit t('auth.links.sign_in')
+          = link_to t('auth.links.recover_password'), new_user_password_path, class: 'forgot_password'
     #social_login.span4
       h3 Sign in with another account
       a#fb_login href=user_omniauth_authorize_path(:facebook)

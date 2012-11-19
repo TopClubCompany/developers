@@ -16,6 +16,7 @@ ru:
       sign_in: "Вход в систему"
       sign_out: "Выход из системы"
       sign_up: "Регистрация"
+      join_reserve: "Войти"
     links_short: 
       cabinet: "Кабинет"
       sign_in: "Вход"

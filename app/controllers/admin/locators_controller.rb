@@ -41,6 +41,7 @@ class Admin::LocatorsController < Admin::BaseController
     redirect_to collection_path, flash: { notice: "successfully cleared cache" }
   end
 
+
   protected
 
   def collection
