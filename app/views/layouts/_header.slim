@@ -4,10 +4,9 @@
       .span8
         #logo
           a href="/"
-            img src="/images/logo.png"
-          a.by_topclub href="http://topclub.ua" by TOPCLUB
-        /span.few-words
-        /  | Restaurant&nbsp;Reservations.&nbsp;Free&nbsp;·&nbsp;Instant&nbsp;·&nbsp;Save&nbsp;money&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            img src="/assets/topclub.png"
+          a.by_topclub href="/" RESERVE
+        span.few-words Restaurant Reservations. Free · Instant · Save money
       .span4
         - if user_signed_in?
           .user_module
@@ -24,48 +23,3 @@
         - else
           a.sign_up href=new_user_registration_path Sign up
           a.sign_in href=new_user_session_path Sign in
-/.top_module
-/  .logo_grad
-/  .top_module_wrap
-/    .logo
-/      a href="/"
-/        img src='/assets/application/header/logo.png' alt=''
-/    form method='get' action="#{places_path}" id='search_form'
-/      .search_module
-/        .label_block
-/          p
-/            | Я ищу
-/            span
-/              | (завтрак, бар гостиницу)
-/          p.pad
-/            | Где
-/            span
-/              | (улица, район, город)
-/        .round_block
-/          .text
-/          .input
-/            input.hdr type='text' name='what' value="#{@what if @what.present?}"
-/            input.hdr.second type='text' name='where' value="#{@where if @where.present?}"
-/        .srch_btn Найти
-/    - if user_signed_in?
-/      .user_module
-/        .ava
-/        .user_hello
-/          p
-/            |Привет,  &nbsp;
-/          span
-/            = current_user.email + " !"
-/          = link_to 'logout', quit_path, method: 'delete', id: 'logout_link'
-/          .user_arrow
-/        .num_frnds
-/          .digits 10
-/
-/
-/nav
-/  .menu_wrap
-/    ul.menu-list.g-clearfix
-/      - {:explorer => "Места", :events => "События", :photo => "Фото", :people => "Люди", :magazine => "Журнал", :gouurmand => "Gouurmand"}.each do |key, value|
-/        li
-/          = link_to value, "/sandboxes/#{key}"
-/          - if value != "Gouurmand"
-/            .pin
