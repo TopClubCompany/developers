@@ -16,4 +16,12 @@ class BillType
     I18n.t(@code, :scope => [:admin, :bill, :kind])
   end
 
+  def code_title
+    I18n.t(@code, :scope => [:admin, :bill, :code])
+  end
+
+  def title_image
+    I18n.t(@code, :scope => [:admin, :bill, :image])
+  end
+
 end

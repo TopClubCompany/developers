@@ -111,17 +111,6 @@ ru:
     en: eng
     ru: "рус"
     uk: "укр"
-  search: 
-    found_message: 
-      few: "По запросу <span class='txt_blue'>%{search_text}</span> найдено <strong>%{count}</strong> совпадения."
-      many: "По запросу <span class='txt_blue'>%{search_text}</span> найдено <strong>%{count}</strong> совпадений."
-      one: "По запросу <span class='txt_blue'>%{search_text}</span> найдено <strong>%{count}</strong> совпадение."
-      other: "По запросу <span class='txt_blue'>%{search_text}</span> найдено <strong>%{count}</strong> совпадений."
-    not_found: "По Вашему запросу ничего не найдено. "
-    placeholder: "Найти..."
-    placeholder1: "Найти..."
-    placeholder2: "Найти..."
-    title: "Результаты поиска"
   simple_form: 
     error_notification: 
       default_message: "При сохранении возникли ошибки"
@@ -154,3 +143,13 @@ ru:
       next: "След &raquo;"
       previous: "&laquo; Пред"
       truncate: ...
+
+  search:
+    category: "Category"
+    refine: "Refine your results"
+    price: "Price"
+    kitchen: "Kitchen"
+    main_text: "Free reservations at %{count} restaurants in %{city}"
+    number_of_people: "Number of people"
+    grid_view: "Grid view"
+    map_view: "Map view"
