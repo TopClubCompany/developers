@@ -39,13 +39,13 @@
           .clear
           label
             = t('sign_up.profile_photo')
-          input name="profile_photo" type="file"
-            .clear
-            p
-              = t('sign_up.by_click')
-              = link_to t('sign_up.term_cond'), '#'
-              |.
-            = f.submit t('auth.links.join_reserve')
+          = f.file_field :avatar, label: false
+          .clear
+          p
+            = t('sign_up.by_click')
+            = link_to t('sign_up.term_cond'), '#'
+            |.
+          = f.submit t('auth.links.join_reserve')
     #social_login.span4
       h3
         = t('sign_up.sign_in_acc')
