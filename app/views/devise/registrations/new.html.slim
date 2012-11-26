@@ -30,7 +30,7 @@
           .clear
           = f.input :city, label: get_reg_form_attr_name(:city)
           .clear
-          = f.input :gender,  collection: [[:Male, 1],[:Female, 2]], prompt: 'select your gender'
+          = f.input :gender,  collection: GenderType.all, prompt: 'select your gender'
           .clear
           = f.label :birthday, label: get_reg_form_attr_name(:birthday)
           = f.date_select :birthday, start_year: Date.today.year - 8, end_year: Date.today.year - 90, order: [:month, :day, :year], default: Time.utc('1991 1 3')
