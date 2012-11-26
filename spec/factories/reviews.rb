@@ -1,10 +1,3 @@
-class Review < ActiveRecord::Base
-  attr_accessible :content, :reviewable_id, :reviewable_type, :title
-
-  belongs_to :reviweable, polymorphic: true
-  belongs_to :user
-
-end
 # == Schema Information
 #
 # Table name: reviews
@@ -18,3 +11,12 @@ end
 #  updated_at      :datetime         not null
 #
 
+# Read about factories at https://github.com/thoughtbot/factory_girl
+
+FactoryGirl.define do
+  factory :review do
+    reviewable_id 1
+    reviewable_type "MyString"
+    content "MyText"
+  end
+end
