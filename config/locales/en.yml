@@ -11,7 +11,7 @@ en:
       confirm_new_password: ""
       new_password: ""
     links: 
-      join_reserve: ""
+      join_reserve: Join reserve
       receive_confirmation: ""
       recover_password: ""
       sign_in: ""
