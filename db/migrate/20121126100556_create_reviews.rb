@@ -13,5 +13,6 @@ class CreateReviews < ActiveRecord::Migration
       t.timestamps
     end
     add_index :reviews, :user_id
+    add_index :reviews, [:reviewable_id, :reviewable_type]
   end
 end
