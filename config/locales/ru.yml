@@ -111,6 +111,15 @@ ru:
     en: eng
     ru: "рус"
     uk: "укр"
+  search: 
+    category: Category
+    grid_view: Grid view
+    kitchen: Kitchen
+    main_text: Free reservations at %{count} restaurants in %{city}
+    map_view: Map view
+    number_of_people: Number of people
+    price: Price
+    refine: Refine your results
   simple_form: 
     error_notification: 
       default_message: "При сохранении возникли ошибки"
@@ -143,13 +152,3 @@ ru:
       next: "След &raquo;"
       previous: "&laquo; Пред"
       truncate: ...
-
-  search:
-    category: "Category"
-    refine: "Refine your results"
-    price: "Price"
-    kitchen: "Kitchen"
-    main_text: "Free reservations at %{count} restaurants in %{city}"
-    number_of_people: "Number of people"
-    grid_view: "Grid view"
-    map_view: "Map view"
