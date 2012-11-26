@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     end
 
     def current_city
-      session[:city] ||= (params[:city] || "Kiev")
+      session['city'] ||= (params[:city] || "Kiev")
     end
 
 
