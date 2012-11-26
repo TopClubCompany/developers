@@ -2,7 +2,7 @@
   .row
     .span12
       #search_form
-        h1 Free reservations at 38 restaurants in Kiev
+        h1= I18n.t('search.main_text', count: Place.visible.count, city: @current_city)
         form
           input name="title_or_location" placeholder="title or location" type="text"
           label for="reserve_date"
@@ -10,66 +10,69 @@
           label for="reserve_time"
           input name="reserve_time" type="text" value="7:00 PM"
           label for="number_of_people"
-            nobr Number of people
+            nobr= I18n.t('search.number_of_people')
           input name="number_of_people" type="text" value="2"
           input type="submit" value="Find a table"
           .clear
         #view_switch
           a#grid_view href="#"
-            nobr Grid view
+            nobr= I18n.t('search.grid_view')
           a#map_view.current href="#"
-            nobr Map view
+            nobr= I18n.t('search.map_view')
   .row
     .span2
       #refine
-        h2 Refine your results
-        h4 Category
-        label.checkbox
-          input type="checkbox"
-        label.checkbox
-          input type="checkbox"
-        label.checkbox
-          input type="checkbox"
-        label.checkbox
-          input type="checkbox"
+        h2= I18n.t('search.refine')
+        h4= I18n.t('search.category')
+        - Category.with_translations.first(4).each do |category|
+          label.checkbox
+            input type="checkbox" val=category.id = category.title
         .clear
         a.more href="#"
-        h4 Price
-        label.checkbox
-          input type="checkbox"
-            | Cheap
-            b $
-        label.checkbox
-          input type="checkbox"
-            | Medium
-            b $$
-        label.checkbox
-          input type="checkbox"
-            | Reasonable
-            b $$$
-        label.checkbox
-          input type="checkbox"
-            | Premium
-            b $$$
+        h4= I18n.t('search.price')
+        - BillType.all.first(4).each do |bill|
+          label.checkbox
+            input type="checkbox" value=bill.id
+              = bill.code_title
+              |&nbsp;
+              b= bill.title_image
         .clear
         a.more href="#"
-        h4 Kitchen
-        label.checkbox
-          input type="checkbox"
-        label.checkbox
-          input type="checkbox"
-        label.checkbox
-          input type="checkbox"
-        label.checkbox
-          input type="checkbox"
+        h4= I18n.t('search.kitchen')
+        - Kitchen.with_translations.first(4).each do |kitchen|
+          label.checkbox
+            input type="checkbox" val=kitchen.id = kitchen.title
         .clear
         a.more href="#"
     #listing.span10
       h3 Results for 11/07/2012, 7:00 PM for 2 people
-      #map
-        iframe frameborder="0" height="450" marginheight="0" marginwidth="0" scrolling="no" src="https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=%D0%BA%D0%B8%D0%B5%D0%B2&aq=&sll=37.0625,-95.677068&sspn=50.557552,93.955078&ie=UTF8&hq=&hnear=Kiev,+Kiev+city,+Kyiv+city,+Ukraine&t=m&z=10&ll=50.4501,30.5234&output=embed" width="510"
+      #map style="background: rgba(128,128,128,0.5);" *{'data-lng'=>"50.451118", "data-lat" => "30.522301"}
+      /iframe#map frameborder="0" height="440" marginheight="0" marginwidth="0" scrolling="no" src="https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=%D0%BA%D0%B8%D0%B5%D0%B2&aq=&sll=37.0625,-95.677068&sspn=50.557552,93.955078&ie=UTF8&hq=&hnear=Kiev,+Kiev+city,+Kyiv+city,+Ukraine&t=m&z=10&ll=50.4501,30.5234&output=embed" width="510"
       #map_details
+        #map_details_wrapper
+          - for i in 1..7 do
+            .place id="place_#{i}"
+              h4
+                a href="#"
+              .rating
+                .stars
+                  .stars_overlay
+                  .stars_bar
+                  .stars_bg
+                small 1 review
+              .timing
+                a href="#"
+                a href="#"
+                a.bold href="#"
+                a href="#"
+                a href="#"
+                .clear
+
+
+      #list_grid_view.none
         .place
+          a href="#"
+            img height="100" src="#" width="140"
           h4
             a href="#"
           .rating
@@ -78,106 +81,139 @@
               .stars_bar
               .stars_bg
             small 1 review
+          ul.place_features
+            li.location Sribnokilskaya st., 3d
+            li.cuisine European, Japaneese
+            li.pricing 200 UAH
           .timing
             a href="#"
             a href="#"
             a.bold href="#"
             a href="#"
             a href="#"
-            .clear
+          .special_offers
+            h5 Special offers:
+            h5
+              a href="#"
+              a href="#"
+              a href="#"
+          .clear
         .place
+          a href="#"
+            img height="100" src="#" width="140"
           h4
             a href="#"
           .rating
             .stars
               .stars_overlay
-              .stars_bar
+              .stars_bar style="left: 33%"
               .stars_bg
             small 1 review
+          ul.place_features
+            li.location Sribnokilskaya st., 3d
+            li.cuisine European, Japaneese
+            li.pricing 200 UAH
           .timing
             a href="#"
             a href="#"
             a.bold href="#"
             a href="#"
             a href="#"
-            .clear
+          .special_offers
+            h5 Special offers:
+            h5
+              a href="#"
+              a href="#"
+              a href="#"
+          .clear
         .place
+          a href="#"
+            img height="100" src="#" width="140"
           h4
             a href="#"
           .rating
             .stars
               .stars_overlay
-              .stars_bar
+              .stars_bar style="left: 71%"
               .stars_bg
             small 1 review
+          ul.place_features
+            li.location Sribnokilskaya st., 3d
+            li.cuisine European, Japaneese
+            li.pricing 200 UAH
           .timing
             a href="#"
             a href="#"
             a.bold href="#"
             a href="#"
             a href="#"
-            .clear
+          .special_offers
+            h5 Special offers:
+            h5
+              a href="#"
+              a href="#"
+              a href="#"
+          .clear
         .place
+          a href="#"
+            img height="100" src="#" width="140"
           h4
             a href="#"
           .rating
             .stars
               .stars_overlay
-              .stars_bar
+              .stars_bar style="left: 95%"
               .stars_bg
             small 1 review
+          ul.place_features
+            li.location Sribnokilskaya st., 3d
+            li.cuisine European, Japaneese
+            li.pricing 200 UAH
           .timing
             a href="#"
             a href="#"
             a.bold href="#"
             a href="#"
             a href="#"
-            .clear
+          .special_offers
+            h5 Special offers:
+            h5
+              a href="#"
+              a href="#"
+              a href="#"
+          .clear
         .place
+          a href="#"
+            img height="100" src="#" width="140"
           h4
             a href="#"
           .rating
             .stars
               .stars_overlay
-              .stars_bar
+              .stars_bar style="left: 12%"
               .stars_bg
             small 1 review
+          ul.place_features
+            li.location Sribnokilskaya st., 3d
+            li.cuisine European, Japaneese
+            li.pricing 200 UAH
           .timing
             a href="#"
             a href="#"
             a.bold href="#"
             a href="#"
             a href="#"
-            .clear
-        .place
-          h4
-            a href="#"
-          .rating
-            .stars
-              .stars_overlay
-              .stars_bar
-              .stars_bg
-            small 1 review
-          .timing
-            a href="#"
-            a href="#"
-            a.bold href="#"
-            a href="#"
-            a href="#"
-            .clear
-        .place
-          h4
-            a href="#"
-          .rating
-            .stars
-              .stars_overlay
-              .stars_bar
-              .stars_bg
-            small 1 review
-          .timing
-            a href="#"
-            a href="#"
-            a.bold href="#"
-            a href="#"
-            a href="#"
-            .clear
+          .special_offers
+            h5 Special offers:
+            h5
+              a href="#"
+              a href="#"
+              a href="#"
+          .clear
+        .paginate
+          a.current href="#"
+          a href="#"
+          a href="#"
+          a href="#"
+          a href="#"
+          a href="#"

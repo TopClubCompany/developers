@@ -3,21 +3,31 @@
     .span8
       .heading
         h1
-          = t('sign_up.sign_in')
+          = t('auth.links.sign_in')
         '  or
         strong
-          = link_to t('sign_up.become_member'), new_user_registration_path
+          = link_to t('auth.links.sign_up'), new_user_registration_path
       #sign_up_page.page_content
-        = simple_form_for :user, url: new_user_session_path, :wrapper => :front_reg_form do |f|
-          = f.input :email, label: get_reg_form_attr_name(:email, true)
+        = front_form_for :user, url: new_user_session_path do |f|
+          = f.input :email, label: get_reg_form_attr_name(:email), wrapper: false
           .clear
-          = f.input :password, label: get_reg_form_attr_name(:password, true)
+          = f.input :password, label: get_reg_form_attr_name(:password), wrapper: false
           .clear
-          = f.input :remember_me, :as => :boolean, label_html: { class: 'checkbox' }
+          label.checkbox
+            input class="boolean optional" id="user_remember_me" name="user[remember_me]" type="checkbox" value="1"
+              | Remember me
+
           .clear
           = f.submit t('auth.links.sign_in')
           = link_to t('auth.links.recover_password'), new_user_password_path, class: 'forgot_password'
+
+
+
+
     #social_login.span4
       h3 Sign in with another account
       = render 'shared/social_links'
+
+
+
 

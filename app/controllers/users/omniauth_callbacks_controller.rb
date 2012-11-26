@@ -29,10 +29,14 @@ class Users::OmniauthCallbacksController < ApplicationController
 
   def user_registration
     user = params[:user]
-    user[:birthday] = (3.times.map { |n| user.delete("birthday(#{n + 1}i)") }).reverse.join('.')
+    #raise user.to_yaml
+    user[:birthday] = format_birthday(user)
+    avatar = user.delete(:avatar)
+    user[:password_confirmation] = user[:password]
     @user = User.new(user).activate
     @user.skip_confirmation! #remove for normal registration with confirm email
     if @user.save
+      (@user.avatar = Avatar.new(data: avatar)) if avatar
       auth_user @user  #remove for normal registration with confirm email
       #redirect_to root_path, flash: { success: "for end of registration you need to confirm you email." } #uncoment for normal registration with confirm email
     else
@@ -86,6 +90,10 @@ class Users::OmniauthCallbacksController < ApplicationController
     else
       redirect_to enter_email_path(email.gsub('.','#')), flash: { error: "Already exist user with that email" }
     end
+  end
+
+  def format_birthday(hash_date)
+    3.times.map { |n| hash_date.delete("birthday(#{n + 1}i)") }.reverse.join('.')
   end
 
 end

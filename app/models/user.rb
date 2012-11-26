@@ -81,8 +81,8 @@ class User < ActiveRecord::Base
   end
 
   def generate_default_fields
-    self.first_name = (first_name or 'Anonym first name')
-    self.last_name = (last_name or 'Anonym last name')
+    self.first_name = (first_name or 'Anonym')
+    self.last_name = (last_name or 'Anonym')
     self
   end
 

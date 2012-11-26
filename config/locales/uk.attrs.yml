@@ -3,8 +3,6 @@ uk:
   activerecord: 
     attributes: 
       asset: 
-        asset_tags: Asset tags
-        asset_textures: Asset textures
         assetable: Assetable
         assetable_id: Assetable
         assetable_type: Assetable type
@@ -13,89 +11,45 @@ uk:
         data_file_name: Data file name
         data_file_size: Data file size
         description: Description
-        description_en: "Description (анг.)"
-        description_ru: "Description (рус.)"
-        description_uk: "Description (укр.)"
+        description_en: Description ()
+        description_ru: Description ()
+        description_uk: Description ()
         guid: Guid
         is_main: Is main
         locale: Locale
         name: Name
-        name_en: "Name (анг.)"
-        name_ru: "Name (рус.)"
-        name_uk: "Name (укр.)"
+        name_en: Name ()
+        name_ru: Name ()
+        name_uk: Name ()
         sort_order: Sort order
-        tags: Tags
-        textures: Textures
         type: Type
-        updated_at: Updated at
-        user: User
-        user_id: User
-      category: 
-        category_image: Category image
-        children: Children
-        created_at: Created at
-        depth: Depth
-        description: Description
-        description_en: "Description (анг.)"
-        description_ru: "Description (рус.)"
-        description_uk: "Description (укр.)"
-        header: Header
-        is_visible: Is visible
-        lft: Lft
-        name: Name
-        name_en: "Name (анг.)"
-        name_ru: "Name (рус.)"
-        name_uk: "Name (укр.)"
-        parent: Parent
-        parent_id: Parent
-        pictures: Pictures
-        places: Places
-        rgt: Rgt
-        slug: Slug
         updated_at: Updated at
         user: User
         user_id: User
       header: 
         created_at: Created at
         description: Description
-        description_en: "Description (анг.)"
-        description_ru: "Description (рус.)"
-        description_uk: "Description (укр.)"
+        description_en: Description ()
+        description_ru: Description ()
+        description_uk: Description ()
         headerable: Headerable
         headerable_id: Headerable
         headerable_type: Headerable type
         keywords: Keywords
-        keywords_en: "Keywords (анг.)"
-        keywords_ru: "Keywords (рус.)"
-        keywords_uk: "Keywords (укр.)"
+        keywords_en: Keywords ()
+        keywords_ru: Keywords ()
+        keywords_uk: Keywords ()
         title: Title
-        title_en: "Title (анг.)"
-        title_ru: "Title (рус.)"
-        title_uk: "Title (укр.)"
+        title_en: Title ()
+        title_ru: Title ()
+        title_uk: Title ()
         updated_at: Updated at
-      kitchen: 
-        created_at: Created at
-        description: Description
-        description_en: "Description (анг.)"
-        description_ru: "Description (рус.)"
-        description_uk: "Description (укр.)"
-        image: Image
-        is_visible: Is visible
-        name: Name
-        name_en: "Name (анг.)"
-        name_ru: "Name (рус.)"
-        name_uk: "Name (укр.)"
-        pictures: Pictures
-        slug: Slug
-        updated_at: Updated at
-        user: User
-        user_id: User
       static_page: 
         attachment_files: Attachment files
         content: Content
-        content_en: "Content (анг.)"
-        content_ru: "Content (рус.)"
-        content_uk: "Content (укр.)"
+        content_en: Content ()
+        content_ru: Content ()
+        content_uk: Content ()
         created_at: Created at
         delta: Delta
         is_visible: Is visible
@@ -104,9 +58,9 @@ uk:
         structure: Structure
         structure_id: Structure
         title: Title
-        title_en: "Title (анг.)"
-        title_ru: "Title (рус.)"
-        title_uk: "Title (укр.)"
+        title_en: Title ()
+        title_ru: Title ()
+        title_uk: Title ()
         updated_at: Updated at
         user_id: User
       structure: 
@@ -125,71 +79,135 @@ uk:
         pictures: Pictures
         position: Position
         redirect_url: Redirect url
-        redirect_url_en: "Redirect url (анг.)"
-        redirect_url_ru: "Redirect url (рус.)"
-        redirect_url_uk: "Redirect url (укр.)"
+        redirect_url_en: Redirect url ()
+        redirect_url_ru: Redirect url ()
+        redirect_url_uk: Redirect url ()
         rgt: Rgt
         slug: Slug
         static_page: Static page
         title: Title
-        title_en: "Title (анг.)"
-        title_ru: "Title (рус.)"
-        title_uk: "Title (укр.)"
+        title_en: Title ()
+        title_ru: Title ()
+        title_uk: Title ()
         updated_at: Updated at
         user_id: User
         visible_children: Visible children
       user: 
+        account_id: Account
+        accounts: Accounts
+        address: Address
+        avatar: Avatar
+        birthday: Birthday
+        confirmation_sent_at: Confirmation sent at
+        confirmed_at: Confirmed at
         created_at: Created at
         current_sign_in_ip: Current sign in ip
         email: Email
         encrypted_password: Encrypted password
+        facebook_friends: Facebook friends
+        first_name: First name
+        gender: Gender
+        last_name: Last name
         last_sign_in_at: Last sign in at
         last_sign_in_ip: Last sign in ip
-        name: Name
-        photo: Photo
+        locked_at: Locked at
+        login: Login
+        patronymic: Patronymic
+        phone: Phone
         reviews: Reviews
         sign_in_count: Sign in count
+        trust_state: Trust state
+        unconfirmed_email: Unconfirmed email
+        unlock_token: Unlock token
         updated_at: Updated at
+        user_role_id: User role
+        vk_friends: Vk friends
+      category: 
+        category_image: Category image
+        children: Children
+        created_at: Created at
+        depth: Depth
+        description: Description
+        description_en: Description ()
+        description_ru: Description ()
+        description_uk: Description ()
+        group_feature_categories: Group feature categories
+        group_features: Group features
+        header: Header
+        is_visible: Is visible
+        lft: Lft
+        name: Name
+        name_en: Name ()
+        name_ru: Name ()
+        name_uk: Name ()
+        parent: Parent
+        parent_id: Parent
+        pictures: Pictures
+        place_categories: Place categories
+        places: Places
+        rgt: Rgt
+        slug: Slug
+        updated_at: Updated at
+        user: User
+        user_id: User
+      kitchen: 
+        created_at: Created at
+        description: Description
+        description_en: Description ()
+        description_ru: Description ()
+        description_uk: Description ()
+        is_visible: Is visible
+        name: Name
+        name_en: Name ()
+        name_ru: Name ()
+        name_uk: Name ()
+        pictures: Pictures
+        place_kitchens: Place kitchens
+        places: Places
+        slug: Slug
+        updated_at: Updated at
+        user: User
+        user_id: User
     models: 
       asset: 
-        few: Asset
-        many: Asset
-        one: Asset
         other: Asset
         zero: Asset
-      category: 
-        few: Category
-        many: Category
-        one: Category
-        other: Category
-        zero: Category
+        one: Asset
+        few: Asset
+        many: Asset
       header: 
-        few: Header
-        many: Header
-        one: Header
         other: Header
         zero: Header
-      kitchen: 
-        few: Kitchen
-        many: Kitchen
-        one: Kitchen
-        other: Kitchen
-        zero: Kitchen
+        one: Header
+        few: Header
+        many: Header
       static_page: 
-        few: Static page
-        many: Static page
-        one: Static page
         other: Static page
         zero: Static page
+        one: Static page
+        few: Static page
+        many: Static page
       structure: 
-        few: Structure
-        many: Structure
-        one: Structure
         other: Structure
         zero: Structure
+        one: Structure
+        few: Structure
+        many: Structure
       user: 
-        few: User
-        many: User
-        one: User
         other: User
         zero: User
+        one: User
+        few: User
+        many: User
+      category: 
+        other: Category
+        zero: Category
+        one: Category
+        few: Category
+        many: Category
+      kitchen: 
+        other: Kitchen
+        zero: Kitchen
+        one: Kitchen
+        few: Kitchen
+        many: Kitchen
