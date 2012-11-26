@@ -8,6 +8,9 @@ Topclub::Application.routes.draw do
   get '/confirm_account(/:token)' => 'users/omniauth_callbacks#confirm_account', as: 'confirm_account'
   post '/user_registration' => 'users/omniauth_callbacks#user_registration', as: 'user_registration'
 
+
+  get '/profile/:user_id' => 'users/profile#show', as: 'profile'
+
   root :to => 'explore#index'
 
   resources :explore

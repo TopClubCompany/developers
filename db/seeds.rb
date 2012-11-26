@@ -6,10 +6,8 @@ def insert_default_user(email, admin = true)
   user                = User.new(email: email, password: password, password_confirmation: password).generate_default_fields
   user.login          = admin ? 'admin' : 'user'
   user.user_role_type = admin ? UserRoleType.admin : UserRoleType.default
-  user.user_role_type = admin ? UserRoleType.admin : UserRoleType.default
   user.activate.skip_confirmation!
   user.save!
-  user.unsuspend!
   puts "#{admin ? 'Admin: ' : 'User: '}#{email}, #{password}"
 end
 
