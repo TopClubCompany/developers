@@ -1,5 +1,5 @@
-.simple_form.user abbr {
-  display: none;
+.simple_form abbr {
+  display: none !important;
 }
 
 .place:target, .place.target {
@@ -16,3 +16,4 @@
   bottom: 0;
   background: rgba(128,128,128, 0.5);
 }
+
