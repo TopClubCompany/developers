@@ -56,7 +56,7 @@ SimpleForm.setup do |config|
     end
   end
 
-  config.wrappers :front_reg_form, :tag => 'div', :class => 'control-group', :error_class => 'error', :item_wrapper_class => 'inline' do |b|
+  config.wrappers :front_reg_form, :item_wrapper_class => 'inline', wrapper: false  do |b|
     b.use :html5
     b.use :placeholder
     b.use :label

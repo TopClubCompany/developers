@@ -65,12 +65,21 @@ def insert_group_feature
 
 end
 
+def insert_marks_and_reviews user
+  (rand(5) + 1).times do
+    place = Place.all.sample
+    place.reviews << Review.new(user_id: user.id, content: 'placeholder', title: 'placeholder')
+  end
+  #user.reviews.each { |review| review.mark = Mark.new(food: (rand(5) + 1) }
+
+end
+
 User.full_truncate
 insert_default_user('admin@adm.com')
 insert_default_user('user@usr.com', false)
 add_test_stuff
 insert_group_feature
-
+insert_marks_and_reviews(User.find_by_email('admin@adm.com'))
 
 #10.times do
 #  s = Selection.make! user: User.first

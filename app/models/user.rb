@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
 
   validates_presence_of :email, :password, :first_name, :last_name
 
+
   enumerated_attribute :gender_type, :id_attribute => :gender, :class => ::GenderType
   enumerated_attribute :user_role_type, :id_attribute => :user_role_id, :class => ::UserRoleType
   enumerated_attribute :trust_state_type, :id_attribute => :trust_state, :class => ::UserState
@@ -178,7 +179,6 @@ class User < ActiveRecord::Base
   end
 
 end
-
 # == Schema Information
 #
 # Table name: users
@@ -192,8 +192,7 @@ end
 #  patronymic             :string(255)
 #  phone                  :string(255)
 #  address                :string(255)
-#  gender                 :integer          default(2)
-#  birthday               :date
+#  birthday               :datetime
 #  account_id             :integer
 #  email                  :string(255)
 #  encrypted_password     :string(255)      default(""), not null

@@ -132,6 +132,19 @@ class Place < ActiveRecord::Base
                        0, $redis.llen(self.redis_key(:in_visited)).to_i)
   end
 
+  def marks
+    marks = { food: 0, service: 0, ambiance: 0, pricing: 0, overall: 0, count: 0 }
+     reviews.each do |review|
+       marks[:count] += 1
+       marks.except(:count, :overall).each do |k, _|
+         marks[k] += review.mark[k].to_f
+         marks[:overall] += review.mark[k].to_f
+       end
+     end
+    marks.except(:count, :overall).each { |k, _|  marks[k] /= marks[:count] } unless marks[:count].zero?
+    marks[:overall] /= marks[:count]*4
+    marks
+  end
 
 
 end

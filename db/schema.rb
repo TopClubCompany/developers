@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121126100556) do
+ActiveRecord::Schema.define(:version => 20121126154556) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -275,6 +275,22 @@ ActiveRecord::Schema.define(:version => 20121126100556) do
 
   add_index "locations", ["locationable_id", "locationable_type"], :name => "index_locations_on_locationable_id_and_locationable_type"
 
+  create_table "marks", :force => true do |t|
+    t.integer  "food"
+    t.integer  "service"
+    t.integer  "pricing"
+    t.integer  "ambiance"
+    t.integer  "review_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "marks", ["ambiance"], :name => "index_marks_on_ambiance"
+  add_index "marks", ["food"], :name => "index_marks_on_food"
+  add_index "marks", ["pricing"], :name => "index_marks_on_pricing"
+  add_index "marks", ["review_id"], :name => "index_marks_on_review_id"
+  add_index "marks", ["service"], :name => "index_marks_on_service"
+
   create_table "notes", :force => true do |t|
     t.integer  "place_id"
     t.string   "picture"
@@ -358,10 +374,6 @@ ActiveRecord::Schema.define(:version => 20121126100556) do
 
   create_table "reviews", :force => true do |t|
     t.integer  "reviewable_id"
-    t.integer  "food"
-    t.integer  "service"
-    t.integer  "pricing"
-    t.integer  "ambiance"
     t.string   "reviewable_type"
     t.string   "title"
     t.text     "content"
