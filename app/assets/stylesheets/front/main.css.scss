@@ -159,14 +159,20 @@ input[type='submit']:hover {
 }
 
 #header .by_topclub {
-	font-size: 9px;
-	color: #df5b49;
-	text-decoration: none;
-	float: right;
-	line-height: 9px;
-	margin-top: 2px;
-	letter-spacing: 1px;
-	font-weight: bold;
+    font-size: 8px;
+    color: #999;
+    text-decoration: none;
+    float: right;
+    line-height: 8px;
+    margin-top: 4px;
+	//font-size: 9px;
+	//color: #df5b49;
+	//text-decoration: none;
+	//float: right;
+	//line-height: 9px;
+	//margin-top: 2px;
+	//letter-spacing: 1px;
+	//font-weight: bold;
 }
 
 #header .few-words {
@@ -729,6 +735,9 @@ input[type='submit']:hover {
   display: none;
 }
 
+place:target {
+  background: yellow;
+}
 
 
 
