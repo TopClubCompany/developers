@@ -28,7 +28,7 @@
           label.checkbox
             input type="checkbox" val=category.id = category.title
         .clear
-        a.more href="#"
+        a.more data-type="category" href="#"
           | more >
         h4= I18n.t('search.price')
         - BillType.all.first(4).each do |bill|
@@ -38,15 +38,14 @@
               |&nbsp;
               b= bill.title_image
         .clear
-        a.more href="#"
+        /a.more href="#"
           | more >
-        a.more href="#"
         h4= I18n.t('search.kitchen')
         - Kitchen.with_translations.first(4).each do |kitchen|
           label.checkbox
             input type="checkbox" val=kitchen.id = kitchen.title
         .clear
-        a.more href="#"
+        a.more data-type="kitchen" href="#"
           | more >
     #listing.span10
       h3 Results for 11/07/2012, 7:00 PM for 2 people
@@ -221,3 +220,5 @@
           a href="#"
           a href="#"
           a href="#"
+
+= render 'shared/more_template'

@@ -17,6 +17,14 @@ Topclub::Application.routes.draw do
 
   resources :explore
 
+  #get '/search/get_more' => "search#get_more"
+
+  resources :search do
+    collection do
+      get :get_more
+    end
+  end
+
   resources :places do
     member do
       post :rate
