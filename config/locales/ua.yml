@@ -1,5 +1,5 @@
 --- 
-uk: 
+ua: 
   activerecord: 
     attributes: 
       user: 
@@ -112,16 +112,14 @@ uk:
     ru: ""
     uk: ""
   search: 
-    found_message: 
-      few: ""
-      many: ""
-      one: ""
-      other: ""
-    not_found: ""
-    placeholder: ""
-    placeholder1: ""
-    placeholder2: ""
-    title: ""
+    category: ""
+    grid_view: ""
+    kitchen: ""
+    main_text: ""
+    map_view: ""
+    number_of_people: ""
+    price: ""
+    refine: ""
   simple_form: 
     error_notification: 
       default_message: ""
