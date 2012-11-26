@@ -13,6 +13,8 @@ Topclub::Application.routes.draw do
 
   root :to => 'explore#index'
 
+  filter :locale
+
   resources :explore
 
   resources :places do

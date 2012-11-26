@@ -358,12 +358,20 @@ ActiveRecord::Schema.define(:version => 20121126100556) do
 
   create_table "reviews", :force => true do |t|
     t.integer  "reviewable_id"
+    t.integer  "food"
+    t.integer  "service"
+    t.integer  "pricing"
+    t.integer  "ambiance"
     t.string   "reviewable_type"
     t.string   "title"
     t.text     "content"
+    t.integer  "user_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
+
+  add_index "reviews", ["reviewable_id", "reviewable_type"], :name => "index_reviews_on_reviewable_id_and_reviewable_type"
+  add_index "reviews", ["user_id"], :name => "index_reviews_on_user_id"
 
   create_table "selections", :force => true do |t|
     t.string   "picture"

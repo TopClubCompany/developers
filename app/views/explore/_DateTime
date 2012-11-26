@@ -1,0 +1,1 @@
+input name="reserve_date" type="text" value=Time.now.strftime("%m/%d/%Y")
