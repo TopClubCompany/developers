@@ -24,26 +24,27 @@
           .clear
           = f.input :phone, placeholder: "+38 ( _ _ _ ) _ _ _ - _ _ - _ _", label: get_reg_form_attr_name(:phone, true), required: true
           .clear
-          = f.input :email, label: get_reg_form_attr_name(:email)
+          = f.input :email, label: get_reg_form_attr_name(:email, true)
           .clear
-          = f.input :password, label: get_reg_form_attr_name(:password)
+          = f.input :password, label: get_reg_form_attr_name(:password, true)
           .clear
-          = f.input :address, label: get_reg_form_attr_name(:address), input_html: {value: get_city_from_ip()}
+          = f.input :city, label: get_reg_form_attr_name(:city)
           .clear
-          = f.input :gender, collection: GenderType.all, include_blank: false
+          = f.input :gender,  collection: GenderType.all, prompt: 'select your gender'
+
           .clear
           = f.label :birthday, label: get_reg_form_attr_name(:birthday)
-          = f.date_select :birthday, start_year: Date.today.year - 90, end_year: Date.today.year - 8, order: [:month, :day, :year]
+          = f.date_select :birthday, start_year: Date.today.year - 8, end_year: Date.today.year - 90, order: [:month, :day, :year], default: Time.utc('1991 1 3')
           .clear
           label
             = t('sign_up.profile_photo')
-          = f.file_field :avatar, label: false
-          .clear
-          p
-            = t('sign_up.by_click')
-            = link_to t('sign_up.term_cond'), '#'
-            |.
-          = f.submit t('auth.links.join_reserve')
+          input name="profile_photo" type="file"
+            .clear
+            p
+              = t('sign_up.by_click')
+              = link_to t('sign_up.term_cond'), '#'
+              |.
+            = f.submit t('auth.links.join_reserve')
     #social_login.span4
       h3
         = t('sign_up.sign_in_acc')
