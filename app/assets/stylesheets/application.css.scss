@@ -1,9 +1,8 @@
 //= require 'lionbars'
 //= require 'custom_checkbox'
 //= require 'jquery-ui'
-//= require 'front/main'
-//= require 'front/temp'
+
 @import "compass";
 //@import "compass/reset";
 @import "front/bootstrap.min";
-@import "front/registration_forms";
+@import "front/main.css.scss";

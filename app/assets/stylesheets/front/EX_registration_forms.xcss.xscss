@@ -5,7 +5,7 @@
   url('front/13947-webfont.ttf') format('truetype');
 }
 
-.control-group label abbr {
+label abbr {
   display: none;
 }
 
@@ -347,13 +347,13 @@ ul, li {
   margin-left: 5px;
 }
 
-.control-group {
-  width: auto;
-  display: inline-block;
-  input {
-    width: 150px;
-  }
-}
+//.simple_form.user {
+//  width: auto;
+//  display: inline-block;
+//  input {
+//    width: 150px;
+//  }
+//}
 
 
 
