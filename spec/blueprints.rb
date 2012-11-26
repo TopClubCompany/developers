@@ -41,7 +41,7 @@ Selection.blueprint {
 }
 
 Review.blueprint {
-  body { Faker::Lorem.sentence }
+  content { Faker::Lorem.sentence }
 }
 
 Event.blueprint {
