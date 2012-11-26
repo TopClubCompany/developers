@@ -51,7 +51,7 @@
       #map_details
         #map_details_wrapper
           - for i in 1..7 do
-            .place id="place_#{i}"
+            .place id="place_#{i}" *{'data-lng'=>"50.4#{i}1118", "data-lat" => "30.5#{i}2301"}
               h4
                 a href="#"
               .rating
