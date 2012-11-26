@@ -1,9 +1,15 @@
 class Review < ActiveRecord::Base
-  attr_accessible :content, :reviewable_id, :reviewable_type, :title, :food, :service, :pricing, :ambiance
+  attr_accessible :content, :reviewable_id, :reviewable_type, :title, :user_id
+
 
   belongs_to :user
   belongs_to :place
   belongs_to :reviweable, polymorphic: true
+  has_one :mark
+
+
+
+
 
 
 end
@@ -13,10 +19,6 @@ end
 #
 #  id              :integer          not null, primary key
 #  reviewable_id   :integer
-#  food            :integer
-#  service         :integer
-#  pricing         :integer
-#  ambiance        :integer
 #  reviewable_type :string(255)
 #  title           :string(255)
 #  content         :text

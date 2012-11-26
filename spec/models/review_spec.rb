@@ -9,10 +9,6 @@ end
 #
 #  id              :integer          not null, primary key
 #  reviewable_id   :integer
-#  food            :integer
-#  service         :integer
-#  pricing         :integer
-#  ambiance        :integer
 #  reviewable_type :string(255)
 #  title           :string(255)
 #  content         :text
