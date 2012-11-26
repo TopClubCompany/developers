@@ -1,0 +1,8 @@
+= admin_form_for @mark_type do |f|
+  = f.locale_tabs do |l|
+    = f.input :name, :locale => l
+    = f.input :description, :locale => l, :as => :ckeditor
+
+
+
+  = f.save_buttons

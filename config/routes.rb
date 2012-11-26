@@ -8,9 +8,22 @@ Topclub::Application.routes.draw do
   get '/confirm_account(/:token)' => 'users/omniauth_callbacks#confirm_account', as: 'confirm_account'
   post '/user_registration' => 'users/omniauth_callbacks#user_registration', as: 'user_registration'
 
+
+  get '/profile/:user_id' => 'users/profile#show', as: 'profile'
+
   root :to => 'explore#index'
 
+  filter :locale
+
   resources :explore
+
+  #get '/search/get_more' => "search#get_more"
+
+  resources :search do
+    collection do
+      get :get_more
+    end
+  end
 
   resources :places do
     member do
@@ -71,6 +84,10 @@ Topclub::Application.routes.draw do
     end
     resources :locators do
       post :prepare, :reload, :cache_clear, :on => :collection
+    end
+
+    resources(:mark_types) do
+      post :batch, :on => :collection
     end
 
   end

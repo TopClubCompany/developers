@@ -6,10 +6,8 @@ def insert_default_user(email, admin = true)
   user                = User.new(email: email, password: password, password_confirmation: password).generate_default_fields
   user.login          = admin ? 'admin' : 'user'
   user.user_role_type = admin ? UserRoleType.admin : UserRoleType.default
-  user.user_role_type = admin ? UserRoleType.admin : UserRoleType.default
   user.activate.skip_confirmation!
   user.save!
-  user.unsuspend!
   puts "#{admin ? 'Admin: ' : 'User: '}#{email}, #{password}"
 end
 
@@ -67,12 +65,30 @@ def insert_group_feature
 
 end
 
+def insert_marks_and_reviews user
+  (rand(5) + 1).times do
+    place = Place.all.sample
+    place.reviews << Review.new(user_id: user.id, content: 'placeholder', title: 'placeholder')
+  end
+  #user.reviews.each { |review| review.mark = Mark.new(food: (rand(5) + 1) }
+
+end
+
+def insert_mark_types
+  %w(price services food).each do |type|
+    MarkType.create do |mark_type|
+      mark_type.name = type
+    end.save!
+  end
+end
+
 User.full_truncate
 insert_default_user('admin@adm.com')
 insert_default_user('user@usr.com', false)
 add_test_stuff
 insert_group_feature
-
+insert_mark_types
+#insert_marks_and_reviews(User.find_by_email('admin@adm.com'))
 
 #10.times do
 #  s = Selection.make! user: User.first

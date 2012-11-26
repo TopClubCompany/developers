@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121113190049) do
+ActiveRecord::Schema.define(:version => 20121126201135) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -275,6 +275,34 @@ ActiveRecord::Schema.define(:version => 20121113190049) do
 
   add_index "locations", ["locationable_id", "locationable_type"], :name => "index_locations_on_locationable_id_and_locationable_type"
 
+  create_table "mark_type_translations", :force => true do |t|
+    t.integer  "mark_type_id"
+    t.string   "locale"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "mark_type_translations", ["locale"], :name => "index_mark_type_translations_on_locale"
+  add_index "mark_type_translations", ["mark_type_id"], :name => "index_mark_type_translations_on_mark_type_id"
+
+  create_table "mark_types", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "marks", :force => true do |t|
+    t.integer  "value"
+    t.integer  "mark_type_id"
+    t.integer  "review_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "marks", ["mark_type_id"], :name => "index_marks_on_mark_type_id"
+  add_index "marks", ["review_id"], :name => "index_marks_on_review_id"
+
   create_table "notes", :force => true do |t|
     t.integer  "place_id"
     t.string   "picture"
@@ -357,13 +385,16 @@ ActiveRecord::Schema.define(:version => 20121113190049) do
   end
 
   create_table "reviews", :force => true do |t|
+    t.integer  "reviewable_id"
+    t.string   "reviewable_type"
+    t.string   "title"
+    t.text     "content"
     t.integer  "user_id"
-    t.integer  "place_id"
-    t.string   "body"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
+  add_index "reviews", ["reviewable_id", "reviewable_type"], :name => "index_reviews_on_reviewable_id_and_reviewable_type"
   add_index "reviews", ["user_id"], :name => "index_reviews_on_user_id"
 
   create_table "selections", :force => true do |t|

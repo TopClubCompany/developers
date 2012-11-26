@@ -1,25 +1,83 @@
 class SearchForm
-
   constructor: ->
+    @createMap()
+    @showMap()
     @bind_change_view()
+    @give_more()
 
   bind_change_view: =>
     self = @
     $("#view_switch a").on 'click', (e) -> self.change_type_view(e, $(this))
 
+  createMap: () ->
+
+    initialData = $('#map').data()
+    mapOptions =
+      center: new google.maps.LatLng(initialData.lat, initialData.lng),
+      zoom: 12,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+
+    @map = new google.maps.Map(document.getElementById("map"), mapOptions)
+    @addMarkers()
+
+  addMarkers: () =>
+    self = @
+    $places = $('#map_details_wrapper').find('.place')
+    $places.each (index, element) ->
+      data = $(element).data()
+      marker = new google.maps.Marker(
+        position: new google.maps.LatLng(data.lat, data.lng)
+        title: "Hello from #{data.id}!"
+        html: "<a class='marker' href='#{data.id}' >place</a>"
+      )
+      marker.setMap(self.map);
+      google.maps.event.addListener marker, "mouseover", ->
+        selector = '#' + data.id
+        console.log selector
+        $(selector).addClass 'target'
+
+      google.maps.event.addListener marker, "click", ->
+        selector = '#' + data.id
+        console.log selector
+        console.log $(selector).attr('href')
+
+      google.maps.event.addListener marker, "mouseout", ->
+        selector = '#' + data.id
+        console.log selector
+        $(selector).removeClass 'target'
+
+
   change_type_view: (e, $el) =>
     e.preventDefault()
+
     unless $el.hasClass('current')
-      $("#view_switch a.current").removeClass('current')
-      $el.toggleClass('current')
-      if $el.attr('id') == 'map_view'
-        $('#list_grid_view').hide()
-        $('#listing.span10 #map').show()
-        $('#listing.span10 #map_details').show()
-      else
-        $('#list_grid_view').show()
-        $('#listing.span10 #map').hide()
-        $('#listing.span10 #map_details').hide()
+      $('#grid_view, #map_view').toggleClass('current')
+      if $el.attr('id') is 'map_view' then @showMap() else @showList()
+
+  showMap: () =>
+    $('#list_grid_view').hide()
+    $('#map').add('#map_details').show()
+
+  showList: () =>
+    $('#list_grid_view').show()
+    $('#map').add('#map_details').hide()
+
+  give_more: =>
+    @more_template = Handlebars.compile($("#more_template").html())
+    self = @
+    $("a.more").on 'click', (e) ->
+      e.preventDefault()
+      $el = $(this)
+      type = $el.data('type')
+      if type
+        $.getJSON '/search/get_more',{type: type}, (data) => parse_more_objects.call(self, data, $el)
+
+  #private methods
+  parse_more_objects = (data, $el) ->
+    _.each data, (obj) =>
+      $el.prev().prev().after(@more_template(obj))
+    $el.hide()
+
 
 $ ->
-  new SearchForm()
+  new SearchForm() if $("#map").size() > 0

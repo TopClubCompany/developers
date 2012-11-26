@@ -1,8 +1,11 @@
 # -*- encoding : utf-8 -*-
 module ApplicationHelper
 
-  def get_reg_form_attr_name(attr, require = false)
-    (User.han(attr) + ':') + (' <b>*</b>'.html_safe if require).to_s
+  def get_reg_form_attr_name(attr, require = nil)
+    validator = ActiveModel::Validations::PresenceValidator
+    attr_name = User.han(attr) + ':'
+    User.validators_on(attr.to_sym).each { |v| require = true if v.is_a? validator } if require.nil?
+    require ? attr_name + (content_tag :b,'*') : attr_name
   end
 
   def rand_str
@@ -211,6 +214,13 @@ module ApplicationHelper
     MIME::Type.new(content_type).try(:sub_type)
   end
 
+  def locale_class(locale)
+    if I18n.locale.to_s == locale.to_s
+      "active"
+    else
+      ""
+    end
+  end
 
 
 

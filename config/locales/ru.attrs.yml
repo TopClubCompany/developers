@@ -3,8 +3,6 @@ ru:
   activerecord: 
     attributes: 
       asset: 
-        asset_tags: Asset tags
-        asset_textures: Asset textures
         assetable: Assetable
         assetable_id: Assetable
         assetable_type: Assetable type
@@ -24,8 +22,6 @@ ru:
         name_ru: "Name (рус.)"
         name_uk: "Name (укр.)"
         sort_order: Sort order
-        tags: Tags
-        textures: Textures
         type: Type
         updated_at: Updated at
         user: User
@@ -39,6 +35,8 @@ ru:
         description_en: "Description (анг.)"
         description_ru: "Description (рус.)"
         description_uk: "Description (укр.)"
+        group_feature_categories: Group feature categories
+        group_features: Group features
         header: Header
         is_visible: Is visible
         lft: Lft
@@ -49,6 +47,7 @@ ru:
         parent: Parent
         parent_id: Parent
         pictures: Pictures
+        place_categories: Place categories
         places: Places
         rgt: Rgt
         slug: Slug
@@ -79,13 +78,14 @@ ru:
         description_en: "Description (анг.)"
         description_ru: "Description (рус.)"
         description_uk: "Description (укр.)"
-        image: Image
         is_visible: Is visible
         name: Name
         name_en: "Name (анг.)"
         name_ru: "Name (рус.)"
         name_uk: "Name (укр.)"
         pictures: Pictures
+        place_kitchens: Place kitchens
+        places: Places
         slug: Slug
         updated_at: Updated at
         user: User
@@ -139,17 +139,35 @@ ru:
         user_id: User
         visible_children: Visible children
       user: 
+        account_id: Account
+        accounts: Accounts
+        address: City
+        avatar: Avatar
+        birthday: Birthday
+        confirmation_sent_at: Confirmation sent at
+        confirmed_at: Confirmed at
         created_at: Created at
         current_sign_in_ip: Current sign in ip
         email: Email
         encrypted_password: Encrypted password
+        facebook_friends: Facebook friends
+        first_name: First name
+        gender: Gender
+        last_name: Last name
         last_sign_in_at: Last sign in at
         last_sign_in_ip: Last sign in ip
-        name: Name
-        photo: Photo
+        locked_at: Locked at
+        login: Login
+        patronymic: Patronymic
+        phone: Phone
         reviews: Reviews
         sign_in_count: Sign in count
+        trust_state: Trust state
+        unconfirmed_email: Unconfirmed email
+        unlock_token: Unlock token
         updated_at: Updated at
+        user_role_id: User role
+        vk_friends: Vk friends
     models: 
       asset: 
         few: Asset

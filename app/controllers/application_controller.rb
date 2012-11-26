@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   include Styx::Initializer
 
   before_filter :login_happy_user
+  before_filter :set_locale
   before_filter :current_city
 
   protected
@@ -13,7 +14,15 @@ class ApplicationController < ActionController::Base
     end
 
     def current_city
-      @current_city ||= (params[:city] || "Kiev")
+      session[:city] ||= (params[:city] || "Kiev")
     end
 
+
+    def set_locale
+      if params[:locale] && Globalize.available_locales.include?(params[:locale].to_sym) && !request.xhr?
+        I18n.locale = params[:locale].to_sym
+      else
+        I18n.locale = I18n.default_locale
+      end
+    end
 end

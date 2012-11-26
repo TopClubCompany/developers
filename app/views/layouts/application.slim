@@ -6,6 +6,7 @@ html
     = render "layouts/fixed"
     div#wrapper
       = render "layouts/header"
+      /= render "shared/breadcrumbs" if not devise pages
       .content#search_results
         = bootstrap_flash
         = yield
