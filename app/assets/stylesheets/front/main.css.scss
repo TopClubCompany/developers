@@ -1,8 +1,8 @@
-@font-face{ 
-	font-family: 'univers_condensedmedium';
-	src: image_url('13947-WebFont.eot?#iefix') format('embedded-opentype'),
-	     image_url('13947-WebFont.woff') format('woff'),
-	     image_url('13947-WebFont.ttf') format('truetype');
+@font-face{
+  font-family: 'univers_condensedmedium';
+  src: url('/univers_condensedmedium.eot?#iefix') format('embedded-opentype'),
+       url('/univers_condensedmedium.woff') format('woff'),
+       url('/univers_condensedmedium.ttf') format('truetype');
 }
 
 html, body {height: 100%; margin: 0; padding: 0;}

@@ -2,6 +2,6 @@
   display: none;
 }
 
-place:target {
-  background: yellow;
+.place:target, .place.target {
+  //background: gray;
 }
