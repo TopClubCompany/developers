@@ -358,6 +358,10 @@ ActiveRecord::Schema.define(:version => 20121126100556) do
 
   create_table "reviews", :force => true do |t|
     t.integer  "reviewable_id"
+    t.integer  "food"
+    t.integer  "service"
+    t.integer  "pricing"
+    t.integer  "ambiance"
     t.string   "reviewable_type"
     t.string   "title"
     t.text     "content"
