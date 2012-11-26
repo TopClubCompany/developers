@@ -2,13 +2,6 @@ class CreateReviews < ActiveRecord::Migration
   def change
     create_table :reviews do |t|
       t.integer :reviewable_id
-      t.integer :food
-      t.integer :service
-      t.integer :pricing
-      t.integer :ambiance
-
-
-
 
       t.string :reviewable_type
       t.string :title
