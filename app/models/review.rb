@@ -1,25 +1,20 @@
+class Review < ActiveRecord::Base
+  attr_accessible :content, :reviewable_id, :reviewable_type, :title
+
+  belongs_to :reviweable, polymorphic: true
+  belongs_to :user
+
+end
 # == Schema Information
 #
 # Table name: reviews
 #
-#  id         :integer          not null, primary key
-#  user_id    :integer
-#  place_id   :integer
-#  body       :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :integer          not null, primary key
+#  reviewable_id   :integer
+#  reviewable_type :string(255)
+#  title           :string(255)
+#  content         :text
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
-# Indexes
-#
-#  index_reviews_on_user_id  (user_id)
-#
-
-class Review < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :place
-
-
-
-end
-
 

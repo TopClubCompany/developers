@@ -261,7 +261,7 @@ input[type='submit']:hover {
 #sign_up_page select[name='day'] { width: 60px; }
 #sign_up_page select[name='year'] { width: 80px; }
 
-#sign_up_page input[type="text"], #sign_up_page input[type="password"] {
+#sign_up_page input[type="text"], #sign_up_page input[type="password"], #sign_up_page input[type="email"] {
 	font-size: 13px;
 	color: #000;
 	width: 150px;
@@ -725,7 +725,9 @@ input[type='submit']:hover {
   display: none;
 }
 
-
+.simple_form.user abbr {
+  display: none;
+}
 
 
 

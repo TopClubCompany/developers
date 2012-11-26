@@ -3,8 +3,6 @@ ru:
   activerecord: 
     attributes: 
       asset: 
-        asset_tags: Asset tags
-        asset_textures: Asset textures
         assetable: Assetable
         assetable_id: Assetable
         assetable_type: Assetable type
@@ -24,34 +22,7 @@ ru:
         name_ru: "Name (рус.)"
         name_uk: "Name (укр.)"
         sort_order: Sort order
-        tags: Tags
-        textures: Textures
         type: Type
-        updated_at: Updated at
-        user: User
-        user_id: User
-      category: 
-        category_image: Category image
-        children: Children
-        created_at: Created at
-        depth: Depth
-        description: Description
-        description_en: "Description (анг.)"
-        description_ru: "Description (рус.)"
-        description_uk: "Description (укр.)"
-        header: Header
-        is_visible: Is visible
-        lft: Lft
-        name: Name
-        name_en: "Name (анг.)"
-        name_ru: "Name (рус.)"
-        name_uk: "Name (укр.)"
-        parent: Parent
-        parent_id: Parent
-        pictures: Pictures
-        places: Places
-        rgt: Rgt
-        slug: Slug
         updated_at: Updated at
         user: User
         user_id: User
@@ -73,23 +44,6 @@ ru:
         title_ru: "Title (рус.)"
         title_uk: "Title (укр.)"
         updated_at: Updated at
-      kitchen: 
-        created_at: Created at
-        description: Description
-        description_en: "Description (анг.)"
-        description_ru: "Description (рус.)"
-        description_uk: "Description (укр.)"
-        image: Image
-        is_visible: Is visible
-        name: Name
-        name_en: "Name (анг.)"
-        name_ru: "Name (рус.)"
-        name_uk: "Name (укр.)"
-        pictures: Pictures
-        slug: Slug
-        updated_at: Updated at
-        user: User
-        user_id: User
       static_page: 
         attachment_files: Attachment files
         content: Content
@@ -139,57 +93,121 @@ ru:
         user_id: User
         visible_children: Visible children
       user: 
+        account_id: Account
+        accounts: Accounts
+        address: City
+        avatar: Avatar
+        birthday: Birthday
+        confirmation_sent_at: Confirmation sent at
+        confirmed_at: Confirmed at
         created_at: Created at
         current_sign_in_ip: Current sign in ip
         email: Email
         encrypted_password: Encrypted password
+        facebook_friends: Facebook friends
+        first_name: First name
+        gender: Gender
+        last_name: Last name
         last_sign_in_at: Last sign in at
         last_sign_in_ip: Last sign in ip
-        name: Name
-        photo: Photo
+        locked_at: Locked at
+        login: Login
+        patronymic: Patronymic
+        phone: Phone
         reviews: Reviews
         sign_in_count: Sign in count
+        trust_state: Trust state
+        unconfirmed_email: Unconfirmed email
+        unlock_token: Unlock token
         updated_at: Updated at
+        user_role_id: User role
+        vk_friends: Vk friends
+      category: 
+        category_image: Category image
+        children: Children
+        created_at: Created at
+        depth: Depth
+        description: Description
+        description_en: "Description (анг.)"
+        description_ru: "Description (рус.)"
+        description_uk: "Description (укр.)"
+        group_feature_categories: Group feature categories
+        group_features: Group features
+        header: Header
+        is_visible: Is visible
+        lft: Lft
+        name: Name
+        name_en: "Name (анг.)"
+        name_ru: "Name (рус.)"
+        name_uk: "Name (укр.)"
+        parent: Parent
+        parent_id: Parent
+        pictures: Pictures
+        place_categories: Place categories
+        places: Places
+        rgt: Rgt
+        slug: Slug
+        updated_at: Updated at
+        user: User
+        user_id: User
+      kitchen: 
+        created_at: Created at
+        description: Description
+        description_en: "Description (анг.)"
+        description_ru: "Description (рус.)"
+        description_uk: "Description (укр.)"
+        is_visible: Is visible
+        name: Name
+        name_en: "Name (анг.)"
+        name_ru: "Name (рус.)"
+        name_uk: "Name (укр.)"
+        pictures: Pictures
+        place_kitchens: Place kitchens
+        places: Places
+        slug: Slug
+        updated_at: Updated at
+        user: User
+        user_id: User
     models: 
       asset: 
-        few: Asset
-        many: Asset
-        one: Asset
         other: Asset
         zero: Asset
-      category: 
-        few: "Категорий"
-        many: "Категорий"
-        one: "Категория"
-        other: "Категорий"
-        zero: "Категорий"
+        one: Asset
+        few: Asset
+        many: Asset
       header: 
-        few: Header
-        many: Header
-        one: Header
         other: Header
         zero: Header
-      kitchen: 
-        few: Kitchen
-        many: Kitchen
-        one: Kitchen
-        other: Kitchen
-        zero: Kitchen
+        one: Header
+        few: Header
+        many: Header
       static_page: 
-        few: Static page
-        many: Static page
-        one: Static page
         other: Static page
         zero: Static page
+        one: Static page
+        few: Static page
+        many: Static page
       structure: 
-        few: Structure
-        many: Structure
-        one: Structure
         other: Structure
         zero: Structure
+        one: Structure
+        few: Structure
+        many: Structure
       user: 
-        few: User
-        many: User
-        one: User
         other: User
         zero: User
+        one: User
+        few: User
+        many: User
+      category: 
+        other: "Категорий"
+        zero: "Категорий"
+        one: "Категория"
+        few: "Категорий"
+        many: "Категорий"
+      kitchen: 
+        other: Kitchen
+        zero: Kitchen
+        one: Kitchen
+        few: Kitchen
+        many: Kitchen
