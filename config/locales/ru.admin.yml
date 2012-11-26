@@ -60,6 +60,17 @@ ru:
         moderate: $11 - $3
         spendy: $31 - $60
         splurge: "> $61"
+      code:
+        cheap: "Cheap"
+        moderate: "Medium"
+        spendy: "Reasonable"
+        splurge: "Premium"
+      image:
+        cheap: "$"
+        moderate: "$$"
+        spendy: "$$$"
+        splurge: "$$$$"
+
     cant_be_deleted: "Удаление невозможно"
     choose: "Выберите %{attr}"
     clear_cache: "Очистить кеш"

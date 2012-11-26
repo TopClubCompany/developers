@@ -8,18 +8,6 @@
           a.by_topclub href="/" RESERVE
         span.few-words Restaurant Reservations. Free · Instant · Save money
       .span4
-        - if user_signed_in?
-          .user_module
-            .ava
-            .user_hello
-              p
-                |Привет,  &nbsp;
-              span
-                = current_user.email + " !"
-              = link_to 'logout', quit_path, method: 'delete', id: 'logout_link'
-              .user_arrow
-            .num_frnds
-              .digits 10
-        - else
+        - unless user_signed_in?
           a.sign_up href=new_user_registration_path Sign up
           a.sign_in href=new_user_session_path Sign in
