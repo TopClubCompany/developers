@@ -152,3 +152,6 @@ en:
       next: ""
       previous: ""
       truncate: ""
+
+  registration_form:
+    or: ' or '

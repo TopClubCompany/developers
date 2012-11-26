@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121126100556) do
+ActiveRecord::Schema.define(:version => 20121126205826) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -114,6 +114,28 @@ ActiveRecord::Schema.define(:version => 20121126100556) do
 
   add_index "category_translations", ["category_id"], :name => "index_category_translations_on_category_id"
   add_index "category_translations", ["locale"], :name => "index_category_translations_on_locale"
+
+  create_table "cities", :force => true do |t|
+    t.string   "slug",                         :null => false
+    t.boolean  "is_visible", :default => true
+    t.integer  "position"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
+
+  add_index "cities", ["slug"], :name => "index_cities_on_slug", :unique => true
+
+  create_table "city_translations", :force => true do |t|
+    t.integer  "city_id"
+    t.string   "locale"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "city_translations", ["city_id"], :name => "index_city_translations_on_city_id"
+  add_index "city_translations", ["locale"], :name => "index_city_translations_on_locale"
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -275,6 +297,34 @@ ActiveRecord::Schema.define(:version => 20121126100556) do
 
   add_index "locations", ["locationable_id", "locationable_type"], :name => "index_locations_on_locationable_id_and_locationable_type"
 
+  create_table "mark_type_translations", :force => true do |t|
+    t.integer  "mark_type_id"
+    t.string   "locale"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "mark_type_translations", ["locale"], :name => "index_mark_type_translations_on_locale"
+  add_index "mark_type_translations", ["mark_type_id"], :name => "index_mark_type_translations_on_mark_type_id"
+
+  create_table "mark_types", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "marks", :force => true do |t|
+    t.integer  "value"
+    t.integer  "mark_type_id"
+    t.integer  "review_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "marks", ["mark_type_id"], :name => "index_marks_on_mark_type_id"
+  add_index "marks", ["review_id"], :name => "index_marks_on_review_id"
+
   create_table "notes", :force => true do |t|
     t.integer  "place_id"
     t.string   "picture"
@@ -358,10 +408,6 @@ ActiveRecord::Schema.define(:version => 20121126100556) do
 
   create_table "reviews", :force => true do |t|
     t.integer  "reviewable_id"
-    t.integer  "food"
-    t.integer  "service"
-    t.integer  "pricing"
-    t.integer  "ambiance"
     t.string   "reviewable_type"
     t.string   "title"
     t.text     "content"

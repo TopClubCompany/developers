@@ -13,7 +13,7 @@
 //=require jquery
 //=require jquery-ui
 //=require jquery_ujs
-//q= require twitter/bootstrap
+//= require twitter/bootstrap
 //=require jquery.browser
 //=require jquery.extend
 //=require jquery.lionbars.0.3
@@ -25,5 +25,8 @@
 //=require custom_elements
 //=require waypoints
 //=require styx
+//=require styx
+//= require underscore-min
+//= require handlebars
 
 //=require_tree ./frontend

@@ -1,198 +1,198 @@
-//validate email in order form
-function validateEmail(){
-    var email = $('#new_user #user_email');
-    email.keyup(function(event) {
-        $(this).tipsy({trigger: 'manual',gravity: 'w'});
-        if($(this).val() == ''){
-            $(this).tipsy('hide');
-        }
-        else{
-            if(/[а-я]+/i.test($(this).val())){
-                $(this).attr('original-title','Только латиница')
-                $(this).tipsy('show');
-            }else if(($(this).val()).length > 7){
-                $(this).attr('original-title','Введите корректный e-mail')
-                //original-title=Введите корректный e-mail
-                pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,5}$/i
-                if(!pattern.test($(this).val())){
-                    $(this).tipsy('show');
-                }
-                else{
-                    $(this).tipsy('hide');
-                }
-            }
-            else{
-                $(this).tipsy('hide');
-            }
-        }
-    });
-    email.blur(function(){
-        $(this).tipsy({trigger: 'manual',gravity: 'w'});
-        $(this).attr('original-title','Введите корректный e-mail')
-        if($(this).val() == ''){
-            $(this).tipsy('hide');
-        }
-        else{
-            if(/[а-я]+/i.test($(this).val())){
-                $(this).attr('original-title','Только латиница')
-                $(this).tipsy('show');
-            }else if(($(this).val()).length > 0){
-                $(this).attr('original-title','Введите корректный e-mail')
-                //original-title=Введите корректный e-mail
-                /* /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z.]{2,5}$/i */
-                pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,5}$/i
-                if(!pattern.test($(this).val())){
-                    $(this).tipsy('show');
-                }
-                else{
-                    $(this).tipsy('hide');
-                }
-            }
-            else{
-                $(this).tipsy('hide');
-            }
-        }
-    });
-}
-function enter_phone(){
-    //event enter phone (only numbers)
-    var user_phone = $('#new_user #user_phone');
-    user_phone.keyup(function(event) {
-        $(this).tipsy({trigger: 'manual',gravity: 'w'});
-        // Allow: backspace, delete, tab, escape, and enter
-        if ( event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 || event.keyCode == 13 ||
-            // Allow: Ctrl+A
-            (event.keyCode == 65 && event.ctrlKey === true) ||
-            // Allow: home, end, left, right
-            (event.keyCode >= 35 && event.keyCode <= 39)) {
-            // let it happen, don't do anything
-            return;
-        }
-        else {
-            // Ensure that it is a number and stop the keypress
-            if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
-                //$('.order_phone_error').show()
-                $(this).tipsy('show');
-                //$('.order_phone_error').tooltip('show');
-                function hide (){
-                    //$('order_phone_error').fadeOut()
-                    $(this).tipsy('hide');
-                    //$('.order_phone_error').tooltip('hide');
-                }
-                setTimeout(hide, 1500)
-                event.preventDefault();
-            }
-            else{
-                //$('.order_phone_error').hide();
-                //$('.order_phone_error').tooltip('hide');
-                $(this).tipsy('hide');
-            }
-        }
-    });
-    user_phone.blur(function(){
-        $(this).tipsy({trigger: 'manual',gravity: 'w'});
-        $(this).tipsy('hide');
-    });
-}
+////validate email in order form
+//function validateEmail(){
+//    var email = $('#new_user #user_email');
+//    email.keyup(function(event) {
+//        $(this).tipsy({trigger: 'manual',gravity: 'w'});
+//        if($(this).val() == ''){
+//            $(this).tipsy('hide');
+//        }
+//        else{
+//            if(/[а-я]+/i.test($(this).val())){
+//                $(this).attr('original-title','Только латиница')
+//                $(this).tipsy('show');
+//            }else if(($(this).val()).length > 7){
+//                $(this).attr('original-title','Введите корректный e-mail')
+//                //original-title=Введите корректный e-mail
+//                pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,5}$/i
+//                if(!pattern.test($(this).val())){
+//                    $(this).tipsy('show');
+//                }
+//                else{
+//                    $(this).tipsy('hide');
+//                }
+//            }
+//            else{
+//                $(this).tipsy('hide');
+//            }
+//        }
+//    });
+//    email.blur(function(){
+//        $(this).tipsy({trigger: 'manual',gravity: 'w'});
+//        $(this).attr('original-title','Введите корректный e-mail')
+//        if($(this).val() == ''){
+//            $(this).tipsy('hide');
+//        }
+//        else{
+//            if(/[а-я]+/i.test($(this).val())){
+//                $(this).attr('original-title','Только латиница')
+//                $(this).tipsy('show');
+//            }else if(($(this).val()).length > 0){
+//                $(this).attr('original-title','Введите корректный e-mail')
+//                //original-title=Введите корректный e-mail
+//                /* /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z.]{2,5}$/i */
+//                pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,5}$/i
+//                if(!pattern.test($(this).val())){
+//                    $(this).tipsy('show');
+//                }
+//                else{
+//                    $(this).tipsy('hide');
+//                }
+//            }
+//            else{
+//                $(this).tipsy('hide');
+//            }
+//        }
+//    });
+//}
+//function enter_phone(){
+//    //event enter phone (only numbers)
+//    var user_phone = $('#new_user #user_phone');
+//    user_phone.keyup(function(event) {
+//        $(this).tipsy({trigger: 'manual',gravity: 'w'});
+//        // Allow: backspace, delete, tab, escape, and enter
+//        if ( event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 27 || event.keyCode == 13 ||
+//            // Allow: Ctrl+A
+//            (event.keyCode == 65 && event.ctrlKey === true) ||
+//            // Allow: home, end, left, right
+//            (event.keyCode >= 35 && event.keyCode <= 39)) {
+//            // let it happen, don't do anything
+//            return;
+//        }
+//        else {
+//            // Ensure that it is a number and stop the keypress
+//            if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
+//                //$('.order_phone_error').show()
+//                $(this).tipsy('show');
+//                //$('.order_phone_error').tooltip('show');
+//                function hide (){
+//                    //$('order_phone_error').fadeOut()
+//                    $(this).tipsy('hide');
+//                    //$('.order_phone_error').tooltip('hide');
+//                }
+//                setTimeout(hide, 1500)
+//                event.preventDefault();
+//            }
+//            else{
+//                //$('.order_phone_error').hide();
+//                //$('.order_phone_error').tooltip('hide');
+//                $(this).tipsy('hide');
+//            }
+//        }
+//    });
+//    user_phone.blur(function(){
+//        $(this).tipsy({trigger: 'manual',gravity: 'w'});
+//        $(this).tipsy('hide');
+//    });
+//}
 
-function validPass(){
-    var user_pass = $('#new_user #user_password');
-    user_pass.keyup(function(event) {
-        $(this).tipsy({trigger: 'manual',gravity: 'w'});
-        if($(this).val() == ''){
-            $(this).tipsy('hide');
-        }
-        else{
-            if(/[а-я]+/i.test($(this).val())){
-                $(this).attr('original-title','Только латиница')
-                $(this).tipsy('show');
-            }
-            else{
-                $(this).tipsy('hide');
-            }
-        }
-    });
+//function validPass(){
+//    var user_pass = $('#new_user #user_password');
+//    user_pass.keyup(function(event) {
+//        $(this).tipsy({trigger: 'manual',gravity: 'w'});
+//        if($(this).val() == ''){
+//            $(this).tipsy('hide');
+//        }
+//        else{
+//            if(/[а-я]+/i.test($(this).val())){
+//                $(this).attr('original-title','Только латиница')
+//                $(this).tipsy('show');
+//            }
+//            else{
+//                $(this).tipsy('hide');
+//            }
+//        }
+//    });
+//
+//    user_pass.blur(function(){
+//        $(this).tipsy({trigger: 'manual',gravity: 'w'});
+//        $(this).attr('original-title','Только латиница')
+//        if($(this).val() == ''){
+//            $(this).tipsy('hide');
+//        }
+//        else{
+//            if(/[а-я]+/i.test($(this).val())){
+//                $(this).attr('original-title','Только латиница')
+//                $(this).tipsy('show');
+//            }
+//            else{
+//                $(this).tipsy('hide');
+//            }
+//        }
+//    });
+//}
 
-    user_pass.blur(function(){
-        $(this).tipsy({trigger: 'manual',gravity: 'w'});
-        $(this).attr('original-title','Только латиница')
-        if($(this).val() == ''){
-            $(this).tipsy('hide');
-        }
-        else{
-            if(/[а-я]+/i.test($(this).val())){
-                $(this).attr('original-title','Только латиница')
-                $(this).tipsy('show');
-            }
-            else{
-                $(this).tipsy('hide');
-            }
-        }
-    });
-}
-
-function validNameLastname(){
-    var user_first_name = $('#new_user #user_first_name');
-    user_first_name.keyup(function(event) {
-        $(this).tipsy({trigger: 'manual',gravity: 's'});
-        if($(this).val() == ''){
-            $(this).tipsy('hide');
-        }
-        else{
-            if(/[^а-яa-z0-9_-]+/i.test($(this).val())){
-                $(this).attr('original-title','Разрешается вводить латиницу, кириллицу, "-", "_"')
-                $(this).tipsy('show');
-            }
-            else{
-                $(this).tipsy('hide');
-            }
-        }
-    });
-
-    user_first_name.blur(function(){
-        $(this).tipsy({trigger: 'manual',gravity: 's'});
-        if($(this).val() == ''){
-            $(this).tipsy('hide');
-        }
-        else{
-            if(/[^а-яa-z0-9_-]+/i.test($(this).val())){
-                $(this).attr('original-title','Разрешается вводить латиницу, кириллицу, "-", "_"')
-                $(this).tipsy('show');
-            }
-            else{
-                $(this).tipsy('hide');
-            }
-        }
-    });
-
-    var user_last_name = $('#new_user #user_last_name');
-    user_last_name.keyup(function(event) {
-        $(this).tipsy({trigger: 'manual',gravity: 's'});
-        if(/[^а-яa-z0-9_-]+/i.test(user_last_name.val())){
-            $(this).attr('original-title','Разрешается вводить латиницу, кириллицу, "-", "_"')
-            $(this).tipsy('show');
-        }
-        else{
-            $(this).tipsy('hide');
-        }
-    });
-
-    user_last_name.blur(function(){
-        $(this).tipsy({trigger: 'manual',gravity: 's'});
-        if($(this).val() == ''){
-            $(this).tipsy('hide');
-        }
-        else{
-            if(/[^а-яa-z0-9_-]+/i.test($(this).val())){
-                $(this).attr('original-title','Разрешается вводить латиницу, кириллицу, "-", "_"')
-                $(this).tipsy('show');
-            }
-            else{
-                $(this).tipsy('hide');
-            }
-        }
-    });
-}
+//function validNameLastname(){
+//    var user_first_name = $('#new_user #user_first_name');
+//    user_first_name.keyup(function(event) {
+//        $(this).tipsy({trigger: 'manual',gravity: 's'});
+//        if($(this).val() == ''){
+//            $(this).tipsy('hide');
+//        }
+//        else{
+//            if(/[^а-яa-z0-9_-]+/i.test($(this).val())){
+//                $(this).attr('original-title','Разрешается вводить латиницу, кириллицу, "-", "_"')
+//                $(this).tipsy('show');
+//            }
+//            else{
+//                $(this).tipsy('hide');
+//            }
+//        }
+//    });
+//
+//    user_first_name.blur(function(){
+//        $(this).tipsy({trigger: 'manual',gravity: 's'});
+//        if($(this).val() == ''){
+//            $(this).tipsy('hide');
+//        }
+//        else{
+//            if(/[^а-яa-z0-9_-]+/i.test($(this).val())){
+//                $(this).attr('original-title','Разрешается вводить латиницу, кириллицу, "-", "_"')
+//                $(this).tipsy('show');
+//            }
+//            else{
+//                $(this).tipsy('hide');
+//            }
+//        }
+//    });
+//
+//    var user_last_name = $('#new_user #user_last_name');
+//    user_last_name.keyup(function(event) {
+//        $(this).tipsy({trigger: 'manual',gravity: 's'});
+//        if(/[^а-яa-z0-9_-]+/i.test(user_last_name.val())){
+//            $(this).attr('original-title','Разрешается вводить латиницу, кириллицу, "-", "_"')
+//            $(this).tipsy('show');
+//        }
+//        else{
+//            $(this).tipsy('hide');
+//        }
+//    });
+//
+//    user_last_name.blur(function(){
+//        $(this).tipsy({trigger: 'manual',gravity: 's'});
+//        if($(this).val() == ''){
+//            $(this).tipsy('hide');
+//        }
+//        else{
+//            if(/[^а-яa-z0-9_-]+/i.test($(this).val())){
+//                $(this).attr('original-title','Разрешается вводить латиницу, кириллицу, "-", "_"')
+//                $(this).tipsy('show');
+//            }
+//            else{
+//                $(this).tipsy('hide');
+//            }
+//        }
+//    });
+//}
 
 function checkNewUser(){
     user_pass = $('#new_user #user_password');
@@ -298,10 +298,10 @@ function checkNewUser(){
 }
 
 $(document).ready(function(){
-    validateEmail();
-    enter_phone();
-    validPass();
-    validNameLastname();
+//    validateEmail();
+//    enter_phone();
+//    validPass();
+//    validNameLastname();
     $('#new_user #user_phone').mask('+38(999)999-99-99');
     $('#sign_up_page #new_user').submit(function(){
         if(!checkNewUser()){

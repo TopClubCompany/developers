@@ -130,7 +130,7 @@ group :development, :test do
   gem 'forgery', '0.3.12'
   gem 'jasmine-rails'
   gem "capybara"
-  gem 'capybara-webkit'
+  gem 'capybara-webkit', '0.12.1'
   gem 'cucumber-rails', :require => false
   gem "spork"
   gem "guard-rspec"

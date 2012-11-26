@@ -1,25 +1,14 @@
 #fixed
   .content
     ul#language
-      li#eng.active
-        a href="/en/" English
-      li#rus
-        a href="/ru/" Русский
-      li#ukr
-        a href="/ua/" Українська
+      - Globalize.available_locales.each do |locale|
+        li id=locale.to_s class=locale_class(locale)
+          a href="/#{locale.to_s}/"= I18n.t("language_title.#{locale.to_s}")
     ul#location
-      li.active
-        a href="#" Kiev
-      li
-        a href="#" Kharkiv
-      li
-        a href="#" Odessa
-      li
-        a href="#" Dnepropetrivsk
-      li
-        a href="#" Donetsk
-      li
-        a href="#" Lviv
+      - City.with_translations.each do |city|
+        li class=get_city_class(city.slug)
+          a href="/#{city.slug}"= city.name
+
     #header_links
       a.first href="#" Help &amp; Support
       a href="#" F.A.Q.
@@ -40,7 +29,7 @@
           li
             = link_to 'My reviews', '#'
           li
-            = link_to 'Settings', profile_path(current_user.id)
+            /= link_to 'Settings', profile_path(current_user.id)
           li
             = link_to 'Diner style', '#'
           li
