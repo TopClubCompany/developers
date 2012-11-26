@@ -30,7 +30,7 @@
           .clear
           = f.input :password_confirmation, label: get_reg_form_attr_name(:password_confirmation), required: false
           .clear
-          = f.input :address, label: get_reg_form_attr_name(:address)
+          = f.input :address, label: get_reg_form_attr_name(:address), input_html: {value: get_city_from_ip()}
           .clear
           = f.input :gender,  collection: [[:Male, 1],[:Female, 2]], prompt: 'select your gender'
           .clear
