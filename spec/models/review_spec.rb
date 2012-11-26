@@ -1,9 +1,7 @@
-class Review < ActiveRecord::Base
-  attr_accessible :content, :reviewable_id, :reviewable_type, :title
+require 'spec_helper'
 
-  belongs_to :reviweable, polymorphic: true
-  belongs_to :user
-
+describe Review do
+  pending "add some examples to (or delete) #{__FILE__}"
 end
 # == Schema Information
 #

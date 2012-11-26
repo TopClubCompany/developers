@@ -22,7 +22,7 @@ class Place < ActiveRecord::Base
 
   has_many :notes
   has_many :events
-  has_many :reviews
+  has_many :reviews, :as => :reviewable
 
   enumerated_attribute :bill, :id_attribute => :avg_bill, :class => ::BillType
 

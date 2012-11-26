@@ -28,9 +28,13 @@
           .clear
           = f.input :password, label: get_reg_form_attr_name(:password)
           .clear
+<<<<<<< HEAD
           = f.input :password_confirmation, label: get_reg_form_attr_name(:password_confirmation), required: false
           .clear
           = f.input :address, label: get_reg_form_attr_name(:address), input_html: {value: get_city_from_ip()}
+=======
+          = f.input :address, label: 'City:'
+>>>>>>> 41714b6345d9a938afd0d204e14398a1f81b1b0e
           .clear
           = f.input :gender,  collection: [[:Male, 1],[:Female, 2]], prompt: 'select your gender'
           .clear
