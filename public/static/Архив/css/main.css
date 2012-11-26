@@ -1,8 +1,8 @@
 @font-face{ 
 	font-family: 'univers_condensedmedium';
-	src: url('13947-WebFont.eot?#iefix') format('embedded-opentype'),
-	     url('13947-WebFont.woff') format('woff'),
-	     url('13947-WebFont.ttf') format('truetype');
+	src: url('/univers_condensedmedium.eot?#iefix') format('embedded-opentype'),
+	     url('/univers_condensedmedium.woff') format('woff'),
+	     url('/univers_condensedmedium.ttf') format('truetype');
 }
 
 html, body {height: 100%; margin: 0; padding: 0;}
@@ -663,11 +663,17 @@ input[type='submit']:hover {
 
 #listing #map_details {
 	float: right;
-	width: 270px;
+
 	height: 450px;
 	overflow-y: scroll;
 	overflow-x: hidden;
 }
+#listing #map_details_wrapper {
+    overflow: hidden;
+    border: red 2px solid;
+    width: 270px;
+}
+
 
 #listing #map_details .place {
 	padding: 10px;

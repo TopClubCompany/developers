@@ -1,6 +1,7 @@
 class SearchForm
 
   constructor: ->
+    @showMap()
     @bind_change_view()
 
   bind_change_view: =>
@@ -9,17 +10,19 @@ class SearchForm
 
   change_type_view: (e, $el) =>
     e.preventDefault()
+
     unless $el.hasClass('current')
-      $("#view_switch a.current").removeClass('current')
-      $el.toggleClass('current')
-      if $el.attr('id') == 'map_view'
-        $('#list_grid_view').hide()
-        $('#listing.span10 #map').show()
-        $('#listing.span10 #map_details').show()
-      else
-        $('#list_grid_view').show()
-        $('#listing.span10 #map').hide()
-        $('#listing.span10 #map_details').hide()
+      $('#grid_view, #map_view').toggleClass('current')
+      if $el.attr('id') is 'map_view' then @showMap() else @showList()
+
+  showMap: () =>
+    $('#list_grid_view').hide()
+    $('#map').add('#map_details').show()
+
+  showList: () =>
+    $('#list_grid_view').show()
+    $('#map').add('#map_details').hide()
+
 
 $ ->
   new SearchForm()
