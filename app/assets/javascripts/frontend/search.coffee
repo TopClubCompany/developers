@@ -64,4 +64,4 @@ class SearchForm
 
 
 $ ->
-  new SearchForm()
+  new SearchForm() if $("#map").size() > 0
