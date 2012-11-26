@@ -1,12 +1,9 @@
 #fixed
   .content
     ul#language
-      li#eng.active
-        a href="/en/" English
-      li#rus
-        a href="/ru/" Русский
-      li#ukr
-        a href="/ua/" Українська
+      - Globalize.available_locales.each do |locale|
+        li id=locale.to_s class=locale_class(locale)
+          a href="/#{locale.to_s}/"= I18n.t("language_title.#{locale.to_s}")
     ul#location
       li.active
         a href="#" Kiev

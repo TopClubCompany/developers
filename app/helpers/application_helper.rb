@@ -214,6 +214,13 @@ module ApplicationHelper
     MIME::Type.new(content_type).try(:sub_type)
   end
 
+  def locale_class(locale)
+    if I18n.locale.to_s == locale.to_s
+      "active"
+    else
+      ""
+    end
+  end
 
 
 
