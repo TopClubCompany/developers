@@ -74,12 +74,21 @@ def insert_marks_and_reviews user
 
 end
 
+def insert_mark_types
+  %w(price services food).each do |type|
+    MarkType.create do |mark_type|
+      mark_type.name = type
+    end.save!
+  end
+end
+
 User.full_truncate
 insert_default_user('admin@adm.com')
 insert_default_user('user@usr.com', false)
 add_test_stuff
 insert_group_feature
-insert_marks_and_reviews(User.find_by_email('admin@adm.com'))
+insert_mark_types
+#insert_marks_and_reviews(User.find_by_email('admin@adm.com'))
 
 #10.times do
 #  s = Selection.make! user: User.first

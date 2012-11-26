@@ -71,7 +71,8 @@ end# == Schema Information
 #  patronymic             :string(255)
 #  phone                  :string(255)
 #  address                :string(255)
-#  birthday               :datetime
+#  gender                 :integer          default(2)
+#  birthday               :date
 #  account_id             :integer
 #  email                  :string(255)
 #  encrypted_password     :string(255)      default(""), not null

@@ -86,6 +86,10 @@ Topclub::Application.routes.draw do
       post :prepare, :reload, :cache_clear, :on => :collection
     end
 
+    resources(:mark_types) do
+      post :batch, :on => :collection
+    end
+
   end
   mount Ckeditor::Engine => "/ckeditor"
 end
