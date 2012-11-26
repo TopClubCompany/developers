@@ -82,13 +82,24 @@ def insert_mark_types
   end
 end
 
+def insert_city
+  [{name: "Kiev", slug: "kiev"},{name: "Kharkiv", slug: "kharkiv"}, {name: "Odessa", slug: "odessa"},
+  {name: "Dnepropetrivsk", slug: "dnepropetrivsk"}, {name: "Donetsk", slug: "donetsk"}, {name: "Lviv", slug: "lviv"}
+  ].each do |city|
+    City.create do |c|
+
+    end
+  end
+end
+
 User.full_truncate
 insert_default_user('admin@adm.com')
 insert_default_user('user@usr.com', false)
-add_test_stuff
-insert_group_feature
-insert_mark_types
+#add_test_stuff
+#insert_group_feature
+#insert_mark_types
 #insert_marks_and_reviews(User.find_by_email('admin@adm.com'))
+insert_city
 
 #10.times do
 #  s = Selection.make! user: User.first
