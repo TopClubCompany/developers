@@ -83,18 +83,20 @@ def insert_mark_types
 end
 
 def insert_city
+  City.full_truncate
   [{name: "Kiev", slug: "kiev"},{name: "Kharkiv", slug: "kharkiv"}, {name: "Odessa", slug: "odessa"},
   {name: "Dnepropetrivsk", slug: "dnepropetrivsk"}, {name: "Donetsk", slug: "donetsk"}, {name: "Lviv", slug: "lviv"}
   ].each do |city|
     City.create do |c|
-
-    end
+      c.name = city[:name]
+      c.slug = city[:slug]
+    end.save!
   end
 end
 
-User.full_truncate
-insert_default_user('admin@adm.com')
-insert_default_user('user@usr.com', false)
+#User.full_truncate
+#insert_default_user('admin@adm.com')
+#insert_default_user('user@usr.com', false)
 #add_test_stuff
 #insert_group_feature
 #insert_mark_types

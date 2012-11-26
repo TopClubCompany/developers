@@ -5,18 +5,10 @@
         li id=locale.to_s class=locale_class(locale)
           a href="/#{locale.to_s}/"= I18n.t("language_title.#{locale.to_s}")
     ul#location
-      li.active
-        a href="#" Kiev
-      li
-        a href="#" Kharkiv
-      li
-        a href="#" Odessa
-      li
-        a href="#" Dnepropetrivsk
-      li
-        a href="#" Donetsk
-      li
-        a href="#" Lviv
+      - City.with_translations.each do |city|
+        li class=get_city_class(city.slug)
+          a href="/#{city.slug}"= city.name
+
     #header_links
       a.first href="#" Help &amp; Support
       a href="#" F.A.Q.

@@ -12,9 +12,9 @@ class SearchController < ApplicationController
     type = params[:type]
     more_objects = case type
       when 'category'
-        Category.includes(:translations).offset(4)
+        Category.with_translations.offset(4)
       when 'kitchen'
-        Kitchen.includes(:translations).offset(4)
+        Kitchen.with_translations.offset(4)
       else
         {}
       end

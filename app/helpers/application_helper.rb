@@ -222,6 +222,12 @@ module ApplicationHelper
     end
   end
 
-
+  def get_city_class city
+    if session['city'].present? && session['city'] == city
+      'active'
+    elsif !session['city'].present? && city == 'kiev'
+      'active'
+    end
+  end
 
 end
