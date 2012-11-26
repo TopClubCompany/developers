@@ -28,11 +28,9 @@
           .clear
           = f.input :password, label: get_reg_form_attr_name(:password)
           .clear
-          = f.input :password_confirmation, label: get_reg_form_attr_name(:password_confirmation), required: false
+          = f.input :address, label: get_reg_form_attr_name(:address), input_html: {value: get_city_from_ip()}
           .clear
-          = f.input :address, label: get_reg_form_attr_name(:address)
-          .clear
-          = f.input :gender,  collection: [[:Male, 1],[:Female, 2]], prompt: 'select your gender'
+          = f.input :gender,  collection: GenderType.all, prompt: 'select your gender'
           .clear
           = f.label :birthday, label: get_reg_form_attr_name(:birthday)
           = f.date_select :birthday, start_year: Date.today.year - 90, end_year: Date.today.year - 8, order: [:month, :day, :year]

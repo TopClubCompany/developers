@@ -32,6 +32,7 @@ class Users::OmniauthCallbacksController < ApplicationController
     #raise user.to_yaml
     user[:birthday] = format_birthday(user)
     avatar = user.delete(:avatar)
+    user[:password_confirmation] = user[:password]
     @user = User.new(user).activate
     @user.skip_confirmation! #remove for normal registration with confirm email
     if @user.save
