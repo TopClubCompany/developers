@@ -178,7 +178,7 @@ class FormValidate
       else
         $el.tipsy "hide"
 
-    user_last_name.blur ->
+    $user_last_name.blur ->
       $el = $(this)
       value = $el.val()
       $el.tipsy
@@ -207,4 +207,4 @@ class FormValidate
     $el.attr "original-title", "Разрешается вводить латиницу, кириллицу, \"-\", \"_\""
 
 $ ->
-  new FormValidate()
+  new FormValidate() if $("#new_user").size() > 0
