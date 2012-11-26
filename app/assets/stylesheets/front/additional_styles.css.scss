@@ -1,0 +1,18 @@
+.simple_form.user abbr {
+  display: none;
+}
+
+.place:target, .place.target {
+  //background: gray;
+}
+.place.target:before {
+  content: '';
+  display: block;
+  position: absolute;
+  z-index:999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(128,128,128, 0.5);
+}
