@@ -34,6 +34,7 @@ $ ->
       [\w+%=&\d]*   # look for characters, %, =, &, and digits
     ///
   ###
-  new FilterInput()
+  if $('#refine').length isnt 0
+    new FilterInput()
 
 
