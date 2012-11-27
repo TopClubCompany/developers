@@ -26,14 +26,14 @@
         h4= I18n.t('search.category')
         - Category.with_translations.first(4).each do |category|
           label.checkbox
-            input type="checkbox" val=category.id = category.title
+            input type="checkbox" data-type="category" value=category.id = category.title
         .clear
         a.more data-type="category" href="#"
           | more >
         h4= I18n.t('search.price')
         - BillType.all.first(4).each do |bill|
           label.checkbox
-            input type="checkbox" value=bill.id
+            input type="checkbox"  data-type="price" value=bill.id
               = bill.code_title
               |&nbsp;
               b= bill.title_image
@@ -43,7 +43,7 @@
         h4= I18n.t('search.kitchen')
         - Kitchen.with_translations.first(4).each do |kitchen|
           label.checkbox
-            input type="checkbox" val=kitchen.id = kitchen.title
+            input type="checkbox" data-type="kitchen" value=kitchen.id = kitchen.title
         .clear
         a.more data-type="kitchen" href="#"
           | more >
