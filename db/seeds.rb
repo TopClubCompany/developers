@@ -97,11 +97,11 @@ end
 User.full_truncate
 insert_default_user('admin@adm.com')
 insert_default_user('user@usr.com', false)
-add_test_stuff
-insert_group_feature
-insert_mark_types
+#add_test_stuff
+#insert_group_feature
+#insert_mark_types
 #insert_marks_and_reviews(User.find_by_email('admin@adm.com'))
-insert_city
+#insert_city
 
 #10.times do
 #  s = Selection.make! user: User.first
