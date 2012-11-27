@@ -47,4 +47,8 @@ function addKitchen(){
     html+= '<label class="checkbox"><input type="checkbox">Ukrainian</label>'
     html+= '<label class="checkbox"><input type="checkbox">Caucasian</label>'
     $('#kitchen label:last').after(html);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> master
