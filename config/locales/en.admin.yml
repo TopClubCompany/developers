@@ -55,6 +55,16 @@ en:
     avatar: ""
     batch_actions: ""
     bill: 
+      code: 
+        cheap: ""
+        moderate: ""
+        spendy: ""
+        splurge: ""
+      image: 
+        cheap: ""
+        moderate: ""
+        spendy: ""
+        splurge: ""
       kind: 
         cheap: ""
         moderate: ""

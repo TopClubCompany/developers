@@ -1,0 +1,272 @@
+--- 
+ua: 
+  activerecord: 
+    attributes: 
+      user: 
+        password: ""
+        password_confirmation: ""
+        remember_me: ""
+  auth: 
+    edit_passwords: 
+      confirm_new_password: ""
+      new_password: ""
+    links: 
+      join_reserve: ""
+      receive_confirmation: ""
+      recover_password: ""
+      sign_in: ""
+      sign_out: ""
+      sign_up: ""
+    links_short: 
+      cabinet: ""
+      sign_in: ""
+      sign_out: ""
+      sign_up: ""
+    mailer: 
+      confirmation: 
+        after_notes: ""
+        body: ""
+        confirm_link: ""
+        confirm_notes: ""
+        title: ""
+      passwords: 
+        after_notes: ""
+        body: ""
+        confirm_link: ""
+        confirm_notes: ""
+        title: ""
+      welcome: 
+        after_notes: ""
+        body: ""
+        subject: ""
+        title: ""
+    submit: 
+      change_password: ""
+      receive_confirmation: ""
+      recover_password: ""
+      sign_in: ""
+      sign_out: ""
+      sign_up: ""
+    title: 
+      change_password: ""
+      receive_confirmation: ""
+      recover_password: ""
+      sign_in: ""
+      sign_out: ""
+      sign_up: ""
+  collections: 
+    about: ""
+    desc: ""
+    details: ""
+    series: ""
+    styles: ""
+    trade_mark: ""
+  comments: 
+    add_comment: ""
+    comment: ""
+    confirm_delete: ""
+    create: ""
+    delete_comment: ""
+    edit_comment: ""
+  flash: 
+    auth: 
+      failure: ""
+      logout: ""
+      success: ""
+      success_again: ""
+    users: 
+      update: 
+        error: ""
+        notice: ""
+  front_js: 
+    comments: 
+      chat_title: ""
+      confirm: ""
+      in_chat_already: ""
+      joined: ""
+      left: ""
+      new_message: ""
+      placeholder: ""
+      said: ""
+      title: ""
+      typing: ""
+    fileupload: 
+      messages: 
+        emptyError: ""
+        minSizeError: ""
+        onLeave: ""
+        sizeError: ""
+        typeError: ""
+  label: 
+    close: ""
+  langs: 
+    en: ""
+    ru: ""
+    uk: ""
+  language_title: 
+    en: ""
+    ru: ""
+    uk: ""
+  links: 
+    en: ""
+    ru: ""
+    uk: ""
+  search: 
+    category: ""
+    grid_view: ""
+    kitchen: ""
+    main_text: ""
+    map_view: ""
+    number_of_people: ""
+    price: ""
+    refine: ""
+  simple_form: 
+    error_notification: 
+      default_message: ""
+  styles: 
+    show: 
+      about: ""
+  time: 
+    am: ""
+    formats: 
+      datepicker: ""
+      day: ""
+      dm: ""
+      long: ""
+      month: ""
+      year: ""
+      ymd: ""
+    pm: ""
+  unauthorized: 
+    default: ""
+  update: ""
+  uploader: 
+    add_file: ""
+    max_size: ""
+    upload_avatar: ""
+    upload_image: ""
+  views: 
+    pagination: 
+      first: ""
+      last: ""
+      next: ""
+      previous: ""
+      truncate: ""
+  date:
+    abbr_day_names:
+    - Вс
+    - Пн
+    - Вт
+    - Ср
+    - Чт
+    - Пт
+    - Сб
+    abbr_month_names:
+    -
+    - янв.
+    - февр.
+    - марта
+    - апр.
+    - мая
+    - июня
+    - июля
+    - авг.
+    - сент.
+    - окт.
+    - нояб.
+    - дек.
+    day_names:
+    - воскресенье
+    - понедельник
+    - вторник
+    - среда
+    - четверг
+    - пятница
+    - суббота
+    formats:
+      default: ! '%d.%m.%Y'
+      long: ! '%d %B %Y'
+      short: ! '%d %b'
+    month_names:
+    -
+    - января
+    - февраля
+    - марта
+    - апреля
+    - мая
+    - июня
+    - июля
+    - августа
+    - сентября
+    - октября
+    - ноября
+    - декабря
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        few: около %{count} часов
+        many: около %{count} часов
+        one: около %{count} часа
+        other: около %{count} часа
+      about_x_months:
+        few: около %{count} месяцев
+        many: около %{count} месяцев
+        one: около %{count} месяца
+        other: около %{count} месяца
+      about_x_years:
+        few: около %{count} лет
+        many: около %{count} лет
+        one: около %{count} года
+        other: около %{count} лет
+      almost_x_years:
+        one: почти 1 год
+        few: почти %{count} года
+        many: почти %{count} лет
+        other: почти %{count} лет
+      half_a_minute: меньше минуты
+      less_than_x_minutes:
+        few: меньше %{count} минут
+        many: меньше %{count} минут
+        one: меньше %{count} минуты
+        other: меньше %{count} минуты
+      less_than_x_seconds:
+        few: меньше %{count} секунд
+        many: меньше %{count} секунд
+        one: меньше %{count} секунды
+        other: меньше %{count} секунды
+      over_x_years:
+        few: больше %{count} лет
+        many: больше %{count} лет
+        one: больше %{count} года
+        other: больше %{count} лет
+      x_days:
+        few: ! '%{count} дня'
+        many: ! '%{count} дней'
+        one: ! '%{count} день'
+        other: ! '%{count} дня'
+      x_minutes:
+        few: ! '%{count} минуты'
+        many: ! '%{count} минут'
+        one: ! '%{count} минуту'
+        other: ! '%{count} минуты'
+      x_months:
+        few: ! '%{count} месяца'
+        many: ! '%{count} месяцев'
+        one: ! '%{count} месяц'
+        other: ! '%{count} месяца'
+      x_seconds:
+        few: ! '%{count} секунды'
+        many: ! '%{count} секунд'
+        one: ! '%{count} секунда'
+        other: ! '%{count} секунды'
+    prompts:
+      day: День
+      hour: Часов
+      minute: Минут
+      month: Месяц
+      second: Секунд
+      year: Год

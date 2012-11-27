@@ -1,9 +1,9 @@
 class SearchForm
-
   constructor: ->
     @createMap()
     @showMap()
     @bind_change_view()
+    @give_more()
 
   bind_change_view: =>
     self = @
@@ -13,14 +13,38 @@ class SearchForm
 
     initialData = $('#map').data()
     mapOptions =
-      center: new google.maps.LatLng(initialData.lng, initialData.lat),
+      center: new google.maps.LatLng(initialData.lat, initialData.lng),
       zoom: 12,
       mapTypeId: google.maps.MapTypeId.ROADMAP
 
-    map = new google.maps.Map(document.getElementById("map"), mapOptions)
+    @map = new google.maps.Map(document.getElementById("map"), mapOptions)
     @addMarkers()
 
-  addMarkers: () ->
+  addMarkers: () =>
+    self = @
+    $places = $('#map_details_wrapper').find('.place')
+    $places.each (index, element) ->
+      data = $(element).data()
+      marker = new google.maps.Marker(
+        position: new google.maps.LatLng(data.lat, data.lng)
+        title: "Hello from #{data.id}!"
+        html: "<a class='marker' href='#{data.id}' >place</a>"
+      )
+      marker.setMap(self.map);
+      google.maps.event.addListener marker, "mouseover", ->
+        selector = '#' + data.id
+        console.log selector
+        $(selector).addClass 'target'
+
+      google.maps.event.addListener marker, "click", ->
+        selector = '#' + data.id
+        console.log selector
+        console.log $(selector).attr('href')
+
+      google.maps.event.addListener marker, "mouseout", ->
+        selector = '#' + data.id
+        console.log selector
+        $(selector).removeClass 'target'
 
 
   change_type_view: (e, $el) =>
@@ -38,6 +62,22 @@ class SearchForm
     $('#list_grid_view').show()
     $('#map').add('#map_details').hide()
 
+  give_more: =>
+    @more_template = Handlebars.compile($("#more_template").html())
+    self = @
+    $("a.more").on 'click', (e) ->
+      e.preventDefault()
+      $el = $(this)
+      type = $el.data('type')
+      if type
+        $.getJSON '/search/get_more',{type: type}, (data) => parse_more_objects.call(self, data, $el)
+
+  #private methods
+  parse_more_objects = (data, $el) ->
+    _.each data, (obj) =>
+      $el.prev().prev().after(@more_template(obj))
+    $el.hide()
+
 
 $ ->
-  new SearchForm()
+  new SearchForm() if $("#map").size() > 0

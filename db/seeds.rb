@@ -65,12 +65,43 @@ def insert_group_feature
 
 end
 
+def insert_marks_and_reviews user
+  (rand(5) + 1).times do
+    place = Place.all.sample
+    place.reviews << Review.new(user_id: user.id, content: 'placeholder', title: 'placeholder')
+  end
+  #user.reviews.each { |review| review.mark = Mark.new(food: (rand(5) + 1) }
+
+end
+
+def insert_mark_types
+  %w(price services food).each do |type|
+    MarkType.create do |mark_type|
+      mark_type.name = type
+    end.save!
+  end
+end
+
+def insert_city
+  City.full_truncate
+  [{name: "Kiev", slug: "kiev"},{name: "Kharkiv", slug: "kharkiv"}, {name: "Odessa", slug: "odessa"},
+  {name: "Dnepropetrivsk", slug: "dnepropetrivsk"}, {name: "Donetsk", slug: "donetsk"}, {name: "Lviv", slug: "lviv"}
+  ].each do |city|
+    City.create do |c|
+      c.name = city[:name]
+      c.slug = city[:slug]
+    end.save!
+  end
+end
+
 User.full_truncate
 insert_default_user('admin@adm.com')
 insert_default_user('user@usr.com', false)
 add_test_stuff
 insert_group_feature
-
+insert_mark_types
+#insert_marks_and_reviews(User.find_by_email('admin@adm.com'))
+insert_city
 
 #10.times do
 #  s = Selection.make! user: User.first
