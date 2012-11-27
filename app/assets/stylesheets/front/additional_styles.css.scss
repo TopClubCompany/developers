@@ -25,3 +25,11 @@
 #fixed #language #ru { background: image_url('../assets/language.png') 0 -16px no-repeat; }
 #fixed #language #ua { background: image_url('../assets/language.png') 0 -38px no-repeat; }
 
+#sign_up_page input[type="email"] {
+  font-size: 13px;
+  color: #000;
+  width: 150px;
+  height: 18px;
+  line-height: 13px;
+  margin-right: 5px;
+}
