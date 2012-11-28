@@ -656,7 +656,7 @@ input[type='submit']:hover {
 	z-index: 3;
 	width: 60px;
 	height: 11px;
-	background: image_url('../assets/rating.png');
+	background: image_url('rating.png');
 }
 
 .rating .stars .stars_bar {
@@ -686,7 +686,7 @@ input[type='submit']:hover {
 }
 
 .rating_big .stars .stars_overlay {
-	background: image_url('../assets/rating_big.png');
+	background: image_url('rating_big.png');
 	width: 90px;
 	height: 17px;
 	position: relative;
@@ -832,6 +832,16 @@ input[type='submit']:hover {
 
 #place .page_content {
 	padding-top: 23px;
+}
+
+
+.place_img {
+  width: 240px;
+  height: 180px;
+  background: #f2f0ea;
+  border: none;
+  float: left;
+  margin: 0 10px 0 0;
 }
 
 .place_assets {
@@ -1473,6 +1483,9 @@ input[type='submit']:hover {
 #footer #footer_nav li a:hover {
 	color: #df5b49;
 }
+
+
+
 
 
 
