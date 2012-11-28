@@ -5,7 +5,8 @@ def insert_default_user(email, admin = true)
   password            = Rails.env.production? ? Devise.friendly_token.first(6) : (1..6).to_a.join
   user                = User.new(email: email, password: password, password_confirmation: password).generate_default_fields
   user.login          = admin ? 'admin' : 'user'
-  user.user_role_type = admin ? UserRoleType.admin : UserRoleType.default
+  #user.user_role_type = admin ? UserRoleType.admin : UserRoleType.default
+  (user.user_role_id   = UserRoleType.admin.id) if admin
   user.activate.skip_confirmation!
   user.save!
   puts "#{admin ? 'Admin: ' : 'User: '}#{email}, #{password}"
@@ -97,11 +98,11 @@ end
 User.full_truncate
 insert_default_user('admin@adm.com')
 insert_default_user('user@usr.com', false)
-#add_test_stuff
-#insert_group_feature
-#insert_mark_types
+add_test_stuff
+insert_group_feature
+insert_mark_types
 #insert_marks_and_reviews(User.find_by_email('admin@adm.com'))
-#insert_city
+insert_city
 
 #10.times do
 #  s = Selection.make! user: User.first

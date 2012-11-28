@@ -1,4 +1,3 @@
-
 #user.content
   .row
     .span2
@@ -39,7 +38,7 @@
     #dashboard.span10.page_content
       .row
         .span2
-          h1 user_menu_name
+          h1= user_menu_name
           img.user_pic_big height="128" src=(current_user.avatar.url(:sidebar) if current_user.avatar) width="128"
             #status.gourmand
               b *
@@ -81,34 +80,20 @@
             h2
               | My reviews
               span (9)
-            .review
-              .review_content
-                a.user_link href="#"
-                  span itemprop="author"
-                small
-                  | Dined yesterday ·
-                  a href="#"
-                .rating
-                  .stars
-                    .stars_overlay
-                    .stars_bar
-                    .stars_bg
-                span What a great find! I wanted to find a restaurant close to our hotel the first night we arrived in New York, so selected Wine 30 based on reviews and proximity. We were lucky to be...
-                a.read_more href="#"
-                  nobr read more ›
-            .review
-              .review_content
-                a.user_link href="#"
-                  span itemprop="author"
-                small
-                  | Dined yesterday ·
-                  a href="#"
-                .rating
-                  .stars
-                    .stars_overlay
-                    .stars_bar
-                    .stars_bg
-                span What a great find! I wanted to find a restaurant close to our hotel the first night we arrived in New York, so selected Wine 30 based on reviews and proximity. We were lucky to be...
-                a.read_more href="#"
-                  nobr read more ›
-            a.all href="#"
+            - current_user.reviews do |review|
+              .review
+                .review_content
+                  a.user_link href="#"
+                    span itemprop="author"
+                  small
+                    = review.title
+                    a href="#"
+                  .rating
+                    .stars
+                      .stars_overlay
+                      .stars_bar
+                      .stars_bg
+                  span
+                    = review.content
+                  a.read_more href="#"
+                    nobr read more ›
