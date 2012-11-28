@@ -19,6 +19,7 @@
 //=require jquery.lionbars.0.3
 //=require jquery.custom_checkbox.min
 //=require jquery.raty
+//=require jquery.deparam
 //=require html5
 //=require textshadow
 //q=require visual

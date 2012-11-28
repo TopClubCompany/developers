@@ -100,17 +100,17 @@ en:
   label: 
     close: ""
   langs: 
-    en: ""
-    ru: ""
-    uk: ""
-  language_title: 
-    en: ""
-    ru: ""
-    uk: ""
-  links: 
-    en: ""
-    ru: ""
-    uk: ""
+    en: eng
+    ru: rus
+    uk: uk
+  language_title:
+    en: English
+    ru: "Русский"
+    ua: "Украинский"
+  links:
+    en: eng
+    ru: "рус"
+    uk: "укр"
   search: 
     category: ""
     grid_view: ""

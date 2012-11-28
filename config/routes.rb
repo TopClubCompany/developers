@@ -32,6 +32,9 @@ Topclub::Application.routes.draw do
       post :planned
       post :visited
     end
+    #collection do
+    #  get :show
+    #end
   end
 
   resources :sandboxes do
