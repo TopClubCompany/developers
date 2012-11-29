@@ -1,5 +1,34 @@
 #search_results.content
   .row
+    .span8 id="teaser"
+      javascript:
+        $(document).ready(function() {
+          projekktor('#video-container', {
+            controls: true,
+            autoplay: false,
+            addplugins: ['controlbar'],
+            whatever: "youwant",
+            plugin_controlbar: {
+               controlsDisableFade: true,
+            }
+          }, function(player) {
+            player.addListener('start', function(data) {
+              $('#teaser .video_player h5').css('display', 'none');
+            });
+          });
+        });
+      .video_player
+        h5 How it works?
+        video#video-container class="projekktor" width="620" height="350" title="How it works?" poster="/img/video/dummy.jpg" controls=true
+          source src="media/intro.ogv" type="video/ogg"  /
+    .span4 id="signup_promo"
+      img src="img/gfx/1.jpg"
+        ul
+          li Find a restaurants
+          li Reserve your table online for free
+          li Save up to 30% off all food and drinks
+        a href="#{new_user_registration_path}" class="btn1" Sign up now!
+  .row
     .span12
       #search_form
         h1= I18n.t('search.main_text', count: Place.visible.count, city: @current_city)
@@ -41,7 +70,7 @@
         /a.more href="#"
           | more >
         h4= I18n.t('search.kitchen')
-        - Kitchen.with_translations.first(4).each do |kitchen|
+        - Kitchen.with_translations.first(1).each do |kitchen|
           label.checkbox
             input type="checkbox" data-type="kitchen" value=kitchen.id = kitchen.title
         .clear
