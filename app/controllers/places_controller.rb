@@ -16,13 +16,13 @@ class PlacesController < ApplicationController
 
   def show
     @place = Place.find params[:id]
-    styx_initialize_with point:           @place.lat_lng,
-                         rating:          @place.rating,
-                         rating_url:      rate_place_path(@place),
-                         can_be_rated:    (@place.rated_users.exclude?  current_user.id.to_s),
-                         can_be_favorite: (@place.in_favorites.exclude? current_user.id.to_s),
-                         can_be_planned:  (@place.in_planes.exclude?    current_user.id.to_s),
-                         can_be_visited:  (@place.in_visited.exclude?   current_user.id.to_s)
+    #styx_initialize_with point:           @place.lat_lng,
+    #                     rating:          @place.rating,
+    #                     rating_url:      rate_place_path(@place),
+    #                     can_be_rated:    (@place.rated_users.exclude?  current_user.id.to_s),
+    #                     can_be_favorite: (@place.in_favorites.exclude? current_user.id.to_s),
+    #                     can_be_planned:  (@place.in_planes.exclude?    current_user.id.to_s),
+    #                     can_be_visited:  (@place.in_visited.exclude?   current_user.id.to_s)
   end
 
   def index

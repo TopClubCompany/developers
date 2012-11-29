@@ -13,7 +13,7 @@ class PlaceImageUploader < Utils::CarrierWave::BaseUploader
   end
 
   version :slider do
-    process :resize_to_fill => [120, 120]
+    process :resize_to_fill => [180, 240]
   end
 
   def extension_white_list

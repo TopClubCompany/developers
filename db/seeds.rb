@@ -5,7 +5,8 @@ def insert_default_user(email, admin = true)
   password            = Rails.env.production? ? Devise.friendly_token.first(6) : (1..6).to_a.join
   user                = User.new(email: email, password: password, password_confirmation: password).generate_default_fields
   user.login          = admin ? 'admin' : 'user'
-  user.user_role_type = admin ? UserRoleType.admin : UserRoleType.default
+  #user.user_role_type = admin ? UserRoleType.admin : UserRoleType.default
+  (user.user_role_id   = UserRoleType.admin.id) if admin
   user.activate.skip_confirmation!
   user.save!
   puts "#{admin ? 'Admin: ' : 'User: '}#{email}, #{password}"
