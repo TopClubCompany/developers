@@ -11,6 +11,7 @@ class FilterInput
         $("#refine input[value='#{value}'][data-type='#{filter}']").click() unless $("#refine input[value='#{value}'][data-type='#{filter}']").is(':checked')
 
   bindChangeListener: () ->
+	baseURL = window.location.host + window.location.pathname
     $('#refine input[type=checkbox]').change ->
       result = {}
       $('#refine input').each(->
@@ -19,8 +20,7 @@ class FilterInput
         result[type].push($(this).val()) if $(this).is(':checked')
       )
       newQuery = $.param result
-      console.log 'changed', result
-      window.history.pushState('',null,'http://0.0.0.0:3005/?' + newQuery)
+      window.history.pushState('',null, baseURL + '/?' + newQuery)
 
 
 
