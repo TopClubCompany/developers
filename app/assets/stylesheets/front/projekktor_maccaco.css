@@ -103,6 +103,7 @@ Author URI: http://www.porkhead.org
 
 .ppcontrols ul.bottom {
     position: relative;
+    display: block!important;
     top: 31px;
     left: 0;
     padding: 0;
