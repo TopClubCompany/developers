@@ -5,9 +5,9 @@
         $(document).ready(function() {
           projekktor('#video-container', {
             controls: true,
-            autoplay: false,
-            addplugins: ['controlbar'],
-            whatever: "youwant",
+            plugins: ['display', 'controlbar'],
+            addplugins: ['display', 'controlbar'],
+            disallowSkip: true,
             plugin_controlbar: {
                controlsDisableFade: true,
             }
@@ -17,10 +17,10 @@
             });
           });
         });
-      .video_player
+      /.video_player
         h5 How it works?
-        video#video-container class="projekktor" width="620" height="350" title="How it works?" poster="/img/video/dummy.jpg" controls=true
-          source src="media/intro.ogv" type="video/ogg"  /
+      video#video-container class="projekktor" width="640" height="360" title="How it works?" poster="/img/video/dummy.jpg" controls=true
+        source src="media/intro.ogv" type="video/ogg"  /
     .span4 id="signup_promo"
       img src="img/gfx/1.jpg"
         ul
