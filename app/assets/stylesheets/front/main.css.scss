@@ -1484,6 +1484,96 @@ input[type='submit']:hover {
 	color: #df5b49;
 }
 
+#teaser {
+	width: 620px;
+	height: 350px;
+	border-radius: 3px;
+	margin-bottom: 20px;
+}
+
+#teaser .video_player {
+	position: relative;
+	width: 620px;
+	height: 350px;
+	background: url('../img/video/dummy.jpg') no-repeat;
+	border-radius: 3px;
+	-moz-box-shadow:    inset 0 0 5px rgba(0,0,0,0.3);
+	   -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+	   box-shadow:         inset 0 0 5px rgba(0,0,0,0.3);
+}
+
+#teaser .video_player h5 {
+	position: absolute;
+	display: inline-block;
+	font-size: 24px;
+	color: #fff;
+	background: rgba(0,0,0,0.6);
+	padding: 5px 8px;
+	margin: 0;
+	top: 10px;
+	left: 10px;
+	line-height: 24px;
+	border-radius: 3px;
+        z-index: 1;
+}
+
+#teaser .video_player .play {
+	width: 100px;
+	height: 100px;
+	background: url('../img/video/play.png') no-repeat;
+	cursor: pointer;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -50px;
+	margin-left: -50px;
+}
+
+#teaser .video_player .play:hover {
+	opacity: 0.9;
+}
+
+#signup_promo {
+	height: 350px;
+	background: #fff;
+	border-radius: 3px;
+}
+
+#signup_promo ul {
+	display: block;
+	margin: 10px 20px;
+	padding: 0;
+}
+
+#signup_promo ul li {
+	font-size: 14px;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin: 0 0 10px 0;
+	padding: 0 0 0 18px;
+	display: block;
+	background: url('../img/check1.png') 0 2px no-repeat;
+	line-height: 18px;
+}
+
+#signup_promo .btn1 {
+	display: block;
+	background: #79ad53;
+	margin: 10px 20px;
+	font-family: 'univers_condensedmedium', 'Arial Narrow';
+	color: #fff;
+	font-size: 24px;
+	border-radius: 3px;
+	border: none;
+	padding: 10px 0;
+	text-align: center;
+	text-decoration: none;
+}
+
+#signup_promo .btn1:hover {
+	background: #df5b49;
+}
+
 
 
 
