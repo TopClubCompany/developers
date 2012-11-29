@@ -1,9 +1,9 @@
 class SearchForm
-
   constructor: ->
     @createMap()
     @showMap()
     @bind_change_view()
+    @give_more()
 
   bind_change_view: =>
     self = @
@@ -61,6 +61,22 @@ class SearchForm
   showList: () =>
     $('#list_grid_view').show()
     $('#map').add('#map_details').hide()
+
+  give_more: =>
+    @more_template = Handlebars.compile($("#more_template").html())
+    self = @
+    $("a.more").on 'click', (e) ->
+      e.preventDefault()
+      $el = $(this)
+      type = $el.data('type')
+      if type
+        $.getJSON '/search/get_more',{type: type}, (data) => parse_more_objects.call(self, data, $el)
+
+  #private methods
+  parse_more_objects = (data, $el) ->
+    _.each data, (obj) =>
+      $el.prev().prev().after(@more_template(obj))
+    $el.hide()
 
 
 $ ->

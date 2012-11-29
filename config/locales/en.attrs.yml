@@ -26,6 +26,34 @@ en:
         updated_at: Updated at
         user: User
         user_id: User
+      category: 
+        category_image: Category image
+        children: Children
+        created_at: Created at
+        depth: Depth
+        description: Description
+        description_en: Description ()
+        description_ru: Description ()
+        description_uk: Description ()
+        group_feature_categories: Group feature categories
+        group_features: Group features
+        header: Header
+        is_visible: Is visible
+        lft: Lft
+        name: Name
+        name_en: Name ()
+        name_ru: Name ()
+        name_uk: Name ()
+        parent: Parent
+        parent_id: Parent
+        pictures: Pictures
+        place_categories: Place categories
+        places: Places
+        rgt: Rgt
+        slug: Slug
+        updated_at: Updated at
+        user: User
+        user_id: User
       header: 
         created_at: Created at
         description: Description
@@ -44,6 +72,24 @@ en:
         title_ru: Title ()
         title_uk: Title ()
         updated_at: Updated at
+      kitchen: 
+        created_at: Created at
+        description: Description
+        description_en: Description ()
+        description_ru: Description ()
+        description_uk: Description ()
+        is_visible: Is visible
+        name: Name
+        name_en: Name ()
+        name_ru: Name ()
+        name_uk: Name ()
+        pictures: Pictures
+        place_kitchens: Place kitchens
+        places: Places
+        slug: Slug
+        updated_at: Updated at
+        user: User
+        user_id: User
       static_page: 
         attachment_files: Attachment files
         content: Content
@@ -122,92 +168,46 @@ en:
         updated_at: Updated at
         user_role_id: User role
         vk_friends: Vk friends
-      category: 
-        category_image: Category image
-        children: Children
-        created_at: Created at
-        depth: Depth
-        description: Description
-        description_en: Description ()
-        description_ru: Description ()
-        description_uk: Description ()
-        group_feature_categories: Group feature categories
-        group_features: Group features
-        header: Header
-        is_visible: Is visible
-        lft: Lft
-        name: Name
-        name_en: Name ()
-        name_ru: Name ()
-        name_uk: Name ()
-        parent: Parent
-        parent_id: Parent
-        pictures: Pictures
-        place_categories: Place categories
-        places: Places
-        rgt: Rgt
-        slug: Slug
-        updated_at: Updated at
-        user: User
-        user_id: User
-      kitchen: 
-        created_at: Created at
-        description: Description
-        description_en: Description ()
-        description_ru: Description ()
-        description_uk: Description ()
-        is_visible: Is visible
-        name: Name
-        name_en: Name ()
-        name_ru: Name ()
-        name_uk: Name ()
-        pictures: Pictures
-        place_kitchens: Place kitchens
-        places: Places
-        slug: Slug
-        updated_at: Updated at
-        user: User
-        user_id: User
     models: 
       asset: 
-        other: Asset
-        zero: Asset
-        one: Asset
         few: Asset
         many: Asset
-      header: 
-        other: Header
-        zero: Header
-        one: Header
-        few: Header
-        many: Header
-      static_page: 
-        other: Static page
-        zero: Static page
-        one: Static page
-        few: Static page
-        many: Static page
-      structure: 
-        other: Structure
-        zero: Structure
-        one: Structure
-        few: Structure
-        many: Structure
-      user: 
-        other: User
-        zero: User
-        one: User
-        few: User
-        many: User
+        one: Asset
+        other: Asset
+        zero: Asset
       category: 
-        other: Category
-        zero: Category
-        one: Category
         few: Category
         many: Category
+        one: Category
+        other: Category
+        zero: Category
+      header: 
+        few: Header
+        many: Header
+        one: Header
+        other: Header
+        zero: Header
       kitchen: 
-        other: Kitchen
-        zero: Kitchen
-        one: Kitchen
         few: Kitchen
         many: Kitchen
+        one: Kitchen
+        other: Kitchen
+        zero: Kitchen
+      static_page: 
+        few: Static page
+        many: Static page
+        one: Static page
+        other: Static page
+        zero: Static page
+      structure: 
+        few: Structure
+        many: Structure
+        one: Structure
+        other: Structure
+        zero: Structure
+      user: 
+        few: User
+        many: User
+        one: User
+        other: User
+        zero: User

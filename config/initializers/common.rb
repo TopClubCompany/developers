@@ -17,10 +17,10 @@ MultiJson.engine = :yajl
 
 $redis ||= Redis.new
 
-I18n.available_locales = Globalize.available_locales = [:ru, :en, :uk]
+I18n.available_locales = Globalize.available_locales = [:ru, :en, :ua]
 I18n.locale = Rails.application.config.i18n.default_locale
 I18n::Backend::Simple.send(:include, I18n::Backend::Fallbacks)
-I18n.fallbacks.map(:uk => :en, :en => :ru)
+I18n.fallbacks.map(:ru => :en, :ua => :en, :en => :ru)
 module ActionView
   module Helpers
     class InstanceTag

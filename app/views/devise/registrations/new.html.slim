@@ -3,7 +3,7 @@
     .span8
       .heading
         h1 #{t('sign_up.become_member')}
-        = t('sign_up.or')
+        = t('registration_form.or')
         strong
           a href=new_user_session_path
             = t('sign_up.sign_in')
@@ -19,35 +19,21 @@
           label
             = t('sign_up.diner_name')
             b  *
-          = f.input :first_name, placeholder: "First name", label: false, wrapper: false
-          = f.input :last_name, placeholder: "Last name",label: false, wrapper: false
+          = f.input :first_name, placeholder: "First name", label: false
+          = f.input :last_name, placeholder: "Last name",label: false
           .clear
-          = f.input :phone, placeholder: "+38 ( _ _ _ ) _ _ _ - _ _ - _ _", label: get_reg_form_attr_name(:phone, true), required: true, wrapper: false
+          = f.input :phone, placeholder: "+38 ( _ _ _ ) _ _ _ - _ _ - _ _", label: get_reg_form_attr_name(:phone, true), required: true
           .clear
-<<<<<<< HEAD
-          = f.input :email, label: get_reg_form_attr_name(:email, true), wrapper: false
+          = f.input :email, label: get_reg_form_attr_name(:email)
           .clear
-          = f.input :password, label: get_reg_form_attr_name(:password, true), wrapper: false
+          = f.input :password, label: get_reg_form_attr_name(:password)
           .clear
-          = f.input :address, label: get_reg_form_attr_name(:address), wrapper: false
+          = f.input :address, label: get_reg_form_attr_name(:address)
           .clear
-          = f.input :gender,  collection: GenderType.all, prompt: 'select your gender', wrapper: false
-
-          .clear
-          = f.label :birthday, label: get_reg_form_attr_name(:birthday), wrapper: false
-          = f.date_select :birthday, start_year: Date.today.year - 8, end_year: Date.today.year - 90, order: [:month, :day, :year], default: Time.utc('1991 1 3'), wrapper: false
-=======
-          = f.input :email, label: get_reg_form_attr_name(:email, true)
-          .clear
-          = f.input :password, label: get_reg_form_attr_name(:password, true)
-          .clear
-          = f.input :city, label: get_reg_form_attr_name(:city)
-          .clear
-          = f.input :gender,  collection: [[:Male, 1],[:Female, 2]], prompt: 'select your gender'
+          = f.input :gender,  collection: GenderType.all, include_blank: false
           .clear
           = f.label :birthday, label: get_reg_form_attr_name(:birthday)
-          = f.date_select :birthday, start_year: Date.today.year - 8, end_year: Date.today.year - 90, order: [:month, :day, :year], default: Time.utc('1991 1 3')
->>>>>>> master
+          = f.date_select :birthday, as: :date, start_year: Date.today.year - 8, end_year: Date.today.year - 90, order: [:month, :day, :year], default: Time.utc('1991 1 3')
           .clear
           label
             = t('sign_up.profile_photo')
