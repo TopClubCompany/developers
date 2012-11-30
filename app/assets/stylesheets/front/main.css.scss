@@ -1373,63 +1373,6 @@ input[type='submit']:hover {
 
 
 
-
-#promo_places {
-	background: #fff image_url('../assets/line1.gif') bottom repeat-x;
-	border-top: 1px solid #d9d8d4;
-	margin: 30px 0 20px 0;
-	padding: 0 0 15px 0;
-}
-
-#promo_places #promo_tabs {
-	margin: -50px 0 0 0;
-	display: block;
-	font-size: 16px;
-	font-weight: bold;
-	padding: 20px 0 0 0;
-}
-
-#promo_places #promo_tabs li {
-	margin: 0 20px 10px 0;
-	padding: 0 0 20px 0;
-	display: block;
-	float: left;
-}
-
-#promo_places #promo_tabs li.active {
-	background: image_url('../assets/active1.gif') bottom center no-repeat;
-}
-
-#promo_places #promo_tabs li.active a {
-	color: #333;
-	font-weight: normal;
-	cursor: default;
-	text-decoration: none;
-}
-
-#promo_places .place {
-	width: 278px;
-	float: left;
-	border: 1px solid #d9d8d4;
-	border-radius: 3px;
-	margin: 0 20px 10px 0;
-	padding: 10px;
-}
-
-#promo_places .place assets {
-	background: #f2f0ea;
-}
-
-#promo_places .place .place_features {
-	width: auto;
-}
-
-#promo_places .all {
-	margin: 0;
-}
-
-
-
 .promo_block {
 	background: #fff;
 	border-radius: 3px;
@@ -1572,6 +1515,86 @@ input[type='submit']:hover {
 
 #signup_promo .btn1:hover {
 	background: #df5b49;
+}
+
+#index #search_form {
+	margin: 0 0 20px 0;
+	padding: 10px;
+}
+
+#index #search_form label {
+	margin-bottom: 0;
+}
+
+#index #search_form input[name='title_or_location'] {
+	width: 270px;
+	font-size: 24px;
+	border-right: 0;
+}
+
+
+
+
+#promo_places {
+	background: #fff url('/img/line1.gif') bottom repeat-x;
+	border-top: 1px solid #d9d8d4;
+	margin: 30px 0 20px 0;
+	padding: 0 0 15px 0;
+}
+
+#promo_places #promo_tabs {
+	margin: -50px 0 0 0;
+	display: block;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 20px 0 0 0;
+}
+
+#promo_places #promo_tabs li {
+	margin: 0 20px 10px 0;
+	padding: 0 0 20px 0;
+	display: block;
+	float: left;
+}
+
+#promo_places #promo_tabs li.active {
+	background: url('../img/active1.gif') bottom center no-repeat;
+}
+
+#promo_places #promo_tabs li.active a {
+	color: #333;
+	font-weight: normal;
+	cursor: default;
+	text-decoration: none;
+}
+
+#promo_places .place {
+	width: 278px;
+	float: left;
+	border: 1px solid #d9d8d4;
+	border-radius: 3px;
+	margin: 0 20px 10px 0;
+	padding: 10px;
+}
+
+.place img {
+    border: medium none;
+    float: left;
+    height: 100px;
+    margin: 0 10px 0 0;
+    width: 140px;
+}
+
+#promo_places .place img {
+	background: #f2f0ea;
+}
+
+#promo_places .place .place_features {
+	width: auto;
+}
+
+#promo_places .all {
+	margin: 0;
 }
 
 
