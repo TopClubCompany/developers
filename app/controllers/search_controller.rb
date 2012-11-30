@@ -18,7 +18,6 @@ class SearchController < ApplicationController
       else
         {}
       end
-
     render :json => more_objects.to_json
   end
 

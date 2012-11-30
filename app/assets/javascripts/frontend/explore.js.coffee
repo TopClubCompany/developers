@@ -10,13 +10,12 @@ $(window).scroll ->
     $('#mapcontainer').css('bottom','');
     $('#mapcontainer').removeClass('bottom');
     $('#mapcontainer').addClass('fixed');
-    console.log(diffHeight + " > " + $(window).scrollTop());
   else if diffHeight <= $(window).scrollTop()
     heightNew = $('#search_results .span2').height() - $('#listing').height() + 10;
     $('#mapcontainer').removeClass('fixed');
     $('#mapcontainer').addClass('bottom');
     $('#mapcontainer').css('bottom','-'+heightNew+'px');
-    console.log(diffHeight + " <= " + $(window).scrollTop());
+
 
 
 
