@@ -2,6 +2,11 @@ class SearchController < ApplicationController
 
   before_filter :init_filters, :only => :search
 
+
+  def index
+
+  end
+
   def search
     #point = MultiGeocoder.geocode options[:where]
     #if point.success

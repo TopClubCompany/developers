@@ -89,7 +89,7 @@
           .description.cf
             .header_blue= link_to place.name, place_path(place)
             .numb_stars
-              .small_stars{class: "stars# place.rating.to_i}"
+              .small_stars class="stars{#place.rating.to_i}"
             .text= place.address
     .buttom.green_button
       .back_left
