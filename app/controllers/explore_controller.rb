@@ -14,7 +14,6 @@ class ExploreController < ApplicationController
       @lang = lang
     end
     styx_initialize_with point: @current_point
-
   end
 
 

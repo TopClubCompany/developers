@@ -31,6 +31,8 @@ class Place < ActiveRecord::Base
 
   has_one :place_image, :as => :assetable, :dependent => :destroy, :conditions => {:is_main => true}
   has_many :place_images, :as => :assetable, :dependent => :destroy, :conditions => {:is_main => false}
+  has_many :all_place_images, :class_name => 'PlaceImage', :as => :assetable, :dependent => :destroy, :order => 'is_main DESC'
+
 
   has_one :location, :as => :locationable, :dependent => :destroy, :autosave => true
 
@@ -52,17 +54,56 @@ class Place < ActiveRecord::Base
 
   #PER_PAGE = 25
 
-  mapping do
-    indexes :lat_lng, type: 'geo_point'
+
+  settings Utils::Elastic::ANALYZERS do
+    mapping do
+      indexes :id, type: 'integer'
+      ::I18n.available_locales.each do |loc|
+        indexes "name_#{loc}", :type => "multi_field",
+                :fields => {
+                    "name_#{loc}" => {:type => 'string', :analyzer => "analyzer_#{loc}", :boost => 100},
+                    "exact" => {:type => 'string', :index => "not_analyzed"}
+                }
+        indexes "description_#{loc}", boost: 5, analyzer: "analyzer_#{loc}"
+      end
+      indexes :lat_lng, type: 'geo_point'
+    end
   end
+
+  def self.paginate(options = {})
+    includes(:kitchens, :categories, :place_feature_items, :location).paginate(:page => options[:page], :per_page => options[:per_page]).to_a
+  end
+
 
   def lat_lng
     [location.try(:latitude), location.try(:longitude)].join(',')
   end
 
   def to_indexed_json
-    to_json except: ['lat', 'lon'], methods: ['lat_lng']
+    attrs = [:id, :slug, :avg_bill, :url]
+    related_ids = [:kitchen_ids, :category_ids, :place_feature_item_ids
+    ]
+    methods = ['lat_lng']
+
+    Jbuilder.encode do |json|
+      json.(self, *self.class.all_translated_attribute_names)
+      json.(self, *attrs)
+      json.(self, *methods)
+
+      [:kitchens, :categories, :place_feature_items].each do |a|
+        json.set!("#{a}_names", self.send(a).map{|t| t.translations.map(&:name).join(' ') }.join(' '))
+      end
+
+      json.(self, *related_ids)
+
+      json.images all_place_images do |json, image|
+        json.id image.id
+        json.url image.url(:thumb)
+        json.is_main image.is_main
+      end
+    end
   end
+
 
   def near
     query = Tire.search 'places', query: { filtered: {
@@ -71,65 +112,6 @@ class Place < ActiveRecord::Base
     } }
     near = query.results.map(&:load)
     near.reject!{ |p| p.id == self.id }
-  end
-
-  def self.recomended_for user
-    Place             # TODO need some places to recommend to this User
-  end
-
-  def rating
-    result = $redis.lrange(self.redis_key(:rating),
-                           0, $redis.llen(self.redis_key(:rating)).to_i)
-    result = result.map(&:to_i)
-    result.avg
-  end
-
-  def rated_users
-    $redis.lrange(self.redis_key(:rated_users),
-                  0, $redis.llen(self.redis_key(:rated_users)).to_i)
-  end
-
-  def rate! val, user_id
-    unless rated_users.include? user_id.to_s
-      $redis.lpush(self.redis_key(:rated_users), user_id)
-      $redis.lpush(self.redis_key(:rating), val) if (1..5).include? val
-    end
-    rating
-  end
-
-  # TODO make dynamic methods here
-  def redis_key str
-    "place:#{self.id}:#{str}"
-  end
-
-  def favorite_for user_id
-    $redis.lpush(self.redis_key(:in_favorites), user_id) unless in_favorites.include?(user_id.to_s)
-    in_favorites.count
-  end
-
-  def in_favorites
-    $redis.lrange(self.redis_key(:in_favorites),
-                       0, $redis.llen(self.redis_key(:in_favorites)).to_i)
-  end
-
-  def planned_by user_id
-    $redis.lpush(self.redis_key(:in_planes), user_id) unless in_planes.include?(user_id.to_s)
-    in_planes.count
-  end
-
-  def in_planes
-    $redis.lrange(self.redis_key(:in_planes),
-                       0, $redis.llen(self.redis_key(:in_planes)).to_i)
-  end
-
-  def visited_by user_id
-    $redis.lpush(self.redis_key(:in_visited), user_id) unless in_visited.include?(user_id.to_s)
-    in_visited.count
-  end
-
-  def in_visited
-    $redis.lrange(self.redis_key(:in_visited),
-                       0, $redis.llen(self.redis_key(:in_visited)).to_i)
   end
 
   def marks

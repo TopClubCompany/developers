@@ -7,9 +7,8 @@ html
     div#wrapper
       = render "layouts/header"
       /= render "shared/breadcrumbs" if not devise pages
-      .content#search_results
-        = bootstrap_flash
-        = yield
+      = bootstrap_flash
+      = yield
         /= render "shared/social_links"
     = render "layouts/footer"
 /! render "layouts/footer_include" for js include for non-blocking pages

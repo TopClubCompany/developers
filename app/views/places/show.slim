@@ -17,6 +17,7 @@
       .page_content itemscope="" itemtype="http://data-vocabulary.org/Review-aggregate"
         img.place_img alt=@place.name height="180" itemprop="photo" src=(@place.place_image.url(:slider)if @place.place_image) width="240"
           h1 title=@place.name
+            = @place.name
             span itemprop="itemreviewed"
           .rating.rating_big
             .stars
