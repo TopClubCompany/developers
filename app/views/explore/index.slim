@@ -54,8 +54,7 @@
         /iframe#map frameborder="0" height="440" marginheight="0" marginwidth="0" scrolling="no" src="https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=%D0%BA%D0%B8%D0%B5%D0%B2&aq=&sll=37.0625,-95.677068&sspn=50.557552,93.955078&ie=UTF8&hq=&hnear=Kiev,+Kiev+city,+Kyiv+city,+Ukraine&t=m&z=10&ll=50.4501,30.5234&output=embed" width="510"
         #map_details.scroll-pane
           #map_details_wrapper
-            - 5.times do
-              - for place in @recomended_places do
+            - for place in @recomended_places do
                 .place id="place_#{place.slug}" *{'data-lat'=>"#{place.location.latitude}", "data-lng" => "#{place.location.longitude}" , "data-id" => "place_#{place.slug}"}
                   h4
                     /= place.location.inspect
