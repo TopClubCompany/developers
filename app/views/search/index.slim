@@ -5,10 +5,11 @@
         h1= I18n.t('search.main_text', count: Place.visible.count, city: @current_city)
         form
           input name="title_or_location" placeholder="title or location" type="text"
-          label for="reserve_date"
-          input name="reserve_date" type="text" value="11/07/2012"
-          label for="reserve_time"
-          input name="reserve_time" type="text" value="7:00 PM"
+          = render 'shared/date_time'
+          /label for="reserve_date"
+          /input name="reserve_date" type="text" value="11/07/2012"
+          /label for="reserve_time"
+          /input name="reserve_time" type="text" value="7:00 PM"
           label for="number_of_people"
             nobr= I18n.t('search.number_of_people')
           input name="number_of_people" type="text" value="2"

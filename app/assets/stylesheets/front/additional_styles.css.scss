@@ -16,7 +16,9 @@
   bottom: 0;
   background: rgba(128,128,128, 0.5);
 }
-
+#fixed ul li {
+  display: none;
+}
 #user_birthday_2i{ width: 120px !important; }
 #user_birthday_3i{ width: 60px !important; }
 #user_birthday_1i{ width: 80px !important; }
@@ -32,4 +34,20 @@
   height: 18px;
   line-height: 13px;
   margin-right: 5px;
+}
+
+select[name="reserve_date"] {
+  float: left;
+  width: 68px;
+  font-size: 20px;
+  font-family: 'univers_condensedmedium', 'Arial Narrow';
+  border: none;
+  box-shadow: none;
+  padding: 10px 17px 10px 10px;
+  float: left;
+  width: 100px;
+  margin: 0 10px 0 0;
+  background: white url(/assets/../assets/arr2.gif) right center no-repeat;
+  border-right: 10px solid transparent;
+
 }
