@@ -36,18 +36,30 @@
   margin-right: 5px;
 }
 
-select[name="reserve_date"] {
-  float: left;
-  width: 68px;
+#search_form select {
+  width: 103px;
+  -webkit-appearance: none;
+  -moz-appearance: window;
+  appearance: none;
+  overflow: hidden;
+  height: 40px;
   font-size: 20px;
   font-family: 'univers_condensedmedium', 'Arial Narrow';
   border: none;
   box-shadow: none;
   padding: 10px 17px 10px 10px;
   float: left;
-  width: 100px;
   margin: 0 10px 0 0;
-  background: white url(/assets/../assets/arr2.gif) right center no-repeat;
+  background: #fff image_url('../assets/arr2.gif') right center no-repeat;
   border-right: 10px solid transparent;
 
 }
+
+#search_form select:focus{
+  color: #333;
+}
+
+#search_form select[name='reserve_time'] { width: 68px; }
+
+
+
