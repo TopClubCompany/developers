@@ -13,14 +13,14 @@ class FilterInput
   bindChangeListener: () ->
     $('#refine input[type=checkbox]').change ->
       result = {}
-      $('#refine input').each(->
+      $('#refine input').each( ->
         type = $(this).data('type')
         result[type] = [] if result[type] is undefined
         result[type].push($(this).val()) if $(this).is(':checked')
       )
+      baseURL = window.location.host + window.location.pathname
       newQuery = $.param result
-      console.log 'changed', result
-      window.history.pushState('',null,'http://0.0.0.0:3005/?' + newQuery)
+      window.history.pushState('',null, baseURL + '/?' + newQuery)
 
 
 
@@ -28,13 +28,14 @@ class FilterInput
 
 
 $ ->
+  if $('#refine').length isnt 0
+    new FilterInput()
   ###
     ///
       (?<=filters=) # after word filters=
       [\w+%=&\d]*   # look for characters, %, =, &, and digits
     ///
   ###
-  if $('#refine').length isnt 0
-    new FilterInput()
+
 
 
