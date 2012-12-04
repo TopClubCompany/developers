@@ -75,6 +75,43 @@ class Place < ActiveRecord::Base
   end
 
 
+  def self.search(options = {})
+    filters = []
+    categories = Category.order :created_at
+    kitchens   = Kitchen.order  :created_at
+    #@distances  = Filter.all_for 'distance'
+    avg_bills   = Filter.all_for 'avg_bill'
+    page_num = (options[:page] || 1).to_i
+    query = { match_all: {} }
+
+    if options[:kitchen]
+      filters << {query: {query_string: {query: "kitchen_ids:#{options[:kitchen].join(' OR ')}"}}}
+    end
+
+    if options[:category]
+      filters << {query: {query_string: {query: "category_ids:#{options[:category].join(' OR ')}"}}}
+    end
+
+    if options[:avg_bill]
+      filters << {query: {query_string: {query: "avg_bill:#{options[:avg_bill].join(' OR ')}"}}}
+    end
+    if filters.empty?
+      {}
+    else
+      query = Tire.search 'places', query: { filtered: {
+          query: query,
+          filter: { and: filters }
+      } },
+                          from: (page_num - 1) * 25,
+                          size: 25
+      total_places = query.results.total
+      query.results.map{ |r| r.load }
+      query.results.to_json
+    end
+
+  end
+
+
   def lat_lng
     [location.try(:latitude), location.try(:longitude)].join(',')
   end

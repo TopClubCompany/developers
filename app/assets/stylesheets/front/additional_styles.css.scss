@@ -16,7 +16,9 @@
   bottom: 0;
   background: rgba(128,128,128, 0.5);
 }
-
+#fixed ul li {
+  display: none;
+}
 #user_birthday_2i{ width: 120px !important; }
 #user_birthday_3i{ width: 60px !important; }
 #user_birthday_1i{ width: 80px !important; }
@@ -33,3 +35,31 @@
   line-height: 13px;
   margin-right: 5px;
 }
+
+#search_form select {
+  width: 103px;
+  -webkit-appearance: none;
+  -moz-appearance: window;
+  appearance: none;
+  overflow: hidden;
+  height: 40px;
+  font-size: 20px;
+  font-family: 'univers_condensedmedium', 'Arial Narrow';
+  border: none;
+  box-shadow: none;
+  padding: 10px 17px 10px 10px;
+  float: left;
+  margin: 0 10px 0 0;
+  background: #fff image_url('../assets/arr2.gif') right center no-repeat;
+  border-right: 10px solid transparent;
+
+}
+
+#search_form select:focus{
+  color: #333;
+}
+
+#search_form select[name='reserve_time'] { width: 68px; }
+
+
+
