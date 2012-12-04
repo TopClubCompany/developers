@@ -18,12 +18,30 @@ class FilterInput
         result[type] = [] if result[type] is undefined
         result[type].push($(this).val()) if $(this).is(':checked')
       )
-      baseURL = window.location.host + window.location.pathname
+      
+      baseURL =  window.location.pathname
       newQuery = $.param result
-      window.history.pushState('',null, baseURL + '/?' + newQuery)
+      newUrl = (baseURL + '/?' + newQuery).replace('//?', '/?')
+      window.history.replaceState('',null, newUrl)
+      askAJAX.call(@, newQuery)
 
+  askAJAX = (serializedData) ->
+    $.ajaxSetup
+       dataType: "json",
+       url: "/filters/",
+       type: "GET"
+       error: (xhr, error) ->
+         console.log xhr, error
+       success: (json) ->
+         console.log(json)
+       beforeSend: () ->
+        console.log 'sending ajax request, can do animation here'
+       complete: () ->
+        console.log 'ajax request completed, can remove animation here'
+    
 
-
+    
+    $.ajax({ data: serializedData });
 
 
 
