@@ -12,7 +12,14 @@
           /input name="reserve_time" type="text" value="7:00 PM"
           label for="number_of_people"
             nobr= I18n.t('search.number_of_people')
-          input name="number_of_people" type="text" value="2"
+          /input name="number_of_people" type="text" value="2"
+          select name="number_of_people" type="text"
+            - for i in 1..10
+              - if i == 2
+                option value="#{i}" selected="selected" #{i}
+              - else
+                option value="#{i}" #{i}
+
           input type="submit" value="Find a table"
           .clear
         #view_switch

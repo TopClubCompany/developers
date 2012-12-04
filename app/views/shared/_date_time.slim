@@ -1,9 +1,6 @@
 - if @lang.to_s == 'en'
   label for="reserve_date"
   input name="reserve_date" type="text" value=Time.now.strftime("%m/%d/%Y")
-  coffee:
-    $(document).ready ->
-      $('input[name="reserve_date"]').datepicker()
   label for="reserve_time"
   select name="reserve_time"
     - for k in ['AM', 'PM']
@@ -20,10 +17,7 @@
             option value="#{i}:#{j} #{k}" #{i}:#{j} #{k}
 - else
   label for="reserve_date"
-  input name="reserve_date" type="text" value=Time.now.strftime("%d/%m/%Y")
-  coffee: 
-    $(document).ready ->
-      $('input[name="reserve_date"]').datepicker({ "dateFormat": 'dd/mm/yy'})
+  input class='dateFormatNeeded' name="reserve_date" type="text" value=Time.now.strftime("%d/%m/%Y")
   label for="reserve_time"
   select name="reserve_time"
     - for i in 0...24
