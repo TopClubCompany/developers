@@ -28,7 +28,7 @@ class FilterInput
   askAJAX = (serializedData) ->
     $.ajaxSetup
        dataType: "json",
-       url: "/search/search/",
+       url: "/search/",
        type: "GET"
        error: (xhr, error) ->
          console.log xhr, error
