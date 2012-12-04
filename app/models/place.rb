@@ -1,6 +1,4 @@
-
 #coding: utf-8
-
 class Place < ActiveRecord::Base
 
   attr_accessible :phone, :is_visible, :user_id, :url, :location_attributes,
