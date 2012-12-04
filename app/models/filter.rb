@@ -12,21 +12,11 @@ module Filter
       { labels: ['Пройтись (1 км.)' ,'пройтись'], value: '1',   type: 'distance' },
       { labels: ['Проехать (5 км.)' ,'проехать'], value: '5',   type: 'distance' },
       { labels: ['Далеко (10 км.)'  ,'далеко'  ], value: '10',  type: 'distance' },
-      { labels: ['Недорого ($)', 'недорого','дешево'         ], value: '0',   type: 'avgbill'  },
-      { labels: ['Неплохо ($$)', 'неплохо'                   ], value: '1',   type: 'avgbill'  },
-      { labels: ['Прилично ($$$)', 'прилично'                ], value: '2',   type: 'avgbill'  },
-      { labels: ['Роскошно ($$$$)','роскошно','восхитительно'], value: '3',   type: 'avgbill'  }
+      { labels: ['Недорого ($)', 'недорого','дешево'         ], value: '0',   type: 'avg_bill'  },
+      { labels: ['Неплохо ($$)', 'неплохо'                   ], value: '1',   type: 'avg_bill'  },
+      { labels: ['Прилично ($$$)', 'прилично'                ], value: '2',   type: 'avg_bill'  },
+      { labels: ['Роскошно ($$$$)','роскошно','восхитительно'], value: '3',   type: 'avg_bill'  }
     ]
-
-    Category.all.each do |cat|
-      filters << { labels: [UnicodeUtils.downcase(cat.name)], value: cat.id.to_s, type: cat.class.name.underscore }
-    end
-
-    Kitchen.all.each do |kitchen|
-      filters << { labels: [UnicodeUtils.downcase(kitchen.name)], value: kitchen.id.to_s, type: kitchen.class.name.underscore }
-    end
-
-    filters
   end
 
   def all_for type

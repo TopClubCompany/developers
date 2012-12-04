@@ -77,10 +77,6 @@ class Place < ActiveRecord::Base
 
   def self.search(options = {})
     filters = []
-    categories = Category.order :created_at
-    kitchens   = Kitchen.order  :created_at
-    #@distances  = Filter.all_for 'distance'
-    avg_bills   = Filter.all_for 'avg_bill'
     page_num = (options[:page] || 1).to_i
     query = { match_all: {} }
 
@@ -120,7 +116,7 @@ class Place < ActiveRecord::Base
     attrs = [:id, :slug, :avg_bill, :url]
     related_ids = [:kitchen_ids, :category_ids, :place_feature_item_ids
     ]
-    methods = ['lat_lng']
+    methods = %w(lat_lng)
 
     Jbuilder.encode do |json|
       json.(self, *self.class.all_translated_attribute_names)
