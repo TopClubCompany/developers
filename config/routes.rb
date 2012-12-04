@@ -22,6 +22,7 @@ Topclub::Application.routes.draw do
   resources :search do
     collection do
       get :get_more
+      get :search
     end
   end
 
