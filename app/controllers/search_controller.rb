@@ -20,20 +20,20 @@ class SearchController < ApplicationController
     #  what = options[:what].split(' ').join(' OR ')
     #  @query = { query_string: { fields: ['address', 'description', 'name^5'], query: what, use_dis_max: true } }
     #else
-    #  @query = { match_all: {} }
+      @query = { match_all: {} }
     #end
 
     # dry this to three lines
     if params[:kitchen]
-      @filters << {query: {query_string: {query: "kitchen_ids:#{params[:kitchen].keys.join(' OR ')}"}}}
+      @filters << {query: {query_string: {query: "kitchen_ids:#{params[:kitchen].join(' OR ')}"}}}
     end
 
     if params[:category]
-      @filters << {query: {query_string: {query: "category_ids:#{params[:category].keys.join(' OR ')}"}}}
+      @filters << {query: {query_string: {query: "category_ids:#{params[:category].join(' OR ')}"}}}
     end
 
     if params[:avg_bill]
-      @filters << {query: {query_string: {query: "avg_bill:#{params[:avg_bill].keys.join(' OR ')}"}}}
+      @filters << {query: {query_string: {query: "avg_bill:#{params[:avg_bill].join(' OR ')}"}}}
     end
 
     query = Tire.search 'places', query: { filtered: {
