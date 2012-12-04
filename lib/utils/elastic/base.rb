@@ -6,7 +6,7 @@ module Utils
         :it => 'Italian'
     }
 
-    custom_filters = [:ru, :en, :it].each_with_object({}) do |l, h|
+    custom_filters = [:ru, :en, :ua].each_with_object({}) do |l, h|
       h["custom_synonyms_#{l}"] = {
           "type" => "synonym",
           "ignore_case" => "true",

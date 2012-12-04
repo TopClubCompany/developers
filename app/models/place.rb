@@ -138,6 +138,9 @@ class Place < ActiveRecord::Base
         json.url image.url(:thumb)
         json.is_main image.is_main
       end
+      json.location_city location.try(:city)
+      json.location_city location.try(:street)
+      json.house_number location.try(:house_number)
     end
   end
 
