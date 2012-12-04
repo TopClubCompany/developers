@@ -110,6 +110,8 @@ input[type='submit']:hover {
   padding: 5px;
   margin: -5px 0 0 -5px;
   color: #ccc;
+  height: 19px;
+  overflow: hidden;
 }
 
 #fixed #language li {
@@ -128,15 +130,12 @@ input[type='submit']:hover {
 #fixed ul:hover {
   background: rgba(0,0,0,0.8);
   border-radius: 0 0 3px 3px;
+  height: auto;
 }
 
 #fixed ul:hover li {
-  display: block;
+	display: block!important;
 }
-
-/*#fixed ul:hover li {
-	display: block;
-}*/
 
 
 #fixed ul li a {
