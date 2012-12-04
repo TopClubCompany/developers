@@ -137,6 +137,10 @@ input[type='submit']:hover {
 	display: block!important;
 }
 
+#fixed ul:hover li.active a {
+  background:none;
+}
+
 
 #fixed ul li a {
   color: #ccc;
