@@ -1,0 +1,42 @@
+#promo_places
+  .content
+    .row
+      .span12
+        ul#promo_tabs
+          li.active
+            a href="#best"
+          li
+            a href="#new"
+          li
+            a href="#available"
+          .clear
+        - places = Place.best 6
+        #best_restaurants
+          - places.each_with_index do |place, i|
+            .place style="#{'margin-right: 0' if ((i + 1)%3 == 0)}"
+              a href=place_path(place)
+                img height="100" src="#{place.place_image.url(:slider) if place.place_image}" width="140"
+              h4
+                a href="#"
+              .rating
+                .stars
+                  .stars_overlay
+                  .stars_bar style=get_star_rating(place)
+                  .stars_bg
+                small
+                  = place.reviews.count
+              ul.place_features
+                li.location
+                  = place.location
+                li.cuisine
+                  = place.kitchens.map(&:name).join(', ')
+                li.pricing 200 UAH
+              .clear
+.content
+  .row
+    #promo_block_sm.promo_block.span4
+      | Earn points and get discounts!
+      a href="#"
+    #promo_block_big.promo_block.span8
+      | Need more clients?
+      a href="#"

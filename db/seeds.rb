@@ -1,45 +1,58 @@
-require_relative "../spec/blueprints"
-
+#encoding: utf-8
 
 def insert_default_user(email, admin = true)
   password            = Rails.env.production? ? Devise.friendly_token.first(6) : (1..6).to_a.join
   user                = User.new(email: email, password: password, password_confirmation: password).generate_default_fields
   user.login          = admin ? 'admin' : 'user'
-  #user.user_role_type = admin ? UserRoleType.admin : UserRoleType.default
-  (user.user_role_id   = UserRoleType.admin.id) if admin
+  (user.user_role_id  = UserRoleType.admin.id) if admin
   user.activate.skip_confirmation!
   user.save!
   puts "#{admin ? 'Admin: ' : 'User: '}#{email}, #{password}"
 end
 
-#user = User.make! first_name: 'Happy user', email: 'admin@example.com', password: 'password', password_confirmation: 'password'
-#other_user = User.make!
+def add_categories
+  categories = ['Рестораны', 'Проведение событий', 'Автомобили', 'Доставка еды', 'Ночная жизнь',
+                'Краcота и здоровье', 'Здоровье и медицина', 'Азартные игры', 'Еда', 'Искусство',
+                'Домашние животные', 'Родители и дети', 'Покупки', 'Спортивные события', 'Недвижимость',
+                'Образование', 'Гостиницы и туризм', 'Локальные сервисы', 'Финансы']
+  categories.each do |category_namne|
+    Category.create(name: category_namne, description: Faker::Lorem.sentence, user_id: User.first.id)
+  end
+  puts 'categories added successfully'
+end
+
+def add_kitchens
+  kitchens = %w(Английская Австрийская Бельгийская Болгарская Валлийская Венгерская Голландская Греческая
+                Датская Итальянская Испанская Ирландская Немецкая Луизианская Польская Португальская
+                Румынская Финская Французская Чешская Швейцарская Шведская Шотландская Югославская Норвежская
+                Вьетнамская Индийская Китайская Корейская Малайзийская Монгольская Тайская Турецкая Японская)
+  kitchens.each do |kitchen_name|
+    Kitchen.create(name: kitchen_name, description: Faker::Lorem.sentence, user_id: User.first.id)
+  end
+  puts 'kitchens added successfully'
+end
+
 def add_test_stuff
   5.times do
-    category  = Category.make!
-    kitchen   = Kitchen.make!
+    category  = Category.all.sample((rand(3) + 2))
+    kitchen   = Kitchen.all.sample((rand(3) + 2))
     10.times do
+      place = Place.create(name: Faker::Company.name, description: Faker::Lorem.sentence, user_id: User.first.id,
+                           phone: Faker::PhoneNumber.phone_number, url: Faker::Internet.http_url)
 
-      place = Place.create! do |pl|
-        pl.name        = Faker::Company.name
-        pl.description = Faker::Lorem.sentence
-        pl.phone       = Faker::PhoneNumber.phone_number
-        pl.url         = Faker::Internet.http_url
-      end
-      place.location = Location.create!({latitude:  Faker::Geolocation.lat, longitude: Faker::Geolocation.lng,
-                                      locationable_id: place.id, locationable_type: 'Place'})
-      place.save!
-
+      place.location   = FactoryGirl.build(:location)
       place.categories << category
-      place.kitchens << kitchen
-      3.times do
-        Note.make!   place: place
-        Review.make! place: place, user: User.last
-        Event.make!  place: place
+      place.kitchens   << kitchen
+      (rand(4) + 1).times do
+        review = FactoryGirl.build(:review, user_id: User.last.id)
+        MarkType.all.each { |mark_type| review.marks << FactoryGirl.build(:mark, mark_type_id: mark_type.id) }
+        place.reviews << review
+        place.notes   << FactoryGirl.build(:note)
+        place.events  << FactoryGirl.build(:event)
       end
-
     end
   end
+  puts 'test stuff added successfully'
 end
 
 def insert_group_feature
@@ -62,25 +75,15 @@ def insert_group_feature
       FeatureItem.create({name_ru: item, group_feature_id: g.id})
     end
   end
-
-
+  puts 'group features added successfully'
 end
 
-def insert_marks_and_reviews user
-  (rand(5) + 1).times do
-    place = Place.all.sample
-    place.reviews << Review.new(user_id: user.id, content: 'placeholder', title: 'placeholder')
-  end
-  #user.reviews.each { |review| review.mark = Mark.new(food: (rand(5) + 1) }
-
-end
 
 def insert_mark_types
-  %w(price services food).each do |type|
-    MarkType.create do |mark_type|
-      mark_type.name = type
-    end.save!
+  %w(pricing service food ambiance).each do |type|
+    MarkType.create(name: type, description: Faker::Lorem.sentence(10))
   end
+  puts 'mark types added successfully'
 end
 
 def insert_city
@@ -93,19 +96,29 @@ def insert_city
       c.slug = city[:slug]
     end.save!
   end
+  puts 'cities added successfully'
+end
+
+def insert_default_place_pictures
+  pictures_path = Rails.root.join('public', 'images', 'default_place_pictures')
+  pictures = Dir.glob("#{pictures_path}/*.{jpg,png,jpeg}").map { |entry| File.new(entry)}
+  Place.all.each { |place| place.place_image = PlaceImage.new(data: pictures.sample, is_main: true) }
+  puts 'place images added successfully'
 end
 
 User.full_truncate
 insert_default_user('admin@adm.com')
 insert_default_user('user@usr.com', false)
-add_test_stuff
-insert_group_feature
+add_categories
+add_kitchens
 insert_mark_types
-#insert_marks_and_reviews(User.find_by_email('admin@adm.com'))
+add_test_stuff
+insert_default_place_pictures
+insert_group_feature
 insert_city
 
 #10.times do
-#  s = Selection.make! user: User.first
+#  s = FactoryGirl(selection, user: User.first)
 #  rand_place = Place.find_by_id rand(Place.last.id)
 #  if (rand_place.id.to_i - 10) > 0
 #    start_place_id = rand_place.id.to_i - 10

@@ -14,6 +14,7 @@ Topclub::Application.routes.draw do
   post '/user_registration' => 'users/omniauth_callbacks#user_registration', as: 'user_registration'
 
   get '/profile/:user_id' => 'users/profile#show', as: 'profile'
+  get '/profile/:user_id/invite_friends' => 'users/profile#invite_friends', as: 'invite_friends'
 
   root :to => 'explore#index'
 

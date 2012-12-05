@@ -21,8 +21,7 @@
 
 FactoryGirl.define do
   factory :review do
-    reviewable_id 1
-    reviewable_type "MyString"
-    content "MyText"
+    title Faker::Lorem.sentence
+    content Faker::Lorem.sentences(5)
   end
 end

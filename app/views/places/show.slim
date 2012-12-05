@@ -15,7 +15,7 @@
                 input type="submit" value="Find a table"
                   .clear
       .page_content itemscope="" itemtype="http://data-vocabulary.org/Review-aggregate"
-        img.place_img alt=@place.name height="180" itemprop="photo" src=(@place.place_image.url(:slider)if @place.place_image) width="240"
+        img.place_img alt=@place.name height="180" itemprop="photo" src=(@place.place_image.url(:place_show)if @place.place_image) width="240"
           h1 title=@place.name
             = @place.name
             span itemprop="itemreviewed"
@@ -26,7 +26,7 @@
                   span itemprop="average"
                   | из
                   span itemprop="best"
-              .stars_bar style="left: 80%"
+              .stars_bar style=get_star_rating(@place)
               .stars_bg
             small
               a href="#"
@@ -35,15 +35,15 @@
                 | reviews ›
           #favorites
             .add_to_favorites
-          		|Add to<br>
-          		|favorites
+          	  |Add to<br>
+          	  |favorites
           ul.place_features
             li.location
               strong Location:
               | Sribnokilskaya st., 3d
             li.cuisine
               strong Kitchen:
-              | European, Japaneese
+              = @place.kitchens.map(&:name).join(', ')
             li.pricing
               strong Pricing:
               span itemprop="pricerange"
@@ -78,58 +78,6 @@
                       .stars_bar
                       .stars_bg
                     meta content="4.3" itemprop="ratingValue"
-                  span itemprop="description"
-                  a.read_more href="#"
-                    nobr read more ›
-                  .review_vote
-                    a.helpful href="#"
-                      | helpful
-                      strong 2
-                    a.unhelpful href="#"
-                      | unhelpful
-                      strong 0
-            .review itemprop="review" itemscope="" itemtype="http://schema.org/Review"
-              a href="#"
-                img.user_pic height="32" src="" width="32"
-              .review_content
-                a.user_link href="#"
-                  span itemprop="author"
-                meta content="2012-10-21" itemprop="datePublished"
-                  small
-                    | Dined yesterday ·
-                    a href="#"
-                  .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
-                    .stars
-                      .stars_overlay
-                      .stars_bar
-                      .stars_bg
-                    meta content="2.3" itemprop="ratingValue"
-                  span itemprop="description"
-                  a.read_more href="#"
-                    nobr read more ›
-                  .review_vote
-                    a.helpful href="#"
-                      | helpful
-                      strong 2
-                    a.unhelpful href="#"
-                      | unhelpful
-                      strong 0
-            .review itemprop="review" itemscope="" itemtype="http://schema.org/Review"
-              a href="#"
-                img.user_pic height="32" src="" width="32"
-              .review_content
-                a.user_link href="#"
-                  span itemprop="author"
-                meta content="2012-10-21" itemprop="datePublished"
-                  small
-                    | Dined yesterday ·
-                    a href="#"
-                  .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
-                    .stars
-                      .stars_overlay
-                      .stars_bar
-                      .stars_bg
-                    meta content="4.1" itemprop="ratingValue"
                   span itemprop="description"
                   a.read_more href="#"
                     nobr read more ›

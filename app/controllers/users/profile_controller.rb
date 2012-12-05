@@ -4,4 +4,8 @@ class Users::ProfileController < ApplicationController
   def show
 
   end
+
+  def invite_friends
+
+  end
 end

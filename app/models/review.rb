@@ -5,7 +5,7 @@ class Review < ActiveRecord::Base
   belongs_to :user
   belongs_to :place
   belongs_to :reviweable, polymorphic: true
-  has_one :mark
+  has_many :marks
 
 
 

@@ -215,7 +215,6 @@ end
 #  locked_at              :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  city                   :string(255)
 #
 # Indexes
 #
