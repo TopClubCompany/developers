@@ -3,19 +3,19 @@ module Utils
     LANG_ANALYZERS = {
         :ru => 'Russian',
         :en => 'English',
-        :it => 'Italian'
+        :ua => 'Ukraine'
     }
 
     custom_filters = [:ru, :en, :ua].each_with_object({}) do |l, h|
       h["custom_synonyms_#{l}"] = {
           "type" => "synonym",
           "ignore_case" => "true",
-          "tokenizer" => "standard",
-          "synonyms_path" => Rails.root.join("tmp/synonym_#{l}.txt").to_s
+          "tokenizer" => "standard"#,
+          #"synonyms_path" => Rails.root.join("tmp/synonym_#{l}.txt").to_s
       }
       h["custom_stop_#{l}"] = {
           "type" => "stop",
-          "stopwords_path" => Rails.root.join("lib/data/stop_big_#{l}.txt").to_s
+          #"stopwords_path" => Rails.root.join("lib/data/stop_big_#{l}.txt").to_s
       }
       h["snow_#{l}"] = {
           "type" => "snowball", 'language' => LANG_ANALYZERS[l]
