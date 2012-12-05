@@ -123,8 +123,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'simplecov', :require => false
   gem "rspec-rails", ">= 2.10.1"
-  gem "factory_girl_rails", ">= 3.3.0"
-  gem "factory_girl", '>=4.0.0'
+
   gem 'quiet_assets'
   gem 'jasmine-rails'
   gem "capybara"
@@ -140,3 +139,7 @@ group :development, :test do
   gem 'jasminerice'
   gem 'rb-inotify' if RUBY_PLATFORM.downcase.include?("linux")
 end
+
+#for seed in production
+gem "factory_girl_rails", ">= 3.3.0"
+gem "factory_girl", '>=4.0.0'

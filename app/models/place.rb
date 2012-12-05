@@ -159,8 +159,7 @@ class Place < ActiveRecord::Base
   end
 
   def overall_mark
-    m = marks
-    { mark: (m[:overall] / m[:count]).round(1), id: id }
+    { mark: (marks[:overall] / marks[:count]).round(1), id: id }
   end
 
   def self.best amount
