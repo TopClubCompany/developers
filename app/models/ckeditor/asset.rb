@@ -1,3 +1,11 @@
+# -*- encoding : utf-8 -*-
+class Ckeditor::Asset < ActiveRecord::Base
+  include Ckeditor::Orm::ActiveRecord::AssetBase
+              
+  delegate :url, :current_path, :size, :content_type, :filename, :to => :data
+  
+  validates_presence_of :data
+end
 # == Schema Information
 #
 # Table name: assets
@@ -24,11 +32,3 @@
 #  index_assets_on_user_id                                   (user_id)
 #
 
-# -*- encoding : utf-8 -*-
-class Ckeditor::Asset < ActiveRecord::Base
-  include Ckeditor::Orm::ActiveRecord::AssetBase
-              
-  delegate :url, :current_path, :size, :content_type, :filename, :to => :data
-  
-  validates_presence_of :data
-end

@@ -11,6 +11,7 @@ def insert_default_user(email, admin = true)
 end
 
 def add_categories
+  Category.full_truncate
   categories = ['Рестораны', 'Проведение событий', 'Автомобили', 'Доставка еды', 'Ночная жизнь',
                 'Краcота и здоровье', 'Здоровье и медицина', 'Азартные игры', 'Еда', 'Искусство',
                 'Домашние животные', 'Родители и дети', 'Покупки', 'Спортивные события', 'Недвижимость',
@@ -22,6 +23,7 @@ def add_categories
 end
 
 def add_kitchens
+  Kitchen.full_truncate
   kitchens = %w(Английская Австрийская Бельгийская Болгарская Валлийская Венгерская Голландская Греческая
                 Датская Итальянская Испанская Ирландская Немецкая Луизианская Польская Португальская
                 Румынская Финская Французская Чешская Швейцарская Шведская Шотландская Югославская Норвежская
@@ -33,12 +35,13 @@ def add_kitchens
 end
 
 def add_test_stuff
+  Place.full_truncate
   5.times do
     category  = Category.all.sample((rand(3) + 2))
-    kitchen   = Kitchen.all.sample((rand(3) + 2))
+    kitchen   = Kitchen.all.sample((rand(3) + 1))
     10.times do
       place = Place.create(name: Faker::Company.name, description: Faker::Lorem.sentence, user_id: User.first.id,
-                           phone: Faker::PhoneNumber.phone_number, url: Faker::Internet.http_url)
+                           phone: Faker::PhoneNumber.phone_number, url: Faker::Internet.http_url, avg_bill: BillType.all.sample.id)
 
       place.location   = FactoryGirl.build(:location)
       place.categories << category
@@ -100,8 +103,8 @@ def insert_city
 end
 
 def insert_default_place_pictures
-  pictures_path = Rails.root.join('public', 'images', 'default_place_pictures')
-  pictures = Dir.glob("#{pictures_path}/*.{jpg,png,jpeg}").map { |entry| File.new(entry)}
+  pictures_path = Rails.root.join('public', 'images', 'default_place_pictures', '*.{jpg, png, jpeg}')
+  pictures = Dir.glob(pictures_path).map { |entry| File.new(entry)}
   Place.all.each { |place| place.place_image = PlaceImage.new(data: pictures.sample, is_main: true) }
   puts 'place images added successfully'
 end

@@ -45,7 +45,7 @@
               strong Kitchen:
               = @place.kitchens.map(&:name).join(', ')
             li.pricing
-              strong Pricing:
+              strong Pricing: #{BillType.find(@place.avg_bill).title}
               span itemprop="pricerange"
           #place_links
             = link_to 'More details ›', '#'

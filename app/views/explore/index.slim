@@ -29,9 +29,9 @@
                 li.location
                   = place.location_city
                 li.cuisine
-                  = place.kitchens_names
+                  = place.kitchens_names.gsub(' ', ', ')
                 li.pricing
-                  = place.avg_bill
+                  = BillType.find(place.avg_bill).title
               .clear
 .content
   .row
