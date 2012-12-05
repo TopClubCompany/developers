@@ -26,6 +26,6 @@ module PlacesHelper
   end
 
   def get_star_rating place
-    "left: #{place.overall_mark[:mark] * 25}%"
+    "left: #{place.overall_mark * 25}%"
   end
 end

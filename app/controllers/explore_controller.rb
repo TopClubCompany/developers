@@ -1,7 +1,7 @@
 class ExploreController < ApplicationController
 
   def index
-    @places = Place.best 6
+    @places = Place.best_places 6
   end
 
 

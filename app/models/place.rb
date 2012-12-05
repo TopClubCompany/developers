@@ -105,6 +105,15 @@ class Place < ActiveRecord::Base
 
   end
 
+  def self.best_places amount
+    query = Tire.search 'places',
+                        sort: {overall_mark: { order: "desc"}},
+                        size: amount
+
+    query.results.map(&:load)
+    query.results
+  end
+
 
   def lat_lng
     [location.try(:latitude), location.try(:longitude)].join(',')
@@ -112,9 +121,9 @@ class Place < ActiveRecord::Base
 
   def to_indexed_json
     attrs = [:id, :slug, :avg_bill, :url]
-    related_ids = [:kitchen_ids, :category_ids, :place_feature_item_ids
+    related_ids = [:kitchen_ids, :category_ids, :place_feature_item_ids, :review_ids
     ]
-    methods = %w(lat_lng)
+    methods = %w(lat_lng marks overall_mark)
 
     Jbuilder.encode do |json|
       json.(self, *self.class.all_translated_attribute_names)
@@ -122,14 +131,16 @@ class Place < ActiveRecord::Base
       json.(self, *methods)
 
       [:kitchens, :categories, :place_feature_items].each do |a|
-        json.set!("#{a}_names", self.send(a).map{|t| t.translations.map(&:name).join(' ') }.join(' '))
+        json.set!("#{a}_names", self.send(a).map{|t| t.translations.map(&:name).join(', ') }.join(' '))
       end
 
       json.(self, *related_ids)
 
       json.images all_place_images do |json, image|
         json.id image.id
-        json.url image.url(:thumb)
+        json.slider_url image.url(:slider)
+        json.show_place_image image.url(:place_show)
+        json.thumb_url image.url(:thumb)
         json.is_main image.is_main
       end
       json.location_city location.try(:city)
@@ -149,27 +160,21 @@ class Place < ActiveRecord::Base
   end
 
   def marks
-    marks = { overall: 0.0 }
-    MarkType.all.each { |type| marks.update(type.name => 0.0) }
-    raw_marks = reviews.map {|review| review.marks.group_by{|m| m.mark_type.name}}
-    marks.update(review_count: raw_marks.count, count: raw_marks.count * MarkType.count)
-    raw_marks.each {|review_mark| review_mark.each { |k,v| marks[k] += v.first.value}}
-    marks.except(:overall, :count, :review_count).each { |_, v| marks[:overall] += v}
+    count_reviews = self.reviews.joins(:marks).
+        select("reviews.*, marks.mark_type_id as mark_type_id, sum(marks.value) as sum_value, avg(marks.value) as avg_value")
+        .group("marks.mark_type_id")
+    marks = {}
+    count_reviews.each do |review|
+      marks.update(MarkType.find(review.mark_type_id).name => {sum: review.sum_value.to_f, avg: review.avg_value.to_f})
+    end
     marks.deep_symbolize_keys!
   end
 
   def overall_mark
-    { mark: (marks[:overall] / marks[:count]).round(1), id: id }
+    marks.values.map { |mark| mark[:avg] }.avg.round(1)
   end
 
-  def self.best amount
-    best = []
-    result = []
-    ratings = all.map(&:overall_mark)
-    amount.times { best << ratings.delete_at(ratings.index(ratings.max{|a,b| a[:mark] - b[:mark]})) }
-    best.each { |place| result << find(place[:id]) }
-    result
-  end
+
 end
 # == Schema Information
 #
