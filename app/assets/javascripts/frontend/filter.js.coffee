@@ -1,10 +1,10 @@
 class PlacesCollection
   constructor: () ->
-    places = {}
+    @places = {}
+    @ids = []
     @createMap()
-
+   
   createMap: () ->
-
     initialData = $('#map').data()
     mapOptions =
       center: new google.maps.LatLng(initialData.lat, initialData.lng),
@@ -12,36 +12,78 @@ class PlacesCollection
       mapTypeId: google.maps.MapTypeId.ROADMAP
 
     @map = new google.maps.Map(document.getElementById("map"), mapOptions)
-    @addMarkers()
 
-  addMarkers: () =>
-    self = @
-    $places = $('#map_details_wrapper').find('.place')
-    $places.each (index, element) ->
-      data = $(element).data()
-      marker = new google.maps.Marker(
-        position: new google.maps.LatLng(data.lat, data.lng)
-        title: "Hello from #{data.id}!"
-        html: "<a class='marker' href='#{data.id}' >place</a>"
-      )
-      marker.setMap(self.map);
-      google.maps.event.addListener marker, "mouseover", ->
-        selector = '#' + data.id
-        console.log selector
-        $(selector).addClass 'target'
+  useNewData: (placesData) ->
+    newIds = _.pluck(placesData, 'id')
+    needToAdd = _.difference newIds, @ids
+    needToRemove = _.without @ids, newIds
+    console.log needToRemove, needToAdd
+    @ids = _.union @ids, needToAdd
+    idsPresent = _.pluck placesData, "id"
 
-      google.maps.event.addListener marker, "click", ->
-        selector = '#' + data.id
-        console.log selector
-        console.log $(selector).attr('href')
+    
+  addPlace: (placeData) ->
+    place =
+      "id": placeData.id
+      "lat": placeData.lat
+      "lng": placeData.lng
+      "title": placeData.name
+      # reviews should state number of reviews, e.g. 1 review, 2 reviews and so on
+      "reviews": placeData.reviews
+    @addBlock place
+    @addMarker place
+  
+  addBlock: (place) =>
+    block = """
+      <div id="place_#{place.id}" data-lng="#{place.lng}" data-lat="#{place.lat}" class="place">
+        <h4>
+          <a href="#">#{place.title}</a>
+        </h4>
+        <div class="rating">
+          <div class="stars">
+            <div class="stars_overlay"></div>
+            <div class="stars_bar"></div>
+            <div class="stars_bg"></div>
+          </div>
+          <small>#{data.reviews}</small>
+        </div>
+        <div class="timing">
+          <a href="#"></a>
+          <a href="#"></a>
+          <a href="#" class="bold"></a>
+          <a href="#"></a>
+          <a href="#"></a>
+          <div class="clear"></div>
+        </div>
+      </div>
+    """
+    $('#map_details_wrapper').append block
+  addMarker: (obj) =>
+    marker = new google.maps.Marker(
+      position: new google.maps.LatLng(data.lat, data.lng)
+      title: "Hello from #{data.id}!"
+      html: "<a class='marker' href='##{data.id}'>place</a>"
+    )
+    marker.setMap(@map);
+    google.maps.event.addListener marker, "mouseover", ->
+      selector = '#' + data.id
+      console.log selector
+      $(selector).addClass 'target'
 
-      google.maps.event.addListener marker, "mouseout", ->
-        selector = '#' + data.id
-        console.log selector
-        $(selector).removeClass 'target'
+    google.maps.event.addListener marker, "click", ->
+      selector = '#' + data.id
+      console.log selector
+      console.log $(selector).attr('href')
+
+    google.maps.event.addListener marker, "mouseout", ->
+      selector = '#' + data.id
+      console.log selector
+      $(selector).removeClass 'target'
 
 class FilterInput
-  constructor: ->
+  constructor: (needToShowMap = no)->
+    if needToShowMap
+      @places = new PlacesCollection() if $("#map").length > 0
     @checkIfNeeded()
     @bindChangeListener()
     @give_more() if $(".more").length > 0
@@ -61,7 +103,7 @@ class FilterInput
         result[type] = [] if result[type] is undefined
         result[type].push($(this).val()) if $(this).is(':checked')
       )
-      
+     
       baseURL =  window.location.pathname
       newQuery = $.param result
       newUrl = (baseURL + '/?' + newQuery).replace('//?', '/?')
@@ -76,7 +118,8 @@ class FilterInput
        error: (xhr, error) ->
          console.log xhr, error
        success: (json) ->
-         console.log(json)
+          console.log json
+          #console.log @places.useNewData(json)
        beforeSend: () ->
         console.log 'sending ajax request, can do animation here'
        complete: () ->
@@ -102,14 +145,15 @@ class FilterInput
 
 $ ->
   if $('#refine').length isnt 0
-    new FilterInput()
-  new PlacesCollection() if $("#map").length > 0
+    new FilterInput(true)
+
   ###
     ///
       (?<=filters=) # after word filters=
       [\w+%=&\d]*   # look for characters, %, =, &, and digits
     ///
   ###
+
 
 
 
