@@ -28,30 +28,30 @@
 #fixed #language #ua { background: image_url('../assets/language.png') 0 -38px no-repeat; }
 
 #sign_up_page input[type="email"] {
-  font-size: 13px;
-  color: #000;
+  margin-right: 5px;
   width: 150px;
   height: 18px;
+  color: #000;
+  font-size: 13px;
   line-height: 13px;
-  margin-right: 5px;
 }
 
 #search_form select {
+  float: left;
+  overflow: hidden;
+  margin: 0 10px 0 0;
   width: 103px;
+  height: 40px;
+  border: none;
+  border-right: 10px solid transparent;
+  background: #fff image_url('../assets/arr2.gif') right center no-repeat;
+  box-shadow: none;
+  font-size: 20px;
+  font-family: 'univers_condensedmedium', 'Arial Narrow';
   -webkit-appearance: none;
   -moz-appearance: window;
   appearance: none;
-  overflow: hidden;
-  height: 40px;
-  font-size: 20px;
-  font-family: 'univers_condensedmedium', 'Arial Narrow';
-  border: none;
-  box-shadow: none;
-  padding: 10px 17px 10px 10px;
-  float: left;
-  margin: 0 10px 0 0;
-  background: #fff image_url('../assets/arr2.gif') right center no-repeat;
-  border-right: 10px solid transparent;
+  //padding: 10px 17px 10px 10px;
 
 }
 
@@ -59,7 +59,21 @@
   color: #333;
 }
 
-#search_form select[name='reserve_time'] { width: 68px; }
+#search_form select[name='number_of_people'] {
+  float: left;
+  margin: 0 10px 0 0;
+  width: 80px;
+  border: none;
+  border-right: 10px solid transparent;
+  background: white url(/assets/../assets/arr2.gif) right center no-repeat;
+  box-shadow: none;
+  color: #333;
+  font-size: 20px;
+  font-family: 'univers_condensedmedium', 'Arial Narrow';
+  -webkit-appearance: none;
+  -moz-appearance: window;
+  appearance: none;
+}
 
 
 
