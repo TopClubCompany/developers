@@ -1,3 +1,3 @@
 FactoryGirl.define do
-  sequence(:random_string) {|n| Forgery(:lorem_ipsum).words(10) }
+  sequence(:random_string) {|n| Faker::Lorem.sentence }
 end

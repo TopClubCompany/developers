@@ -21,7 +21,6 @@ end
 gem 'jquery-rails'
 
 gem 'ffaker'
-gem 'machinist'
 
 gem 'geokit'
 gem 'geokit-rails3'
@@ -127,7 +126,6 @@ group :development, :test do
   gem "factory_girl_rails", ">= 3.3.0"
   gem "factory_girl", '>=4.0.0'
   gem 'quiet_assets'
-  gem 'forgery', '0.3.12'
   gem 'jasmine-rails'
   gem "capybara"
   gem 'capybara-webkit', '0.12.1'

@@ -1,5 +1,7 @@
 class MarkType < ActiveRecord::Base
 
+  attr_accessible :name, :description
+
   translates :name, :description
 
   include Utils::Models::Base

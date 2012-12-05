@@ -1,11 +1,10 @@
 class Kitchen < ActiveRecord::Base
-  #has_many :places
 
   has_many :place_kitchens, :dependent => :destroy
   has_many :places, :through => :place_kitchens
 
 
-  attr_accessible :is_visible, :name, :description
+  attr_accessible :is_visible, :name, :description, :user_id
 
   belongs_to :user
 

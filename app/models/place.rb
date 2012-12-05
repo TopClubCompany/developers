@@ -2,7 +2,7 @@
 class Place < ActiveRecord::Base
 
   attr_accessible :phone, :is_visible, :user_id, :url, :location_attributes,
-                  :avg_bill, :feature_item_ids, :place_administrators_attributes
+                  :avg_bill, :feature_item_ids, :place_administrators_attributes, :name, :description
 
   belongs_to :user
 
@@ -20,7 +20,7 @@ class Place < ActiveRecord::Base
 
   has_many :notes
   has_many :events
-  has_many :reviews, :as => :reviewable
+  has_many :reviews, :as => :reviewable, :dependent => :destroy
 
   enumerated_attribute :bill, :id_attribute => :avg_bill, :class => ::BillType
 
@@ -149,20 +149,28 @@ class Place < ActiveRecord::Base
   end
 
   def marks
-    marks = { food: 0, service: 0, ambiance: 0, pricing: 0, overall: 0, count: 0 }
-     reviews.each do |review|
-       marks[:count] += 1
-       marks.except(:count, :overall).each do |k, _|
-         marks[k] += review.mark[k].to_f
-         marks[:overall] += review.mark[k].to_f
-       end
-     end
-    marks.except(:count, :overall).each { |k, _|  marks[k] /= marks[:count] } unless marks[:count].zero?
-    marks[:overall] /= marks[:count]*4
-    marks
+    marks = { overall: 0.0 }
+    MarkType.all.each { |type| marks.update(type.name => 0.0) }
+    raw_marks = reviews.map {|review| review.marks.group_by{|m| m.mark_type.name}}
+    marks.update(review_count: raw_marks.count, count: raw_marks.count * MarkType.count)
+    raw_marks.each {|review_mark| review_mark.each { |k,v| marks[k] += v.first.value}}
+    marks.except(:overall, :count, :review_count).each { |_, v| marks[:overall] += v}
+    marks.deep_symbolize_keys!
   end
 
+  def overall_mark
+    m = marks
+    { mark: (m[:overall] / m[:count]).round(1), id: id }
+  end
 
+  def self.best amount
+    best = []
+    result = []
+    ratings = all.map(&:overall_mark)
+    amount.times { best << ratings.delete_at(ratings.index(ratings.max{|a,b| a[:mark] - b[:mark]})) }
+    best.each { |place| result << find(place[:id]) }
+    result
+  end
 end
 # == Schema Information
 #

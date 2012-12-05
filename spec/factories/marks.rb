@@ -19,10 +19,6 @@
 
 FactoryGirl.define do
   factory :mark do
-    food 1
-    service 1
-    pricing 1
-    ambiance 1
-    references ""
+    value { (rand(5) + 1) }
   end
 end
