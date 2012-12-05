@@ -30,7 +30,7 @@ module Utils
         }
     }
 
-    lang_analyzers = [:ru, :en, :it].each_with_object({}) do |l, h|
+    lang_analyzers = [:ru, :en, :ua].each_with_object({}) do |l, h|
       h["analyzer_#{l}"] = {
           "type" => "custom",
           "tokenizer" => "standard",

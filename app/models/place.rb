@@ -131,7 +131,7 @@ class Place < ActiveRecord::Base
       json.(self, *methods)
 
       [:kitchens, :categories, :place_feature_items].each do |a|
-        json.set!("#{a}_names", self.send(a).map{|t| t.translations.map(&:name).join(', ') }.join(' '))
+        json.set!("#{a}_names", self.send(a).map{|t| t.translations.map(&:name).join(', ') }.join(', '))
       end
 
       json.(self, *related_ids)
