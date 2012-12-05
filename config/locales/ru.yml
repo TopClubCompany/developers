@@ -11,7 +11,7 @@ ru:
       confirm_new_password: "Подтвердите пароль"
       new_password: "Новый пароль"
     links: 
-      join_reserve: "Войти"
+      join_reserve: "Зарегистрироваться"
       receive_confirmation: "Не получили письма с подтверждением регистрации?"
       recover_password: "Забыли пароль?"
       sign_in: "Вход в систему"
@@ -44,7 +44,7 @@ ru:
       change_password: "Изменить пароль"
       receive_confirmation: "Выслать подтверждение"
       recover_password: "Восстановить"
-      sign_in: "Войти"
+      sign_in: "Зарегистрироваться"
       sign_out: "Выйти"
       sign_up: "Зарегистрироваться"
     title: 
