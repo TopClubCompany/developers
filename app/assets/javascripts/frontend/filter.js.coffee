@@ -11,7 +11,6 @@ class PlacesCollection
       center: new google.maps.LatLng(initialData.lat, initialData.lng),
       zoom: 9,
       mapTypeId: google.maps.MapTypeId.ROADMAP
-
     @map = new google.maps.Map(document.getElementById("map"), mapOptions)
 
   useNewData: (placesData) ->
@@ -30,28 +29,19 @@ class PlacesCollection
     @ids = _.without(_.union(@ids, needToAddIds), needToRemoveIds)
 
   multipleAdd: (placesToAdd = []) =>
-    _.each placesToAdd, (place) ->
+    _.each placesToAdd, (place) =>
 #      console.log 'places', place
       @places.push place
-      #TODO REMOVE WITH REAL VALUES
-      _.extend place, {lat: 50.451118, lng: 30.522301} 
+      #TODO REPLACE WITH REAL VALUES
+      _.extend place, {lat: 50.44067063154785 + Math.random() * 0.5, lng: 30.52654266357422 + Math.random() * 0.5}
       @addMarker place
       @addBlock place
-    , @
+
 
   multipleRemove: (placeIds) ->
     console.log placeIds
-      
-  addPlace: (placeData) ->
-    place =
-      "id": placeData.id
-      "lat": placeData.lat
-      "lng": placeData.lng
-      "title": placeData.name
-      # reviews should state number of reviews, e.g. 1 review, 2 reviews and so on
-      "reviews": placeData.reviews
-    @addBlock place
-    @addMarker place
+
+
   
   addBlock: (place) =>
  #   console.log "addBlock",  place
@@ -82,13 +72,15 @@ class PlacesCollection
     $('#map_details_wrapper').append block
     
   addMarker: (obj) =>
+    console.log 'addedMarker', obj.lat, obj.lng
+
  #   console.log "addMarker",  obj, "##{obj.id}"
     marker = new google.maps.Marker(
       position: new google.maps.LatLng(obj.lat, obj.lng)
       title: "Hello from #{obj.id}!"
-      html: "<a class='marker' href='##{obj.id}'>place</a>"
+#      html: "<a class='marker' href='##{obj.id}'>place</a>"
     )
-    marker.setMap(@map);
+    marker.setMap(@map)
     google.maps.event.addListener marker, "mouseover", ->
       selector = '#' + obj.id
       console.log selector
@@ -140,13 +132,16 @@ class FilterInput
        url: "/search/",
        type: "GET"
        error: (xhr, error) ->
+         $.noop()
 #          console.log xhr, error
        success: (json) ->
 #           console.log json
           placesObj.useNewData(json)
        beforeSend: () ->
+         $.noop()
 #        sending ajax request, can do animation here'
        complete: () ->
+         $.noop()
 #        ajax request completed, can remove animation here'
 
     $.ajax({ data: serializedData });
@@ -158,11 +153,13 @@ class FilterInput
       e.preventDefault()
       $el = $(this)
       type = $el.data('type')
+      console.log 'request'
       if type
-        $.getJSON '/search/get_more',{type: type}, (data) => parse_more_objects.call(self, data, $el)
+        $.getJSON '/search/get_more',{type: type}, (data) => parse_more_objects.call(self, data, $el, type)
 
   #private methods
-  parse_more_objects = (data, $el) ->
+  parse_more_objects = (data, $el, type) ->
+		_.extend obj, {type: type}
     _.each data, (obj) =>
       $el.prev().prev().after(@more_template(obj))
     $el.hide()
