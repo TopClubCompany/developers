@@ -90,7 +90,7 @@ class Place < ActiveRecord::Base
       filters << {query: {query_string: {query: "avg_bill:#{options[:avg_bill].join(' OR ')}"}}}
     end
     if filters.empty?
-      {}
+      self.best_places(20).to_json
     else
       query = Tire.search 'places', query: { filtered: {
           query: query,
