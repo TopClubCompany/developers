@@ -75,43 +75,47 @@ class Place < ActiveRecord::Base
 
   def self.search(options = {})
     filters = []
+    fields = search_fields
     page_num = (options[:page] || 1).to_i
     query = { match_all: {} }
 
     if options[:kitchen]
-      filters << {query: {query_string: {query: "kitchen_ids:#{options[:kitchen].join(' OR ')}"}}}
+      filters << {query: {terms: {kitchen_ids: options[:kitchen]} }}#{query: "kitchen_ids:#{options[:kitchen].join(' OR ')}"}}}
     end
 
     if options[:category]
-      filters << {query: {query_string: {query: "category_ids:#{options[:category].join(' OR ')}"}}}
+      filters << {query: {terms: {category_ids: options[:category]} }}
     end
 
     if options[:avg_bill]
-      filters << {query: {query_string: {query: "avg_bill:#{options[:avg_bill].join(' OR ')}"}}}
+      filters << {query: {terms: {category_ids: options[:category]} }}
     end
     if filters.empty?
       self.best_places(20).to_json
     else
-      query = Tire.search 'places', query: { filtered: {
-          query: query,
-          filter: { and: filters }
-      } },
-                          from: (page_num - 1) * 25,
-                          size: 25
-      total_places = query.results.total
-      query.results.map{ |r| r.load }
-      query.results.to_json
+      tire.search(page: options[:page], per_page: options[:per_page] || 36) do
+        filter(:and, :filters => filters)
+      end.to_json
+
     end
 
   end
 
-  def self.best_places amount
-    query = Tire.search 'places',
-                        sort: {overall_mark: { order: "desc"}},
-                        size: amount
+  def self.search_fields
+    "id,slug,name_#{I18n.locale},images,lat_lng,marks,overall_mark,category_ids,categories_names,kitchen_ids,kitchens_names,place_feature_item_ids,"
+  end
 
-    query.results.map(&:load)
-    query.results
+  def self.best_places amount
+    tire.search(page: 1, per_page: amount) do
+      sort { by "overall_mark", "desc" }
+    end
+
+    #query = Tire.search 'places',
+    #                    sort: {overall_mark: { order: "desc"}},
+    #                    size: amount
+    #
+    #query.results.map(&:load)
+    #query.results
   end
 
 

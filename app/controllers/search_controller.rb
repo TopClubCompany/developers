@@ -1,9 +1,9 @@
 class SearchController < ApplicationController
   def index
-    result = Place.search(params)
+    @result = Place.search(params)
     respond_to do |format|
       format.json do
-        render :json => result
+        render :json => @result
       end
       format.html do
         render 'search/index'

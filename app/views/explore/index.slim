@@ -31,7 +31,7 @@
                 li.cuisine
                   = place.kitchens_names.gsub(' ', ', ')
                 li.pricing
-                  = BillType.find(place.avg_bill).title
+                  /= BillType.find(place.avg_bill).title
               .clear
 .content
   .row
