@@ -178,7 +178,9 @@ class Place < ActiveRecord::Base
     marks.values.map { |mark| mark[:avg] }.avg.round(1)
   end
 
-
+  def avg_bill_title
+    BillType.find(avg_bill).try(:title)
+  end
 end
 # == Schema Information
 #

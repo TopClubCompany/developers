@@ -28,4 +28,8 @@ module PlacesHelper
   def get_star_rating place
     "left: #{place.overall_mark * 20}%"
   end
+
+  def avg_bill_title avg_id
+    BillType.find(avg_id).try(:title)
+  end
 end

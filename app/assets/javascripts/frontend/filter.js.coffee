@@ -159,8 +159,8 @@ class FilterInput
 
   #private methods
   parse_more_objects = (data, $el, type) ->
-		_.extend obj, {type: type}
     _.each data, (obj) =>
+      _.extend obj, {type: type}
       $el.prev().prev().after(@more_template(obj))
     $el.hide()
 
