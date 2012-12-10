@@ -28,8 +28,9 @@
               ul.place_features
                 li.location
                   = place.location_city
-                li.cuisine
-                  = place.kitchens_names
+                - kitchens_names = place.kitchens_names
+                li.cuisine title=kitchens_names
+                  = truncate(kitchens_names, length: 18)
                 li.pricing
                   = avg_bill_title(place.avg_bill)
               .clear
