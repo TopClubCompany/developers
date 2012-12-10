@@ -11,11 +11,11 @@ module Utils
           "type" => "synonym",
           "ignore_case" => "true",
           "tokenizer" => "standard"#,
-          #"synonyms_path" => Rails.root.join("tmp/synonym_#{l}.txt").to_s
+          "synonyms_path" => Rails.root.join("tmp/synonym_#{l}.txt").to_s
       }
       h["custom_stop_#{l}"] = {
           "type" => "stop",
-          #"stopwords_path" => Rails.root.join("lib/data/stop_big_#{l}.txt").to_s
+          "stopwords_path" => Rails.root.join("lib/data/stop_big_#{l}.txt").to_s
       }
       h["snow_#{l}"] = {
           "type" => "snowball", 'language' => LANG_ANALYZERS[l]
