@@ -120,6 +120,9 @@ group :development, :test do
     gem 'growl_notify'
   end
 
+  gem "better_errors"
+  gem "binding_of_caller"
+
   gem 'database_cleaner'
   gem 'simplecov', :require => false
   gem "rspec-rails", ">= 2.10.1"
