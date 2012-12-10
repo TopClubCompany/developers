@@ -14,8 +14,8 @@ module Utils
           #"synonyms_path" => Rails.root.join("lib/data/synonym_#{l}.txt").to_s
       }
       h["custom_stop_#{l}"] = {
-          "type" => "stop",
-          "stopwords_path" => Rails.root.join("lib/data/stop_big_#{l}.txt").to_s
+          #"type" => "stop",
+          #"stopwords_path" => Rails.root.join("lib/data/stop_big_#{l}.txt").to_s
       }
       h["snow_#{l}"] = {
           "type" => "snowball", 'language' => LANG_ANALYZERS[l]
