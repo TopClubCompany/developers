@@ -108,6 +108,7 @@ class Place < ActiveRecord::Base
   def self.best_places amount
     tire.search(page: 1, per_page: amount) do
       sort { by "overall_mark", "desc" }
+      puts to_curl
     end
 
     #query = Tire.search 'places',
