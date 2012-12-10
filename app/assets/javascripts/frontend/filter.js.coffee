@@ -3,6 +3,7 @@ class PlacesCollection
     @places = []
     @ids = []
     @createMap()
+    @markers = []
    
   createMap: () ->
     console.log 'inited GMap'
@@ -41,13 +42,25 @@ class PlacesCollection
 
   multipleRemove: (placeIds) ->
     console.log placeIds
-
+    for removeId in placeIds  
+      _.where(@markers,{placeId: removeId}).setMap(null)
+      $("#place_#{removeId}").add("#list_place_#{removeId}").remove()
 
   
   addBlock: (place) =>
  #   console.log "addBlock",  place
-    
-    block = """
+    listblockAddition = """
+                  <div class='special_offers'>
+                    <h5>Special offers:</h5>
+                    <h5></h5>
+                      <a href="#"></a>
+                      <a href="#"></a>
+                      <a href="#"></a>
+                  <div class='clear></div>
+                  </div>
+              
+    """
+    mapBlock = """
       <div id="place_#{place.id}" data-lng="#{place.lng}" data-lat="#{place.lat}" class="place">
         <h4>
           <a href="#">#{place.name_en}</a>
@@ -70,17 +83,24 @@ class PlacesCollection
         </div>
       </div>
     """
-    $('#map_details_wrapper').append block
+    $('#map_details_wrapper').append mapBlock
+    listBlock = $(mapBlock).attr('id', "list_" + $(mapBlock).attr('id')).append listblockAddition
+    $("#list_grid_view").append listBlock
+
+
     
   addMarker: (obj) =>
+    
     console.log 'addedMarker', obj.lat, obj.lng
 
  #   console.log "addMarker",  obj, "##{obj.id}"
     marker = new google.maps.Marker(
       position: new google.maps.LatLng(obj.lat, obj.lng)
       title: "Hello from #{obj.id}!"
+      placeId: obj.id
 #      html: "<a class='marker' href='##{obj.id}'>place</a>"
     )
+    @markers.push marker
     marker.setMap(@map)
     google.maps.event.addListener marker, "mouseover", ->
       selector = '#' + obj.id
@@ -107,6 +127,7 @@ class FilterInput
 
   checkIfNeeded: () ->
     querystring = window.location.search
+    askAJAX.call(@, newQuery, @places) if querystring isnt '?' and places?
     needToCheck = $.deparam querystring.slice(1)
     for filter, values of needToCheck
       for value in values
