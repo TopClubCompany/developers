@@ -27,6 +27,16 @@
 #fixed #language #ru { background: image_url('../assets/language.png') 0 -16px no-repeat; }
 #fixed #language #ua { background: image_url('../assets/language.png') 0 -38px no-repeat; }
 
+#listing #map_places {
+  float: left;
+  width: 510px;
+  height: 450px;
+  overflow: hidden;
+  & img{
+    max-width: inherit;
+  }
+}
+
 #sign_up_page input[type="email"] {
   margin-right: 5px;
   width: 150px;

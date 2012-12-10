@@ -6,12 +6,13 @@ class PlacesCollection
    
   createMap: () ->
     console.log 'inited GMap'
-    initialData = $('#map').data()
+    initialData = $('#map_places').data()
     mapOptions =
       center: new google.maps.LatLng(initialData.lat, initialData.lng),
       zoom: 9,
+      minZoom: 2,
       mapTypeId: google.maps.MapTypeId.ROADMAP
-    @map = new google.maps.Map(document.getElementById("map"), mapOptions)
+    @map = new google.maps.Map(document.getElementById("map_places"), mapOptions)
 
   useNewData: (placesData) ->
     newIds = _.pluck(placesData, 'id')
@@ -99,7 +100,7 @@ class PlacesCollection
 class FilterInput
   constructor: (needToShowMap = no)->
     if needToShowMap is yes
-      @places = new PlacesCollection() if $("#map").length > 0
+      @places = new PlacesCollection() if $("#map_places").length > 0
     @checkIfNeeded()
     @bindChangeListener()
     @give_more() if $(".more").length > 0
@@ -112,7 +113,8 @@ class FilterInput
         $("#refine input[value='#{value}'][data-type='#{filter}']").click() unless $("#refine input[value='#{value}'][data-type='#{filter}']").is(':checked')
 
   bindChangeListener: () =>
-    $('#refine input[type=checkbox]').change =>
+    $('#refine input[type=checkbox]').off 'change'
+    $('#refine input[type=checkbox]').on 'change', =>
       result = {}
       $('#refine input').each( ->
         type = $(this).data('type')
@@ -162,6 +164,7 @@ class FilterInput
     _.each data, (obj) =>
       _.extend obj, {type: type}
       $el.prev().prev().after(@more_template(obj))
+    @bindChangeListener()
     $el.hide()
 
 $ ->
