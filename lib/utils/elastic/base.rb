@@ -10,7 +10,7 @@ module Utils
       h["custom_synonyms_#{l}"] = {
           "type" => "synonym",
           "ignore_case" => "true",
-          "tokenizer" => "standard"#,
+          "tokenizer" => "standard",
           "synonyms_path" => Rails.root.join("tmp/synonym_#{l}.txt").to_s
       }
       h["custom_stop_#{l}"] = {
