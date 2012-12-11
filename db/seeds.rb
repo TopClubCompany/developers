@@ -118,11 +118,11 @@ end
 #User.full_truncate
 #insert_default_user('admin@adm.com')
 #insert_default_user('user@usr.com', false)
-#add_categories
-#add_kitchens
-#insert_mark_types
+add_categories
+add_kitchens
+insert_mark_types
 add_test_stuff
 insert_default_place_pictures
-#insert_group_feature
-#insert_city
+insert_group_feature
+insert_city
 
