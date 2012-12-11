@@ -28,7 +28,7 @@
               ul.place_features
                 li.location
                   = place.location_city
-                - kitchens_names = place.kitchens_names
+                - kitchens_names = place.send("kitchens_names_#{I18n.locale}")
                 li.cuisine title=kitchens_names
                   = truncate(kitchens_names, length: 18)
                 li.pricing
