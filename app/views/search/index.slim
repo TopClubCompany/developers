@@ -58,9 +58,11 @@
       #map_places style="background: rgba(128,128,128,0.5);" *{'data-lat'=>"50.451118", "data-lng" => "30.522301"}
       #map_details
         #map_details_wrapper
-          -if !@recomended_places.nil?
-            - for place in @recomended_places do
-              .place id="place_#{place.slug}" *{'data-lat'=>"#{place.location.latitude}", "data-lng" => "#{place.location.longitude}" , "data-id" => "place_#{place.slug}"}
+          -if !@result.nil?
+            - for place in @result do
+              h1
+                = place.inspect
+              /.place id="place_#{place.id}" *{'data-lat'=>"#{place.location.latitude}", "data-lng" => "#{place.location.longitude}" , "data-id" => "place_#{place.slug}"}
                 h4
                   /= place.location.inspect
                   /= place.inspect
@@ -81,8 +83,8 @@
 
 
       #list_grid_view.none
-        -if !@recomended_places.nil?    
-          - for place in @recomended_places do
+        /-if !@result.nil?
+          - for place in @result do
             .place
               a href="#"
                 img height="100" src="#" width="140"
