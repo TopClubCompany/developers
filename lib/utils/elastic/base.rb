@@ -34,7 +34,7 @@ module Utils
       h["analyzer_#{l}"] = {
           "type" => "custom",
           "tokenizer" => "standard",
-          "filter" => ["custom_stop_#{l}", "asciifolding", "snow_#{l}", "lowercase", "custom_synonyms_#{l}"]
+          "filter" => ["custom_stop_#{l}", "asciifolding", "snow_#{l}", "lowercase"]
       }
       h["base_ru"] = {
           "type" => "custom",
@@ -47,7 +47,7 @@ module Utils
         "default" => {
             "type" => "custom",
             "tokenizer" => "standard",
-            "filter" => ["custom_stop_ru", "asciifolding", "snow_ru", "lowercase", "custom_synonyms_ru"]
+            "filter" => ["custom_stop_ru", "asciifolding", "snow_ru", "lowercase"]
         },
         "ac_ngram" => {
             "type" => "custom",
