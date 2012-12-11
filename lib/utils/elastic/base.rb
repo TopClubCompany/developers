@@ -7,12 +7,12 @@ module Utils
     }
 
     custom_filters = [:ru, :en, :ua].each_with_object({}) do |l, h|
-      #h["custom_synonyms_#{l}"] = {
-      #    "type" => "synonym",
-      #    "ignore_case" => "true",
-      #    "tokenizer" => "standard"#,
-      #    #"synonyms_path" => Rails.root.join("tmp/synonym_#{l}.txt").to_s
-      #}
+      h["custom_#{l}"] = {
+          "type" => "custom",
+          "ignore_case" => "true",
+          "tokenizer" => "standard"#,
+          #"synonyms_path" => Rails.root.join("tmp/synonym_#{l}.txt").to_s
+      }
       h["custom_stop_#{l}"] = {
           "type" => "stop",
           "stopwords_path" => Rails.root.join("lib/data/stop_big_#{l}.txt").to_s
@@ -58,7 +58,7 @@ module Utils
 
     ANALYZERS = {
         :analysis => {
-            :filter => n_gram_filters,
+            :filter => custom_filters.merge(n_gram_filters),
             :analyzer => base_analyzers.update(lang_analyzers)
         }
     }
