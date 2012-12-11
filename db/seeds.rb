@@ -97,7 +97,7 @@ end
 
 def insert_city
   City.full_truncate
-  [{name: "Kiev", slug: "kiev"},{name: "Kharkiv", slug: "kharkiv"}, {name: "Odessa", slug: "odessa"},
+  [{name: "Kyiv", slug: "kyiv"},{name: "Kharkiv", slug: "kharkiv"}, {name: "Odessa", slug: "odessa"},
   {name: "Dnepropetrivsk", slug: "dnepropetrivsk"}, {name: "Donetsk", slug: "donetsk"}, {name: "Lviv", slug: "lviv"}
   ].each do |city|
     City.create do |c|

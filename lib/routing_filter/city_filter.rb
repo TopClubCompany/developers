@@ -36,7 +36,7 @@ module RoutingFilter
       if  valid_city?(city)
         if env.present?
           session = env['rack.session']
-          session["city"] = city
+          session["city"] = City.find(city).name rescue 'Kyiv'
           self.run(:around_recognize, "/", env) do
             params || {}
           end

@@ -223,15 +223,13 @@ module ApplicationHelper
   end
 
   def get_city_class city
-    if session['city'].present? && session['city'] == city
-      'active'
-    elsif !session['city'].present? && city == 'kiev'
+    if current_city == city.camelcase
       'active'
     end
   end
 
   def current_city
-    session['city'] || 'kiev'
+    session['city'] || 'kyiv'
   end
 
 end

@@ -32,7 +32,7 @@ class Location < ActiveRecord::Base
         self.send("city_#{language}=", geo_res.send(language).address.try(:state))
         self.send("street_#{language}=", geo_res.send(language).address.try(:road))
         self.send("country_#{language}=", geo_res.send(language).address.try(:country))
-        self.send("county_#{language}=", geo_res.send(language).address.try { |address| address.county.split(' ').first })
+        self.send("county_#{language}=", geo_res.send(language).address.try { |address| address.county.split(' ').first if  address.county})
       end
 
       self.zip = geo_res.send(languages[0]).address.try(:postcode)
