@@ -1,6 +1,6 @@
 class SearchController < ApplicationController
   def index
-    @result = Place.search(params)
+    @result = Place.search(params.merge(city: current_city))
     respond_to do |format|
       format.json do
         render :json => @result

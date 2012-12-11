@@ -75,11 +75,6 @@ class Place < ActiveRecord::Base
 
   def self.search(options = {})
     filters = []
-    #if options[:title]
-    #  or_filters << {query: "name_#{I18n.locale}: #{options[:title]}"}
-    #  or_filters << {query: "street_#{I18n.locale}: #{options[:title]}"}
-    #  or_filters << {query: "county_#{I18n.locale}: #{options[:title]}"}
-    #end
 
     if options[:kitchen]
       filters << {query: {terms: {kitchen_ids: options[:kitchen]} }}#{query: "kitchen_ids:#{options[:kitchen].join(' OR ')}"}}}
@@ -92,7 +87,12 @@ class Place < ActiveRecord::Base
     if options[:avg_bill]
       filters << {query: {terms: {category_ids: options[:category]} }}
     end
-    if filters.empty? && or_filters.empty?
+
+    if options[:city]
+      filters << {query: {flt: {like_text: options[:city], fields: I18n.available_locales.map { |l| "city_#{l}" }} }}
+    end
+
+    if filters.empty? && options.empty?
       self.best_places(20).to_json
     else
       tire.search(page: options[:page], per_page: options[:per_page] || 36) do
@@ -113,18 +113,15 @@ class Place < ActiveRecord::Base
     "id,slug,name_#{I18n.locale},images,lat_lng,marks,overall_mark,category_ids,categories_names,kitchen_ids,kitchens_names,place_feature_item_ids,"
   end
 
-  def self.best_places amount
+  def self.best_places amount, options={}
     tire.search(page: 1, per_page: amount) do
       sort { by "overall_mark", "desc" }
-      puts to_curl
+      if options[:city]
+        query do
+          flt options[:city].lucene_escape, :fields => I18n.available_locales.map { |l| "city_#{l}" }, :min_similarity => 0.5
+        end
+      end
     end
-
-    #query = Tire.search 'places',
-    #                    sort: {overall_mark: { order: "desc"}},
-    #                    size: amount
-    #
-    #query.results.map(&:load)
-    #query.results
   end
 
 
