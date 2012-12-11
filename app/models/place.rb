@@ -75,9 +75,11 @@ class Place < ActiveRecord::Base
 
   def self.search(options = {})
     filters = []
-    fields = search_fields
-    page_num = (options[:page] || 1).to_i
-    query = { match_all: {} }
+    #if options[:title]
+    #  or_filters << {query: "name_#{I18n.locale}: #{options[:title]}"}
+    #  or_filters << {query: "street_#{I18n.locale}: #{options[:title]}"}
+    #  or_filters << {query: "county_#{I18n.locale}: #{options[:title]}"}
+    #end
 
     if options[:kitchen]
       filters << {query: {terms: {kitchen_ids: options[:kitchen]} }}#{query: "kitchen_ids:#{options[:kitchen].join(' OR ')}"}}}
@@ -90,13 +92,19 @@ class Place < ActiveRecord::Base
     if options[:avg_bill]
       filters << {query: {terms: {category_ids: options[:category]} }}
     end
-    if filters.empty?
+    if filters.empty? && or_filters.empty?
       self.best_places(20).to_json
     else
       tire.search(page: options[:page], per_page: options[:per_page] || 36) do
+        if options[:title]
+          fields = I18n.available_locales.map { |l| "name_#{l}" }.concat(Location.all_translated_attribute_names)
+          query do
+            flt options[:title].lucene_escape, :fields => fields, :min_similarity => 0.5
+          end
+        end
         filter(:and, :filters => filters)
+        puts to_curl
       end.to_json
-
     end
 
   end
@@ -132,13 +140,13 @@ class Place < ActiveRecord::Base
 
     Jbuilder.encode do |json|
       json.(self, *self.class.all_translated_attribute_names)
+      json.(self.location, *self.location.class.all_translated_attribute_names) if self.location
       json.(self, *attrs)
       json.(self, *methods)
 
       [:kitchens, :categories, :place_feature_items].each do |a|
         json.set!("#{a}_names", self.send(a).map{|t| t.translations.map(&:name).join(', ') }.join(', '))
       end
-
       json.(self, *related_ids)
 
       json.images all_place_images do |json, image|
