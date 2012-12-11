@@ -7,12 +7,12 @@ module Utils
     }
 
     custom_filters = [:ru, :en, :ua].each_with_object({}) do |l, h|
-      #h["custom_synonyms_#{l}"] = {
-      #    "type" => "synonym",
-      #    "ignore_case" => "true",
-      #    "tokenizer" => "standard",
-      #    "synonyms_path" => Rails.root.join("tmp/synonym_#{l}.txt").to_s
-      #}
+      h["custom_synonyms_#{l}"] = {
+          "type" => "synonym",
+          "ignore_case" => "true",
+          "tokenizer" => "standard",
+          "synonyms_path" => Rails.root.join("tmp/synonym_#{l}.txt").to_s
+      }
       h["custom_stop_#{l}"] = {
           "type" => "stop",
           "stopwords_path" => Rails.root.join("lib/data/stop_big_#{l}.txt").to_s
@@ -81,11 +81,11 @@ module Utils
         res_path
       end
 
-      def self.prepare_all_synonyms
-        ::I18n.available_locales.each do |l|
-          prepare_sym(Rails.root.join("lib/data/synonym_#{l}.txt"))
-        end
-      end
+      #def self.prepare_all_synonyms
+      #  ::I18n.available_locales.each do |l|
+      #    prepare_sym(Rails.root.join("lib/data/synonym_#{l}.txt"))
+      #  end
+      #end
     end
   end
 end
