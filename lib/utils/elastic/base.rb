@@ -10,8 +10,7 @@ module Utils
       h["custom_#{l}"] = {
           "type" => "custom",
           "ignore_case" => "true",
-          "tokenizer" => "standard"#,
-          #"synonyms_path" => Rails.root.join("tmp/synonym_#{l}.txt").to_s
+          "tokenizer" => "standard"
       }
       h["custom_stop_#{l}"] = {
           "type" => "stop",
@@ -36,10 +35,10 @@ module Utils
           "tokenizer" => "standard",
           "filter" => ["custom_stop_#{l}", "asciifolding", "snow_#{l}", "lowercase"]
       }
-      h["base_ru"] = {
+      h["base_#{l}"] = {
           "type" => "custom",
           "tokenizer" => "keyword",
-          "filter" => ["stop", "asciifolding", "snow_ru", "lowercase"]
+          "filter" => ["stop", "asciifolding", "snow_#{l}", "lowercase"]
       }
     end
     #
