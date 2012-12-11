@@ -16,10 +16,11 @@ class PlacesCollection
     @map = new google.maps.Map(document.getElementById("map_places"), mapOptions)
 
   useNewData: (placesData) ->
+
     newIds = _.pluck(placesData, 'id')
     needToAddIds = _.difference newIds, @ids
     needToRemoveIds = _.without @ids, newIds
-
+    console.log placesData, needToAddIds, needToRemoveIds, @ids
     # idsPresent = _.pluck placesData, "id"
     if needToAddIds.length > 0
 
@@ -98,7 +99,7 @@ class PlacesCollection
       position: new google.maps.LatLng(obj.lat, obj.lng)
       title: "Hello from #{obj.id}!"
       placeId: obj.id
-#      html: "<a class='marker' href='##{obj.id}'>place</a>"
+      html: "<a class='marker' href='##{obj.id}'>place</a>"
     )
     @markers.push marker
     marker.setMap(@map)
@@ -127,7 +128,7 @@ class FilterInput
 
   checkIfNeeded: () ->
     querystring = window.location.search
-    askAJAX.call(@, newQuery, @places) if querystring isnt '?' and places?
+    askAJAX.call(@, querystring, @places) if querystring isnt '?' and @places?
     needToCheck = $.deparam querystring.slice(1)
     for filter, values of needToCheck
       for value in values
