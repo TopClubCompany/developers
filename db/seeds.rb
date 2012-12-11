@@ -12,12 +12,15 @@ end
 
 def add_categories
   Category.full_truncate
-  categories = ['Рестораны', 'Проведение событий', 'Автомобили', 'Доставка еды', 'Ночная жизнь',
-                'Краcота и здоровье', 'Здоровье и медицина', 'Азартные игры', 'Еда', 'Искусство',
-                'Домашние животные', 'Родители и дети', 'Покупки', 'Спортивные события', 'Недвижимость',
-                'Образование', 'Гостиницы и туризм', 'Локальные сервисы', 'Финансы']
-  categories.each do |category_namne|
-    Category.create(name: category_namne, description: Faker::Lorem.sentence, user_id: User.first.id)
+  main_rest = Category.create(name: "Рестораны", description: "Рестораны", user_id: User.first.id)
+  %w(кафе пиццерии бары пабы кофейни суши загородные).each do |category|
+    Category.create(name: category, description: category, user_id: User.first.id, parent_id: main_rest.id)
+  end
+
+  night = Category.create(name: "Ночная жизнь", description: "Ночная жизнь", user_id: User.first.id)
+
+  %w(ночные\ клубы караоке).each do |category|
+    Category.create(name: category, description: category, user_id: User.first.id, parent_id: night.id)
   end
   puts 'categories added successfully'
 end
@@ -36,25 +39,28 @@ end
 
 def add_test_stuff
   Place.full_truncate
-  5.times do
-    category  = Category.all.sample((rand(3) + 2))
-    kitchen   = Kitchen.all.sample((rand(3) + 1))
-    10.times do
-      place = Place.create(name: Faker::Company.name, description: Faker::Lorem.sentence, user_id: User.first.id,
+  15.times do
+    kitchen   = Kitchen.all.sample(2)
+    category  = Category.all.sample(2)
+    place = Place.create(name: Faker::Company.name, description: Faker::Lorem.sentence, user_id: User.first.id,
                            phone: Faker::PhoneNumber.phone_number, url: Faker::Internet.http_url, avg_bill: BillType.all.sample.id)
 
-      place.location   = FactoryGirl.build(:location)
+
+      latitude = [50.4481, 50.4454, 50.4467, 50.4439].sample
+      longitude =  [30.5002, 30.5440, 30.5451, 30.5455, 30.5459].sample
+      location = Location.new({latitude: latitude, longitude: longitude})
+      place.location   = location
       place.categories << category
       place.kitchens   << kitchen
-      (rand(4) + 1).times do
+      2.times do
         review = FactoryGirl.build(:review, user_id: User.last.id)
         MarkType.all.each { |mark_type| review.marks << FactoryGirl.build(:mark, mark_type_id: mark_type.id) }
         place.reviews << review
         place.notes   << FactoryGirl.build(:note)
         place.events  << FactoryGirl.build(:event)
       end
+      puts "place created!"
     end
-  end
   puts 'test stuff added successfully'
 end
 
@@ -109,23 +115,14 @@ def insert_default_place_pictures
   puts 'place images added successfully'
 end
 
-User.full_truncate
-insert_default_user('admin@adm.com')
-insert_default_user('user@usr.com', false)
-add_categories
-add_kitchens
-insert_mark_types
+#User.full_truncate
+#insert_default_user('admin@adm.com')
+#insert_default_user('user@usr.com', false)
+#add_categories
+#add_kitchens
+#insert_mark_types
 add_test_stuff
 insert_default_place_pictures
-insert_group_feature
-insert_city
+#insert_group_feature
+#insert_city
 
-#10.times do
-#  s = FactoryGirl(selection, user: User.first)
-#  rand_place = Place.find_by_id rand(Place.last.id)
-#  if (rand_place.id.to_i - 10) > 0
-#    start_place_id = rand_place.id.to_i - 10
-#    places = [start_place_id..rand_place.id]
-#    Place.where(id: places).all.map{ |pl| s.places << pl}
-#  end
-#end

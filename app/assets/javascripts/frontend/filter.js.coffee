@@ -32,23 +32,23 @@ class PlacesCollection
 
   multipleAdd: (placesToAdd = []) =>
     _.each placesToAdd, (place) =>
-#      console.log 'places', place
       @places.push place
       #TODO REPLACE WITH REAL VALUES
-      _.extend place, {lat: 50.44067063154785 + Math.random() * 0.5, lng: 30.52654266357422 + Math.random() * 0.5}
+      coords =  place.lat_lng.split(',')
+      if coords.length > 0
+        place.lat = coords[0]
+        place.lng = coords[1]
       @addMarker place
       @addBlock place
 
 
   multipleRemove: (placeIds) ->
-    console.log placeIds
-    for removeId in placeIds  
+    for removeId in placeIds
       _.where(@markers,{placeId: removeId}).setMap(null)
       $("#place_#{removeId}").add("#list_place_#{removeId}").remove()
 
   
   addBlock: (place) =>
- #   console.log "addBlock",  place
     listblockAddition = """
                   <div class='special_offers'>
                     <h5>Special offers:</h5>
