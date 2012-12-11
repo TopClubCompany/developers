@@ -115,9 +115,9 @@ def insert_default_place_pictures
   puts 'place images added successfully'
 end
 
-#User.full_truncate
-#insert_default_user('admin@adm.com')
-#insert_default_user('user@usr.com', false)
+User.full_truncate
+insert_default_user('admin@adm.com')
+insert_default_user('user@usr.com', false)
 add_categories
 add_kitchens
 insert_mark_types
