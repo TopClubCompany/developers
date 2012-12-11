@@ -23,6 +23,8 @@ class Category < ActiveRecord::Base
   include Utils::Models::Translations
   include Utils::Models::AdminAdds
 
+  scope :children, -> { where("parent_id IS NOT NULL") }
+
 
   default_scope reversed_nested_set.includes(:translations)
 

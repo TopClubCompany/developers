@@ -19,7 +19,7 @@ class SearchController < ApplicationController
     type = params[:type]
     more_objects = case type
       when 'category'
-        Category.with_translations.offset(4).limit(10000)
+        Category.children.offset(4).limit(10000)
       when 'kitchen'
         Kitchen.with_translations.offset(4).limit(10000)
       else

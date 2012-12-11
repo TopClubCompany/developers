@@ -230,4 +230,8 @@ module ApplicationHelper
     end
   end
 
+  def current_city
+    session['city'] || 'kiev'
+  end
+
 end

@@ -2,7 +2,7 @@
   .row
     .span12
       #search_form
-        h1= I18n.t('search.main_text', count: Place.visible.count, city: @current_city)
+        h1= I18n.t('search.main_text', count: Place.visible.count, city: current_city)
         form
           input name="title_or_location" placeholder="title or location" type="text"
           = render 'shared/date_time'
@@ -12,13 +12,11 @@
           /input name="reserve_time" type="text" value="7:00 PM"
           label for="number_of_people"
             nobr= I18n.t('search.number_of_people')
-          /input name="number_of_people" type="text" value="2"
           select name="number_of_people" type="text"
-            - for i in 1..10
-              - if i == 2
-                option value="#{i}" selected="selected" #{i}
-              - else
-                option value="#{i}" #{i}
+            option value="1" 1
+            option value="1" selected="selected" 2
+            - (3..10).each do |i|
+              option value="#{i}" #{i}
 
           input type="submit" value="Find a table"
           .clear
@@ -32,7 +30,7 @@
       #refine
         h2= I18n.t('search.refine')
         h4= I18n.t('search.category')
-        - Category.with_translations.first(4).each do |category|
+        - Category.children.first(4).each do |category|
           label.checkbox
             input type="checkbox" data-type="category" value=category.id = category.title
         .clear
