@@ -504,8 +504,8 @@ input[type='submit']:hover {
 
 #search_form input[name='title_or_location'] { width: 133px; }
 #search_form input[name='reserve_date'] { width: 81px; }
-#search_form input[name='reserve_time'] { width: 68px; }
-#search_form input[name='number_of_people'] { width: 30px; }
+#search_results #search_form select[name='reserve_time'] { width: 78px; }
+#search_results #search_form select[name='number_of_people'] { width: 50px;}
 
 #search_form label {
   display: block;
