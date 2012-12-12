@@ -33,31 +33,32 @@ module Utils
       h["analyzer_#{l}"] = {
           "type" => "custom",
           "tokenizer" => "standard",
-          "filter" => ["custom_stop_#{l}", "asciifolding", "snow_#{l}", "lowercase"]
+          "filter" => ["asciifolding", "lowercase"]
       }
       h["base_#{l}"] = {
           "type" => "custom",
           "tokenizer" => "keyword",
-          "filter" => ["stop", "asciifolding", "snow_#{l}", "lowercase"]
+          "filter" => ["asciifolding", "lowercase"]
       }
     end
-    #
+
     base_analyzers = {
-        "default" => {
-            "type" => "custom",
-            "tokenizer" => "standard",
-            "filter" => ["custom_stop_ru", "asciifolding", "snow_ru", "lowercase"]
-        },
-        "ac_ngram" => {
-            "type" => "custom",
-            "tokenizer" => "lowercase",
-            "filter" => ["ac_ngram"]
-        }
+        #"default" => {
+        #    "type" => "custom",
+        #    "type" => "custom",
+        #    "tokenizer" => "standard",
+        #    "filter" => ["custom_stop_ru", "asciifolding", "snow_ru", "lowercase"]
+        #},
+        #"ac_ngram" => {
+        #    "type" => "custom",
+        #    "tokenizer" => "lowercase",
+        #    "filter" => ["ac_ngram"]
+        #}
     }
 
     ANALYZERS = {
         :analysis => {
-            :filter => custom_filters.merge(n_gram_filters),
+            #:filter => custom_filters.merge(n_gram_filters),
             :analyzer => base_analyzers.update(lang_analyzers)
         }
     }
