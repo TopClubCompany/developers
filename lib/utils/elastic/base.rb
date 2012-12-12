@@ -3,15 +3,14 @@ module Utils
     LANG_ANALYZERS = {
         :ru => 'Russian',
         :en => 'English',
-        :it => 'Italian'
+        :ua => 'Ukraine'
     }
 
-    custom_filters = [:ru, :en, :it].each_with_object({}) do |l, h|
-      h["custom_synonyms_#{l}"] = {
-          "type" => "synonym",
+    custom_filters = [:ru, :en, :ua].each_with_object({}) do |l, h|
+      h["custom_#{l}"] = {
+          "type" => "custom",
           "ignore_case" => "true",
-          "tokenizer" => "standard",
-          "synonyms_path" => Rails.root.join("tmp/synonym_#{l}.txt").to_s
+          "tokenizer" => "standard"
       }
       h["custom_stop_#{l}"] = {
           "type" => "stop",
@@ -30,35 +29,36 @@ module Utils
         }
     }
 
-    lang_analyzers = [:ru, :en, :it].each_with_object({}) do |l, h|
+    lang_analyzers = [:ru, :en, :ua].each_with_object({}) do |l, h|
       h["analyzer_#{l}"] = {
           "type" => "custom",
           "tokenizer" => "standard",
-          "filter" => ["custom_stop_#{l}", "asciifolding", "snow_#{l}", "lowercase", "custom_synonyms_#{l}"]
+          "filter" => ["asciifolding", "lowercase"]
       }
-      h["base_ru"] = {
+      h["base_#{l}"] = {
           "type" => "custom",
           "tokenizer" => "keyword",
-          "filter" => ["stop", "asciifolding", "snow_ru", "lowercase"]
+          "filter" => ["asciifolding", "lowercase"]
       }
     end
 
     base_analyzers = {
-        "default" => {
-            "type" => "custom",
-            "tokenizer" => "standard",
-            "filter" => ["custom_stop_ru", "asciifolding", "snow_ru", "lowercase", "custom_synonyms_ru"]
-        },
-        "ac_ngram" => {
-            "type" => "custom",
-            "tokenizer" => "lowercase",
-            "filter" => ["ac_ngram"]
-        }
+        #"default" => {
+        #    "type" => "custom",
+        #    "type" => "custom",
+        #    "tokenizer" => "standard",
+        #    "filter" => ["custom_stop_ru", "asciifolding", "snow_ru", "lowercase"]
+        #},
+        #"ac_ngram" => {
+        #    "type" => "custom",
+        #    "tokenizer" => "lowercase",
+        #    "filter" => ["ac_ngram"]
+        #}
     }
 
     ANALYZERS = {
         :analysis => {
-            :filter => custom_filters.merge(n_gram_filters),
+            #:filter => custom_filters.merge(n_gram_filters),
             :analyzer => base_analyzers.update(lang_analyzers)
         }
     }
@@ -81,11 +81,11 @@ module Utils
         res_path
       end
 
-      def self.prepare_all_synonyms
-        ::I18n.available_locales.each do |l|
-          prepare_sym(Rails.root.join("lib/data/synonym_#{l}.txt"))
-        end
-      end
+      #def self.prepare_all_synonyms
+      #  ::I18n.available_locales.each do |l|
+      #    prepare_sym(Rails.root.join("lib/data/synonym_#{l}.txt"))
+      #  end
+      #end
     end
   end
 end

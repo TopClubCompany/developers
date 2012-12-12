@@ -21,7 +21,6 @@ end
 gem 'jquery-rails'
 
 gem 'ffaker'
-gem 'machinist'
 
 gem 'geokit'
 gem 'geokit-rails3'
@@ -48,7 +47,7 @@ group :development do
   if File.exists?('/var/www/top_club/developers/.local_gems')
     gem 'annotate', :path => '/var/www/gems/annotate_models'
   else
-    gem 'annotate', :git => 'git://github.com/OpakAlex/annotate_models.git', :ref => '568b3b4a76'
+    gem 'annotate', :git => 'git://github.com/OpakAlex/annotate_models.git', :ref => '887923f'
   end
   gem 'pry-rails'
   gem 'pry-doc'
@@ -121,13 +120,14 @@ group :development, :test do
     gem 'growl_notify'
   end
 
+  gem "better_errors"
+  gem "binding_of_caller"
+
   gem 'database_cleaner'
   gem 'simplecov', :require => false
   gem "rspec-rails", ">= 2.10.1"
-  gem "factory_girl_rails", ">= 3.3.0"
-  gem "factory_girl", '>=4.0.0'
+
   gem 'quiet_assets'
-  gem 'forgery', '0.3.12'
   gem 'jasmine-rails'
   gem "capybara"
   gem 'capybara-webkit', '0.12.1'
@@ -142,3 +142,7 @@ group :development, :test do
   gem 'jasminerice'
   gem 'rb-inotify' if RUBY_PLATFORM.downcase.include?("linux")
 end
+
+#for seed in production
+gem "factory_girl_rails", ">= 3.3.0"
+gem "factory_girl", '>=4.0.0'

@@ -3,7 +3,6 @@ html
   head
     = render "layouts/head_include"
   body
-    = render "layouts/fixed"
     div#wrapper
       = render "layouts/header"
       /= render "shared/breadcrumbs" if not devise pages
@@ -11,4 +10,5 @@ html
       = yield
         /= render "shared/social_links"
     = render "layouts/footer"
+    = render "layouts/fixed"
 /! render "layouts/footer_include" for js include for non-blocking pages

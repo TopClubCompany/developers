@@ -1,10 +1,8 @@
-
 #coding: utf-8
-
 class Place < ActiveRecord::Base
 
   attr_accessible :phone, :is_visible, :user_id, :url, :location_attributes,
-                  :avg_bill, :feature_item_ids, :place_administrators_attributes
+                  :avg_bill, :feature_item_ids, :place_administrators_attributes, :name, :description
 
   belongs_to :user
 
@@ -22,7 +20,7 @@ class Place < ActiveRecord::Base
 
   has_many :notes
   has_many :events
-  has_many :reviews, :as => :reviewable
+  has_many :reviews, :as => :reviewable, :dependent => :destroy
 
   enumerated_attribute :bill, :id_attribute => :avg_bill, :class => ::BillType
 
@@ -77,38 +75,53 @@ class Place < ActiveRecord::Base
 
   def self.search(options = {})
     filters = []
-    categories = Category.order :created_at
-    kitchens   = Kitchen.order  :created_at
-    #@distances  = Filter.all_for 'distance'
-    avg_bills   = Filter.all_for 'avg_bill'
-    page_num = (options[:page] || 1).to_i
-    query = { match_all: {} }
 
     if options[:kitchen]
-      filters << {query: {query_string: {query: "kitchen_ids:#{options[:kitchen].join(' OR ')}"}}}
+      filters << {query: {terms: {kitchen_ids: options[:kitchen]} }}#{query: "kitchen_ids:#{options[:kitchen].join(' OR ')}"}}}
     end
 
     if options[:category]
-      filters << {query: {query_string: {query: "category_ids:#{options[:category].join(' OR ')}"}}}
+      filters << {query: {terms: {category_ids: options[:category]} }}
     end
 
     if options[:avg_bill]
-      filters << {query: {query_string: {query: "avg_bill:#{options[:avg_bill].join(' OR ')}"}}}
-    end
-    if filters.empty?
-      {}
-    else
-      query = Tire.search 'places', query: { filtered: {
-          query: query,
-          filter: { and: filters }
-      } },
-                          from: (page_num - 1) * 25,
-                          size: 25
-      total_places = query.results.total
-      query.results.map{ |r| r.load }
-      query.results.to_json
+      filters << {query: {terms: {category_ids: options[:category]} }}
     end
 
+    if options[:city]
+      filters << {query: {flt: {like_text: options[:city], fields: I18n.available_locales.map { |l| "city_#{l}" }} }}
+    end
+
+    if filters.empty? && options.empty?
+      self.best_places(20)
+    else
+      tire.search(page: options[:page], per_page: options[:per_page] || 36) do
+        if options[:title]
+          fields = I18n.available_locales.map { |l| "name_#{l}" }.concat(Location.all_translated_attribute_names)
+          query do
+            flt options[:title].lucene_escape, :fields => fields, :min_similarity => 0.5
+          end
+        end
+        filter(:and, :filters => filters)
+      end
+    end
+
+  end
+
+  def self.search_fields
+    "id,slug,name_#{I18n.locale},images,lat_lng,marks,overall_mark,category_ids,categories_names,kitchen_ids,kitchens_names,place_feature_item_ids,"
+  end
+
+  def self.best_places amount, options={}
+    tire.search(page: 1, per_page: amount) do
+      sort { by "overall_mark", "desc" }
+      if options[:city]
+        query do
+          flt options[:city].lucene_escape, :fields => I18n.available_locales.map { |l| "city_#{l}" }, :min_similarity => 0.5
+        end
+      end
+      puts to_curl
+    end
   end
 
 
@@ -118,26 +131,33 @@ class Place < ActiveRecord::Base
 
   def to_indexed_json
     attrs = [:id, :slug, :avg_bill, :url]
-    related_ids = [:kitchen_ids, :category_ids, :place_feature_item_ids
+    related_ids = [:kitchen_ids, :category_ids, :place_feature_item_ids, :review_ids
     ]
-    methods = ['lat_lng']
+    methods = %w(lat_lng marks overall_mark)
 
     Jbuilder.encode do |json|
       json.(self, *self.class.all_translated_attribute_names)
+      json.(self.location, *self.location.class.all_translated_attribute_names) if self.location
       json.(self, *attrs)
       json.(self, *methods)
 
       [:kitchens, :categories, :place_feature_items].each do |a|
-        json.set!("#{a}_names", self.send(a).map{|t| t.translations.map(&:name).join(' ') }.join(' '))
+        I18n.available_locales.each do |locale|
+          json.set!("#{a}_names_#{locale}", self.send(a).map{|t| t.send("name_#{locale}")}.join(', '))
+        end
       end
-
       json.(self, *related_ids)
 
       json.images all_place_images do |json, image|
         json.id image.id
-        json.url image.url(:thumb)
+        json.slider_url image.url(:slider)
+        json.show_place_image image.url(:place_show)
+        json.thumb_url image.url(:thumb)
         json.is_main image.is_main
       end
+      json.location_city location.try(:city)
+      json.location_city location.try(:street)
+      json.house_number location.try(:house_number)
     end
   end
 
@@ -152,20 +172,23 @@ class Place < ActiveRecord::Base
   end
 
   def marks
-    marks = { food: 0, service: 0, ambiance: 0, pricing: 0, overall: 0, count: 0 }
-     reviews.each do |review|
-       marks[:count] += 1
-       marks.except(:count, :overall).each do |k, _|
-         marks[k] += review.mark[k].to_f
-         marks[:overall] += review.mark[k].to_f
-       end
-     end
-    marks.except(:count, :overall).each { |k, _|  marks[k] /= marks[:count] } unless marks[:count].zero?
-    marks[:overall] /= marks[:count]*4
-    marks
+    count_reviews = self.reviews.joins(:marks).
+        select("reviews.*, marks.mark_type_id as mark_type_id, sum(marks.value) as sum_value, avg(marks.value) as avg_value")
+        .group("marks.mark_type_id")
+    marks = {}
+    count_reviews.each do |review|
+      marks.update(MarkType.find(review.mark_type_id).name => {sum: review.sum_value.to_f, avg: review.avg_value.to_f})
+    end
+    marks.deep_symbolize_keys!
   end
 
+  def overall_mark
+    marks.values.map { |mark| mark[:avg] }.avg.round(1)
+  end
 
+  def avg_bill_title
+    BillType.find(avg_bill).try(:title)
+  end
 end
 # == Schema Information
 #

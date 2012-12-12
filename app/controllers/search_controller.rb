@@ -1,9 +1,9 @@
 class SearchController < ApplicationController
   def index
-    result = Place.search(params)
+    @result = Place.search(params.merge(city: current_city))
     respond_to do |format|
       format.json do
-        render :json => result
+        render :json => @result.to_json
       end
       format.html do
         render 'search/index'
@@ -19,9 +19,9 @@ class SearchController < ApplicationController
     type = params[:type]
     more_objects = case type
       when 'category'
-        Category.with_translations.offset(4)
+        Category.children.offset(4).limit(10000)
       when 'kitchen'
-        Kitchen.with_translations.offset(4)
+        Kitchen.with_translations.offset(4).limit(10000)
       else
         {}
       end

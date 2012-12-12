@@ -29,7 +29,6 @@ class Account < ActiveRecord::Base
   def self.prepare_user_for_account(data)
     data[:password]     = Devise.friendly_token[0,20]
     user                = User.new(data)
-    user.user_role_type = UserRoleType.default
     user.trust_state    = UserState.active.id
     user.generate_default_fields
     user.skip_confirmation!

@@ -3,7 +3,7 @@ class Category < ActiveRecord::Base
   has_many :place_categories, :dependent => :destroy
   has_many :places, :through => :place_categories
 
-  attr_accessible :is_visible, :parent_id, :name, :description
+  attr_accessible :is_visible, :parent_id, :name, :description, :user_id
 
   belongs_to :user
 
@@ -22,6 +22,8 @@ class Category < ActiveRecord::Base
   include Utils::Models::Base
   include Utils::Models::Translations
   include Utils::Models::AdminAdds
+
+  scope :children, -> { where("parent_id IS NOT NULL") }
 
 
   default_scope reversed_nested_set.includes(:translations)
