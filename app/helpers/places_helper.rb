@@ -30,6 +30,6 @@ module PlacesHelper
   end
 
   def avg_bill_title avg_id
-    BillType.find(avg_id).title if avg_id
+    BillType.find(avg_id).title rescue ''
   end
 end
