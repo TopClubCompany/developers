@@ -133,7 +133,7 @@ class Place < ActiveRecord::Base
     attrs = [:id, :slug, :avg_bill, :url]
     related_ids = [:kitchen_ids, :category_ids, :place_feature_item_ids, :review_ids
     ]
-    methods = %w(lat_lng marks overall_mark)
+    methods = %w(lat_lng marks overall_mark avg_bill_title)
 
     Jbuilder.encode do |json|
       json.(self, *self.class.all_translated_attribute_names)
@@ -187,7 +187,7 @@ class Place < ActiveRecord::Base
   end
 
   def avg_bill_title
-    BillType.find(avg_bill).try(:title)
+    BillType.find(avg_bill).title if avg_bill
   end
 end
 # == Schema Information
