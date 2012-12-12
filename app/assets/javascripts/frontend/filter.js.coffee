@@ -51,6 +51,7 @@ class PlacesCollection
 
   
   addBlock: (place) =>
+    console.log place
     listblockAddition = """
                   <div class='special_offers'>
                     <h5>Special offers:</h5>
