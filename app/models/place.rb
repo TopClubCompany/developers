@@ -93,7 +93,7 @@ class Place < ActiveRecord::Base
     end
 
     if filters.empty? && options.empty?
-      self.best_places(20).to_json
+      self.best_places(20)
     else
       tire.search(page: options[:page], per_page: options[:per_page] || 36) do
         if options[:title]
@@ -103,8 +103,7 @@ class Place < ActiveRecord::Base
           end
         end
         filter(:and, :filters => filters)
-        puts to_curl
-      end.to_json
+      end
     end
 
   end
