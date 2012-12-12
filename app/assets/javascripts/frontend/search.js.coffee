@@ -1,6 +1,6 @@
 class ViewToggler
   constructor: ->
-    @showMap()
+    @showList()
     @bind_change_view()
 
 
@@ -16,11 +16,11 @@ class ViewToggler
 
   showMap: () =>
     $('#list_grid_view').hide()
-    $('#map').add('#map_details').show()
+    $('#map_places').add('#map_details').show()
 
   showList: () =>
     $('#list_grid_view').show()
-    $('#map').add('#map_details').hide()
+    $('#map_places').add('#map_details').hide()
 
 $ ->
   new ViewToggler() if $("#view_switch").length > 0

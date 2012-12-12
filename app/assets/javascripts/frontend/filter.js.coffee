@@ -1,5 +1,6 @@
 class PlacesCollection
-  constructor: () ->
+  constructor: (blocksThatExist = []) ->
+    console.log "blocksThatExist", blocksThatExist
     @places = []
     @ids = []
     @createMap()
@@ -85,13 +86,13 @@ class PlacesCollection
       </div>
     """
     $('#map_details_wrapper').append mapBlock
-    listBlock = $(mapBlock).attr('id', "list_" + $(mapBlock).attr('id')).append listblockAddition
-    $("#list_grid_view").append listBlock
+    listBlock = $(mapBlock).attr('id', "list_" + $(mapBlock).attr('id')).removeAttr('data-lng').removeAttr('data-lat').append listblockAddition
 
+#    $("#list_grid_view").append listBlock
+    listBlock.insertBefore('#list_grid_view .paginate')
 
     
   addMarker: (obj) =>
-    
     console.log 'addedMarker', obj.lat, obj.lng
 
  #   console.log "addMarker",  obj, "##{obj.id}"
@@ -121,7 +122,8 @@ class PlacesCollection
 class FilterInput
   constructor: (needToShowMap = no)->
     if needToShowMap is yes
-      @places = new PlacesCollection() if $("#map_places").length > 0
+      blocksThatExist = $("#map_details_wrapper .place")
+      @places = new PlacesCollection(blocksThatExist) if $("#map_places").length > 0
     @checkIfNeeded()
     @bindChangeListener()
     @give_more() if $(".more").length > 0

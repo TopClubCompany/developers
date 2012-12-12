@@ -21,9 +21,9 @@
           input type="submit" value="Find a table"
           .clear
         #view_switch
-          a#grid_view href="#"
+          a#grid_view.current href="#"
             nobr= I18n.t('search.grid_view')
-          a#map_view.current href="#"
+          a#map_view href="#"
             nobr= I18n.t('search.map_view')
   .row
     .span2
@@ -59,19 +59,17 @@
       #map_details
         #map_details_wrapper
           - @result.each do |place|
-            h1
-              = place.id
-            /.place id="place_#{place.id}" *{'data-lat'=>"#{place.location.latitude}", "data-lng" => "#{place.location.longitude}" , "data-id" => "place_#{place.slug}"}
+            - location = place.lat_lng.split(',')
+            .place id="place_#{place.id}" *{'data-lat'=>"#{location[0]}", "data-lng" => "#{location[1]}"}
               h4
-                /= place.location.inspect
-                /= place.inspect
                 a href="#"
               .rating
                 .stars
                   .stars_overlay
-                  .stars_bar
+                  .stars_bar style=get_star_rating(place)
                   .stars_bg
-                small 1 review
+                small
+                  = place.review_ids.count
               .timing
                 a href="#"
                 a href="#"
@@ -82,36 +80,41 @@
 
 
       #list_grid_view.none
-        /-if !@result.nil?
-          - for place in @result do
-            .place
+        - @result.each do |place|
+          .place id="list_place_#{place.id}"
+            a href=place_path(place)
+              img height="100" width="140" src="#{slider_place_image(place)}"
+            h4
               a href="#"
-                img height="100" src="#" width="140"
-              h4
+            .rating
+              .stars
+                .stars_overlay
+                .stars_bar style=get_star_rating(place)
+                .stars_bg
+              small
+                = place.review_ids.count
+            ul.place_features
+              /li.location #{location?}
+              li.location
+                = place.location_city
+              - kitchens_names = place.send("kitchens_names_#{I18n.locale}")
+              li.cuisine title=kitchens_names
+                = truncate(kitchens_names, length: 18)
+              li.pricing
+                = avg_bill_title(place.avg_bill)
+            .timing
+              a href="#"
+              a href="#"
+              a.bold href="#"
+              a href="#"
+              a href="#"
+            .special_offers
+              h5 Special offers:
+              h5
                 a href="#"
-              .rating
-                .stars
-                  .stars_overlay
-                  .stars_bar
-                  .stars_bg
-                small 1 review
-              ul.place_features
-                li.location #{location?}
-                li.cuisine #{kitchen?.reduce(:concat)}
-                li.pricing #{pricing}
-              .timing
                 a href="#"
                 a href="#"
-                a.bold href="#"
-                a href="#"
-                a href="#"
-              .special_offers
-                h5 Special offers:
-                h5
-                  a href="#"
-                  a href="#"
-                  a href="#"
-              .clear
+            .clear
         .paginate
           a.current href="#"
           a href="#"
