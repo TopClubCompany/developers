@@ -69,7 +69,7 @@
                   .stars_bar style=get_star_rating(place)
                   .stars_bg
                 small
-                  = place.review_ids.count
+                  = place.review_ids.try(:count)
               .timing
                 a href="#"
                 a href="#"
@@ -92,7 +92,7 @@
                 .stars_bar style=get_star_rating(place)
                 .stars_bg
               small
-                = place.review_ids.count
+                = place.review_ids.try(:count)
             ul.place_features
               /li.location #{location?}
               li.location
