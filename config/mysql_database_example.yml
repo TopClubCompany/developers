@@ -1,0 +1,24 @@
+common: &common
+  adapter: mysql2
+  encoding: utf8
+  username: root
+  password:
+  host: localhost
+
+development:
+  <<: *common
+  database: top_c_development
+
+test:
+  <<: *common
+  database: top_c_test
+
+production:
+  <<: *common
+  database: top_c_production
+
+
+#for cucumber
+cucumber:
+  <<: *common
+  database: top_c_test
