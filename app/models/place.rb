@@ -88,9 +88,9 @@ class Place < ActiveRecord::Base
       filters << {query: {terms: {category_ids: options[:category]} }}
     end
 
-    if options[:city]
-      filters << {query: {flt: {like_text: options[:city], fields: I18n.available_locales.map { |l| "city_#{l}" }} }}
-    end
+    #if options[:city]
+    #  filters << {query: {flt: {like_text: options[:city], fields: I18n.available_locales.map { |l| "city_#{l}" }} }}
+    #end
 
     if filters.empty? && options.empty?
       self.best_places(20)
