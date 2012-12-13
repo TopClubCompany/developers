@@ -53,20 +53,20 @@ class Place < ActiveRecord::Base
   #PER_PAGE = 25
 
 
-  settings Utils::Elastic::ANALYZERS do
+  #settings Utils::Elastic::ANALYZERS do
     mapping do
       indexes :id, type: 'integer'
       ::I18n.available_locales.each do |loc|
         indexes "name_#{loc}", :type => "multi_field",
                 :fields => {
-                    "name_#{loc}" => {:type => 'string', :analyzer => "analyzer_#{loc}", :boost => 100},
+                    "name_#{loc}" => {:type => 'string', :analyzer => "standard", :boost => 100},
                     "exact" => {:type => 'string', :index => "not_analyzed"}
                 }
-        indexes "description_#{loc}", boost: 5, analyzer: "analyzer_#{loc}"
+        indexes "description_#{loc}", boost: 5, analyzer: "standard"
       end
       indexes :lat_lng, type: 'geo_point'
     end
-  end
+  #end
 
   def self.paginate(options = {})
     includes(:kitchens, :categories, :place_feature_items, :location).paginate(:page => options[:page], :per_page => options[:per_page]).to_a
