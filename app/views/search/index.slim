@@ -58,7 +58,7 @@
       #map_places style="background: rgba(128,128,128,0.5);" *{'data-lat'=>"50.451118", "data-lng" => "30.522301"}
       #map_details
         #map_details_wrapper
-          - @result.each do |place|
+          /- @result.each do |place|
             - location = place.lat_lng.split(',')
             .place id="place_#{place.id}" *{'data-lat'=>"#{location[0]}", "data-lng" => "#{location[1]}"}
               h4
@@ -80,7 +80,7 @@
 
 
       #list_grid_view.none
-        - @result.each do |place|
+        /- @result.each do |place|
           .place id="list_place_#{place.id}"
             a href=place_path(place)
               img height="100" width="140" src="#{slider_place_image(place)}"
@@ -116,11 +116,11 @@
                 a href="#"
             .clear
         .paginate
-          a.current href="#"
-          a href="#"
-          a href="#"
-          a href="#"
-          a href="#"
-          a href="#"
+          a.current href="#" 1
+          a href="#" 2
+          a href="#" 3
+          a href="#" 4
+          a href="#" 5
+          a href="#" next ›
 
 = render 'shared/more_template'
