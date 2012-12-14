@@ -53,32 +53,35 @@
         .clear
         a.more data-type="kitchen" href="#"
           | more >
+
+
     #listing.span10
-      h3 Results for 11/07/2012, 7:00 PM for 2 people
-      #map_places style="background: rgba(128,128,128,0.5);" *{'data-lat'=>"50.451118", "data-lng" => "30.522301"}
-      #map_details
-        #map_details_wrapper
-          - @result.each do |place|
-            h1
-              = place.id
-            /.place id="place_#{place.id}" *{'data-lat'=>"#{place.location.latitude}", "data-lng" => "#{place.location.longitude}" , "data-id" => "place_#{place.slug}"}
-              h4
-                /= place.location.inspect
-                /= place.inspect
-                a href="#"
-              .rating
-                .stars
-                  .stars_overlay
-                  .stars_bar
-                  .stars_bg
-                small 1 review
-              .timing
-                a href="#"
-                a href="#"
-                a.bold href="#"
-                a href="#"
-                a href="#"
-                .clear
+      #mapcontainer
+        h3 Results for 11/07/2012, 7:00 PM for 2 people
+        #map_places style="background: rgba(128,128,128,0.5);" *{'data-lat'=>"50.451118", "data-lng" => "30.522301"}
+        #map_details
+          #map_details_wrapper
+            - @result.each do |place|
+              h1
+                = place.id
+              /.place id="place_#{place.id}" *{'data-lat'=>"#{place.location.latitude}", "data-lng" => "#{place.location.longitude}" , "data-id" => "place_#{place.slug}"}
+                h4
+                  /= place.location.inspect
+                  /= place.inspect
+                  a href="#"
+                .rating
+                  .stars
+                    .stars_overlay
+                    .stars_bar
+                    .stars_bg
+                  small 1 review
+                .timing
+                  a href="#"
+                  a href="#"
+                  a.bold href="#"
+                  a href="#"
+                  a href="#"
+                  .clear
 
 
       #list_grid_view.none
