@@ -3,7 +3,7 @@ class SearchController < ApplicationController
     @result = Place.search(params.merge(city: current_city))
     respond_to do |format|
       format.json do
-        render :json => @result.to_json
+        render :json => @result.map{|e| Place.for_mustache(e) }
       end
       format.html do
         render 'search/index'

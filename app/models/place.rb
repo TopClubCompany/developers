@@ -104,7 +104,6 @@ class Place < ActiveRecord::Base
           end
         end
         filter(:and, :filters => filters)
-        puts to_curl
       end
     end
 
@@ -156,8 +155,14 @@ class Place < ActiveRecord::Base
         json.thumb_url image.url(:thumb)
         json.is_main image.is_main
       end
-      json.location_city location.try(:city)
-      json.location_city location.try(:street)
+
+      json.place_image do |json|
+        json.id place_image.id
+        json.slider_url place_image.url(:slider)
+        json.show_place_image place_image.url(:place_show)
+        json.thumb_url place_image.url(:thumb)
+
+      end
       json.house_number location.try(:house_number)
     end
   end
@@ -189,6 +194,26 @@ class Place < ActiveRecord::Base
 
   def avg_bill_title
     BillType.find(avg_bill).title if avg_bill
+  end
+
+  def self.for_mustache(place)
+    res = {}
+    res[:id] = place.id
+    res[:slug] = place.slug || place.id
+    res[:name] = place["name_#{I18n.locale}"]
+    res[:image_path] = place.place_image.try(:slider_url)
+    res[:description] = place["description_#{I18n.locale}"]
+    res[:kitchens] = place["kitchens_names_#{I18n.locale}"]
+    res[:categories] = place["categories_names_#{I18n.locale}"]
+    res[:place_feature_items] = place["place_feature_items_names_#{I18n.locale}"]
+    res[:city] = place["city_#{I18n.locale}"]
+    res[:street] = place["street_#{I18n.locale}"]
+    res[:house_number] = place["house_number"]
+    res[:avg_bill_title] = place["avg_bill_title"]
+    res[:overall_mark] = place["overall_mark"]
+    res[:marks] = place["marks"]
+    res[:lat_lng] = place["lat_lng"]
+    res
   end
 end
 # == Schema Information
