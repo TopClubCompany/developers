@@ -25,8 +25,8 @@
                 small
                   = place.review_ids.count
               ul.place_features
-                li.location
-                  = place.location_city
+                li.location title=place.location_city
+                  = truncate(place.location_city, length: 18) 
                 - kitchens_names = place.send("kitchens_names_#{I18n.locale}")
                 li.cuisine title=kitchens_names
                   = truncate(kitchens_names, length: 18)

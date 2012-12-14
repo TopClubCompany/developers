@@ -15,10 +15,10 @@ class ViewToggler
       if $el.attr('id') is 'map_view' then @showMap() else @showList()
 
   showMap: () =>
-    google.maps.event.trigger($("#map_places")[0], 'resize');
     $('#list_grid_view').hide()
     $('#map_places').add('#map_details').show()
-
+    google.maps.event.trigger($("#map_places")[0], 'resize');
+    
   showList: () =>
     $('#list_grid_view').show()
     $('#map_places').add('#map_details').hide()
