@@ -66,6 +66,7 @@ end
 
 def insert_group_feature
   GroupFeature.all.map(&:destroy)
+  FeatureItem.full_truncate
   groups_features = [{name: "Wi-Fi", features: %w(Free Paid)},
                      {name: "Parking", features: %w(Street Garage Valet Private\ Lot Validated)},
                      {name: "Meals Served", features: %w(Breakfast Brunch Lunch Dinner Dessert Late\ Night)},

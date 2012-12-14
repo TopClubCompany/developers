@@ -88,13 +88,14 @@ class Place < ActiveRecord::Base
       filters << {query: {terms: {category_ids: options[:category]} }}
     end
 
-    #if options[:city]
-    #  filters << {query: {flt: {like_text: options[:city], fields: I18n.available_locales.map { |l| "city_#{l}" }} }}
-    #end
-
     if filters.empty? && options.empty?
       self.best_places(20)
     else
+
+      if options[:city]
+        filters << {query: {flt: {like_text: options[:city], fields: I18n.available_locales.map { |l| "city_#{l}" }} }}
+      end
+
       tire.search(page: options[:page], per_page: options[:per_page] || 36) do
         if options[:title]
           fields = I18n.available_locales.map { |l| "name_#{l}" }.concat(Location.all_translated_attribute_names)
@@ -120,7 +121,6 @@ class Place < ActiveRecord::Base
           flt options[:city].lucene_escape, :fields => I18n.available_locales.map { |l| "city_#{l}" }, :min_similarity => 0.5
         end
       end
-      puts to_curl
     end
   end
 
