@@ -89,14 +89,14 @@ class Place < ActiveRecord::Base
     end
 
     if filters.empty? && options.empty?
-      self.best_places(20)
+      self.best_places(4)
     else
 
       if options[:city]
         filters << {query: {flt: {like_text: options[:city], fields: I18n.available_locales.map { |l| "city_#{l}" }} }}
       end
 
-      tire.search(page: options[:page], per_page: options[:per_page] || 36) do
+      tire.search(page: options[:page], per_page: options[:per_page] || 4) do
         if options[:title]
           fields = I18n.available_locales.map { |l| "name_#{l}" }.concat(Location.all_translated_attribute_names)
           query do
