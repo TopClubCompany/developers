@@ -1,44 +1,174 @@
-#promo_places
+#index.content
+  .row
+    .span8 id="teaser"
+      javascript:
+        $(document).ready(function() {
+          projekktor('#video-container', {
+            controls: true,
+            plugins: ['display', 'controlbar'],
+            plugin_controlbar: {
+               controlsDisableFade: true,
+            }
+          }, function(player) {
+            player.addListener('start', function(data) {
+              $('#teaser .video_player h5').css('display', 'none');
+            });
+          });
+        });
+      .video_player
+        h5 How it works?
+        video#video-container class="projekktor" width="620" height="350" title="How it works?" poster="/img/video/dummy.jpg" controls=true
+          source src="/media/intro.ogv" type="video/ogg"  /
+    .span4 id="signup_promo"
+      img src="/img/gfx/1.jpg"
+        ul
+          li Find a restaurants
+          li Reserve your table online for free
+          li Save up to 30% off all food and drinks
+        a href="#{new_user_registration_path}" class="btn1" Sign up now!
+  .row
+    .span12
+      #search_form
+        form
+          input type="text" name="title_or_location" placeholder="title or location"
+          label for="reserve_date" Date
+          input type="text" name="reserve_date" value="11/07/2012"
+          label for="reserve_time" Time
+          input type="text" name="reserve_time" value="7:00 PM"
+          label for="number_of_people" <nobr>Number of people</nobr>
+          input type="text" name="number_of_people" value="2"
+          input type="submit" value="Find a table"
+          .clear
+  #promo_places
+    .content
+      .row
+        .span12
+          ul id="promo_tabs"
+            li class="active" <a href="#best">Best restaurants</a>
+            li <a href="#new">New restaurants</a>
+            li <a href="#available">Available tonight</a>
+            .clear
+          javascript:
+            $(document).ready(function() {
+              function in_array(element, arr) {
+                for (i in arr) {
+                  if (arr[i] == element)
+                    return true;
+                }
+                return false;
+              }
+              var hash = location.hash.replace(/#?(\w+)/, "$1");
+              $('#promo_places div.tab_content').css('display', 'none');
+              if (hash.length > 0) {
+                aviabled_hases = [];
+                $('#promo_places div.tab_content').each(function(index) {
+                  aviabled_hases.push($('#promo_places div.tab_content').eq(index).attr('id'));
+                });
+                if (in_array(hash, aviabled_hases)) {
+                  $('#promo_places #' + hash).css('display', 'block');
+                  for (i in aviabled_hases) {
+                    if (aviabled_hases[i] == hash) {
+                      $('#promo_places ul#promo_tabs li').removeClass('active');
+                      $('#promo_places ul#promo_tabs li').eq(i).addClass('active');
+                    }
+                  }
+                } else {
+                  $('#promo_places div.tab_content').eq(0).css('display', 'block');
+                }
+              } else {
+                $('#promo_places div.tab_content').eq(0).css('display', 'block');
+              }
+              $('#promo_places ul#promo_tabs li').click(function() {
+                var index = $('#promo_places ul#promo_tabs li').index(this);
+                $('#promo_places ul#promo_tabs li').removeClass('active');
+                $('#promo_places ul#promo_tabs li').eq(index).addClass('active');
+                $('#promo_places div.tab_content').css('display', 'none');
+                $('#promo_places div.tab_content').eq(index).css('display', 'block');
+              });
+            })
+          #best.tab_content
+            - @places.each_with_index do |place, i|
+              .place style="#{'margin-right: 0' if ((i + 1)%3 == 0)}"
+                a href=place_path(place)
+                  - image = slider_place_image(place)
+                  img height="100" src="#{image if image}" width="140"
+                h4
+                  a href="#"
+                .rating
+                  .stars
+                    .stars_overlay
+                    .stars_bar style=get_star_rating(place)
+                    .stars_bg
+                  small
+                    = place.review_ids.count
+                ul.place_features
+                  li.location
+                    = place.location_city
+                  - kitchens_names = place.send("kitchens_names_#{I18n.locale}")
+                  li.cuisine title=kitchens_names
+                    = truncate(kitchens_names, length: 18)
+                  li.pricing
+                    = avg_bill_title(place.avg_bill)
+                .clear
+            a.all href="#" Browse all ›
+          #new.tab_content
+            - @places.each_with_index do |place, i|
+              .place style="#{'margin-right: 0' if ((i + 1)%3 == 0)}"
+                a href=place_path(place)
+                  - image = slider_place_image(place)
+                  img height="100" src="#{image if image}" width="140"
+                h4
+                  a href="#"
+                .rating
+                  .stars
+                    .stars_overlay
+                    .stars_bar style=get_star_rating(place)
+                    .stars_bg
+                  small
+                    = place.review_ids.count
+                ul.place_features
+                  li.location
+                    = place.location_city
+                  - kitchens_names = place.send("kitchens_names_#{I18n.locale}")
+                  li.cuisine title=kitchens_names
+                    = truncate(kitchens_names, length: 18)
+                  li.pricing
+                    = avg_bill_title(place.avg_bill)
+                .clear
+            a.all href="#" Browse all ›
+          #available.tab_content
+            - @places.each_with_index do |place, i|
+              .place style="#{'margin-right: 0' if ((i + 1)%3 == 0)}"
+                a href=place_path(place)
+                  - image = slider_place_image(place)
+                  img height="100" src="#{image if image}" width="140"
+                h4
+                  a href="#"
+                .rating
+                  .stars
+                    .stars_overlay
+                    .stars_bar style=get_star_rating(place)
+                    .stars_bg
+                  small
+                    = place.review_ids.count
+                ul.place_features
+                  li.location
+                    = place.location_city
+                  - kitchens_names = place.send("kitchens_names_#{I18n.locale}")
+                  li.cuisine title=kitchens_names
+                    = truncate(kitchens_names, length: 18)
+                  li.pricing
+                    = avg_bill_title(place.avg_bill)
+                .clear
+            a.all href="#" Browse all ›
+
+
+  = render 'shared/more_template'
   .content
     .row
-      .span12
-        ul#promo_tabs
-          li.active
-            a href="#best"
-          li
-            a href="#new"
-          li
-            a href="#available"
-          .clear
-        #best_restaurants
-          - @places.each_with_index do |place, i|
-            .place style="#{'margin-right: 0' if ((i + 1)%3 == 0)}"
-              a href=place_path(place)
-                - image = slider_place_image(place)
-                img height="100" src="#{image if image}" width="140"
-              h4
-                a href="#"
-              .rating
-                .stars
-                  .stars_overlay
-                  .stars_bar style=get_star_rating(place)
-                  .stars_bg
-                small
-                  = place.review_ids.count
-              ul.place_features
-                li.location
-                  = place.location_city
-                - kitchens_names = place.send("kitchens_names_#{I18n.locale}")
-                li.cuisine title=kitchens_names
-                  = truncate(kitchens_names, length: 18)
-                li.pricing
-                  = avg_bill_title(place.avg_bill)
-              .clear
-.content
-  .row
-    #promo_block_sm.promo_block.span4
-      | Earn points and get discounts!
-      a href="#"
-    #promo_block_big.promo_block.span8
-      | Need more clients?
-      a href="#"
+      #promo_block_sm.promo_block.span4
+        | Earn points and get discounts!
+        a href="#"
+      #promo_block_big.promo_block.span8
+        | Need more clients?
+        a href="#"
