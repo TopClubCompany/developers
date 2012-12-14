@@ -182,7 +182,7 @@ class FilterInput
       newUrl = (baseURL + '/?' + newQuery).replace('//?', '/?')
       window.history.replaceState('',null, newUrl)
       askAJAX.call(@, newQuery, @places)
-
+    ###
     $("select[name=reserve_time]").on 'change', =>
       time = $(this).val()
       $('#map_details_wrapper').add('#list_grid_view').find('.place').each (index, el) ->
@@ -194,7 +194,7 @@ class FilterInput
       console.log headline = $('#listing > h3:first-child')
       headlineText = $('#listing > h3:first-child').html()
       console.log headlineText
-
+    ###
 
 
 
