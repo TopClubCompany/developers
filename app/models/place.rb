@@ -84,8 +84,8 @@ class Place < ActiveRecord::Base
       filters << {query: {terms: {category_ids: options[:category]} }}
     end
 
-    if options[:avg_bill]
-      filters << {query: {terms: {category_ids: options[:category]} }}
+    if options[:price]
+      filters << {query: {terms: {avg_bill: options[:price]} }}
     end
 
     if filters.empty? && options.empty?
@@ -104,6 +104,7 @@ class Place < ActiveRecord::Base
           end
         end
         filter(:and, :filters => filters)
+        puts to_curl
       end
     end
 
