@@ -202,6 +202,7 @@ class Place < ActiveRecord::Base
     res[:slug] = place.slug || place.id
     res[:name] = place["name_#{I18n.locale}"]
     res[:image_path] = place.place_image.try(:slider_url)
+    res[:review_count] = place.review_ids.try(:count)
     res[:description] = place["description_#{I18n.locale}"]
     res[:kitchens] = place["kitchens_names_#{I18n.locale}"]
     res[:categories] = place["categories_names_#{I18n.locale}"]

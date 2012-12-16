@@ -1,7 +1,18 @@
 class PlacesCollection
   constructor: ( blocksThatExist = [], @page = 1 ) ->
+    @places = []
+    @ids = []
+    @createMap()
+    @markers = []
+    console.log "blocksThatExist", blocksThatExist
+    for block in blocksThatExist
 
-    # console.log "blocksThatExist", blocksThatExist
+      obj = 
+        id: $(block).data('id')
+        lat: $(block).data('lat')
+        lng: $(block).data('lng')
+      @ids.push obj.id
+      @addMarker obj
     ###
       name: "Sawayn-Lakin"
       image_path: "/uploads/place_image/27/slider_9.jpg"
@@ -25,10 +36,7 @@ class PlacesCollection
       place_feature_items: ""
       slug: "sawayn-lakin"      
     ###
-    @places = []
-    @ids = []
-    @createMap()
-    @markers = []
+    
    
   createMap: () ->
     console.log 'inited GMap'
@@ -46,7 +54,7 @@ class PlacesCollection
     newIds = _.pluck(placesData, 'id')
     needToAddIds = _.difference newIds, @ids
     needToRemoveIds = _.without @ids, newIds
-    # console.log placesData, needToAddIds, needToRemoveIds, @ids
+    console.log placesData, needToAddIds, needToRemoveIds, @ids
     # idsPresent = _.pluck placesData, "id"
     if needToAddIds.length > 0
 
@@ -77,7 +85,7 @@ class PlacesCollection
       # console.log 'lol2', removeId, @, @markers
       # console.log 'lol', @markers, _.find(self.markers,{ placeId: removeId })
       # ?.setMap(null)
-      $("#place_#{removeId}").add("#list_place_#{removeId}").remove()
+      $("#place_#{removeId}").add("#list_place_#{removeId}").fadeOut('fast').remove()
   
   addBlock: (place) =>
     properKitchensName = if place.kitchens.length > 18 then place.kitchens.substring(0, 18) + '...' else place.kitchens
@@ -94,7 +102,7 @@ class PlacesCollection
             <div class="stars_bar" style="left: #{place.overall_mark * 20}%"></div>
             <div class="stars_bg"></div>
           </div>
-          <small>2</small>
+          <small>#{place.reviews}</small>
         </div>
         <ul class="place_features">
           <li class="location">Ивана Мазепы улица</li>
@@ -128,10 +136,10 @@ class PlacesCollection
         <div class="rating">
           <div class="stars">
             <div class="stars_overlay"></div>
-            <div class="stars_bar"></div>
+            <div class="stars_bar" style="left: #{place.overall_mark * 20}%"></div>
             <div class="stars_bg"></div>
           </div>
-          <small>#{place.reviews}</small>
+          <small></small>
         </div>
         <div class="timing">
           <a href="#"></a>
@@ -144,14 +152,12 @@ class PlacesCollection
       </div>
     """
     $('#map_details_wrapper').append mapBlock
-    
 
-#    $("#list_grid_view").append listBlock
     $(listBlock).insertBefore('#list_grid_view .paginate')
 
     
   addMarker: (obj) =>
-    # console.log 'addedMarker', obj.lat, obj.lng, "##{obj.id}"
+
 
     marker = new google.maps.Marker(
       position: new google.maps.LatLng(obj.lat, obj.lng)
@@ -179,22 +185,24 @@ class PlacesCollection
 class FilterInput
   constructor: (needToShowMap = no)->
     if needToShowMap 
-      blocksThatExist = $("#list_grid_view .place")
+      blocksThatExist = $("#map_details_wrapper .place")
       page = @getPage()
       @places = new PlacesCollection(blocksThatExist, page) if $("#map_places").length > 0
-    #@checkIfNeeded()
+    @checkIfNeeded()
     @bindChangeListener()
     @give_more() if $(".more").length > 0
 
   getPage: () ->
-    page = window.location.search.match( /page=\d*/)
-    page?.substring(5, page.length()) || 1
+    page = window.location.search.match( /page=\d*/) || 1
+    # if $(".paginate .current").attr('href') isnt "##{page}" or $(".paginate .current").length is 0
+      # $(".paginate a[href=##{page}]").addClass('current')
+        
+
   checkIfNeeded: () ->
     querystring = window.location.search
-    askAJAX.call(@, querystring, @places) if querystring isnt '?' and @places?
     needToCheck = $.deparam querystring.slice(1)
     for filter, values of needToCheck
-      for value in values
+      for value in values.split(',')
         $("#refine input[value='#{value}'][data-type='#{filter}']").click() unless $("#refine input[value='#{value}'][data-type='#{filter}']").is(':checked')
 
   bindChangeListener: () =>
@@ -214,15 +222,31 @@ class FilterInput
           amp = if newQuery is '' then '' else '&'
           newQuery = newQuery + amp + "#{key}=#{value}"
 
-          console.log newQuery
       baseURL =  window.location.pathname
-      
-      #TODO REPLACE WITH ONE FROM LINE:187
-      # newQuery = $.param result
-      # newQuery = $.param result
-      newUrl = (baseURL + '/?' + newQuery).replace('//?', '/?')
+      newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '/?')
       window.history.replaceState('',null, newUrl)
-      askAJAX.call(@, newQuery, @places)
+      askAJAX.call(@, newQuery, @places)      
+
+    $('#list_grid_view .paginate a').on 'click', (e) =>      
+      e.preventDefault()
+      unless $(e.target).hasClass('current')
+        $(e.target).addClass('current').siblings().removeClass('current')
+        baseURL =  window.location.pathname
+        oldQuery = window.location.search
+        pageTo = $(e.target).attr('href').slice(1)
+        amp = if oldQuery is '' then '' else '&'
+        if (window.location.search.match(/page=(\d+)/)) 
+          console.log 'modified old one'
+          newQuery = oldQuery.replace(/page=\d+/, "page=#{pageTo}")          
+        else
+          console.log 'added new'
+          newQuery = oldQuery + amp + "page=#{pageTo}"          
+        
+        newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '/?')
+        window.history.replaceState('',null, newUrl)
+        askAJAX.call(@, newQuery, @places)      
+
+
     ###
     $("select[name=reserve_time]").on 'change', =>
       time = $(this).val()
@@ -236,9 +260,6 @@ class FilterInput
       headlineText = $('#listing > h3:first-child').html()
       console.log headlineText
     ###
-
-
-
 
   askAJAX = (serializedData, placesObj) =>
     $.ajaxSetup
@@ -267,7 +288,6 @@ class FilterInput
       e.preventDefault()
       $el = $(this)
       type = $el.data('type')
-      console.log 'request'
       if type
         $.getJSON '/search/get_more',{type: type}, (data) => parse_more_objects.call(self, data, $el, type)
 
@@ -276,6 +296,7 @@ class FilterInput
     _.each data, (obj) =>
       _.extend obj, {type: type}
       $el.prev().prev().after(@more_template(obj))
+    @checkIfNeeded()
     @bindChangeListener()
     $el.hide()
 
