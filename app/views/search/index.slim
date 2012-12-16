@@ -54,7 +54,10 @@
         a.more data-type="kitchen" href="#"
           | more >
     #listing.span10
-      h3 Results for 11/07/2012, 7:00 PM for 2 people
+      - date = "11/07/2012"
+      - time = "7:00 PM"
+      - person = '2'
+      h3 Results for #{date}, #{time} for #{person} people
       #map_places style="background: rgba(128,128,128,0.5);" *{'data-lat'=>"50.451118", "data-lng" => "30.522301"}
       #map_details
         #map_details_wrapper
@@ -78,14 +81,16 @@
                 a href="#"
                 .clear
 
-
-      #list_grid_view.none
-        /- @result.each do |place|
+  
+      #list_grid_view.none 
+        - @result.each do |place|
           .place id="list_place_#{place.id}"
             a href=place_path(place)
               img height="100" width="140" src="#{slider_place_image(place)}"
-            h4
-              a href="#"
+            h4 
+
+              a href="#" 
+                = place["name_#{I18n.locale}"]
             .rating
               .stars
                 .stars_overlay
@@ -94,7 +99,6 @@
               small
                 = place.review_ids.try(:count)
             ul.place_features
-              /li.location #{location?}
               li.location
                 = place.location_city
               - kitchens_names = place.send("kitchens_names_#{I18n.locale}")
@@ -103,11 +107,22 @@
               li.pricing
                 = avg_bill_title(place.avg_bill)
             .timing
+              - possibilities = ["00", "15", "30", "45"]
+              - base_time = /^\d*/.match(time)
+              - minutes = /(?<=:)\d+/.match(time)
+              - index = possibilities.index(minutes)
+
+              a href="#" 
+                = "#{base_time[0].to_i + ( (index.to_i + 2) / 4 ) }:#{possibilities[(index.to_i + 2) % 4]}"
               a href="#"
+                = "#{base_time[0].to_i + ( (index.to_i + 1) / 4 ) }:#{possibilities[(index.to_i + 1) % 4]}"
+                
+              a.bold href="#" 
+                = time 
               a href="#"
-              a.bold href="#"
+                = "#{base_time[0].to_i - ( (index.to_i - 1) < 0? 1 : 0 ) }:#{possibilities[(index.to_i - 1) % 4]}"
               a href="#"
-              a href="#"
+                = "#{base_time[0].to_i - ( (index.to_i - 2) < 0? 1 : 0 ) }:#{possibilities[(index.to_i - 2) % 4]}"
             .special_offers
               h5 Special offers:
               h5
