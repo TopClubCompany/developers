@@ -77,15 +77,15 @@ class Place < ActiveRecord::Base
     filters = []
 
     if options[:kitchen]
-      filters << {query: {terms: {kitchen_ids: options[:kitchen]} }}#{query: "kitchen_ids:#{options[:kitchen].join(' OR ')}"}}}
+      filters << {query: {terms: {kitchen_ids: options[:kitchen].split(',')} }}#{query: "kitchen_ids:#{options[:kitchen].join(' OR ')}"}}}
     end
 
     if options[:category]
-      filters << {query: {terms: {category_ids: options[:category]} }}
+      filters << {query: {terms: {category_ids: options[:category].split(',')} }}
     end
 
     if options[:price]
-      filters << {query: {terms: {avg_bill: options[:price]} }}
+      filters << {query: {terms: {avg_bill: options[:price].split(',')} }}
     end
 
     if filters.empty? && options.empty?
