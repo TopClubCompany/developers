@@ -5,7 +5,8 @@
         h1= I18n.t('search.main_text', count: Place.visible.count, city: current_city)
         form
           input name="title_or_location" placeholder="title or location" type="text"
-          = render 'shared/date_time'
+          /= render :partial => 'shared/date_time'
+          = render :partial => 'shared/date_time', :locals => { :time => {:h => (@time[:h] || 12), :m => (@time[:m] || '00')} }
           /label for="reserve_date"
           /input name="reserve_date" type="text" value="11/07/2012"
           /label for="reserve_time"
@@ -54,10 +55,9 @@
         a.more data-type="kitchen" href="#"
           | more >
     #listing.span10
-      - date = "11/07/2012"
-      - time = "7:00 PM"
+      - date = "11/07/2012"      
       - person = '2'
-      h3 Results for #{date}, #{time} for #{person} people
+      h3 Results for #{date}, #{@time[:h]}:#{@time[:m]} for #{person} people
       #map_places style="background: rgba(128,128,128,0.5);" *{'data-lat'=>"50.451118", "data-lng" => "30.522301"}
       #map_details
         #map_details_wrapper
@@ -108,21 +108,23 @@
                 = avg_bill_title(place.avg_bill)
             .timing
               - possibilities = ["00", "15", "30", "45"]
-              - base_time = /^\d*/.match(time)
-              - minutes = /(?<=:)\d+/.match(time)
+              / - base_time = /^\d*/.match(@time)
+              / - minutes = /(?<=:)\d+/.match(time)
+              - base_time = @time[:h]
+              - minutes = @time[:m]              
               - index = possibilities.index(minutes)
 
               a href="#" 
-                = "#{base_time[0].to_i + ( (index.to_i + 2) / 4 ) }:#{possibilities[(index.to_i + 2) % 4]}"
+                = "#{base_time.to_i + ( (index.to_i + 2) / 4 ) }:#{possibilities[(index.to_i + 2) % 4]}"
               a href="#"
-                = "#{base_time[0].to_i + ( (index.to_i + 1) / 4 ) }:#{possibilities[(index.to_i + 1) % 4]}"
+                = "#{base_time.to_i + ( (index.to_i + 1) / 4 ) }:#{possibilities[(index.to_i + 1) % 4]}"
                 
               a.bold href="#" 
-                = time 
+                = "#{base_time}:#{minutes}"
               a href="#"
-                = "#{base_time[0].to_i - ( (index.to_i - 1) < 0? 1 : 0 ) }:#{possibilities[(index.to_i - 1) % 4]}"
+                = "#{base_time.to_i - ( (index.to_i - 1) < 0? 1 : 0 ) }:#{possibilities[(index.to_i - 1) % 4]}"
               a href="#"
-                = "#{base_time[0].to_i - ( (index.to_i - 2) < 0? 1 : 0 ) }:#{possibilities[(index.to_i - 2) % 4]}"
+                = "#{base_time.to_i - ( (index.to_i - 2) < 0? 1 : 0 ) }:#{possibilities[(index.to_i - 2) % 4]}"
             .special_offers
               h5 Special offers:
               h5
