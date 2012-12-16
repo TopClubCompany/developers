@@ -212,13 +212,13 @@ class FilterInput
           _.reduce value, (memo, id) ->
             memo + ',' + id
           amp = if newQuery is '' then '' else '&'
-          newQuery = newQuery + amp + "#{key}-#{value}"
+          newQuery = newQuery + amp + "#{key}=#{value}"
 
           console.log newQuery
       baseURL =  window.location.pathname
       
       #TODO REPLACE WITH ONE FROM LINE:187
-      newQuery = $.param result
+      # newQuery = $.param result
       # newQuery = $.param result
       newUrl = (baseURL + '/?' + newQuery).replace('//?', '/?')
       window.history.replaceState('',null, newUrl)
@@ -249,7 +249,7 @@ class FilterInput
          $.noop()
 #          console.log xhr, error
        success: (json) ->
-#           console.log json
+          console.log json
           placesObj.useNewData(json)
        beforeSend: () ->
          $.noop()
