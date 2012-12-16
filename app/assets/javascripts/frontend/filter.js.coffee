@@ -1,6 +1,30 @@
 class PlacesCollection
-  constructor: (blocksThatExist = [], @language) ->
-    console.log "blocksThatExist", blocksThatExist.data()
+  constructor: ( blocksThatExist = [], @page = 1 ) ->
+
+    # console.log "blocksThatExist", blocksThatExist
+    ###
+      name: "Sawayn-Lakin"
+      image_path: "/uploads/place_image/27/slider_9.jpg"
+      city: "Киев"
+      street: "Михаила Грушевского улица" 
+      house_number: "9а"      
+      kitchens: "Английская, Чешская"
+      avg_bill_title: "> $61"
+      categories: "суши, пиццерии"
+      description: "Vero provident est et porro nobis velit."      
+      id: "12"
+      lat_lng: "50.4454,30.544"
+      lat: "50.4454"
+      lng: "30.544"
+      marks: 
+        ambiance:  {avg: X, sum: Y}
+        food:      {avg: X, sum: Y}
+        pricing:   {avg: X, sum: Y}
+        service:   {avg: X, sum: Y}      
+      overall_mark: 3.4
+      place_feature_items: ""
+      slug: "sawayn-lakin"      
+    ###
     @places = []
     @ids = []
     @createMap()
@@ -22,19 +46,20 @@ class PlacesCollection
     newIds = _.pluck(placesData, 'id')
     needToAddIds = _.difference newIds, @ids
     needToRemoveIds = _.without @ids, newIds
-    console.log placesData, needToAddIds, needToRemoveIds, @ids
+    # console.log placesData, needToAddIds, needToRemoveIds, @ids
     # idsPresent = _.pluck placesData, "id"
     if needToAddIds.length > 0
 
       needToAdd = _.filter(placesData, (place) -> needToAddIds.indexOf(place.id) isnt -1  )
-      console.log needToAdd
-      @multipleAdd $.makeArray(needToAdd)
+      #console.log needToAdd
+      @multipleAdd($.makeArray(needToAdd))
     if needToRemoveIds.length > 0  
       @multipleRemove needToRemoveIds
 
     @ids = _.without(_.union(@ids, needToAddIds), needToRemoveIds)
 
   multipleAdd: (placesToAdd = []) =>
+    #console.log placesToAdd
     _.each placesToAdd, (place) =>
       @places.push place
       coords =  place.lat_lng.split(',')
@@ -45,14 +70,16 @@ class PlacesCollection
       @addMarker place
       @addBlock place
 
-  multipleRemove: (placeIds) =>
-    for removeId in placeIds
-      _.select(@markers,{placeId: removeId}).setMap(null)
+  multipleRemove: (placeIdsToRemove) =>
+    console.log 'lol2', placeIdsToRemove
+    for removeId in placeIdsToRemove
+      self = @
+      # console.log 'lol2', removeId, @, @markers
+      # console.log 'lol', @markers, _.find(self.markers,{ placeId: removeId })
+      # ?.setMap(null)
       $("#place_#{removeId}").add("#list_place_#{removeId}").remove()
   
   addBlock: (place) =>
-    console.log place
-    
     properKitchensName = if place.kitchens.length > 18 then place.kitchens.substring(0, 18) + '...' else place.kitchens
     
     listBlock = """
@@ -60,7 +87,7 @@ class PlacesCollection
         <a href="/places/#{place.id}">
           <img height="100" src="#{place.image_path}" width="140">
         </a>
-        <h4><a href="#"></a></h4>
+        <h4><a href="#">#{place.name}</a></h4>
         <div class="rating">
           <div class="stars">
             <div class="stars_overlay"></div>
@@ -96,7 +123,7 @@ class PlacesCollection
     mapBlock = """
       <div id="place_#{place.id}" data-lng="#{place.lng}" data-lat="#{place.lat}" class="place">
         <h4>
-          <a href="#">#{place.name_en}</a>
+          <a href="#">#{place.name}</a>
         </h4>
         <div class="rating">
           <div class="stars">
@@ -124,9 +151,8 @@ class PlacesCollection
 
     
   addMarker: (obj) =>
-    console.log 'addedMarker', obj.lat, obj.lng
+    # console.log 'addedMarker', obj.lat, obj.lng, "##{obj.id}"
 
- #   console.log "addMarker",  obj, "##{obj.id}"
     marker = new google.maps.Marker(
       position: new google.maps.LatLng(obj.lat, obj.lng)
       title: "Hello from #{obj.id}!"
@@ -151,14 +177,18 @@ class PlacesCollection
       $(selector).removeClass 'target'
 
 class FilterInput
-  constructor: (needToShowMap = no, language = 'en')->
+  constructor: (needToShowMap = no)->
     if needToShowMap 
-      blocksThatExist = $("#map_details_wrapper .place")
-      @places = new PlacesCollection(blocksThatExist, language) if $("#map_places").length > 0
-    @checkIfNeeded()
+      blocksThatExist = $("#list_grid_view .place")
+      page = @getPage()
+      @places = new PlacesCollection(blocksThatExist, page) if $("#map_places").length > 0
+    #@checkIfNeeded()
     @bindChangeListener()
     @give_more() if $(".more").length > 0
 
+  getPage: () ->
+    page = window.location.search.match( /page=\d*/)
+    page?.substring(5, page.length()) || 1
   checkIfNeeded: () ->
     querystring = window.location.search
     askAJAX.call(@, querystring, @places) if querystring isnt '?' and @places?
@@ -174,11 +204,22 @@ class FilterInput
       $('#refine input').each( ->
         type = $(this).data('type')
         result[type] = [] if result[type] is undefined
-        result[type].push($(this).val()) if $(this).is(':checked')
+        result[type].push(parseInt( $(this).val() ) )if $(this).is(':checked')
       )
-     
+      newQuery = ''
+      for own key, value of result
+        if value.length > 0
+          _.reduce value, (memo, id) ->
+            memo + ',' + id
+          amp = if newQuery is '' then '' else '&'
+          newQuery = newQuery + amp + "#{key}-#{value}"
+
+          console.log newQuery
       baseURL =  window.location.pathname
+      
+      #TODO REPLACE WITH ONE FROM LINE:187
       newQuery = $.param result
+      # newQuery = $.param result
       newUrl = (baseURL + '/?' + newQuery).replace('//?', '/?')
       window.history.replaceState('',null, newUrl)
       askAJAX.call(@, newQuery, @places)
@@ -239,17 +280,6 @@ class FilterInput
     $el.hide()
 
 $ ->
-  language = $("#language li.active").attr('id')
   if $('#refine').length isnt 0
-    new FilterInput(yes, language)
-
-  ###
-    ///
-      (?<=filters=) # after word filters=
-      [\w+%=&\d]*   # look for characters, %, =, &, and digits
-    ///
-  ###
-
-
-
+    new FilterInput yes
 
