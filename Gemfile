@@ -24,7 +24,7 @@ gem 'ffaker'
 
 gem 'geokit'
 gem 'geokit-rails3'
-gem 'geokit-nominatim'#, :git => 'git://github.com/sobakasu/geokit-nominatim.git'
+gem 'geokit-nominatim'
 gem 'tire'
 gem 'figaro'
 
@@ -41,8 +41,7 @@ gem 'cancan'
 gem 'fb_graph'
 gem 'vkontakte_api', '~> 1.0'
 
-#gem 'kaminari'
-gem 'unicode_utils' # For unicode-strings downcase method o_O !!!
+gem 'unicode_utils'
 
 group :development do
   if File.exists?('/var/www/top_club/developers/.local_gems')
