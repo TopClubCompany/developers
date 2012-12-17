@@ -654,10 +654,14 @@ input[type='submit']:hover {
 }
 
 .place h4 {
-  margin: 0 0 5px 0;
+  margin: 0 0 5px 150px;
   padding: 0;
   font-size: 16px;
   line-height: 16px;
+  width: 270px;
+}
+
+.place h4 a {
   width: 270px;
 }
 
