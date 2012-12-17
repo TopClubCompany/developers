@@ -47,13 +47,13 @@
             h2
               | My reviews
               span (#{current_user.reviews.count})
-            - current_user.reviews do |review|
+            - current_user.reviews.each do |review|
               .review
                 .review_content
                   a.user_link href="#"
                     span itemprop="author"
-                  small
-                    = review.title
+                  small title=review.title
+                    = truncate(review.title, length: 50)
                     a href="#"
                   .rating
                     .stars
