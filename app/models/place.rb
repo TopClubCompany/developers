@@ -104,6 +104,7 @@ class Place < ActiveRecord::Base
           query do
             flt options[:title].lucene_escape, :fields => fields, :min_similarity => 0.5
           end
+          sort { by "overall_mark", "desc" }
         end
         filter(:and, :filters => filters)
       end
@@ -211,6 +212,7 @@ class Place < ActiveRecord::Base
     res[:place_feature_items] = place["place_feature_items_names_#{I18n.locale}"]
     res[:city] = place["city_#{I18n.locale}"]
     res[:street] = place["street_#{I18n.locale}"]
+    res[:county] = place["county_#{I18n.locale}"]
     res[:house_number] = place["house_number"]
     res[:avg_bill_title] = place["avg_bill_title"]
     res[:overall_mark] = place["overall_mark"]
@@ -218,6 +220,15 @@ class Place < ActiveRecord::Base
     res[:lat_lng] = place["lat_lng"]
     res
   end
+
+  def self.for_autocomplite(place)
+    res[:id] = place.id
+    res[:slug] = place.slug || place.id
+    res[:name] = place["name_#{I18n.locale}"]
+    res[:street] = place["street_#{I18n.locale}"]
+    res[:county] = place["county_#{I18n.locale}"]
+  end
+
 end
 # == Schema Information
 #
