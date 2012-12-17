@@ -79,15 +79,15 @@ class Place < ActiveRecord::Base
     filters = []
 
     if options[:kitchen]
-      filters << {query: {terms: {kitchen_ids: options[:kitchen]} }}#{query: "kitchen_ids:#{options[:kitchen].join(' OR ')}"}}}
+      filters << {query: {terms: {kitchen_ids: options[:kitchen].split(',')} }}#{query: "kitchen_ids:#{options[:kitchen].join(' OR ')}"}}}
     end
 
     if options[:category]
-      filters << {query: {terms: {category_ids: options[:category]} }}
+      filters << {query: {terms: {category_ids: options[:category].split(',')} }}
     end
 
     if options[:price]
-      filters << {query: {terms: {avg_bill: options[:price]} }}
+      filters << {query: {terms: {avg_bill: options[:price].split(',')} }}
     end
 
     if filters.empty? && options.empty?
@@ -204,6 +204,7 @@ class Place < ActiveRecord::Base
     res[:slug] = place.slug || place.id
     res[:name] = place["name_#{I18n.locale}"]
     res[:image_path] = place.place_image.try(:slider_url)
+    res[:review_count] = place.review_ids.try(:count)
     res[:description] = place["description_#{I18n.locale}"]
     res[:kitchens] = place["kitchens_names_#{I18n.locale}"]
     res[:categories] = place["categories_names_#{I18n.locale}"]
