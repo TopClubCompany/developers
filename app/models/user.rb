@@ -161,6 +161,9 @@ class User < ActiveRecord::Base
   end
 
 
+  def role_title
+    UserRoleType.find_by_id(user_role_id).try(:title)
+  end
 
 
   protected
@@ -177,6 +180,7 @@ class User < ActiveRecord::Base
       end
     end
   end
+
 
 end
 # == Schema Information

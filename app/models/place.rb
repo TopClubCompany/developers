@@ -1,8 +1,8 @@
 #coding: utf-8
 class Place < ActiveRecord::Base
 
-  attr_accessible :phone, :is_visible, :user_id, :url, :location_attributes,
-                  :avg_bill, :feature_item_ids, :place_administrators_attributes, :name, :description
+  attr_accessible :phone, :is_visible, :user_id, :url, :location_attributes, :week_days_attributes,
+                  :avg_bill, :feature_item_ids, :place_administrators_attributes, :name, :description, :week_days_ids
 
   belongs_to :user
 
@@ -21,6 +21,8 @@ class Place < ActiveRecord::Base
   has_many :notes
   has_many :events
   has_many :reviews, :as => :reviewable, :dependent => :destroy
+  has_many :week_days
+
 
   enumerated_attribute :bill, :id_attribute => :avg_bill, :class => ::BillType
 
@@ -34,7 +36,7 @@ class Place < ActiveRecord::Base
 
   has_one :location, :as => :locationable, :dependent => :destroy, :autosave => true
 
-  accepts_nested_attributes_for :location, :reviews, :place_administrators, :allow_destroy => true, :reject_if => :all_blank
+  accepts_nested_attributes_for :location, :reviews, :place_administrators, :week_days, :allow_destroy => true, :reject_if => :all_blank
 
   translates :name, :description
 
@@ -162,7 +164,7 @@ class Place < ActiveRecord::Base
         json.show_place_image place_image.url(:place_show)
         json.thumb_url place_image.url(:thumb)
 
-      end
+      end if place_image
       json.house_number location.try(:house_number)
     end
   end

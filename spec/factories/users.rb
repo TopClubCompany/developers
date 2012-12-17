@@ -46,14 +46,23 @@
 
 
 FactoryGirl.define do
-  sequence :email do |n|
-    "email#{n}@factory.com"
-  end
+  sequence(:email) { |n| "email#{n}@factory.com" }
 
   factory :user do
     email
-    first_name 'Bro'
-    last_name 'Pro '
-    password 'password'
+    first_name { Faker::Name.first_name }
+    last_name  { Faker::Name.last_name }
+    password   { Rails.env.production? ? Devise.friendly_token.first(6) : (1..6).to_a.join }
   end
+
+  trait :admin do
+    user_role_id  UserRoleType.admin.id
+    login 'admin'
+  end
+
+  trait :default do
+    user_role_id UserRoleType.default.id
+    login 'user'
+  end
+
 end

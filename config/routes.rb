@@ -1,8 +1,9 @@
 Topclub::Application.routes.draw do
 
   filter :locale
-  filter :city_filter
+  #filter :city_filter
 
+  post '/set_location/:location_slug' => 'places#set_location', as: 'set_location'
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
   delete '/sign_out' => 'users/omniauth_callbacks#destroy_user_session', as: 'quit'
@@ -15,6 +16,7 @@ Topclub::Application.routes.draw do
 
   get '/profile/:user_id' => 'users/profile#show', as: 'profile'
   get '/profile/:user_id/invite_friends' => 'users/profile#invite_friends', as: 'invite_friends'
+  post '/profile/send_email_invitation_path' => 'users/profile#send_email_invitation', as: 'send_email_invitation'
 
   root :to => 'explore#index'
 
