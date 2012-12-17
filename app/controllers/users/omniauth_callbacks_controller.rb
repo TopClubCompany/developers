@@ -3,6 +3,23 @@ class Users::OmniauthCallbacksController < ApplicationController
 
   def auth
     data = Account.get_data_from_callback request.env["omniauth.auth"]
+    #raise data.inspect
+    if data[:provider] == 'facebook'
+      facebook_user = FbGraph::User.me(data[:token]).fetch
+      facebook_friends = facebook_user.friends.map{ |friend| {name: friend.name, id: friend.identifier  } }
+      #raise facebook_friends.to_yaml
+    end
+    if data[:provider] == 'vkontakte'
+      vk_user = VkontakteApi::Client.new(data[:token])
+      vk_user.users.get(uid: data[:uid]).first
+      fields = [:first_name, :last_name, :uid, :photo]
+      vk_friends = []
+      vk_user.friends.get(fields: fields) do |friend|
+        vk_friends << {name: "#{friend.first_name} #{friend.last_name}", id: friend.uid}
+      end
+      #raise vk_friends.inspect
+    end
+
     data[:email].present? ? auth_with_email(data) : auth_without_email(data)
   end
 

@@ -39,6 +39,7 @@ gem 'omniauth-openid'
 gem 'omniauth-google-oauth2'
 gem 'cancan'
 gem 'fb_graph'
+gem 'vkontakte_api', '~> 1.0'
 
 #gem 'kaminari'
 gem 'unicode_utils' # For unicode-strings downcase method o_O !!!
