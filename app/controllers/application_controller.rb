@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
       session['city'] || session[:city] || 'kyiv'
     end
 
-
     def set_locale
       if params[:locale] && Globalize.available_locales.include?(params[:locale].to_sym) && !request.xhr?
         I18n.locale = params[:locale].to_sym

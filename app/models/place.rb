@@ -91,7 +91,7 @@ class Place < ActiveRecord::Base
     end
 
     if filters.empty? && options.empty?
-      self.best_places(4)
+      self.best_places(4, options)
     else
 
       if options[:city]
@@ -117,7 +117,7 @@ class Place < ActiveRecord::Base
   end
 
   def self.best_places amount, options={}
-    tire.search(page: 1, per_page: amount) do
+    tire.search(page: options[:page] || 1, per_page: amount) do
       sort { by "overall_mark", "desc" }
       if options[:city]
         query do
