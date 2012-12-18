@@ -16,13 +16,16 @@
     .span12
       #search_form
         form
-          input type="text" name="title_or_location" placeholder="title or location"
-          label for="reserve_date" Date
-          input type="text" name="reserve_date" value="11/07/2012"
-          label for="reserve_time" Time
-          input type="text" name="reserve_time" value="7:00 PM"
-          label for="number_of_people" <nobr>Number of people</nobr>
-          input type="text" name="number_of_people" value="2"
+          input name="title" placeholder="title or location" type="text"
+          = render :partial => 'shared/search_form', :locals => { :time => {:h => (@time[:h] || 12), :m => (@time[:m] || '00')} }
+          label for="number_of_people"
+            nobr= I18n.t('search.number_of_people')
+          select name="number_of_people" type="text"
+            option value="1" 1
+            option value="2" selected="selected" 2
+            - (3..10).each do |i|
+              option value="#{i}" #{i}
+
           input type="submit" value="Find a table"
           .clear
   #promo_places
