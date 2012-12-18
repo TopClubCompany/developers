@@ -64,13 +64,44 @@
     #listing.span10
       - date = "11/07/2012"      
       - person = '2'
-      h3 Results for #{date}, #{@time[:h]}:#{@time[:m]} for #{person} people
-      #map_places style="background: rgba(128,128,128,0.5);" *{'data-lat'=>"50.451118", "data-lng" => "30.522301"}
-      #map_details
-        #map_details_wrapper
+      #mapcontainer
+        h3 Results for #{date}, #{@time[:h]}:#{@time[:m]} for #{person} people
+        #map_places style="background: rgba(128,128,128,0.5);" *{'data-lat'=>"50.451118", "data-lng" => "30.522301"}
+        #map_details
+          #map_details_wrapper
+            - @result.each do |place|
+              - location = place.lat_lng.split(',')
+              .place id="place_#{place.id}" *{'data-lat'=>"#{location[0]}", "data-lng" => "#{location[1]}", 'data-id' => "#{place.id}"}
+                h4
+                  a href="#"
+                    = place["name_#{I18n.locale}"]
+                .rating
+                  .stars
+                    .stars_overlay
+                    .stars_bar style=get_star_rating(place)
+                    .stars_bg
+                  small
+                    = place.review_ids.try(:count)
+                .timing
+                  a href="#"
+                    = "#{base_time.to_i + ( (index.to_i + 2) / 4 ) }:#{possibilities[(index.to_i + 2) % 4]}"
+                  a href="#"
+                    = "#{base_time.to_i + ( (index.to_i + 1) / 4 ) }:#{possibilities[(index.to_i + 1) % 4]}"
+
+                  a.bold href="#"
+                    = "#{base_time}:#{minutes}"
+                  a href="#"
+                    = "#{base_time.to_i - ( (index.to_i - 1) < 0? 1 : 0 ) }:#{possibilities[(index.to_i - 1) % 4]}"
+                  a href="#"
+                    = "#{base_time.to_i - ( (index.to_i - 2) < 0? 1 : 0 ) }:#{possibilities[(index.to_i - 2) % 4]}"
+                  .clear
+
+
+        #list_grid_view.none
           - @result.each do |place|
-            - location = place.lat_lng.split(',')
-            .place id="place_#{place.id}" *{'data-lat'=>"#{location[0]}", "data-lng" => "#{location[1]}", 'data-id' => "#{place.id}"}
+            .place id="list_place_#{place.id}"
+              a href=place_path(place)
+                img height="100" width="140" src="#{slider_place_image(place)}"
               h4
                 a href="#"
                   = place["name_#{I18n.locale}"]
@@ -81,73 +112,43 @@
                   .stars_bg
                 small
                   = place.review_ids.try(:count)
+              ul.place_features
+                li.location
+                  = place.location_city
+                - kitchens_names = place.send("kitchens_names_#{I18n.locale}")
+                li.cuisine title=kitchens_names
+                  = truncate(kitchens_names, length: 18)
+                li.pricing
+                  = avg_bill_title(place.avg_bill)
               .timing
-                a href="#" 
+                a href="#"
                   = "#{base_time.to_i + ( (index.to_i + 2) / 4 ) }:#{possibilities[(index.to_i + 2) % 4]}"
                 a href="#"
                   = "#{base_time.to_i + ( (index.to_i + 1) / 4 ) }:#{possibilities[(index.to_i + 1) % 4]}"
-                  
-                a.bold href="#" 
+                a.bold href="#"
                   = "#{base_time}:#{minutes}"
                 a href="#"
                   = "#{base_time.to_i - ( (index.to_i - 1) < 0? 1 : 0 ) }:#{possibilities[(index.to_i - 1) % 4]}"
                 a href="#"
                   = "#{base_time.to_i - ( (index.to_i - 2) < 0? 1 : 0 ) }:#{possibilities[(index.to_i - 2) % 4]}"
-                .clear
-
-  
-      #list_grid_view.none 
-        - @result.each do |place|
-          .place id="list_place_#{place.id}"
-            a href=place_path(place)
-              img height="100" width="140" src="#{slider_place_image(place)}"
-            h4 
-              a href="#" 
-                = place["name_#{I18n.locale}"]
-            .rating
-              .stars
-                .stars_overlay
-                .stars_bar style=get_star_rating(place)
-                .stars_bg
-              small
-                = place.review_ids.try(:count)
-            ul.place_features
-              li.location
-                = place.location_city
-              - kitchens_names = place.send("kitchens_names_#{I18n.locale}")
-              li.cuisine title=kitchens_names
-                = truncate(kitchens_names, length: 18)
-              li.pricing
-                = avg_bill_title(place.avg_bill)
-            .timing
-              a href="#" 
-                = "#{base_time.to_i + ( (index.to_i + 2) / 4 ) }:#{possibilities[(index.to_i + 2) % 4]}"
-              a href="#"
-                = "#{base_time.to_i + ( (index.to_i + 1) / 4 ) }:#{possibilities[(index.to_i + 1) % 4]}"                
-              a.bold href="#" 
-                = "#{base_time}:#{minutes}"
-              a href="#"
-                = "#{base_time.to_i - ( (index.to_i - 1) < 0? 1 : 0 ) }:#{possibilities[(index.to_i - 1) % 4]}"
-              a href="#"
-                = "#{base_time.to_i - ( (index.to_i - 2) < 0? 1 : 0 ) }:#{possibilities[(index.to_i - 2) % 4]}"
-            .special_offers
-              h5 Special offers:
-              h5
-                a href="#"
-                a href="#"
-                a href="#"
-            .clear
-        .paginate
-          / h1 #{@result.total}
-          - current = 1
-          - number_of_pages = @result.total.to_i / 4 + 1
-          - if number_of_pages > 1  
-            - for i in 1..number_of_pages            
-              -if current == i
-                a.current href="##{i}" #{i}
-              - else
-                a href="##{i}" #{i}
-            a href="#" next ›
-          - else
-            a href="#" No page stub
+              .special_offers
+                h5 Special offers:
+                h5
+                  a href="#"
+                  a href="#"
+                  a href="#"
+              .clear
+          .paginate
+            / h1 #{@result.total}
+            - current = 1
+            - number_of_pages = @result.total.to_i / 4 + 1
+            - if number_of_pages > 1
+              - for i in 1..number_of_pages
+                -if current == i
+                  a.current href="##{i}" #{i}
+                - else
+                  a href="##{i}" #{i}
+              a href="#" next ›
+            - else
+              a href="#" No page stub
 = render 'shared/more_template'

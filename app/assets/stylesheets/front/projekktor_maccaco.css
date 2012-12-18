@@ -427,3 +427,7 @@ background: url("/img/projekktor/maccaco/maccaco.png") no-repeat -91px top trans
     -webkit-border-radius: 15px;
     display: none;
 }
+
+.ppcontrols.fade{
+    opacity: 1 !important;
+}
