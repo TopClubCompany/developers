@@ -4,18 +4,7 @@
       #search_form
         h1= I18n.t('search.main_text', count: Place.visible.count, city: current_city)
         form
-          input name="title" placeholder="title or location" type="text"
           = render :partial => 'shared/search_form', :locals => { :time => {:h => (@time[:h] || 12), :m => (@time[:m] || '00')} }
-          label for="number_of_people"
-            nobr= I18n.t('search.number_of_people')
-          select name="number_of_people" type="text"
-            option value="1" 1
-            option value="2" selected="selected" 2
-            - (3..10).each do |i|
-              option value="#{i}" #{i}
-
-          input type="submit" value="Find a table"
-          .clear
         #view_switch
           a#grid_view.current href="#"
             nobr= I18n.t('search.grid_view')
