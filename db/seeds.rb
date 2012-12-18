@@ -1,13 +1,11 @@
 #encoding: utf-8
 
-def insert_default_user(email, admin = true)
-  password            = Rails.env.production? ? Devise.friendly_token.first(6) : (1..6).to_a.join
-  user                = User.new(email: email, password: password, password_confirmation: password).generate_default_fields
-  user.login          = admin ? 'admin' : 'user'
-  (user.user_role_id  = UserRoleType.admin.id) if admin
+def insert_default_user(email, role = :default)
+  user = FactoryGirl.build(:user, role.to_sym, email: email)
   user.activate.skip_confirmation!
   user.save!
-  puts "#{admin ? 'Admin: ' : 'User: '}#{email}, #{password}"
+  p '=============== User ================='
+  p "email: #{user.email} password: #{user.password} role: #{user.role_title}"
 end
 
 def add_categories
@@ -39,33 +37,37 @@ end
 
 def add_test_stuff
   Place.full_truncate
+  WeekDay.full_truncate
   15.times do
-    kitchen   = Kitchen.all.sample(2)
-    category  = Category.all.sample(2)
+    kitchen  = Kitchen.all.sample(2)
+    category = Category.all.sample(2)
+    location = FactoryGirl.build(:location)
+
     place = Place.create(name: Faker::Company.name, description: Faker::Lorem.sentence, user_id: User.first.id,
                            phone: Faker::PhoneNumber.phone_number, url: Faker::Internet.http_url, avg_bill: BillType.all.sample.id)
 
+      week_days = [:monday, :tuesday, :wednesday, :thursday,
+                   :friday, :saturday, :sunday].map { |title| FactoryGirl.build(:week_day, title: title)}
 
-      latitude = [50.4481, 50.4454, 50.4467, 50.4439].sample
-      longitude =  [30.5002, 30.5440, 30.5451, 30.5455, 30.5459].sample
-      location = Location.new({latitude: latitude, longitude: longitude})
       place.location   = location
+      place.week_days  << week_days
       place.categories << category
       place.kitchens   << kitchen
+
       2.times do
-        review = FactoryGirl.build(:review, user_id: User.last.id)
+        review = FactoryGirl.build(:review, user_id: User.all.sample.id)
         MarkType.all.each { |mark_type| review.marks << FactoryGirl.build(:mark, mark_type_id: mark_type.id) }
         place.reviews << review
         place.notes   << FactoryGirl.build(:note)
         place.events  << FactoryGirl.build(:event)
       end
-      puts "place created!"
     end
   puts 'test stuff added successfully'
 end
 
 def insert_group_feature
   GroupFeature.all.map(&:destroy)
+  FeatureItem.full_truncate
   groups_features = [{name: "Wi-Fi", features: %w(Free Paid)},
                      {name: "Parking", features: %w(Street Garage Valet Private\ Lot Validated)},
                      {name: "Meals Served", features: %w(Breakfast Brunch Lunch Dinner Dessert Late\ Night)},
@@ -116,8 +118,8 @@ def insert_default_place_pictures
 end
 
 User.full_truncate
-insert_default_user('admin@adm.com')
-insert_default_user('user@usr.com', false)
+insert_default_user('admin@adm.com', :admin)
+insert_default_user('user@usr.com')
 add_categories
 add_kitchens
 insert_mark_types

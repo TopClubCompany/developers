@@ -25,8 +25,6 @@
 //q=require visual
 //=require custom_elements
 //=require waypoints
-//=require styx
-//=require styx
 //= require underscore-min
 //= require handlebars
 

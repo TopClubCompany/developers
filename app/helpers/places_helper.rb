@@ -26,10 +26,10 @@ module PlacesHelper
   end
 
   def get_star_rating place
-    "left: #{place.overall_mark * 20}%"
+    "left: #{place.overall_mark * 20}%" if place.overall_mark
   end
 
   def avg_bill_title avg_id
-    BillType.find(avg_id).title if avg_id
+    BillType.find(avg_id).title rescue ''
   end
 end

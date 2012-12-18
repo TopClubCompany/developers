@@ -47,5 +47,3 @@ public/uploads/
 public/static
 public/assets
 
-# Ignore application configuration
-/config/application.yml

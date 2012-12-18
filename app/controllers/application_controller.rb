@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  include Styx::Initializer
 
   before_filter :set_locale
   before_filter :current_city
@@ -8,7 +7,7 @@ class ApplicationController < ActionController::Base
   protected
 
     def current_city
-      session['city'] ||= (params[:city] || "Kyiv")
+      session['city'] || session[:city] || 'kyiv'
     end
 
 

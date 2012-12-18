@@ -1,15 +1,11 @@
 class Review < ActiveRecord::Base
   attr_accessible :content, :reviewable_id, :reviewable_type, :title, :user_id
 
-
   belongs_to :user
   belongs_to :place
   belongs_to :reviweable, polymorphic: true
+
   has_many :marks
-
-
-
-
 
 
 end

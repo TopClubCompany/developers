@@ -1,0 +1,10 @@
+p Hello!
+| Your friend #{@sender} invites you for eating for more details click link below:
+p
+  = link_to 'Join party', "link_to_party/#{@link}"
+p
+  = @message
+
+p with respects
+= link_to 'Top Club', root_url
+

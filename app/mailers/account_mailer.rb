@@ -6,4 +6,11 @@ class AccountMailer < ActionMailer::Base
      mail(to: email, subject: 'Account confirmation')
   end
 
+  def send_invitation email, link, sender, message
+    @link    = link
+    @sender  = sender
+    @message = message
+    mail(to: email, subject: "Your friend #{sender} invite you")
+  end
+
 end

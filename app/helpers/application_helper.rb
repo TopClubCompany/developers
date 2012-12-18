@@ -223,13 +223,13 @@ module ApplicationHelper
   end
 
   def get_city_class city
-    if current_city == city.camelcase
+    if current_city == city
       'active'
     end
   end
 
   def current_city
-    session['city'] || 'kyiv'
+    session['city'] || session[:city] || 'kyiv'
   end
 
 end
