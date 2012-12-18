@@ -1,9 +1,42 @@
 class PlacesCollection
-  constructor: () ->
+  constructor: ( blocksThatExist = [], @page = 1 ) ->
     @places = []
     @ids = []
     @createMap()
     @markers = []
+    console.log "blocksThatExist", blocksThatExist
+    for block in blocksThatExist
+
+      obj = 
+        id: $(block).data('id')
+        lat: $(block).data('lat')
+        lng: $(block).data('lng')
+      @ids.push obj.id
+      @addMarker obj
+    ###
+      name: "Sawayn-Lakin"
+      image_path: "/uploads/place_image/27/slider_9.jpg"
+      city: "Киев"
+      street: "Михаила Грушевского улица" 
+      house_number: "9а"      
+      kitchens: "Английская, Чешская"
+      avg_bill_title: "> $61"
+      categories: "суши, пиццерии"
+      description: "Vero provident est et porro nobis velit."      
+      id: "12"
+      lat_lng: "50.4454,30.544"
+      lat: "50.4454"
+      lng: "30.544"
+      marks: 
+        ambiance:  {avg: X, sum: Y}
+        food:      {avg: X, sum: Y}
+        pricing:   {avg: X, sum: Y}
+        service:   {avg: X, sum: Y}      
+      overall_mark: 3.4
+      place_feature_items: ""
+      slug: "sawayn-lakin"      
+    ###
+    
    
   createMap: () ->
     console.log 'inited GMap'
@@ -15,8 +48,9 @@ class PlacesCollection
       mapTypeId: google.maps.MapTypeId.ROADMAP
     @map = new google.maps.Map(document.getElementById("map_places"), mapOptions)
 
-  useNewData: (placesData) ->
-
+  useNewData: (json) ->
+    total = json.total
+    placesData = json.result
     newIds = _.pluck(placesData, 'id')
     needToAddIds = _.difference newIds, @ids
     needToRemoveIds = _.without @ids, newIds
@@ -24,55 +58,88 @@ class PlacesCollection
     # idsPresent = _.pluck placesData, "id"
     if needToAddIds.length > 0
 
-      needToAdd = _.find(placesData, (place) -> place.id in needToAddIds)
-      @multipleAdd $.makeArray(needToAdd)
+      needToAdd = _.filter(placesData, (place) -> needToAddIds.indexOf(place.id) isnt -1  )
+      #console.log needToAdd
+      @multipleAdd($.makeArray(needToAdd))
     if needToRemoveIds.length > 0  
       @multipleRemove needToRemoveIds
 
     @ids = _.without(_.union(@ids, needToAddIds), needToRemoveIds)
 
   multipleAdd: (placesToAdd = []) =>
+    #console.log placesToAdd
     _.each placesToAdd, (place) =>
       @places.push place
-      #TODO REPLACE WITH REAL VALUES
       coords =  place.lat_lng.split(',')
       if coords.length > 0
         place.lat = coords[0]
         place.lng = coords[1]
+
       @addMarker place
       @addBlock place
 
-
-  multipleRemove: (placeIds) ->
-    for removeId in placeIds
-      _.where(@markers,{placeId: removeId}).setMap(null)
-      $("#place_#{removeId}").add("#list_place_#{removeId}").remove()
-
+  multipleRemove: (placeIdsToRemove) =>
+    console.log 'lol2', placeIdsToRemove
+    for removeId in placeIdsToRemove
+      self = @
+      # console.log 'lol2', removeId, @, @markers
+      # console.log 'lol', @markers, _.find(self.markers,{ placeId: removeId })
+      # ?.setMap(null)
+      $("#place_#{removeId}").add("#list_place_#{removeId}").fadeOut('fast').remove()
   
   addBlock: (place) =>
-    listblockAddition = """
-                  <div class='special_offers'>
-                    <h5>Special offers:</h5>
-                    <h5></h5>
-                      <a href="#"></a>
-                      <a href="#"></a>
-                      <a href="#"></a>
-                  <div class='clear></div>
-                  </div>
+    properKitchensName = if place.kitchens.length > 18 then place.kitchens.substring(0, 18) + '...' else place.kitchens
+    
+    listBlock = """
+    <div class="place" id="list_place_#{place.id}">
+        <a href="/places/#{place.id}">
+          <img height="100" src="#{place.image_path}" width="140">
+        </a>
+        <h4><a href="#">#{place.name}</a></h4>
+        <div class="rating">
+          <div class="stars">
+            <div class="stars_overlay"></div>
+            <div class="stars_bar" style="left: #{place.overall_mark * 20}%"></div>
+            <div class="stars_bg"></div>
+          </div>
+          <small>#{place.reviews}</small>
+        </div>
+        <ul class="place_features">
+          <li class="location">Ивана Мазепы улица</li>
+          <li class="cuisine" title="#{place.kitchens_names}">#{properKitchensName}</li>
+          <li class="pricing">#{place.avg_bill_title}</li>
+        </ul>
+        <div class="timing">
+          <a href="#"></a>
+          <a href="#"></a>
+          <a class="bold" href="#"></a>
+          <a href="#"></a>
+          <a href="#"></a>
+        </div>
+        <div class="special_offers">
+          <h5>Special offers:</h5>
+          <h5>
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+          </h5>
+        </div>
+        <div class="clear"></div>
+      </div>             
               
     """
     mapBlock = """
       <div id="place_#{place.id}" data-lng="#{place.lng}" data-lat="#{place.lat}" class="place">
         <h4>
-          <a href="#">#{place.name_en}</a>
+          <a href="#">#{place.name}</a>
         </h4>
         <div class="rating">
           <div class="stars">
             <div class="stars_overlay"></div>
-            <div class="stars_bar"></div>
+            <div class="stars_bar" style="left: #{place.overall_mark * 20}%"></div>
             <div class="stars_bg"></div>
           </div>
-          <small>#{place.reviews}</small>
+          <small></small>
         </div>
         <div class="timing">
           <a href="#"></a>
@@ -85,16 +152,13 @@ class PlacesCollection
       </div>
     """
     $('#map_details_wrapper').append mapBlock
-    listBlock = $(mapBlock).attr('id', "list_" + $(mapBlock).attr('id')).append listblockAddition
-    $("#list_grid_view").append listBlock
 
+    $(listBlock).insertBefore('#list_grid_view .paginate')
 
     
   addMarker: (obj) =>
-    
-    console.log 'addedMarker', obj.lat, obj.lng
 
- #   console.log "addMarker",  obj, "##{obj.id}"
+
     marker = new google.maps.Marker(
       position: new google.maps.LatLng(obj.lat, obj.lng)
       title: "Hello from #{obj.id}!"
@@ -120,18 +184,25 @@ class PlacesCollection
 
 class FilterInput
   constructor: (needToShowMap = no)->
-    if needToShowMap is yes
-      @places = new PlacesCollection() if $("#map_places").length > 0
+    if needToShowMap 
+      blocksThatExist = $("#map_details_wrapper .place")
+      page = @getPage()
+      @places = new PlacesCollection(blocksThatExist, page) if $("#map_places").length > 0
     @checkIfNeeded()
     @bindChangeListener()
     @give_more() if $(".more").length > 0
 
+  getPage: () ->
+    page = window.location.search.match( /page=\d*/) || 1
+    # if $(".paginate .current").attr('href') isnt "##{page}" or $(".paginate .current").length is 0
+      # $(".paginate a[href=##{page}]").addClass('current')
+        
+
   checkIfNeeded: () ->
     querystring = window.location.search
-    askAJAX.call(@, querystring, @places) if querystring isnt '?' and @places?
     needToCheck = $.deparam querystring.slice(1)
     for filter, values of needToCheck
-      for value in values
+      for value in values.split(',')
         $("#refine input[value='#{value}'][data-type='#{filter}']").click() unless $("#refine input[value='#{value}'][data-type='#{filter}']").is(':checked')
 
   bindChangeListener: () =>
@@ -141,14 +212,54 @@ class FilterInput
       $('#refine input').each( ->
         type = $(this).data('type')
         result[type] = [] if result[type] is undefined
-        result[type].push($(this).val()) if $(this).is(':checked')
+        result[type].push(parseInt( $(this).val() ) )if $(this).is(':checked')
       )
-     
+      newQuery = ''
+      for own key, value of result
+        if value.length > 0
+          _.reduce value, (memo, id) ->
+            memo + ',' + id
+          amp = if newQuery is '' then '' else '&'
+          newQuery = newQuery + amp + "#{key}=#{value}"
+
       baseURL =  window.location.pathname
-      newQuery = $.param result
-      newUrl = (baseURL + '/?' + newQuery).replace('//?', '/?')
+      newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '/?')
       window.history.replaceState('',null, newUrl)
-      askAJAX.call(@, newQuery, @places)
+      askAJAX.call(@, newQuery, @places)      
+
+    $('#list_grid_view .paginate a').on 'click', (e) =>      
+      e.preventDefault()
+      unless $(e.target).hasClass('current')
+        $(e.target).addClass('current').siblings().removeClass('current')
+        baseURL =  window.location.pathname
+        oldQuery = window.location.search
+        pageTo = $(e.target).attr('href').slice(1)
+        amp = if oldQuery is '' then '' else '&'
+        if (window.location.search.match(/page=(\d+)/)) 
+          console.log 'modified old one'
+          newQuery = oldQuery.replace(/page=\d+/, "page=#{pageTo}")          
+        else
+          console.log 'added new'
+          newQuery = oldQuery + amp + "page=#{pageTo}"          
+        
+        newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '/?')
+        window.history.replaceState('',null, newUrl)
+        askAJAX.call(@, newQuery, @places)      
+
+
+    ###
+    $("select[name=reserve_time]").on 'change', =>
+      time = $(this).val()
+      $('#map_details_wrapper').add('#list_grid_view').find('.place').each (index, el) ->
+        el.find('.timing a').each (index, el) ->
+          console.log time
+  
+    $("select[name=number_of_people]").on 'change', =>          
+      number = $(this).val()
+      console.log headline = $('#listing > h3:first-child')
+      headlineText = $('#listing > h3:first-child').html()
+      console.log headlineText
+    ###
 
   askAJAX = (serializedData, placesObj) =>
     $.ajaxSetup
@@ -159,7 +270,7 @@ class FilterInput
          $.noop()
 #          console.log xhr, error
        success: (json) ->
-#           console.log json
+          console.log json
           placesObj.useNewData(json)
        beforeSend: () ->
          $.noop()
@@ -177,7 +288,6 @@ class FilterInput
       e.preventDefault()
       $el = $(this)
       type = $el.data('type')
-      console.log 'request'
       if type
         $.getJSON '/search/get_more',{type: type}, (data) => parse_more_objects.call(self, data, $el, type)
 
@@ -186,20 +296,11 @@ class FilterInput
     _.each data, (obj) =>
       _.extend obj, {type: type}
       $el.prev().prev().after(@more_template(obj))
+    @checkIfNeeded()
     @bindChangeListener()
     $el.hide()
 
 $ ->
   if $('#refine').length isnt 0
-    new FilterInput(true)
-
-  ###
-    ///
-      (?<=filters=) # after word filters=
-      [\w+%=&\d]*   # look for characters, %, =, &, and digits
-    ///
-  ###
-
-
-
+    new FilterInput yes
 

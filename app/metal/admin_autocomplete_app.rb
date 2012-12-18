@@ -9,23 +9,8 @@ class AdminAutocompleteApp
     options = params.slice('with', 'with_all', 'without').symbolize_keys
     attr = params['attr'] || (klass.ac_opts[:localized] ? "#{klass.ac_attr}_#{I18n.locale}" : klass.ac_attr.to_s)
 
-    if ['Catalogue', 'Section', 'PGroup', 'MGroup', 'TagGroup'].include?(klass.name)
-      options[:order] = "lft"
-      options[:per_page] = 1000
-    elsif ['Material', 'Tag'].include?(klass.name)
-      options[:order] = "name_#{I18n.locale}"
-      options[:order] = "name_#{I18n.locale}"
-    elsif ['ContentKind'].include?(klass.name)
-      options[:with] = {'is_public' => false}
-    else
-      options[:order] = "created_at"
-      options[:sort_mode] = "desc"
-    end
-
-    #if ['Tag'].include?(klass.name)
-    #  options[:with] ||= {}
-    #  options[:with][:is_visible] = true
-    #end
+    options[:order] = "overall_mark"
+    options[:sort_mode] = "desc"
 
     entries = klass.token_search("#{params['q']}* OR *#{params['q']}*", options).to_a
     entries = klass.token_search(params['q'].split(/\s+/).map { |s| "*#{s}*" }.join(' AND '), options).to_a if entries.empty?

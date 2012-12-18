@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121126205826) do
+ActiveRecord::Schema.define(:version => 20121217015057) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -535,5 +535,28 @@ ActiveRecord::Schema.define(:version => 20121126205826) do
   add_index "users", ["last_name", "first_name", "patronymic"], :name => "index_users_on_last_name_and_first_name_and_patronymic"
   add_index "users", ["login"], :name => "index_users_on_login"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "week_day_translations", :force => true do |t|
+    t.integer  "week_day_id"
+    t.string   "locale"
+    t.string   "title"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "week_day_translations", ["locale"], :name => "index_week_day_translations_on_locale"
+  add_index "week_day_translations", ["week_day_id"], :name => "index_week_day_translations_on_week_day_id"
+
+  create_table "week_days", :force => true do |t|
+    t.float    "start_at"
+    t.float    "end_at"
+    t.float    "start_break_at"
+    t.float    "end_break_at"
+    t.integer  "place_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "week_days", ["place_id"], :name => "index_week_days_on_place_id"
 
 end

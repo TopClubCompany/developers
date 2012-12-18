@@ -7,7 +7,7 @@
     ul#location
       - City.with_translations.each do |city|
         li class=get_city_class(city.slug)
-          a href="/#{city.slug}"= city.name
+          = link_to city.name, set_location_path(city.slug), method: 'post'
 
     #header_links
       a.first href="#" Help &amp; Support
@@ -22,19 +22,11 @@
                 nobr
                   = user_menu_name
 
-          li
-            = link_to 'My reservations', '#'
-          li
-            = link_to 'My favourites', '#'
-          li
-            = link_to 'My reviews', '#'
-          li
-            = link_to 'Settings', profile_path(current_user.id)
-          li
-            = link_to 'Diner style', '#'
-          li
-            = link_to 'TOP points', '#'
-          li
-            = link_to 'Invite friends', '#'
-          li
-            = link_to 'Logout', quit_path, method: 'delete'
+          li= link_to 'My reservations', '#'
+          li= link_to 'My favourites', '#'
+          li= link_to 'My reviews', '#'
+          li= link_to 'Settings', profile_path(current_user.id)
+          li= link_to 'Diner style', '#'
+          li= link_to 'TOP points', '#'
+          li= link_to 'Invite friends', invite_friends_path(current_user.id)
+          li= link_to 'Logout', quit_path, method: 'delete'

@@ -1,45 +1,12 @@
 #user.content
   .row
     .span2
-      #sidebar.specials
-        h3 Admin
-        ul
-          li
-            a href="#"
-              | View reservations
-          li
-            a href="#"
-              | View places
-      #sidebar.specials
-        h3 My account
-        ul
-          li
-            a href="#"
-              | My reservations
-          li
-            a href="#"
-              | My favourites
-          li
-            a href="#"
-              | My reviews
-          li
-            a href="#"
-              | Settings
-          li
-            a href="#"
-              | Diner style
-          li
-            a href="#"
-              | TOP points
-              strong 5
-          li
-            a href=invite_friends_path
-              | Invite friends
+      = render 'shared/user_sidebar'
     #dashboard.span10.page_content
       .row
         .span2
           h1= user_menu_name
-          img.user_pic_big height="128" src=(current_user.avatar.url(:sidebar) if current_user.avatar) width="128"
+          img.user_pic_big height="128" src=(current_user.avatar ? current_user.avatar.url(:sidebar) : '/assets/no_avatar.gif') width="128"
             #status.gourmand
               b *
               | GOURMAND
@@ -79,14 +46,14 @@
           #my_reviews.dash_block
             h2
               | My reviews
-              span (9)
-            - current_user.reviews do |review|
+              span (#{current_user.reviews.count})
+            - current_user.reviews.each do |review|
               .review
                 .review_content
                   a.user_link href="#"
                     span itemprop="author"
-                  small
-                    = review.title
+                  small title=review.title
+                    = truncate(review.title, length: 50)
                     a href="#"
                   .rating
                     .stars

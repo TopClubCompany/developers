@@ -6,6 +6,17 @@ en:
         password: ""
         password_confirmation: ""
         remember_me: ""
+  user_profile:
+    invite_friends:
+      tell_friends: Tell your friends about
+      copy: Copy
+      email_friends: Email your friends
+      share_link: Share a link
+      inv_friends: Invite friends from
+      or: or
+      send_email: Send email
+      facebook: Facebook
+      vkontakte: Вконтакте
   auth: 
     edit_passwords: 
       confirm_new_password: ""

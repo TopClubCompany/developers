@@ -1,9 +1,11 @@
 class SearchController < ApplicationController
   def index
     @result = Place.search(params.merge(city: current_city))
+    @time = {:h => '10', :m => '30'}
     respond_to do |format|
       format.json do
-        render :json => @result.to_json
+        render :json => {result: @result.map{|e| Place.for_mustache(e) },
+                         total: @result.total}
       end
       format.html do
         render 'search/index'

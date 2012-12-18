@@ -1,64 +1,38 @@
 #user.content
   .row
     .span2
-      #sidebar.specials
-        h3 Admin
-        ul
-          li
-            a href="#"
-              | View reservations
-          li
-            a href="#"
-              | View places
-      #sidebar.specials
-        h3 My account
-        ul
-          li
-            a href="#"
-              | My reservations
-          li
-            a href="#"
-              | My favourites
-          li
-            a href="#"
-              | My reviews
-          li
-            a href="#"
-              | Settings
-          li
-            a href="#"
-              | Diner style
-          li
-            a href="#"
-              | TOP points
-              strong 5
-          li
-            a href=invite_friends_path
-              | Invite friends
+      = render 'shared/user_sidebar'
     #dashboard.span10.page_content
       h1
-        | Tell your friends about
+        = t('user_profile.invite_friends.tell_friends')
         a href="#"
       .row
         .invite_left
           #share_a_link.invite_block
-            h4 Share a link
+            h4
+              = t('user_profile.invite_friends.share_link')
             input name="share_a_link" type="text" value="http://reserv.com.ua/hpdzh"
               button.copy
-              | Copy
+                = t('user_profile.invite_friends.copy')
               .clear
           #email_your_friends.invite_block
-            form
-              h4 Email your friends
-              textarea name="emails" placeholder="john@smith.com, valera@yandex.ru..."
-              textarea name="message"
-              input type="submit" value="Send email"
+            = form_tag send_email_invitation_path, method: 'post' do
+              h4
+                = t('user_profile.invite_friends.email_friends')
+              = text_area_tag "emails", nil, placeholder: "john@smith.com, valera@yandex.ru..."
+              = text_area_tag "message"
+              = submit_tag "Send email"
         #invite_friends
           h4
-            | Invite friends from
-            a.invite_fb.active href="#"
-            | or
-            a.invite_vk href="#"
+            = t('user_profile.invite_friends.inv_friends')
+            '
+            a.invite_fb.active href="facebook.com"
+              = t('user_profile.invite_friends.facebook')
+            '
+            = t('user_profile.invite_friends.or')
+            '
+            a.invite_vk href="vk.com"
+              = t('user_profile.invite_friends.vkontakte')
           form
             ul#friends_list
               li.checked
@@ -66,34 +40,5 @@
                   input checked="" type="checkbox"
                     img height="40" src="#" width="40"
                       | Владислав Чечёткин
-              li.checked
-                label.checkbox
-                  input checked="" type="checkbox"
-                    img height="40" src="#" width="40"
-                      | Juliana Osovska
-              li.checked
-                label.checkbox
-                  input checked="" type="checkbox"
-                    img height="40" src="#" width="40"
-                      | Ilia Kenigshtein
-              li
-                label.checkbox
-                  input type="checkbox"
-                    img height="40" src="#" width="40"
-                      | Виталия Курносова
-              li
-                label.checkbox
-                  input type="checkbox"
-                    img height="40" src="#" width="40"
-                      | Юлия Мельник
-              li
-                label.checkbox
-                  input type="checkbox"
-                    img height="40" src="#" width="40"
-                      | Денис Никоненко
-              li
-                label.checkbox
-                  input type="checkbox"
-                    img height="40" src="#" width="40"
-                      | Руслан Секретный
             input type="submit" value="Send invitation"
+

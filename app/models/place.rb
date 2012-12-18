@@ -1,8 +1,8 @@
 #coding: utf-8
 class Place < ActiveRecord::Base
 
-  attr_accessible :phone, :is_visible, :user_id, :url, :location_attributes,
-                  :avg_bill, :feature_item_ids, :place_administrators_attributes, :name, :description
+  attr_accessible :phone, :is_visible, :user_id, :url, :location_attributes, :week_days_attributes,
+                  :avg_bill, :feature_item_ids, :place_administrators_attributes, :name, :description, :week_days_ids
 
   belongs_to :user
 
@@ -21,6 +21,8 @@ class Place < ActiveRecord::Base
   has_many :notes
   has_many :events
   has_many :reviews, :as => :reviewable, :dependent => :destroy
+  has_many :week_days
+
 
   enumerated_attribute :bill, :id_attribute => :avg_bill, :class => ::BillType
 
@@ -34,7 +36,7 @@ class Place < ActiveRecord::Base
 
   has_one :location, :as => :locationable, :dependent => :destroy, :autosave => true
 
-  accepts_nested_attributes_for :location, :reviews, :place_administrators, :allow_destroy => true, :reject_if => :all_blank
+  accepts_nested_attributes_for :location, :reviews, :place_administrators, :week_days, :allow_destroy => true, :reject_if => :all_blank
 
   translates :name, :description
 
@@ -53,20 +55,20 @@ class Place < ActiveRecord::Base
   #PER_PAGE = 25
 
 
-  settings Utils::Elastic::ANALYZERS do
+  #settings Utils::Elastic::ANALYZERS do
     mapping do
       indexes :id, type: 'integer'
       ::I18n.available_locales.each do |loc|
         indexes "name_#{loc}", :type => "multi_field",
                 :fields => {
-                    "name_#{loc}" => {:type => 'string', :analyzer => "analyzer_#{loc}", :boost => 100},
+                    "name_#{loc}" => {:type => 'string', :analyzer => "standard", :boost => 100},
                     "exact" => {:type => 'string', :index => "not_analyzed"}
                 }
-        indexes "description_#{loc}", boost: 5, analyzer: "analyzer_#{loc}"
+        indexes "description_#{loc}", boost: 5, analyzer: "standard"
       end
       indexes :lat_lng, type: 'geo_point'
     end
-  end
+  #end
 
   def self.paginate(options = {})
     includes(:kitchens, :categories, :place_feature_items, :location).paginate(:page => options[:page], :per_page => options[:per_page]).to_a
@@ -77,30 +79,32 @@ class Place < ActiveRecord::Base
     filters = []
 
     if options[:kitchen]
-      filters << {query: {terms: {kitchen_ids: options[:kitchen]} }}#{query: "kitchen_ids:#{options[:kitchen].join(' OR ')}"}}}
+      filters << {query: {terms: {kitchen_ids: options[:kitchen].split(',')} }}#{query: "kitchen_ids:#{options[:kitchen].join(' OR ')}"}}}
     end
 
     if options[:category]
-      filters << {query: {terms: {category_ids: options[:category]} }}
+      filters << {query: {terms: {category_ids: options[:category].split(',')} }}
     end
 
-    if options[:avg_bill]
-      filters << {query: {terms: {category_ids: options[:category]} }}
-    end
-
-    if options[:city]
-      filters << {query: {flt: {like_text: options[:city], fields: I18n.available_locales.map { |l| "city_#{l}" }} }}
+    if options[:price]
+      filters << {query: {terms: {avg_bill: options[:price].split(',')} }}
     end
 
     if filters.empty? && options.empty?
-      self.best_places(20)
+      self.best_places(4)
     else
-      tire.search(page: options[:page], per_page: options[:per_page] || 36) do
+
+      if options[:city]
+        filters << {query: {flt: {like_text: options[:city], fields: I18n.available_locales.map { |l| "city_#{l}" }} }}
+      end
+
+      tire.search(page: options[:page], per_page: options[:per_page] || 4) do
         if options[:title]
           fields = I18n.available_locales.map { |l| "name_#{l}" }.concat(Location.all_translated_attribute_names)
           query do
             flt options[:title].lucene_escape, :fields => fields, :min_similarity => 0.5
           end
+          sort { by "overall_mark", "desc" }
         end
         filter(:and, :filters => filters)
       end
@@ -120,7 +124,6 @@ class Place < ActiveRecord::Base
           flt options[:city].lucene_escape, :fields => I18n.available_locales.map { |l| "city_#{l}" }, :min_similarity => 0.5
         end
       end
-      puts to_curl
     end
   end
 
@@ -133,7 +136,7 @@ class Place < ActiveRecord::Base
     attrs = [:id, :slug, :avg_bill, :url]
     related_ids = [:kitchen_ids, :category_ids, :place_feature_item_ids, :review_ids
     ]
-    methods = %w(lat_lng marks overall_mark)
+    methods = %w(lat_lng marks overall_mark avg_bill_title)
 
     Jbuilder.encode do |json|
       json.(self, *self.class.all_translated_attribute_names)
@@ -155,8 +158,14 @@ class Place < ActiveRecord::Base
         json.thumb_url image.url(:thumb)
         json.is_main image.is_main
       end
-      json.location_city location.try(:city)
-      json.location_city location.try(:street)
+
+      json.place_image do |json|
+        json.id place_image.id
+        json.slider_url place_image.url(:slider)
+        json.show_place_image place_image.url(:place_show)
+        json.thumb_url place_image.url(:thumb)
+
+      end if place_image
       json.house_number location.try(:house_number)
     end
   end
@@ -187,8 +196,39 @@ class Place < ActiveRecord::Base
   end
 
   def avg_bill_title
-    BillType.find(avg_bill).try(:title)
+    BillType.find(avg_bill).title if avg_bill
   end
+
+  def self.for_mustache(place)
+    res = {}
+    res[:id] = place.id
+    res[:slug] = place.slug || place.id
+    res[:name] = place["name_#{I18n.locale}"]
+    res[:image_path] = place.place_image.try(:slider_url)
+    res[:review_count] = place.review_ids.try(:count)
+    res[:description] = place["description_#{I18n.locale}"]
+    res[:kitchens] = place["kitchens_names_#{I18n.locale}"]
+    res[:categories] = place["categories_names_#{I18n.locale}"]
+    res[:place_feature_items] = place["place_feature_items_names_#{I18n.locale}"]
+    res[:city] = place["city_#{I18n.locale}"]
+    res[:street] = place["street_#{I18n.locale}"]
+    res[:county] = place["county_#{I18n.locale}"]
+    res[:house_number] = place["house_number"]
+    res[:avg_bill_title] = place["avg_bill_title"]
+    res[:overall_mark] = place["overall_mark"]
+    res[:marks] = place["marks"]
+    res[:lat_lng] = place["lat_lng"]
+    res
+  end
+
+  def self.for_autocomplite(place)
+    res[:id] = place.id
+    res[:slug] = place.slug || place.id
+    res[:name] = place["name_#{I18n.locale}"]
+    res[:street] = place["street_#{I18n.locale}"]
+    res[:county] = place["county_#{I18n.locale}"]
+  end
+
 end
 # == Schema Information
 #

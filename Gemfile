@@ -1,10 +1,9 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.9'
 gem 'mysql2'
 gem 'redis'
 gem 'slim-rails'
-gem 'styx'
 
 
 gem 'globalize3', :git => 'git://github.com/leschenko/globalize3.git', :ref => '586ccbd'
@@ -24,7 +23,7 @@ gem 'ffaker'
 
 gem 'geokit'
 gem 'geokit-rails3'
-gem 'geokit-nominatim'#, :git => 'git://github.com/sobakasu/geokit-nominatim.git'
+gem 'geokit-nominatim'
 gem 'tire'
 gem 'figaro'
 
@@ -39,9 +38,9 @@ gem 'omniauth-openid'
 gem 'omniauth-google-oauth2'
 gem 'cancan'
 gem 'fb_graph'
+gem 'vkontakte_api', '~> 1.0'
 
-#gem 'kaminari'
-gem 'unicode_utils' # For unicode-strings downcase method o_O !!!
+gem 'unicode_utils'
 
 group :development do
   if File.exists?('/var/www/top_club/developers/.local_gems')

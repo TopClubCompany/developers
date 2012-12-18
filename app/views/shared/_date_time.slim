@@ -11,7 +11,7 @@
               - i = '00'
             - else
               - i = '12'
-          - if i == '12' and j == '00'
+          - if i.to_s == @time[:h] and j == @time[:m]
             option value="#{i}:#{j}" selected="selected" #{i}:#{j} #{k}
           - else
             option value="#{i}:#{j} #{k}" #{i}:#{j} #{k}
@@ -24,7 +24,7 @@
       - for j in ['00', '30']
         - if i == 0 
           - i = '00'
-        - if i == 12 and j == '00'
+        - if i.to_s == @time[:h] and j == @time[:m]
           option value="#{i}:#{j}" selected="selected" #{i}:#{j}
         - else
           option value="#{i}:#{j}" #{i}:#{j}

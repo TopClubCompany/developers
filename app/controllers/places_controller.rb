@@ -11,7 +11,10 @@ class PlacesController < ApplicationController
     end
   end
 
-
+  def set_location
+    session[:city] = params[:location_slug]
+    redirect_to  :back
+  end
 
 
 end
