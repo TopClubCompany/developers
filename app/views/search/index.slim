@@ -4,13 +4,8 @@
       #search_form
         h1= I18n.t('search.main_text', count: Place.visible.count, city: current_city)
         form
-          input name="title_or_location" placeholder="title or location" type="text"
-          /= render :partial => 'shared/date_time'
-          = render :partial => 'shared/date_time', :locals => { :time => {:h => (@time[:h] || 12), :m => (@time[:m] || '00')} }
-          /label for="reserve_date"
-          /input name="reserve_date" type="text" value="11/07/2012"
-          /label for="reserve_time"
-          /input name="reserve_time" type="text" value="7:00 PM"
+          input name="title" placeholder="title or location" type="text"
+          = render :partial => 'shared/search_form', :locals => { :time => {:h => (@time[:h] || 12), :m => (@time[:m] || '00')} }
           label for="number_of_people"
             nobr= I18n.t('search.number_of_people')
           select name="number_of_people" type="text"

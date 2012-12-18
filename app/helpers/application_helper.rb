@@ -232,4 +232,46 @@ module ApplicationHelper
     session['city'] || session[:city] || 'kyiv'
   end
 
+  def time_with_locale(time)
+    if I18n.locale.to_s == "en"
+      en_time(time)
+    else
+      other_time(time)
+    end
+  end
+
+  def other_time time
+    times = []
+    (0...24).each do |minutes|
+      %w(00 30).each do |_time|
+        minutes = '00' if minutes == 0
+        key = "#{minutes}:#{_time}"
+        if minutes.to_s == time[:h] and _time == time[:m]
+          times.push({key => true})
+        else
+          times.push({key => false})
+        end
+      end
+    end
+    times
+  end
+
+  def en_time time
+    times = []
+    %w(AM PM).each do |_time|
+      (0...12).each do |hour|
+        %w(00 30).each do |minute|
+          hour = (_time == 'AM' ? '00' : '12') if hour == 0
+          key = "#{hour}:#{minute} #{_time}"
+          if hour.to_s == time[:h] and minute == time[:m]
+            times.push({key => true})
+          else
+            times.push({key => false})
+          end
+        end
+      end
+    end
+    times
+  end
+
 end

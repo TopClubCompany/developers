@@ -1,20 +1,6 @@
 #index.content
   .row
     .span8 id="teaser"
-      javascript:
-        $(document).ready(function() {
-          projekktor('#video-container', {
-            controls: true,
-            plugins: ['display', 'controlbar'],
-            plugin_controlbar: {
-               controlsDisableFade: true,
-            }
-          }, function(player) {
-            player.addListener('start', function(data) {
-              $('#teaser .video_player h5').css('display', 'none');
-            });
-          });
-        });
       .video_player
         h5 How it works?
         video#video-container class="projekktor" width="620" height="350" title="How it works?" poster="/img/video/dummy.jpg" controls=true

@@ -1,0 +1,10 @@
+label for="reserve_date"
+input class='dateFormatNeeded' name="reserve_date" type="text" value=Time.now.strftime("%d/%m/%Y")
+label for="reserve_time"
+select name="reserve_time"
+  - time_with_locale(@time).each do |time_el|
+    - time_el.each do |k, v|
+      - if v
+        option value=k selected="selected" #{k}
+      - else
+        option value=k #{k}
