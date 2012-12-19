@@ -1,42 +1,47 @@
+class Pagination
+  constructor: (total_elements, per_page = 4, @max_visible = 5, @elSelector = '#list_grid_view .paginate') ->
+    @$el = $(elSelector)
+    @total_pages = Math.ceil (total_elements / per_page)
+    @bindListener()
+    @goTo 1
+    @
+
+  bindListener: () ->
+    $("#{@elSelector} a").on 'click', (e) =>      
+      e.preventDefault()
+      unless $(e.target).hasClass('current')
+        pageNum = $(e.target).attr('href').slice(1)
+        filter.getPage pageNum
+        @goTo pageNum
+    @
+
+  goTo: (page) ->
+    @$el.html('')
+    @$el.append "<a href='##{page - 1 }'>Prev</a>" if page > 1 and @total_pages > @max_visible
+    for i in [page..Math.min(page + @max_visible - 1, @total_pages)]
+      @$el.append "<a href='##{i}'>#{i}</a>"
+    if @max_visible < @total_pages
+      @$el.append "<a href='##{page + 1}'>next</a>"
+    
+    $("#{@elSelector} a[href=##{page}]").addClass('current').siblings().removeClass('current')
+    @
+    
+
+
 class PlacesCollection
-  constructor: ( blocksThatExist = [], @page = 1 ) ->
+  constructor: ( blocksThatExist = [], page = 1 ) ->
+    new Pagination(blocksThatExist.length).goTo(page)
     @places = []
     @ids = []
     @createMap()
     @markers = []
-    console.log "blocksThatExist", blocksThatExist
     for block in blocksThatExist
-
       obj = 
         id: $(block).data('id')
         lat: $(block).data('lat')
         lng: $(block).data('lng')
       @ids.push obj.id
       @addMarker obj
-    ###
-      name: "Sawayn-Lakin"
-      image_path: "/uploads/place_image/27/slider_9.jpg"
-      city: "Киев"
-      street: "Михаила Грушевского улица" 
-      house_number: "9а"      
-      kitchens: "Английская, Чешская"
-      avg_bill_title: "> $61"
-      categories: "суши, пиццерии"
-      description: "Vero provident est et porro nobis velit."      
-      id: "12"
-      lat_lng: "50.4454,30.544"
-      lat: "50.4454"
-      lng: "30.544"
-      marks: 
-        ambiance:  {avg: X, sum: Y}
-        food:      {avg: X, sum: Y}
-        pricing:   {avg: X, sum: Y}
-        service:   {avg: X, sum: Y}      
-      overall_mark: 3.4
-      place_feature_items: ""
-      slug: "sawayn-lakin"      
-    ###
-    
    
   createMap: () ->
     console.log 'inited GMap'
@@ -48,8 +53,8 @@ class PlacesCollection
       mapTypeId: google.maps.MapTypeId.ROADMAP
     @map = new google.maps.Map(document.getElementById("map_places"), mapOptions)
 
-  useNewData: (json) ->
-    total = json.total
+  useNewData: (json, page) ->
+    new Pagination(json.total).goTo(page)
     placesData = json.result
     newIds = _.pluck(placesData, 'id')
     needToAddIds = _.difference newIds, @ids
@@ -186,21 +191,35 @@ class FilterInput
   constructor: (needToShowMap = no)->
     if needToShowMap 
       blocksThatExist = $("#map_details_wrapper .place")
-      page = @getPage()
+      page = @getPageNum()
       @places = new PlacesCollection(blocksThatExist, page) if $("#map_places").length > 0
     @checkIfNeeded()
     @bindChangeListener()
-    @give_more() if $(".more").length > 0
+    @give_more() if $(".more").length > 0    
 
-  getPage: () ->
-    page = window.location.search.match( /page=\d*/) || 1
+  getPageNum: () ->
+    page = window.location.search.match( /page=\d*/)?[0].slice(5) || 1
     # if $(".paginate .current").attr('href') isnt "##{page}" or $(".paginate .current").length is 0
       # $(".paginate a[href=##{page}]").addClass('current')
-        
+
+  getPage: (pageTo) ->
+    baseURL = window.location.pathname
+    oldQuery = window.location.search
+    amp = if oldQuery is '' then '' else '&'
+    if (window.location.search.match(/page=(\d+)/)) 
+      newQuery = oldQuery.replace(/page=\d+/, "page=#{pageTo}")          
+    else
+      newQuery = oldQuery + amp + "page=#{pageTo}"          
+    
+    newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '/?')
+    window.history.replaceState('',null, newUrl)
+    askAJAX.call(@, newQuery, @places, pageTo)      
 
   checkIfNeeded: () ->
     querystring = window.location.search
     needToCheck = $.deparam querystring.slice(1)
+    for filter, values of needToCheck
+      $("a.more[data-type='#{filter}']").click() if $("#refine[data-type='#{filter}']").length < values.split(',').length
     for filter, values of needToCheck
       for value in values.split(',')
         $("#refine input[value='#{value}'][data-type='#{filter}']").click() unless $("#refine input[value='#{value}'][data-type='#{filter}']").is(':checked')
@@ -215,37 +234,22 @@ class FilterInput
         result[type].push(parseInt( $(this).val() ) )if $(this).is(':checked')
       )
       newQuery = ''
+      startPage = 1
       for own key, value of result
         if value.length > 0
           _.reduce value, (memo, id) ->
             memo + ',' + id
           amp = if newQuery is '' then '' else '&'
           newQuery = newQuery + amp + "#{key}=#{value}"
-
+          
+      newQuery = newQuery + amp + "page=#{startPage}"          
       baseURL =  window.location.pathname
       newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '/?')
+
       window.history.replaceState('',null, newUrl)
-      askAJAX.call(@, newQuery, @places)      
+      askAJAX.call(@, newQuery, @places, startPage) 
 
-    $('#list_grid_view .paginate a').on 'click', (e) =>      
-      e.preventDefault()
-      unless $(e.target).hasClass('current')
-        $(e.target).addClass('current').siblings().removeClass('current')
-        baseURL =  window.location.pathname
-        oldQuery = window.location.search
-        pageTo = $(e.target).attr('href').slice(1)
-        amp = if oldQuery is '' then '' else '&'
-        if (window.location.search.match(/page=(\d+)/)) 
-          console.log 'modified old one'
-          newQuery = oldQuery.replace(/page=\d+/, "page=#{pageTo}")          
-        else
-          console.log 'added new'
-          newQuery = oldQuery + amp + "page=#{pageTo}"          
-        
-        newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '/?')
-        window.history.replaceState('',null, newUrl)
-        askAJAX.call(@, newQuery, @places)      
-
+    
 
     ###
     $("select[name=reserve_time]").on 'change', =>
@@ -261,7 +265,7 @@ class FilterInput
       console.log headlineText
     ###
 
-  askAJAX = (serializedData, placesObj) =>
+  askAJAX = (serializedData, placesObj, page) =>
     $.ajaxSetup
        dataType: "json",
        url: "/search/",
@@ -271,7 +275,7 @@ class FilterInput
 #          console.log xhr, error
        success: (json) ->
           console.log json
-          placesObj.useNewData(json)
+          placesObj.useNewData(json, page)
        beforeSend: () ->
          $.noop()
 #        sending ajax request, can do animation here'
@@ -302,5 +306,5 @@ class FilterInput
 
 $ ->
   if $('#refine').length isnt 0
-    new FilterInput yes
+    window.filter = new FilterInput yes
 
