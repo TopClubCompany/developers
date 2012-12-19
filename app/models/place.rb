@@ -78,15 +78,15 @@ class Place < ActiveRecord::Base
   def self.search(options = {})
     filters = []
 
-    if options[:kitchen]
+    if options[:kitchen].present?
       filters << {query: {terms: {kitchen_ids: options[:kitchen].split(',')} }}#{query: "kitchen_ids:#{options[:kitchen].join(' OR ')}"}}}
     end
 
-    if options[:category]
+    if options[:category].present?
       filters << {query: {terms: {category_ids: options[:category].split(',')} }}
     end
 
-    if options[:price]
+    if options[:price].present?
       filters << {query: {terms: {avg_bill: options[:price].split(',')} }}
     end
 
@@ -94,17 +94,18 @@ class Place < ActiveRecord::Base
       self.best_places(4, options)
     else
 
-      if options[:city]
+      if options[:city].present?
         filters << {query: {flt: {like_text: options[:city], fields: I18n.available_locales.map { |l| "city_#{l}" }} }}
       end
 
       tire.search(page: options[:page], per_page: options[:per_page] || 4) do
-        if options[:title]
+        if options[:title].present?
           fields = I18n.available_locales.map { |l| "name_#{l}" }.concat(Location.all_translated_attribute_names)
           query do
-            flt options[:title].lucene_escape, :fields => fields, :min_similarity => 0.5
+            flt options[:title].lucene_escape, :fields => fields, :min_similarity => 0
           end
           sort { by "overall_mark", "desc" }
+          puts to_curl
         end
         filter(:and, :filters => filters)
       end
@@ -123,6 +124,7 @@ class Place < ActiveRecord::Base
         query do
           flt options[:city].lucene_escape, :fields => I18n.available_locales.map { |l| "city_#{l}" }, :min_similarity => 0.5
         end
+        puts to_curl
       end
     end
   end
@@ -222,11 +224,13 @@ class Place < ActiveRecord::Base
   end
 
   def self.for_autocomplite(place)
+    res = {}
     res[:id] = place.id
     res[:slug] = place.slug || place.id
     res[:name] = place["name_#{I18n.locale}"]
     res[:street] = place["street_#{I18n.locale}"]
     res[:county] = place["county_#{I18n.locale}"]
+    res
   end
 
 end

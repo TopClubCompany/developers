@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_locale
   before_filter :current_city
+  before_filter :set_time
 
   protected
 
@@ -17,4 +18,8 @@ class ApplicationController < ActionController::Base
         I18n.locale = I18n.default_locale
       end
     end
+
+  def set_time
+    @time = {:h => '10', :m => '30'}
+  end
 end
