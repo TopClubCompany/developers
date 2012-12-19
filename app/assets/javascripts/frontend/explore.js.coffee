@@ -1,5 +1,6 @@
 #$(document).ready ->
  # $('.scroll-pane').jScrollPane();
+### 
 $(window).scroll ->
   diffHeight = $('#wrapper').height() - $('#listing').height();
   if $(window).scrollTop() < 229
@@ -15,6 +16,7 @@ $(window).scroll ->
     $('#mapcontainer').removeClass('fixed');
     $('#mapcontainer').addClass('bottom');
     $('#mapcontainer').css('bottom','-'+heightNew+'px');
+###
 
 $ ->
   class Projector

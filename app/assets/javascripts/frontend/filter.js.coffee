@@ -257,13 +257,13 @@ class FilterInput
       $('#map_details_wrapper').add('#list_grid_view').find('.place').each (index, el) ->
         el.find('.timing a').each (index, el) ->
           console.log time
-  
+    ###
     $("select[name=number_of_people]").on 'change', =>          
       number = $(this).val()
       console.log headline = $('#listing > h3:first-child')
       headlineText = $('#listing > h3:first-child').html()
       console.log headlineText
-    ###
+    
 
   askAJAX = (serializedData, placesObj, page) =>
     $.ajaxSetup
