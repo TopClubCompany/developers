@@ -102,9 +102,10 @@ class Place < ActiveRecord::Base
         if options[:title].present?
           fields = I18n.available_locales.map { |l| "name_#{l}" }.concat(Location.all_translated_attribute_names)
           query do
-            flt options[:title].lucene_escape, :fields => fields, :min_similarity => 0.5
+            flt options[:title].lucene_escape, :fields => fields, :min_similarity => 0
           end
           sort { by "overall_mark", "desc" }
+          puts to_curl
         end
         filter(:and, :filters => filters)
       end
@@ -123,6 +124,7 @@ class Place < ActiveRecord::Base
         query do
           flt options[:city].lucene_escape, :fields => I18n.available_locales.map { |l| "city_#{l}" }, :min_similarity => 0.5
         end
+        puts to_curl
       end
     end
   end
@@ -222,11 +224,13 @@ class Place < ActiveRecord::Base
   end
 
   def self.for_autocomplite(place)
+    res = {}
     res[:id] = place.id
     res[:slug] = place.slug || place.id
     res[:name] = place["name_#{I18n.locale}"]
     res[:street] = place["street_#{I18n.locale}"]
     res[:county] = place["county_#{I18n.locale}"]
+    res
   end
 
 end
