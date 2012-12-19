@@ -23,48 +23,13 @@
       .row
         .span12
           ul id="promo_tabs"
-            li class="active" <a href="#best">Best restaurants</a>
-            li <a href="#new">New restaurants</a>
-            li <a href="#available">Available tonight</a>
+            li class="active" 
+              a href="#best" Best restaurants
+            li 
+              a href="#new" New restaurants
+            li 
+              a href="#available" Available tonight
             .clear
-          javascript:
-            $(document).ready(function() {
-              function in_array(element, arr) {
-                for (i in arr) {
-                  if (arr[i] == element)
-                    return true;
-                }
-                return false;
-              }
-              var hash = location.hash.replace(/#?(\w+)/, "$1");
-              $('#promo_places div.tab_content').css('display', 'none');
-              if (hash.length > 0) {
-                aviabled_hases = [];
-                $('#promo_places div.tab_content').each(function(index) {
-                  aviabled_hases.push($('#promo_places div.tab_content').eq(index).attr('id'));
-                });
-                if (in_array(hash, aviabled_hases)) {
-                  $('#promo_places #' + hash).css('display', 'block');
-                  for (i in aviabled_hases) {
-                    if (aviabled_hases[i] == hash) {
-                      $('#promo_places ul#promo_tabs li').removeClass('active');
-                      $('#promo_places ul#promo_tabs li').eq(i).addClass('active');
-                    }
-                  }
-                } else {
-                  $('#promo_places div.tab_content').eq(0).css('display', 'block');
-                }
-              } else {
-                $('#promo_places div.tab_content').eq(0).css('display', 'block');
-              }
-              $('#promo_places ul#promo_tabs li').click(function() {
-                var index = $('#promo_places ul#promo_tabs li').index(this);
-                $('#promo_places ul#promo_tabs li').removeClass('active');
-                $('#promo_places ul#promo_tabs li').eq(index).addClass('active');
-                $('#promo_places div.tab_content').css('display', 'none');
-                $('#promo_places div.tab_content').eq(index).css('display', 'block');
-              });
-            })
           #best.tab_content
             - @places.each_with_index do |place, i|
               .place style="#{'margin-right: 0' if ((i + 1)%3 == 0)}"
@@ -73,6 +38,7 @@
                   img height="100" src="#{image if image}" width="140"
                 h4
                   a href="#"
+                    = place["name_#{I18n.locale}"]
                 .rating
                   .stars
                     .stars_overlay
@@ -98,6 +64,7 @@
                   img height="100" src="#{image if image}" width="140"
                 h4
                   a href="#"
+                    = place["name_#{I18n.locale}"]
                 .rating
                   .stars
                     .stars_overlay
@@ -115,7 +82,7 @@
                     = avg_bill_title(place.avg_bill)
                 .clear
             a.all href="#" Browse all ›
-          #available.tab_content
+          #available.tab_content 
             - @places.each_with_index do |place, i|
               .place style="#{'margin-right: 0' if ((i + 1)%3 == 0)}"
                 a href=place_path(place)
@@ -123,6 +90,7 @@
                   img height="100" src="#{image if image}" width="140"
                 h4
                   a href="#"
+                    = place["name_#{I18n.locale}"]
                 .rating
                   .stars
                     .stars_overlay
