@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121220123459) do
+ActiveRecord::Schema.define(:version => 20121220151632) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -85,6 +85,13 @@ ActiveRecord::Schema.define(:version => 20121220123459) do
   add_index "assets", ["assetable_type", "assetable_id"], :name => "index_assets_on_assetable_type_and_assetable_id"
   add_index "assets", ["assetable_type", "type", "assetable_id"], :name => "index_assets_on_assetable_type_and_type_and_assetable_id"
   add_index "assets", ["user_id"], :name => "index_assets_on_user_id"
+
+  create_table "autocompletes", :force => true do |t|
+    t.string   "term"
+    t.integer  "freq"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "categories", :force => true do |t|
     t.string   "slug",                         :null => false

@@ -2,21 +2,29 @@
 class AutocompleteApp
   def self.call(env)
     params = Rack::Request.new(env).params
-    session = env['rack.session']
+    if params['q'].present?
+      entries = Autocomplete.search(params['q'])
 
-    params['q'] = '' unless params['q']
-    options = {}
+      if entries.empty?
+        entries = Autocomplete.search(params['q'].tr_lang)
+      end
 
-    #options[:order] = "overall_mark"
-    #options[:sort_mode] = "desc"
-    options[:title] = params['q']
-    options[:per_page] = params['per_page'] if params['per_page'].present?
-    options[:city] = (session['city'] || 'kyiv')
+      if entries.size < 5
+        words = params['q'].split(/\s+/)
+        words.each_with_index do |w, i|
+          next if i.zero?
+          w_entries = Autocomplete.search(w)
+          w_entries.each do |w_e|
+            entries << words.dup.tap{|ws| ws[i] = w_e }.join(' ')
+          end
+        end
+      end
 
-    result = Place.search(options)
-
-    [200, {"Content-Type" => "application/json"}, result.map{|e| Place.for_autocomplite(e)}.to_json]
-
+      res = {:suggestions => entries, :query => params['q']}
+      [200, {"Content-Type" => "application/json"}, res.to_json]
+    else
+      [404, {"Content-Type" => "text/html"}, ["Not Found"]]
+    end
   end
 
 
