@@ -2,7 +2,8 @@
 class Place < ActiveRecord::Base
 
   attr_accessible :phone, :is_visible, :user_id, :url, :location_attributes, :week_days_attributes,
-                  :avg_bill, :feature_item_ids, :place_administrators_attributes, :name, :description, :week_days_ids
+                  :avg_bill, :feature_item_ids, :place_administrators_attributes, :name, :description,
+                  :week_days_ids, :day_discount_schedules_attributes
 
   belongs_to :user
 
@@ -23,11 +24,11 @@ class Place < ActiveRecord::Base
   has_many :reviews, :as => :reviewable, :dependent => :destroy
   has_many :week_days
 
+  has_many :day_discount_schedules, :dependent => :destroy
+
 
   enumerated_attribute :bill, :id_attribute => :avg_bill, :class => ::BillType
 
-  #belongs_to :category
-  #belongs_to :kitchen
 
   has_one :place_image, :as => :assetable, :dependent => :destroy, :conditions => {:is_main => true}
   has_many :place_images, :as => :assetable, :dependent => :destroy, :conditions => {:is_main => false}
@@ -36,39 +37,37 @@ class Place < ActiveRecord::Base
 
   has_one :location, :as => :locationable, :dependent => :destroy, :autosave => true
 
-  accepts_nested_attributes_for :location, :reviews, :place_administrators, :week_days, :allow_destroy => true, :reject_if => :all_blank
+  accepts_nested_attributes_for :location, :reviews, :place_administrators, :week_days, :day_discount_schedules,
+                                :allow_destroy => true, :reject_if => :all_blank
 
   translates :name, :description
 
   fileuploads :place_image, :place_images
 
-  include Tire::Model::Search
-  include Tire::Model::Callbacks
+  elasticsearch
 
   include Utils::Models::Base
+  include Utils::Models::Elastic
   include Utils::Models::Translations
   include Utils::Models::AdminAdds
 
-
   as_token_ids :category, :kitchen
 
-  #PER_PAGE = 25
 
-
-  #settings Utils::Elastic::ANALYZERS do
+  settings Utils::Elastic::ANALYZERS do
     mapping do
       indexes :id, type: 'integer'
       ::I18n.available_locales.each do |loc|
         indexes "name_#{loc}", :type => "multi_field",
                 :fields => {
-                    "name_#{loc}" => {:type => 'string', :analyzer => "standard", :boost => 100},
+                    "name_#{loc}" => {:type => 'string', :analyzer => "analyzer_#{loc}", :boost => 100},
                     "exact" => {:type => 'string', :index => "not_analyzed"}
                 }
-        indexes "description_#{loc}", boost: 5, analyzer: "standard"
+        indexes "description_#{loc}", boost: 5, analyzer: "analyzer_#{loc}"
       end
       indexes :lat_lng, type: 'geo_point'
     end
-  #end
+  end
 
   def self.paginate(options = {})
     includes(:kitchens, :categories, :place_feature_items, :location).paginate(:page => options[:page], :per_page => options[:per_page]).to_a
@@ -102,10 +101,9 @@ class Place < ActiveRecord::Base
         if options[:title].present?
           fields = I18n.available_locales.map { |l| "name_#{l}" }.concat(Location.all_translated_attribute_names)
           query do
-            flt options[:title].lucene_escape, :fields => fields, :min_similarity => 0
+            flt options[:title].lucene_escape, :fields => fields, :min_similarity => 0.5
           end
           sort { by "overall_mark", "desc" }
-          puts to_curl
         end
         filter(:and, :filters => filters)
       end
@@ -124,7 +122,6 @@ class Place < ActiveRecord::Base
         query do
           flt options[:city].lucene_escape, :fields => I18n.available_locales.map { |l| "city_#{l}" }, :min_similarity => 0.5
         end
-        puts to_curl
       end
     end
   end

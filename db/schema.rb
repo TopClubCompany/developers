@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121217015057) do
+ActiveRecord::Schema.define(:version => 20121220151632) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -86,6 +86,13 @@ ActiveRecord::Schema.define(:version => 20121217015057) do
   add_index "assets", ["assetable_type", "type", "assetable_id"], :name => "index_assets_on_assetable_type_and_type_and_assetable_id"
   add_index "assets", ["user_id"], :name => "index_assets_on_user_id"
 
+  create_table "autocompletes", :force => true do |t|
+    t.string   "term"
+    t.integer  "freq"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "categories", :force => true do |t|
     t.string   "slug",                         :null => false
     t.integer  "user_id"
@@ -150,6 +157,26 @@ ActiveRecord::Schema.define(:version => 20121217015057) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
+
+  create_table "day_discount_schedules", :force => true do |t|
+    t.integer  "place_id"
+    t.integer  "day_type_id"
+    t.boolean  "is_running",  :default => true
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "day_discount_schedules", ["day_type_id"], :name => "index_day_discount_schedules_on_day_type_id"
+  add_index "day_discount_schedules", ["place_id"], :name => "index_day_discount_schedules_on_place_id"
+
+  create_table "day_discounts", :force => true do |t|
+    t.integer  "day_discount_schedule_id"
+    t.time     "from_time"
+    t.time     "to_time"
+    t.float    "discount"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
 
   create_table "events", :force => true do |t|
     t.datetime "start_at"

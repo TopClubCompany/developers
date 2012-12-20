@@ -13,6 +13,7 @@
 //=require jquery
 //=require jquery-ui
 //=require jquery_ujs
+
 //= require twitter/bootstrap
 //=require jquery.browser
 //=require jquery.extend
@@ -29,3 +30,4 @@
 //= require handlebars
 
 //=require_tree ./frontend
+//=require jquery.autocomplete

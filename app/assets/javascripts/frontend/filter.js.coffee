@@ -204,7 +204,7 @@ class FilterInput
 
   getPage: (pageTo) ->
     baseURL = window.location.pathname
-    oldQuery = window.location.search
+    oldQuery = window.location.search || ''
     amp = if oldQuery is '' then '' else '&'
     if (window.location.search.match(/page=(\d+)/)) 
       newQuery = oldQuery.replace(/page=\d+/, "page=#{pageTo}")          
@@ -233,7 +233,7 @@ class FilterInput
         result[type] = [] if result[type] is undefined
         result[type].push(parseInt( $(this).val() ) )if $(this).is(':checked')
       )
-      newQuery = ''
+      newQuery = amp = ''      
       startPage = 1
       for own key, value of result
         if value.length > 0
@@ -241,8 +241,9 @@ class FilterInput
             memo + ',' + id
           amp = if newQuery is '' then '' else '&'
           newQuery = newQuery + amp + "#{key}=#{value}"
-          
-      newQuery = newQuery + amp + "page=#{startPage}"          
+      console.log newQuery
+      amp = '&' if newQuery.length > 0
+      newQuery = newQuery + amp + "page=#{startPage}"                
       baseURL =  window.location.pathname
       newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '/?')
 

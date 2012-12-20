@@ -1,8 +1,9 @@
 jQuery ($) ->
   $("form a.add_nested_fields").live "click", ->
     $el = $(this)
+    id = $el.data("blueprint-id")
     assoc = $el.attr("data-association")
-    content = $("#" + assoc + "_fields_blueprint").html()
+    content = $("#" + id).data("blueprint")
     context = ($el.closest(".fields").find("input:first").attr("name") or "").replace(new RegExp("[[a-z]+]$"), "")
     if context
       parent_names = context.match(/[a-z_]+_attributes/g) or []
