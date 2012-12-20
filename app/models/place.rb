@@ -44,18 +44,14 @@ class Place < ActiveRecord::Base
 
   fileuploads :place_image, :place_images
 
-  include Tire::Model::Search
-  include Tire::Model::Callbacks
+  elasticsearch
 
   include Utils::Models::Base
   include Utils::Models::Elastic
   include Utils::Models::Translations
   include Utils::Models::AdminAdds
 
-
   as_token_ids :category, :kitchen
-
-  #PER_PAGE = 25
 
 
   settings Utils::Elastic::ANALYZERS do

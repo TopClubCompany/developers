@@ -5,9 +5,6 @@ class WeekDay < ActiveRecord::Base
 
   translates :title
 
-  include Tire::Model::Search
-  include Tire::Model::Callbacks
-
   include Utils::Models::Base
   include Utils::Models::Translations
   include Utils::Models::AdminAdds
