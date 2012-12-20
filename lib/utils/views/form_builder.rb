@@ -106,6 +106,10 @@ module Utils
         template.render(:partial => "admin/fileupload/#{container_tmpl}", :locals => locals)
       end
 
+      def get_value(attribute_name)
+        @object.send(attribute_name)
+      end
+
       protected
 
       def object_plural
