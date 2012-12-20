@@ -241,8 +241,8 @@ class FilterInput
             memo + ',' + id
           amp = if newQuery is '' then '' else '&'
           newQuery = newQuery + amp + "#{key}=#{value}"
-      
-      console.log 'newQuery is before change', newQuery, amp
+      console.log newQuery
+      amp = '&' if newQuery.length > 0
       newQuery = newQuery + amp + "page=#{startPage}"                
       baseURL =  window.location.pathname
       newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '/?')
