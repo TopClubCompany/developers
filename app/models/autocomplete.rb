@@ -9,7 +9,7 @@ class Autocomplete < ActiveRecord::Base
   def self.search(query)
     return [] if query.blank?
     tire.search :per_page => 30 do
-      query { text :term, query.lucene_escape, 'type' => 'phrase_prefix' }
+      query { match :term, query.lucene_escape, 'type' => 'phrase_prefix' }
       sort { by 'freq', 'desc' }
     end.map(&:term).uniq
   end
