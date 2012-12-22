@@ -7,6 +7,7 @@
 //= require jquery.pjax
 //= require jquery.scrollTo
 //= require chosen
+//= require toggles.min
 //q= require bootstrap-datepicker
 
 //= require bootstrap-datepicker/core

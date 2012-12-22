@@ -2,7 +2,7 @@
   = f.locale_tabs do |l|
     = f.input :name, :locale => l
     = f.input :description, :locale => l, :as => :ckeditor
-
+  .pretty-slide-checkbox-wrap
   = f.input :is_visible, input_html: {class: "pretty-slide-checkbox preload"}
   - input_html = @place.token_data(:categories).update({:"data-token_add_function" => "PlaceForm", :"data-token_delete_function" => "PlaceForm"})
   = f.input :token_category_ids, as: :string, label: Place.han(:categories), input_html: input_html

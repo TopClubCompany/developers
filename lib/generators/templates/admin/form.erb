@@ -18,7 +18,8 @@
        when :string
          "= f.input :#{key}"
        when :boolean
-         "= f.input :#{key}, input_html: {class: 'pretty-slide-checkbox'}"
+         ".pretty-slide-checkbox-wrap
+         = f.input :#{key}, input_html: {class: 'pretty-slide-checkbox'}"        
        when :text
          %Q[= f.input :#{key}, :as => :ckeditor]
        else
