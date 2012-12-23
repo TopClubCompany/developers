@@ -220,7 +220,7 @@ class Place < ActiveRecord::Base
   def self.time_filter(options={})
     fields = []
     if options[:reserve_time].present?
-      time = options[:reserve_time]
+      time = self.en_to_time(options[:reserve_time])
       current_day = DateTime.now.wday+1
       field = "week_day_#{current_day}_start_at"
       fields << {query: {range: {:"#{field}" => {lte: time, boost: 2.0}} }}
@@ -263,8 +263,18 @@ class Place < ActiveRecord::Base
     res
   end
 
+private
 
-
+  def self.en_to_time(time)
+    if time.include?("AM")
+      time.sub!("AM",'')
+    elsif time.include?("PM")
+      time = time.sub!("PM",'').split(":")
+      time[0] = (time[0].to_i + 12).to_s
+      time = time.join(":")
+    end
+    time
+  end
 end
 # == Schema Information
 #
