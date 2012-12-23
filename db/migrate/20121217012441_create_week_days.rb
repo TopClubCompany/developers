@@ -9,6 +9,8 @@ class CreateWeekDays < ActiveRecord::Migration
 
       t.integer :day_type_id, null: false
 
+      t.boolean :is_working, default: false
+
       t.references :place
       t.timestamps
     end
