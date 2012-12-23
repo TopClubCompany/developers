@@ -264,12 +264,12 @@ class Place < ActiveRecord::Base
   end
 
 private
+
   def self.en_to_time(time)
     if time.include?("AM")
       time.sub!("AM",'')
     elsif time.include?("PM")
-      time.sub!("PM",'')
-      time = time.split(":")
+      time = time.sub!("PM",'').split(":")
       time[0] = (time[0].to_i + 12).to_s
       time = time.join(":")
     end
