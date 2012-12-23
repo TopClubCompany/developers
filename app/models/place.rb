@@ -22,7 +22,8 @@ class Place < ActiveRecord::Base
   has_many :notes
   has_many :events
   has_many :reviews, :as => :reviewable, :dependent => :destroy
-  has_many :week_days
+  has_many :week_days, :dependent => :destroy
+  has_many :day_discounts, :through => :week_days
 
 
   enumerated_attribute :bill, :id_attribute => :avg_bill, :class => ::BillType
@@ -63,11 +64,6 @@ class Place < ActiveRecord::Base
                 }
         indexes "description_#{loc}", boost: 5, analyzer: "analyzer_#{loc}"
 
-      end
-      DayType.all.each do |day|
-        %w(start_work end_work).each do |type_of_time|
-          indexes "week_day_#{day.id}_#{type_of_time}", type: 'float'
-        end
       end
       indexes :lat_lng, type: 'geo_point'
     end
@@ -138,7 +134,8 @@ class Place < ActiveRecord::Base
 
   def to_indexed_json
     attrs = [:id, :slug, :avg_bill, :url]
-    related_ids = [:kitchen_ids, :category_ids, :place_feature_item_ids, :review_ids
+    related_ids = [:kitchen_ids, :category_ids, :place_feature_item_ids, :review_ids, :week_day_ids,
+                   :day_discount_ids
     ]
     methods = %w(lat_lng marks overall_mark avg_bill_title)
 
@@ -154,11 +151,6 @@ class Place < ActiveRecord::Base
         end
       end
 
-      self.week_days.each do |week_day|
-        json.set!("week_day_#{week_day.day_type_id}_start_work", week_day.start_at)
-        json.set!("week_day_#{week_day.day_type_id}_end_work", week_day.end_at)
-        json.set!("week_day_#{week_day.day_type_id}_is_working", week_day.is_working)
-      end
 
       json.(self, *related_ids)
 
@@ -212,10 +204,6 @@ class Place < ActiveRecord::Base
   end
 
 
-  def self.work_time_filter
-    time = DateTime.now.strftime("%H:%M")
-
-  end
 
   def self.for_mustache(place)
     res = {}

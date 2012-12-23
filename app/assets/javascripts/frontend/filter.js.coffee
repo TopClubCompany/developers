@@ -88,12 +88,12 @@ class PlacesCollection
       @addBlock place
 
   multipleRemove: (placeIdsToRemove) =>
-    console.log 'lol2', placeIdsToRemove
     for removeId in placeIdsToRemove
       self = @
-      # console.log 'lol2', removeId, @, @markers
-      # console.log 'lol', @markers, _.find(self.markers,{ placeId: removeId })
-      # ?.setMap(null)
+      markerToRemove = _.filter( self.markers, (marker) -> 
+        marker.placeId is removeId) 
+      markerToRemove[0]?.setMap(null)
+  
       $("#place_#{removeId}").add("#list_place_#{removeId}").fadeOut('fast').remove()
   
   addBlock: (place) =>
@@ -169,7 +169,6 @@ class PlacesCollection
     
 
   updateTime: (time) =>
-    console.log time
     #TODO create ajax responder for batch of ids
     #@batchUpdate @ids, time
     $('#map_details_wrapper').find('.place').each (index, el) ->
