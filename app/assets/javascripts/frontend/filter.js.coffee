@@ -2,8 +2,11 @@ class Pagination
   constructor: (total_elements, per_page = 4, @max_visible = 5, @elSelector = '#list_grid_view .paginate') ->
     @$el = $(elSelector)
     @total_pages = Math.ceil (total_elements / per_page)
-    @bindListener()
-    @goTo 1
+    if @total_pages > 1
+      @bindListener()
+      @goTo 1
+    else 
+      @stub()
     @
 
   bindListener: () ->
@@ -14,6 +17,8 @@ class Pagination
         filter.getPage pageNum
         @goTo pageNum
     @
+  stub: () ->
+    @$el.html('<a href="#"> No page stub></a>')
 
   goTo: (page) ->
     @$el.html('')
@@ -245,7 +250,7 @@ class FilterInput
       amp = '&' if newQuery.length > 0
       newQuery = newQuery + amp + "page=#{startPage}"                
       baseURL =  window.location.pathname
-      newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '/?')
+      newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '?')
 
       window.history.replaceState('',null, newUrl)
       askAJAX.call(@, newQuery, @places, startPage) 
