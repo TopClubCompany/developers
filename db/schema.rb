@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121220151632) do
+ActiveRecord::Schema.define(:version => 20121223141559) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -158,25 +158,28 @@ ActiveRecord::Schema.define(:version => 20121220151632) do
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
 
-  create_table "day_discount_schedules", :force => true do |t|
-    t.integer  "place_id"
-    t.integer  "day_type_id"
-    t.boolean  "is_running",  :default => true
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+  create_table "day_discount_translations", :force => true do |t|
+    t.integer  "day_discount_id"
+    t.string   "locale"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
-  add_index "day_discount_schedules", ["day_type_id"], :name => "index_day_discount_schedules_on_day_type_id"
-  add_index "day_discount_schedules", ["place_id"], :name => "index_day_discount_schedules_on_place_id"
+  add_index "day_discount_translations", ["day_discount_id"], :name => "index_1ef7a097c4517b0a80521b1368f9f8b91af33d0d"
+  add_index "day_discount_translations", ["locale"], :name => "index_day_discount_translations_on_locale"
 
   create_table "day_discounts", :force => true do |t|
-    t.integer  "day_discount_schedule_id"
+    t.integer  "week_day_id"
     t.time     "from_time"
     t.time     "to_time"
     t.float    "discount"
-    t.datetime "created_at",               :null => false
-    t.datetime "updated_at",               :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
+
+  add_index "day_discounts", ["week_day_id"], :name => "index_day_discounts_on_week_day_id"
 
   create_table "events", :force => true do |t|
     t.datetime "start_at"
@@ -563,27 +566,18 @@ ActiveRecord::Schema.define(:version => 20121220151632) do
   add_index "users", ["login"], :name => "index_users_on_login"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
-  create_table "week_day_translations", :force => true do |t|
-    t.integer  "week_day_id"
-    t.string   "locale"
-    t.string   "title"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "week_day_translations", ["locale"], :name => "index_week_day_translations_on_locale"
-  add_index "week_day_translations", ["week_day_id"], :name => "index_week_day_translations_on_week_day_id"
-
   create_table "week_days", :force => true do |t|
-    t.float    "start_at"
-    t.float    "end_at"
-    t.float    "start_break_at"
-    t.float    "end_break_at"
+    t.time     "start_at"
+    t.time     "end_at"
+    t.time     "start_break_at"
+    t.time     "end_break_at"
+    t.integer  "day_type_id",    :null => false
     t.integer  "place_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
 
+  add_index "week_days", ["day_type_id"], :name => "index_week_days_on_day_type_id"
   add_index "week_days", ["place_id"], :name => "index_week_days_on_place_id"
 
 end

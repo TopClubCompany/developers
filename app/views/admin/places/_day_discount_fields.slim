@@ -1,0 +1,7 @@
+.discount_fields
+  = f.input :title
+  = f.input :description
+  = f.input :from_time
+  = f.input :to_time
+  = f.input :discount
+  = f.link_to_remove t('admin.delete'), class: 'btn btn-danger btn-mini', id: 'discount-destroy'
