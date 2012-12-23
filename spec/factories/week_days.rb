@@ -21,7 +21,7 @@
 
 FactoryGirl.define do
   factory :week_day do
-    start_at       { "#{rand(7..11)}.#{(10..60).step(5).sample}".to_f }
-    end_at         { "#{rand(15..24)}.#{(10..60).step(5).sample}".to_f }
+    start_at       { "#{rand(7..11)}.#{(10..55).step(5).sample}".to_f }
+    end_at         { "#{rand(15..24)}.#{(10..55).step(5).sample}".to_f }
   end
 end
