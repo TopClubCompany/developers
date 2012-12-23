@@ -1,6 +1,6 @@
 class WeekDay < ActiveRecord::Base
   attr_accessible :title, :start_at, :end_at, :start_break_at, :end_break_at, :place_id,
-                  :day_discounts_attributes, :day_type_id
+                  :day_discounts_attributes, :day_type_id, :is_working
 
   belongs_to :place
 
@@ -32,6 +32,7 @@ end
 #  start_break_at :time
 #  end_break_at   :time
 #  day_type_id    :integer          not null
+#  is_working     :boolean          default(FALSE)
 #  place_id       :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

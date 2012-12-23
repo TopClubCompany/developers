@@ -1,6 +1,7 @@
 .discount_fields
-  = f.input :title
-  = f.input :description
+  = f.locale_tabs do |l|
+    = f.input :title, locale: l
+    = f.input :description, locale: l, :as => :ckeditor
   = f.input :from_time
   = f.input :to_time
   = f.input :discount
