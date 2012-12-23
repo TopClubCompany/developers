@@ -26,16 +26,14 @@ end
 #
 # Table name: week_days
 #
-#  id             :integer          not null, primary key
-#  start_at       :time
-#  end_at         :time
-#  start_break_at :time
-#  end_break_at   :time
-#  day_type_id    :integer          not null
-#  is_working     :boolean          default(FALSE)
-#  place_id       :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  id          :integer          not null, primary key
+#  start_at    :decimal(4, 2)
+#  end_at      :decimal(4, 2)
+#  day_type_id :integer          not null
+#  is_working  :boolean          default(FALSE)
+#  place_id    :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 # Indexes
 #

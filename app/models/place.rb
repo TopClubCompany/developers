@@ -65,8 +65,8 @@ class Place < ActiveRecord::Base
 
       end
       DayType.all.each do |day|
-        %w(start_work end_work start_break_at end_break_at is_working).each do |type_of_time|
-          indexes "week_day_#{day.id}_#{type_of_time}", type: 'date', format: 'hour_minute'
+        %w(start_work end_work).each do |type_of_time|
+          indexes "week_day_#{day.id}_#{type_of_time}", type: 'float'
         end
       end
       indexes :lat_lng, type: 'geo_point'
@@ -157,8 +157,6 @@ class Place < ActiveRecord::Base
       self.week_days.each do |week_day|
         json.set!("week_day_#{week_day.day_type_id}_start_work", week_day.start_at)
         json.set!("week_day_#{week_day.day_type_id}_end_work", week_day.end_at)
-        json.set!("week_day_#{week_day.day_type_id}_start_break_at", week_day.start_break_at)
-        json.set!("week_day_#{week_day.day_type_id}_end_break_at", week_day.end_break_at)
         json.set!("week_day_#{week_day.day_type_id}_is_working", week_day.is_working)
       end
 
