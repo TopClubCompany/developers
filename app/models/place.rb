@@ -66,6 +66,12 @@ class Place < ActiveRecord::Base
 
       end
       indexes :lat_lng, type: 'geo_point'
+      DayType.all.each do |day|
+        %w(start_at end_at).each do |work_time|
+          indexes "week_day_#{day.id}_#{work_time}", type: :date, format: :hour_minute
+        end
+      end
+
     end
   end
 
@@ -88,6 +94,8 @@ class Place < ActiveRecord::Base
     if options[:price].present?
       filters << {query: {terms: {avg_bill: options[:price].split(',')} }}
     end
+
+    filters += self.time_filter(options)
 
     if filters.empty? && options.empty?
       self.best_places(4, options)
@@ -151,6 +159,11 @@ class Place < ActiveRecord::Base
         end
       end
 
+      week_days.each do |week_day|
+        json.set!("week_day_#{week_day.day_type_id}_start_at", week_day.start_at.to_s.split(".").join(":"))
+        json.set!("week_day_#{week_day.day_type_id}_end_at", week_day.end_at.to_s.split(".").join(":"))
+      end
+
 
       json.(self, *related_ids)
 
@@ -200,9 +213,22 @@ class Place < ActiveRecord::Base
   end
 
   def avg_bill_title
-    BillType.find(avg_bill).title if avg_bill
+    bill.try(:title)
   end
 
+
+  def self.time_filter(options={})
+    fields = []
+    if options[:reserve_time].present?
+      time = options[:reserve_time]
+      current_day = DateTime.now.wday+1
+      field = "week_day_#{current_day}_start_at"
+      fields << {query: {range: {:"#{field}" => {lte: time, boost: 2.0}} }}
+      field = "week_day_#{current_day}_end_at"
+      fields << {query: {range: {:"#{field}" => {gte: time, boost: 2.0}} }}
+    end
+    fields
+  end
 
 
   def self.for_mustache(place)
