@@ -1,6 +1,10 @@
 = input_set week_day_title do
-  /= f.input :title, readonly: true
   = f.input :start_at
   = f.input :end_at
-  = f.input :start_break_at
-  = f.input :end_break_at
+  = f.input :day_type_id, as: :hidden
+  .nested_fields
+    = input_set 'discounts' do
+      = f.input :is_working
+      = f.simple_fields_for :day_discounts
+      br
+      = f.link_to_add t('admin.add'), :day_discounts, class: 'btn btn-primary'

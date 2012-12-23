@@ -3,7 +3,7 @@ class Place < ActiveRecord::Base
 
   attr_accessible :phone, :is_visible, :user_id, :url, :location_attributes, :week_days_attributes,
                   :avg_bill, :feature_item_ids, :place_administrators_attributes, :name, :description,
-                  :week_days_ids, :day_discount_schedules_attributes
+                  :week_days_ids
 
   belongs_to :user
 
@@ -24,8 +24,6 @@ class Place < ActiveRecord::Base
   has_many :reviews, :as => :reviewable, :dependent => :destroy
   has_many :week_days
 
-  has_many :day_discount_schedules, :dependent => :destroy
-
 
   enumerated_attribute :bill, :id_attribute => :avg_bill, :class => ::BillType
 
@@ -37,7 +35,7 @@ class Place < ActiveRecord::Base
 
   has_one :location, :as => :locationable, :dependent => :destroy, :autosave => true
 
-  accepts_nested_attributes_for :location, :reviews, :place_administrators, :week_days, :day_discount_schedules,
+  accepts_nested_attributes_for :location, :reviews, :place_administrators, :week_days,
                                 :allow_destroy => true, :reject_if => :all_blank
 
   translates :name, :description
@@ -64,6 +62,12 @@ class Place < ActiveRecord::Base
                     "exact" => {:type => 'string', :index => "not_analyzed"}
                 }
         indexes "description_#{loc}", boost: 5, analyzer: "analyzer_#{loc}"
+
+      end
+      DayType.all.each do |day|
+        %w(start_work end_work).each do |type_of_time|
+          indexes "week_day_#{day.id}_#{type_of_time}", type: 'float'
+        end
       end
       indexes :lat_lng, type: 'geo_point'
     end
@@ -106,6 +110,7 @@ class Place < ActiveRecord::Base
           sort { by "overall_mark", "desc" }
         end
         filter(:and, :filters => filters)
+        puts to_curl
       end
     end
 
@@ -148,6 +153,13 @@ class Place < ActiveRecord::Base
           json.set!("#{a}_names_#{locale}", self.send(a).map{|t| t.send("name_#{locale}")}.join(', '))
         end
       end
+
+      self.week_days.each do |week_day|
+        json.set!("week_day_#{week_day.day_type_id}_start_work", week_day.start_at)
+        json.set!("week_day_#{week_day.day_type_id}_end_work", week_day.end_at)
+        json.set!("week_day_#{week_day.day_type_id}_is_working", week_day.is_working)
+      end
+
       json.(self, *related_ids)
 
       json.images all_place_images do |json, image|
@@ -179,6 +191,7 @@ class Place < ActiveRecord::Base
     near.reject!{ |p| p.id == self.id }
   end
 
+
   def marks
     count_reviews = self.reviews.joins(:marks).
         select("reviews.*, marks.mark_type_id as mark_type_id, sum(marks.value) as sum_value, avg(marks.value) as avg_value")
@@ -196,6 +209,12 @@ class Place < ActiveRecord::Base
 
   def avg_bill_title
     BillType.find(avg_bill).title if avg_bill
+  end
+
+
+  def self.work_time_filter
+    time = DateTime.now.strftime("%H:%M")
+
   end
 
   def self.for_mustache(place)
@@ -229,6 +248,8 @@ class Place < ActiveRecord::Base
     res[:county] = place["county_#{I18n.locale}"]
     res
   end
+
+
 
 end
 # == Schema Information
