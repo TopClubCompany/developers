@@ -4,8 +4,8 @@
 #
 #  id          :integer          not null, primary key
 #  week_day_id :integer
-#  from_time   :time
-#  to_time     :time
+#  from_time   :decimal(4, 2)
+#  to_time     :decimal(4, 2)
 #  discount    :float
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

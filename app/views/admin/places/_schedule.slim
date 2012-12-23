@@ -1,8 +1,6 @@
 = input_set week_day_title do
   = f.input :start_at
   = f.input :end_at
-  = f.input :start_break_at
-  = f.input :end_break_at
   = f.input :day_type_id, as: :hidden
   .nested_fields
     = input_set 'discounts' do

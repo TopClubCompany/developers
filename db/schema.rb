@@ -172,11 +172,11 @@ ActiveRecord::Schema.define(:version => 20121223141559) do
 
   create_table "day_discounts", :force => true do |t|
     t.integer  "week_day_id"
-    t.time     "from_time"
-    t.time     "to_time"
+    t.decimal  "from_time",   :precision => 4, :scale => 2
+    t.decimal  "to_time",     :precision => 4, :scale => 2
     t.float    "discount"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
   end
 
   add_index "day_discounts", ["week_day_id"], :name => "index_day_discounts_on_week_day_id"
@@ -567,15 +567,13 @@ ActiveRecord::Schema.define(:version => 20121223141559) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "week_days", :force => true do |t|
-    t.time     "start_at"
-    t.time     "end_at"
-    t.time     "start_break_at"
-    t.time     "end_break_at"
-    t.integer  "day_type_id",                       :null => false
-    t.boolean  "is_working",     :default => false
+    t.decimal  "start_at",    :precision => 4, :scale => 2
+    t.decimal  "end_at",      :precision => 4, :scale => 2
+    t.integer  "day_type_id",                                                  :null => false
+    t.boolean  "is_working",                                :default => false
     t.integer  "place_id"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at",                                                   :null => false
+    t.datetime "updated_at",                                                   :null => false
   end
 
   add_index "week_days", ["day_type_id"], :name => "index_week_days_on_day_type_id"
