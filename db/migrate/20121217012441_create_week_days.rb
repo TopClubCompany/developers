@@ -4,9 +4,6 @@ class CreateWeekDays < ActiveRecord::Migration
       t.time :start_at,       default: nil
       t.time :end_at,         default: nil
 
-      t.time :start_break_at, default: nil
-      t.time :end_break_at,   default: nil
-
       t.integer :day_type_id, null: false
 
       t.boolean :is_working, default: false

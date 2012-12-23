@@ -7,7 +7,7 @@
 //= require jquery.pjax
 //= require jquery.scrollTo
 //= require chosen
-//q= require bootstrap-datepicker
+//= require bootstrap-datepicker
 
 //= require bootstrap-datepicker/core
 //q= require bootstrap-datepicker/locales/bootstrap-datepicker.ru

@@ -1,5 +1,5 @@
 class WeekDay < ActiveRecord::Base
-  attr_accessible :title, :start_at, :end_at, :start_break_at, :end_break_at, :place_id,
+  attr_accessible :start_at, :end_at, :place_id,
                   :day_discounts_attributes, :day_type_id, :is_working
 
   belongs_to :place
