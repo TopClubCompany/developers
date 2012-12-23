@@ -13,6 +13,7 @@ end
 #  start_break_at :time
 #  end_break_at   :time
 #  day_type_id    :integer          not null
+#  is_working     :boolean          default(FALSE)
 #  place_id       :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

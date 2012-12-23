@@ -571,10 +571,11 @@ ActiveRecord::Schema.define(:version => 20121223141559) do
     t.time     "end_at"
     t.time     "start_break_at"
     t.time     "end_break_at"
-    t.integer  "day_type_id",    :null => false
+    t.integer  "day_type_id",                       :null => false
+    t.boolean  "is_working",     :default => false
     t.integer  "place_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   add_index "week_days", ["day_type_id"], :name => "index_week_days_on_day_type_id"
