@@ -1,5 +1,6 @@
 class Pagination
   constructor: (total_elements, per_page = 4, @max_visible = 5, @elSelector = '#list_grid_view .paginate') ->
+    console.log 'created pagination', total_elements
     @$el = $(elSelector)
     @total_pages = Math.ceil (total_elements / per_page)
     if @total_pages > 1
@@ -64,13 +65,11 @@ class PlacesCollection
     newIds = _.pluck(placesData, 'id')
     needToAddIds = _.difference newIds, @ids
     needToRemoveIds = _.without @ids, newIds
-    console.log placesData, needToAddIds, needToRemoveIds, @ids
     # idsPresent = _.pluck placesData, "id"
     if needToAddIds.length > 0
-
       needToAdd = _.filter(placesData, (place) -> needToAddIds.indexOf(place.id) isnt -1  )
-      #console.log needToAdd
       @multipleAdd($.makeArray(needToAdd))
+      @updateTime($("select[name=reserve_time]").val())
     if needToRemoveIds.length > 0  
       @multipleRemove needToRemoveIds
 
@@ -161,9 +160,40 @@ class PlacesCollection
         </div>
       </div>
     """
-    $('#map_details_wrapper').append mapBlock
+    $el = $('#map_details_wrapper').append(mapBlock)
+    $listEl = $(listBlock).insertBefore('#list_grid_view .paginate')
+    time = $("select[name=reserve_time]").val()
+    updateSingleTime.call(@, time, $el, $listEl)
+    
+    
+    
 
-    $(listBlock).insertBefore('#list_grid_view .paginate')
+  updateTime: (time) =>
+    console.log time
+    #TODO create ajax responder for batch of ids
+    #@batchUpdate @ids, time
+    $('#map_details_wrapper').find('.place').each (index, el) ->
+      $el = $(el)
+      $listEl = $('#list_' + $(el).attr('id'))
+      #askAjax for single place being available at specific time
+      updateSingleTime.call(@, time, $el, $listEl)
+      
+  updateSingleTime = (time, els...) ->
+    if els.length is 2
+      [$el, $listEl] = els
+    [base_time, minutes] = time.split ':'
+    base_time = parseInt base_time
+    possibilities = ['00', '15', '30', '45']
+    length = possibilities.length
+    index = possibilities.indexOf(minutes)
+    values = [ "#{base_time + Math.floor( (index + 2) / 4 ) }:#{possibilities[(index + 2) % 4]}",                  
+    "#{base_time + Math.floor( (index + 1) / 4 ) }:#{possibilities[(index + 1) % 4]}",
+    "#{base_time}:#{minutes}",                  
+    "#{base_time - ( if (index - 1) < 0 then 1 else 0 ) }:#{possibilities[(if (index - 1) < 0 then index - 1 + length else index - 1) % 4]}",                  
+    "#{base_time - ( if (index - 2) < 0 then 1 else 0 ) }:#{possibilities[(if (index - 2) < 0 then index - 2 + length else index - 2) % 4]}"]
+    _.each values, (time, index, values) ->
+      $el.find(".timing a:eq(#{index})").html time
+      $listEl.find(".timing a:eq(#{index})").html time
 
     
   addMarker: (obj) =>
@@ -216,7 +246,7 @@ class FilterInput
     else
       newQuery = oldQuery + amp + "page=#{pageTo}"          
     
-    newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '/?')
+    newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '?')
     window.history.replaceState('',null, newUrl)
     askAJAX.call(@, newQuery, @places, pageTo)      
 
@@ -246,7 +276,6 @@ class FilterInput
             memo + ',' + id
           amp = if newQuery is '' then '' else '&'
           newQuery = newQuery + amp + "#{key}=#{value}"
-      console.log newQuery
       amp = '&' if newQuery.length > 0
       newQuery = newQuery + amp + "page=#{startPage}"                
       baseURL =  window.location.pathname
@@ -254,21 +283,19 @@ class FilterInput
 
       window.history.replaceState('',null, newUrl)
       askAJAX.call(@, newQuery, @places, startPage) 
-
     
-
-    ###
-    $("select[name=reserve_time]").on 'change', =>
+    self = @
+    $("select[name=reserve_time]").on 'change', ->
       time = $(this).val()
-      $('#map_details_wrapper').add('#list_grid_view').find('.place').each (index, el) ->
-        el.find('.timing a').each (index, el) ->
-          console.log time
-    ###
-    $("select[name=number_of_people]").on 'change', =>          
+      self.places.updateTime time
+      
+                
+    
+    $("select[name=number_of_people]").on 'change', ->          
       number = $(this).val()
-      console.log headline = $('#listing > h3:first-child')
-      headlineText = $('#listing > h3:first-child').html()
-      console.log headlineText
+      headlineText = $('#mapcontainer > h3:first-child').html().replace(/\d+(?=\speople)/, number)
+      $('#mapcontainer > h3:first-child').html headlineText
+      
     
 
   askAJAX = (serializedData, placesObj, page) =>
@@ -280,7 +307,6 @@ class FilterInput
          $.noop()
 #          console.log xhr, error
        success: (json) ->
-          console.log json
           placesObj.useNewData(json, page)
        beforeSend: () ->
          $.noop()
