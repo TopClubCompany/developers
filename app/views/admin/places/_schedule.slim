@@ -3,6 +3,7 @@
   = f.input :end_at
   = f.input :start_break_at
   = f.input :end_break_at
+  = f.input :day_type_id, as: :hidden
   .nested_fields
     = input_set 'discounts' do
       = f.input :is_working

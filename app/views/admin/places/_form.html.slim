@@ -29,7 +29,7 @@
 
   = input_set 'work_time' do
     - week_days_titles = DayType.all.map(&:title)
-    - @place.create_for_new_place if @place.week_days.empty?
+    - @place.week_days = WeekDay.create_for_new_place if @place.week_days.empty?
     = f.simple_fields_for :week_days do |object|
       - week_day_title = week_days_titles.shift
       = render 'schedule', :f => object, week_day_title: week_day_title

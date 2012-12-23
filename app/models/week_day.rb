@@ -17,7 +17,7 @@ class WeekDay < ActiveRecord::Base
 
   def self.create_for_new_place
     ::DayType.all.map do |day|
-      self.new({day_type_id: day.id})
+      self.create({day_type_id: day.id})
     end
   end
 
