@@ -28,7 +28,7 @@ $ ->
         controls: true,
         plugins: ['display', 'controlbar'],
         plugin_controlbar: {
-        controlsDisableFade: true,
+          controlsDisableFade: true,
         }
       }, (player) ->
         player.addListener('start', (data) ->
@@ -36,7 +36,8 @@ $ ->
         )
       )
 
-#  new Projector() if $(".video_player").size() > 0
+  $(document).ready ->
+    new Projector() if $(".video_player").size() > 0
 
 
 
