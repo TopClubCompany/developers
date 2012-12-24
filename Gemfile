@@ -145,3 +145,6 @@ end
 #for seed in production
 gem "factory_girl_rails", ">= 3.3.0"
 gem "factory_girl", '>=4.0.0'
+
+#work with soap
+gem 'soap4r', :git => 'git://github.com/felipec/soap4r.git'
