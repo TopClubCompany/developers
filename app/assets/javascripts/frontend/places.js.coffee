@@ -13,10 +13,12 @@ $(document).ready ->
       showHash.call @, available_hashes[0]
 
   if $('#promo_tabs').length > 0
-	  $('#promo_tabs a').on 'click', ->
-	  	showHash.call @, $(this).attr('href'), yes
+	  $('#promo_tabs a').click (e)->
+      e.preventDefault();
+      showHash.call @, $(this).attr('href'), yes
 
 	showHash = (hashName, stripNeed = no) ->
     hashName = hashName.slice(1) if stripNeed
+    history.pushState {}, "", "##{hashName}"
     $("a[href=##{hashName}]").parent().addClass('active').siblings().removeClass('active')
     $("##{hashName}").show().siblings('.tab_content').hide()  
