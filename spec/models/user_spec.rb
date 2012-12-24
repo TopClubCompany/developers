@@ -92,11 +92,13 @@ end# == Schema Information
 #  failed_attempts        :integer          default(0)
 #  unlock_token           :string(255)
 #  locked_at              :datetime
+#  city_id                :integer
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
 # Indexes
 #
+#  index_users_on_city_id                                  (city_id)
 #  index_users_on_confirmation_token                       (confirmation_token) UNIQUE
 #  index_users_on_email_and_account_id                     (email,account_id)
 #  index_users_on_last_name_and_first_name_and_patronymic  (last_name,first_name,patronymic)

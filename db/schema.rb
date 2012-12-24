@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121223141559) do
+ActiveRecord::Schema.define(:version => 20121224113531) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -436,6 +436,16 @@ ActiveRecord::Schema.define(:version => 20121223141559) do
     t.integer "selection_id"
   end
 
+  create_table "reservations", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "phone"
+    t.string   "email"
+    t.text     "special_notes"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
   create_table "reviews", :force => true do |t|
     t.integer  "reviewable_id"
     t.string   "reviewable_type"
@@ -556,10 +566,12 @@ ActiveRecord::Schema.define(:version => 20121223141559) do
     t.integer  "failed_attempts",                      :default => 0
     t.string   "unlock_token"
     t.datetime "locked_at"
+    t.integer  "city_id"
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
   end
 
+  add_index "users", ["city_id"], :name => "index_users_on_city_id"
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email", "account_id"], :name => "index_users_on_email_and_account_id"
   add_index "users", ["last_name", "first_name", "patronymic"], :name => "index_users_on_last_name_and_first_name_and_patronymic"
