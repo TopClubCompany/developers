@@ -1,6 +1,6 @@
 .central_module.search-result.cf
   .mainsearch
-    = render 'filters'
+    / =render :partial => 'filters'
     #sort_by_block.cf
       .top_button
         #sort_by.buttom_second.super_list
@@ -63,7 +63,7 @@
             img src='/assets/foto/anet.jpg'
             img src='/assets/foto/anet.jpg'
             img src='/assets/foto/anet.jpg'
-      = render 'places'
+      / =render :partial => 'places'
       #new_loader style="display:none"
         .gradient
         .text_loader.cf
@@ -83,9 +83,9 @@
       .header_gray
         span.title
           | Рекомендуемые места
-      - @recomended_places.each do |place|
+      / - @recomended_places.each do |place|
         .points_bottom.cf
-          img src= place.picture, width: '43px', height: '30px'
+          img src=place.picture width: '43px' height: '30px'
           .description.cf
             .header_blue= link_to place.name, place_path(place)
             .numb_stars
