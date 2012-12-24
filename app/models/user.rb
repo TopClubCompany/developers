@@ -7,9 +7,8 @@ class User < ActiveRecord::Base
 
 
   attr_accessible :login, :email, :password, :password_confirmation, :remember_me,
-                  :first_name, :last_name, :patronymic, :phone, :address, :birthday
-
-  attr_accessible :gender, :kind, :time_zone, :locale
+                  :first_name, :last_name, :patronymic, :phone, :address, :birthday,
+                  :city_id, :gender, :kind, :time_zone, :locale
 
   attr_accessible :user_role_id, :trust_state, :as => :admin
 
@@ -21,6 +20,8 @@ class User < ActiveRecord::Base
   enumerated_attribute :gender_type, :id_attribute => :gender, :class => ::GenderType
   enumerated_attribute :user_role_type, :id_attribute => :user_role_id, :class => ::UserRoleType
   enumerated_attribute :trust_state_type, :id_attribute => :trust_state, :class => ::UserState
+
+  belongs_to :city
 
   has_one :avatar, :as => :assetable, :dependent => :destroy, :autosave => true
   has_many :accounts, :dependent => :destroy
@@ -217,11 +218,13 @@ end
 #  failed_attempts        :integer          default(0)
 #  unlock_token           :string(255)
 #  locked_at              :datetime
+#  city_id                :integer
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
 # Indexes
 #
+#  index_users_on_city_id                                  (city_id)
 #  index_users_on_confirmation_token                       (confirmation_token) UNIQUE
 #  index_users_on_email_and_account_id                     (email,account_id)
 #  index_users_on_last_name_and_first_name_and_patronymic  (last_name,first_name,patronymic)

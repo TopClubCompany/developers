@@ -28,7 +28,7 @@
           .clear
           = f.input :password, label: get_reg_form_attr_name(:password)
           .clear
-          = f.input :address, label: get_reg_form_attr_name(:address)
+          = f.input :city_id, collection: City.all, include_blank: false
           .clear
           = f.input :gender,  collection: GenderType.all, include_blank: false
           .clear
