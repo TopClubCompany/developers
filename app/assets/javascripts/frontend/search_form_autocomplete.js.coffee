@@ -11,7 +11,7 @@ $ ->
     minChars: 1
     delimiter: /(,|;)\s*/
     # maxHeight:400,
-    # width:300,
+    width:270,
     zIndex: 9999
     deferRequestBy: 0
     # params: { q:'Yes' }, //aditional parameters
@@ -20,9 +20,12 @@ $ ->
       console.log ('You selected: ' + value + ', ' + data)
 
     
-  
-  $("#title_or_location").oautocomplete(options)
-    
+  if $("#title_or_location").length > 0
+    if $("#title_or_location").parent().is('.shorten')
+      console.log 'not main page'
+      _.extend options, {width: 167}
+      console.log options
+    $("#title_or_location").oautocomplete(options)
         
 
 
