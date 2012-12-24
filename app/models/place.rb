@@ -221,7 +221,7 @@ class Place < ActiveRecord::Base
     fields = []
     if options[:reserve_time].present?
       time = self.en_to_time(options[:reserve_time])
-      current_day = DateTime.now.wday+1
+      current_day = options[:reserve_date].present? ? DateTime.parse(options[:reserve_date]).wday + 1 : DateTime.now.wday + 1
       field = "week_day_#{current_day}_start_at"
       fields << {query: {range: {:"#{field}" => {lte: time, boost: 2.0}} }}
       field = "week_day_#{current_day}_end_at"
