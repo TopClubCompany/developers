@@ -9,8 +9,8 @@ class AdminAutocompleteApp
     options = params.slice('with', 'with_all', 'without').symbolize_keys
     attr = params['attr'] || (klass.ac_opts[:localized] ? "#{klass.ac_attr}_#{I18n.locale}" : klass.ac_attr.to_s)
 
-    options[:order] = "overall_mark"
-    options[:sort_mode] = "desc"
+    #options[:order] = "overall_mark"
+    #options[:sort_mode] = "desc"
 
     entries = klass.token_search("#{params['q']}* OR *#{params['q']}*", options).to_a
     entries = klass.token_search(params['q'].split(/\s+/).map { |s| "*#{s}*" }.join(' AND '), options).to_a if entries.empty?
