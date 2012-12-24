@@ -1,21 +1,22 @@
-input id='title_or_location' name="title" placeholder="title or location" type="text"
-label for="reserve_date"
-input class='dateFormatNeeded' name="reserve_date" type="text" value=Time.now.strftime("%d/%m/%Y")
-label for="reserve_time"
-select name="reserve_time"
-  - time_with_locale(@time).each do |time_el|
-    - time_el.each do |k, v|
-      - if v
-        option value=k selected="selected" #{k}
-      - else
-        option value=k #{k}
-label for="number_of_people"
-  nobr= I18n.t('search.number_of_people')
-select name="number_of_people" type="text"
-  option value="1" 1
-  option value="2" selected="selected" 2
-  - (3..10).each do |i|
-    option value="#{i}" #{i}
+form action='/search'
+  input id='title_or_location' name="title" placeholder="title or location" type="text"
+  label for="reserve_date"
+  input class='dateFormatNeeded' name="reserve_date" type="text" value=Time.now.strftime("%d/%m/%Y")
+  label for="reserve_time"
+  select name="reserve_time"
+    - time_with_locale(@time).each do |time_el|
+      - time_el.each do |k, v|
+        - if v
+          option value=k selected="selected" #{k}
+        - else
+          option value=k #{k}
+  label for="number_of_people"
+    nobr= I18n.t('search.number_of_people')
+  select name="number_of_people" type="text"
+    option value="1" 1
+    option value="2" selected="selected" 2
+    - (3..10).each do |i|
+      option value="#{i}" #{i}
 
-input type="submit" value="Find a table"
-.clear
+  input type="submit" value="Find a table"
+  .clear
