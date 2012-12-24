@@ -1,0 +1,8 @@
+.discount_fields
+  = f.locale_tabs do |l|
+    = f.input :title, locale: l
+    = f.input :description, locale: l, :as => :ckeditor
+  = f.input :from_time
+  = f.input :to_time
+  = f.input :discount
+  = f.link_to_remove t('admin.delete'), class: 'btn btn-danger btn-mini', id: 'discount-destroy'

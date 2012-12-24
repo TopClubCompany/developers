@@ -3,7 +3,7 @@ class Place < ActiveRecord::Base
 
   attr_accessible :phone, :is_visible, :user_id, :url, :location_attributes, :week_days_attributes,
                   :avg_bill, :feature_item_ids, :place_administrators_attributes, :name, :description,
-                  :week_days_ids, :day_discount_schedules_attributes
+                  :week_days_ids
 
   belongs_to :user
 
@@ -22,9 +22,8 @@ class Place < ActiveRecord::Base
   has_many :notes
   has_many :events
   has_many :reviews, :as => :reviewable, :dependent => :destroy
-  has_many :week_days
-
-  has_many :day_discount_schedules, :dependent => :destroy
+  has_many :week_days, :dependent => :destroy
+  has_many :day_discounts, :through => :week_days
 
 
   enumerated_attribute :bill, :id_attribute => :avg_bill, :class => ::BillType
@@ -37,7 +36,7 @@ class Place < ActiveRecord::Base
 
   has_one :location, :as => :locationable, :dependent => :destroy, :autosave => true
 
-  accepts_nested_attributes_for :location, :reviews, :place_administrators, :week_days, :day_discount_schedules,
+  accepts_nested_attributes_for :location, :reviews, :place_administrators, :week_days,
                                 :allow_destroy => true, :reject_if => :all_blank
 
   translates :name, :description
@@ -64,8 +63,15 @@ class Place < ActiveRecord::Base
                     "exact" => {:type => 'string', :index => "not_analyzed"}
                 }
         indexes "description_#{loc}", boost: 5, analyzer: "analyzer_#{loc}"
+
       end
       indexes :lat_lng, type: 'geo_point'
+      DayType.all.each do |day|
+        %w(start_at end_at).each do |work_time|
+          indexes "week_day_#{day.id}_#{work_time}", type: :date, format: :hour_minute
+        end
+      end
+
     end
   end
 
@@ -89,6 +95,8 @@ class Place < ActiveRecord::Base
       filters << {query: {terms: {avg_bill: options[:price].split(',')} }}
     end
 
+    filters += self.time_filter(options)
+
     if filters.empty? && options.empty?
       self.best_places(4, options)
     else
@@ -106,6 +114,7 @@ class Place < ActiveRecord::Base
           sort { by "overall_mark", "desc" }
         end
         filter(:and, :filters => filters)
+        puts to_curl
       end
     end
 
@@ -133,7 +142,8 @@ class Place < ActiveRecord::Base
 
   def to_indexed_json
     attrs = [:id, :slug, :avg_bill, :url]
-    related_ids = [:kitchen_ids, :category_ids, :place_feature_item_ids, :review_ids
+    related_ids = [:kitchen_ids, :category_ids, :place_feature_item_ids, :review_ids, :week_day_ids,
+                   :day_discount_ids
     ]
     methods = %w(lat_lng marks overall_mark avg_bill_title)
 
@@ -148,6 +158,13 @@ class Place < ActiveRecord::Base
           json.set!("#{a}_names_#{locale}", self.send(a).map{|t| t.send("name_#{locale}")}.join(', '))
         end
       end
+
+      week_days.each do |week_day|
+        json.set!("week_day_#{week_day.day_type_id}_start_at", week_day.start_at.to_s.split(".").join(":"))
+        json.set!("week_day_#{week_day.day_type_id}_end_at", week_day.end_at.to_s.split(".").join(":"))
+      end
+
+
       json.(self, *related_ids)
 
       json.images all_place_images do |json, image|
@@ -179,6 +196,7 @@ class Place < ActiveRecord::Base
     near.reject!{ |p| p.id == self.id }
   end
 
+
   def marks
     count_reviews = self.reviews.joins(:marks).
         select("reviews.*, marks.mark_type_id as mark_type_id, sum(marks.value) as sum_value, avg(marks.value) as avg_value")
@@ -195,8 +213,23 @@ class Place < ActiveRecord::Base
   end
 
   def avg_bill_title
-    BillType.find(avg_bill).title if avg_bill
+    bill.try(:title)
   end
+
+
+  def self.time_filter(options={})
+    fields = []
+    if options[:reserve_time].present?
+      time = self.en_to_time(options[:reserve_time])
+      current_day = DateTime.now.wday+1
+      field = "week_day_#{current_day}_start_at"
+      fields << {query: {range: {:"#{field}" => {lte: time, boost: 2.0}} }}
+      field = "week_day_#{current_day}_end_at"
+      fields << {query: {range: {:"#{field}" => {gte: time, boost: 2.0}} }}
+    end
+    fields
+  end
+
 
   def self.for_mustache(place)
     res = {}
@@ -230,6 +263,18 @@ class Place < ActiveRecord::Base
     res
   end
 
+private
+
+  def self.en_to_time(time)
+    if time.include?("AM")
+      time.sub!("AM",'')
+    elsif time.include?("PM")
+      time = time.sub!("PM",'').split(":")
+      time[0] = (time[0].to_i + 12).to_s
+      time = time.join(":")
+    end
+    time
+  end
 end
 # == Schema Information
 #

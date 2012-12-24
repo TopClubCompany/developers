@@ -29,16 +29,15 @@ module SimpleForm
 
         if [:date, :datetime].include? input_type
           attr = "#{data_target}_date"
-          html << template.text_field_tag(attr, object.send(attribute_name).try(:strftime, "%d.%m.%Y"), :id => attr,
+          html << template.text_field_tag(attr, formated_value, :id => attr,
                                  :class => 'datepicker input-small', :data => {:target => data_target})
         end
 
         if [:time, :datetime].include? input_type
           attr = "#{data_target}_time"
-          html << template.text_field(attr, object.send(attribute_name).try(:strftime, "%H:%M"), :id => attr,
+          html << template.text_field(attr, formated_value, :id => attr,
                                  :class => 'timepicker input-small', :data => {:target => data_target})
         end
-
         html.join.html_safe
       end
 
