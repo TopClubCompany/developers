@@ -57,7 +57,7 @@
           .clear
           a.all href="#" Browse all ›
         #new.tab_content
-          - @places.each_with_index do |place, i|
+          - @new_place.each_with_index do |place, i|
             .place style="#{'margin-right: 0' if ((i + 1)%3 == 0)}"
               a href=place_path(place)
                 - image = slider_place_image(place)
@@ -84,7 +84,7 @@
           .clear
           a.all href="#" Browse all ›
         #available.tab_content
-          - @places.each_with_index do |place, i|
+          - @tonight_available.each_with_index do |place, i|
             .place style="#{'margin-right: 0' if ((i + 1)%3 == 0)}"
               a href=place_path(place)
                 - image = slider_place_image(place)

@@ -135,13 +135,42 @@ class Place < ActiveRecord::Base
     end
   end
 
+  def self.new_places amount, options={}
+    tire.search(page: options[:page] || 1, per_page: amount) do
+      sort { by("created_at", "desc")
+             by("overall_mark", "asc")}
+      if options[:city]
+        query do
+          flt options[:city].lucene_escape, :fields => I18n.available_locales.map { |l| "city_#{l}" }, :min_similarity => 0.5
+        end
+      end
+    end
+  end
+
+  def self.tonight_available amount, options={}
+    current_day = DateTime.now.wday + 1
+    field = "week_day_#{current_day}_end_at"
+    filters = []
+    filters << {query: {range: {:"#{field}" => {from: "23:55", to: "10:00", boost: 2.0}} }}
+    tire.search(page: options[:page] || 1, per_page: amount) do
+      sort { by("overall_mark", "desc") }
+      if options[:city]
+        query do
+          flt options[:city].lucene_escape, :fields => I18n.available_locales.map { |l| "city_#{l}" }, :min_similarity => 0.5
+        end
+      end
+      filter(:and, :filters => filters)
+      puts to_curl
+    end
+  end
+
 
   def lat_lng
     [location.try(:latitude), location.try(:longitude)].join(',')
   end
 
   def to_indexed_json
-    attrs = [:id, :slug, :avg_bill, :url]
+    attrs = [:id, :slug, :avg_bill, :url, :created_at]
     related_ids = [:kitchen_ids, :category_ids, :place_feature_item_ids, :review_ids, :week_day_ids,
                    :day_discount_ids
     ]
