@@ -49,10 +49,11 @@ class CreateUsers < ActiveRecord::Migration
 
       # Token authenticatable
       # t.string :authentication_token
-
+      t.references :city
       t.timestamps
     end
 
+    add_index :users, :city_id
     add_index :users, [:email, :account_id]#, :unique => true
     add_index :users, :reset_password_token, :unique => true
     add_index :users, :confirmation_token, :unique => true
