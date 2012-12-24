@@ -15,8 +15,7 @@
   .row
     .span12
       #search_form
-        form
-          = render :partial => 'shared/search_form', :locals => { :time => {:h => (@time[:h] || 12), :m => (@time[:m] || '00')} }
+        = render :partial => 'shared/search_form', :locals => { :time => {:h => (@time[:h] || 12), :m => (@time[:m] || '00')} }
 
   #promo_places
     .content
