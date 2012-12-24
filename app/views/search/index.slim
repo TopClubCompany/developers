@@ -123,8 +123,7 @@
                   a href="#"
               .clear
           .paginate
-            / h1 #{@result.total}
-            - current = 1
+            - current = params[:page] || 1
             - number_of_pages = @result.total.to_i / 4 + 1
             - if number_of_pages > 1
               - for i in 1..number_of_pages
@@ -132,7 +131,7 @@
                   a.current href="##{i}" #{i}
                 - else
                   a href="##{i}" #{i}
-              a href="#" next ›
+              a href="##{current.to_i + 1}.to_s" next ›
             - else
               a href="#" No page stub
 = render 'shared/more_template'

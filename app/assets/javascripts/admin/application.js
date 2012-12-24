@@ -7,7 +7,7 @@
 //= require jquery.pjax
 //= require jquery.scrollTo
 //= require chosen
-//q= require bootstrap-datepicker
+//= require bootstrap-datepicker
 
 //= require bootstrap-datepicker/core
 //q= require bootstrap-datepicker/locales/bootstrap-datepicker.ru
@@ -39,6 +39,7 @@
 //= require admin/components/confirmation
 //= require admin/components/gmaps
 //= require admin/components/nested_filelds_adder.js
+//= require admin/components/decimal_zero_fix
 //= require admin/pretty-slide-checkbox
 //= require admin/main
 //= require_tree ./place

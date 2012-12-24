@@ -1,9 +1,0 @@
-h4
-  - id = f.get_value :day_type_id
-  = DayType.find(id).title if id
-= f.input :day_type_id, :as => :hidden
-= f.input :is_running
-.nested_fields
-  = f.simple_fields_for :day_discounts do |object|
-    = render 'day_discount', :f => object
-  = f.link_to_add t('admin.add'), :day_discounts, :class => 'btn btn-primary'
