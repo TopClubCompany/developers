@@ -4,4 +4,8 @@ class ReservationsController < ApplicationController
 
   end
 
+  def reservation_confirmed
+
+  end
+
 end

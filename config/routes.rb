@@ -19,6 +19,7 @@ Topclub::Application.routes.draw do
   post '/profile/send_email_invitation_path' => 'users/profile#send_email_invitation', as: 'send_email_invitation'
 
   get '/new_reservation' => 'reservations#new_reservation', as: 'new_reservation'
+  get '/reservation_confirmed/:reservation_id' => 'reservations#reservation_confirmed', as: 'reservation_confirmed'
 
   match 'autocomplete' => AutocompleteApp
 
