@@ -2,7 +2,7 @@ class Pagination
   constructor: (total_elements, per_page = 4, @max_visible = 5, @elSelector = '#list_grid_view .paginate') ->
     @$el = $(@elSelector)
     @total_pages = Math.ceil (total_elements / per_page)
-    console.log total_elements, per_page, total_elements / per_page
+    # console.log total_elements, per_page, total_elements / per_page
     if @total_pages > 1
       @bindListener()
       @goTo 1
@@ -12,7 +12,7 @@ class Pagination
     @
 
   bindListener: () ->
-    console.log 'binded'
+    # console.log 'binded'
     $("#{@elSelector} a").off 'click'
     setTimeout ( =>
       $("#{@elSelector} a").on 'click', (e) =>      
@@ -72,7 +72,7 @@ class PlacesCollection
     @map = new google.maps.Map(document.getElementById("map_places"), mapOptions)
 
   useNewData: (json, page) ->
-    console.log json
+    # console.log json
     new Pagination(json.total).goTo(page)
     placesData = json.result
     newIds = _.pluck(placesData, 'id')
