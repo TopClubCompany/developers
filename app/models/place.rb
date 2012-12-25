@@ -139,7 +139,10 @@ class Place < ActiveRecord::Base
 
   def self.new_places amount, options={}
     tire.search(page: options[:page] || 1, per_page: amount) do
-      sort { by("created_at", "desc")}
+      sort do
+         by("created_at", "desc")
+         by("overall_mark", "asc")
+      end
       if options[:city]
         query do
           flt options[:city].lucene_escape, :fields => I18n.available_locales.map { |l| "city_#{l}" }, :min_similarity => 0.5
