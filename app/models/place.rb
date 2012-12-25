@@ -65,6 +65,8 @@ class Place < ActiveRecord::Base
         indexes "description_#{loc}", boost: 5, analyzer: "analyzer_#{loc}"
 
       end
+      indexes :overall_mark, type: 'double'
+      indexes :created_at, type: 'date', format: 'dateOptionalTime'
       indexes :lat_lng, type: 'geo_point'
       DayType.all.each do |day|
         %w(start_at end_at).each do |work_time|
