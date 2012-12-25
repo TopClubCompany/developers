@@ -19,5 +19,8 @@
 
 FactoryGirl.define do
   factory :day_discount do
+    discount    { (5...70).step(5).sample }
+    title       { "Special offer!!! " + %w|Day\ of\ heroes! Big\ boom\ day! Anniversary! Jubilee! Opening!|.sample }
+    description { "#{discount.to_i}% off your food bill" }
   end
 end
