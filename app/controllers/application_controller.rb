@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protected
 
     def current_city
-      session['city'] || session[:city] || 'kyiv'
+      session['city'] || session[:city] || current_user.try(:city).try(:slug) || 'kyiv'
     end
 
     def set_locale
