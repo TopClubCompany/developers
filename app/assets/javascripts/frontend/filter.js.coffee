@@ -1,29 +1,41 @@
 class Pagination
   constructor: (total_elements, per_page = 4, @max_visible = 5, @elSelector = '#list_grid_view .paginate') ->
-    console.log 'created pagination', total_elements
-    @$el = $(elSelector)
+    @$el = $(@elSelector)
     @total_pages = Math.ceil (total_elements / per_page)
+    # console.log total_elements, per_page, total_elements / per_page
     if @total_pages > 1
       @bindListener()
       @goTo 1
     else 
+      console.log 'stub', @, @$el      
       @stub()
     @
 
   bindListener: () ->
-    $("#{@elSelector} a").on 'click', (e) =>      
-      e.preventDefault()
-      unless $(e.target).hasClass('current')
-        pageNum = $(e.target).attr('href').slice(1)
-        filter.getPage pageNum
-        @goTo pageNum
+    # console.log 'binded'
+    $("#{@elSelector} a").off 'click'
+    setTimeout ( =>
+      $("#{@elSelector} a").on 'click', (e) =>      
+        e.preventDefault()
+        unless $(e.target).hasClass('current')
+          pageNum = $(e.target).attr('href').slice(1)
+          window.filter.getPage pageNum
+          @goTo pageNum
+    ), 100
+
+
     @
+
   stub: () ->
+    @$el.empty()
     @$el.html('<a href="#"> No page stub></a>')
 
   goTo: (page) ->
-    @$el.html('')
-    @$el.append "<a href='##{page - 1 }'>Prev</a>" if page > 1 and @total_pages > @max_visible
+    @$el.empty()
+    if page > 1 and @total_pages > @max_visible
+      @$el.append "<a href='?##{page - 1 }'>Prev</a>" 
+    if page > 1 and @total_pages < @max_visible
+      @$el.append "<a href='?#1'>1</a>" 
     for i in [page..Math.min(page + @max_visible - 1, @total_pages)]
       @$el.append "<a href='##{i}'>#{i}</a>"
     if @max_visible < @total_pages
@@ -41,6 +53,7 @@ class PlacesCollection
     @ids = []
     @createMap()
     @markers = []
+    window.googleMarkers = @markers
     for block in blocksThatExist
       obj = 
         id: $(block).data('id')
@@ -58,8 +71,9 @@ class PlacesCollection
       minZoom: 2,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     @map = new google.maps.Map(document.getElementById("map_places"), mapOptions)
-
+    window.googleMap = @map
   useNewData: (json, page) ->
+    # console.log json
     new Pagination(json.total).goTo(page)
     placesData = json.result
     newIds = _.pluck(placesData, 'id')
@@ -236,7 +250,7 @@ class FilterInput
     # if $(".paginate .current").attr('href') isnt "##{page}" or $(".paginate .current").length is 0
       # $(".paginate a[href=##{page}]").addClass('current')
 
-  getPage: (pageTo) ->
+  getPage: (pageTo) =>
     baseURL = window.location.pathname
     oldQuery = window.location.search || ''
     amp = if oldQuery is '' then '' else '&'
@@ -244,7 +258,6 @@ class FilterInput
       newQuery = oldQuery.replace(/page=\d+/, "page=#{pageTo}")          
     else
       newQuery = oldQuery + amp + "page=#{pageTo}"          
-    
     newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '?')
     window.history.replaceState('',null, newUrl)
     askAJAX.call(@, newQuery, @places, pageTo)      
@@ -338,4 +351,6 @@ class FilterInput
 $ ->
   if $('#refine').length isnt 0
     window.filter = new FilterInput yes
-
+  if $('.paginate').length isnt 0
+    total = parseInt($('.paginate').find('.total').html())
+    new Pagination( total )

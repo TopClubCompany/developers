@@ -2,6 +2,7 @@ class City < ActiveRecord::Base
 
   attr_accessible :is_visible, :position
 
+  has_many :users
 
   translates :name, :description
 

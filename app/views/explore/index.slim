@@ -15,107 +15,114 @@
   .row
     .span12
       #search_form
-        form
-          = render :partial => 'shared/search_form', :locals => { :time => {:h => (@time[:h] || 12), :m => (@time[:m] || '00')} }
+        = render :partial => 'shared/search_form', :locals => { :time => {:h => (@time[:h] || 12), :m => (@time[:m] || '00')} }
 
-  #promo_places
-    .content
-      .row
-        .span12
-          ul id="promo_tabs"
-            li class="active" 
-              a href="#best" Best restaurants
-            li 
-              a href="#new" New restaurants
-            li 
-              a href="#available" Available tonight
-            .clear
-          #best.tab_content
-            - @places.each_with_index do |place, i|
-              .place style="#{'margin-right: 0' if ((i + 1)%3 == 0)}"
-                a href=place_path(place)
-                  - image = slider_place_image(place)
-                  img height="100" src="#{image if image}" width="140"
-                h4
-                  a href="#"
-                    = place["name_#{I18n.locale}"]
-                .rating
-                  .stars
-                    .stars_overlay
-                    .stars_bar style=get_star_rating(place)
-                    .stars_bg
-                  small
-                    = place.review_ids.count
-                ul.place_features
-                  li.location
-                    = place.location_city
-                  - kitchens_names = place.send("kitchens_names_#{I18n.locale}")
-                  li.cuisine title=kitchens_names
-                    = truncate(kitchens_names, length: 18)
-                  li.pricing
-                    = avg_bill_title(place.avg_bill)
-                .clear
-            a.all href="#" Browse all ›
-          #new.tab_content
-            - @places.each_with_index do |place, i|
-              .place style="#{'margin-right: 0' if ((i + 1)%3 == 0)}"
-                a href=place_path(place)
-                  - image = slider_place_image(place)
-                  img height="100" src="#{image if image}" width="140"
-                h4
-                  a href="#"
-                    = place["name_#{I18n.locale}"]
-                .rating
-                  .stars
-                    .stars_overlay
-                    .stars_bar style=get_star_rating(place)
-                    .stars_bg
-                  small
-                    = place.review_ids.count
-                ul.place_features
-                  li.location
-                    = place.location_city
-                  - kitchens_names = place.send("kitchens_names_#{I18n.locale}")
-                  li.cuisine title=kitchens_names
-                    = truncate(kitchens_names, length: 18)
-                  li.pricing
-                    = avg_bill_title(place.avg_bill)
-                .clear
-            a.all href="#" Browse all ›
-          #available.tab_content 
-            - @places.each_with_index do |place, i|
-              .place style="#{'margin-right: 0' if ((i + 1)%3 == 0)}"
-                a href=place_path(place)
-                  - image = slider_place_image(place)
-                  img height="100" src="#{image if image}" width="140"
-                h4
-                  a href="#"
-                    = place["name_#{I18n.locale}"]
-                .rating
-                  .stars
-                    .stars_overlay
-                    .stars_bar style=get_star_rating(place)
-                    .stars_bg
-                  small
-                    = place.review_ids.count
-                ul.place_features
-                  li.location
-                    = place.location_city
-                  - kitchens_names = place.send("kitchens_names_#{I18n.locale}")
-                  li.cuisine title=kitchens_names
-                    = truncate(kitchens_names, length: 18)
-                  li.pricing
-                    = avg_bill_title(place.avg_bill)
-                .clear
-            a.all href="#" Browse all ›
-
-
-  = render 'shared/more_template'
+#promo_places
   .content
     .row
-      #promo_block_sm.promo_block.span4
-        | Earn points and get discounts!
-        a href="#"
-      #promo_block_big.promo_block.span8
-        | Need more clients?
-        a href="#"
+      .span12
+        ul id="promo_tabs"
+          li class="active"
+            a href="#best" Best restaurants
+          li
+            a href="#new" New restaurants
+          li
+            a href="#available" Available tonight
+          .clear
+        #best.tab_content
+          - @places.each_with_index do |place, i|
+            .place style="#{'margin-right: 0' if ((i + 1)%3 == 0)}"
+              a href=place_path(place)
+                - image = slider_place_image(place)
+                img height="100" src="#{image if image}" width="140"
+              h4
+                a href=place_path(place)
+                  = place["name_#{I18n.locale}"]
+              .rating
+                .stars
+                  .stars_overlay
+                  .stars_bar style=get_star_rating(place)
+                  .stars_bg
+                small
+                  = place.review_ids.count
+              ul.place_features
+                li.location
+                  = place.location_city
+                - kitchens_names = place.send("kitchens_names_#{I18n.locale}")
+                li.cuisine title=kitchens_names
+                  = truncate(kitchens_names, length: 18)
+                li.pricing
+                  = avg_bill_title(place.avg_bill)
+              .clear
+          .clear
+          a.all href="/places" Browse all ›
+        #new.tab_content
+          - @new_place.each_with_index do |place, i|
+            .place style="#{'margin-right: 0' if ((i + 1)%3 == 0)}"
+              a href=place_path(place)
+                - image = slider_place_image(place)
+                img height="100" src="#{image if image}" width="140"
+              h4
+                a href=place_path(place)
+                  = place["name_#{I18n.locale}"]
+              .rating
+                .stars
+                  .stars_overlay
+                  .stars_bar style=get_star_rating(place)
+                  .stars_bg
+                small
+                  = place.review_ids.count
+              ul.place_features
+                li.location
+                  = place.location_city
+                - kitchens_names = place.send("kitchens_names_#{I18n.locale}")
+                li.cuisine title=kitchens_names
+                  = truncate(kitchens_names, length: 18)
+                li.pricing
+                  = avg_bill_title(place.avg_bill)
+              .clear
+          .clear
+          a.all href="/places" Browse all ›
+        #available.tab_content
+          - @tonight_available.each_with_index do |place, i|
+            .place style="#{'margin-right: 0' if ((i + 1)%3 == 0)}"
+              a href=place_path(place)
+                - image = slider_place_image(place)
+                img height="100" src="#{image if image}" width="140"
+              h4
+                a href=place_path(place)
+                  = place["name_#{I18n.locale}"]
+              .rating
+                .stars
+                  .stars_overlay
+                  .stars_bar style=get_star_rating(place)
+                  .stars_bg
+                small
+                  = place.review_ids.count
+              ul.place_features
+                li.location
+                  = place.location_city
+                - kitchens_names = place.send("kitchens_names_#{I18n.locale}")
+                li.cuisine title=kitchens_names
+                  = truncate(kitchens_names, length: 18)
+                li.pricing
+                  = avg_bill_title(place.avg_bill)
+                .clear
+          .clear
+          a.all href="/places" Browse all ›
+
+
+= render 'shared/more_template'
+.content
+  .row
+    #promo_block_sm.promo_block.span4
+      | Earn points and get discounts!
+      br
+      a href=new_user_registration_path Sign up now!
+    #promo_block_big.promo_block.span8
+      | Need more clients?
+      a href="/partner_info" &nbsp;Become a partner!
+
+
+                
+          
