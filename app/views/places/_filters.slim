@@ -15,7 +15,7 @@
         li.col
           ul.category
             li.header Категория
-            /- @categories.each do |cat|
+            - @categories.each do |cat|
               li.element
                 label
                   input.filter_val{type: 'checkbox', name: "category[# cat.id}]", value: cat.name 

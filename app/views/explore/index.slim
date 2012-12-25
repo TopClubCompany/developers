@@ -36,7 +36,7 @@
                 - image = slider_place_image(place)
                 img height="100" src="#{image if image}" width="140"
               h4
-                a href="#"
+                a href=place_path(place)
                   = place["name_#{I18n.locale}"]
               .rating
                 .stars
@@ -55,7 +55,7 @@
                   = avg_bill_title(place.avg_bill)
               .clear
           .clear
-          a.all href="#" Browse all ›
+          a.all href="/places" Browse all ›
         #new.tab_content
           - @new_place.each_with_index do |place, i|
             .place style="#{'margin-right: 0' if ((i + 1)%3 == 0)}"
@@ -63,7 +63,7 @@
                 - image = slider_place_image(place)
                 img height="100" src="#{image if image}" width="140"
               h4
-                a href="#"
+                a href=place_path(place)
                   = place["name_#{I18n.locale}"]
               .rating
                 .stars
@@ -82,7 +82,7 @@
                   = avg_bill_title(place.avg_bill)
               .clear
           .clear
-          a.all href="#" Browse all ›
+          a.all href="/places" Browse all ›
         #available.tab_content
           - @tonight_available.each_with_index do |place, i|
             .place style="#{'margin-right: 0' if ((i + 1)%3 == 0)}"
@@ -90,7 +90,7 @@
                 - image = slider_place_image(place)
                 img height="100" src="#{image if image}" width="140"
               h4
-                a href="#"
+                a href=place_path(place)
                   = place["name_#{I18n.locale}"]
               .rating
                 .stars
@@ -109,7 +109,7 @@
                   = avg_bill_title(place.avg_bill)
                 .clear
           .clear
-          a.all href="#" Browse all ›
+          a.all href="/places" Browse all ›
 
 
 = render 'shared/more_template'
@@ -118,7 +118,11 @@
     #promo_block_sm.promo_block.span4
       | Earn points and get discounts!
       br
-      a href="#" Sign up now!
+      a href=new_user_registration_path Sign up now!
     #promo_block_big.promo_block.span8
       | Need more clients?
-      a href="#" &nbsp;Become a partner!
+      a href="/partner_info" &nbsp;Become a partner!
+
+
+                
+          
