@@ -442,7 +442,7 @@ ActiveRecord::Schema.define(:version => 20121224113531) do
     t.string   "phone"
     t.string   "email"
     t.text     "special_notes"
-    t.time     "time"
+    t.datetime "time"
     t.integer  "user_id"
     t.integer  "place_id"
     t.datetime "created_at",    :null => false
