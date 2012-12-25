@@ -112,20 +112,20 @@ class PlacesCollection
   
   addBlock: (place) =>
     properKitchensName = if place.kitchens.length > 18 then place.kitchens.substring(0, 18) + '...' else place.kitchens
-    
+    console.log place
     listBlock = """
     <div class="place" id="list_place_#{place.id}">
         <a href="/places/#{place.id}">
           <img height="100" src="#{place.image_path}" width="140">
         </a>
-        <h4><a href="#">#{place.name}</a></h4>
+        <h4><a href="/places/#{place.id}">#{place.name}</a></h4>
         <div class="rating">
           <div class="stars">
             <div class="stars_overlay"></div>
             <div class="stars_bar" style="left: #{place.overall_mark * 20}%"></div>
             <div class="stars_bg"></div>
           </div>
-          <small>#{place.reviews}</small>
+          <small>#{place.review_count}</small>
         </div>
         <ul class="place_features">
           <li class="location">Ивана Мазепы улица</li>
@@ -154,7 +154,7 @@ class PlacesCollection
     mapBlock = """
       <div id="place_#{place.id}" data-lng="#{place.lng}" data-lat="#{place.lat}" class="place">
         <h4>
-          <a href="#">#{place.name}</a>
+          <a href="/places/#{place.id}">#{place.name}</a>
         </h4>
         <div class="rating">
           <div class="stars">

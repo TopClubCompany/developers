@@ -24,7 +24,7 @@ class Place < ActiveRecord::Base
   has_many :reviews, :as => :reviewable, :dependent => :destroy
   has_many :week_days, :dependent => :destroy
   has_many :day_discounts, :through => :week_days
-
+  has_many :reservations
 
   enumerated_attribute :bill, :id_attribute => :avg_bill, :class => ::BillType
 
