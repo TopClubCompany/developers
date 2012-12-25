@@ -21,6 +21,10 @@ class Location < ActiveRecord::Base
   alias_method :name_countries, :country
 
 
+  def address
+    street
+  end
+
   private
 
   def prepare_location
@@ -41,9 +45,7 @@ class Location < ActiveRecord::Base
     end
   end
 
-  def address
-    street
-  end
+
 
 end
 # == Schema Information
