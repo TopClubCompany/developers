@@ -13,7 +13,7 @@ end
 #  phone         :string(255)
 #  email         :string(255)
 #  special_notes :text
-#  time          :time
+#  time          :datetime
 #  user_id       :integer
 #  place_id      :integer
 #  created_at    :datetime         not null

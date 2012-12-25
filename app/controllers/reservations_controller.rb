@@ -16,8 +16,8 @@ class ReservationsController < ApplicationController
   def reservation_confirmed
     @reservation = Reservation.find_by_id(params[:reservation_id])
     @place = @reservation.try(:place)
-    @date  = DateTime@reservation.try(:time)
-    #raise @reservation.inspect
+    #raise @reservation.try(:time).to_s
+    @date  = DateTime.parse(@reservation.try{|reserv| reserv.time.to_s})
     redirect_to root_path, flash: { error: 'no such reservation' } unless @reservation && @place
   end
 
@@ -26,7 +26,8 @@ class ReservationsController < ApplicationController
     reservation = Reservation.new(params[:reservation])
 
     if reservation.save
-      AccountMailer.new_reservation(User.first.email, reservation.id).deliver
+      AccountMailer.new_reservation(reservation.email, reservation.id).deliver
+      Utils::Soap::TurboSms.send_sms(reservation.phone, "#{reservation.id} You id for reserv") if reservation.phone
       redirect_to reservation_confirmed_path(reservation.id)
     else
       redirect_to new_reservation_path(@reservation), flash: { error: @reservation.errors.full_messages.join(', ') }
