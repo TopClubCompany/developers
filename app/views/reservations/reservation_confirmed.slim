@@ -4,25 +4,26 @@
       #confirmed.heading
         h1 Your reservation is confirmed!
         strong 
-          ' Avalon
-        | Friday, November 9, 2012 at 7:15 PM for 2
+          = @place.title
+        = @date.strftime('%A, %B %e, %Y at %I:%M %p') + " for #{@persons} people"
       #sign_up_page.page_content.complete.confirmed
         h2
           | Confirmation #: 
           a href='#'
-            =params[:reservation_id]
+            = @reservation.id
             
           
         p Your reservation is confirmed and saved in the restaurant's computer reservation system. You'll receive an email copy of this confirmation.
         p
           strong Diner Name:
-          | Eugene Vasutkin
+          = @reservation.user_full_name
           br
             strong Address:
-            | 1 Lawson Ln, Burlington, VT 05401
+            /| 1 Lawson Ln, Burlington, VT 05401
+            = @place.location.address
             br
               strong Phone:
-              | (802) 363-3639
+              = @reservation.phone
         p
           strong Dress Code:
           | Smart Casual
@@ -31,7 +32,7 @@
           | Thank you for choosing Avalon. Should your plans change, please let us know. We look forward to serving you.
         p
           strong More Info:
-          | Blue Cat Cafe & Wine Bar profile page
+          = @place.description
     #sidebar.span4.confirmed
       h3 Where do i go from here?
       ul
