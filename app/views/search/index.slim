@@ -84,7 +84,7 @@
         #list_grid_view.none
           - @result.each do |place|
             .place id="list_place_#{place.id}"
-              a href=place_path(place)
+              a href=place_path(place.slug)
                 img height="100" width="140" src="#{slider_place_image(place)}"
               h4
                 a href="#"
