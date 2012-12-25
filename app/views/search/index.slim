@@ -104,6 +104,10 @@
                   = truncate(kitchens_names, length: 18)
                 li.pricing
                   = avg_bill_title(place.avg_bill)
+                li
+                  - date = date.gsub('/','-')
+                  - reservation_data = { place_id: place.id, date: date, time: @time, amount_of_person: person }
+                  = link_to 'Reserve', new_reservation_path(reservation_data)
               .timing
                 a href="#"
                   = "#{base_time.to_i + ( (index.to_i + 2) / 4 ) }:#{possibilities[(index.to_i + 2) % 4]}"
