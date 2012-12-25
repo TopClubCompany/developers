@@ -18,8 +18,9 @@ Topclub::Application.routes.draw do
   get '/profile/:user_id/invite_friends' => 'users/profile#invite_friends', as: 'invite_friends'
   post '/profile/send_email_invitation_path' => 'users/profile#send_email_invitation', as: 'send_email_invitation'
 
-  get '/new_reservation' => 'reservations#new_reservation', as: 'new_reservation'
+  get '/new_reservation/:date,:place_id,:time,:amount_of_person' => 'reservations#new_reservation', as: 'new_reservation'
   get '/reservation_confirmed/:reservation_id' => 'reservations#reservation_confirmed', as: 'reservation_confirmed'
+  post '/complete_reservation' => 'reservations#complete_reservation', as: 'complete_reservation'
 
   match 'autocomplete' => AutocompleteApp
 

@@ -166,3 +166,6 @@ en:
 
   registration_form:
     or: ' or '
+  reservation:
+    new_reservation:
+      complete_reservation: Complete your reservation
