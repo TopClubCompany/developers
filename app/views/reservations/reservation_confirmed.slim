@@ -1,0 +1,49 @@
+.content
+  .row
+    .span8
+      #confirmed.heading
+        h1 Your reservation is confirmed!
+        strong 
+          ' Avalon
+        | Friday, November 9, 2012 at 7:15 PM for 2
+      #sign_up_page.page_content.complete.confirmed
+        h2
+          | Confirmation #: 
+          a href='#'
+            =params[:reservation_id]
+            
+          
+        p Your reservation is confirmed and saved in the restaurant's computer reservation system. You'll receive an email copy of this confirmation.
+        p
+          strong Diner Name:
+          | Eugene Vasutkin
+          br
+            strong Address:
+            | 1 Lawson Ln, Burlington, VT 05401
+            br
+              strong Phone:
+              | (802) 363-3639
+        p
+          strong Dress Code:
+          | Smart Casual
+        p
+          strong Message from the Restaurant:
+          | Thank you for choosing Avalon. Should your plans change, please let us know. We look forward to serving you.
+        p
+          strong More Info:
+          | Blue Cat Cafe & Wine Bar profile page
+    #sidebar.span4.confirmed
+      h3 Where do i go from here?
+      ul
+        li.view
+          a href="#"
+            | View or change your reservation
+        li.print
+          a href="#"
+            | Print reservation details
+        li.map
+          a href="#"
+            | View restaurant on map
+        li.invite
+          a href="#"
+            | Invite friends

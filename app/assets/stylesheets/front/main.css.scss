@@ -348,6 +348,29 @@ input[type='submit']:hover {
 #complete, #confirmed {
   background: #79ad53;
   font-size: 18px;
+  overflow: hidden;
+}
+
+#complete .complete_edit {
+  color: #fff;
+  font-size: 13px;
+  font-weight: bold;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  display: inline-block;
+  padding: 5px 9px 2px 6px;
+  -moz-box-shadow:inset 0px 0px 5px 1px rgba(119, 119, 119, 0.5);
+  -webkit-box-shadow:inset 0px 0px 5px 1px rgba(119, 119, 119, 0.5);
+  box-shadow:inset 0px 0px 5px 1px rgba(119, 119, 119, 0.5);
+  border-radius: 3px;
+  background: rgba(0,0,0,0.2);
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+
+#complete .complete_edit:hover {
+  background: rgba(0,0,0,0.1);
 }
 
 #complete h1, #confirmed h1 {
@@ -423,7 +446,7 @@ input[type='submit']:hover {
 #sign_up_page p {
   margin: 10px 0 5px 0;
   padding: 0;
-  font-size: 13px;
+  font-size: 13px;  
 }
 
 #sign_up_page label.checkbox {
