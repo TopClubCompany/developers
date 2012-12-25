@@ -18,7 +18,8 @@ class ViewToggler
     $('#list_grid_view').hide()
     $('#map_places').add('#map_details').show()
     google.maps.event.trigger($("#map_places")[0], 'resize');
-    # google.maps.event.trigger($("#map_places")[0], 'center_changed');
+    center = new google.maps.LatLng( $("#map_places").data('lat'), $("#map_places").data('lng'))
+    window.googleMap.setCenter center
     
   showList: () =>
     $('#list_grid_view').show()

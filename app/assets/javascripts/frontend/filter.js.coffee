@@ -53,6 +53,7 @@ class PlacesCollection
     @ids = []
     @createMap()
     @markers = []
+    window.googleMarkers = @markers
     for block in blocksThatExist
       obj = 
         id: $(block).data('id')
@@ -70,7 +71,7 @@ class PlacesCollection
       minZoom: 2,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     @map = new google.maps.Map(document.getElementById("map_places"), mapOptions)
-
+    window.googleMap = @map
   useNewData: (json, page) ->
     # console.log json
     new Pagination(json.total).goTo(page)
