@@ -3,6 +3,7 @@
 class PlacesController < ApplicationController
   def show
     @place = Place.find params[:id]
+    @location = (Place.find params[:id]).lat_lng
   end
 
   def index
