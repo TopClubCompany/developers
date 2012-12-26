@@ -1,7 +1,9 @@
 .simple_form abbr {
   display: none !important;
 }
-
+.place .timing {
+  overflow: hidden;
+}
 .place:target, .place.target {
   //background: gray;
 }
