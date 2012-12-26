@@ -7,7 +7,13 @@ class Reservation < ActiveRecord::Base
   validates_presence_of :email, :first_name, :last_name, :phone, :time
 
   def full_name
-    "#{first_name} #{last_name}".strip
+    "#{first_name} #{last_name}"#.strip
+  end
+
+  def self.create_from_place(current_user, place)
+    self.new(first_name: current_user.try(:first_name), last_name: current_user.try(:last_name),
+         phone: current_user.try(:phone), user_id: current_user.try(:id), place_id: place,
+         email: current_user.try(:email))
   end
 
 

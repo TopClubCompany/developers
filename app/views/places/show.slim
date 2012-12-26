@@ -98,5 +98,6 @@
           = link_to '50% off all wine card', '#'
         li
           = link_to 'Free welcome drink', '#'
-    #map.span4
-      iframe frameborder="0" height="300" marginheight="0" marginwidth="0" scrolling="no" src="https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=%D0%BA%D0%B8%D0%B5%D0%B2&aq=&sll=37.0625,-95.677068&sspn=50.557552,93.955078&ie=UTF8&hq=&hnear=Kiev,+Kiev+city,+Kyiv+city,+Ukraine&t=m&z=10&ll=50.4501,30.5234&output=embed" width="300"
+    #map.span4 style='width:300px; height: 300px;' *{'data-lat'=>"#{@location.split(',')[0]}", "data-lng" => "#{@location.split(',')[1]}"}
+      
+      
