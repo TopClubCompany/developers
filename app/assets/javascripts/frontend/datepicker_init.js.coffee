@@ -1,6 +1,12 @@
-$(document).ready ->
+$ ->
   $datepicker = $('input[name="reserve_date"]')
-  if $datepicker.hasClass('dateFormatNeeded').length > 0
-    $datepicker.datepicker({ "dateFormat": 'dd/mm/yy'})
-  else
+  if $datepicker.length > 0
+    $datepicker.css('zIndex', '2')
+    if $datepicker.hasClass('dateFormatNeeded')
+      $.datepicker.setDefaults
+        dateFormat: 'dd/mm/yy'
     $datepicker.datepicker()
+ 
+
+
+      
