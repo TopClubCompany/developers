@@ -1,0 +1,50 @@
+.content
+  .row
+    .span8
+      #confirmed.heading
+        h1 Your reservation is confirmed!
+        strong 
+          = @place.title
+        = @date.strftime('%A, %B %e, %Y at %I:%M %p') + " for #{@persons} people"
+      #sign_up_page.page_content.complete.confirmed
+        h2
+          | Confirmation #: 
+          a href='#'
+            = @reservation.id
+            
+          
+        p Your reservation is confirmed and saved in the restaurant's computer reservation system. You'll receive an email copy of this confirmation.
+        p
+          strong Diner Name:
+          = @reservation.full_name
+          br
+            strong Address:
+            /| 1 Lawson Ln, Burlington, VT 05401
+            = @place.location.address
+            br
+              strong Phone:
+              = @reservation.phone
+        p
+          strong Dress Code:
+          | Smart Casual
+        p
+          strong Message from the Restaurant:
+          | Thank you for choosing Avalon. Should your plans change, please let us know. We look forward to serving you.
+        p
+          strong More Info:
+          = @place.description
+    #sidebar.span4.confirmed
+      h3 Where do i go from here?
+      ul
+        li.view
+          a href="#"
+            | View or change your reservation
+        li.print
+          a href="#"
+            | Print reservation details
+        li.map
+          a href="#"
+            | View restaurant on map
+        li.invite
+          a href="#"
+            | Invite friends

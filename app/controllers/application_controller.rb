@@ -4,11 +4,12 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
   before_filter :current_city
   before_filter :set_time
+  helper_method :current_city
 
   protected
 
     def current_city
-      session['city'] || session[:city] || current_user.try(:city).try(:slug) || 'kyiv'
+      current_user.try(:city).try(:slug) || session['city'] || session[:city] || 'kyiv'
     end
 
     def set_locale
@@ -20,6 +21,7 @@ class ApplicationController < ActionController::Base
     end
 
   def set_time
+    # params[:reserve_time].try(:split,':')
     @time = {:h => '10', :m => '30'}
   end
 end

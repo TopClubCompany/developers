@@ -24,7 +24,9 @@ class User < ActiveRecord::Base
   belongs_to :city
 
   has_one :avatar, :as => :assetable, :dependent => :destroy, :autosave => true
+
   has_many :accounts, :dependent => :destroy
+  has_many :reservation, :dependent => :destroy
 
   alias_attribute :name, :title
 

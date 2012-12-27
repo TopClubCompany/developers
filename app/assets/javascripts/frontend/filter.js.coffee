@@ -2,7 +2,7 @@ class Pagination
   constructor: (total_elements, per_page = 4, @max_visible = 5, @elSelector = '#list_grid_view .paginate') ->
     @$el = $(@elSelector)
     @total_pages = Math.ceil (total_elements / per_page)
-    console.log total_elements, per_page, total_elements / per_page
+    # console.log total_elements, per_page, total_elements / per_page
     if @total_pages > 1
       @bindListener()
       @goTo 1
@@ -12,14 +12,14 @@ class Pagination
     @
 
   bindListener: () ->
-    console.log 'binded'
+    # console.log 'binded'
     $("#{@elSelector} a").off 'click'
     setTimeout ( =>
       $("#{@elSelector} a").on 'click', (e) =>      
         e.preventDefault()
         unless $(e.target).hasClass('current')
           pageNum = $(e.target).attr('href').slice(1)
-          window.filter.getPage pageNum
+          window.filter.get 'page', pageNum
           @goTo pageNum
     ), 100
 
@@ -53,6 +53,7 @@ class PlacesCollection
     @ids = []
     @createMap()
     @markers = []
+    window.googleMarkers = @markers
     for block in blocksThatExist
       obj = 
         id: $(block).data('id')
@@ -70,9 +71,9 @@ class PlacesCollection
       minZoom: 2,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     @map = new google.maps.Map(document.getElementById("map_places"), mapOptions)
-
+    window.googleMap = @map
   useNewData: (json, page) ->
-    console.log json
+    # console.log json
     new Pagination(json.total).goTo(page)
     placesData = json.result
     newIds = _.pluck(placesData, 'id')
@@ -111,20 +112,20 @@ class PlacesCollection
   
   addBlock: (place) =>
     properKitchensName = if place.kitchens.length > 18 then place.kitchens.substring(0, 18) + '...' else place.kitchens
-    
+    console.log place
     listBlock = """
     <div class="place" id="list_place_#{place.id}">
         <a href="/places/#{place.id}">
           <img height="100" src="#{place.image_path}" width="140">
         </a>
-        <h4><a href="#">#{place.name}</a></h4>
+        <h4><a href="/places/#{place.id}">#{place.name}</a></h4>
         <div class="rating">
           <div class="stars">
             <div class="stars_overlay"></div>
             <div class="stars_bar" style="left: #{place.overall_mark * 20}%"></div>
             <div class="stars_bg"></div>
           </div>
-          <small>#{place.reviews}</small>
+          <small>#{place.review_count}</small>
         </div>
         <ul class="place_features">
           <li class="location">Ивана Мазепы улица</li>
@@ -153,7 +154,7 @@ class PlacesCollection
     mapBlock = """
       <div id="place_#{place.id}" data-lng="#{place.lng}" data-lat="#{place.lat}" class="place">
         <h4>
-          <a href="#">#{place.name}</a>
+          <a href="/places/#{place.id}">#{place.name}</a>
         </h4>
         <div class="rating">
           <div class="stars">
@@ -177,22 +178,52 @@ class PlacesCollection
     $listEl = $(listBlock).insertBefore('#list_grid_view .paginate')
     time = $("select[name=reserve_time]").val()
     updateSingleTime.call(@, time, $el, $listEl)
-    
+    updateReservationLink.call(@, place, $el, $listEl)
     
     
 
   updateTime: (time) =>
     #TODO create ajax responder for batch of ids
     #@batchUpdate @ids, time
+    window.filter.get 'reserve_time', time
     $('#map_details_wrapper').find('.place').each (index, el) ->
       $el = $(el)
       $listEl = $('#list_' + $(el).attr('id'))
       #askAjax for single place being available at specific time
       updateSingleTime.call(@, time, $el, $listEl)
-      
+  updatePeople: (number) =>
+    window.filter.get 'number_of_people', number
+    $('#map_details_wrapper').find('.place').each (index, el) ->
+      $el = $(el)
+      $listEl = $('#list_' + $(el).attr('id'))
+      #askAjax for single place being available at specific time
+      updateSinglePerson.call(@, number, $el, $listEl)      
+
+  updateReservationLink = (place, els...) ->
+    #http://0.0.0.0:3005/new_reservation/26-12-2012,13,h=10&m=00,3
+    if els.length is 2
+      [$listEl, $el] = els
+    for index in [0..4]     
+      date = $("input[name='reserve_date']").val().replace(/\//g,'-')
+      id = place.id
+      time = $("select[name=reserve_time]").val()
+      people = $("select[name=number_of_people]").val()
+      newLink = "/new_reservation/#{date},#{id}, h=#{time.split(':')[0]}&m=#{time.split(':')[1]},#{people}"
+      $el.find(".timing a:eq(#{index})").attr('href', newLink)
+      $listEl.find(".timing a:eq(#{index})").attr('href', newLink)
+
+  updateSinglePerson = (number, els...) ->
+    if els.length is 2
+      [$listEl, $el] = els
+    for index in [0..4]  
+      oldLink = $el.find(".timing a:eq(#{index})").attr('href')
+      newLink = oldLink.replace(/\d+$/, number) 
+      $el.find(".timing a:eq(#{index})").attr('href', newLink)
+      $listEl.find(".timing a:eq(#{index})").attr('href', newLink)
+            
   updateSingleTime = (time, els...) ->
     if els.length is 2
-      [$el, $listEl] = els
+      [$listEl, $el] = els
     [base_time, minutes] = time.split ':'
     base_time = parseInt base_time
     possibilities = ['00', '15', '30', '45']
@@ -204,13 +235,16 @@ class PlacesCollection
     "#{base_time - ( if (index - 1) < 0 then 1 else 0 ) }:#{possibilities[(if (index - 1) < 0 then index - 1 + length else index - 1) % 4]}",                  
     "#{base_time - ( if (index - 2) < 0 then 1 else 0 ) }:#{possibilities[(if (index - 2) < 0 then index - 2 + length else index - 2) % 4]}"]
     _.each values, (time, index, values) ->
+      oldLink = $el.find(".timing a:eq(#{index})").attr('href')
+      oldLink = oldLink.replace(/h=\d+/,"h=#{time.split(':')[0]}")
+      newLink = oldLink.replace(/m=\d+/,"m=#{time.split(':')[1]}")
+      console.log oldLink
+      $el.find(".timing a:eq(#{index})").attr('href', newLink)
       $el.find(".timing a:eq(#{index})").html time
       $listEl.find(".timing a:eq(#{index})").html time
 
     
   addMarker: (obj) =>
-
-
     marker = new google.maps.Marker(
       position: new google.maps.LatLng(obj.lat, obj.lng)
       title: "Hello from #{obj.id}!"
@@ -249,17 +283,34 @@ class FilterInput
     # if $(".paginate .current").attr('href') isnt "##{page}" or $(".paginate .current").length is 0
       # $(".paginate a[href=##{page}]").addClass('current')
 
-  getPage: (pageTo) =>
+  get: (entity = 'page', entityTo) =>
+    obj = {}
+    obj[entity] = entityTo
+    paramed = $.param(obj)
+    switch entity
+      when 'page'
+       # /#{entity}=(\d+)/
+       regexpMatch = /page=(\d+)/
+       regexpReplace = /page=\d+/
+      when 'reserve_time'
+       regexpMatch = /reserve_time=(\d+\W+\w+)/
+       regexpReplace = /reserve_time=(\d+\W+\w+)/       
+      when 'number_of_people'
+       regexpMatch = /number_of_people=(\d+)/
+       regexpReplace = /number_of_people=\d+/
+
     baseURL = window.location.pathname
     oldQuery = window.location.search || ''
     amp = if oldQuery is '' then '' else '&'
-    if (window.location.search.match(/page=(\d+)/)) 
-      newQuery = oldQuery.replace(/page=\d+/, "page=#{pageTo}")          
+    if (window.location.search.match(regexpMatch))
+      newQuery = oldQuery.replace(regexpReplace, paramed)          
     else
-      newQuery = oldQuery + amp + "page=#{pageTo}"          
+      newQuery = oldQuery + amp + paramed          
     newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '?')
     window.history.replaceState('',null, newUrl)
-    askAJAX.call(@, newQuery, @places, pageTo)      
+    if entity is 'page' 
+      pageTo = entityTo
+      askAJAX.call(@, newQuery, @places, pageTo)      
 
   checkIfNeeded: () ->
     querystring = window.location.search
@@ -288,7 +339,13 @@ class FilterInput
           amp = if newQuery is '' then '' else '&'
           newQuery = newQuery + amp + "#{key}=#{value}"
       amp = '&' if newQuery.length > 0
+
       newQuery = newQuery + amp + "page=#{startPage}"                
+      date = $("input[name='reserve_date']").val().replace(/\//g,'-')
+      # page is always there so no need to check for &
+      newQuery = newQuery + "&" + $.param({reserve_date: date})
+      newQuery = newQuery + "&" + $.param({reserve_time: $('select[name=reserve_time]').val()})
+      newQuery = newQuery + "&" + $.param({number_of_people: $('select[name=number_of_people]').val()}) 
       baseURL =  window.location.pathname
       newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '?')
 
@@ -296,17 +353,29 @@ class FilterInput
       askAJAX.call(@, newQuery, @places, startPage) 
     
     self = @
+   
+    $('input[name="reserve_date"]').datepicker( 
+      beforeShow: () ->
+        console.log 'lol2'
+      onClose: (dateText, inst) ->
+        console.log 'lol'
+        # headlineText = $('#mapcontainer > h3:first-child').html().replace(/(\d+\/?){3}(?=,)/, dateText)
+        # $('#mapcontainer > h3:first-child').html headlineText
+        # self.places.updateDate date
+    )
+
     $("select[name=reserve_time]").on 'change', ->
       time = $(this).val()
-      self.places.updateTime time
-      
-                
+      console.log time
+      headlineText = $('#mapcontainer > h3:first-child').html().replace(/\d+\:\d+(?=\sfor\s)/, time)
+      $('#mapcontainer > h3:first-child').html headlineText
+      self.places.updateTime time               
     
     $("select[name=number_of_people]").on 'change', ->          
       number = $(this).val()
       headlineText = $('#mapcontainer > h3:first-child').html().replace(/\d+(?=\speople)/, number)
       $('#mapcontainer > h3:first-child').html headlineText
-      
+      self.places.updatePeople number
     
 
   askAJAX = (serializedData, placesObj, page) =>

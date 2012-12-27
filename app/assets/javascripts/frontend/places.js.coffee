@@ -1,4 +1,4 @@
-$(document).ready ->
+$ ->
   $('.add_to_favorites').click ->
     $(this).toggleClass 'i_like_this_place'
 
@@ -22,3 +22,23 @@ $(document).ready ->
     history.pushState {}, "", "##{hashName}"
     $("a[href=##{hashName}]").parent().addClass('active').siblings().removeClass('active')
     $("##{hashName}").show().siblings('.tab_content').hide()  
+ 
+  console.log 'lold', $('#map').length > 0
+  setTimeout((->
+    if $('#map').length > 0
+      console.log 'lold'
+      initialData = $('#map').data()
+      mapOptions =
+        center: new google.maps.LatLng(initialData.lat, initialData.lng),
+        zoom: 13,
+        minZoom: 9,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      map = new google.maps.Map(document.getElementById("map"), mapOptions)
+      marker = new google.maps.Marker(
+        position: new google.maps.LatLng(initialData.lat, initialData.lng)
+        title: "Hello from here!"        
+      )
+      marker.setMap(map)
+      google.maps.event.trigger($("#map")[0], 'resize');
+  ), 1000)
+  
