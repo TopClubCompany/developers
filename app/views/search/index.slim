@@ -54,7 +54,7 @@
               - location = place.lat_lng.split(',')
               .place id="place_#{place.id}" *{'data-lat'=>"#{location[0]}", "data-lng" => "#{location[1]}", 'data-id' => "#{place.id}"}
                 h4
-                  a href="#"
+                  a href=place_path(place.slug)
                     = place["name_#{I18n.locale}"]
                 .rating
                   .stars
@@ -107,7 +107,7 @@
               a href=place_path(place.slug)
                 img height="100" width="140" src="#{slider_place_image(place)}"
               h4
-                a href="#"
+                a href=place_path(place.slug)
                   = place["name_#{I18n.locale}"]
               .rating
                 .stars
@@ -179,7 +179,7 @@
             - current = params[:page] || 1
             - per_page = 4
             - number_of_pages = @result.total.to_i == per_page ?  1 : @result.total.to_i / per_page + 1
-            - if number_of_pages > 1
+            - if number_of_pages.to_i > 1
               - for i in 1..number_of_pages
                 -if current == i
                   a.current href="##{i}" #{i}
