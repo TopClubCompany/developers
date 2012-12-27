@@ -442,9 +442,15 @@ ActiveRecord::Schema.define(:version => 20121224113531) do
     t.string   "phone"
     t.string   "email"
     t.text     "special_notes"
+    t.datetime "time"
+    t.integer  "user_id"
+    t.integer  "place_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
+
+  add_index "reservations", ["place_id"], :name => "index_reservations_on_place_id"
+  add_index "reservations", ["user_id"], :name => "index_reservations_on_user_id"
 
   create_table "reviews", :force => true do |t|
     t.integer  "reviewable_id"

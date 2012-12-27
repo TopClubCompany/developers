@@ -6,17 +6,6 @@ en:
         password: ""
         password_confirmation: ""
         remember_me: ""
-  user_profile:
-    invite_friends:
-      tell_friends: Tell your friends about
-      copy: Copy
-      email_friends: Email your friends
-      share_link: Share a link
-      inv_friends: Invite friends from
-      or: or
-      send_email: Send email
-      facebook: Facebook
-      vkontakte: Вконтакте
   auth: 
     edit_passwords: 
       confirm_new_password: ""
@@ -79,6 +68,81 @@ en:
     create: ""
     delete_comment: ""
     edit_comment: ""
+  date: 
+    abbr_day_names: ""
+    abbr_month_names: ""
+    day_names: ""
+    formats: 
+      default: ""
+      long: ""
+      short: ""
+    month_names: ""
+    order: ""
+  datetime: 
+    distance_in_words: 
+      about_x_hours: 
+        few: ""
+        many: ""
+        one: ""
+        other: ""
+      about_x_months: 
+        few: ""
+        many: ""
+        one: ""
+        other: ""
+      about_x_years: 
+        few: ""
+        many: ""
+        one: ""
+        other: ""
+      almost_x_years: 
+        few: ""
+        many: ""
+        one: ""
+        other: ""
+      half_a_minute: ""
+      less_than_x_minutes: 
+        few: ""
+        many: ""
+        one: ""
+        other: ""
+      less_than_x_seconds: 
+        few: ""
+        many: ""
+        one: ""
+        other: ""
+      over_x_years: 
+        few: ""
+        many: ""
+        one: ""
+        other: ""
+      x_days: 
+        few: ""
+        many: ""
+        one: ""
+        other: ""
+      x_minutes: 
+        few: ""
+        many: ""
+        one: ""
+        other: ""
+      x_months: 
+        few: ""
+        many: ""
+        one: ""
+        other: ""
+      x_seconds: 
+        few: ""
+        many: ""
+        one: ""
+        other: ""
+    prompts: 
+      day: ""
+      hour: ""
+      minute: ""
+      month: ""
+      second: ""
+      year: ""
   flash: 
     auth: 
       failure: ""
@@ -114,11 +178,11 @@ en:
     en: eng
     ru: rus
     uk: uk
-  language_title:
+  language_title: 
     en: English
     ru: "Русский"
     ua: "Украинский"
-  links:
+  links: 
     en: eng
     ru: "рус"
     uk: "укр"
@@ -163,6 +227,8 @@ en:
       next: ""
       previous: ""
       truncate: ""
-
   registration_form:
     or: ' or '
+  reservation:
+    new_reservation:
+      complete_reservation: Complete your reservation

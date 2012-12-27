@@ -19,7 +19,6 @@ $ ->
         @init_keyup_listener()
         @init_request_checker()
 
-
     init_config: (config)->
       el = @
       for key of config
@@ -52,6 +51,8 @@ $ ->
               el.is_search_value_new = false
               $(el.autocomplete_selector).typeahead({source: el.suggestions})
               $(el.autocomplete_selector).keyup()
+          ).error(->
+            el.is_search_value_new = false
           )
 
   $(document).ready ->

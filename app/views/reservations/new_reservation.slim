@@ -1,0 +1,45 @@
+.content
+  .row
+    .span8 id="#{'new_reserve_center' if signed_in?}"
+      #complete.heading
+        h1= t('reservation.new_reservation.complete_reservation')
+        strong 
+          = @place.title
+          '
+        = @date.strftime('%A, %B %e, %Y at %I:%M %p') + " for #{@persons} people"
+        span.complete_edit
+          i.icon-pencil.icon-white
+          | edit
+      #sign_up_page.page_content.complete
+        h2
+          | Special offer:
+          a href="#"
+        = simple_form_for @reservation, url: complete_reservation_path, method: 'post', :wrapper => :front_reg_form do |f|
+          = f.error_notification
+          label
+            = t('sign_up.diner_name')
+            b  *
+          = f.input :first_name, placeholder: "First name", label: false
+          = f.input :last_name, placeholder: "Last name",label: false
+          .clear
+          = f.input :phone, placeholder: "+38 ( _ _ _ ) _ _ _ - _ _ - _ _", label: get_reg_form_attr_name(:phone, true), required: true
+          .clear
+          = f.input :email, label: get_reg_form_attr_name(:email)
+          .clear
+          = f.input :special_notes
+          .clear
+          = f.input :time, as: 'hidden', input_html: { value: @date }
+          .clear
+          = f.input :user_id, as: 'hidden', input_html: { value: @reservation.try(:user_id) }
+          .clear
+          = f.input :place_id, as: 'hidden', input_html: { value: @reservation.try(:place_id) }
+          .clear
+          = f.submit "Complete Free Reservation"
+
+    - unless signed_in?
+      #sidebar.span4
+        h3
+          a href=new_user_session_path
+            ' Sign in
+          | and earn 5 points
+        p All members get rewards for online reservations!
