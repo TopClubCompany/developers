@@ -1,10 +1,6 @@
 form action='/search'
-  input id='title_or_location' name="title_or_location" placeholder="title or location" type="text"
-  #suggetions
-    span Sowa Cafe
-    span Cafe Champagne, Kiev, Ukraine, Earth planet
-    span SiaM Cafe
-    span Cafe Teatr
+  .span3
+    input id='title_or_location' name="title_or_location" placeholder="title or location" type="text" autocomplete="off"
   label for="reserve_date"
   input class='dateFormatNeeded' name="reserve_date" type="text" value=Time.now.strftime("%d/%m/%Y")
   label for="reserve_time"
