@@ -1,7 +1,7 @@
 form action='/search'
-  input id='title_or_location' name="title" placeholder="title or location" type="text"
+  input id='title_or_location' name="title_or_location" placeholder="title or location" type="text" autocomplete="off"
   label for="reserve_date"
-  / input class='dateFormatNeeded'
+  /input class='dateFormatNeeded'
   input class='dateFormatNeeded' name="reserve_date" type="text" value=(params[:reserve_date] || Time.now.strftime("%d/%m/%Y"))
   label for="reserve_time"
   select name="reserve_time"
