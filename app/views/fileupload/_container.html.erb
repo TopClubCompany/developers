@@ -1,0 +1,21 @@
+<%= content_tag(:div, :class => "fileupload #{multiple ? 'many_assets' : 'one_asset'}",
+                :id => element_id, :data => {:assoc => attribute_name}) do %>
+  <div class="gray-blocks">
+    <div>
+      <div class="fileupload-list ill-bl galery">
+        <%= render :partial => "fileupload/#{asset_render_template}", :collection => assets %>
+      </div>
+      <i class="fileupload-button icon-edit icon-white" style="display:none;">
+        upload
+      </i>
+    </div>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    var upl = new qq.FileUploaderInput(<%= raw script_options %>);
+//    upl._setupDragDrop();
+//    Manage.init_assets('<%= element_id %>', '<%= sort_admin_assets_path(:klass => asset_klass) %>', <%= multiple ? 'true' : 'false' %>);
+  });
+</script>
