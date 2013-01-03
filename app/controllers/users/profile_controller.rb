@@ -40,16 +40,13 @@ class Users::ProfileController < ApplicationController
   end
 
   def update_settings
-    user = current_user
     #user.password = params[:user][:password].present? ?  params[:user][:password] : current_user.password
-    if user.update_attributes(params[:user])
-      redirect_to settings_path(current_user.id)
-      sign_in(user, by_pass: true)
+    if current_user.update_attributes(params[:user])
+      redirect_to settings_profile_path(current_user.id)
+      sign_in(current_user, by_pass: true)
     else
-      #raise user.inspect
       render action: 'edit_settings'
     end
-
   end
 
 end
