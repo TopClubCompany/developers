@@ -1,0 +1,55 @@
+#user.content
+  .row
+    .span2
+      = render 'shared/user_sidebar'
+
+    #dashboard.span10.page_content
+      .row
+        .span2
+          h1= user_menu_name
+          #user_pic_big
+            img.user_pic_big height="128" src=(current_user.avatar ? current_user.avatar.url(:sidebar) : '/assets/no_avatar.gif') width="128"
+              a.edit href="#"
+                i.icon-edit.icon-white
+                | upload
+          #status.gourmand GOURMAND
+        #dash_blocks.span8
+          #personal_information.dash_block
+            h2
+              | Personal Information
+              a.edit href=edit_settings_path(current_user.id)
+                i.icon-edit
+                | edit
+            ul.settings
+              li
+                label Name
+                = current_user.full_name
+              li
+                label City
+                = current_user.city.try(:title) or 'not specified'
+              li
+                label Phone
+                = current_user.phone
+              li
+                label Gender
+                = current_user.gender_title or 'not specified'
+              li
+                label Birthday
+                /| December 25 1986
+                = current_user.birthday.try { |birthday| birthday.strftime("%B %e %Y") } or 'not specified'
+          #settings.dash_block
+            h2
+              | Settings
+              a.edit href=edit_settings_path(current_user.id)
+                i.icon-edit
+                | edit
+            ul.settings
+              li
+                label Email
+                = current_user.email
+              li
+                label Password
+                | ••••••••••
+              li
+                label Notifications
+                | Weekly Digest
