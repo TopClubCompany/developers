@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121224113531) do
+ActiveRecord::Schema.define(:version => 20130103132506) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -592,6 +592,7 @@ ActiveRecord::Schema.define(:version => 20121224113531) do
     t.integer  "place_id"
     t.datetime "created_at",                                                   :null => false
     t.datetime "updated_at",                                                   :null => false
+    t.boolean  "is_discount"
   end
 
   add_index "week_days", ["day_type_id"], :name => "index_week_days_on_day_type_id"
