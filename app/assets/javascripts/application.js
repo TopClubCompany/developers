@@ -28,6 +28,10 @@
 //=require waypoints
 //= require underscore-min
 //= require handlebars
+//= require fileupload/fileuploader.js
+//= require fileupload/fileuploader-input.js
+//= require manage-fileuploader.js
+//= require jquery.tmpl.min
 
 //=require_tree ./frontend
 //=require jquery.autocomplete

@@ -14,6 +14,8 @@ Topclub::Application.routes.draw do
 
   post '/user_registration' => 'users/omniauth_callbacks#user_registration', as: 'user_registration'
 
+
+  #refactor this
   get '/profile/:user_id' => 'users/profile#show', as: 'profile'
   get '/profile/:user_id/invite_friends' => 'users/profile#invite_friends', as: 'invite_friends'
   get '/profile/:user_id/self_reviews' => 'users/profile#self_reviews', as: 'self_reviews'
@@ -21,9 +23,12 @@ Topclub::Application.routes.draw do
   get '/profile/:user_id/edit_settings' => 'users/profile#edit_settings', as: 'edit_settings'
   put '/profile/:user_id/update_settings' => 'users/profile#update_settings', as: 'update_settings'
   post '/profile/send_email_invitation_path' => 'users/profile#send_email_invitation', as: 'send_email_invitation'
+  #end refactor
 
   get '/new_reservation/:date,:place_id,:time,:amount_of_person' => 'reservations#new_reservation', as: 'new_reservation'
+
   get '/reservation_confirmed/:reservation_id' => 'reservations#reservation_confirmed', as: 'reservation_confirmed'
+
   post '/complete_reservation' => 'reservations#complete_reservation', as: 'complete_reservation'
 
   match 'autocomplete' => AutocompleteApp
@@ -31,6 +36,9 @@ Topclub::Application.routes.draw do
   root :to => 'explore#index'
 
   resources :explore
+
+  #resources :assets, :only => [:create, :destroy], :module => "admin" do
+  #end
 
   resources :search do
     collection do
@@ -46,9 +54,6 @@ Topclub::Application.routes.draw do
       post :planned
       post :visited
     end
-    #collection do
-    #  get :show
-    #end
   end
 
   resources :sandboxes do
@@ -68,8 +73,11 @@ Topclub::Application.routes.draw do
     match 'place_feature' => PlaceFeatureApp
 
     get 'static_pages/:structure_id' => 'static_pages#show'
+
     root :to => "dashboards#index"
+
     resources :dashboards
+
     resources :categories do
       post :batch, :on => :collection
       post :rebuild, :on => :collection
