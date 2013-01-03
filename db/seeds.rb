@@ -1,7 +1,7 @@
 #encoding: utf-8
 
 def insert_default_user(email, role = :default)
-  user = FactoryGirl.build(:user, role.to_sym, email: email)
+  user = FactoryGirl.build(:user, role.to_sym, email: email, phone: "+38(044)111-11-11")
   user.activate.skip_confirmation!
   user.save!
   p '=============== User ================='
@@ -38,7 +38,7 @@ end
 def add_test_stuff
   Place.full_truncate
   WeekDay.full_truncate
-  15.times do
+  35.times do
     kitchen  = Kitchen.all.sample(2)
     category = Category.all.sample(2)
     location = FactoryGirl.build(:location)

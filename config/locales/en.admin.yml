@@ -104,6 +104,7 @@ en:
     gender: 
       female: ""
       male: ""
+      unknown: Don't know yet
     geo_autocomplete: ""
     group: 
       kind: 

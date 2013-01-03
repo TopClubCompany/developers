@@ -16,6 +16,10 @@ Topclub::Application.routes.draw do
 
   get '/profile/:user_id' => 'users/profile#show', as: 'profile'
   get '/profile/:user_id/invite_friends' => 'users/profile#invite_friends', as: 'invite_friends'
+  get '/profile/:user_id/self_reviews' => 'users/profile#self_reviews', as: 'self_reviews'
+  get '/profile/:user_id/settings' => 'users/profile#settings', as: 'settings'
+  get '/profile/:user_id/edit_settings' => 'users/profile#edit_settings', as: 'edit_settings'
+  put '/profile/:user_id/update_settings' => 'users/profile#update_settings', as: 'update_settings'
   post '/profile/send_email_invitation_path' => 'users/profile#send_email_invitation', as: 'send_email_invitation'
 
   get '/new_reservation/:date,:place_id,:time,:amount_of_person' => 'reservations#new_reservation', as: 'new_reservation'

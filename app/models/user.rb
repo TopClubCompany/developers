@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   #attr_accessible :user_role_id, :trust_state
 
-  validates_presence_of :email, :password, :first_name, :last_name
+  validates_presence_of :email, :first_name, :last_name
 
 
   enumerated_attribute :gender_type, :id_attribute => :gender, :class => ::GenderType
@@ -89,6 +89,11 @@ class User < ActiveRecord::Base
     self.last_name = (last_name or 'Anonym')
     self
   end
+
+  def gender_title
+    GenderType.find_by_id(gender).try(:title)
+  end
+
 
   def email_required?
     !pending? || email.present?

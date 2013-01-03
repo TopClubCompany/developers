@@ -18,14 +18,14 @@
         ul#user_dropdown
           li.active
             img height="20" src="" width="20"
-              a href="#"
+              a href=profile_path(current_user.id)
                 nobr
                   = user_menu_name
 
           li= link_to 'My reservations', '/user#reservations'
           li= link_to 'My favourites', '/user#favourites'
           li= link_to 'My reviews', '/user#reviews'
-          li= link_to 'Settings', profile_path(current_user.id)
+          li= link_to 'Settings', settings_path(current_user.id)
           li= link_to 'Diner style', '/user#style'
           li= link_to 'TOP points', '/user#points'
           li= link_to 'Invite friends', invite_friends_path(current_user.id)

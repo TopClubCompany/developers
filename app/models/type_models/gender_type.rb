@@ -9,7 +9,7 @@ class GenderType
   define_enum do |builder|
     builder.member :male, :object => new("male")
     builder.member :female, :object => new("female")
-#    builder.member :else, :object => new("else")
+    builder.member :else, :object => new("unknown")
   end
 
   attr_reader :code
