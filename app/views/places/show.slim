@@ -4,16 +4,7 @@
       #search_form
         span.header Reserve at #{@place.name}
         .header_special Up to 30% off
-        form
-          label for="reserve_date"
-          input name="reserve_date" type="text" value="11/07/2012"
-            label for="reserve_time"
-            input name="reserve_time" type="text" value="7:00 PM"
-              label for="number_of_people"
-                nobr Number of people
-              input name="number_of_people" type="text" value="2"
-                input type="submit" value="Find a table"
-                  .clear
+        = render :partial => 'shared/search_form', :locals => { :time => {:h => (@time[:h] || 12), :m => (@time[:m] || '00')}, :show_title => true }
       .page_content itemscope="" itemtype="http://data-vocabulary.org/Review-aggregate"
         img.place_img alt=@place.name height="180" itemprop="photo" src=(@place.place_image.url(:place_show)if @place.place_image) width="240"
           h1 title=@place.name
