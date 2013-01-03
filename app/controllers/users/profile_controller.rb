@@ -16,12 +16,15 @@ class Users::ProfileController < ApplicationController
     sender  = current_user.full_name
     emails.each do |email|
       unless email =~ Devise.email_regexp
-        return (render action: 'invite_friends', falsh: { error: "some email(s) don't valid"} )
+        flash[:error] = "some email(s) don't valid"
+        return (render action: 'invite_friends')
       end
     end
     emails.each do |email|
       AccountMailer.send_invitation(email, link, sender, message).deliver
     end
+    flash[:success] = "invated!"
+    redirect_to profile_path(current_user)
   end
 
   def self_reviews
