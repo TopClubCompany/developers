@@ -47,5 +47,4 @@ class SearchController < ApplicationController
   #  @query = { match_all: {} }
   #end
 
-
 end

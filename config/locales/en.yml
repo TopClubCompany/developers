@@ -16,7 +16,7 @@ en:
       recover_password: ""
       sign_in: ""
       sign_out: ""
-      sign_up: ""
+      sign_up: "Sign up now!"
     links_short: 
       cabinet: ""
       sign_in: ""
@@ -232,3 +232,19 @@ en:
   reservation:
     new_reservation:
       complete_reservation: Complete your reservation
+
+  explore:
+    index:
+      how_it_works: "How it works?"
+      find_restorants: "Find a restaurants"
+      reserv_online: "Reserve your table online for free"
+      save_up: "Save up to 30% off all food and drinks"
+      best: "Best restaurants"
+      new: "New restaurants"
+      available: "Available tonight"
+      all: "Browse all ›"
+
+  footer:
+    earn_point: "Earn points and get discounts!"
+    need_clients: "Need more clients?"
+    become_a_prtner: "Become a partner!"
