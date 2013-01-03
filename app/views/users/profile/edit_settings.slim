@@ -6,7 +6,7 @@
     #dashboard.span10.page_content
       .row
         - @user = current_user
-        = simple_form_for @user, url: update_settings_path, builder: Utils::Views::FrontFormBuilder, wrapper: :front_reg_form do |f|
+        = simple_form_for @user, url: update_settings_profile_path, builder: Utils::Views::FrontFormBuilder, wrapper: :front_reg_form do |f|
           .span2
             h1= user_menu_name
             = f.attach_file_field :avatar, :file_max_size => 2

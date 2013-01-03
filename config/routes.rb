@@ -16,14 +16,22 @@ Topclub::Application.routes.draw do
 
 
   #refactor this
-  get '/profile/:user_id' => 'users/profile#show', as: 'profile'
-  get '/profile/:user_id/invite_friends' => 'users/profile#invite_friends', as: 'invite_friends'
-  get '/profile/:user_id/self_reviews' => 'users/profile#self_reviews', as: 'self_reviews'
-  get '/profile/:user_id/settings' => 'users/profile#settings', as: 'settings'
-  get '/profile/:user_id/edit_settings' => 'users/profile#edit_settings', as: 'edit_settings'
-  put '/profile/:user_id/update_settings' => 'users/profile#update_settings', as: 'update_settings'
-  post '/profile/send_email_invitation_path' => 'users/profile#send_email_invitation', as: 'send_email_invitation'
-  #end refactor
+
+
+  resources :profile, module: :users do
+    member do
+      get :invite_friends
+      get :self_reviews
+      get :settings
+      get :edit_settings
+      put :update_settings
+    end
+
+    collection do
+      post :send_email_invitation
+    end
+  end
+
 
   get '/new_reservation/:date,:place_id,:time,:amount_of_person' => 'reservations#new_reservation', as: 'new_reservation'
 
