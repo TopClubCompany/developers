@@ -7,6 +7,9 @@ class Review < ActiveRecord::Base
 
   has_many :marks
 
+  def avg_mark
+    marks.average(:value).to_f
+  end
 
 end
 # == Schema Information
