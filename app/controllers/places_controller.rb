@@ -1,5 +1,4 @@
 #coding: utf-8
-
 class PlacesController < ApplicationController
   def show
     @place = Place.find params[:id]
@@ -7,15 +6,12 @@ class PlacesController < ApplicationController
   end
 
   def index
-    if request.xhr?
-      render :partial => 'places', :content_type => 'text/html; charset=utf-8'
-    end
   end
 
   def set_location
     session[:city] = params[:location_slug]
-    if City.find_by_slug(session[:city]) && current_user
-      current_user.update_attribute(:city, City.find_by_slug(session[:city]))
+    if (city = City.find_by_slug(session[:city])) && current_user
+      current_user.update_attribute(:city, city)
     end
     redirect_to  :back
   end
