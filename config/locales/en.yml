@@ -54,13 +54,7 @@ en:
       sign_in: ""
       sign_out: ""
       sign_up: ""
-  collections: 
-    about: ""
-    desc: ""
-    details: ""
-    series: ""
-    styles: ""
-    trade_mark: ""
+
   comments: 
     add_comment: ""
     comment: ""
