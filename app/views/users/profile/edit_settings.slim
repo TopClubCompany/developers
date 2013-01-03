@@ -10,19 +10,11 @@
           .span2
             h1= user_menu_name
             = f.attach_file_field :avatar, :file_max_size => 2
-            /#user_pic_big
-              img.user_pic_big height="128" src=(current_user.avatar ? current_user.avatar.url(:sidebar) : '/assets/no_avatar.gif') width="128"
-                a.edit href="#"
-                  i.icon-edit.icon-white
-                  | upload
             #status.gourmand GOURMAND
           #dash_blocks.span8
             #personal_information.dash_block
               h2
                 | Personal Information
-                a.edit href=edit_settings_path(current_user.id)
-                  i.icon-edit
-                  | edit
               ul.settings
                 li
                   = f.input :first_name
@@ -39,9 +31,6 @@
             #settings.dash_block
               h2
                 | Settings
-                a.edit href=edit_settings_path(current_user.id)
-                  i.icon-edit
-                  | edit
               ul.settings
                 li
                   = f.input :email
@@ -50,7 +39,7 @@
                 li
                   label Notifications
                   select name="user_notifications"
-                    option value="1986"
-                    option value="1987"
-                    option value="1988"
+                    option value="1986" 1986
+                    option value="1987" 1990
+                    option value="1988" 2932
             = f.submit 'Update information'
