@@ -1,0 +1,14 @@
+<%= content_tag(:div, :class => "asset ill", :id => "asset_#{file.id}", :style => 'width: 850px;height: 40px;float:none;') do %>
+    <%= link_to image_tag("/images/admin/empty.gif", :alt => t('admin.fileupload.delete'), :title => t('admin.fileupload.delete')),
+                admin_asset_path(file),
+                :remote => true,
+                :method => :delete,
+                :data => {:confirm => t('admin.delete_confirmation')},
+                :class => "del",
+                :style => 'left: 0;' %>
+
+    <%= link_to content_tag(:span, t('active_admin.fileupload.file')), file.url, :style => 'margin-left: 20px;' %>
+    <br/>
+    <%#= text_field_tag '', "http://#{request.env['HTTP_HOST']}"+file.url, :size => 90, :style => '' %>
+
+<% end %>
