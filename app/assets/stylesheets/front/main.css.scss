@@ -1241,13 +1241,42 @@ input[type='submit']:hover {
   width: 740px;
 }
 
-#user .user_pic_big {
+#user #user_pic_big {
+  position: relative;
   width: 128px;
   height: 128px;
+  overflow: hidden;
   border-radius: 3px;
   background: #f2f0ea;
   margin: 0 10px 5px 0;
   float: left;
+}
+
+#user #user_pic_big .user_pic_big {
+  width: 128px;
+  height: 128px;
+  border-radius: 3px
+}
+
+#user #user_pic_big:hover img {
+  opacity: 0.7;
+}
+
+#user #user_pic_big .edit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1px 5px;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  font-size: 11px;
+  display: none;
+  border-radius: 0 3px 0 3px;
+  font-weight: bold;
+}
+
+#user #user_pic_big:hover .edit {
+  display: block;
 }
 
 #user #status {
@@ -1263,7 +1292,7 @@ input[type='submit']:hover {
 }
 
 #user #status.gourmand {
-  background: image_url('../assets/status/gourmand.png') top left no-repeat;
+  background: url('../img/status/gourmand.png') top left no-repeat;
 }
 
 
@@ -1282,8 +1311,34 @@ input[type='submit']:hover {
   margin-top: -10px;
 }
 
+#user #dash_blocks .dash_block h2 .edit {
+  font-family: Arial, Helvetica;
+  font-size: 11px;
+  font-weight: bold;
+  margin: 0 0 0 5px;
+}
+
+#user #dash_blocks .dash_block h2 .edit i {
+  opacity: 0.5;
+  margin: 0 0 5px 0;
+}
+
 #user #dash_blocks .dash_block h2 span {
   color: #df5b49;
+}
+
+#user #dash_blocks .dash_block ul.settings li {
+  display: block;
+  font-size: 13px;
+  margin: 0 0 10px 0;
+  font-weight: bold;
+}
+
+#user label {
+  font-size: 13px;
+  margin-bottom: 0;
+  color: #999;
+  font-weight: normal;
 }
 
 #user #dash_blocks #upcoming_reservations.dash_block {
@@ -1304,6 +1359,10 @@ input[type='submit']:hover {
 #user #dash_blocks #upcoming_reservations .reservation {
   border-bottom: 1px solid #f2f0ea;
   padding: 5px 0 10px 0;
+}
+
+#user #dash_blocks #upcoming_reservations .btns {
+  right: 0;
 }
 
 #user #dash_blocks #upcoming_reservations .btns a {
@@ -1346,6 +1405,235 @@ input[type='submit']:hover {
   padding: 5px 0 5px 0;
   margin-bottom: 0;
 }
+
+#user #dash_blocks .reservation {
+  position: relative;
+  padding: 8px 0 10px 10px !important;
+  margin-left: -10px;
+}
+
+#user #dash_blocks .reservation .rating {
+  margin-bottom: 0;
+}
+
+#user #dash_blocks .reservation .btns {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  width: 200px;
+}
+
+#user #dash_blocks .reservation .btns a {
+  float: right !important;
+  margin-bottom: 5px !important;
+}
+
+#user #dash_blocks .past img {
+  filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */
+  filter: gray; /* IE6-9 */
+  -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+  opacity: 0.8;
+
+  -o-transition: all 300ms linear;
+  -webkit-transition: all 300ms linear;
+  -moz-transition: all 300ms linear;
+  transition: all 300ms linear;
+}
+
+#user #dash_blocks .past:hover img {
+  filter: none;
+  -webkit-filter: none;
+  opacity: 1;
+}
+
+#user #dash_blocks .past h4 a {
+  color: #999;
+}
+
+#user #dash_blocks .past:hover h4 a {
+  color: #DF5B49;
+}
+
+#user #dash_blocks .past .discount_label {
+  background-color: #999;
+}
+
+#user #dash_blocks .past:hover .discount_label {
+  background-color: #08C;
+}
+
+#user #dash_blocks #edit_reservation .place {
+  background: none !important;
+  padding-left: 0;
+  margin: 0 0 10px 0;
+}
+
+
+#user #dash_blocks #reservation_details label {
+  float: left;
+  width: 130px;
+  margin-bottom: 8px;
+}
+
+#user #dash_blocks a.user_btn {
+  border: 1px solid #DFDEDA;
+  padding: 5px 10px;
+  border-radius: 3px;
+  margin: 10px 0;
+  display: inline-block;
+}
+
+#user #dash_blocks a.user_btn i {
+  margin: 0 5px 0 0;
+  opacity: 0.4;
+}
+
+
+
+/******* USER INVITE ******/
+
+#user .invite_left {
+  float: left;
+  margin: 0 10px 0 15px;
+}
+
+#user .invite_block {
+  background: #f2f0ea;
+  border: 1px solid #cccbc7;
+  padding: 14px;
+  border-radius: 3px;
+  width: 240px;
+}
+
+#user .invite_block h4, #user #invite_friends h4 {
+  font-size: 24px;
+  font-family: 'univers_condensedmedium', 'Arial Narrow';
+  margin: 0 0 10px 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+#user .invite_block input[type='text'] {
+  border: 1px solid #cccbc7;
+  box-shadow: none;
+  width: 183px;
+  float: left;
+  border-radius: 3px 0 0 3px;
+  border-right: none;
+}
+
+#user #share_a_link.invite_block {
+  margin: 0 0 10px 0;
+}
+
+#user #share_a_link button {
+  float: left;
+  background: #df5b49;
+  border: 0;
+  border-radius: 0 3px 3px 0;
+  color: #fff;
+  font-family: 'univers_condensedmedium', 'Arial Narrow';
+  font-size: 18px;
+  height: 29px;
+  width: 42px;
+}
+
+#user .invite_block textarea {
+  width: 225px;
+  height: 50px;
+}
+
+#user .invite_block input[type='submit'] {
+  margin-top: 0;
+}
+
+#user .invite_block form {
+  margin: 0;
+}
+
+
+
+#user #invite_friends {
+  float: right;
+  width: 455px;
+  border: 1px solid #d2d1ce;
+  padding: 3px;
+  border-radius: 3px;
+  position: relative;
+}
+
+#user #invite_friends h4 {
+  margin: 3px;
+  display: block;
+  background: #f2f0ea;
+  padding: 10px;
+}
+
+#user #invite_friends h4 a {
+  padding: 0 0 0 30px;
+  text-decoration: underline;
+}
+
+#user #invite_friends h4 a.active {
+  color: #000;
+  text-decoration: none;
+  cursor: text;
+}
+
+#user #invite_friends h4 a.invite_fb {
+  background: url('../img/icons7.gif') 3px 2px no-repeat;
+}
+
+#user #invite_friends h4 a.invite_vk {
+  background: url('../img/icons7.gif') 3px -55px no-repeat;
+}
+
+#user #invite_friends input[type='submit'] {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+#user #invite_friends form {
+  margin: 0;
+}
+
+#user #invite_friends #friends_list {
+  display: block;
+  height: 280px;
+  overflow-y: scroll;
+  padding: 0 0 10px 0;
+  color: #333;
+}
+
+#user #invite_friends #friends_list input[type='checkbox'] {
+  margin-top: 15px;
+}
+
+#user #invite_friends #friends_list img {
+  background: #f2f0ea;
+  border-radius: 3px;
+  margin: 0 5px 0 0;
+  width: 40px;
+  height: 40px;
+}
+
+#user #invite_friends #friends_list li {
+  display: block;
+  margin: 0 0 2px 3px;
+  padding: 2px 0 2px 7px;
+}
+
+#user #invite_friends #friends_list .checked {
+  background: #f2f0ea;
+}
+
+#user #invite_friends #friends_list .checked label {
+  font-weight: bold;
+}
+
+
+
 
 
 

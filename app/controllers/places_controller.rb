@@ -15,8 +15,7 @@ class PlacesController < ApplicationController
   def set_location
     session[:city] = params[:location_slug]
     if City.find_by_slug(session[:city]) && current_user
-      current_user.city = City.find_by_slug(session[:city])
-      current_user.save
+      current_user.update_attribute(:city, City.find_by_slug(session[:city]))
     end
     redirect_to  :back
   end

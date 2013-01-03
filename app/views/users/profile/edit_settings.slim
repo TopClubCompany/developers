@@ -1,0 +1,55 @@
+#user.content
+  .row
+    .span2
+      = render 'shared/user_sidebar'
+
+    #dashboard.span10.page_content
+      .row
+        .span2
+          h1= user_menu_name
+          #user_pic_big
+            img.user_pic_big height="128" src=(current_user.avatar ? current_user.avatar.url(:sidebar) : '/assets/no_avatar.gif') width="128"
+              a.edit href="#"
+                i.icon-edit.icon-white
+                | upload
+          #status.gourmand GOURMAND
+        #dash_blocks.span8
+          - @user = current_user
+          = simple_form_for @user, url: update_settings_path, wrapper: :front_reg_form do |f|
+            #personal_information.dash_block
+              h2
+                | Personal Information
+                a.edit href=edit_settings_path(current_user.id)
+                  i.icon-edit
+                  | edit
+              ul.settings
+                li
+                  = f.input :first_name
+                li
+                  = f.input :last_name
+                li
+                  = f.input :city_id, collection: City.all, include_blank: false
+                li
+                  = f.input :phone
+                li
+                  = f.input :gender, collection: GenderType.all, include_blank: false
+                li
+                  = f.date_select :birthday, as: 'date', start_year: Date.today.year - 8, end_year: Date.today.year - 90, order: [:month, :day, :year]
+            #settings.dash_block
+              h2
+                | Settings
+                a.edit href=edit_settings_path(current_user.id)
+                  i.icon-edit
+                  | edit
+              ul.settings
+                li
+                  = f.input :email
+                li
+                  = f.input :password, placeholder: "••••••••••", required: false
+                li
+                  label Notifications
+                  select name="user_notifications"
+                    option value="1986"
+                    option value="1987"
+                    option value="1988"
+            = f.submit 'Update information'

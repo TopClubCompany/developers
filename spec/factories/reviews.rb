@@ -22,6 +22,6 @@
 FactoryGirl.define do
   factory :review do
     title Faker::Lorem.sentence
-    content Faker::Lorem.sentences(5)
+    content Faker::Lorem.sentences(5).join(' ')
   end
 end
