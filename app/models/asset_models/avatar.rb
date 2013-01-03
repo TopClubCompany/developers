@@ -4,7 +4,11 @@ class Avatar < Asset
   
 	validates :data_content_type, :inclusion => {:in => Utils.image_types }
 	validates_integrity_of :data
-	validates_filesize_of :data, :maximum => 1.megabyte
+	validates_filesize_of :data, :maximum => 2.megabyte
+
+  def preview_url
+    data.try(:sidebar).url
+  end
 
 end
 # == Schema Information
