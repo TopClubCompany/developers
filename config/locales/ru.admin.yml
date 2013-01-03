@@ -79,6 +79,14 @@ ru:
         contacts: "Контакты"
         form: "Основное"
         info: "Реквизиты"
+    day_type: 
+      friday: "Пятница"
+      monday: "Понедельник"
+      saturday: "Суббота"
+      sunday: "Воскресенье"
+      thursday: "Четверг"
+      tuesday: "Вторник"
+      wednesday: "Среда"
     delete: "Удалить"
     delete_confirmation: "Вы уверены, что хотите удалить это?"
     details: "Подробнее"
@@ -249,15 +257,7 @@ ru:
       modified_by: "Редактировал(а)"
       title: "История"
       type: "Тип"
-    day_type:
-      monday: "Понедельник"
-      tuesday: "Вторник"
-      wednesday: "Среда"
-      thursday: "Четверг"
-      friday: "Пятница"
-      saturday: "Суббота"
-      sunday: "Воскресенье"
-  admin_js:
+  admin_js: 
     add_link: "Создать?"
     button_description: "Описание"
     button_name_add: "Добавить"
