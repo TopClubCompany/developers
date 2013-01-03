@@ -3,7 +3,12 @@
   <div class="gray-blocks">
     <div>
       <div class="fileupload-list ill-bl galery">
-        <%= render :partial => "fileupload/#{asset_render_template}", :collection => assets %>
+        <% if assets.empty? %>
+            <%= render :partial => "fileupload/default_avatar" %>
+        <% else %>
+            <%= render :partial => "fileupload/#{asset_render_template}", :collection => assets %>
+        <% end %>
+
       </div>
       <i class="fileupload-button icon-edit icon-white" style="display:none;">
         upload
