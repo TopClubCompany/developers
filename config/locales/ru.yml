@@ -179,6 +179,16 @@ ru:
       month: "Месяц"
       second: "Секунд"
       year: "Год"
+  explore: 
+    index: 
+      all: "Browse all ›"
+      available: Available tonight
+      best: Best restaurants
+      find_restorants: Find a restaurants
+      how_it_works: How it works?
+      new: New restaurants
+      reserv_online: Reserve your table online for free
+      save_up: Save up to 30% off all food and drinks
   flash: 
     auth: 
       failure: "Ошибка авторизации"
@@ -189,10 +199,13 @@ ru:
       update: 
         error: "При обновлении данных возникли ошибки"
         notice: "Данные успешно обновлены"
+  footer: 
+    become_a_prtner: Become a partner!
+    earn_point: Earn points and get discounts!
+    need_clients: Need more clients?
   front_js: 
     comments: 
       chat_title: "Переписка"
-
     fileupload: 
       messages: 
         emptyError: "{file} пустой, выберите другой файл."
@@ -214,6 +227,11 @@ ru:
     en: eng
     ru: "рус"
     uk: "укр"
+  registration_form: 
+    or: " or "
+  reservation: 
+    new_reservation: 
+      complete_reservation: Complete your reservation
   search: 
     category: Category
     grid_view: Grid view
@@ -255,24 +273,3 @@ ru:
       next: "След &raquo;"
       previous: "&laquo; Пред"
       truncate: ...
-  registration_form:
-    or: ' or '
-  reservation:
-    new_reservation:
-      complete_reservation: Complete your reservation
-
-  explore:
-    index:
-      how_it_works: "How it works?"
-      find_restorants: "Find a restaurants"
-      reserv_online: "Reserve your table online for free"
-      save_up: "Save up to 30% off all food and drinks"
-      best: "Best restaurants"
-      new: "New restaurants"
-      available: "Available tonight"
-      all: "Browse all ›"
-
-  footer:
-    earn_point: "Earn points and get discounts!"
-    need_clients: "Need more clients?"
-    become_a_prtner: "Become a partner!"
