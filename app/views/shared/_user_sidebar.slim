@@ -11,16 +11,16 @@
   h3 My account
   ul
     li
-      a href="#"
+      a href=my_reservations_profile_path(current_user)
         | My reservations
     li
       a href="#"
         | My favourites
     li
-      a href="#"
+      a href=self_reviews_profile_path(current_user)
         | My reviews
     li
-      a href="#"
+      a href=settings_profile_path(current_user)
         | Settings
     li
       a href="#"
@@ -30,5 +30,5 @@
         | TOP points
         strong 5
     li
-      a href=invite_friends_path(current_user.id)
+      a href=invite_friends_profile_path(current_user)
         | Invite friends

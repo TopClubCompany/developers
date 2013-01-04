@@ -122,6 +122,18 @@ def insert_default_place_pictures
   puts 'place images added successfully'
 end
 
+def insert_default_reservations
+  Reservation.full_truncate
+  10.times do
+    user        = User.all.sample
+    place       = Place.all.sample
+    reservation = Reservation.create_from_place_and_user(user, place)
+    reservation.special_notes = Faker::Lorem.sentences(3).join(' ')
+    reservation.time = DateTime.now + rand(-5...5).days
+    reservation.save
+  end
+end
+
 User.full_truncate
 insert_default_user('admin@adm.com', :admin)
 insert_default_user('user@usr.com')
@@ -132,4 +144,4 @@ add_test_stuff
 insert_default_place_pictures
 insert_group_feature
 insert_city
-
+insert_default_reservations

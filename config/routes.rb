@@ -25,6 +25,9 @@ Topclub::Application.routes.draw do
       get :settings
       get :edit_settings
       put :update_settings
+      put :edit_reservation
+      get :my_reservations
+      get :show_reservation
     end
 
     collection do

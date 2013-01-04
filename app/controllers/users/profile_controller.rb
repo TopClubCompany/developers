@@ -39,6 +39,18 @@ class Users::ProfileController < ApplicationController
 
   end
 
+  def my_reservations
+
+  end
+
+  def show_reservation
+
+  end
+
+  def edit_reservation
+
+  end
+
   def update_settings
     #user.password = params[:user][:password].present? ?  params[:user][:password] : current_user.password
     if current_user.update_attributes(params[:user])

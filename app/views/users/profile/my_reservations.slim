@@ -1,0 +1,48 @@
+#user.content
+  .row
+    .span2
+      = render 'shared/user_sidebar'
+
+    #dashboard.span10.page_content
+      .row
+        .span2
+          h1= user_menu_name
+          #user_pic_big
+            img.user_pic_big height="128" src=(current_user.avatar ? current_user.avatar.url(:sidebar) : '/assets/no_avatar.gif') width="128"
+          #status.gourmand GOURMAND
+        #dash_blocks.span8
+          #upcoming_reservations.dash_block style="width: 600px;"
+            h2
+              | My Reservations
+              span (2 upcoming!)
+            - reservations = current_user.reservations.sort_by { |res| res.time}
+            - reservations.each do |reservation|
+              - place = reservation.place
+              .reservation.place class=('past' if reservation.time.to_i < DateTime.now.to_i)
+                a.place_img_sm href="#"
+                  img height="100" src=place.place_image.url(:slider) width="140"
+                    span.discount.minus_5
+                h4
+                  a href="#"
+                    = place.title
+                    span.discount_label -5%
+                .rating
+                  .stars
+                    .stars_overlay
+                    .stars_bar
+                    .stars_bg
+                  small
+                    a href="#"
+                small= reservation.time
+                .btns
+                  a href="#"
+                    | cancel
+                  a href="#"
+                    | invite
+                  a href="#"
+                    | View / Edit
+                  .clear
+                #favorites_small
+                  .add_to_favorites
+                    | Add to favorites
+                .clear
