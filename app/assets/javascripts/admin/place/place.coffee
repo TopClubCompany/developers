@@ -34,3 +34,38 @@ class @PlaceForm
     _.each data, (obj) =>
       obj.category_id = @category_id
       $('.features').append(@template(obj))
+
+class Discount
+  constructor: ->
+    _.each $(".is_discount:checked"), (el) =>
+      @hide(el)
+
+    @bind_events()
+
+  bind_events: ->
+    self = @
+    $(".is_discount").live 'change', ->
+      $el = $(this)
+      if @checked
+        self.hide($el)
+      else
+        self.show($el)
+
+  hide: (el) =>
+    $el = $(el)
+    $parent = $el.parents(".nested_fields:first")
+    $parent.find(".nav-tabs").hide()
+    $parent.find(".tab-content").hide()
+
+  show: (el) =>
+    $el = $(el)
+    $parent = $el.parents(".nested_fields:first")
+    $parent.find(".nav-tabs").show()
+    $parent.find(".tab-content").show()
+
+$ ->
+  new Discount()
+
+
+
+

@@ -79,6 +79,14 @@ en:
         contacts: ""
         form: ""
         info: ""
+    day_type: 
+      friday: ""
+      monday: ""
+      saturday: ""
+      sunday: ""
+      thursday: ""
+      tuesday: ""
+      wednesday: ""
     delete: ""
     delete_confirmation: ""
     details: ""
@@ -104,7 +112,6 @@ en:
     gender: 
       female: ""
       male: ""
-      unknown: Don't know yet
     geo_autocomplete: ""
     group: 
       kind: 

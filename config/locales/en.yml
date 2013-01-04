@@ -16,7 +16,7 @@ en:
       recover_password: ""
       sign_in: ""
       sign_out: ""
-      sign_up: ""
+      sign_up: Sign up now!
     links_short: 
       cabinet: ""
       sign_in: ""
@@ -54,13 +54,6 @@ en:
       sign_in: ""
       sign_out: ""
       sign_up: ""
-  collections: 
-    about: ""
-    desc: ""
-    details: ""
-    series: ""
-    styles: ""
-    trade_mark: ""
   comments: 
     add_comment: ""
     comment: ""
@@ -143,6 +136,16 @@ en:
       month: ""
       second: ""
       year: ""
+  explore: 
+    index: 
+      all: "Browse all ›"
+      available: Available tonight
+      best: Best restaurants
+      find_restorants: Find a restaurants
+      how_it_works: How it works?
+      new: New restaurants
+      reserv_online: Reserve your table online for free
+      save_up: Save up to 30% off all food and drinks
   flash: 
     auth: 
       failure: ""
@@ -153,18 +156,13 @@ en:
       update: 
         error: ""
         notice: ""
+  footer: 
+    become_a_prtner: Become a partner!
+    earn_point: Earn points and get discounts!
+    need_clients: Need more clients?
   front_js: 
     comments: 
       chat_title: ""
-      confirm: ""
-      in_chat_already: ""
-      joined: ""
-      left: ""
-      new_message: ""
-      placeholder: ""
-      said: ""
-      title: ""
-      typing: ""
     fileupload: 
       messages: 
         emptyError: ""
@@ -186,6 +184,11 @@ en:
     en: eng
     ru: "рус"
     uk: "укр"
+  registration_form: 
+    or: " or "
+  reservation: 
+    new_reservation: 
+      complete_reservation: Complete your reservation
   search: 
     category: ""
     grid_view: ""
@@ -227,8 +230,3 @@ en:
       next: ""
       previous: ""
       truncate: ""
-  registration_form:
-    or: ' or '
-  reservation:
-    new_reservation:
-      complete_reservation: Complete your reservation
