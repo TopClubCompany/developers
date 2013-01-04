@@ -92,14 +92,13 @@
   -moz-appearance: window;
   appearance: none;
 }
-#search_form input[name='title'] {
-
+#search_form input[name='title_or_location'] {
   color: #999;
   line-height: 28px;
   padding-left: 40px;
   background: #fff url('../assets/icons1.png') 10px 10px no-repeat;
 }
-#index #search_form input[name='title'] { 
+#index #search_form input[name='title_or_location'] {
   webkit-box-sizing: border-box;
   khtml-box-sizing:border-box;
   moz-box-sizing: border-box;
