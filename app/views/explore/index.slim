@@ -2,16 +2,16 @@
   .row
     .span8 id="teaser"
       .video_player
-        h5 How it works?
+        h5= t('.how_it_works')
         video#video-container class="projekktor" width="620" height="350" title="How it works?" poster="/img/video/dummy.jpg" controls=true
           source src="/media/intro.ogv" type="video/ogg"  /
     .span4 id="signup_promo"
       img src="/img/gfx/1.jpg"
         ul
-          li Find a restaurants
-          li Reserve your table online for free
-          li Save up to 30% off all food and drinks
-        a href="#{new_user_registration_path}" class="btn1" Sign up now!
+          li= t('.find_restorants')
+          li= t('.reserv_online')
+          li= t('.save_up')
+        a href="#{new_user_registration_path}" class="btn1"= t('auth.links.sign_up')
   .row
     .span12
       #search_form
@@ -23,39 +23,40 @@
       .span12
         ul id="promo_tabs"
           li class="active"
-            a href="#best" Best restaurants
+            a href="#best"= t('.best')
           li
-            a href="#new" New restaurants
+            a href="#new"= t('.new')
           li
-            a href="#available" Available tonight
+            a href="#available"= t('.available')
           .clear
         #best.tab_content
           - @places.each_with_index do |place, i|
             = render 'shared/place', place: place, i: i
           .clear
-          a.all href="/places" Browse all ›
+          a.all href="/places"= t('.all')
         #new.tab_content
           - @new_place.each_with_index do |place, i|
             = render 'shared/place', place: place, i: i
           .clear
-          a.all href="/places" Browse all ›
+          a.all href="/places"= t('.all')
         #available.tab_content
           - @tonight_available.each_with_index do |place, i|
             = render 'shared/place', place: place, i: i
           .clear
-          a.all href="/places" Browse all ›
+          a.all href="/places"= t('.all')
 
 
 = render 'shared/more_template'
 .content
   .row
     #promo_block_sm.promo_block.span4
-      | Earn points and get discounts!
+      = t('footer.earn_point')
       br
-      a href=new_user_registration_path Sign up now!
+      a href=new_user_registration_path
+        = t('auth.links.sign_up')
     #promo_block_big.promo_block.span8
-      | Need more clients?
-      a href="/partner_info" &nbsp;Become a partner!
+      = t('footer.need_clients')
+      a href="/partner_info" &nbsp; #{t('footer.become_a_prtner')}
 
 
                 

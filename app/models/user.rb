@@ -16,6 +16,9 @@ class User < ActiveRecord::Base
 
   validates_presence_of :email, :first_name, :last_name
 
+  extend FriendlyId
+  friendly_id :email
+
 
   enumerated_attribute :gender_type, :id_attribute => :gender, :class => ::GenderType
   enumerated_attribute :user_role_type, :id_attribute => :user_role_id, :class => ::UserRoleType
@@ -171,6 +174,10 @@ class User < ActiveRecord::Base
 
   def role_title
     UserRoleType.find_by_id(user_role_id).try(:title)
+  end
+
+  def to_param
+    [id, name.parameterize].join('-')
   end
 
 

@@ -25,7 +25,7 @@ ru:
     mailer: 
       confirmation: 
         after_notes: "C уважением,  Всегда рады приветствовать Вас на страницах нашего ресурса! <br/>Полезная информация <br/>- При регистрации, подтверждая ее, вы принимаете Соглашение (ссылка на соглашение). <br/>- Если у вас возникли проблемы с регистрацией, пожалуйста, свяжитесь с администратором (ссылка на форму) или ознакомьтесь с разделом «Помощь» (начинаем раздел «Помощь» со страницы с кратким «FAQ»)»."
-        body: "Мы рады приветствовать Вас на ABITANT.com. Еще один шаг и Вы завершите регистрацию.<br/> Для подтверждения регистрации Вам необходимо перейти по указанной ниже ссылке, после чего ваша учетная запись будет активирована, а Вы будете перенаправлены на страницу редактирования Ваших личных данных."
+        body: "Мы рады приветствовать Вас на Еще один шаг и Вы завершите регистрацию.<br/> Для подтверждения регистрации Вам необходимо перейти по указанной ниже ссылке, после чего ваша учетная запись будет активирована, а Вы будете перенаправлены на страницу редактирования Ваших личных данных."
         confirm_link: "Подтвердить регистрацию"
         confirm_notes: "Ссылка действительна в течении 72 часов"
         title: "Здравствуйте, %{name}."
@@ -54,13 +54,6 @@ ru:
       sign_in: "Вход в систему"
       sign_out: "Выход из системы"
       sign_up: "Регистрация"
-  collections: 
-    about: "Общая"
-    desc: "Описание"
-    details: "Детали"
-    series: "Серии"
-    styles: "Стили"
-    trade_mark: "Торговая марка:"
   comments: 
     add_comment: "Создать"
     comment: "Комментировать"
@@ -186,6 +179,16 @@ ru:
       month: "Месяц"
       second: "Секунд"
       year: "Год"
+  explore: 
+    index: 
+      all: "Browse all ›"
+      available: Available tonight
+      best: Best restaurants
+      find_restorants: Find a restaurants
+      how_it_works: How it works?
+      new: New restaurants
+      reserv_online: Reserve your table online for free
+      save_up: Save up to 30% off all food and drinks
   flash: 
     auth: 
       failure: "Ошибка авторизации"
@@ -196,18 +199,13 @@ ru:
       update: 
         error: "При обновлении данных возникли ошибки"
         notice: "Данные успешно обновлены"
+  footer: 
+    become_a_prtner: Become a partner!
+    earn_point: Earn points and get discounts!
+    need_clients: Need more clients?
   front_js: 
     comments: 
       chat_title: "Переписка"
-      confirm: "Вы уверены что хотите удалить комментарий?"
-      in_chat_already: "Вы уже открыли консультант на другой странице"
-      joined: "присоединился(лась) к переписке"
-      left: "покинул(а) переписку"
-      new_message: "Новое сообщение! - Консультант"
-      placeholder: "Напишите сообщение и нажмите enter..."
-      said: "написал(а):"
-      title: "Консультант"
-      typing: " пишет сообщение..."
     fileupload: 
       messages: 
         emptyError: "{file} пустой, выберите другой файл."
@@ -229,6 +227,11 @@ ru:
     en: eng
     ru: "рус"
     uk: "укр"
+  registration_form: 
+    or: " or "
+  reservation: 
+    new_reservation: 
+      complete_reservation: Complete your reservation
   search: 
     category: Category
     grid_view: Grid view

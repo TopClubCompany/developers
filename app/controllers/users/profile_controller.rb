@@ -16,12 +16,15 @@ class Users::ProfileController < ApplicationController
     sender  = current_user.full_name
     emails.each do |email|
       unless email =~ Devise.email_regexp
-        return (render action: 'invite_friends', falsh: { error: "some email(s) don't valid"} )
+        flash[:error] = "some email(s) don't valid"
+        return (render action: 'invite_friends')
       end
     end
     emails.each do |email|
       AccountMailer.send_invitation(email, link, sender, message).deliver
     end
+    flash[:success] = "invated!"
+    redirect_to profile_path(current_user)
   end
 
   def self_reviews
@@ -37,16 +40,13 @@ class Users::ProfileController < ApplicationController
   end
 
   def update_settings
-    user = current_user
     #user.password = params[:user][:password].present? ?  params[:user][:password] : current_user.password
-    if user.update_attributes(params[:user])
-      redirect_to settings_path(current_user.id)
-      sign_in(user, by_pass: true)
+    if current_user.update_attributes(params[:user])
+      redirect_to settings_profile_path(current_user.id)
+      sign_in(current_user, by_pass: true)
     else
-      #raise user.inspect
       render action: 'edit_settings'
     end
-
   end
 
 end

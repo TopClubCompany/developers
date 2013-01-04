@@ -25,8 +25,8 @@
           li= link_to 'My reservations', '/user#reservations'
           li= link_to 'My favourites', '/user#favourites'
           li= link_to 'My reviews', '/user#reviews'
-          li= link_to 'Settings', settings_path(current_user.id)
+          li= link_to 'Settings', settings_profile_path(current_user)
           li= link_to 'Diner style', '/user#style'
           li= link_to 'TOP points', '/user#points'
-          li= link_to 'Invite friends', invite_friends_path(current_user.id)
+          li= link_to 'Invite friends', invite_friends_profile_path(current_user)
           li= link_to 'Logout', quit_path, method: 'delete'
