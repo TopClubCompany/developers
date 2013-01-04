@@ -68,4 +68,4 @@
                     = review.content
                   a.read_more href="#"
                     nobr read more ›
-            = link_to 'Read all reviews', self_reviews_path(current_user.id), class: 'all'
+            = link_to 'Read all reviews', self_reviews_profile_path(current_user), class: 'all'
