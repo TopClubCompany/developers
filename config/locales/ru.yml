@@ -273,3 +273,5 @@ ru:
       next: "След &raquo;"
       previous: "&laquo; Пред"
       truncate: ...
+  forgot_password:
+    reset_pass: "Сбросить пароль"
