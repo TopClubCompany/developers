@@ -180,7 +180,15 @@ class PlacesCollection
     updateSingleTime.call(@, time, $el, $listEl)
     updateReservationLink.call(@, place, $el, $listEl)
     
-    
+
+  updateDate: (dateText) =>
+    window.filter.get 'reserve_date', dateText
+    $('#map_details_wrapper').find('.place').each (index, el) ->
+      $el = $(el)
+      $listEl = $('#list_' + $(el).attr('id'))
+      #askAjax for single place being available at specific date
+      date = dateText.replace /\//g,'-'
+      updateSingleDate.call(@, date, $el, $listEl)
 
   updateTime: (time) =>
     #TODO create ajax responder for batch of ids
@@ -212,12 +220,21 @@ class PlacesCollection
       $el.find(".timing a:eq(#{index})").attr('href', newLink)
       $listEl.find(".timing a:eq(#{index})").attr('href', newLink)
 
-  updateSinglePerson = (number, els...) ->
+  updateSingleDate = (date, els...) ->
     if els.length is 2
       [$listEl, $el] = els
     for index in [0..4]  
       oldLink = $el.find(".timing a:eq(#{index})").attr('href')
-      newLink = oldLink.replace(/\d+$/, number) 
+      newLink = oldLink.replace(/(\d+\-)+\d{4}/, date)
+      $el.find(".timing a:eq(#{index})").attr('href', newLink)
+      $listEl.find(".timing a:eq(#{index})").attr('href', newLink)
+
+  updateSinglePerson = (number, els...) ->
+    if els.length is 2
+      [$listEl, $el] = els
+    for index in [0..4]
+      oldLink = $el.find(".timing a:eq(#{index})").attr('href')
+      newLink = oldLink.replace(/\d+$/, number)
       $el.find(".timing a:eq(#{index})").attr('href', newLink)
       $listEl.find(".timing a:eq(#{index})").attr('href', newLink)
             
@@ -298,6 +315,9 @@ class FilterInput
       when 'number_of_people'
        regexpMatch = /number_of_people=(\d+)/
        regexpReplace = /number_of_people=\d+/
+      when 'reserve_date'
+       regexpMatch = /reserve_date=(\d+\%+\w+)/
+       regexpReplace = /reserve_date=[\d+\%+\w+]*/
 
     baseURL = window.location.pathname
     oldQuery = window.location.search || ''
@@ -353,16 +373,19 @@ class FilterInput
       askAJAX.call(@, newQuery, @places, startPage) 
     
     self = @
-   
-    $('input[name="reserve_date"]').datepicker( 
-      beforeShow: () ->
-        console.log 'lol2'
-      onClose: (dateText, inst) ->
-        console.log 'lol'
-        # headlineText = $('#mapcontainer > h3:first-child').html().replace(/(\d+\/?){3}(?=,)/, dateText)
-        # $('#mapcontainer > h3:first-child').html headlineText
-        # self.places.updateDate date
+    $('input[name="reserve_date"]').data('Zebra_DatePicker').update(
+      onSelect: (dateText) ->
+        headlineText = $('#mapcontainer > h3:first-child').html().replace(/(\d+\/?){3}(?=,)/, dateText)
+        $('#mapcontainer > h3:first-child').html headlineText
+        self.places.updateDate dateText
     )
+#    $('input[name="reserve_date"]').datepicker(
+#      beforeShow: () ->
+#        console.log 'lol2'
+#      onClose: (dateText, inst) ->
+#        console.log 'lol'
+
+#    )
 
     $("select[name=reserve_time]").on 'change', ->
       time = $(this).val()
