@@ -294,8 +294,7 @@ class Place < ActiveRecord::Base
     res[:overall_mark] = place["overall_mark"]
     res[:marks] = place["marks"]
     res[:lat_lng] = place["lat_lng"]
-    res[:special_offers] = []
-    place["day_discount_ids"]
+    res[:special_offers] =  place["discounts_names_#{I18n.locale}"]
     res
   end
 
