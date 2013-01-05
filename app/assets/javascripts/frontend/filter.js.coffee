@@ -68,6 +68,8 @@ class PlacesCollection
     mapOptions =
       center: new google.maps.LatLng(initialData.lat, initialData.lng),
       zoom: 9,
+      disableDefaultUI: true,
+      zoomControl: true,
       minZoom: 2,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     @map = new google.maps.Map(document.getElementById("map_places"), mapOptions)
