@@ -192,6 +192,17 @@ class Place < ActiveRecord::Base
         end
       end
 
+      I18n.available_locales.each do |locale|
+        offers_array = []
+        self.send(:day_discounts).includes(:week_day).map do |day_discount|
+          offers_array << {
+              title: day_discount.send("title_#{locale}"), id: day_discount.id,
+              is_discount: day_discount.week_day.is_discount
+          }
+        end
+        json.set!("discounts_names_#{locale}", offers_array)
+      end
+
       week_days.each do |week_day|
         json.set!("week_day_#{week_day.day_type_id}_start_at", week_day.start_at.to_s.split(".").join(":"))
         json.set!("week_day_#{week_day.day_type_id}_end_at", week_day.end_at.to_s.split(".").join(":"))
@@ -283,6 +294,7 @@ class Place < ActiveRecord::Base
     res[:overall_mark] = place["overall_mark"]
     res[:marks] = place["marks"]
     res[:lat_lng] = place["lat_lng"]
+    res[:special_offers] =  place["discounts_names_#{I18n.locale}"]
     res
   end
 
