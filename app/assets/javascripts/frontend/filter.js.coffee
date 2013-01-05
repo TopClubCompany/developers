@@ -7,7 +7,7 @@ class Pagination
       @bindListener()
       @goTo 1
     else 
-      console.log 'stub', @, @$el      
+#      console.log 'stub', @, @$el
       @stub()
     @
 
@@ -28,7 +28,7 @@ class Pagination
 
   stub: () ->
     @$el.empty()
-    @$el.html('<a href="#"> No page stub></a>')
+    @$el.html("<a class='current' href='?#1'>1</a>")
 
   goTo: (page) ->
     @$el.empty()
@@ -72,8 +72,10 @@ class PlacesCollection
       mapTypeId: google.maps.MapTypeId.ROADMAP
     @map = new google.maps.Map(document.getElementById("map_places"), mapOptions)
     window.googleMap = @map
+
+
   useNewData: (json, page) ->
-    # console.log json
+#    console.log json
     new Pagination(json.total).goTo(page)
     placesData = json.result
     newIds = _.pluck(placesData, 'id')
@@ -198,6 +200,7 @@ class PlacesCollection
       $el = $(el)
       $listEl = $('#list_' + $(el).attr('id'))
       #askAjax for single place being available at specific time
+
       updateSingleTime.call(@, time, $el, $listEl)
   updatePeople: (number) =>
     window.filter.get 'number_of_people', number
@@ -255,7 +258,6 @@ class PlacesCollection
       oldLink = $el.find(".timing a:eq(#{index})").attr('href')
       oldLink = oldLink.replace(/h=\d+/,"h=#{time.split(':')[0]}")
       newLink = oldLink.replace(/m=\d+/,"m=#{time.split(':')[1]}")
-      console.log oldLink
       $el.find(".timing a:eq(#{index})").attr('href', newLink)
       $el.find(".timing a:eq(#{index})").html time
       $listEl.find(".timing a:eq(#{index})").html time
@@ -379,17 +381,9 @@ class FilterInput
         $('#mapcontainer > h3:first-child').html headlineText
         self.places.updateDate dateText
     )
-#    $('input[name="reserve_date"]').datepicker(
-#      beforeShow: () ->
-#        console.log 'lol2'
-#      onClose: (dateText, inst) ->
-#        console.log 'lol'
-
-#    )
 
     $("select[name=reserve_time]").on 'change', ->
       time = $(this).val()
-      console.log time
       headlineText = $('#mapcontainer > h3:first-child').html().replace(/\d+\:\d+(?=\sfor\s)/, time)
       $('#mapcontainer > h3:first-child').html headlineText
       self.places.updateTime time               
