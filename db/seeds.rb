@@ -46,7 +46,7 @@ def add_test_stuff
     place = Place.create(name: Faker::Company.name, description: Faker::Lorem.sentence, user_id: User.first.id,
                            phone: Faker::PhoneNumber.phone_number, url: Faker::Internet.http_url, avg_bill: BillType.all.sample.id)
 
-    week_days = DayType.all.map { |day| FactoryGirl.build(:week_day, day_type_id: day.id, is_working: true)}
+    week_days = DayType.all.map { |day| FactoryGirl.build(:week_day, day_type_id: day.id, is_working: true, is_discount: [true, false].sample)}
     week_days.each do |week_day|
       week_day.day_discounts << (rand(0..1)).times.map do
         FactoryGirl.build(:day_discount, from_time: (week_day.start_at + rand(4)),
