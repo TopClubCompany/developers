@@ -9,10 +9,11 @@
             = t('sign_up.sign_in')
       #sign_up_page.page_content
         h2
-          =t('sign_up.sign_up_and')
+          ='t('sign_up.sign_up_and')
           a href="#"
             = t('sign_up.earn_points')
-          = t('sign_up.for_suc_reserv')
+          == " #{t('sign_up.for_successful_reservations')}"
+          /= t('sign_up.for_suc_reserv')
         - (@user = User.new) unless @user
         = simple_form_for @user, url: user_registration_path, :wrapper => :front_reg_form do |f|
           = f.error_notification
@@ -22,7 +23,7 @@
           = f.input :first_name, placeholder: "First name", label: false
           = f.input :last_name, placeholder: "Last name",label: false
           .clear
-          = f.input :phone, placeholder: "+38 ( _ _ _ ) _ _ _ - _ _ - _ _", label: get_reg_form_attr_name(:phone, true), required: true
+          = f.input :phone, placeholder: "+38(___)___-__-__", label: get_reg_form_attr_name(:phone, true), required: true
           .clear
           = f.input :email, label: get_reg_form_attr_name(:email)
           .clear
@@ -40,7 +41,7 @@
           = f.file_field :avatar, label: false
           .clear
           p
-            = t('sign_up.by_click')
+            =' t('sign_up.by_click')
             = link_to t('sign_up.term_cond'), '#'
             |.
           = f.submit t('auth.links.join_reserve')
