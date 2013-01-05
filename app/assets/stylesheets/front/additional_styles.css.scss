@@ -112,7 +112,11 @@
 [id^=AutocompleteContainter] [class^=autocomplete-] {
   position: relative;
   top: -3px;
-  left: -1px;
+  left: 0px;
+  //border-color: blue;
+  //border-style: solid;
+  //border-width: 0px 1px 1px 1px;
+
   font-size: 13px;
   webkit-border-radius: 0 0 3px 3px;
   khtml-border-radius: 0 0 3px 3px;
