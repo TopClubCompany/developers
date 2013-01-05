@@ -230,3 +230,9 @@ en:
       next: ""
       previous: ""
       truncate: ""
+  sign_up:
+    by_click: "By clicking “Join Reserve” you confirm that you accept"
+    term_cond: "Terms and conditions"
+    for_successful_reservations: "for succesful reservations!"
+  forgot_password:
+    reset_pass: "Reset password"
