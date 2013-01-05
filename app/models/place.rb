@@ -192,16 +192,7 @@ class Place < ActiveRecord::Base
         end
       end
 
-      I18n.available_locales.each do |locale|
-        offers_array = []
-        self.send(:day_discounts).includes(:week_day).map do |day_discount|
-          offers_array << {
-              title: day_discount.send("title_#{locale}"), id: day_discount.id,
-              is_discount: day_discount.week_day.is_discount
-          }
-        end
-        json.set!("discounts_names_#{locale}", offers_array)
-      end
+      json.set!("discounts", self.discounts_index)
 
       week_days.each do |week_day|
         json.set!("week_day_#{week_day.day_type_id}_start_at", week_day.start_at.to_s.split(".").join(":"))
@@ -265,7 +256,7 @@ class Place < ActiveRecord::Base
     fields = []
     if options[:reserve_time].present?
       time = self.en_to_time(options[:reserve_time])
-      current_day = options[:reserve_date].present? ? DateTime.parse(options[:reserve_date]).wday + 1 : DateTime.now.wday + 1
+      current_day = options[:reserve_date].present? ? DateTime.parse(options[:reserve_date]).wday : DateTime.now.wday
       field = "week_day_#{current_day}_start_at"
       fields << {query: {range: {:"#{field}" => {lte: time, boost: 2.0}} }}
       field = "week_day_#{current_day}_end_at"
@@ -275,7 +266,7 @@ class Place < ActiveRecord::Base
   end
 
 
-  def self.for_mustache(place)
+  def self.for_mustache(place, options={})
     res = {}
     res[:id] = place.id
     res[:slug] = place.slug || place.id
@@ -294,21 +285,26 @@ class Place < ActiveRecord::Base
     res[:overall_mark] = place["overall_mark"]
     res[:marks] = place["marks"]
     res[:lat_lng] = place["lat_lng"]
-    res[:special_offers] =  place["discounts_names_#{I18n.locale}"]
+    res[:special_offers] =  self.today_discount(place["discounts"], options)
     res
   end
 
-  def self.for_autocomplite(place)
-    res = {}
-    res[:id] = place.id
-    res[:slug] = place.slug || place.id
-    res[:name] = place["name_#{I18n.locale}"]
-    res[:street] = place["street_#{I18n.locale}"]
-    res[:county] = place["county_#{I18n.locale}"]
-    res
+  def discounts_index()
+    self.send(:day_discounts).with_translation.includes(:week_day).map do |day_discount|
+      {
+          id: day_discount.id,
+          is_discount: day_discount.week_day.is_discount,
+          day: day_discount.week_day.day_type_id,
+          discount:  day_discount.discount,
+          to_time: day_discount.to_time,
+          from_time: day_discount.from_time
+      }.update(I18n.available_locales.inject({}) do |h, locale|
+        h.update({:"title_#{locale}" => day_discount.send("title_#{locale}")})
+      end)
+    end
   end
 
-private
+  private
 
   def self.en_to_time(time)
     if time.include?("AM")
@@ -320,6 +316,18 @@ private
     end
     time
   end
+
+
+
+  def self.today_discount(discounts, options={})
+    if options[:reserve_time].present?
+      time = self.en_to_time(options[:reserve_time])
+      current_day = options[:reserve_date].present? ? DateTime.parse(options[:reserve_date]).wday : DateTime.now.wday
+      discounts = discounts.select{|discount| discount["day"] == current_day}
+    end
+    discounts
+  end
+
 end
 # == Schema Information
 #
