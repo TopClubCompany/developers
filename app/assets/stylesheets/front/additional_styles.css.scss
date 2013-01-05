@@ -18,9 +18,12 @@
   bottom: 0;
   background: rgba(128,128,128, 0.5);
 }
-/*#fixed ul li {
-  display: none;
-}*/
+#fixed a{
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
 #user_birthday_2i{ width: 120px !important; }
 #user_birthday_3i{ width: 60px !important; }
 #user_birthday_1i{ width: 80px !important; }
@@ -112,7 +115,11 @@
 [id^=AutocompleteContainter] [class^=autocomplete-] {
   position: relative;
   top: -3px;
-  left: -1px;
+  left: 0px;
+  //border-color: blue;
+  //border-style: solid;
+  //border-width: 0px 1px 1px 1px;
+
   font-size: 13px;
   webkit-border-radius: 0 0 3px 3px;
   khtml-border-radius: 0 0 3px 3px;

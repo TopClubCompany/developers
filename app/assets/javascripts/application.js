@@ -21,6 +21,7 @@
 //=require jquery.custom_checkbox.min
 //=require jquery.raty
 //=require jquery.deparam
+//=require zebra_datepicker
 //=require html5
 //=require textshadow
 //q=require visual
