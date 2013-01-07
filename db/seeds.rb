@@ -59,7 +59,7 @@ def add_test_stuff
       place.categories << category
       place.kitchens   << kitchen
 
-      2.times do
+      rand(1..5).times do
         review = FactoryGirl.build(:review, user_id: User.all.sample.id)
         MarkType.all.each { |mark_type| review.marks << FactoryGirl.build(:mark, mark_type_id: mark_type.id) }
         place.reviews << review
@@ -130,6 +130,7 @@ def insert_default_reservations
     reservation = Reservation.create_from_place_and_user(user, place)
     reservation.special_notes = Faker::Lorem.sentences(3).join(' ')
     reservation.time = DateTime.now + rand(-5...5).days
+    reservation.persons = rand(1..5)
     reservation.save
   end
 end

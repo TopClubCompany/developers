@@ -730,6 +730,19 @@ input[type='submit']:hover {
   width: 270px;
 }
 
+h4 .discount_label {
+  display: inline-block;
+  background: #08C;
+  border-radius: 3px;
+  padding: 1px 4px;
+  color: #fff;
+  font-size: 13px;
+  -moz-box-shadow:inset 0px 0px 5px 1px rgba(119, 119, 119, 0.5);
+  -webkit-box-shadow:inset 0px 0px 5px 1px rgba(119, 119, 119, 0.5);
+  box-shadow:inset 0px 0px 5px 1px rgba(119, 119, 119, 0.5);
+  margin-left: 5px;
+}
+
 .place .rating, #place .rating {
   margin: 0 0 10px 0;
 }
@@ -980,6 +993,35 @@ input[type='submit']:hover {
 #place #favorites .add_to_favorites:hover, #place #favorites .i_like_this_place {
   color: #666;
   background: image_url('../assets/icons6.gif') center -50px no-repeat;
+}
+
+.place #favorites_small .add_to_favorites {
+  position: absolute;
+  bottom: 5px;
+  right: 20px;
+  padding: 0 0 0 17px;
+  background: url('icons8.png') 0 4px no-repeat;
+  color: #df5b49;
+  font-weight: bold;
+  font-size: 9px;
+  cursor: pointer;
+}
+
+.place #favorites_small .add_to_favorites:hover, .place #favorites_small .i_like_this_place {
+  color: #666;
+  background: url('icons8.png') 0 -16px no-repeat;
+}
+
+.place #favorites_small .i_like_this_place {
+  font-weight: bold;
+}
+
+.place #favorites_small {
+  display: none;
+}
+
+.place:hover #favorites_small {
+  display: block;
 }
 
 #place .rating small {

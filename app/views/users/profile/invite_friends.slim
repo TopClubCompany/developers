@@ -16,7 +16,7 @@
                 = t('user_profile.invite_friends.copy')
               .clear
           #email_your_friends.invite_block
-            = form_tag send_email_invitation_profile_path, method: 'post' do
+            = form_tag send_email_invitation_profile_index_path, method: 'post' do
               h4
                 = t('user_profile.invite_friends.email_friends')
               = text_area_tag "emails", nil, placeholder: "john@smith.com, valera@yandex.ru..."
