@@ -1,10 +1,13 @@
 class Reservation < ActiveRecord::Base
-  attr_accessible :email, :first_name, :last_name, :phone, :special_notes, :user_id, :time, :place_id
+  attr_accessible :email, :first_name, :last_name, :phone, :special_notes, :user_id, :time, :place_id, :persons
 
   belongs_to :user
+  scope :old_reservations, lambda { |user_id| where("reservations.time<=? AND reservations.user_id=?","#{DateTime.now}", "#{user_id}") }
+  scope :active_reservations, lambda { |user_id| where("reservations.time>=? AND reservations.user_id=?","#{DateTime.now}", "#{user_id}") }
+
   belongs_to :place
 
-  validates_presence_of :email, :first_name, :last_name, :phone, :time
+  validates_presence_of :email, :first_name, :last_name, :phone, :time, :persons
 
   def full_name
     "#{first_name} #{last_name}"#.strip
@@ -33,6 +36,7 @@ end
 #  place_id      :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  persons       :integer
 #
 # Indexes
 #

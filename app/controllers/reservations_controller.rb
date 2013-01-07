@@ -5,6 +5,7 @@ class ReservationsController < ApplicationController
     @place   = Place.find_by_id(params[:place_id])
     @date = DateTime.parse("#{params[:date]} #{params[:time].gsub(/[hm=]/,'').gsub('&',':')}")
     @reservation = Reservation.create_from_place_and_user(current_user, @place)
+    @reservation.persons = @persons.to_i
   end
 
   def reservation_confirmed

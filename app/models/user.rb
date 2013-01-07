@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   has_one :avatar, :as => :assetable, :dependent => :destroy, :autosave => true
 
   has_many :accounts, :dependent => :destroy
+
   has_many :reservations, :dependent => :destroy
 
   alias_attribute :name, :title

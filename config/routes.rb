@@ -14,6 +14,10 @@ Topclub::Application.routes.draw do
 
   post '/user_registration' => 'users/omniauth_callbacks#user_registration', as: 'user_registration'
 
+  get '/profile/:user_id/show_reservation/:reservation_id' => 'users/profile#show_reservation', as: 'show_profile_reservation'
+  get '/profile/:user_id/edit_reservation/:reservation_id' => 'users/profile#edit_reservation', as: 'edit_profile_reservation'
+  put '/update_reservation/:reservation_id' => 'users/profile#update_reservation', as: 'update_reservation'
+
 
   #refactor this
 
@@ -25,9 +29,8 @@ Topclub::Application.routes.draw do
       get :settings
       get :edit_settings
       put :update_settings
-      put :edit_reservation
+      #put :update_reservation
       get :my_reservations
-      get :show_reservation
     end
 
     collection do
