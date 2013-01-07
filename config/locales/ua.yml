@@ -273,3 +273,5 @@ ua:
       next: ""
       previous: ""
       truncate: ""
+  forgot_password:
+    reset_pass: "Скинути пароль"

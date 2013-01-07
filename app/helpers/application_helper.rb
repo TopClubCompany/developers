@@ -271,4 +271,8 @@ module ApplicationHelper
     times
   end
 
+  def localization_link(resource)
+    "/#{I18n.locale}/#{resource}"
+  end
+
 end

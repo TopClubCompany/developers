@@ -10,7 +10,7 @@
         = simple_form_for :user, url: user_password_path, :wrapper => :front_reg_form do |f|
           = f.input :email, label: 'Your email' + ':<b> *</b>'.html_safe
           .clear
-          = f.submit t('forgot_password.resset_pass')
+          = f.submit t('forgot_password.reset_pass')
     #social_login.span4
       h3
         = t('sign_up.sign_in_acc')

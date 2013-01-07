@@ -230,3 +230,31 @@ en:
       next: ""
       previous: ""
       truncate: ""
+  sign_up:
+    by_click: "By clicking “Join Reserve” you confirm that you accept"
+    term_cond: "Terms and conditions"
+    for_successful_reservations: "for succesfull reservations!"
+  forgot_password:
+    reset_pass: "Reset password"
+
+  short_strings:
+    my_reservations: My Reservations
+    add_to_favorites: Add to favorites
+    view_your_reservation: View your reservation
+    number_of_people: Number of people
+    phone_number: Phone number
+    first_name: First name
+    last_name: Last name
+    special_notes: Special notes
+    edit_reservation: Edit reservation
+    invite_friends: Invite friends
+    print_this_page: Print this page
+    edit_your_reservation: Edit your reservation
+  words:
+    cancel: cancel
+    invite: invite
+    view: view
+    edit: edit
+    date: date
+    time: time
+    email: email

@@ -18,9 +18,12 @@
   bottom: 0;
   background: rgba(128,128,128, 0.5);
 }
-/*#fixed ul li {
-  display: none;
-}*/
+#fixed a{
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
 #user_birthday_2i{ width: 120px !important; }
 #user_birthday_3i{ width: 60px !important; }
 #user_birthday_1i{ width: 80px !important; }
@@ -92,14 +95,13 @@
   -moz-appearance: window;
   appearance: none;
 }
-#search_form input[name='title'] {
-
+#search_form #title_or_location {
   color: #999;
   line-height: 28px;
   padding-left: 40px;
   background: #fff url('../assets/icons1.png') 10px 10px no-repeat;
 }
-#index #search_form input[name='title'] { 
+#index #search_form #title_or_location {
   webkit-box-sizing: border-box;
   khtml-box-sizing:border-box;
   moz-box-sizing: border-box;
@@ -113,7 +115,11 @@
 [id^=AutocompleteContainter] [class^=autocomplete-] {
   position: relative;
   top: -3px;
-  left: -1px;
+  left: 0px;
+  //border-color: blue;
+  //border-style: solid;
+  //border-width: 0px 1px 1px 1px;
+
   font-size: 13px;
   webkit-border-radius: 0 0 3px 3px;
   khtml-border-radius: 0 0 3px 3px;
@@ -143,7 +149,18 @@
   margin-left: 150px;
 }
 
+#sign_up_page input[type="tel"] {
+  width: 150px;
+}
 
+.fixed {
+  position: fixed;
+  top: 0px;
+  left: 50%;
+  background: white;
+  z-index: 150;
+  border: 1px gray solid;
+}
 
 
  

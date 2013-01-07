@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130103132506) do
+ActiveRecord::Schema.define(:version => 20130107050413) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -447,6 +447,7 @@ ActiveRecord::Schema.define(:version => 20130103132506) do
     t.integer  "place_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "persons"
   end
 
   add_index "reservations", ["place_id"], :name => "index_reservations_on_place_id"

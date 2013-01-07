@@ -3,7 +3,7 @@
     .span12
       #search_form
         h1= I18n.t('search.main_text', count: Place.visible.count, city: current_city)
-        form.shorten action='/search'
+        form.shorten action=localization_link("search")
           = render :partial => 'shared/search_form', :locals => { :time => {:h => (@time[:h] || 12), :m => (@time[:m] || '00')} }
         #view_switch
           a#grid_view.current href="#"
@@ -128,7 +128,7 @@
                   
                   - date = (params[:reserve_date] || Time.now.strftime("%d-%m-%Y")).gsub('/','-')
                   - reservation_data = { place_id: place.id, date: date, time: @time, amount_of_person: (params[:number_of_people] || 2) }
-                  = link_to 'Reserve', new_reservation_path(reservation_data)
+
 
 
               .timing
