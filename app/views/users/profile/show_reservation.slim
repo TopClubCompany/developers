@@ -1,0 +1,80 @@
+#user.content
+  .row
+    .span2
+      = render 'shared/user_sidebar'
+
+    #dashboard.span10.page_content
+      .row
+        .span2
+          h1= user_menu_name
+          #user_pic_big
+            img.user_pic_big height="128" src=(current_user.avatar ? current_user.avatar.url(:sidebar) : '/assets/no_avatar.gif') width="128"
+          #status.gourmand GOURMAND
+
+        #dash_blocks.span8
+          #edit_reservation.dash_block style="width: 600px;"
+            h2
+              = t('short_strings.view_your_reservation')
+              a.edit href="#"
+                i.icon-edit
+                = t('words.edit')
+            .place
+              a.place_img_sm href="#"
+                img height="100" src=(@place.place_image.url(:place_show)if @place.place_image) width="140"
+                  span.discount.minus_5
+              h4 style="width: auto;"
+                a href="#"
+                  = @place.title
+                  span.discount_label -5%
+              .rating
+                .stars
+                  .stars_overlay
+                  .stars_bar style="left: #{@place.overall_mark * 20}%"
+                  .stars_bg
+                small
+                  - place_reviews = @place.reviews.count
+                  a href="#"
+                    = place_reviews
+                    |  #{place_reviews == 1 ? 'review' : 'reviews'}
+              ul.place_features
+                li.location= @place.location.address
+                li.cuisine= @place.kitchens.map(&:name).join(', ')
+                li.pricing= avg_bill_title(@place.avg_bill)
+              .clear
+            #reservation_details
+              label for="reserve_date"
+                = t('words.date')
+              = @reservation.time.strftime("%D")
+              .clear
+              label for="reserve_time"
+                = t('words.time')
+              = @reservation.time.strftime("%I:%M %p")
+              .clear
+              label for="number_of_people"
+                nobr= t('short_strings.number_of_people')
+              = @reservation.persons
+              .clear
+              label= t('short_strings.first_name')
+              = @reservation.first_name
+              .clear
+              label= t('short_strings.last_name')
+              = @reservation.last_name
+              .clear
+              label= t('short_strings.phone_number')
+              = @reservation.phone
+              .clear
+              label= t('words.email')
+              = @reservation.user.email
+              .clear
+              label= t('short_strings.special_notes') + ':'
+              = @reservation.special_notes
+              .clear
+              a.user_btn href=edit_profile_reservation_path(@reservation.user.id, @reservation.id)
+                i.icon-pencil
+                strong= t('short_strings.edit_reservation')
+              a.user_btn href="#"
+                i.icon-print
+                strong= t('short_strings.print_this_page')
+              a.user_btn href="#"
+                i.icon-plus
+                strong= t('short_strings.invite_friends')

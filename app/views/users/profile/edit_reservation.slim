@@ -1,0 +1,64 @@
+#user.content
+  .row
+    .span2
+      = render 'shared/user_sidebar'
+
+    #dashboard.span10.page_content
+      .row
+        .span2
+          h1= user_menu_name
+          #user_pic_big
+            img.user_pic_big height="128" src=(current_user.avatar ? current_user.avatar.url(:sidebar) : '/assets/no_avatar.gif') width="128"
+          #status.gourmand GOURMAND
+
+
+
+
+        #dash_blocks.span8
+          #edit_reservation.dash_block style="width: 600px;"
+            h2= t('short_strings.edit_your_reservation')
+            .place
+              a.place_img_sm href="#"
+                img height="100" src=(@place.place_image.url(:place_show)if @place.place_image) width="140"
+                  span.discount.minus_5
+              h4 style="width: auto;"
+                a href="#"
+                  = @place.title
+                  span.discount_label -5%
+              .rating
+                .stars
+                  .stars_overlay
+                  .stars_bar style="left: #{@place.overall_mark * 20}%"
+                  .stars_bg
+                small
+                  - place_reviews = @place.reviews.count
+                  a href="#"
+                    = place_reviews
+                    |  #{place_reviews == 1 ? 'review' : 'reviews'}
+              ul.place_features
+                li.location= @place.location.address
+                li.cuisine= @place.kitchens.map(&:name).join(', ')
+                li.pricing= avg_bill_title(@place.avg_bill)
+              .clear
+            = simple_form_for @reservation, url: update_reservation_path(@reservation.id), wrapper: :front_reg_form do |f|
+              .row
+                .span3
+                  label for="reservation_date"  Date
+                  = f.text_field :date, label: "Date", value: "#{@reservation.time.strftime("%D")}"
+                .span3
+                  label for="reservation_time"  Time
+                  = f.text_field :time, label: "Time", value: "#{@reservation.time.strftime("%I:%M %p")}"
+              = f.input :persons, label: "#{t('short_strings.number_of_people')}"
+              .row
+                .span3
+                  = f.input :first_name, placeholder: "First name"
+                .span3
+                  = f.input :last_name, placeholder: "Last name"
+              .row
+                .span3
+                  = f.input :phone, placeholder: "+38 ( _ _ _ ) _ _ _ - _ _ - _ _"
+                .span3
+                  = f.input :email
+              = f.input :special_notes, input_html: {rows: '3'}
+              .clear
+              = f.submit "Save changes"

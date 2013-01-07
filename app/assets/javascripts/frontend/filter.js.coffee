@@ -7,7 +7,7 @@ class Pagination
       @bindListener()
       @goTo 1
     else 
-      console.log 'stub', @, @$el      
+#      console.log 'stub', @, @$el
       @stub()
     @
 
@@ -28,7 +28,7 @@ class Pagination
 
   stub: () ->
     @$el.empty()
-    @$el.html('<a href="#"> No page stub></a>')
+    @$el.html("<a class='current' href='?#1'>1</a>")
 
   goTo: (page) ->
     @$el.empty()
@@ -68,12 +68,16 @@ class PlacesCollection
     mapOptions =
       center: new google.maps.LatLng(initialData.lat, initialData.lng),
       zoom: 9,
+      disableDefaultUI: true,
+      zoomControl: true,
       minZoom: 2,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     @map = new google.maps.Map(document.getElementById("map_places"), mapOptions)
     window.googleMap = @map
+
+
   useNewData: (json, page) ->
-    # console.log json
+#    console.log json
     new Pagination(json.total).goTo(page)
     placesData = json.result
     newIds = _.pluck(placesData, 'id')
@@ -180,7 +184,15 @@ class PlacesCollection
     updateSingleTime.call(@, time, $el, $listEl)
     updateReservationLink.call(@, place, $el, $listEl)
     
-    
+
+  updateDate: (dateText) =>
+    window.filter.get 'reserve_date', dateText
+    $('#map_details_wrapper').find('.place').each (index, el) ->
+      $el = $(el)
+      $listEl = $('#list_' + $(el).attr('id'))
+      #askAjax for single place being available at specific date
+      date = dateText.replace /\//g,'-'
+      updateSingleDate.call(@, date, $el, $listEl)
 
   updateTime: (time) =>
     #TODO create ajax responder for batch of ids
@@ -190,6 +202,7 @@ class PlacesCollection
       $el = $(el)
       $listEl = $('#list_' + $(el).attr('id'))
       #askAjax for single place being available at specific time
+
       updateSingleTime.call(@, time, $el, $listEl)
   updatePeople: (number) =>
     window.filter.get 'number_of_people', number
@@ -212,12 +225,21 @@ class PlacesCollection
       $el.find(".timing a:eq(#{index})").attr('href', newLink)
       $listEl.find(".timing a:eq(#{index})").attr('href', newLink)
 
-  updateSinglePerson = (number, els...) ->
+  updateSingleDate = (date, els...) ->
     if els.length is 2
       [$listEl, $el] = els
     for index in [0..4]  
       oldLink = $el.find(".timing a:eq(#{index})").attr('href')
-      newLink = oldLink.replace(/\d+$/, number) 
+      newLink = oldLink.replace(/(\d+\-)+\d{4}/, date)
+      $el.find(".timing a:eq(#{index})").attr('href', newLink)
+      $listEl.find(".timing a:eq(#{index})").attr('href', newLink)
+
+  updateSinglePerson = (number, els...) ->
+    if els.length is 2
+      [$listEl, $el] = els
+    for index in [0..4]
+      oldLink = $el.find(".timing a:eq(#{index})").attr('href')
+      newLink = oldLink.replace(/\d+$/, number)
       $el.find(".timing a:eq(#{index})").attr('href', newLink)
       $listEl.find(".timing a:eq(#{index})").attr('href', newLink)
             
@@ -238,7 +260,6 @@ class PlacesCollection
       oldLink = $el.find(".timing a:eq(#{index})").attr('href')
       oldLink = oldLink.replace(/h=\d+/,"h=#{time.split(':')[0]}")
       newLink = oldLink.replace(/m=\d+/,"m=#{time.split(':')[1]}")
-      console.log oldLink
       $el.find(".timing a:eq(#{index})").attr('href', newLink)
       $el.find(".timing a:eq(#{index})").html time
       $listEl.find(".timing a:eq(#{index})").html time
@@ -298,6 +319,9 @@ class FilterInput
       when 'number_of_people'
        regexpMatch = /number_of_people=(\d+)/
        regexpReplace = /number_of_people=\d+/
+      when 'reserve_date'
+       regexpMatch = /reserve_date=(\d+\%+\w+)/
+       regexpReplace = /reserve_date=[\d+\%+\w+]*/
 
     baseURL = window.location.pathname
     oldQuery = window.location.search || ''
@@ -353,20 +377,15 @@ class FilterInput
       askAJAX.call(@, newQuery, @places, startPage) 
     
     self = @
-   
-    $('input[name="reserve_date"]').datepicker( 
-      beforeShow: () ->
-        console.log 'lol2'
-      onClose: (dateText, inst) ->
-        console.log 'lol'
-        # headlineText = $('#mapcontainer > h3:first-child').html().replace(/(\d+\/?){3}(?=,)/, dateText)
-        # $('#mapcontainer > h3:first-child').html headlineText
-        # self.places.updateDate date
+    $('input[name="reserve_date"]').data('Zebra_DatePicker').update(
+      onSelect: (dateText) ->
+        headlineText = $('#mapcontainer > h3:first-child').html().replace(/(\d+\/?){3}(?=,)/, dateText)
+        $('#mapcontainer > h3:first-child').html headlineText
+        self.places.updateDate dateText
     )
 
     $("select[name=reserve_time]").on 'change', ->
       time = $(this).val()
-      console.log time
       headlineText = $('#mapcontainer > h3:first-child').html().replace(/\d+\:\d+(?=\sfor\s)/, time)
       $('#mapcontainer > h3:first-child').html headlineText
       self.places.updateTime time               

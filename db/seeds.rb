@@ -46,7 +46,7 @@ def add_test_stuff
     place = Place.create(name: Faker::Company.name, description: Faker::Lorem.sentence, user_id: User.first.id,
                            phone: Faker::PhoneNumber.phone_number, url: Faker::Internet.http_url, avg_bill: BillType.all.sample.id)
 
-    week_days = DayType.all.map { |day| FactoryGirl.build(:week_day, day_type_id: day.id, is_working: true)}
+    week_days = DayType.all.map { |day| FactoryGirl.build(:week_day, day_type_id: day.id, is_working: true, is_discount: [true, false].sample)}
     week_days.each do |week_day|
       week_day.day_discounts << (rand(0..1)).times.map do
         FactoryGirl.build(:day_discount, from_time: (week_day.start_at + rand(4)),
@@ -59,7 +59,7 @@ def add_test_stuff
       place.categories << category
       place.kitchens   << kitchen
 
-      2.times do
+      rand(1..5).times do
         review = FactoryGirl.build(:review, user_id: User.all.sample.id)
         MarkType.all.each { |mark_type| review.marks << FactoryGirl.build(:mark, mark_type_id: mark_type.id) }
         place.reviews << review
@@ -130,6 +130,7 @@ def insert_default_reservations
     reservation = Reservation.create_from_place_and_user(user, place)
     reservation.special_notes = Faker::Lorem.sentences(3).join(' ')
     reservation.time = DateTime.now + rand(-5...5).days
+    reservation.persons = rand(1..5)
     reservation.save
   end
 end

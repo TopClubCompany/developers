@@ -44,11 +44,13 @@ class Users::ProfileController < ApplicationController
   end
 
   def show_reservation
-
+    @reservation = Reservation.find_by_id(params[:reservation_id])
+    @place       = @reservation.place
   end
 
   def edit_reservation
-
+    @reservation = Reservation.find_by_id(params[:reservation_id])
+    @place       = @reservation.place
   end
 
   def update_settings
@@ -58,6 +60,22 @@ class Users::ProfileController < ApplicationController
       sign_in(current_user, by_pass: true)
     else
       render action: 'edit_settings'
+    end
+  end
+
+  def update_reservation
+    #raise params.to_yaml
+    reservation = Reservation.find_by_id(params[:reservation_id])
+    if current_user.reservations.map(&:id).include? reservation.id
+      time = DateTime.strptime(params[:reservation].delete(:date) + ' ' + params[:reservation].delete(:time), "%D %I:%M %p")
+      params[:reservation][:time] = time
+      if reservation.update_attributes(params[:reservation])
+        redirect_to show_profile_reservation_path(reservation.user.id, reservation.id), flash: {success: 'reservation updated successfully'}
+      else
+        render action: 'edit_reservation'
+      end
+    else
+      redirect_to root_path
     end
   end
 

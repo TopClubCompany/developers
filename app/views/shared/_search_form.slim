@@ -1,8 +1,8 @@
-form action='/search'
+form action=localization_link("search")
   - unless defined? show_title
-    input id='title_or_location' name="title_or_location" placeholder="title or location" type="text" autocomplete="off"
+    input id='title_or_location' name="title" placeholder="title or location" type="text"
   label for="reserve_date"
-  input class='dateFormatNeeded' name="reserve_date" type="text" value=(params[:reserve_date] || Time.now.strftime("%d/%m/%Y"))
+  input class='dateFormatNeeded' name="reserve_date" autocomplete="off" type="text" value=(params[:reserve_date] || Time.now.strftime("%d/%m/%Y"))
   label for="reserve_time"
   select name="reserve_time"
     - time_with_locale(@time).each do |time_el|
