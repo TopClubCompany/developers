@@ -1,6 +1,6 @@
 module MustacheTemplateHandler
 	def self.call(template)
-		if template.locals.include? :mustache
+		if template.locals.include? 'mustache'
 			"Mustache.render(#{template.source.inspect}, mustache).html_safe"
 		else
 			"#{template.source.inspect}.html_safe"
