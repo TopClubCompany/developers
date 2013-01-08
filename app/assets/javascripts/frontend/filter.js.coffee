@@ -154,29 +154,19 @@ class PlacesCollection
       </div>             
               
     """
-    mapBlock = """
-      <div id="place_#{place.id}" data-lng="#{place.lng}" data-lat="#{place.lat}" class="place">
-        <h4>
-          <a href="/places/#{place.id}">#{place.name}</a>
-        </h4>
-        <div class="rating">
-          <div class="stars">
-            <div class="stars_overlay"></div>
-            <div class="stars_bar" style="left: #{place.overall_mark * 20}%"></div>
-            <div class="stars_bg"></div>
-          </div>
-          <small></small>
-        </div>
-        <div class="timing">
-          <a href="#"></a>
-          <a href="#"></a>
-          <a href="#" class="bold"></a>
-          <a href="#"></a>
-          <a href="#"></a>
-          <div class="clear"></div>
-        </div>
-      </div>
-    """
+    source   = $("#map_place_template").html()
+    _.extend place, {"star_rating": "left: #{place.overall_mark * 20}%"}
+    _.extend(place, {
+      "timing": [
+        {"url": "/new_reservation/08-01-2013,11,h=11&amp;m=00,2", "time": "11:00"} 
+        {"url": "/new_reservation/08-01-2013,11,h=10&amp;m=45,2", "time": "10:45"}
+        {"url": "/new_reservation/08-01-2013,11,h=10&amp;m=30,2", "time": "10:30"}
+        {"url": "/new_reservation/08-01-2013,11,h=10&amp;m=15,2", "time": "10:15"}
+        {"url": "new_reservation/08-01-2013,11,h=10&amp;m=00,2", "time": "10:00"}
+      ]
+    } )   
+
+    mapBlock = Mustache.to_html(source, place)
     $el = $('#map_details_wrapper').append(mapBlock)
     $listEl = $(listBlock).insertBefore('#list_grid_view .paginate')
     time = $("select[name=reserve_time]").val()

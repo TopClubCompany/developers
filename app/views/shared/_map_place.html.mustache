@@ -1,0 +1,19 @@
+<div class="place" data-id="{{id}}" data-lat="{{lat}}" data-lng="30.5451" id="place_{{id}}">
+<h4>
+  <a href="{{show_path}}">{{name}}</a>
+</h4>
+
+<div class="rating">
+    <div class="stars">
+        <div class="stars_overlay"></div>
+        <div class="stars_bar" style="{{star_rating}}"></div>
+        <div class="stars_bg"></div>
+    </div>
+      <small>{{review_count}}</small>
+</div>
+<div class="timing">
+  {{#timing}}
+    <a href="{{url}}">{{time}}</a>
+  {{/timing}}
+</div>
+</div>
