@@ -11,33 +11,7 @@
           a#map_view href="#"
             nobr= I18n.t('search.map_view')
   .row
-    .span2
-      #refine
-        h2= I18n.t('search.refine')
-        h4= I18n.t('search.category')
-        - Category.children.first(4).each do |category|
-          label.checkbox
-            input type="checkbox" data-type="category" value=category.id = category.title
-        .clear
-        a.more data-type="category" href="#"
-          | more >
-        h4= I18n.t('search.price')
-        - BillType.all.first(4).each do |bill|
-          label.checkbox
-            input type="checkbox"  data-type="price" value=bill.id
-              = bill.code_title
-              |&nbsp;
-              b= bill.title_image
-        .clear
-        /a.more href="#"
-          | more >
-        h4= I18n.t('search.kitchen')
-        - Kitchen.with_translations.first(1).each do |kitchen|
-          label.checkbox
-            input type="checkbox" data-type="kitchen" value=kitchen.id = kitchen.title
-        .clear
-        a.more data-type="kitchen" href="#"
-          | more >
+    = render 'filters'
 
     - possibilities = ["00", "15", "30", "45"]
     - base_time = @time[:h]
