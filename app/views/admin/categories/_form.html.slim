@@ -3,7 +3,9 @@
     = f.input :name, :locale => l
     = f.input :description, :locale => l, :as => :ckeditor
 
-  = f.input :is_visible
+  = f.input :is_visible, input_html: {class: "pretty-slide-checkbox preload"}
+  = f.input :is_visible_on_main, input_html: {class: "pretty-slide-checkbox preload"}
+  = f.input :position
   = f.association :parent
 
   = input_set t('admin.pictures') do
