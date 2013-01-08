@@ -32,7 +32,7 @@
               - place.show_path = place_path(place.slug)
               - place.reviews = place.review_ids.try(:count)
               - place.review_count = place.review_ids.try(:count)
-              == render 'shared/map_place', :mustache => place
+              == render 'shared/map_place', :mustache => Place.for_mustache(place, params)
               / .place id="place_#{place.id}" *{'data-lat'=>"#{location[0]}", "data-lng" => "#{location[1]}", 'data-id' => "#{place.id}"}
                 h4
                   a href=place_path(place.slug)
