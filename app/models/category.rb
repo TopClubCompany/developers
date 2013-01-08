@@ -24,7 +24,7 @@ class Category < ActiveRecord::Base
   include Utils::Models::AdminAdds
 
   scope :children, -> { where("parent_id IS NOT NULL") }
-  scope :for_main, -> { with_translation.where(:is_visible_on_main => true).order(:position) }
+  scope :for_main, -> { with_translation.where(:is_visible_on_main => true) }
 
   default_scope reversed_nested_set.includes(:translations)
 
@@ -58,6 +58,10 @@ class Category < ActiveRecord::Base
     input_name = self_and_ancestors.map{|r| r.try(:name)}
     input_name[-1] = "<b>#{input_name.last}</b>"
     {:name => input_name.join(' - '), :id => self.id}
+  end
+
+  def self.main_page_categories
+    Category.for_main.sort_by { |category| category.position }
   end
 
 

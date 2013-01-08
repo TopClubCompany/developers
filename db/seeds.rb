@@ -11,14 +11,41 @@ end
 def add_categories
   Category.full_truncate
   main_rest = Category.create(name: "Рестораны", description: "Рестораны", user_id: User.first.id)
-  %w(кафе пиццерии бары пабы кофейни суши загородные).each do |category|
-    Category.create(name: category, description: category, user_id: User.first.id, parent_id: main_rest.id)
+  %w(Coffee Bars\ &\ pubs Pizza Sushi Café Restaurants).each_with_index do |category, index|
+    params = case index
+               when 0
+                {css_id: "coffee", is_visible_on_main: true, position: 0}
+               when 1
+                 {css_id: "bars_and_pubs", is_visible_on_main: true, position: 1}
+                when 2
+                  {css_id: "pizza", is_visible_on_main: true, position: 2}
+               when 3
+                 {css_id: "sushi", is_visible_on_main: true, position: 3}
+               when 4
+                 {css_id: "cafe", is_visible_on_main: true, position: 4}
+               when 5
+                 {css_id: "restaurants", is_visible_on_main: true, position: 5}
+               else
+                {}
+              end
+
+    cat_params = {name: category, description: category, user_id: User.first.id, parent_id: main_rest.id}.merge!(params)
+    Category.create(cat_params)
   end
 
   night = Category.create(name: "Ночная жизнь", description: "Ночная жизнь", user_id: User.first.id)
 
-  %w(ночные\ клубы караоке).each do |category|
-    Category.create(name: category, description: category, user_id: User.first.id, parent_id: night.id)
+  %w(Nightъ clubs Karaoke).each_with_index do |category, index|
+    params = case index
+               when 0
+                 {css_id: "night_clubs", is_visible_on_main: true, position: 6}
+               when 1
+                 {css_id: "karaoke", is_visible_on_main: true, position: 7}
+               else
+                {}
+             end
+    cat_params = {name: category, description: category, user_id: User.first.id, parent_id: night.id}.merge!(params)
+    Category.create(cat_params)
   end
   puts 'categories added successfully'
 end
