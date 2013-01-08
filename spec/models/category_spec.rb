@@ -19,6 +19,7 @@ end
 #  updated_at         :datetime         not null
 #  is_visible_on_main :boolean          default(FALSE)
 #  position           :integer
+#  css_id             :string(255)
 #
 # Indexes
 #
