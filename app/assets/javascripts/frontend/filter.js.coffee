@@ -63,7 +63,6 @@ class PlacesCollection
       @addMarker obj
    
   createMap: () ->
-    console.log 'inited GMap'
     initialData = $('#map_places').data()
     mapOptions =
       center: new google.maps.LatLng(initialData.lat, initialData.lng),
