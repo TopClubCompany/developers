@@ -319,13 +319,13 @@ class Place < ActiveRecord::Base
   end
 
 
-
   def self.today_discount(discounts, options={})
     if options[:reserve_time].present?
       time = self.en_to_time(options[:reserve_time]).sub(":",".").to_f
       current_day = options[:reserve_date].present? ? DateTime.parse(options[:reserve_date]).wday : DateTime.now.wday
-      puts time
-      discounts = discounts.select{|discount| discount["day"] == current_day && time > discount["from_time"].to_f && time <  discount["to_time"].to_f}
+      discounts = discounts.select do |discount|
+        discount["day"] == current_day && time > discount["from_time"].to_f && time <  discount["to_time"].to_f
+      end
     end
     discounts
   end
