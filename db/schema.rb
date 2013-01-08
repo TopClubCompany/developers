@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130108083733) do
+ActiveRecord::Schema.define(:version => 20130108150622) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(:version => 20130108083733) do
     t.datetime "updated_at",                            :null => false
     t.boolean  "is_visible_on_main", :default => false
     t.integer  "position"
+    t.string   "css_id"
   end
 
   add_index "categories", ["lft", "rgt"], :name => "index_categories_on_lft_and_rgt"
