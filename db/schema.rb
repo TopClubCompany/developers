@@ -180,6 +180,7 @@ ActiveRecord::Schema.define(:version => 20130108150622) do
     t.float    "discount"
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
+    t.boolean  "is_discount"
   end
 
   add_index "day_discounts", ["week_day_id"], :name => "index_day_discounts_on_week_day_id"
@@ -596,7 +597,6 @@ ActiveRecord::Schema.define(:version => 20130108150622) do
     t.integer  "place_id"
     t.datetime "created_at",                                                   :null => false
     t.datetime "updated_at",                                                   :null => false
-    t.boolean  "is_discount"
   end
 
   add_index "week_days", ["day_type_id"], :name => "index_week_days_on_day_type_id"
