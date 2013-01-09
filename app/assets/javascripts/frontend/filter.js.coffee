@@ -1,5 +1,5 @@
 class Pagination
-  constructor: (total_elements, per_page = 4, @max_visible = 5, @elSelector = '#list_grid_view .paginate') ->
+  constructor: (total_elements, per_page = 15, @max_visible = 5, @elSelector = '#list_grid_view .paginate') ->
     @$el = $(@elSelector)
     @total_pages = Math.ceil (total_elements / per_page)
     # console.log total_elements, per_page, total_elements / per_page
@@ -32,13 +32,14 @@ class Pagination
 
   goTo: (page) ->
     @$el.empty()
-    if page > 1 and @total_pages > @max_visible
-      @$el.append "<a href='?##{page - 1 }'>Prev</a>" 
-    if page > 1 and @total_pages < @max_visible
-      @$el.append "<a href='?#1'>1</a>" 
-    for i in [page..Math.min(page + @max_visible - 1, @total_pages)]
+    page = parseInt(page)
+    endPage = Math.min(@total_pages, page + @max_visible)
+    startPage = Math.max(endPage - @max_visible, 1)
+    if startPage > 1 
+      @$el.append "<a href='##{page - 1}'>prev</a>"
+    for i in [startPage..endPage]
       @$el.append "<a href='##{i}'>#{i}</a>"
-    if @max_visible < @total_pages
+    if endPage < @total_pages
       @$el.append "<a href='##{page + 1}'>next</a>"
     
     $("#{@elSelector} a[href=##{page}]").addClass('current').siblings().removeClass('current')
@@ -115,46 +116,9 @@ class PlacesCollection
   
   addBlock: (place) =>
     properKitchensName = if place.kitchens.length > 18 then place.kitchens.substring(0, 18) + '...' else place.kitchens
-    console.log place
-    listBlock = """
-    <div class="place" id="list_place_#{place.id}">
-        <a href="/places/#{place.id}">
-          <img height="100" src="#{place.image_path}" width="140">
-        </a>
-        <h4><a href="/places/#{place.id}">#{place.name}</a></h4>
-        <div class="rating">
-          <div class="stars">
-            <div class="stars_overlay"></div>
-            <div class="stars_bar" style="left: #{place.overall_mark * 20}%"></div>
-            <div class="stars_bg"></div>
-          </div>
-          <small>#{place.review_count}</small>
-        </div>
-        <ul class="place_features">
-          <li class="location">Ивана Мазепы улица</li>
-          <li class="cuisine" title="#{place.kitchens_names}">#{properKitchensName}</li>
-          <li class="pricing">#{place.avg_bill_title}</li>
-        </ul>
-        <div class="timing">
-          <a href="#"></a>
-          <a href="#"></a>
-          <a class="bold" href="#"></a>
-          <a href="#"></a>
-          <a href="#"></a>
-        </div>
-        <div class="special_offers">
-          <h5>Special offers:</h5>
-          <h5>
-            <a href="#"></a>
-            <a href="#"></a>
-            <a href="#"></a>
-          </h5>
-        </div>
-        <div class="clear"></div>
-      </div>             
-              
-    """
-    source   = $("#map_place_template").html()
+    ###
+    TODO REPLACE WITH HELPER METHODS
+    ###
     _.extend place, {"star_rating": "left: #{place.overall_mark * 20}%"}
     _.extend(place, {
       "timing": [
@@ -165,7 +129,9 @@ class PlacesCollection
         {"url": "new_reservation/08-01-2013,11,h=10&amp;m=00,2", "time": "10:00"}
       ]
     } )   
-
+    source   = $("#list_place_template").html()
+    listBlock = Mustache.to_html(source, place)
+    source   = $("#map_place_template").html()
     mapBlock = Mustache.to_html(source, place)
     $el = $('#map_details_wrapper').append(mapBlock)
     $listEl = $(listBlock).insertBefore('#list_grid_view .paginate')
