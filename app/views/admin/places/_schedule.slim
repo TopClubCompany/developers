@@ -5,7 +5,6 @@
   .nested_fields
     = input_set 'discounts' do
       = f.input :is_working
-      = f.input :is_discount, input_html: {class: "is_discount"}
       = f.simple_fields_for :day_discounts
       br
       = f.link_to_add t('admin.add'), :day_discounts, class: 'btn btn-primary'
