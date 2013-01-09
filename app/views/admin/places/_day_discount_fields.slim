@@ -1,4 +1,5 @@
 .discount_fields
+  = f.input :is_discount, input_html: {class: "is_discount"}
   = f.locale_tabs do |l|
     = f.input :title, locale: l
     = f.input :description, locale: l, :as => :ckeditor
