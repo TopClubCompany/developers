@@ -1,4 +1,5 @@
 #index.content
+
   .row
     .span8 id="teaser"
       .video_player
@@ -16,48 +17,110 @@
     .span12
       #search_form
         = render :partial => 'shared/search_form', :locals => { :time => {:h => (@time[:h] || 12), :m => (@time[:m] || '00')} }
-
+  .row
+    .span12
+      #browse_by_category
+        h6 Browse places by category
+        ul
+          li#coffee
+            a href="#"
+              span.cat_icon
+                b
+              | Coffee
+          li#bars_and_pubs
+            a href="#"
+              span.cat_icon
+                b
+              | Bars & pubs
+          li#pizza
+            a href="#"
+              span.cat_icon
+                b
+              | Pizza
+          li#sushi
+            a href="#"
+              span.cat_icon
+                b
+              | Sushi
+          li#cafe
+            a href="#"
+              span.cat_icon
+                b
+              | Café
+          li#restaurants
+            a href="#"
+              span.cat_icon
+                b
+              | Restaurants
+          li#night_clubs
+            a href="#"
+              span.cat_icon
+                b
+              | Night clubs
+          li#karaoke
+            a href="#"
+              span.cat_icon
+                b
+              | Karaoke
+          .clear
 #promo_places
   .content
     .row
       .span12
-        ul id="promo_tabs"
+        ul#promo_tabs
           li class="active"
             a href="#best"= t('.best')
           li
             a href="#new"= t('.new')
           li
             a href="#available"= t('.available')
+
           .clear
-        #best.tab_content
+        #best_restaurants.tab_content
           - @places.each_with_index do |place, i|
             = render 'shared/place', place: place, i: i
           .clear
-          a.all href="/places"= t('.all')
+          a.load_more href="#" Show more restaurants
         #new.tab_content
           - @new_place.each_with_index do |place, i|
             = render 'shared/place', place: place, i: i
           .clear
-          a.all href="/places"= t('.all')
+          a.load_more href="#" Show more restaurants
         #available.tab_content
           - @tonight_available.each_with_index do |place, i|
             = render 'shared/place', place: place, i: i
           .clear
-          a.all href="/places"= t('.all')
+          a.load_more href="#" Show more restaurants
+    .content
+      .row
+        #promo_block_sm.promo_block.span4
+          = t('footer.earn_point')
+          a href=new_user_registration_path
+            = t('auth.links.sign_up')
+        #promo_block_big.promo_block.span8
+          = t('footer.need_clients')
+          a href="/partner_info" &nbsp; #{t('footer.become_a_prtner')}
+
+/#promo_places
+/  .content
+/    .row
+/      .span12
+
+/        #best.tab_content
+/          - @places.each_with_index do |place, i|
+/            = render 'shared/place', place: place, i: i
+/          .clear
+/          a.all href="/places"= t('.all')
+/        #new.tab_content
+/          - @new_place.each_with_index do |place, i|
+/            = render 'shared/place', place: place, i: i
+/          .clear
+/          a.all href="/places"= t('.all')
+/        #available.tab_content
+/          - @tonight_available.each_with_index do |place, i|
+/            = render 'shared/place', place: place, i: i
+/          .clear
+/          a.all href="/places"= t('.all')
 
 
 = render 'shared/more_template'
-.content
-  .row
-    #promo_block_sm.promo_block.span4
-      = t('footer.earn_point')
-      br
-      a href=new_user_registration_path
-        = t('auth.links.sign_up')
-    #promo_block_big.promo_block.span8
-      = t('footer.need_clients')
-      a href="/partner_info" &nbsp; #{t('footer.become_a_prtner')}
-
-
-                
-          
