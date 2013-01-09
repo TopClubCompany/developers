@@ -287,6 +287,7 @@ class Place < ActiveRecord::Base
     res[:marks] = place["marks"]
     res[:lat_lng] = place["lat_lng"]
     res[:special_offers] =  self.today_discount(place["discounts"], options)
+    res[:place_url] = "/#{place["slug"]}"
     res
   end
 
