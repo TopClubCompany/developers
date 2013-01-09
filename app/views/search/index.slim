@@ -11,33 +11,7 @@
           a#map_view href="#"
             nobr= I18n.t('search.map_view')
   .row
-    .span2
-      #refine
-        h2= I18n.t('search.refine')
-        h4= I18n.t('search.category')
-        - Category.children.first(4).each do |category|
-          label.checkbox
-            input type="checkbox" data-type="category" value=category.id = category.title
-        .clear
-        a.more data-type="category" href="#"
-          | more >
-        h4= I18n.t('search.price')
-        - BillType.all.first(4).each do |bill|
-          label.checkbox
-            input type="checkbox"  data-type="price" value=bill.id
-              = bill.code_title
-              |&nbsp;
-              b= bill.title_image
-        .clear
-        /a.more href="#"
-          | more >
-        h4= I18n.t('search.kitchen')
-        - Kitchen.with_translations.first(1).each do |kitchen|
-          label.checkbox
-            input type="checkbox" data-type="kitchen" value=kitchen.id = kitchen.title
-        .clear
-        a.more data-type="kitchen" href="#"
-          | more >
+    = render 'filters'
 
     - possibilities = ["00", "15", "30", "45"]
     - base_time = @time[:h]
@@ -52,7 +26,14 @@
           #map_details_wrapper
             - @result.each do |place|
               - location = place.lat_lng.split(',')
-              .place id="place_#{place.id}" *{'data-lat'=>"#{location[0]}", "data-lng" => "#{location[1]}", 'data-id' => "#{place.id}"}
+              - place.lat = location[0]
+              - place.lng = location[1]
+              - place.title = place["name_#{I18n.locale}"]
+              - place.show_path = place_path(place.slug)
+              - place.reviews = place.review_ids.try(:count)
+              - place.review_count = place.review_ids.try(:count)
+              == render 'shared/map_place', :mustache => Place.for_mustache(place, params)
+              / .place id="place_#{place.id}" *{'data-lat'=>"#{location[0]}", "data-lng" => "#{location[1]}", 'data-id' => "#{place.id}"}
                 h4
                   a href=place_path(place.slug)
                     = place["name_#{I18n.locale}"]
@@ -103,11 +84,12 @@
 
         #list_grid_view.none
           - @result.each do |place|
-            .place id="list_place_#{place.id}"
-              a href=place_path(place.slug)
+            == render 'shared/list_place', :mustache => Place.for_mustache(place, params)
+            /.place id="list_place_#{place.id}"
+              a href="/places/#{place.slug}"
                 img height="100" width="140" src="#{slider_place_image(place)}"
               h4
-                a href=place_path(place.slug)
+                a href="/places/#{place.slug}"
                   = place["name_#{I18n.locale}"]
               .rating
                 .stars
@@ -189,3 +171,12 @@
             - else
               a.current href="#1" 1
 = render 'shared/more_template'
+script type='text/html' id='map_place_template'
+  = render 'shared/map_place'
+
+script type='text/html' id='list_place_template'
+<<<<<<< HEAD
+  = render 'shared/list_place'
+=======
+  = render 'shared/list_place'
+>>>>>>> mustache_demo

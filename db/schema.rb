@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130107050413) do
+ActiveRecord::Schema.define(:version => 20130108150622) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -94,15 +94,18 @@ ActiveRecord::Schema.define(:version => 20130107050413) do
   end
 
   create_table "categories", :force => true do |t|
-    t.string   "slug",                         :null => false
+    t.string   "slug",                                  :null => false
     t.integer  "user_id"
-    t.boolean  "is_visible", :default => true, :null => false
+    t.boolean  "is_visible",         :default => true,  :null => false
     t.integer  "parent_id"
-    t.integer  "lft",        :default => 0
-    t.integer  "rgt",        :default => 0
-    t.integer  "depth",      :default => 0
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.integer  "lft",                :default => 0
+    t.integer  "rgt",                :default => 0
+    t.integer  "depth",              :default => 0
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.boolean  "is_visible_on_main", :default => false
+    t.integer  "position"
+    t.string   "css_id"
   end
 
   add_index "categories", ["lft", "rgt"], :name => "index_categories_on_lft_and_rgt"
