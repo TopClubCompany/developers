@@ -1,15 +1,15 @@
 #header
   .content
     .row
-      .span8
+      .span9
         #logo
           a href="/"
             img src="/assets/topreserve.png"
           a.by_topclub href="/" by TOPCLUB
-        span.few-words
-          | Restaurant Reservations. Free · Instant · Save money
-      .span4
+        span.few-words Restaurant Reservations. Free · Instant · Save money
+      .span3
         - unless user_signed_in?
           a.sign_up href=new_user_registration_path Sign up
           a.sign_in href=new_user_session_path Sign in
+
 =render "layouts/breadcrumbs"
