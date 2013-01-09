@@ -1,5 +1,5 @@
 class DayDiscount < ActiveRecord::Base
-  attr_accessible :week_day_id, :from_time, :to_time, :discount, :title, :description
+  attr_accessible :week_day_id, :from_time, :to_time, :discount, :title, :description, :is_discount
 
   belongs_to :week_day
 

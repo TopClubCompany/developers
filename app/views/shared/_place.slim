@@ -7,7 +7,9 @@
     h4
       a href=place_path(place.slug)
         = place["name_#{I18n.locale}"]
-      span.discount_label -5%
+      - discount = Place.today_discount(place.discounts).first.try(:discount)
+      - if discount
+        span.discount_label #{discount.to_i}%
     .rating.rating_big
       .stars
         .stars_overlay

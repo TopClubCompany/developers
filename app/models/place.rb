@@ -287,7 +287,9 @@ class Place < ActiveRecord::Base
     res[:overall_mark] = place["overall_mark"]
     res[:marks] = place["marks"]
     res[:lat_lng] = place["lat_lng"]
-    res[:special_offers] =  self.today_discount(place["discounts"], options)
+    offers = self.today_discount(place["discounts"], options)
+    res[:special_offers] = offers[1]
+    res[:discount] = offers[0]
     res[:place_url] = "/#{place["slug"]}"
     res[:star_rating] = self.get_star_rating(place)
     res
@@ -299,7 +301,7 @@ class Place < ActiveRecord::Base
     self.send(:day_discounts).with_translation.includes(:week_day).map do |day_discount|
       {
           id: day_discount.id,
-          is_discount: day_discount.week_day.is_discount,
+          is_discount: day_discount.is_discount,
           day: day_discount.week_day.day_type_id,
           discount:  day_discount.discount,
           to_time: day_discount.to_time,
@@ -331,12 +333,18 @@ class Place < ActiveRecord::Base
   def self.today_discount(discounts, options={})
     if options[:reserve_time].present?
       time = self.en_to_time(options[:reserve_time]).sub(":",".").to_f
+    else
+      time = nil
+    end
       current_day = options[:reserve_date].present? ? DateTime.parse(options[:reserve_date]).wday : DateTime.now.wday
       discounts = discounts.select do |discount|
-        discount["day"] == current_day && time > discount["from_time"].to_f && time <  discount["to_time"].to_f
+        if time
+          discount["day"] == current_day && time > discount["from_time"].to_f && time <  discount["to_time"].to_f
+        else
+          discount["day"] == current_day
+        end
       end
-    end
-    discounts
+    [discounts.select{|discount| discount["is_discount"]}.first, discounts]
   end
 
 end
