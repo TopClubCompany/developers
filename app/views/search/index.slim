@@ -26,7 +26,14 @@
           #map_details_wrapper
             - @result.each do |place|
               - location = place.lat_lng.split(',')
-              .place id="place_#{place.id}" *{'data-lat'=>"#{location[0]}", "data-lng" => "#{location[1]}", 'data-id' => "#{place.id}"}
+              - place.lat = location[0]
+              - place.lng = location[1]
+              - place.title = place["name_#{I18n.locale}"]
+              - place.show_path = place_path(place.slug)
+              - place.reviews = place.review_ids.try(:count)
+              - place.review_count = place.review_ids.try(:count)
+              == render 'shared/map_place', :mustache => Place.for_mustache(place, params)
+              / .place id="place_#{place.id}" *{'data-lat'=>"#{location[0]}", "data-lng" => "#{location[1]}", 'data-id' => "#{place.id}"}
                 h4
                   a href=place_path(place.slug)
                     = place["name_#{I18n.locale}"]
@@ -168,4 +175,8 @@ script type='text/html' id='map_place_template'
   = render 'shared/map_place'
 
 script type='text/html' id='list_place_template'
+<<<<<<< HEAD
   = render 'shared/list_place'
+=======
+  = render 'shared/list_place'
+>>>>>>> mustache_demo
