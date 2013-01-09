@@ -344,7 +344,8 @@ class Place < ActiveRecord::Base
           discount["day"] == current_day
         end
       end
-    [discounts.select{|discount| discount["is_discount"]}.first, discounts]
+    discounts = discounts.group_by{|arr| arr["is_discount"]}
+    [discounts[true].try(:first), discounts[false]]
   end
 
 end
