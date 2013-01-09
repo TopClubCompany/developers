@@ -77,11 +77,12 @@
 
         #list_grid_view.none
           - @result.each do |place|
-            .place id="list_place_#{place.id}"
-              a href=place_path(place.slug)
+            == render 'shared/list_place', :mustache => Place.for_mustache(place, params)
+            /.place id="list_place_#{place.id}"
+              a href="/places/#{place.slug}"
                 img height="100" width="140" src="#{slider_place_image(place)}"
               h4
-                a href=place_path(place.slug)
+                a href="/places/#{place.slug}"
                   = place["name_#{I18n.locale}"]
               .rating
                 .stars
@@ -163,3 +164,8 @@
             - else
               a.current href="#1" 1
 = render 'shared/more_template'
+script type='text/html' id='map_place_template'
+  = render 'shared/map_place'
+
+script type='text/html' id='list_place_template'
+  = render 'shared/list_place'
