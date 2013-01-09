@@ -288,10 +288,13 @@ class Place < ActiveRecord::Base
     res[:lat_lng] = place["lat_lng"]
     res[:special_offers] =  self.today_discount(place["discounts"], options)
     res[:place_url] = "/#{place["slug"]}"
+    res[:star_rating] = self.get_star_rating(place)
     res
   end
 
-  def discounts_index()
+
+
+  def discounts_index
     self.send(:day_discounts).with_translation.includes(:week_day).map do |day_discount|
       {
           id: day_discount.id,
@@ -307,6 +310,10 @@ class Place < ActiveRecord::Base
   end
 
   private
+
+  def self.get_star_rating place
+  "left: #{place["overall_mark"] * 20}%" if place["overall_mark"].present?
+  end
 
   def self.en_to_time(time)
     if time.include?("AM")
