@@ -1,0 +1,12 @@
+.row
+  .span12
+    #browse_by_category
+      h6 Browse places by category
+      ul
+        - Category.main_page_categories.each do |category|
+          li id=category.css_id
+            a href=search_path(category.slug)
+              span.cat_icon
+                b
+              | #{category.title}
+        .clear

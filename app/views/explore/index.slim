@@ -17,52 +17,9 @@
     .span12
       #search_form
         = render :partial => 'shared/search_form', :locals => { :time => {:h => (@time[:h] || 12), :m => (@time[:m] || '00')} }
-  .row
-    .span12
-      #browse_by_category
-        h6 Browse places by category
-        ul
-          li#coffee
-            a href="#"
-              span.cat_icon
-                b
-              | Coffee
-          li#bars_and_pubs
-            a href="#"
-              span.cat_icon
-                b
-              | Bars & pubs
-          li#pizza
-            a href="#"
-              span.cat_icon
-                b
-              | Pizza
-          li#sushi
-            a href="#"
-              span.cat_icon
-                b
-              | Sushi
-          li#cafe
-            a href="#"
-              span.cat_icon
-                b
-              | Café
-          li#restaurants
-            a href="#"
-              span.cat_icon
-                b
-              | Restaurants
-          li#night_clubs
-            a href="#"
-              span.cat_icon
-                b
-              | Night clubs
-          li#karaoke
-            a href="#"
-              span.cat_icon
-                b
-              | Karaoke
-          .clear
+
+  = render 'shared/main_category'
+
 #promo_places
   .content
     .row
