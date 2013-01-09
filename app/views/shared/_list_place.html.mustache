@@ -1,0 +1,37 @@
+<div class="place" id="list_place_{{id}}">
+  <a href="{{place_url}}">
+    <img height="100" src="/uploads/place_image/9/slider_9.jpg" width="140">
+  </a>
+  <h4>
+    <a href="{{place_url}}">{{name}}</a>
+  </h4>
+  <div class="rating">
+    <div class="stars">
+      <div class="stars_overlay"></div>
+      <div class="stars_bar" style="{{star_rating}}"></div>
+      <div class="stars_bg"></div>
+    </div>
+    <small>{{review_count}}</small>
+  </div>
+  <ul class="place_features">
+    <li class="location">{{street}}</li>
+    <li class="cuisine" title="{{kitchens}}">{{kitchens}}</li>
+    <li class="pricing">{{avg_bill_title}}</li>
+  </ul>
+  <div class="timing">
+    {{#timing}}
+      <a href="{{url}}">{{time}}</a>
+    {{/timing}}
+  </div>
+  <div class="special_offers">
+    <h5>Special offers:</h5>
+    <h5>
+      {{#special_offers}}
+        <a href="#"></a>
+      {{/special_offers}}
+    </h5>
+  </div>
+  <div class="clear"></div>
+</div>
+
+           

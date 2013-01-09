@@ -3,7 +3,7 @@ class Category < ActiveRecord::Base
   has_many :place_categories, :dependent => :destroy
   has_many :places, :through => :place_categories
 
-  attr_accessible :is_visible, :parent_id, :name, :description, :user_id
+  attr_accessible :is_visible, :parent_id, :name, :description, :user_id, :is_visible_on_main, :position, :css_id
 
   belongs_to :user
 
@@ -24,7 +24,7 @@ class Category < ActiveRecord::Base
   include Utils::Models::AdminAdds
 
   scope :children, -> { where("parent_id IS NOT NULL") }
-
+  scope :for_main, -> { with_translation.where(:is_visible_on_main => true) }
 
   default_scope reversed_nested_set.includes(:translations)
 
@@ -60,23 +60,29 @@ class Category < ActiveRecord::Base
     {:name => input_name.join(' - '), :id => self.id}
   end
 
+  def self.main_page_categories
+    Category.for_main.sort_by { |category| category.position }
+  end
+
 
 end
-
 # == Schema Information
 #
 # Table name: categories
 #
-#  id         :integer          not null, primary key
-#  slug       :string(255)      not null
-#  user_id    :integer
-#  is_visible :boolean          default(TRUE), not null
-#  parent_id  :integer
-#  lft        :integer          default(0)
-#  rgt        :integer          default(0)
-#  depth      :integer          default(0)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id                 :integer          not null, primary key
+#  slug               :string(255)      not null
+#  user_id            :integer
+#  is_visible         :boolean          default(TRUE), not null
+#  parent_id          :integer
+#  lft                :integer          default(0)
+#  rgt                :integer          default(0)
+#  depth              :integer          default(0)
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  is_visible_on_main :boolean          default(FALSE)
+#  position           :integer
+#  css_id             :string(255)
 #
 # Indexes
 #

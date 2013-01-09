@@ -45,6 +45,8 @@ Topclub::Application.routes.draw do
 
   post '/complete_reservation' => 'reservations#complete_reservation', as: 'complete_reservation'
 
+
+
   match 'autocomplete' => AutocompleteApp
 
   root :to => 'explore#index'
@@ -135,4 +137,7 @@ Topclub::Application.routes.draw do
 
   end
   mount Ckeditor::Engine => "/ckeditor"
+
+  match '/:id' => "places#show", :as => "place"
+
 end

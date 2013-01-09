@@ -1,6 +1,8 @@
 class SearchController < ApplicationController
+
+  before_filter :search, only: [:index, :show]
+
   def index
-    @result = Place.search(params.merge(city: current_city))
     respond_to do |format|
       format.json do
         render :json => {result: @result.map{|e| Place.for_mustache(e, params) },
@@ -13,6 +15,12 @@ class SearchController < ApplicationController
   end
 
   def show
+    @category = params[:id]
+    respond_to do |format|
+      format.html do
+        render action: :index
+      end
+    end
 
   end
 
@@ -31,6 +39,10 @@ class SearchController < ApplicationController
 
 
   private
+
+  def search
+    @result = Place.search(params.merge(city: current_city))
+  end
 
   #point = MultiGeocoder.geocode options[:where]
   #if point.success
