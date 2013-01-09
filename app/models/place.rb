@@ -208,6 +208,7 @@ class Place < ActiveRecord::Base
         json.slider_url image.url(:slider)
         json.show_place_image image.url(:place_show)
         json.thumb_url image.url(:thumb)
+        json.main_url image.url(:main)
         json.is_main image.is_main
       end
 

@@ -14,7 +14,11 @@ class PlaceImageUploader < Utils::CarrierWave::BaseUploader
 
   version :slider do
     process :resize_to_fill => [100, 140]
-    end
+  end
+
+  version :main do
+    process :resize_to_fill => [300, 165]
+  end
 
   version :place_show do
     process :resize_to_fill => [180, 240]
