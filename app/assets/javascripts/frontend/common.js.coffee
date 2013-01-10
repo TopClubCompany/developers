@@ -14,6 +14,6 @@ $ ->
     for language in languagePool
       regexp = new RegExp('\^'+ (language.replace /\//g, '\\/') )
       currentPath = currentPath.replace(regexp, '')
-    window.location.href = (window.location.host + languageToSet + currentPath).replace /\/{2,}/g, '/'
+    window.location.replace((languageToSet + currentPath).replace(/\/{2,}/g, '/'))
     
     
