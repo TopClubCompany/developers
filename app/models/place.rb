@@ -216,6 +216,7 @@ class Place < ActiveRecord::Base
         json.id place_image.id
         json.slider_url place_image.url(:slider)
         json.show_place_image place_image.url(:place_show)
+        json.main_url place_image.url(:main)
         json.thumb_url place_image.url(:thumb)
 
       end if place_image
@@ -269,11 +270,12 @@ class Place < ActiveRecord::Base
 
 
   def self.for_mustache(place, options={})
+    options[:image_url] ||= :slider_url
     res = {}
     res[:id] = place.id
     res[:slug] = place.slug || place.id
     res[:name] = place["name_#{I18n.locale}"]
-    res[:image_path] = place.place_image.try(:slider_url)
+    res[:image_path] = place.place_image.try(options[:image_url])
     res[:review_count] = place.review_ids.try(:count)
     res[:description] = place["description_#{I18n.locale}"]
     res[:kitchens] = place["kitchens_names_#{I18n.locale}"]
@@ -289,7 +291,7 @@ class Place < ActiveRecord::Base
     res[:lat_lng] = place["lat_lng"]
     offers = self.today_discount(place["discounts"], options)
     res[:special_offers] = offers[1]
-    res[:discount] = offers[0]
+    res[:discount] = offers[0].try{|offer| offer.discount.try(:to_i) }
     res[:place_url] = "/#{place["slug"]}"
     res[:star_rating] = self.get_star_rating(place)
     res

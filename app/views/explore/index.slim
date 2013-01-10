@@ -33,21 +33,25 @@
             a href="#available"= t('.available')
 
           .clear
+        - params[:image_url] = :main_url
         #best_restaurants.tab_content
           - @places.each_with_index do |place, i|
-            = render 'shared/place', place: place, i: i
+            - css_class = (i+1)%3 == 0 ? 'margin_right_place' : ''
+            = render 'place', :mustache => Place.for_mustache(place, params).merge(css_class: css_class)
           .clear
-          a.load_more href="#" Show more restaurants
+          a.load_more href="#"= t(".more")
         #new.tab_content
           - @new_place.each_with_index do |place, i|
-            = render 'shared/place', place: place, i: i
+            - css_class = (i+1)%3 == 0 ? 'margin_right_place' : ''
+            = render 'place', :mustache => Place.for_mustache(place, params).merge(css_class: css_class)
           .clear
-          a.load_more href="#" Show more restaurants
+          a.load_more href="#"= t(".more")
         #available.tab_content
           - @tonight_available.each_with_index do |place, i|
-            = render 'shared/place', place: place, i: i
+            - css_class = (i+1)%3 == 0 ? 'margin_right_place' : ''
+            = render 'place', :mustache => Place.for_mustache(place, params).merge(css_class: css_class)
           .clear
-          a.load_more href="#" Show more restaurants
+          a.load_more href="#"= t(".more")
     .content
       .row
         #promo_block_sm.promo_block.span4
@@ -58,26 +62,8 @@
           = t('footer.need_clients')
           a href="/partner_info" &nbsp; #{t('footer.become_a_prtner')}
 
-/#promo_places
-/  .content
-/    .row
-/      .span12
-
-/        #best.tab_content
-/          - @places.each_with_index do |place, i|
-/            = render 'shared/place', place: place, i: i
-/          .clear
-/          a.all href="/places"= t('.all')
-/        #new.tab_content
-/          - @new_place.each_with_index do |place, i|
-/            = render 'shared/place', place: place, i: i
-/          .clear
-/          a.all href="/places"= t('.all')
-/        #available.tab_content
-/          - @tonight_available.each_with_index do |place, i|
-/            = render 'shared/place', place: place, i: i
-/          .clear
-/          a.all href="/places"= t('.all')
-
 
 = render 'shared/more_template'
+
+script type='text/html' id='place_template'
+  = render 'place'

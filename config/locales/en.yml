@@ -146,6 +146,7 @@ en:
       new: New restaurants
       reserv_online: Reserve your table online for free
       save_up: Save up to 30% off all food and drinks
+      more: "Show more restaurants"
   flash: 
     auth: 
       failure: ""

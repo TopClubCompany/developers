@@ -1,9 +1,24 @@
 class ExploreController < ApplicationController
 
   def index
-    @places = Place.best_places(6, city: current_city)
-    @new_place = Place.new_places(6, city: current_city)
-    @tonight_available = Place.tonight_available(6, city: current_city)
+    params.merge!(city: current_city)
+    @places = Place.best_places(6, params)
+    @new_place = Place.new_places(6, params)
+    @tonight_available = Place.tonight_available(6, params)
+  end
+
+  def get_more
+    method = case params[:type]
+     when "best"
+      :best_places
+     when "new"
+      :new_places
+     when "tonight"
+      :tonight_available
+   end
+    result = Place.send(method, 6, params)
+    render :json => {result: result.map{|e| Place.for_mustache(e, params) },
+                     total:  result.total}
   end
 
 
