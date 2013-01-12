@@ -2,9 +2,10 @@ class ExploreController < ApplicationController
 
   def index
     params.merge!(city: current_city)
-    @places = Place.best_places(6, params)
-    @new_place = Place.new_places(6, params)
-    @tonight_available = Place.tonight_available(6, params)
+    places = Place.best_places(6, params)
+    new_place = Place.new_places(6, params)
+    tonight_available = Place.tonight_available(6, params)
+    @tabs = {best: places, new: new_place, available: tonight_available}
   end
 
   def get_more
