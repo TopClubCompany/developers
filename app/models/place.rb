@@ -59,7 +59,6 @@ class Place < ActiveRecord::Base
     {:term => {:is_visible => true}}
   ]
 
-
   settings Utils::Elastic::ANALYZERS do
     mapping do
       indexes :id, type: 'integer'
@@ -177,7 +176,7 @@ class Place < ActiveRecord::Base
 
 
   def lat_lng
-    [location.try(:latitude), location.try(:longitude)].join(',')
+    [location.try(:latitude), location.try(:longitude)].compact.join(',') if location
   end
 
   def to_indexed_json
@@ -193,6 +192,8 @@ class Place < ActiveRecord::Base
       json.(self, *attrs)
       json.(self, *methods)
 
+      json.house_number location.house_number if location.respond_to?(:house_number)
+
       [:kitchens, :categories, :place_feature_items].each do |a|
         I18n.available_locales.each do |locale|
           json.set!("#{a}_names_#{locale}", self.send(a).map{|t| t.send("name_#{locale}")}.join(', '))
@@ -201,10 +202,10 @@ class Place < ActiveRecord::Base
 
       json.set!("discounts", self.discounts_index)
 
-      week_days.each do |week_day|
-        json.set!("week_day_#{week_day.day_type_id}_start_at", week_day.start_at.to_s.split(".").join(":"))
-        json.set!("week_day_#{week_day.day_type_id}_end_at", week_day.end_at.to_s.split(".").join(":"))
-      end
+      self.week_days.each do |week_day|
+        json.set!("week_day_#{week_day.day_type_id}_start_at", week_day.start_at.to_s.split(".").join(":")) if  week_day.start_at
+        json.set!("week_day_#{week_day.day_type_id}_end_at", week_day.end_at.to_s.split(".").join(":")) if  week_day.end_at
+      end if self.week_days.any?
 
 
       json.(self, *related_ids)
@@ -226,7 +227,7 @@ class Place < ActiveRecord::Base
         json.thumb_url place_image.url(:thumb)
 
       end if place_image
-      json.house_number location.try(:house_number)
+
     end
   end
 

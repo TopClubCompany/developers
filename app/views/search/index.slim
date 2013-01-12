@@ -2,7 +2,7 @@
   .row
     .span12
       #search_form
-        h1= I18n.t('search.main_text', count: Place.count_visible, city: current_city)
+        h1= I18n.t('search.main_text', count: Place.count_visible(city: current_city), city: current_city)
         form.shorten action=localization_link("search")
           = render :partial => 'shared/search_form', :locals => { :time => {:h => (@time[:h] || 12), :m => (@time[:m] || '00')} }
         #view_switch
