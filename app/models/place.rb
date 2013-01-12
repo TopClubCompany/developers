@@ -59,6 +59,7 @@ class Place < ActiveRecord::Base
     {:term => {:is_visible => true}}
   ]
 
+
   settings Utils::Elastic::ANALYZERS do
     mapping do
       indexes :id, type: 'integer'
@@ -328,7 +329,6 @@ class Place < ActiveRecord::Base
         end
       end
       filter(:and, :filters => model.visible_filter)
-      puts to_curl
     end.total
   end
 
