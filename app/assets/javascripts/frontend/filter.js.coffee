@@ -252,7 +252,7 @@ class FilterInput
       @places = new PlacesCollection(blocksThatExist, page) if $("#map_places").length > 0
     @checkIfNeeded()
     @bindChangeListener()
-    @give_more() if $(".more").length > 0    
+    @give_more() if $(".more").length > 0
 
   getPageNum: () ->
     page = window.location.search.match( /page=\d*/)?[0].slice(5) || 1
