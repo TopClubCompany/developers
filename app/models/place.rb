@@ -53,6 +53,11 @@ class Place < ActiveRecord::Base
 
   as_token_ids :category, :kitchen
 
+  class_attribute :visible_filter, :instance_writer => false
+
+  self.visible_filter = [
+    {:term => {:is_visible => true}}
+  ]
 
   settings Utils::Elastic::ANALYZERS do
     mapping do
@@ -175,7 +180,7 @@ class Place < ActiveRecord::Base
   end
 
   def to_indexed_json
-    attrs = [:id, :slug, :avg_bill, :url, :created_at]
+    attrs = [:id, :slug, :avg_bill, :url, :created_at, :is_visible]
     related_ids = [:kitchen_ids, :category_ids, :place_feature_item_ids, :review_ids, :week_day_ids,
                    :day_discount_ids
     ]
@@ -312,6 +317,19 @@ class Place < ActiveRecord::Base
         h.update({:"title_#{locale}" => day_discount.send("title_#{locale}")})
       end)
     end
+  end
+
+  def self.count_visible options={}
+    model = self
+    tire.search(search_type: "scan", scroll: "10m") do
+      if options[:city]
+        query do
+          flt options[:city].lucene_escape, :fields => I18n.available_locales.map { |l| "city_#{l}" }, :min_similarity => 0.5
+        end
+      end
+      filter(:and, :filters => model.visible_filter)
+      puts to_curl
+    end.total
   end
 
   private
