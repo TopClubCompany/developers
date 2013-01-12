@@ -116,10 +116,6 @@
   position: relative;
   top: -3px;
   left: 0px;
-  //border-color: blue;
-  //border-style: solid;
-  //border-width: 0px 1px 1px 1px;
-
   font-size: 13px;
   webkit-border-radius: 0 0 3px 3px;
   khtml-border-radius: 0 0 3px 3px;
@@ -127,7 +123,6 @@
   background: #fff;
   border: 1px solid #dfdeda;
   border-top: none;
-  z-index: 0;
   padding: 3px 0 0 0;
   overflow-x: hidden;
   z-index: 0;
@@ -158,11 +153,17 @@
   top: 0px;
   left: 50%;
   background: white;
-  z-index: 150;
+  z-index: 9;
   border: 1px gray solid;
 }
 
 .margin_right_place{
   margin-right: 0px !important;
 }
- 
+
+#listing .timing a.unavailable {
+  color: #df5b49;
+  background: #fff;
+  text-decoration: none;
+  min-height: 11px;
+}
