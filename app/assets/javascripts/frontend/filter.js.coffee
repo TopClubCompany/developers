@@ -374,7 +374,7 @@ class FilterInput
   give_more: =>
     @more_template = Handlebars.compile($("#more_template").html())
     self = @
-    $("a.more").on 'click', (e) ->
+    $("a.more").one 'click', (e) ->
       e.preventDefault()
       $el = $(this)
       type = $el.data('type')
