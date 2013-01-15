@@ -1,9 +1,12 @@
 #fixed
   .content
     ul#language
+      li.active id=I18n.locale.to_s
+        a href="/#{I18n.locale.to_s}/"= I18n.t("language_title.#{I18n.locale.to_s}")
       - Globalize.available_locales.each do |locale|
-        li id=locale.to_s class=locale_class(locale)
-          a href="/#{locale.to_s}/"= I18n.t("language_title.#{locale.to_s}")
+        - unless locale.to_s == I18n.locale.to_s
+          li id=locale.to_s
+            a href="/#{locale.to_s}/"= I18n.t("language_title.#{locale.to_s}")
     ul#location
       - City.with_translations.each do |city|
         li class=get_city_class(city.slug)
