@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.10'
+gem 'rails', '3.2.11'
 gem 'mysql2'
 gem 'redis'
 gem 'slim-rails'
@@ -117,6 +117,7 @@ group :development, :test do
     gem 'terminal-notifier-guard'
     gem 'growl'
     gem 'growl_notify'
+    gem 'rack-mini-profiler'
   end
 
   gem "better_errors"

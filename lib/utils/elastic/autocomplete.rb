@@ -24,7 +24,7 @@ module Utils
           #include Utils::Elastic::Callbacks
           if options[:delay]
             unless options[:skip_after_save]
-              after_save lambda { Resque.enqueue(::ReindexJob, self.class.name, self.id) }
+              after_save lambda { tire.update_index }
             end
             after_destroy lambda { tire.update_index }
           else

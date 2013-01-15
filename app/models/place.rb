@@ -53,6 +53,11 @@ class Place < ActiveRecord::Base
 
   as_token_ids :category, :kitchen
 
+  class_attribute :visible_filter, :instance_writer => false
+
+  self.visible_filter = [
+    {:term => {:is_visible => true}}
+  ]
 
   settings Utils::Elastic::ANALYZERS do
     mapping do
@@ -171,11 +176,11 @@ class Place < ActiveRecord::Base
 
 
   def lat_lng
-    [location.try(:latitude), location.try(:longitude)].join(',')
+    [location.try(:latitude), location.try(:longitude)].compact.join(',') if location
   end
 
   def to_indexed_json
-    attrs = [:id, :slug, :avg_bill, :url, :created_at]
+    attrs = [:id, :slug, :avg_bill, :url, :created_at, :is_visible]
     related_ids = [:kitchen_ids, :category_ids, :place_feature_item_ids, :review_ids, :week_day_ids,
                    :day_discount_ids
     ]
@@ -187,6 +192,8 @@ class Place < ActiveRecord::Base
       json.(self, *attrs)
       json.(self, *methods)
 
+      json.house_number location.house_number if location.respond_to?(:house_number)
+
       [:kitchens, :categories, :place_feature_items].each do |a|
         I18n.available_locales.each do |locale|
           json.set!("#{a}_names_#{locale}", self.send(a).map{|t| t.send("name_#{locale}")}.join(', '))
@@ -195,10 +202,10 @@ class Place < ActiveRecord::Base
 
       json.set!("discounts", self.discounts_index)
 
-      week_days.each do |week_day|
-        json.set!("week_day_#{week_day.day_type_id}_start_at", week_day.start_at.to_s.split(".").join(":"))
-        json.set!("week_day_#{week_day.day_type_id}_end_at", week_day.end_at.to_s.split(".").join(":"))
-      end
+      self.week_days.each do |week_day|
+        json.set!("week_day_#{week_day.day_type_id}_start_at", week_day.start_at.to_s.split(".").join(":")) if  week_day.start_at
+        json.set!("week_day_#{week_day.day_type_id}_end_at", week_day.end_at.to_s.split(".").join(":")) if  week_day.end_at
+      end if self.week_days.any?
 
 
       json.(self, *related_ids)
@@ -216,10 +223,11 @@ class Place < ActiveRecord::Base
         json.id place_image.id
         json.slider_url place_image.url(:slider)
         json.show_place_image place_image.url(:place_show)
+        json.main_url place_image.url(:main)
         json.thumb_url place_image.url(:thumb)
 
       end if place_image
-      json.house_number location.try(:house_number)
+
     end
   end
 
@@ -269,11 +277,16 @@ class Place < ActiveRecord::Base
 
 
   def self.for_mustache(place, options={})
+    time_now = Time.now
+    truncated_time_now = Time.at(time_now.to_i - time_now.sec - time_now.min % 15 * 60)
+    time = options[:reserve_time]? Time.parse(options[:reserve_time]) : truncated_time_now
+    options[:image_url] ||= :slider_url
     res = {}
     res[:id] = place.id
     res[:slug] = place.slug || place.id
-    res[:name] = place["name_#{I18n.locale}"]
-    res[:image_path] = place.place_image.try(:slider_url)
+    res[:name] = place["name_#{I18n.locale}"].slice(0, 22)
+    res[:title] = place["name_#{I18n.locale}"]
+    res[:image_path] = place.place_image.try(options[:image_url])
     res[:review_count] = place.review_ids.try(:count)
     res[:description] = place["description_#{I18n.locale}"]
     res[:kitchens] = place["kitchens_names_#{I18n.locale}"]
@@ -285,13 +298,30 @@ class Place < ActiveRecord::Base
     res[:house_number] = place["house_number"]
     res[:avg_bill_title] = place["avg_bill_title"]
     res[:overall_mark] = place["overall_mark"]
+    res[:star_rating] = "left: #{place["overall_mark"] * 20}%"
     res[:marks] = place["marks"]
     res[:lat_lng] = place["lat_lng"]
     offers = self.today_discount(place["discounts"], options)
-    res[:special_offers] = offers[1]
-    res[:discount] = offers[0]
+    # triing to simplify js
+    #res[:special_offers] = offers[1]
+    unless offers[1].is_a? NilClass
+      res[:special_offers] = offers[1].map {|obj|
+          {:title => obj["title_#{I18n.locale}"],
+           :time_start => '%.2f' % obj["from_time"].to_f ,
+          :time_end => '%.2f' % obj["to_time"].to_f
+          }
+      }
+    end
+    res[:discount] = offers[0].try{|offer| offer.discount.try(:to_i) }
     res[:place_url] = "/#{place["slug"]}"
     res[:star_rating] = self.get_star_rating(place)
+    res[:timing] = [
+        {:time => (time + 30.minutes).strftime("%H:%M")},
+        {:time => (time + 15.minutes).strftime("%H:%M")},
+        {:time => (time).strftime("%H:%M")},
+        {:time => (time - 15.minutes).strftime("%H:%M")},
+        {:time => (time - 30.minutes).strftime("%H:%M")}
+    ]
     res
   end
 
@@ -310,6 +340,18 @@ class Place < ActiveRecord::Base
         h.update({:"title_#{locale}" => day_discount.send("title_#{locale}")})
       end)
     end
+  end
+
+  def self.count_visible options={}
+    model = self
+    tire.search(search_type: "scan", scroll: "10m") do
+      if options[:city]
+        query do
+          flt options[:city].lucene_escape, :fields => I18n.available_locales.map { |l| "city_#{l}" }, :min_similarity => 0.5
+        end
+      end
+      filter(:and, :filters => model.visible_filter)
+    end.total
   end
 
   private
@@ -344,7 +386,8 @@ class Place < ActiveRecord::Base
           discount["day"] == current_day
         end
       end
-    [discounts.select{|discount| discount["is_discount"]}.first, discounts]
+    discounts = discounts.group_by{|arr| arr["is_discount"]}
+    [discounts[true].try(:first), discounts[false]]
   end
 
 end

@@ -1,4 +1,4 @@
-<div class="place" id="list_place_{{id}}">
+<div class="place" id="list_place_{{id}}" data-id="{{id}}">
   <a href="{{place_url}}">
     <img height="100" src="{{image_path}}" width="140">
   </a>
@@ -27,7 +27,7 @@
     <h5>Special offers:</h5>
     <h5>
       {{#special_offers}}
-        <a href="#"></a>
+        <a title="From {{time_start}} to {{time_end}}" href="#">{{title}}</a>
       {{/special_offers}}
     </h5>
   </div>

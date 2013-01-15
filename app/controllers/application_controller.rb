@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     end
 
   def set_time
-    # params[:reserve_time].try(:split,':')
-    @time = {:h => '10', :m => '30'}
+    h,m = params[:reserve_time].try(:split,':')
+    @time = {:h => (h or '10'), :m => (m or '30') }
   end
 end

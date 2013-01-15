@@ -141,11 +141,13 @@ en:
       all: "Browse all ›"
       available: Available tonight
       best: Best restaurants
+      best_restaurants: Best restaurants
       find_restorants: Find a restaurants
       how_it_works: How it works?
       new: New restaurants
       reserv_online: Reserve your table online for free
       save_up: Save up to 30% off all food and drinks
+      more: "Show more restaurants"
   flash: 
     auth: 
       failure: ""
