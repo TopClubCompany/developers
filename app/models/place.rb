@@ -277,11 +277,15 @@ class Place < ActiveRecord::Base
 
 
   def self.for_mustache(place, options={})
+    time_now = Time.now
+    truncated_time_now = Time.at(time_now.to_i - time_now.sec - time_now.min % 15 * 60)
+    time = options[:reserve_time]? Time.parse(options[:reserve_time]) : truncated_time_now
     options[:image_url] ||= :slider_url
     res = {}
     res[:id] = place.id
     res[:slug] = place.slug || place.id
-    res[:name] = place["name_#{I18n.locale}"]
+    res[:name] = place["name_#{I18n.locale}"].slice(0, 22)
+    res[:title] = place["name_#{I18n.locale}"]
     res[:image_path] = place.place_image.try(options[:image_url])
     res[:review_count] = place.review_ids.try(:count)
     res[:description] = place["description_#{I18n.locale}"]
@@ -294,13 +298,30 @@ class Place < ActiveRecord::Base
     res[:house_number] = place["house_number"]
     res[:avg_bill_title] = place["avg_bill_title"]
     res[:overall_mark] = place["overall_mark"]
+    res[:star_rating] = "left: #{place["overall_mark"] * 20}%"
     res[:marks] = place["marks"]
     res[:lat_lng] = place["lat_lng"]
     offers = self.today_discount(place["discounts"], options)
-    res[:special_offers] = offers[1]
+    # triing to simplify js
+    #res[:special_offers] = offers[1]
+    unless offers[1].is_a? NilClass
+      res[:special_offers] = offers[1].map {|obj|
+          {:title => obj["title_#{I18n.locale}"],
+           :time_start => '%.2f' % obj["from_time"].to_f ,
+          :time_end => '%.2f' % obj["to_time"].to_f
+          }
+      }
+    end
     res[:discount] = offers[0].try{|offer| offer.discount.try(:to_i) }
     res[:place_url] = "/#{place["slug"]}"
     res[:star_rating] = self.get_star_rating(place)
+    res[:timing] = [
+        {:time => (time + 30.minutes).strftime("%H:%M")},
+        {:time => (time + 15.minutes).strftime("%H:%M")},
+        {:time => (time).strftime("%H:%M")},
+        {:time => (time - 15.minutes).strftime("%H:%M")},
+        {:time => (time - 30.minutes).strftime("%H:%M")}
+    ]
     res
   end
 
