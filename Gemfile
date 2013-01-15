@@ -41,6 +41,7 @@ gem 'fb_graph'
 gem 'vkontakte_api', '~> 1.0'
 
 gem 'unicode_utils'
+gem 'gon'
 
 group :development do
   if File.exists?('/var/www/top_club/developers/.local_gems')
