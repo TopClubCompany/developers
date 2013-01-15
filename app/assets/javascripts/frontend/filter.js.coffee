@@ -364,9 +364,10 @@ $ ->
 
   $('.timing a').on 'click', (e) ->
     e.preventDefault()
+    language = $('#language .active').attr('id')
     date = $("input[name='reserve_date']").val().replace(/\//g,'-')
     id = $(e.target).parents('.place').data('id')
     time = $(e.target).html()
     people = $("select[name=number_of_people]").val()
-    newLink = "/new_reservation/#{date},#{id},h=#{time.split(':')[0]}&m=#{time.split(':')[1]},#{people}"
+    newLink = "/#{language}/new_reservation/#{date},#{id},h=#{time.split(':')[0]}&m=#{time.split(':')[1]},#{people}"
     window.location.replace newLink
