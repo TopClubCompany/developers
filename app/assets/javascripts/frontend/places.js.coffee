@@ -19,7 +19,7 @@ $ ->
     hashName = hashName.slice(1) if stripNeed
     history.pushState {}, "", "##{hashName}"
     $("a[href=##{hashName}]").parent().addClass('active').siblings().removeClass('active')
-    $("##{hashName}").show().siblings('.tab_content').hide()  
+    $("##{hashName}").show().siblings('.tab_content').hide()
  
   setTimeout((->
     if $('#map').length > 0

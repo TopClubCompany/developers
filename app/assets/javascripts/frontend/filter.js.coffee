@@ -115,20 +115,8 @@ class PlacesCollection
       $("#place_#{removeId}").add("#list_place_#{removeId}").fadeOut('fast').remove()
   
   addBlock: (place) =>
+    I18n = $('#language .active').attr('id')
     properKitchensName = if place.kitchens.length > 18 then place.kitchens.substring(0, 18) + '...' else place.kitchens
-    ###
-    TODO REPLACE WITH HELPER METHODS
-    ###
-    _.extend place, {"star_rating": "left: #{place.overall_mark * 20}%"}
-    _.extend(place, {
-      "timing": [
-        {"url": "/new_reservation/08-01-2013,11,h=11&amp;m=00,2", "time": "11:00"} 
-        {"url": "/new_reservation/08-01-2013,11,h=10&amp;m=45,2", "time": "10:45"}
-        {"url": "/new_reservation/08-01-2013,11,h=10&amp;m=30,2", "time": "10:30"}
-        {"url": "/new_reservation/08-01-2013,11,h=10&amp;m=15,2", "time": "10:15"}
-        {"url": "new_reservation/08-01-2013,11,h=10&amp;m=00,2", "time": "10:00"}
-      ]
-    } )   
     source   = $("#list_place_template").html()
     listBlock = Mustache.to_html(source, place)
     source   = $("#map_place_template").html()
@@ -138,16 +126,9 @@ class PlacesCollection
     time = $("select[name=reserve_time]").val()
     updateSingleTime.call(@, time, $el, $listEl)
     updateReservationLink.call(@, place, $el, $listEl)
-    
 
   updateDate: (dateText) =>
     window.filter.get 'reserve_date', dateText
-    $('#map_details_wrapper').find('.place').each (index, el) ->
-      $el = $(el)
-      $listEl = $('#list_' + $(el).attr('id'))
-      #askAjax for single place being available at specific date
-      date = dateText.replace /\//g,'-'
-      updateSingleDate.call(@, date, $el, $listEl)
 
   updateTime: (time) =>
     #TODO create ajax responder for batch of ids
@@ -156,29 +137,10 @@ class PlacesCollection
     $('#map_details_wrapper').find('.place').each (index, el) ->
       $el = $(el)
       $listEl = $('#list_' + $(el).attr('id'))
-      #askAjax for single place being available at specific time
-
       updateSingleTime.call(@, time, $el, $listEl)
+
   updatePeople: (number) =>
     window.filter.get 'number_of_people', number
-    $('#map_details_wrapper').find('.place').each (index, el) ->
-      $el = $(el)
-      $listEl = $('#list_' + $(el).attr('id'))
-      #askAjax for single place being available at specific time
-      updateSinglePerson.call(@, number, $el, $listEl)      
-
-  updateReservationLink = (place, els...) ->
-    #http://0.0.0.0:3005/new_reservation/26-12-2012,13,h=10&m=00,3
-    if els.length is 2
-      [$listEl, $el] = els
-    for index in [0..4]     
-      date = $("input[name='reserve_date']").val().replace(/\//g,'-')
-      id = place.id
-      time = $("select[name=reserve_time]").val()
-      people = $("select[name=number_of_people]").val()
-      newLink = "/new_reservation/#{date},#{id}, h=#{time.split(':')[0]}&m=#{time.split(':')[1]},#{people}"
-      $el.find(".timing a:eq(#{index})").attr('href', newLink)
-      $listEl.find(".timing a:eq(#{index})").attr('href', newLink)
 
   updateSingleDate = (date, els...) ->
     if els.length is 2
@@ -212,10 +174,6 @@ class PlacesCollection
     "#{base_time - ( if (index - 1) < 0 then 1 else 0 ) }:#{possibilities[(if (index - 1) < 0 then index - 1 + length else index - 1) % 4]}",                  
     "#{base_time - ( if (index - 2) < 0 then 1 else 0 ) }:#{possibilities[(if (index - 2) < 0 then index - 2 + length else index - 2) % 4]}"]
     _.each values, (time, index, values) ->
-      oldLink = $el.find(".timing a:eq(#{index})").attr('href')
-      oldLink = oldLink.replace(/h=\d+/,"h=#{time.split(':')[0]}")
-      newLink = oldLink.replace(/m=\d+/,"m=#{time.split(':')[1]}")
-      $el.find(".timing a:eq(#{index})").attr('href', newLink)
       $el.find(".timing a:eq(#{index})").html time
       $listEl.find(".timing a:eq(#{index})").html time
 
@@ -252,7 +210,7 @@ class FilterInput
       @places = new PlacesCollection(blocksThatExist, page) if $("#map_places").length > 0
     @checkIfNeeded()
     @bindChangeListener()
-    @give_more() if $(".more").length > 0    
+    @give_more() if $(".more").length > 0
 
   getPageNum: () ->
     page = window.location.search.match( /page=\d*/)?[0].slice(5) || 1
@@ -284,9 +242,15 @@ class FilterInput
     if (window.location.search.match(regexpMatch))
       newQuery = oldQuery.replace(regexpReplace, paramed)          
     else
-      newQuery = oldQuery + amp + paramed          
+      newQuery = oldQuery + amp + paramed
+    if entity is 'reserve_time'
+      newQuery = newQuery.replace(/(\+AM){2,}/, '+AM')
+      newQuery = newQuery.replace(/(\+PM){2,}/, '+PM')
+      newQuery = newQuery.replace(/\+AM\+PM/, '+PM')
+      newQuery = newQuery.replace(/\+PM\+AM/, '+AM')
     newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '?')
     window.history.replaceState('',null, newUrl)
+
     if entity is 'page' 
       pageTo = entityTo
       askAJAX.call(@, newQuery, @places, pageTo)      
@@ -374,7 +338,7 @@ class FilterInput
   give_more: =>
     @more_template = Handlebars.compile($("#more_template").html())
     self = @
-    $("a.more").on 'click', (e) ->
+    $("a.more").one 'click', (e) ->
       e.preventDefault()
       $el = $(this)
       type = $el.data('type')
@@ -393,6 +357,16 @@ class FilterInput
 $ ->
   if $('#refine').length isnt 0
     window.filter = new FilterInput yes
+
   if $('.paginate').length isnt 0
     total = parseInt($('.paginate').find('.total').html())
     new Pagination( total )
+
+  $('.timing a').on 'click', (e) ->
+    e.preventDefault()
+    date = $("input[name='reserve_date']").val().replace(/\//g,'-')
+    id = $(e.target).parents('.place').data('id')
+    time = $(e.target).html()
+    people = $("select[name=number_of_people]").val()
+    newLink = "/new_reservation/#{date},#{id},h=#{time.split(':')[0]}&m=#{time.split(':')[1]},#{people}"
+    window.location.replace newLink

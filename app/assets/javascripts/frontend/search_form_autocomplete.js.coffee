@@ -4,13 +4,13 @@ $ ->
     minChars: 1
     delimiter: /(,|;)\s*/
     # maxHeight:400,
-    width:268,
-    zIndex: 9999
+    width:268
+    zIndex: 8
     deferRequestBy: 0
     # params: { q:'Yes' }, //aditional parameters
     # noCache: false, //default is false, set to true to disable caching
     onSelect: (value, data) ->
-      $('#search_form').find('form:eq(0)').trigger("submit")
+#      $('#search_form').find('form:eq(0)').trigger("submit")
 
 
 

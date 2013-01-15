@@ -25,29 +25,21 @@
     .row
       .span12
         ul#promo_tabs
-          li class="active"
-            a href="#best"= t('.best')
-          li
-            a href="#new"= t('.new')
-          li
-            a href="#available"= t('.available')
-
-          .clear
-        #best_restaurants.tab_content
-          - @places.each_with_index do |place, i|
-            = render 'shared/place', place: place, i: i
-          .clear
-          a.load_more href="#" Show more restaurants
-        #new.tab_content
-          - @new_place.each_with_index do |place, i|
-            = render 'shared/place', place: place, i: i
-          .clear
-          a.load_more href="#" Show more restaurants
-        #available.tab_content
-          - @tonight_available.each_with_index do |place, i|
-            = render 'shared/place', place: place, i: i
-          .clear
-          a.load_more href="#" Show more restaurants
+          - @tabs.each do |category, tabs|
+            li class="#{'active' if category == :best}"
+              a href="##{category}"= t(".#{category}")
+        .clear
+        - params[:image_url] = :main_url
+        - @tabs.each do |places_id, place_batch|
+          .tab_content id="#{places_id.to_s}"
+            - place_batch.each_with_index do |place, i|
+              - css_class = (i+1)%3 == 0 ? 'margin_right_place' : ''
+              = render 'place', :mustache => Place.for_mustache(place, params).merge(css_class: css_class)
+            .clear
+            - if place_batch.size > 0
+              a.load_more data-type=places_id.to_s data-displayed=place_batch.size href="#"= t(".more")
+            - else
+              h2 Nothing here today, sorry.
     .content
       .row
         #promo_block_sm.promo_block.span4
@@ -58,26 +50,8 @@
           = t('footer.need_clients')
           a href="/partner_info" &nbsp; #{t('footer.become_a_prtner')}
 
-/#promo_places
-/  .content
-/    .row
-/      .span12
-
-/        #best.tab_content
-/          - @places.each_with_index do |place, i|
-/            = render 'shared/place', place: place, i: i
-/          .clear
-/          a.all href="/places"= t('.all')
-/        #new.tab_content
-/          - @new_place.each_with_index do |place, i|
-/            = render 'shared/place', place: place, i: i
-/          .clear
-/          a.all href="/places"= t('.all')
-/        #available.tab_content
-/          - @tonight_available.each_with_index do |place, i|
-/            = render 'shared/place', place: place, i: i
-/          .clear
-/          a.all href="/places"= t('.all')
-
 
 = render 'shared/more_template'
+
+script type='text/html' id='place_template'
+  = render 'place'

@@ -51,7 +51,11 @@ Topclub::Application.routes.draw do
 
   root :to => 'explore#index'
 
-  resources :explore
+  resources :explore do
+    collection do
+      get :get_more
+    end
+  end
 
   #resources :assets, :only => [:create, :destroy], :module => "admin" do
   #end
