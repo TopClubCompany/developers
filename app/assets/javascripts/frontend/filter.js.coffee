@@ -211,6 +211,42 @@ class FilterInput
     @checkIfNeeded()
     @bindChangeListener()
     @give_more() if $(".more").length > 0
+    # @dirtyHack()
+
+
+  dirtyHack: () ->
+    querystring = window.location.search
+    if gon?
+      gon["category"] = _.reduce gon["category"], (memo, num) ->
+        memo + ',' + num
+      gon["category"] = gon["category"] + ''
+      needToCheck = _.extend({}, $.deparam(querystring.slice(1)), gon)
+    else
+      needToCheck = $.deparam querystring.slice(1)
+    @getFilterseNeedToTriggerPaginate(needToCheck)
+
+  getFilterseNeedToTriggerPaginate: (needToCheck) =>
+    self = @
+    alreadyThere = {}
+    $('#refine input').each( ->
+      type = $(this).data('type')
+      alreadyThere[type] = [] if alreadyThere[type] is undefined
+      alreadyThere[type].push(parseInt( $(this).val() ))
+    )
+    needed = {}
+    console.log alreadyThere, needToCheck
+    for filter, values of needToCheck
+      needed[filter] = false if needed[filter] is undefined
+      needed[filter] = true if _.without(values, alreadyThere[filter]...) > 0
+
+    for filter, flag of needed
+      if flag        
+        $("a.more[data-type='#{filter}']").click()
+        setTimeout(( ->          
+          self.getFilterseNeedToTriggerPaginate(needToCheck)
+        ), 500)
+    needed
+      
 
   getPageNum: () ->
     page = window.location.search.match( /page=\d*/)?[0].slice(5) || 1

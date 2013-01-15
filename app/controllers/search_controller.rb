@@ -46,7 +46,7 @@ class SearchController < ApplicationController
   end
 
   def set_gon_params
-    gon.categories = [@category.id]
+    gon.category = [@category.id]
   end
 
   #point = MultiGeocoder.geocode options[:where]
