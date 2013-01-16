@@ -7,6 +7,8 @@ class Paginator
   bindListener: () ->
     $(@options.containerId()).find('.load_more').on 'click', (e) =>
       e.preventDefault()
+      @htmlToSet = $(e.target).html()
+      $(e.target).html("<img src='/assets/ajax_loader_transp.gif'>")
       @next_page()
 
   initDefaults: (opts) ->
@@ -49,6 +51,8 @@ class Paginator
         if self.options.displayed is data.total
           showMoreButton.remove()
         else
+          # reseting gif image of loader with html previously saved
+          showMoreButton.html(self.htmlToSet)
           showMoreButton.add(clear).detach().appendTo($(self.options.containerId()))
           self.nextPage = self.nextPage + 1
 
