@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module Utils
   module Elastic
     LANG_ANALYZERS = {
@@ -7,11 +8,6 @@ module Utils
     }
 
     custom_filters = [:ru, :en, :ua].each_with_object({}) do |l, h|
-      h["custom_#{l}"] = {
-          "type" => "custom",
-          "ignore_case" => "true",
-          "tokenizer" => "standard"
-      }
       h["custom_stop_#{l}"] = {
           "type" => "stop",
           "stopwords_path" => Rails.root.join("lib/data/stop_big_#{l}.txt").to_s
@@ -32,13 +28,8 @@ module Utils
     lang_analyzers = [:ru, :en, :ua].each_with_object({}) do |l, h|
       h["analyzer_#{l}"] = {
           "type" => "custom",
-          "tokenizer" => "standard",
-          "filter" => ["asciifolding", "lowercase"]
-      }
-      h["base_#{l}"] = {
-          "type" => "custom",
-          "tokenizer" => "keyword",
-          "filter" => ["asciifolding", "lowercase"]
+          "tokenizer" => "lowercase",
+          "filter" => ["custom_stop_#{l}", "stop"]
       }
     end
 
@@ -47,18 +38,18 @@ module Utils
         #    "type" => "custom",
         #    "type" => "custom",
         #    "tokenizer" => "standard",
-        #    "filter" => ["custom_stop_ru", "asciifolding", "snow_ru", "lowercase"]
-        #},
-        #"ac_ngram" => {
-        #    "type" => "custom",
-        #    "tokenizer" => "lowercase",
-        #    "filter" => ["ac_ngram"]
-        #}
+        #    "filter" => ["asciifolding" "lowercase"]
+        #}#,
+        "ac_ngram" => {
+            "type" => "custom",
+            "tokenizer" => "lowercase",
+            "filter" => ["ac_ngram"]
+        }
     }
 
     ANALYZERS = {
         :analysis => {
-            #:filter => custom_filters.merge(n_gram_filters),
+            :filter => custom_filters.merge(n_gram_filters),
             :analyzer => base_analyzers.update(lang_analyzers)
         }
     }
