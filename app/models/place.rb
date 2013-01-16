@@ -111,7 +111,7 @@ class Place < ActiveRecord::Base
     filters += self.time_filter(options)
 
     if filters.empty? && options.empty?
-      self.best_places(4, options)
+      self.best_places(15, options)
     else
 
       if options[:city].present?
