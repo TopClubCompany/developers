@@ -70,6 +70,11 @@ class Place < ActiveRecord::Base
                 }
         indexes "description_#{loc}", boost: 5, analyzer: "analyzer_#{loc}"
 
+        indexes "street_#{loc}", :type => "multi_field",
+                :fields => {
+                    "street_#{loc}" => {:type => 'string', :analyzer => "analyzer_#{loc}", :boost => 100},
+                    "exact" => {:type => 'string', :index => "not_analyzed"}
+                }
       end
       indexes :overall_mark, type: 'double'
       indexes :created_at, type: 'date', format: 'dateOptionalTime'
@@ -117,7 +122,7 @@ class Place < ActiveRecord::Base
         if options[:title].present?
           fields = I18n.available_locales.map { |l| "name_#{l}" }.concat(Location.all_translated_attribute_names)
           query do
-            flt options[:title].lucene_escape, :fields => fields, :min_similarity => 0.5
+            flt options[:title].lucene_escape, :fields => fields, :min_similarity => 0.9
           end
           sort { by "overall_mark", "desc" }
         end
