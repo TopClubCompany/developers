@@ -15,7 +15,8 @@ class SearchController < ApplicationController
   end
 
   def show
-    @category = params[:id]
+    @category = Category.find(params[:id])
+    set_gon_params
     respond_to do |format|
       format.html do
         render action: :index
@@ -42,6 +43,10 @@ class SearchController < ApplicationController
 
   def search
     @result = Place.search(params.merge(city: current_city))
+  end
+
+  def set_gon_params
+    gon.category = [@category.id]
   end
 
   #point = MultiGeocoder.geocode options[:where]

@@ -10,7 +10,7 @@ $ ->
     e.preventDefault()
     languageToSet = $(e.target).attr('href')
     currentPath = window.location.href.toString().split(window.location.host)[1]
-    console.log $(this).attr('href'), currentPath, languagePool
+    
     for language in languagePool
       regexp = new RegExp('\^'+ (language.replace /\//g, '\\/') )
       currentPath = currentPath.replace(regexp, '')
