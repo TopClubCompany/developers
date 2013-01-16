@@ -158,10 +158,18 @@ input[type='submit']:hover {
 #fixed ul li.active {
 	display: block;
 	cursor: default;
+	&:before {
+		background: image_url('arr1.gif') 0px 0px no-repeat;
+		content: '';
+		width: 5px;
+		height: 5px;
+		display: inline-block;
+		float: right;
+		margin-top: 8px;
+	}
 }
 
-#fixed ul li.active a {
-	background: image_url('arr1.gif') right 5px no-repeat;
+#fixed ul li.active a {	
 	padding: 0 10px 0 0;
 	color: #fff;
 }

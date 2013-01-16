@@ -67,10 +67,10 @@ class PlacesCollection
     initialData = $('#map_places').data()
     mapOptions =
       center: new google.maps.LatLng(initialData.lat, initialData.lng),
-      zoom: 9,
+      zoom: 12,
       disableDefaultUI: true,
       zoomControl: true,
-      minZoom: 2,
+      minZoom: 9,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     @map = new google.maps.Map(document.getElementById("map_places"), mapOptions)
     window.googleMap = @map
