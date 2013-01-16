@@ -125,10 +125,6 @@ class PlacesCollection
     $listEl = $(listBlock).insertBefore('#list_grid_view .paginate')
     time = $("select[name=reserve_time]").val()
     updateSingleTime.call(@, time, $el, $listEl)
-    updateReservationLink.call(@, place, $el, $listEl)
-
-  updateDate: (dateText) =>
-    window.filter.get 'reserve_date', dateText
 
   updateTime: (time) =>
     #TODO create ajax responder for batch of ids
@@ -138,9 +134,6 @@ class PlacesCollection
       $el = $(el)
       $listEl = $('#list_' + $(el).attr('id'))
       updateSingleTime.call(@, time, $el, $listEl)
-
-  updatePeople: (number) =>
-    window.filter.get 'number_of_people', number
 
   updateSingleDate = (date, els...) ->
     if els.length is 2
@@ -211,7 +204,7 @@ class FilterInput
     @checkIfNeeded()
     @bindChangeListener()
     @give_more() if $(".more").length > 0
-    # @dirtyHack()
+    @dirtyHack()
 
 
   dirtyHack: () ->
@@ -224,8 +217,21 @@ class FilterInput
     else
       needToCheck = $.deparam querystring.slice(1)
     @getFilterseNeedToTriggerPaginate(needToCheck)
+  
+  strip: (obj) ->
+    result = {}
+    allowed_properties = ["category", "kitchen", "price"]
+    for key in allowed_properties 
+      result[key] = obj[key] if obj[key]?
+    result
 
+  
   getFilterseNeedToTriggerPaginate: (needToCheck) =>
+    needToCheck = @strip needToCheck
+    for own key, value of needToCheck
+      unless $.isArray value
+        needToCheck[key] = undefined
+        needToCheck[key] = _.flatten([value.split(',')])
     self = @
     alreadyThere = {}
     $('#refine input').each( ->
@@ -234,11 +240,12 @@ class FilterInput
       alreadyThere[type].push(parseInt( $(this).val() ))
     )
     needed = {}
-    console.log alreadyThere, needToCheck
     for filter, values of needToCheck
       needed[filter] = false if needed[filter] is undefined
-      needed[filter] = true if _.without(values, alreadyThere[filter]...) > 0
-
+      needed[filter] = true if _.reject(values, (num) -> 
+        $("#refine input[value='#{num}'][data-type='#{filter}']").click() unless $("#refine input[value='#{num}'][data-type='#{filter}']").is(':checked')
+        parseInt(num) in alreadyThere[filter]
+      ).length > 0
     for filter, flag of needed
       if flag        
         $("a.more[data-type='#{filter}']").click()
@@ -274,6 +281,9 @@ class FilterInput
 
     baseURL = window.location.pathname
     oldQuery = window.location.search || ''
+    if entity is 'reserve_date' and oldQuery.match(/reserve_date=(\d+\-){2,}\d+/)
+      oldQuery = oldQuery.replace(/reserve_date=(\d+\-){2,}\d+/, '')
+      oldQuery = oldQuery.replace(/&{2,}/,'&')
     amp = if oldQuery is '' then '' else '&'
     if (window.location.search.match(regexpMatch))
       newQuery = oldQuery.replace(regexpReplace, paramed)          
@@ -336,7 +346,7 @@ class FilterInput
       onSelect: (dateText) ->
         headlineText = $('#mapcontainer > h3:first-child').html().replace(/(\d+\/?){3}(?=,)/, dateText)
         $('#mapcontainer > h3:first-child').html headlineText
-        self.places.updateDate dateText
+        window.filter.get 'reserve_date', dateText
     )
 
     $("select[name=reserve_time]").on 'change', ->
@@ -349,7 +359,7 @@ class FilterInput
       number = $(this).val()
       headlineText = $('#mapcontainer > h3:first-child').html().replace(/\d+(?=\speople)/, number)
       $('#mapcontainer > h3:first-child').html headlineText
-      self.places.updatePeople number
+      window.filter.get 'number_of_people', number
     
 
   askAJAX = (serializedData, placesObj, page) =>
