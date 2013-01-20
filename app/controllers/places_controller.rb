@@ -3,6 +3,7 @@ class PlacesController < ApplicationController
   def show
     @place = Place.find params[:id]
     @location = (Place.find params[:id]).lat_lng
+    @special_offers =  @place.day_discounts.where(is_discount: false)
   end
 
   def index

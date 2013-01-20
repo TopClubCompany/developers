@@ -21,6 +21,10 @@ class WeekDay < ActiveRecord::Base
     end
   end
 
+  def day_type_title type = :full
+    day_type.try(:title, type)
+  end
+
 end
 # == Schema Information
 #

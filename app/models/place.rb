@@ -266,6 +266,9 @@ class Place < ActiveRecord::Base
     bill.try(:title)
   end
 
+  def all_images
+    @images ||= place_images.unshift(place_image)
+  end
 
   def self.time_filter(options={})
     fields = []
@@ -346,6 +349,20 @@ class Place < ActiveRecord::Base
       end)
     end
   end
+
+  def humanable_schedule
+    result = []
+    groups = week_days.group_by do |day|
+      [:start_at, :end_at].map do |point|
+        Time.strptime(day.send(point).to_s, "%H.%M").strftime("%I:%M%p")
+      end.join('-')
+    end
+    groups.each do |time, days|
+      result << "<b>#{days.map { |day| day.day_type_title(:short) }.join('-')}:</b> #{time}"
+    end
+    result
+  end
+
 
   def self.count_visible options={}
     model = self

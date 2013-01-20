@@ -150,7 +150,11 @@ end
 def insert_default_place_pictures
   pictures_path = Rails.root.join('public', 'images', 'default_place_pictures', '*.{jpg, png, jpeg}')
   pictures = Dir.glob(pictures_path).map { |entry| File.new(entry)}
-  Place.all.each { |place| place.place_image = PlaceImage.new(data: pictures.sample, is_main: true) }
+  Place.all.each do |place|
+     pictures_clone = pictures.clone #for uniq images in place
+     place.place_image = PlaceImage.new(data: pictures_clone.delete(pictures_clone.sample), is_main: true)
+     rand(1..5).times { place.place_images << PlaceImage.new(data: pictures_clone.delete(pictures_clone.sample), is_main: false) }
+  end
   puts 'place images added successfully'
 end
 

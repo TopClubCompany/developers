@@ -1,94 +1,295 @@
+/    #map.span4 style='width:300px; height: 300px;' *{'data-lat'=>"#{@location.split(',')[0]}", "data-lng" => "#{@location.split(',')[1]}"}
+
 #place.content
   .row
     .span8
       #search_form
-        span.header Reserve at #{@place.name}
+        span.header #{t('short_strings.reserve_at')} #{@place.name}
         .header_special Up to 30% off
-        = render :partial => 'shared/search_form', :locals => { :time => {:h => (@time[:h] || 12), :m => (@time[:m] || '00')}, :show_title => true }
-      .page_content itemscope="" itemtype="http://data-vocabulary.org/Review-aggregate"
-        img.place_img alt=@place.name height="180" itemprop="photo" src=(@place.place_image.url(:place_show)if @place.place_image) width="240"
-          h1 title=@place.name
-            = @place.name
-            span itemprop="itemreviewed"
-          .rating.rating_big
-            .stars
-              .stars_overlay
-                span itemprop="rating" itemscope="" itemtype="http://data-vocabulary.org/Rating"
-                  span itemprop="average"
-                  | из
-                  span itemprop="best"
-              .stars_bar style=get_star_rating(@place)
-              .stars_bg
-            small
-              a href="#"
-                | Real all
-                span itemprop="count"
-                | reviews ›
-          #favorites
-            .add_to_favorites
-          	  |Add to<br>
-          	  |favorites
-          ul.place_features
-            li.location
-              strong Location:
-              | Sribnokilskaya st., 3d
-            li.cuisine
-              strong Kitchen:
-              = @place.kitchens.map(&:name).join(', ')
-            li.pricing
-              strong Pricing: #{avg_bill_title(@place.avg_bill)}
-              span itemprop="pricerange"
-          #place_links
-            = link_to 'More details ›', '#'
-            = link_to 'View menu ›', '#'
+        form
+          label for="reserve_date"
+          input name="reserve_date" type="text" value="11/07/2012"
+            label for="reserve_time"
+            input name="reserve_time" type="text" value="7:00 PM"
+              label for="number_of_people"
+                nobr #{t('short_strings.number_of_people')}
+              input name="number_of_people" type="text" value="2"
+                input type="submit" value="Find a table"
+                  .clear
+      .page_content.zz itemscope="" itemtype="http://data-vocabulary.org/Review-aggregate"
+        .place_img
+          /- unless @place.all_images.empty?
+            - place_image_gallery = @place.all_images.map { |image| image.url(:content)}
+            - place_image_gallery.drop(1).each do |image_src|
+              a.fancybox rel='gallery' href=image_src
+          a.fancybox rel='gallery' href=(@place.place_image.url(:content)if @place.place_image)
+            img alt="#{@place.title}" height="180" itemprop="photo" src=(@place.place_image.url(:place_show)if @place.place_image) width="240"
+          ul.carousel_bullets
+            - place_images = @place.all_images
+            - place_images.each_with_index do |image, i|
+              li data-small_image_src=image.url(:place_show) data-big_image_src=image.url(:content) class=('current' if i.zero?)
+        h1 title="#{@place.title}"
+          span itemprop="itemreviewed"
+            = @place.title
+        span.header_info
+          - categories = @place.categories
+          - categories.each_with_index do |category, i|
+            = link_to category.title, '#'
+            = ', ' if (i + 1) < categories.count
+          '  ·
+          - data = { trigger: 'hover', title: 'Average check', content: @place.bill.try(:title), placement: 'top' }
+          span.pricing.popoverable data=data
+          = content_tag :span, class: 'pricing popoverable', data: data do
+            strong
+              - @place.bill.try(:id).to_i.times do
+                | $
+            - (4 - @place.bill.try(:id).to_i).times do
+              | $
+        .rating.rating_big.rating_topclub
+          .stars
+            .stars_overlay
+              span itemprop="rating" itemscope="" itemtype="http://data-vocabulary.org/Rating"
+                span itemprop="average"
+                | из
+                span itemprop="best"
+            .stars_bar style=get_star_rating(@place)
+            .stars_bg
+          a href=root_path
+            img.topclub src="/assets/topclub.png"
           .clear
-          .place_desc
-            h5 A few words from #{@place.name}
-            = @place.description
+          small
+            span itemprop="count"
+            ' #{@place.reviews.count} reviews ·
+            a#write_review href="#review_form"
+              |Write a review
+        #favorites
+          .add_to_favorites
+            | Add to
+            br
+            | favorites
+        .share_btns
+          a#fb href="#"
+          a#vk href="#"
+          a#tw href="#"
+        ul.place_features
+          li.location
+            strong
+              'Location:
+            = @place.location.address
+          li.cuisine
+            strong
+              'Kitchen:
+            = @place.kitchens.map(&:name).join(', ')
+          li.timing
+            - @place.humanable_schedule.each do |time|
+              = time.html_safe
+              br
+          #place_links
+            = link_to "More detalis ›", '#'
+            = link_to "View menu ›", '#'
+        .clear
+        .place_desc
+          h5 A few words from #{@place.title}
+          = @place.description
+          .clear
+          a.desc_expand href="#" Expand
+        #review_form
+          .line2
+          h5 #{current_user.try(:first_name)}, submit a review:
+          .row
+            .span3
+              .criteria
+                .rating.rating_big
+                  label Overall
+                  .set_rating
+                    a.rate_1
+                    a.rate_2
+                    a.rate_3
+                    a.rate_4
+                    a.rate_5
+                    .overlay
+                    .bar
+                    .bg
+                  .stars
+                    .stars_overlay
+                    .stars_bar style="left: 76px;"
+                    .stars_bg
+                  | 3
+            .span3
+              .criteria
+                .rating.rating_big
+                  label Pricing
+                  .stars
+                    .stars_overlay
+                    .stars_bar style="left: 76px;"
+                    .stars_bg
+                  | 4
+          .row
+            .span3
+              .criteria
+                .rating.rating_big
+                  label Food
+                  .stars
+                    .stars_overlay
+                    .stars_bar style="left: 76px;"
+                    .stars_bg
+                  | 4
+            .span3
+              .criteria
+                .rating.rating_big
+                  label Ambiance
+                  .stars
+                    .stars_overlay
+                    .stars_bar style="left: 76px;"
+                    .stars_bg
+                  | 5
+          .row
+            .span3
+              .criteria
+                .rating.rating_big
+                  label Service
+                  .stars
+                    .stars_overlay
+                    .stars_bar style="left: 76px;"
+                    .stars_bg
+                  | 2
+            .span3
+              .criteria
+                .noise.noise_big
+                  label Noise level
+                  .set_noise
+                    a#noise_1.set
+                    a#noise_2.set
+                    a#noise_3.set
+                    a#noise_4.set
+                    a#noise_5.set
+                  .noise_level.noise_3
+                  | 4
+          .clear
+          a href="#"
+            img.user_pic height="50" src=get_user_avatar width="50"
+          textarea#review_text name="review_text" placeholder="Have you been here? Tell us your story about dinner at this place!"
+          input name="review_submit" type="submit" value="Submit review"
             .clear
-            a.desc_expand href="#"
-          #review_form
-            h5 Eugene, submit a review:
-            | detailed review form...
-          #reviews
-            h6 Featured reviews
-            a#sortby.sortby.dropdown-toggle data-target="#" data-toggle="dropdown" role="button"
-            .review itemprop="review" itemscope="" itemtype="http://schema.org/Review"
-              a href="#"
-                img.user_pic height="32" src="" width="32"
-              .review_content
-                a.user_link href="#"
-                  span itemprop="author"
-                meta content="2012-10-21" itemprop="datePublished"
-                  small
-                    | Dined yesterday ·
-                    a href="#"
-                  .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
-                    .stars
-                      .stars_overlay
-                      .stars_bar
-                      .stars_bg
-                    meta content="4.3" itemprop="ratingValue"
-                  span itemprop="description"
-                  a.read_more href="#"
-                    nobr read more ›
-                  .review_vote
-                    a.helpful href="#"
-                      | helpful
-                      strong 2
-                    a.unhelpful href="#"
-                      | unhelpful
-                      strong 0
-            a.all href="#"
+            .line2
+        #reviews
+          h6 All #{@place.reviews.count} reviews for #{@place.title}
+          a#sortby.sortby.dropdown-toggle data-target="#" data-toggle="dropdown" role="button"
+          .review itemprop="review" itemscope="" itemtype="http://schema.org/Review"
+            a href="#"
+              img.user_pic height="32" src="" width="32"
+            .review_content
+              a.user_link href="#"
+                span itemprop="author"
+              meta content="2012-10-21" itemprop="datePublished"
+                small
+                  | Dined yesterday ·
+                  a href="#"
+                span itemprop="description"
+                span.review_specials
+                  | Special offers:
+                  a href="#"
+                .review_vote
+                  a.helpful href="#"
+                    | helpful
+                    strong 2
+                  a.unhelpful href="#"
+                    | unhelpful
+                    strong 0
+            .ratings
+              div
+                label
+                  strong Overall
+                .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
+                  .stars
+                    .stars_overlay
+                    .stars_bar
+                    .stars_bg
+                  meta content="4.3" itemprop="ratingValue"
+              div
+                label Food
+                .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
+                  .stars
+                    .stars_overlay
+                    .stars_bar style="left: 60%"
+                    .stars_bg
+                  meta content="4.3" itemprop="ratingValue"
+          .review itemprop="review" itemscope="" itemtype="http://schema.org/Review"
+            a href="#"
+              img.user_pic height="32" src="" width="32"
+            .review_content.topclub_review
+              a.user_link href="#"
+                span itemprop="author"
+              meta content="2012-10-21" itemprop="datePublished"
+                small
+                  | Dined yesterday ·
+                  a href="#"
+                span itemprop="description"
+                .review_vote
+                  a.helpful href="#"
+                    | helpful
+                    strong 2
+                  a.unhelpful href="#"
+                    | unhelpful
+                    strong 0
+                .ratings
+                  div
+                    .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
+                      .stars
+                        .stars_overlay
+                        .stars_bar style="left: 100%"
+                        .stars_bg
+                      meta content="4.3" itemprop="ratingValue"
+                        | Reviewed by
+                        a href="#"
+                          img src="img/topclub.png"
+          .review itemprop="review" itemscope="" itemtype="http://schema.org/Review"
+            a href="#"
+              img.user_pic height="32" src="" width="32"
+            .review_content
+              a.user_link href="#"
+                span itemprop="author"
+              meta content="2012-10-21" itemprop="datePublished"
+                small
+                  | Dined yesterday ·
+                  a href="#"
+                span itemprop="description"
+                .review_vote
+                  a.helpful href="#"
+                    | helpful
+                    strong 2
+                  a.unhelpful href="#"
+                    | unhelpful
+                    strong 0
+                .ratings
+                  div
+                    label
+                      strong Overall
+                    .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
+                      .stars
+                        .stars_overlay
+                        .stars_bar
+                        .stars_bg
+                      meta content="4.3" itemprop="ratingValue"
+                  div
+                    label Food
+                    .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
+                      .stars
+                        .stars_overlay
+                        .stars_bar style="left: 60%"
+                        .stars_bg
+                      meta content="4.3" itemprop="ratingValue"
+                  .noise
+                    label Noise level
+                    .noise_level.noise_3
+          a.load_more href="#"
     #sidebar.specials.span4
-      h3 Pick a special offer
+      h3 Special offers from #{@place.title}
       ul
-        li
-          = link_to '30% off all food & drinks', '#'
-        li
-          = link_to '50% off all wine card', '#'
-        li
-          = link_to 'Free welcome drink', '#'
+        - @special_offers.each do |offer|
+          li
+            - offer_time = "<br/>#{t('words.time')}: #{offer.nice_offer_time}"
+            - offer_title = offer.week_day.try{ |week_day| week_day.day_type.title }
+            - data = { trigger: 'hover', title: offer_title, content: offer.description + offer_time, placement: 'left' }
+            = link_to offer.title, '#', class: 'popoverable', data: data
     #map.span4 style='width:300px; height: 300px;' *{'data-lat'=>"#{@location.split(',')[0]}", "data-lng" => "#{@location.split(',')[1]}"}
-      
-      

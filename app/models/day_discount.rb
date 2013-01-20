@@ -8,6 +8,9 @@ class DayDiscount < ActiveRecord::Base
   include Utils::Models::Base
   include Utils::Models::Translations
 
+  def nice_offer_time
+    [from_time, to_time].map{ |point| Time.strptime(point.to_s, "%H.%M").strftime("%I:%M%p") }.join('-')
+  end
 
 end
 # == Schema Information
@@ -21,7 +24,6 @@ end
 #  discount    :float
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  is_discount :boolean
 #
 # Indexes
 #
