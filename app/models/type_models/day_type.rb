@@ -15,7 +15,9 @@ class DayType
     builder.member :sunday, :object => new("sunday")
   end
 
-  def title
-    I18n.t(@code, :scope => [:admin, :day_type])
+  def title type = :full
+    I18n.t(@code, :scope => [:admin, :day_type, type.to_sym])
   end
+
+
 end

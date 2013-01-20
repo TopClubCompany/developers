@@ -9,6 +9,7 @@ class Users::ProfileController < ApplicationController
 
   end
 
+
   def send_email_invitation
     emails  = params[:emails].split("\r\n")
     message = params[:message]

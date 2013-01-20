@@ -79,14 +79,24 @@ ru:
         contacts: "Контакты"
         form: "Основное"
         info: "Реквизиты"
-    day_type: 
-      friday: "Пятница"
-      monday: "Понедельник"
-      saturday: "Суббота"
-      sunday: "Воскресенье"
-      thursday: "Четверг"
-      tuesday: "Вторник"
-      wednesday: "Среда"
+    day_type:
+      full:
+        friday: "Пятница"
+        monday: "Понедельник"
+        saturday: "Суббота"
+        sunday: "Воскресенье"
+        thursday: "Четверг"
+        tuesday: "Вторник"
+        wednesday: "Среда"
+      short:
+        friday: Пт
+        monday: Пн
+        saturday: Сб
+        sunday: Вс
+        thursday: Чт
+        tuesday: Вт
+        wednesday: Ср
+
     delete: "Удалить"
     delete_confirmation: "Вы уверены, что хотите удалить это?"
     details: "Подробнее"
