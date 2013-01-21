@@ -2,6 +2,21 @@ $ ->
   $('.add_to_favorites').click ->
     $(this).toggleClass 'i_like_this_place'
 
+  $("ul.carousel_bullets li").click ->
+    img_element = $(".place_img img")
+    link_for_fancy = $("a.fancybox")
+    $("ul.carousel_bullets li").removeClass("current")
+    $(this).addClass("current")
+    img_element.attr('src', $(this).data('small_image_src'))
+    link_for_fancy.attr('href', $(this).data('big_image_src'))
+
+  $(".popoverable").popover(html: true)
+
+  $(".fancybox").fancybox()
+
+  $("a#write_review").click ->
+    $("#review_text").focus()
+
   if $("#promo_tabs").length > 0
     hash = location.hash.replace(/#?(\w+)/, "$1")
     $('.tab_content').hide().eq(0).show()
@@ -37,4 +52,4 @@ $ ->
       marker.setMap(map)
       google.maps.event.trigger($("#map")[0], 'resize');
   ), 1000)
-  
+

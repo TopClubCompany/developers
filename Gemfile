@@ -4,7 +4,7 @@ gem 'rails', '3.2.11'
 gem 'mysql2'
 gem 'redis'
 gem 'slim-rails'
-
+gem 'fancybox2-rails'
 
 gem 'globalize3', :git => 'git://github.com/leschenko/globalize3.git', :ref => '586ccbd'
 
