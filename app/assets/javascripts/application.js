@@ -37,3 +37,4 @@
 //=require_tree ./frontend
 //=require jquery.autocomplete
 //=require mustache
+//= require fancybox
