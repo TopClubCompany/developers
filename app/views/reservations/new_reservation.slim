@@ -33,6 +33,7 @@
           = f.input :user_id, as: 'hidden', input_html: { value: @reservation.try(:user_id) }
           .clear
           = f.input :place_id, as: 'hidden', input_html: { value: @reservation.try(:place_id) }
+          = f.input :persons, as: 'hidden', input_html: { value: @persons }
           .clear
           = f.submit "Complete Free Reservation"
 
