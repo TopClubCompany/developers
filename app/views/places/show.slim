@@ -300,7 +300,7 @@
                   .noise
                     label Noise level
                     .noise_level.noise_3
-          a.load_more data-type='reviews' data-displayed=2 data-base-url='/reviews/get_more?' href="#"= t(".more")
+          a.load_more data-type='reviews' data-displayed=2 data-base-url="#{more_place_path(@place)}" href="#"= t(".more")
 
     #sidebar.specials.span4
       h3 Special offers from #{@place.title}
