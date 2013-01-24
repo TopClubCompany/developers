@@ -23,16 +23,22 @@
             label for="place_feature_item_id_#{item.id}"=  item.title
   = input_set t('admin.administrators') do
     .nested_fields
-      - f.simple_fields_for :place_administrators do |object|
-        = render 'place_administrators', :f => object
+      = f.simple_fields_for :place_administrators do |object|
+        = render 'place_administrators', f: object
     = f.link_to_add t('admin.add'), :place_administrators, :class => 'btn btn-primary'
+
+  = input_set t('admin.place_menu') do
+    .nested_fields
+      = f.simple_fields_for :place_menus do |object|
+        = render 'place_menu', f: object
+      = f.link_to_add t('admin.add'), :place_menus, :class => 'btn btn-primary'
 
   = input_set 'work_time' do
     - week_days_titles = DayType.all.map(&:title)
     - @place.week_days = WeekDay.create_for_new_place if @place.week_days.empty?
     = f.simple_fields_for :week_days do |object|
       - week_day_title = week_days_titles.shift
-      = render 'schedule', :f => object, week_day_title: week_day_title
+      = render 'schedule', f: object, week_day_title: week_day_title
   .nested_fields
     - @place.location ||= Location.new()
     = f.simple_fields_for :location do |object|

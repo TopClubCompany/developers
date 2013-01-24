@@ -24,6 +24,7 @@ end
 #  discount    :float
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  is_discount :boolean
 #
 # Indexes
 #
