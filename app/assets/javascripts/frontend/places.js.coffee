@@ -14,8 +14,21 @@ $ ->
 
   $(".fancybox").fancybox()
 
-  $("a#write_review").click ->
-    $("#review_text").focus()
+  $("a#write_review").click (e) ->
+    e.preventDefault()
+#    $("#review_text").focus()
+    $('html,body').animate
+      'scrollTop': $('#review_text').offset().top - 35
+    ,
+      "duration": 1000
+      "complete": ->
+        $("#review_text").focus()
+
+  $("#review_text").on 'blur', (e) ->
+    if $(@).val().length > 0
+      $(@).addClass 'not_empty'
+    else
+      $(@).removeClass 'not_empty'
 
   if $("#promo_tabs").length > 0
     hash = location.hash.replace(/#?(\w+)/, "$1")
@@ -35,7 +48,7 @@ $ ->
     history.pushState {}, "", "##{hashName}"
     $("a[href=##{hashName}]").parent().addClass('active').siblings().removeClass('active')
     $("##{hashName}").show().siblings('.tab_content').hide()
- 
+
   setTimeout((->
     if $('#map').length > 0
       initialData = $('#map').data()
@@ -47,7 +60,7 @@ $ ->
       map = new google.maps.Map(document.getElementById("map"), mapOptions)
       marker = new google.maps.Marker(
         position: new google.maps.LatLng(initialData.lat, initialData.lng)
-        title: "Hello from here!"        
+        title: "Hello from here!"
       )
       marker.setMap(map)
       google.maps.event.trigger($("#map")[0], 'resize');
