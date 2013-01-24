@@ -17,5 +17,8 @@
 
 FactoryGirl.define do
   factory :place_menu_item do
+    title { Faker::Lorem.sentence }
+    description { Faker::Lorem.sentences(3).join(' ') }
+    price { rand(1...100) }
   end
 end

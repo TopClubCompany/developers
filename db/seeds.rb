@@ -89,6 +89,7 @@ def add_test_stuff
       place.week_days  << week_days
       place.categories << category
       place.kitchens   << kitchen
+      insert_default_menus(place)
 
       rand(1..5).times do
         review = FactoryGirl.build(:review, user_id: User.all.sample.id)
@@ -169,6 +170,17 @@ def insert_default_reservations
     reservation.persons = rand(1..5)
     reservation.save
   end
+end
+
+def insert_default_menus place
+  place.place_menus << rand(1..5).times.map do
+    place_menu = FactoryGirl.create(:place_menu, place_id: place.id)
+    place_menu.place_menu_items << rand(1..5).times.map do
+       FactoryGirl.create(:place_menu_item, place_menu_id: place_menu.id)
+    end
+    place_menu
+  end
+  place.save!
 end
 
 User.full_truncate

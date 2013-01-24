@@ -16,5 +16,7 @@
 
 FactoryGirl.define do
   factory :place_menu do
+    title { Faker::Lorem.sentence }
+    description { Faker::Lorem.sentences(3).join(' ') }
   end
 end
