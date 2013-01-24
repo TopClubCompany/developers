@@ -35,7 +35,9 @@ class Paginator
         self.options.baseUrl + $.param({ type: self.options.type, size: self.options.size, page: self.nextPage})
       # success callback for request  
       success: (data) ->
+        data.result = [] unless data.result?
         _.each data.result, (place, index) ->
+          console.log data.result
           # main page specific feature
           css_class = if (index+1)%3 is 0 then 'margin_right_place' else ''
           _.extend place, {css_class: css_class}
@@ -47,9 +49,9 @@ class Paginator
         # finding button, which triggers next page request
         showMoreButton = $(self.options.containerId()).find(self.options.button)
         clear = showMoreButton.siblings('.clear')
-   
+
         self.options.displayed = self.options.displayed + data.result.length
-        if self.options.displayed is data.total
+        if self.options.displayed is data.total or not data.total?
           showMoreButton.remove()
         else
           # reseting gif image of loader with html previously saved
@@ -57,17 +59,19 @@ class Paginator
           showMoreButton.add(clear).detach().appendTo($(self.options.containerId()))
           self.nextPage = self.nextPage + 1
 
+
     @options =  _.extend {}, @defaults, opts
 
 
   next_page: () ->
     self = @
+    console.log self.options.url()
     $.ajax
       type: "GET"
       url: self.options.url()
       dataType: "json"
       success: self.options.success
-
+      error: self.options.error
 $ ->
   if $('.load_more').length
     $('.load_more').each (index, element) ->

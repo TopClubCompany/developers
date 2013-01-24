@@ -2,6 +2,13 @@ $ ->
   $('.add_to_favorites').click ->
     $(this).toggleClass 'i_like_this_place'
 
+  movingItself = setInterval (->
+    if $("ul.carousel_bullets li.current").next().length > 0
+      $("ul.carousel_bullets li.current").next().click()
+    else
+      $("ul.carousel_bullets li").first().click()
+  ), 5000
+
   $("ul.carousel_bullets li").click ->
     img_element = $(".place_img img")
     link_for_fancy = $("a.fancybox")
@@ -16,7 +23,6 @@ $ ->
 
   $("a#write_review").click (e) ->
     e.preventDefault()
-#    $("#review_text").focus()
     $('html,body').animate
       'scrollTop': $('#review_text').offset().top - 35
     ,
@@ -30,6 +36,7 @@ $ ->
     else
       $(@).removeClass 'not_empty'
 
+  # promo tabs toggler and history pushState
   if $("#promo_tabs").length > 0
     hash = location.hash.replace(/#?(\w+)/, "$1")
     $('.tab_content').hide().eq(0).show()
@@ -49,6 +56,7 @@ $ ->
     $("a[href=##{hashName}]").parent().addClass('active').siblings().removeClass('active')
     $("##{hashName}").show().siblings('.tab_content').hide()
 
+  # google map handler
   setTimeout((->
     if $('#map').length > 0
       initialData = $('#map').data()
