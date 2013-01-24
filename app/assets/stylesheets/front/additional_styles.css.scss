@@ -83,7 +83,7 @@
 #search_form select[name='number_of_people'] {
   float: left;
   margin: 0 10px 0 0;
-  width: 80px;
+  width: 56px;
   border: none;
   border-right: 10px solid transparent;
   background: white url(/assets/../assets/arr2.gif) right center no-repeat;
@@ -166,4 +166,8 @@
   background: #fff;
   text-decoration: none;
   min-height: 11px;
+}
+
+#place #review_form textarea.not_empty {
+  min-height: 100px;
 }

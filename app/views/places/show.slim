@@ -6,16 +6,29 @@
       #search_form
         span.header #{t('short_strings.reserve_at')} #{@place.name}
         .header_special Up to 30% off
+
         form
           label for="reserve_date"
-          input name="reserve_date" type="text" value="11/07/2012"
-            label for="reserve_time"
-            input name="reserve_time" type="text" value="7:00 PM"
-              label for="number_of_people"
-                nobr #{t('short_strings.number_of_people')}
-              input name="number_of_people" type="text" value="2"
-                input type="submit" value="Find a table"
-                  .clear
+          input class='dateFormatNeeded' type="text" name="reserve_date" autocomplete="off" value="#{@date}"
+          label for="reserve_time"
+          select name="reserve_time"
+            - time_with_locale(@time).each do |time_el|
+              - time_el.each do |k, v|
+                - if v
+                  option value=k selected="selected" #{k}
+                - else
+                  option value=k #{k}
+          label for="number_of_people"
+            nobr #{t('short_strings.number_of_people')}
+          select name="number_of_people" type="text"
+            - number = (params[:number_of_people] || 2)
+            - (1..10).each do |i|
+              - if i == number.to_i
+                option value="#{i}" selected="selected" #{i}
+              - else
+                option value="#{i}" #{i}
+          input type="submit" value="Find a table"
+            .clear
       .page_content.zz itemscope="" itemtype="http://data-vocabulary.org/Review-aggregate"
         .place_img
           /- unless @place.all_images.empty?
@@ -100,7 +113,7 @@
             .span3
               .criteria
                 .rating.rating_big
-                  label Overall
+                  label.required Overall
                   .set_rating
                     a.rate_1
                     a.rate_2
@@ -114,7 +127,8 @@
                     .stars_overlay
                     .stars_bar style="left: 76px;"
                     .stars_bg
-                  | 3
+                  .p
+                    | 3
             .span3
               .criteria
                 .rating.rating_big
@@ -123,7 +137,8 @@
                     .stars_overlay
                     .stars_bar style="left: 76px;"
                     .stars_bg
-                  | 4
+                  .p
+                    | 4
           .row
             .span3
               .criteria
@@ -133,7 +148,8 @@
                     .stars_overlay
                     .stars_bar style="left: 76px;"
                     .stars_bg
-                  | 4
+                  .p
+                    | 4
             .span3
               .criteria
                 .rating.rating_big
@@ -152,7 +168,8 @@
                     .stars_overlay
                     .stars_bar style="left: 76px;"
                     .stars_bg
-                  | 2
+                  .p
+                    | 2
             .span3
               .criteria
                 .noise.noise_big
@@ -164,7 +181,8 @@
                     a#noise_4.set
                     a#noise_5.set
                   .noise_level.noise_3
-                  | 4
+                  .p
+                    | 4
           .clear
           a href="#"
             img.user_pic height="50" src=get_user_avatar width="50"
@@ -282,7 +300,8 @@
                   .noise
                     label Noise level
                     .noise_level.noise_3
-          a.load_more href="#"
+          a.load_more data-type='reviews' data-displayed=2 data-base-url='/reviews/get_more?' href="#"= t(".more")
+
     #sidebar.specials.span4
       h3 Special offers from #{@place.title}
       ul
