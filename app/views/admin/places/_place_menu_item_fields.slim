@@ -1,0 +1,5 @@
+.place_menu_item
+  = f.locale_tabs do |l|
+    = f.input :title, locale: l
+    = f.input :description, locale: l, as: :text
+    = f.input :price

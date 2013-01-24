@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130108150622) do
+ActiveRecord::Schema.define(:version => 20130124100853) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -408,6 +408,47 @@ ActiveRecord::Schema.define(:version => 20130108150622) do
 
   add_index "place_kitchens", ["kitchen_id"], :name => "index_place_kitchens_on_kitchen_id"
   add_index "place_kitchens", ["place_id"], :name => "index_place_kitchens_on_place_id"
+
+  create_table "place_menu_item_translations", :force => true do |t|
+    t.integer  "place_menu_item_id"
+    t.string   "locale"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "place_menu_item_translations", ["locale"], :name => "index_place_menu_item_translations_on_locale"
+  add_index "place_menu_item_translations", ["place_menu_item_id"], :name => "index_2c48ed73e5a0ec59a6a95609f60003d4f831b8d7"
+
+  create_table "place_menu_items", :force => true do |t|
+    t.float    "price",         :default => 0.0
+    t.integer  "place_menu_id"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
+  add_index "place_menu_items", ["place_menu_id"], :name => "index_place_menu_items_on_place_menu_id"
+
+  create_table "place_menu_translations", :force => true do |t|
+    t.integer  "place_menu_id"
+    t.string   "locale"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "place_menu_translations", ["locale"], :name => "index_place_menu_translations_on_locale"
+  add_index "place_menu_translations", ["place_menu_id"], :name => "index_place_menu_translations_on_place_menu_id"
+
+  create_table "place_menus", :force => true do |t|
+    t.integer  "place_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "place_menus", ["place_id"], :name => "index_place_menus_on_place_id"
 
   create_table "place_translations", :force => true do |t|
     t.integer  "place_id"

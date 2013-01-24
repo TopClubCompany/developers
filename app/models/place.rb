@@ -2,8 +2,8 @@
 class Place < ActiveRecord::Base
 
   attr_accessible :phone, :is_visible, :user_id, :url, :location_attributes, :week_days_attributes,
-                  :avg_bill, :feature_item_ids, :place_administrators_attributes, :name, :description,
-                  :week_days_ids
+                  :avg_bill, :feature_item_ids, :place_administrators_attributes, :place_menus_attributes,
+                  :name, :description, :week_days_ids
 
   belongs_to :user
 
@@ -24,7 +24,8 @@ class Place < ActiveRecord::Base
   has_many :reviews, :as => :reviewable, :dependent => :destroy
   has_many :week_days, :dependent => :destroy
   has_many :day_discounts, :through => :week_days
-  has_many :reservations
+  has_many :reservations, :dependent => :destroy
+  has_many :place_menus, :dependent => :destroy
 
   enumerated_attribute :bill, :id_attribute => :avg_bill, :class => ::BillType
 
@@ -36,7 +37,7 @@ class Place < ActiveRecord::Base
 
   has_one :location, :as => :locationable, :dependent => :destroy, :autosave => true
 
-  accepts_nested_attributes_for :location, :reviews, :place_administrators, :week_days,
+  accepts_nested_attributes_for :location, :reviews, :place_administrators, :week_days, :place_menus,
                                 :allow_destroy => true, :reject_if => :all_blank
 
 
