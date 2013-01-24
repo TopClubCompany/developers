@@ -30,8 +30,9 @@ class Paginator
       containerId: () ->
         '#' + self.options.type
       # url with parameters for request
+      baseUrl: "/explore/get_more?"
       url: () ->
-        "/explore/get_more?" + $.param({ type: self.options.type, size: self.options.size, page: self.nextPage})
+        self.options.baseUrl + $.param({ type: self.options.type, size: self.options.size, page: self.nextPage})
       # success callback for request  
       success: (data) ->
         _.each data.result, (place, index) ->
@@ -70,4 +71,4 @@ class Paginator
 $ ->
   if $('.load_more').length
     $('.load_more').each (index, element) ->
-      new Paginator({type: $(element).data('type'), displayed: $(element).data('displayed')})
+      new Paginator($(element).data())
