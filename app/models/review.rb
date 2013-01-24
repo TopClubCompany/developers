@@ -7,8 +7,17 @@ class Review < ActiveRecord::Base
 
   has_many :marks
 
+  self.per_page = 6
+
   def avg_mark
     marks.average(:value).to_f
+  end
+
+  def for_mustache
+    {
+        overall: avg_mark,
+        marks: marks.map{|mark| {mark_type: mark.mark_type.title, value: mark.value}}
+    }
   end
 
 end
