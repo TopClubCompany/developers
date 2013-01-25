@@ -261,3 +261,5 @@ en:
     date: date
     time: time
     email: email
+    expand: expand
+    roll_up: roll up
