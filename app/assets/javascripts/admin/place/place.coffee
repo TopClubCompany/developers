@@ -53,13 +53,13 @@ class Discount
 
   hide: (el) =>
     $el = $(el)
-    $parent = $el.parents(".nested_fields:first")
+    $parent = $el.parents(".fields:first")
     $parent.find(".nav-tabs").hide()
     $parent.find(".tab-content").hide()
 
   show: (el) =>
     $el = $(el)
-    $parent = $el.parents(".nested_fields:first")
+    $parent = $el.parents(".fields:first")
     $parent.find(".nav-tabs").show()
     $parent.find(".tab-content").show()
 

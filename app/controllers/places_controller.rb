@@ -1,9 +1,22 @@
 #coding: utf-8
 class PlacesController < ApplicationController
+  before_filter :find_place, only: [:show, :more]
+
   def show
-    @place = Place.find params[:id]
-    @location = (Place.find params[:id]).lat_lng
-    @special_offers =  @place.day_discounts.where(is_discount: false)
+    if params[:reserve_date].present? and params[:reserve_date].length > 1
+      @date = params[:reserve_date]
+    else
+      @date = Date.today.strftime('%d/%m/%Y')
+    end
+    if params[:reserve_time].present? and params[:reserve_time].length > 1
+      time = Time.parse(params[:reserve_time])
+    else
+      time = Time.now
+    end
+    minutes = %w(00 30)[time.min / 30]
+    @time = {:h => time.hour.to_s, :m => minutes}
+    @location = @place.lat_lng
+    @special_offers =  @place.day_discounts.special
   end
 
   def index
@@ -15,6 +28,17 @@ class PlacesController < ApplicationController
       current_user.update_attribute(:city, city)
     end
     redirect_to  :back
+  end
+
+  def more
+    reviews = @place.reviews.paginate(:page => params[:page])
+    render :json => reviews.map(&:for_mustache)
+  end
+
+  private
+
+  def find_place
+    @place = Place.find params[:id]
   end
 
 

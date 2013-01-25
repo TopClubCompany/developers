@@ -69,10 +69,7 @@ Topclub::Application.routes.draw do
 
   resources :places do
     member do
-      post :rate
-      post :favorite
-      post :planned
-      post :visited
+      get :more
     end
   end
 
