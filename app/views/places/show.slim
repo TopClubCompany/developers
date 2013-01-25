@@ -158,43 +158,30 @@
                   span itemprop="description"
                     = review.content
                   .review_vote
-                    a.helpful href="#"
+                    a.helpful href=set_review_usefulness_path(review.id, 'helpful') data-method="post"
                       | helpful
-                      strong 2
-                    a.unhelpful href="#"
+                      strong= review.votes.helpful.count
+                    a.unhelpful href=set_review_usefulness_path(review.id, 'unhelpful') data-method="post"
                       | unhelpful
-                      strong 0
+                      strong= review.votes.unhelpful.count
                   .ratings
-                    - review.marks.each do |mark|
+                    - temp_overall_mark = Hashie::Mash.new(value: review.avg_mark, id: 0, mark_type: { title: t('words.overall') })
+                    - marks = review.marks.to_a.push(temp_overall_mark)
+                    - marks.each_with_index do |mark, i|
+                      /- if i.zero?
+                      /  .noise
+                      /    label Noise
+                      /    .noise_level.noise_5
                       div
-                        label
-                          = mark.mark_type.title
-                        .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
+                        label style="font-weight: #{'bold' if mark.id.zero?}"
+                          = mark.mark_type.title.try(:capitalize)
+                        .rating itemprop="reviewRating"
                           .stars
                             .stars_overlay
                             .stars_bar style="left: #{mark.value * 20}%"
                             .stars_bg
-                          meta content=mark.value itemprop="ratingValue"
-                  /div
-                  /  label
-                  /    strong Overall
-                  /  .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
-                  /    .stars
-                  /      .stars_overlay
-                  /      .stars_bar
-                  /      .stars_bg
-                  /    meta content="4.3" itemprop="ratingValue"
-                  /div
-                  /  label Food
-                  /  .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
-                  /    .stars
-                  /      .stars_overlay
-                  /      .stars_bar style="left: 60%"
-                  /      .stars_bg
-                  /    meta content="4.3" itemprop="ratingValue"
-                  /.noise
-                  /  label Noise level
-                  /  .noise_level.noise_5
+                          meta content=mark.value
+
           a.load_more data-type='reviews' data-displayed=2 data-template-id="#review_template" data-base-url="/places/#{@place.id}/more?" href="#"= t(".more")
 
     #sidebar.specials.span4

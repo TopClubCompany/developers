@@ -1,5 +1,5 @@
 class Mark < ActiveRecord::Base
-  attr_accessible :value
+  attr_accessible :value, :mark_type_id
   belongs_to :review
   belongs_to :mark_type
 

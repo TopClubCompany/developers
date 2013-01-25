@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130124100853) do
+ActiveRecord::Schema.define(:version => 20130125145458) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -629,6 +629,35 @@ ActiveRecord::Schema.define(:version => 20130124100853) do
   add_index "users", ["last_name", "first_name", "patronymic"], :name => "index_users_on_last_name_and_first_name_and_patronymic"
   add_index "users", ["login"], :name => "index_users_on_login"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "vote_type_translations", :force => true do |t|
+    t.integer  "vote_type_id"
+    t.string   "locale"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "vote_type_translations", ["locale"], :name => "index_vote_type_translations_on_locale"
+  add_index "vote_type_translations", ["vote_type_id"], :name => "index_vote_type_translations_on_vote_type_id"
+
+  create_table "vote_types", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "review_id"
+    t.integer  "vote_type_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "votes", ["review_id"], :name => "index_votes_on_review_id"
+  add_index "votes", ["user_id"], :name => "index_votes_on_user_id"
+  add_index "votes", ["vote_type_id"], :name => "index_votes_on_vote_type_id"
 
   create_table "week_days", :force => true do |t|
     t.decimal  "start_at",    :precision => 4, :scale => 2
