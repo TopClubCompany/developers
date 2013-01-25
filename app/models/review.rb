@@ -5,7 +5,8 @@ class Review < ActiveRecord::Base
   belongs_to :place
   belongs_to :reviweable, polymorphic: true
 
-  has_many :marks
+  has_many :marks, dependent: :destroy
+  has_many :votes, dependent: :destroy
 
   self.per_page = 6
 

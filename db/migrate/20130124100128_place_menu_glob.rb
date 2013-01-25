@@ -4,6 +4,6 @@ class PlaceMenuGlob < ActiveRecord::Migration
   end
 
   def down
-    PlaceMenu.create_translation_table! :title => :string, :description => :text
+    PlaceMenu.drop_translation_table!
   end
 end

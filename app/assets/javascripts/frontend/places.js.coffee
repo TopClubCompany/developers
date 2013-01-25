@@ -77,11 +77,11 @@ $ ->
       showHash.call @, hash
 
   if $('#promo_tabs').length > 0
-	  $('#promo_tabs a').click (e)->
+    $('#promo_tabs a').click (e)->
       e.preventDefault();
       showHash.call @, $(this).attr('href'), yes
 
-	showHash = (hashName, stripNeed = no) ->
+  showHash = (hashName, stripNeed = no) ->
     hashName = hashName.slice(1) if stripNeed
     history.pushState {}, "", "##{hashName}"
     $("a[href=##{hashName}]").parent().addClass('active').siblings().removeClass('active')

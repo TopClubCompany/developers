@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
   has_many :accounts, :dependent => :destroy
 
   has_many :reservations, :dependent => :destroy
+  has_many :votes, :dependent => :destroy
 
   alias_attribute :name, :title
 
