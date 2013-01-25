@@ -127,6 +127,7 @@ end
 
 
 def insert_mark_types
+  MarkType.full_truncate
   %w(pricing service food ambiance noise\ level).each do |type|
     MarkType.create(name: type, description: Faker::Lorem.sentence(10))
   end
