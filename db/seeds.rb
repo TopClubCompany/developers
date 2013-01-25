@@ -191,7 +191,7 @@ User.full_truncate
 insert_default_user('admin@adm.com', :admin)
 insert_default_user('user@usr.com')
 add_categories
-add_kitchens                                                                                ro
+add_kitchens
 insert_mark_types
 add_test_stuff
 insert_default_place_pictures
