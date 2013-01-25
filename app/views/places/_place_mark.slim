@@ -1,0 +1,30 @@
+- marks.each do |mark|
+  .span3
+    .criteria
+      .rating.rating_big
+        label class="#{'required' if required}"
+          = mark.title.capitalize
+        - if required
+          /- if mark.title == 'noise level'
+          .set_rating
+            - 5.times do |i|
+              = link_to '','', class: 'rate', data: { value: "#{20 * (i + 1)}.0%", mark: i + 1 }
+              .overlay
+              .bar
+              .bg
+          /- else
+          /  .set_noise
+          /    a#noise_1.set
+          /    a#noise_2.set
+          /    a#noise_3.set
+          /    a#noise_4.set
+          /    a#noise_5.set
+          /  .noise_level.noise_3
+          /  .p
+          /    | 4
+        .stars
+          .stars_overlay
+          .stars_bar style="left: 20px;"
+          .stars_bg
+        .p
+          | 1

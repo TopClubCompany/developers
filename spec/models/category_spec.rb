@@ -7,19 +7,16 @@ end
 #
 # Table name: categories
 #
-#  id                 :integer          not null, primary key
-#  slug               :string(255)      not null
-#  user_id            :integer
-#  is_visible         :boolean          default(TRUE), not null
-#  parent_id          :integer
-#  lft                :integer          default(0)
-#  rgt                :integer          default(0)
-#  depth              :integer          default(0)
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  is_visible_on_main :boolean          default(FALSE)
-#  position           :integer
-#  css_id             :string(255)
+#  id         :integer          not null, primary key
+#  slug       :string(255)      not null
+#  user_id    :integer
+#  is_visible :boolean          default(TRUE), not null
+#  parent_id  :integer
+#  lft        :integer          default(0)
+#  rgt        :integer          default(0)
+#  depth      :integer          default(0)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 # Indexes
 #
