@@ -1,0 +1,9 @@
+.place_menus
+  = f.locale_tabs do |l|
+    = f.input :title, locale: l
+    .nested_fields
+      = input_set 'menu_item' do
+        = f.simple_fields_for :place_menu_items
+        br
+        = f.link_to_add t('admin.add'), :place_menu_items, class: 'btn btn-primary'
+      /= f.input :description, locale: l, :as => :ckeditor
