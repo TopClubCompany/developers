@@ -1,12 +1,9 @@
-/    #map.span4 style='width:300px; height: 300px;' *{'data-lat'=>"#{@location.split(',')[0]}", "data-lng" => "#{@location.split(',')[1]}"}
-
 #place.content
   .row
     .span8
       #search_form
         span.header #{t('short_strings.reserve_at')} #{@place.name}
         .header_special Up to 30% off
-
         form
           label for="reserve_date"
           input class='dateFormatNeeded' type="text" name="reserve_date" autocomplete="off" value="#{@date}"
@@ -103,204 +100,101 @@
         .clear
         .place_desc
           h5 A few words from #{@place.title}
-          = @place.description
+          .short_description.active_desc
+            = truncate(@place.description, length: 100)
+          .full_description
+            = @place.description
           .clear
-          a.desc_expand href="#" Expand
-        #review_form
-          .line2
-          h5 #{current_user.try(:first_name)}, submit a review:
-          .row
-            .span3
-              .criteria
-                .rating.rating_big
-                  label.required Overall
-                  .set_rating
-                    a.rate_1
-                    a.rate_2
-                    a.rate_3
-                    a.rate_4
-                    a.rate_5
-                    .overlay
-                    .bar
-                    .bg
-                  .stars
-                    .stars_overlay
-                    .stars_bar style="left: 76px;"
-                    .stars_bg
-                  .p
-                    | 3
-            .span3
-              .criteria
-                .rating.rating_big
-                  label Pricing
-                  .stars
-                    .stars_overlay
-                    .stars_bar style="left: 76px;"
-                    .stars_bg
-                  .p
-                    | 4
-          .row
-            .span3
-              .criteria
-                .rating.rating_big
-                  label Food
-                  .stars
-                    .stars_overlay
-                    .stars_bar style="left: 76px;"
-                    .stars_bg
-                  .p
-                    | 4
-            .span3
-              .criteria
-                .rating.rating_big
-                  label Ambiance
-                  .stars
-                    .stars_overlay
-                    .stars_bar style="left: 76px;"
-                    .stars_bg
-                  | 5
-          .row
-            .span3
-              .criteria
-                .rating.rating_big
-                  label Service
-                  .stars
-                    .stars_overlay
-                    .stars_bar style="left: 76px;"
-                    .stars_bg
-                  .p
-                    | 2
-            .span3
-              .criteria
-                .noise.noise_big
-                  label Noise level
-                  .set_noise
-                    a#noise_1.set
-                    a#noise_2.set
-                    a#noise_3.set
-                    a#noise_4.set
-                    a#noise_5.set
-                  .noise_level.noise_3
-                  .p
-                    | 4
-          .clear
-          a href="#"
-            img.user_pic height="50" src=get_user_avatar width="50"
-          textarea#review_text name="review_text" placeholder="Have you been here? Tell us your story about dinner at this place!"
-          input name="review_submit" type="submit" value="Submit review"
-            .clear
+          = link_to t('words.expand'), '#', class: 'desc_expand', data: { expand: t('words.expand'), rollup: t('words.roll_up') }
+        - if signed_in?
+          #review_form
             .line2
+            h5 #{current_user.try(:first_name)}, submit a review:
+            .marks
+              - MarkType.all.each_slice(2) do |marks|
+                .row
+                  = render partial: 'place_mark', locals: { marks: marks, required: true }
+            .overall_mark style="float: right;"
+              = render partial: 'place_mark', locals: { marks: [MarkType.new(name: 'overal')], required: false }
+            /  .span3
+            /    .criteria
+            /      .noise.noise_big
+            /        label Noise level
+            /        .set_noise
+            /          a#noise_1.set
+            /          a#noise_2.set
+            /          a#noise_3.set
+            /          a#noise_4.set
+            /          a#noise_5.set
+            /        .noise_level.noise_3
+            /        .p
+            /          | 4
+            .clear
+            a href="#"
+              img.user_pic height="50" src=get_user_avatar width="50"
+            textarea#review_text name="review_text" placeholder="Have you been here? Tell us your story about dinner at this place!"
+            input name="review_submit" type="submit" value="Submit review"
+              .clear
+              .line2
         #reviews
-          h6 All #{@place.reviews.count} reviews for #{@place.title}
-          - p @place.reviews.inspect
+          - reviews = @place.reviews
+          h6 All #{reviews.count} reviews for #{@place.title}
           a#sortby.sortby.dropdown-toggle data-target="#" data-toggle="dropdown" role="button"
-          .review itemprop="review" itemscope="" itemtype="http://schema.org/Review"
-            a href="#"
-              img.user_pic height="32" src="" width="32"
-            .review_content
-              a.user_link href="#"
-                span itemprop="author"
-              meta content="2012-10-21" itemprop="datePublished"
-                small
-                  | Dined yesterday ·
-                  a href="#"
-                span itemprop="description"
-                span.review_specials
-                  | Special offers:
-                  a href="#"
-                .review_vote
-                  a.helpful href="#"
-                    | helpful
-                    strong 2
-                  a.unhelpful href="#"
-                    | unhelpful
-                    strong 0
-            .ratings
-              div
-                label
-                  strong Overall
-                .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
-                  .stars
-                    .stars_overlay
-                    .stars_bar
-                    .stars_bg
-                  meta content="4.3" itemprop="ratingValue"
-              div
-                label Food
-                .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
-                  .stars
-                    .stars_overlay
-                    .stars_bar style="left: 60%"
-                    .stars_bg
-                  meta content="4.3" itemprop="ratingValue"
-          .review itemprop="review" itemscope="" itemtype="http://schema.org/Review"
-            a href="#"
-              img.user_pic height="32" src="" width="32"
-            .review_content.topclub_review
-              a.user_link href="#"
-                span itemprop="author"
-              meta content="2012-10-21" itemprop="datePublished"
-                small
-                  | Dined yesterday ·
-                  a href="#"
-                span itemprop="description"
-                .review_vote
-                  a.helpful href="#"
-                    | helpful
-                    strong 2
-                  a.unhelpful href="#"
-                    | unhelpful
-                    strong 0
-                .ratings
-                  div
-                    .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
-                      .stars
-                        .stars_overlay
-                        .stars_bar style="left: 100%"
-                        .stars_bg
-                      meta content="4.3" itemprop="ratingValue"
-                        | Reviewed by
-                        a href="#"
-                          img src="img/topclub.png"
-          .review itemprop="review" itemscope="" itemtype="http://schema.org/Review"
-            a href="#"
-              img.user_pic height="32" src="" width="32"
-            .review_content
-              a.user_link href="#"
-                span itemprop="author"
-              meta content="2012-10-21" itemprop="datePublished"
-                small
-                  | Dined yesterday ·
-                  a href="#"
-                span itemprop="description"
-                .review_vote
-                  a.helpful href="#"
-                    | helpful
-                    strong 2
-                  a.unhelpful href="#"
-                    | unhelpful
-                    strong 0
-                .ratings
-                  div
-                    label
-                      strong Overall
-                    .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
-                      .stars
-                        .stars_overlay
-                        .stars_bar
-                        .stars_bg
-                      meta content="4.3" itemprop="ratingValue"
-                  div
-                    label Food
-                    .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
-                      .stars
-                        .stars_overlay
-                        .stars_bar style="left: 60%"
-                        .stars_bg
-                      meta content="4.3" itemprop="ratingValue"
-                  .noise
-                    label Noise level
-                    .noise_level.noise_3
+            |Sort by
+          - reviews.each do |review|
+            .review itemprop="review" itemscope="" itemtype="http://schema.org/Review"
+              a href="#"
+                img.user_pic height="32" src=get_user_avatar(review.user) width="32"
+              .review_content
+                a.user_link href="#"
+                  span itemprop="author"
+                    = user_menu_name review.user
+                  '
+                meta content="2012-10-21" itemprop="datePublished"
+                  small
+                    ' Dined yesterday ·
+                    a href="#"
+                      | #
+                  span itemprop="description"
+                    = review.content
+                  .review_vote
+                    a.helpful href="#"
+                      | helpful
+                      strong 2
+                    a.unhelpful href="#"
+                      | unhelpful
+                      strong 0
+                  .ratings
+                    - review.marks.each do |mark|
+                      div
+                        label
+                          = mark.mark_type.title
+                        .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
+                          .stars
+                            .stars_overlay
+                            .stars_bar style="left: #{mark.value * 20}%"
+                            .stars_bg
+                          meta content=mark.value itemprop="ratingValue"
+                  /div
+                  /  label
+                  /    strong Overall
+                  /  .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
+                  /    .stars
+                  /      .stars_overlay
+                  /      .stars_bar
+                  /      .stars_bg
+                  /    meta content="4.3" itemprop="ratingValue"
+                  /div
+                  /  label Food
+                  /  .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
+                  /    .stars
+                  /      .stars_overlay
+                  /      .stars_bar style="left: 60%"
+                  /      .stars_bg
+                  /    meta content="4.3" itemprop="ratingValue"
+                  /.noise
+                  /  label Noise level
+                  /  .noise_level.noise_5
           a.load_more data-type='reviews' data-displayed=2 data-template-id="#review_template" data-base-url="/places/#{@place.id}/more?" href="#"= t(".more")
 
     #sidebar.specials.span4
@@ -309,100 +203,12 @@
         - @special_offers.each do |offer|
           li
             - offer_time = "<br/>#{t('words.time')}: #{offer.nice_offer_time}"
-            - offer_title = offer.week_day.try{ |week_day| week_day.day_type.title }
+            - offer_title = offer.week_day.try { |week_day| week_day.day_type.title }
             - data = { trigger: 'hover', title: offer_title, content: offer.description + offer_time, placement: 'left' }
             = link_to offer.title, '#', class: 'popoverable', data: data
     #map.span4 style='width:300px; height: 300px;' *{'data-lat'=>"#{@location.split(',')[0]}", "data-lng" => "#{@location.split(',')[1]}"}
 
-#popup_content style="display:none"
-  #place_menu.fancybox.popup
-    button.close aria-hidden="true" data-dismiss="modal" type="button"
-    h5 Menu
-    h6 Salads
-    ul
-      li
-        span
-          | Салат с куриной печенью и яйцом пашот
-          small Карамелезированная куриная печень, микс салата, шампиньоны с горчично-медовым соусом
-        b 35.00 грн.
-        .clear
-      li
-        span
-          | Салат с куриной печенью и яйцом пашот
-          small Карамелезированная куриная печень, микс салата, шампиньоны с горчично-медовым соусом
-        b 35.00 грн.
-        .clear
-      li
-        span
-          | Салат с куриной печенью и яйцом пашот
-          small Карамелезированная куриная печень, микс салата, шампиньоны с горчично-медовым соусом
-        b 35.00 грн.
-        .clear
-    h6 Карамелезированная куриная печень, микс салата, шампиньоны с горчично-медовым соусом
-    ul
-      li
-        span
-          | Салат с куриной печенью и яйцом пашот
-          small Карамелезированная куриная печень, микс салата, шампиньоны с горчично-медовым соусом
-        b 35.00 грн.
-        .clear
-      li
-        span
-          | Салат с куриной печенью и яйцом пашот Салат с куриной печенью и яйцом пашот Салат с куриной печенью и яйцом пашот Салат с куриной печенью и яйцом пашот
-          small Карамелезированная куриная печень, микс салата, шампиньоны с горчично-медовым соусом трам парам парам
-        b 99999.00 грн.
-        .clear
-      li
-        span
-          | Салат с куриной печенью и яйцом пашот
-          small Карамелезированная куриная печень, микс салата, шампиньоны с горчично-медовым соусом
-        b 35.00 грн.
-        .clear
-    h6 Dishes without description
-    ul
-      li
-        span
-          | Салат с куриной печенью и яйцом пашот
-        b 35.00 грн.
-        .clear
-      li
-        span
-          | Салат с куриной печенью и яйцом пашот Салат с куриной печенью и яйцом пашот Салат с куриной печенью и яйцом пашот Салат с куриной печенью и яйцом пашот
-        b 99999.00 грн.
-        .clear
-      li
-        span
-          | Салат с куриной печенью и яйцом пашот
-        b 35.00 грн.
-        .clear
-  #share.fancybox.popup
-    button.close aria-hidden="true" data-dismiss="modal" type="button"
-    h5 Share with friends
-    .shared_content
-      img height="80" src="#" width="120"
-        h6 Avalon
-        span.header_info
-          a href="#"
-          | ,
-          a href="#"
-          span.pricing
-            | .
-            strong $$$
-            |$
-        ul.place_features
-          li.location
-            strong Location:
-            | Sribnokilskaya st., 3d
-          li.cuisine
-            strong Kitchen:
-            | European, Italian
-        .clear
-    textarea name="shared_comment" placeholder="Add a comment..."
-    ul.share_selector
-      strong Share on:
-      li#fb.active
-      li#vk.active
-      li#tw
-    input type="submit" value="Share"
+  = render 'place_menu_popup'
+  = render 'place_share_popup'
 script type='text/html' id='review_template'
-  = render 'review'
+  /= render 'review'

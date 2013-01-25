@@ -1,10 +1,10 @@
 module Users::ProfileHelper
 
-  def user_menu_name
-    if current_user.first_name.present? && current_user.last_name.present?
-      "#{current_user.first_name} #{current_user.last_name[0]}."
+  def user_menu_name user = current_user
+    if user.first_name.present? && user.last_name.present?
+      "#{user.first_name} #{user.last_name[0]}."
     else
-      current_user.email
+      user.email
     end
   end
 

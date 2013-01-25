@@ -70,8 +70,7 @@ def add_test_stuff
     category = Category.all.sample(2)
     location = FactoryGirl.build(:location)
 
-    place = Place.create(name: Faker::Company.name, description: Faker::Lorem.sentence, user_id: User.first.id,
-                           phone: Faker::PhoneNumber.phone_number, url: Faker::Internet.http_url, avg_bill: BillType.all.sample.id)
+    place = FactoryGirl.create(:place, user_id: User.first.id)
 
     week_days = DayType.all.map { |day| FactoryGirl.build(:week_day, day_type_id: day.id, is_working: true)}
     week_days.each do |week_day|
@@ -91,14 +90,13 @@ def add_test_stuff
       place.kitchens   << kitchen
       insert_default_menus(place)
 
-      rand(1..5).times do
+      rand(1..15).times do
         review = FactoryGirl.build(:review, user_id: User.all.sample.id)
         MarkType.all.each { |mark_type| review.marks << FactoryGirl.build(:mark, mark_type_id: mark_type.id) }
         place.reviews << review
         place.notes   << FactoryGirl.build(:note)
         place.events  << FactoryGirl.build(:event)
       end
-    puts "place add"
     end
   puts 'test stuff added successfully'
 end
@@ -129,7 +127,7 @@ end
 
 
 def insert_mark_types
-  %w(pricing service food ambiance).each do |type|
+  %w(pricing service food ambiance noise\ level).each do |type|
     MarkType.create(name: type, description: Faker::Lorem.sentence(10))
   end
   puts 'mark types added successfully'

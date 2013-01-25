@@ -3,16 +3,8 @@ class PlacesController < ApplicationController
   before_filter :find_place, only: [:show, :more]
 
   def show
-    if params[:reserve_date].present? and params[:reserve_date].length > 1
-      @date = params[:reserve_date]
-    else
-      @date = Date.today.strftime('%d/%m/%Y')
-    end
-    if params[:reserve_time].present? and params[:reserve_time].length > 1
-      time = Time.parse(params[:reserve_time])
-    else
-      time = Time.now
-    end
+    @date = params[:reserve_date] || Date.today.strftime('%d/%m/%Y')
+    time = Time.parse(params[:reserve_time]) rescue Time.now
     minutes = %w(00 30)[time.min / 30]
     @time = {:h => time.hour.to_s, :m => minutes}
     @location = @place.lat_lng
@@ -32,7 +24,9 @@ class PlacesController < ApplicationController
 
   def more
     reviews = @place.reviews.paginate(:page => params[:page])
-    render :json => reviews.map(&:for_mustache)
+    respond_to do |format|
+      format.json { render json: reviews.map(&:for_mustache) }
+    end
   end
 
   private
