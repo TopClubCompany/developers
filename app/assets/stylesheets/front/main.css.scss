@@ -1442,6 +1442,12 @@ h4 .discount_label {
   line-height: 21px;
   color: #333;
   margin: 20px 0;
+  .full_description, .short_description {
+    display: none;
+    &.active_desc {
+      display: inline;
+    }
+  }
 }
 
 #place .place_desc h5 {
@@ -1455,6 +1461,9 @@ h4 .discount_label {
   display: inline-block;
   padding-right: 8px;
   background: image_url('arr3.gif') right 10px no-repeat;
+  &.roll_up {
+    background: image_url('arr33.gif') right 10px no-repeat;
+  }
   margin: 5px 0 0 0;
   font-weight: bold;
   font-size: 11px;

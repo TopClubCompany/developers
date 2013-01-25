@@ -1,4 +1,35 @@
 $ ->
+  console.log 'test'
+  #handle reviews marks
+  $(".set_rating a.rate").click (e) ->
+    e.preventDefault();
+    main_element = $(this).closest(".span3")
+    $(main_element.find(".stars_bar")).css("left", $(this).data('value'))
+    $(main_element.find(".p")).text($(this).data('mark'))
+    set_overall_mark()
+
+  #computing overall mark
+  set_overall_mark = () ->
+    mark_css_values = 0
+    mark_values     = 0
+    marks           = $(".marks .stars_bar")
+    overall_mark_el = $(".overall_mark .stars_bar")
+    for mark_value in marks
+      mark_css_values += parseInt($(mark_value).css('left'))
+      mark_values     += parseInt($(mark_value).closest('.span3').find(".p").text())
+    overall_mark_css_value = mark_css_values / marks.size()
+    overall_mark_value     = mark_values / marks.size()
+    overall_mark_el.css('left', overall_mark_css_value)
+    overall_mark_el.closest('.span3').find(".p").text(overall_mark_value)
+
+  #handle place description
+  $("a.desc_expand").click (e) ->
+    e.preventDefault();
+    $(".place_desc .full_description").toggleClass("active_desc")
+    $(".place_desc .short_description").toggleClass("active_desc")
+    text = (if $(this).hasClass("roll_up") then $(this).data('expand') else $(this).data('rollup'))
+    $(this).toggleClass("roll_up").text(text)
+
   $('.add_to_favorites').click ->
     $(this).toggleClass 'i_like_this_place'
 
