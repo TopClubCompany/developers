@@ -77,7 +77,7 @@ class PlacesCollection
 
 
   useNewData: (json, page) ->
-#    console.log json
+    console.log json
     new Pagination(json.total).goTo(page)
     placesData = json.result
     newIds = _.pluck(placesData, 'id')
