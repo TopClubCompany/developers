@@ -200,6 +200,7 @@ en:
     number_of_people: ""
     price: ""
     refine: ""
+    location: "Location"
   simple_form: 
     error_notification: 
       default_message: ""

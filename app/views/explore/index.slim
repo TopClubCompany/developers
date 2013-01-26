@@ -1,24 +1,25 @@
 #index.content
-
-  .row
-    .span8 id="teaser"
-      .video_player
-        h5= t('.how_it_works')
-        video#video-container class="projekktor" width="620" height="350" title="How it works?" poster="/img/video/dummy.jpg" controls=true
-          source src="/media/intro.ogv" type="video/ogg"  /
-    .span4 id="signup_promo"
-      img src="/img/gfx/1.jpg"
-        ul
-          li= t('.find_restorants')
-          li= t('.reserv_online')
-          li= t('.save_up')
-        a.btn1 href="#{new_user_registration_path}"= t('auth.links.sign_up')
+  - cache [I18n.locale, 'explorer', 'main_video'] do
+    .row
+      .span8 id="teaser"
+        .video_player
+          h5= t('.how_it_works')
+          video#video-container class="projekktor" width="620" height="350" title="How it works?" poster="/img/video/dummy.jpg" controls=true
+            source src="/media/intro.ogv" type="video/ogg"  /
+      .span4 id="signup_promo"
+        img src="/img/gfx/1.jpg"
+          ul
+            li= t('.find_restorants')
+            li= t('.reserv_online')
+            li= t('.save_up')
+          a.btn1 href="#{new_user_registration_path}"= t('auth.links.sign_up')
   .row
     .span12
       #search_form
         = render :partial => 'shared/search_form', :locals => { :time => {:h => (@time[:h] || 12), :m => (@time[:m] || '00')} }
 
-  = render 'shared/main_category'
+  - cache [I18n.locale, 'explorer', 'categories', Category.max_time, "main"] do
+    = render 'shared/main_category'
 
 #promo_places
   .content
@@ -51,8 +52,7 @@
       = t('footer.need_clients')
       a href="/partner_info" &nbsp; #{t('footer.become_a_prtner')}
 
-
-= render 'shared/more_template'
-
-script type='text/html' id='place_template'
-  = render 'place'
+- cache [I18n.locale, 'explorer', 'more_template', 'render'] do
+  = render 'shared/more_template'
+  script type='text/html' id='place_template'
+    = render 'place'

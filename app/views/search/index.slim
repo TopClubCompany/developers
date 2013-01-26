@@ -12,12 +12,7 @@
             nobr= I18n.t('search.map_view')
   .row
     = render 'filters'
-    - possibilities = ["00", "15", "30", "45"]
-    - base_time = @time[:h]
-    - minutes = @time[:m]              
-    - index = possibilities.index(minutes)
     #listing.span10
-      
       #mapcontainer
         h3 Results for #{(params[:reserve_date] || Time.now.strftime("%d/%m/%Y"))}, #{@time[:h]}:#{@time[:m]} for #{params[:number_of_people] || 2} people
         #map_places style="background: rgba(128,128,128,0.5);" *{'data-lat'=>"50.451118", "data-lng" => "30.522301"}
