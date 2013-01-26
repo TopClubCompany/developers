@@ -384,7 +384,7 @@ class Place < ActiveRecord::Base
 
   def self.deparam(url)
     replace_url = url
-    City.all.map{|obj| obj.slug}.map{|i| [i].zip("#{i} oblast")}.flatten.each do |slug|
+    City.all.map{|obj| obj.slug}.map{|i| [i].zip("#{i}_oblast")}.flatten.each do |slug|
       puts slug
       replace_url = url.sub(/-#{slug}$/,'')
       if replace_url != url
