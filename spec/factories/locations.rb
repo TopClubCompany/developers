@@ -23,7 +23,7 @@
 
 FactoryGirl.define do
   factory :location do
-    latitude  { [50.4481, 50.4454, 50.4467, 50.4439].sample }
-    longitude { [30.5002, 30.5440, 30.5451, 30.5455, 30.5459].sample }
+    latitude  { [50.4481, 50.1454, 50.3467, 51.4439].sample }
+    longitude { [30.1002, 30.2440, 30.3451, 30.4455, 30.9459].sample }
   end
 end
