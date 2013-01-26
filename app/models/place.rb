@@ -111,6 +111,11 @@ class Place < ActiveRecord::Base
 
     filters += self.time_filter(options)
 
+    if options[:distance].present? && options[:current_point].present?
+      distance = options[:distance].split(',').map { |dist| PlaceGeoType.find(dist.to_i).distance }.max
+      filters << { geo_distance: { distance: "#{distance}km", lat_lng: options[:current_point] } }
+    end
+
     if filters.empty? && options.empty?
       self.best_places(15, options)
     else
