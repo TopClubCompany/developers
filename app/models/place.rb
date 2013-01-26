@@ -328,12 +328,14 @@ class Place < ActiveRecord::Base
     res[:discount] = offers[0].try{|offer| offer.discount.try(:to_i) }
     res[:place_url] = "/#{place["slug"]}"
     res[:star_rating] = self.get_star_rating(place)
+    # TODO: replace with actual values of availability and being_favourite
+    res[:is_favourite] = [true, false].sample
     res[:timing] = [
-        {:time => (time + 30.minutes).strftime("%H:%M")},
-        {:time => (time + 15.minutes).strftime("%H:%M")},
-        {:time => (time).strftime("%H:%M")},
-        {:time => (time - 15.minutes).strftime("%H:%M")},
-        {:time => (time - 30.minutes).strftime("%H:%M")}
+        {:time => (time + 30.minutes).strftime("%H:%M").to_sym, :available => [true, false].sample },
+        {:time => (time + 15.minutes).strftime("%H:%M").to_sym, :available => [true, false].sample },
+        {:time => (time).strftime("%H:%M").to_sym, :available => [true, false].sample  },
+        {:time => (time - 15.minutes).strftime("%H:%M").to_sym, :available => [true, false].sample },
+        {:time => (time - 30.minutes).strftime("%H:%M").to_sym, :available => [true, false].sample }
     ]
     res
   end

@@ -54,6 +54,10 @@ $ ->
 
   $('.add_to_favorites').click ->
     $(this).toggleClass 'i_like_this_place'
+    if $(this).hasClass('i_like_this_place')
+      $(this).parent().css('display', 'block')
+    else
+      $(this).parent().removeAttr('style')
 
   movingItself = setInterval (->
     if $("ul.carousel_bullets li.current").next().length > 0
