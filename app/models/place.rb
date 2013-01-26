@@ -328,14 +328,15 @@ class Place < ActiveRecord::Base
     res[:star_rating] = self.get_star_rating(place)
     # TODO: replace with actual values of availability and being_favourite
     res[:is_favourite] = [true, false].sample
-    res[:timing] = [
-        {:time => (time + 30.minutes).strftime("%H:%M").to_sym, :available => [true, false].sample },
-        {:time => (time + 15.minutes).strftime("%H:%M").to_sym, :available => [true, false].sample },
-        {:time => (time).strftime("%H:%M").to_sym, :available => [true, false].sample  },
-        {:time => (time - 15.minutes).strftime("%H:%M").to_sym, :available => [true, false].sample },
-        {:time => (time - 30.minutes).strftime("%H:%M").to_sym, :available => [true, false].sample }
-    ]
+    res[:timing] = self.order_time(time)
     res
+  end
+
+
+  def self.order_time time
+    [30, 15, 0, -15, -30].map do |i|
+      {:time => (time + i.minutes).strftime("%H:%M").to_sym, :available => true}
+    end
   end
 
 
