@@ -98,7 +98,7 @@ class Place < ActiveRecord::Base
     filters = []
 
     if options[:kitchen].present?
-      filters << {query: {terms: {kitchen_ids: options[:kitchen].split(',')} }}#{query: "kitchen_ids:#{options[:kitchen].join(' OR ')}"}}}
+      filters << {query: {terms: {kitchen_ids: options[:kitchen].split(',')} }}
     end
 
     if options[:category].present?
@@ -165,7 +165,6 @@ class Place < ActiveRecord::Base
           flt options[:city].lucene_escape, :fields => I18n.available_locales.map { |l| "city_#{l}" }, :min_similarity => 0.5
         end
       end
-      puts to_curl
     end
   end
 
