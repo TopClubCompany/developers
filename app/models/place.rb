@@ -296,7 +296,7 @@ class Place < ActiveRecord::Base
     options[:image_url] ||= :slider_url
     res = {}
     res[:id] = place.id
-    res[:slug] = place.slug || place.id
+    res[:slug] = place.slug
     res[:name] = place["name_#{I18n.locale}"].slice(0, 22)
     res[:title] = place["name_#{I18n.locale}"]
     res[:image_path] = place.place_image.try(options[:image_url])
@@ -315,8 +315,6 @@ class Place < ActiveRecord::Base
     res[:marks] = place["marks"]
     res[:lat_lng] = place["lat_lng"]
     offers = self.today_discount(place["discounts"], options)
-    # triing to simplify js
-    #res[:special_offers] = offers[1]
     unless offers[1].is_a? NilClass
       res[:special_offers] = offers[1].map {|obj|
           {:title => obj["title_#{I18n.locale}"],
@@ -326,7 +324,7 @@ class Place < ActiveRecord::Base
       }
     end
     res[:discount] = offers[0].try{|offer| offer.discount.try(:to_i) }
-    res[:place_url] = "/#{place["slug"]}"
+    res[:place_url] = "/#{I18n.locale}/#{place.slug}-#{place['city_en'].downcase.gsub(' ','_')}"
     res[:star_rating] = self.get_star_rating(place)
     res[:timing] = [
         {:time => (time + 30.minutes).strftime("%H:%M")},
@@ -381,6 +379,19 @@ class Place < ActiveRecord::Base
     end.total
   end
 
+
+  def self.deparam(url)
+    replace_url = url
+    City.all.map{|obj| obj.slug}.map{|i| [i].zip("#{i} oblast")}.flatten.each do |slug|
+      puts slug
+      replace_url = url.sub(/-#{slug}$/,'')
+      if replace_url != url
+        break
+      end
+    end
+    replace_url
+  end
+
   private
 
   def self.get_star_rating place
@@ -416,6 +427,13 @@ class Place < ActiveRecord::Base
     discounts = discounts.group_by{|arr| arr["is_discount"]}
     [discounts[true].try(:first), discounts[false]]
   end
+
+
+  def to_param
+    "#{slug} - #{location.try(:city_en).downcase.gsub(' ','_')}"
+  end
+
+
 
 end
 # == Schema Information

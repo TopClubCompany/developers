@@ -32,7 +32,7 @@ class PlacesController < ApplicationController
   private
 
   def find_place
-    @place = Place.find params[:id]
+    @place = Place.find Place.deparam(params[:id])
   end
 
 
