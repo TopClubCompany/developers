@@ -267,6 +267,17 @@ ru:
       modified_by: "Редактировал(а)"
       title: "История"
       type: "Тип"
+    geo_type:
+      kind:
+        close: "Close"
+        walk: "Walk"
+        drive: "Drive"
+        far: "Far"
+      distance:
+        close: " > 500 m."
+        walk: " > 1 km."
+        drive: " > 5 km."
+        far: " Far < 10 km."
   admin_js: 
     add_link: "Создать?"
     button_description: "Описание"
