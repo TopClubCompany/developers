@@ -25,3 +25,11 @@
     .clear
     a.more data-type="kitchen" href="#"
       | more >
+
+    h4= I18n.t('search.location')
+    - PlaceGeoType.all.each do |geo|
+      label.checkbox
+        input type="checkbox"  data-type="distance" value=geo.id
+          = geo.title
+          small= geo.distance_label
+    .clear

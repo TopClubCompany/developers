@@ -98,7 +98,7 @@ class Place < ActiveRecord::Base
     filters = []
 
     if options[:kitchen].present?
-      filters << {query: {terms: {kitchen_ids: options[:kitchen].split(',')} }}#{query: "kitchen_ids:#{options[:kitchen].join(' OR ')}"}}}
+      filters << {query: {terms: {kitchen_ids: options[:kitchen].split(',')} }}
     end
 
     if options[:category].present?
@@ -110,6 +110,11 @@ class Place < ActiveRecord::Base
     end
 
     filters += self.time_filter(options)
+
+    if options[:distance].present? && options[:current_point].present?
+      distance = options[:distance].split(',').map { |dist| PlaceGeoType.find(dist.to_i).distance }.max
+      filters << { geo_distance: { distance: "#{distance}km", lat_lng: options[:current_point] } }
+    end
 
     if filters.empty? && options.empty?
       self.best_places(15, options)
@@ -160,7 +165,6 @@ class Place < ActiveRecord::Base
           flt options[:city].lucene_escape, :fields => I18n.available_locales.map { |l| "city_#{l}" }, :min_similarity => 0.5
         end
       end
-      puts to_curl
     end
   end
 
