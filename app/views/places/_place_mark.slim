@@ -8,10 +8,10 @@
           /- if mark.title == 'noise level'
           .set_rating
             - 5.times do |i|
-              = link_to '','', class: 'rate', data: { value: "#{20 * (i + 1)}.0%", mark: i + 1 }
-              .overlay
-              .bar
-              .bg
+              = link_to '','', class: 'rate', data: {mark: i + 1 }
+            .overlay
+            .bar
+            .bg
           /- else
           /  .set_noise
           /    a#noise_1.set
@@ -24,7 +24,9 @@
           /    | 4
         .stars
           .stars_overlay
-          .stars_bar style="left: 40px;"
+
+          .stars_bar style="left: 20%;"
+          /.stars_bar style="left: #{mark.value * 20}%;"
           .stars_bg
         .p
           | 1

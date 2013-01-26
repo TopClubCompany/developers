@@ -171,3 +171,13 @@
 #place #review_form textarea.not_empty {
   min-height: 100px;
 }
+#place #review_form .criteria .rating:hover {
+  .set_rating {
+    display: block;
+    position: absolute;
+    .bar {
+      left: 0;
+      background-color: rgba(121, 173, 83, 0.5);
+    }
+  }
+}
