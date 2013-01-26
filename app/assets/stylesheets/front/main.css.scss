@@ -1234,8 +1234,15 @@ h4 .discount_label {
   display: none;
 }
 
-#place #review_form .criteria .rating:hover .set_rating {
-  display: block;
+#place #review_form .criteria .rating:hover {
+  .set_rating {
+    display: block;
+    position: absolute;
+    .bar {
+      left: 0;
+      background-color: rgba(121, 173, 83, 0.5);
+    }
+  }
 }
 
 #place #review_form .criteria .rating .set_rating a {

@@ -1,5 +1,5 @@
 <div class="place" id="list_place_{{id}}" data-id="{{id}}">
-  <a href="{{place_url}}">
+  <a class="place_img_sm" href="{{place_url}}">
     <img height="100" src="{{image_path}}" width="140">
   </a>
   <h4>
@@ -20,7 +20,14 @@
   </ul>
   <div class="timing">
     {{#timing}}
-      <a href="{{url}}">{{time}}</a>
+      {{#time}}
+        {{#available}}
+            <a href="#">{{time}}</a>
+        {{/available}}
+        {{^available}}
+            <a href="#" class="na">{{time}}</a>
+        {{/available}}
+      {{/time}}
     {{/timing}}
   </div>
   <div class="special_offers">
@@ -31,7 +38,21 @@
       {{/special_offers}}
     </h5>
   </div>
+  {{#is_favourite}}
+    <div id="favorites_small_{{id}}" style="display: block;">
+        <div class="add_to_favorites i_like_this_place">
+            I like this place
+        </div>
+    </div>
+  {{/is_favourite}}
+  {{^is_favourite}}
+    <div id="favorites_small_{{id}}">
+        <div class="add_to_favorites">
+            I like this place
+        </div>
+    </div>
+  {{/is_favourite}}
+
   <div class="clear"></div>
 </div>
 
-           
