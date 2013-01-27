@@ -2,7 +2,7 @@ class Pagination
   constructor: (total_elements, per_page = 4, @max_visible = 5, @elSelector = '#list_grid_view .paginate') ->
     @$el = $(@elSelector)
     @total_pages = Math.ceil (total_elements / per_page ) || 0
-    console.log total_elements, per_page, @total_pages
+#    console.log total_elements, per_page, @total_pages
     if @total_pages > 1
       @bindListener()
       @goTo 1
@@ -48,7 +48,6 @@ class Pagination
 class PlacesCollection
   constructor: ( blocksThatExist = [], page = 1 ) ->
     number = parseInt($('#total').text())
-    console.log number
     new Pagination(number, blocksThatExist.length).goTo(page)
     @places = []
     @ids = []
@@ -78,7 +77,6 @@ class PlacesCollection
 
   useNewData: (json, page) ->
     $('#total').text json.total
-    console.log $('#total').text()
     new Pagination(json.total).goTo(page)
     placesData = json.result
     newIds = _.pluck(placesData, 'id')
@@ -206,6 +204,36 @@ class FilterInput
     @bindChangeListener()
     @give_more() if $(".more").length > 0
     @dirtyHack()
+    @bindFilterChangeListener()
+
+  bindFilterChangeListener: () ->
+    needToDisplay = _.reduce($("#refine input[type=checkbox]:checked"), ((memo,checkbox) ->
+      type = $(checkbox).data('type')
+      memo.push type unless _.contains memo, type
+      memo
+    ), [])
+
+    for filter in needToDisplay
+      @displayFilterType filter
+
+    $('#refine input[type=checkbox]').on 'change', (e) =>
+      type = $(e.target).data('type')
+      if $(e.target).is(":checked")
+        @displayFilterType(type) if $("##{type}_filter").length is 0
+      else
+        if $("#refine input[type=checkbox][data-type=#{type}]:checked").length is 0
+          $("##{type}_filter")?.fadeOut("fast", () -> $(this).remove())
+
+  displayFilterType: (filter_type) ->
+    if $("##{filter_type}_filter").length is 0
+      filterBlock = "<span style='display: none;' id='#{filter_type}_filter'>#{filter_type}<b>×</b></span>"
+      $('#filters').append(filterBlock)
+      $("##{filter_type}_filter").fadeIn("fast").find('b').on 'click', (e) ->
+        type = $(e.target).parent().fadeOut("fast", () -> $(this).remove()).attr('id').slice(0, -7)
+        $("#refine input[type=checkbox][data-type=#{type}]:checked").click()
+
+
+
 
 
   dirtyHack: () ->
@@ -258,8 +286,6 @@ class FilterInput
 
   getPageNum: () ->
     page = window.location.search.match( /page=\d*/)?[0].slice(5) || 1
-    # if $(".paginate .current").attr('href') isnt "##{page}" or $(".paginate .current").length is 0
-      # $(".paginate a[href=##{page}]").addClass('current')
 
   get: (entity = 'page', entityTo) =>
     obj = {}
@@ -313,7 +339,7 @@ class FilterInput
 
   bindChangeListener: () =>
     $('#refine input[type=checkbox]').off 'change'
-    $('#refine input[type=checkbox]').on 'change', =>
+    $('#refine input[type=checkbox]').on 'change', (e) =>
       result = {}
       $('#refine input').each( ->
         type = $(this).data('type')
@@ -345,21 +371,21 @@ class FilterInput
     self = @
     $('input[name="reserve_date"]').data('Zebra_DatePicker').update(
       onSelect: (dateText) ->
-        headlineText = $('#mapcontainer > h3:first-child').html().replace(/(\d+\/?){3}(?=,)/, dateText)
-        $('#mapcontainer > h3:first-child').html headlineText
+        headlineText = $('#map_details > h3:first-child').html().replace(/(\d+\/?){3}(?=,)/, dateText)
+        $('#map_details > h3:first-child').html headlineText
         window.filter.get 'reserve_date', dateText
     )
 
     $("select[name=reserve_time]").on 'change', ->
       time = $(this).val()
-      headlineText = $('#mapcontainer > h3:first-child').html().replace(/\d+\:\d+(?=\sfor\s)/, time)
-      $('#mapcontainer > h3:first-child').html headlineText
+      headlineText = $('#map_details > h3:first-child').html().replace(/\d+\:\d+(?=\sfor\s)/, time)
+      $('#map_details > h3:first-child').html headlineText
       self.places.updateTime time
 
     $("select[name=number_of_people]").on 'change', ->
       number = $(this).val()
-      headlineText = $('#mapcontainer > h3:first-child').html().replace(/\d+(?=\speople)/, number)
-      $('#mapcontainer > h3:first-child').html headlineText
+      headlineText = $('#map_details > h3:first-child').html().replace(/\d+(?=\speople)/, number)
+      $('#map_details > h3:first-child').html headlineText
       window.filter.get 'number_of_people', number
 
 
