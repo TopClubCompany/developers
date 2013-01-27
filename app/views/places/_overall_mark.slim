@@ -1,0 +1,11 @@
+.overall_mark style="float: right;"
+  - marks.each do |mark_type|
+    .span3
+      .criteria
+        .rating.rating_big
+          label= mark_type.title.capitalize
+          .stars
+            .stars_overlay
+            .stars_bar style="left: 20px;"
+            .stars_bg
+          .p 1

@@ -127,6 +127,7 @@ end
 
 
 def insert_mark_types
+  MarkType.full_truncate
   %w(pricing service food ambiance noise\ level).each do |type|
     MarkType.create(name: type, description: Faker::Lorem.sentence(10))
   end
@@ -181,6 +182,11 @@ def insert_default_menus place
   place.save!
 end
 
+def insert_default_vote_types
+  VoteType.full_truncate
+  %w|helpful unhelpful|.each { |title| VoteType.create(title: title, description: Faker::Lorem.sentence)}
+end
+
 User.full_truncate
 insert_default_user('admin@adm.com', :admin)
 insert_default_user('user@usr.com')
@@ -192,3 +198,4 @@ insert_default_place_pictures
 insert_group_feature
 insert_city
 insert_default_reservations
+insert_default_vote_types

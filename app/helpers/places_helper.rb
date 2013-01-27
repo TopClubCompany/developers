@@ -32,4 +32,6 @@ module PlacesHelper
   def avg_bill_title avg_id
     BillType.find(avg_id).title rescue ''
   end
+
+
 end

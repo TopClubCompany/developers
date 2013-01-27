@@ -1,24 +1,46 @@
 $ ->
-  console.log 'test'
   #handle reviews marks
-  $(".set_rating a.rate").click (e) ->
-    e.preventDefault();
-    main_element = $(this).closest(".span3")
-    $(main_element.find(".stars_bar")).css("left", $(this).data('value'))
-    $(main_element.find(".p")).text($(this).data('mark'))
-    set_overall_mark()
+  $(".set_rating a.rate").on
+    'mouseenter': (e) ->
+      [main_element, text_mark, stars_bar] = initStarElements.call @
+      unless main_element.data('old_mark')
+        main_element.data('old_mark', text_mark.text())
+      $(".set_rating .bar").css("width", "#{$(this).data('mark') * 20}%")
+      text_mark.text($(this).data('mark')).css('color', 'gray')
+
+    'click': (e) ->
+      e.preventDefault()
+      [main_element, text_mark, stars_bar] = initStarElements.call @
+      main_element.data('old_mark', $(this).data('mark'))
+      stars_bar.css("left", "#{main_element.data('old_mark') * 20}%")
+      $(main_element.find(".review_mark_value")).val($(this).data('mark'))
+      text_mark.removeAttr('style')
+      set_overall_mark.call @
+
+  $(".set_rating").on
+    'mouseleave': (e) ->
+      [main_element, text_mark, stars_bar] = initStarElements.call @
+      stars_bar.css("left", "#{main_element.data('old_mark') * 20}%")
+      text_mark.text(main_element.data('old_mark')).removeAttr('style')
+
+  initStarElements = ->
+    main_element = $(this).closest(".criteria")
+    text_mark = main_element.find(".p")
+    stars_bar = main_element.find(".stars_bar")
+    [main_element, text_mark, stars_bar]
 
   #computing overall mark
   set_overall_mark = () ->
-    mark_css_values = 0
-    mark_values     = 0
-    marks           = $(".marks .stars_bar")
+    sum = 0
+    $('.marks .criteria').each ->
+      console.log $(this).data('old_mark')
+      value = parseInt($(this).data('old_mark')) || 1
+      sum += value
+    quantity = $('.marks .criteria').length
+    overall_mark_value = sum / quantity
+    overall_mark_css_value = "#{overall_mark_value * 20}%"
     overall_mark_el = $(".overall_mark .stars_bar")
-    for mark_value in marks
-      mark_css_values += parseInt($(mark_value).css('left'))
-      mark_values     += parseInt($(mark_value).closest('.span3').find(".p").text())
-    overall_mark_css_value = mark_css_values / marks.size()
-    overall_mark_value     = mark_values / marks.size()
+    console.log overall_mark_el[0]
     overall_mark_el.css('left', overall_mark_css_value)
     overall_mark_el.closest('.span3').find(".p").text(overall_mark_value)
 
@@ -32,6 +54,11 @@ $ ->
 
   $('.add_to_favorites').click ->
     $(this).toggleClass 'i_like_this_place'
+    if $(this).hasClass('i_like_this_place')
+      $(this).parent().css('display', 'block')
+    else
+      $(this).parent().removeAttr('style')
+    $.post("/set_unset_favorite_place/#{$(this).data('id')}")
 
   movingItself = setInterval (->
     if $("ul.carousel_bullets li.current").next().length > 0
@@ -77,11 +104,11 @@ $ ->
       showHash.call @, hash
 
   if $('#promo_tabs').length > 0
-	  $('#promo_tabs a').click (e)->
+    $('#promo_tabs a').click (e)->
       e.preventDefault();
       showHash.call @, $(this).attr('href'), yes
 
-	showHash = (hashName, stripNeed = no) ->
+  showHash = (hashName, stripNeed = no) ->
     hashName = hashName.slice(1) if stripNeed
     history.pushState {}, "", "##{hashName}"
     $("a[href=##{hashName}]").parent().addClass('active').siblings().removeClass('active')

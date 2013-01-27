@@ -1,11 +1,14 @@
 class Review < ActiveRecord::Base
-  attr_accessible :content, :reviewable_id, :reviewable_type, :title, :user_id
+  attr_accessible :content, :reviewable_id, :reviewable_type, :title, :user_id, :marks_attributes
+
+  validates :content, :user_id, presence: true
 
   belongs_to :user
   belongs_to :place
   belongs_to :reviweable, polymorphic: true
 
-  has_many :marks
+  has_many :marks, dependent: :destroy
+  has_many :votes, dependent: :destroy
 
   self.per_page = 6
 
@@ -20,6 +23,7 @@ class Review < ActiveRecord::Base
     }
   end
 
+  accepts_nested_attributes_for :marks, allow_destroy: true, reject_if: :all_blank
 end
 # == Schema Information
 #

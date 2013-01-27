@@ -1,6 +1,6 @@
 #coding: utf-8
 class PlacesController < ApplicationController
-  before_filter :find_place, only: [:show, :more]
+  before_filter :find_place, only: [:show, :more, :set_unset_favorite]
 
   def show
     @date = params[:reserve_date] || Date.today.strftime('%d/%m/%Y')
@@ -9,6 +9,10 @@ class PlacesController < ApplicationController
     @time = {:h => time.hour.to_s, :m => minutes}
     @location = @place.lat_lng
     @special_offers =  @place.day_discounts.special
+    if signed_in?
+      @review = Review.new(reviewable_id: @place.id, reviewable_type: Place.name)
+      @review.marks.build
+    end
   end
 
   def index
@@ -22,6 +26,20 @@ class PlacesController < ApplicationController
     redirect_to  :back
   end
 
+  def set_unset_favorite
+    if signed_in? && @place
+      already_favorite = current_user.user_favorite_places.pluck(:place_id).include? @place.id
+      if already_favorite
+        current_user.user_favorite_places.find_by_place_id(@place.id).destroy
+      else
+        current_user.favorite_places << @place
+        current_user.save
+      end
+    end
+    render nothing: true
+  end
+
+
   def more
     reviews = @place.reviews.paginate(:page => params[:page])
     respond_to do |format|
@@ -32,7 +50,7 @@ class PlacesController < ApplicationController
   private
 
   def find_place
-    @place = Place.find params[:id]
+    @place = Place.find Place.deparam(params[:id])
   end
 
 

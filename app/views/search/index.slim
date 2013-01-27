@@ -12,12 +12,7 @@
             nobr= I18n.t('search.map_view')
   .row
     = render 'filters'
-    - possibilities = ["00", "15", "30", "45"]
-    - base_time = @time[:h]
-    - minutes = @time[:m]              
-    - index = possibilities.index(minutes)
     #listing.span10
-      
       #mapcontainer
         h3 Results for #{(params[:reserve_date] || Time.now.strftime("%d/%m/%Y"))}, #{@time[:h]}:#{@time[:m]} for #{params[:number_of_people] || 2} people
         #map_places style="background: rgba(128,128,128,0.5);" *{'data-lat'=>"50.451118", "data-lng" => "30.522301"}
@@ -25,18 +20,18 @@
           #map_details_wrapper
             - @result.each do |place|
               - location = place.lat_lng.split(',')
-              == render 'shared/map_place', :mustache => Place.for_mustache(place, params).merge(lat: location[0]).merge(lng: location[1])  
+              = render 'shared/map_place', :mustache => Place.for_mustache(place, params).merge(lat: location[0]).merge(lng: location[1])
         #list_grid_view.none
           - @result.each do |place|
-            == render 'shared/list_place', :mustache => Place.for_mustache(place, params)
-  
+            = render 'shared/list_place', :mustache => Place.for_mustache(place, params)
+          #total style="display:none" = @result.total.to_i
           .paginate
-            .total style="display:none" = @result.total.to_i
+
             - current = params[:page] || 1
             - per_page = 4
             - number_of_pages = @result.total.to_i == per_page ?  1 : @result.total.to_i / per_page + 1
             - if number_of_pages.to_i > 1
-              - for i in 1..number_of_pages
+              - (1..number_of_pages).each do |i|
                 -if current == i
                   a.current href="##{i}" #{i}
                 - else

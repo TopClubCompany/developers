@@ -1,0 +1,2 @@
+(ps aux | grep -v grep | grep -q "redis") || (cd /var/www/redis/redis/src/ && ./redis-server /usr/local/etc/redis.conf)
+(ps aux | grep -v grep | grep -q "memcached") || (memcached -m 64 -p 11211 -u root -l 127.0.0.1 -d)
