@@ -1,8 +1,8 @@
 class Pagination
   constructor: (total_elements, per_page = 4, @max_visible = 5, @elSelector = '#list_grid_view .paginate') ->
     @$el = $(@elSelector)
-    @total_pages = Math.ceil (total_elements / per_page)
-    console.log total_elements, per_page, total_elements / per_page
+    @total_pages = Math.ceil (total_elements / per_page ) || 0
+    console.log total_elements, per_page, @total_pages
     if @total_pages > 1
       @bindListener()
       @goTo 1

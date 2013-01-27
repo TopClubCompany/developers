@@ -395,7 +395,7 @@ class Place < ActiveRecord::Base
   end
 
   def to_param
-    "#{slug} - #{location.try(:city_en).downcase.gsub(' ','_')}"
+    "#{slug}-#{location.try(:city_en).downcase.gsub(' ','_')}"
   end
 
   private

@@ -7,9 +7,11 @@
             <a title="{{title}}" href="{{place_url}}">
                 {{name}}
             </a>
-            <span class="discount_label">
-                {{discount}}%
-            </span>
+            {{#discount}}
+                <span class="discount_label">
+                   {{discount}}%
+                </span>
+            {{/discount}}
         </h4>
         <div class="rating rating_big">
             <div class="stars">
