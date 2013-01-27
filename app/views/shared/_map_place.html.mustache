@@ -12,8 +12,15 @@
       <small>{{review_count}}</small>
 </div>
 <div class="timing">
-  {{#timing}}
-    <a href="#">{{time}}</a>
-  {{/timing}}
+    {{#timing}}
+      {{#time}}
+        {{#available}}
+            <a href="#">{{time}}</a>
+        {{/available}}
+        {{^available}}
+            <a href="#" class="na">{{time}}</a>
+        {{/available}}
+      {{/time}}
+    {{/timing}}
 </div>
 </div>
