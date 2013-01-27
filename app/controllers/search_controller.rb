@@ -49,19 +49,4 @@ class SearchController < ApplicationController
     gon.category = [@category.id]
   end
 
-  #point = MultiGeocoder.geocode options[:where]
-  #if point.success
-  #  distance = options[:distance].present? ? options[:distance].values.map(&:to_f).max : 10
-  #  @filters << { geo_distance: { distance: "#{distance}km", lat_lng: @current_point } }
-  #else
-  #  @filters << { geo_distance: { distance: '1km', lat_lng: @current_point } }
-  #end
-
-  #if options[:what].present? and options[:what].size > 0
-  #  what = options[:what].split(' ').join(' OR ')
-  #  @query = { query_string: { fields: ['address', 'description', 'name^5'], query: what, use_dis_max: true } }
-  #else
-  #  @query = { match_all: {} }
-  #end
-
 end
