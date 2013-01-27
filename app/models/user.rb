@@ -33,6 +33,9 @@ class User < ActiveRecord::Base
   has_many :reservations, :dependent => :destroy
   has_many :votes, :dependent => :destroy
 
+  has_many :user_favorite_places
+  has_many :favorite_places, through: :user_favorite_places, source: :place, class_name: 'Place'
+
   alias_attribute :name, :title
 
   before_validation :generate_login
@@ -181,6 +184,9 @@ class User < ActiveRecord::Base
     [id, name.parameterize].join('-')
   end
 
+  def favorite_place? place
+    user_favorite_places.pluck(:place_id).include? place.id
+  end
 
   protected
 
@@ -196,6 +202,7 @@ class User < ActiveRecord::Base
       end
     end
   end
+
 
 
 end

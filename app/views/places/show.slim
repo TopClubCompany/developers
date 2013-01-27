@@ -72,11 +72,13 @@
             ' #{@place.reviews.count} reviews ·
             a#write_review href="#review_form"
               |Write a review
-        #favorites
-          .add_to_favorites
-            | Add to
-            br
-            | favorites
+        - if signed_in?
+          a.set_unset_favorite href=set_unset_favorite_place_path(@place) data-remote='true' data-method='post'
+            #favorites
+              .add_to_favorites class="#{'i_like_this_place' if current_user.favorite_place?(@place)}"
+                | Add to
+                br
+                | favorites
         .share_btns
           a#fb href="#"
           a#vk href="#"
@@ -108,32 +110,35 @@
           = link_to t('words.expand'), '#', class: 'desc_expand', data: { expand: t('words.expand'), rollup: t('words.roll_up') }
         - if signed_in?
           #review_form
-            .line2
-            h5 #{current_user.try(:first_name)}, submit a review:
-            .marks
-              - MarkType.all.each_slice(2) do |marks|
-                .row
-                  = render partial: 'place_mark', locals: { marks: marks, required: true }
-            .overall_mark style="float: right;"
-              = render partial: 'place_mark', locals: { marks: [MarkType.new(name: 'overal')], required: false }
-            /  .span3
-            /    .criteria
-            /      .noise.noise_big
-            /        label Noise level
-            /        .set_noise
-            /          a#noise_1.set
-            /          a#noise_2.set
-            /          a#noise_3.set
-            /          a#noise_4.set
-            /          a#noise_5.set
-            /        .noise_level.noise_3
-            /        .p
-            /          | 4
-            .clear
-            a href="#"
-              img.user_pic height="50" src=get_user_avatar width="50"
-            textarea#review_text name="review_text" placeholder="Have you been here? Tell us your story about dinner at this place!"
-            input name="review_submit" type="submit" value="Submit review"
+            /= raise @review.inspect
+            = simple_form_for @review, url: review_create_path, method: 'post', wrapper: :front_reg_form, nested: true do |f|
+              .line2
+              h5 #{current_user.try(:first_name)}, submit a review:
+              .marks
+                - MarkType.all.each_slice(2) do |marks|
+                  .row
+                    = render partial: 'place_mark', locals: { review_form: f, marks: marks }
+              = render partial: 'overall_mark', locals: { marks: [MarkType.new(name: 'overall')] }
+              /  .span3
+              /    .criteria
+              /      .noise.noise_big
+              /        label Noise level
+              /        .set_noise
+              /          a#noise_1.set
+              /          a#noise_2.set
+              /          a#noise_3.set
+              /          a#noise_4.set
+              /          a#noise_5.set
+              /        .noise_level.noise_3
+              /        .p
+              /          | 4
+              .clear
+              a href="#"
+                img.user_pic height="50" src=get_user_avatar width="50"
+              = f.input :reviewable_id, as: 'hidden'
+              = f.input :reviewable_type, as: 'hidden'
+              = f.input :content, placeholder: t('long_strings.review_placeholder'), label: false, input_html: {rows: '0',cols: '0', id: 'review_text'}
+              = f.submit "Submit review"
               .clear
               .line2
         #reviews
@@ -155,34 +160,38 @@
                     ' Dined yesterday ·
                     a href="#"
                       | #
+                    br
                   span itemprop="description"
                     = review.content
-                  .review_vote
-                    a.helpful href=set_review_usefulness_path(review.id, 'helpful') data-method="post"
-                      | helpful
-                      strong= review.votes.helpful.count
-                    a.unhelpful href=set_review_usefulness_path(review.id, 'unhelpful') data-method="post"
-                      | unhelpful
-                      strong= review.votes.unhelpful.count
+                  - unless review.user_id == current_user.id
+                    .review_vote
+                      a.helpful href=set_review_usefulness_path(review.id, 'helpful') data-method="post"
+                        | helpful
+                        strong= review.votes.helpful.count
+                      a.unhelpful href=set_review_usefulness_path(review.id, 'unhelpful') data-method="post"
+                        | unhelpful
+                        strong= review.votes.unhelpful.count
                   .ratings
                     - temp_overall_mark = Hashie::Mash.new(value: review.avg_mark, id: 0, mark_type: { title: t('words.overall') })
                     - marks = review.marks.to_a.push(temp_overall_mark)
                     - marks.each_with_index do |mark, i|
-                      /- if i.zero?
-                      /  .noise
-                      /    label Noise
-                      /    .noise_level.noise_5
-                      div
-                        label style="font-weight: #{'bold' if mark.id.zero?}"
-                          = mark.mark_type.title.try(:capitalize)
-                        .rating itemprop="reviewRating"
-                          .stars
-                            .stars_overlay
-                            .stars_bar style="left: #{mark.value * 20}%"
-                            .stars_bg
-                          meta content=mark.value
+                      - if mark.mark_type.title == 'noise level'
+                        .noise
+                          label= mark.mark_type.title.try(:capitalize)
+                          .noise_level class="noise_#{mark.value}"
+                          br
+                      - else
+                        div
+                          label style="font-weight: #{'bold' if mark.id.zero?}"
+                            = mark.mark_type.title.try(:capitalize)
+                          .rating itemprop="reviewRating"
+                            .stars
+                              .stars_overlay
+                              .stars_bar style="left: #{mark.value * 20}%"
+                              .stars_bg
+                            meta content=mark.value
 
-          a.load_more data-type='reviews' data-displayed=2 data-template-id="#review_template" data-base-url="/places/#{@place.id}/more?" href="#"= t(".more")
+        a.load_more data-type='reviews' data-displayed=2 data-template-id="#review_template" data-base-url="/places/#{@place.id}/more?" href="#"= t(".more")
 
     #sidebar.specials.span4
       h3 Special offers from #{@place.title}

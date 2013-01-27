@@ -1,11 +1,11 @@
 $ ->
-  console.log 'test'
   #handle reviews marks
   $(".set_rating a.rate").click (e) ->
     e.preventDefault();
     main_element = $(this).closest(".span3")
     $(main_element.find(".stars_bar")).css("left", $(this).data('value'))
     $(main_element.find(".p")).text($(this).data('mark'))
+    $(main_element.find(".review_mark_value")).val($(this).data('mark'))
     set_overall_mark()
 
   #computing overall mark
