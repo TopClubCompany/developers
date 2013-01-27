@@ -1,5 +1,7 @@
 class Review < ActiveRecord::Base
-  attr_accessible :content, :reviewable_id, :reviewable_type, :title, :user_id
+  attr_accessible :content, :reviewable_id, :reviewable_type, :title, :user_id, :marks_attributes
+
+  validates :content, :user_id, presence: true
 
   belongs_to :user
   belongs_to :place
@@ -21,6 +23,7 @@ class Review < ActiveRecord::Base
     }
   end
 
+  accepts_nested_attributes_for :marks, allow_destroy: true, reject_if: :all_blank
 end
 # == Schema Information
 #

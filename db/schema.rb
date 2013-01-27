@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130125145458) do
+ActiveRecord::Schema.define(:version => 20130127062207) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -577,6 +577,16 @@ ActiveRecord::Schema.define(:version => 20130125145458) do
   add_index "structures", ["lft", "rgt"], :name => "index_structures_on_lft_and_rgt"
   add_index "structures", ["parent_id"], :name => "index_structures_on_parent_id"
   add_index "structures", ["user_id"], :name => "index_structures_on_user_id"
+
+  create_table "user_favorite_places", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "place_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_favorite_places", ["place_id"], :name => "index_user_favorite_places_on_place_id"
+  add_index "user_favorite_places", ["user_id"], :name => "index_user_favorite_places_on_user_id"
 
   create_table "user_roles", :force => true do |t|
     t.integer  "user_id"

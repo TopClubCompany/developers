@@ -254,6 +254,8 @@ en:
     print_this_page: Print this page
     edit_your_reservation: Edit your reservation
     reserve_at: Reserve at
+  long_strings:
+    review_placeholder: Have you been here? Tell us your story about dinner at this place!
   words:
     cancel: cancel
     invite: invite

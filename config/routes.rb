@@ -19,6 +19,9 @@ Topclub::Application.routes.draw do
   put '/update_reservation/:reservation_id' => 'users/profile#update_reservation', as: 'update_reservation'
 
   post '/reviews/:review_id/:vote_type' => 'reviews#set_usefulness', as: 'set_review_usefulness'
+  post '/reviews' => 'reviews#create', as: 'review_create'
+  post '/set_unset_favorite_place/:id' => 'places#set_unset_favorite', as: 'set_unset_favorite_place'
+  #resources :reviews
 
   #refactor this
 
