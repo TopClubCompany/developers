@@ -163,14 +163,12 @@
                     br
                   span itemprop="description"
                     = review.content
-                  - unless review.user_id == current_user.id
-                    .review_vote
-                      a.helpful href=set_review_usefulness_path(review.id, 'helpful') data-method="post"
-                        | helpful
-                        strong= review.votes.helpful.count
-                      a.unhelpful href=set_review_usefulness_path(review.id, 'unhelpful') data-method="post"
-                        | unhelpful
-                        strong= review.votes.unhelpful.count
+                  - can_vote = signed_in? && (review.user_id != current_user.id)
+                  .review_vote
+                    - %w|helpful unhelpful|.each do |usefulness|
+                      a href="#{can_vote ? set_review_usefulness_path(review.id, usefulness) : ''}" class=usefulness data-method="post"
+                        = usefulness
+                        strong= review.votes.send(usefulness.to_sym).count
                   .ratings
                     - temp_overall_mark = Hashie::Mash.new(value: review.avg_mark, id: 0, mark_type: { title: t('words.overall') })
                     - marks = review.marks.to_a.push(temp_overall_mark)
