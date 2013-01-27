@@ -58,6 +58,7 @@ $ ->
       $(this).parent().css('display', 'block')
     else
       $(this).parent().removeAttr('style')
+    $.post("/set_unset_favorite_place/#{$(this).data('id')}")
 
   movingItself = setInterval (->
     if $("ul.carousel_bullets li.current").next().length > 0

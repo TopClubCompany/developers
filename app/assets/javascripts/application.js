@@ -33,7 +33,7 @@
 //= require fileupload/fileuploader-input.js
 //= require manage-fileuploader.js
 //= require jquery.tmpl.min
-
+//= require jquery.cookie
 //=require_tree ./frontend
 //=require jquery.autocomplete
 //=require mustache
