@@ -79,8 +79,8 @@ ru:
         contacts: "Контакты"
         form: "Основное"
         info: "Реквизиты"
-    day_type:
-      full:
+    day_type: 
+      full: 
         friday: "Пятница"
         monday: "Понедельник"
         saturday: "Суббота"
@@ -88,15 +88,14 @@ ru:
         thursday: "Четверг"
         tuesday: "Вторник"
         wednesday: "Среда"
-      short:
-        friday: Пт
-        monday: Пн
-        saturday: Сб
-        sunday: Вс
-        thursday: Чт
-        tuesday: Вт
-        wednesday: Ср
-
+      short: 
+        friday: "Пт"
+        monday: "Пн"
+        saturday: "Сб"
+        sunday: "Вс"
+        thursday: "Чт"
+        tuesday: "Вт"
+        wednesday: "Ср"
     delete: "Удалить"
     delete_confirmation: "Вы уверены, что хотите удалить это?"
     details: "Подробнее"
@@ -123,6 +122,17 @@ ru:
       female: "Женский"
       male: "Мужской"
     geo_autocomplete: "Введите адрес"
+    geo_type: 
+      distance: 
+        close: " > 500 m."
+        drive: " > 5 km."
+        far: " Far < 10 km."
+        walk: " > 1 km."
+      kind: 
+        close: Close
+        drive: Drive
+        far: Far
+        walk: Walk
     group: 
       kind: 
         admin: "Административная"
@@ -267,17 +277,6 @@ ru:
       modified_by: "Редактировал(а)"
       title: "История"
       type: "Тип"
-    geo_type:
-      kind:
-        close: "Close"
-        walk: "Walk"
-        drive: "Drive"
-        far: "Far"
-      distance:
-        close: " > 500 m."
-        walk: " > 1 km."
-        drive: " > 5 km."
-        far: " Far < 10 km."
   admin_js: 
     add_link: "Создать?"
     button_description: "Описание"
