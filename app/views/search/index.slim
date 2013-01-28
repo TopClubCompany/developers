@@ -24,8 +24,17 @@
         #list_grid_view.none
           #filters.filters
             | Filters:
-          a#sortby.sortby.dropdown-toggle data-target="#" data-toggle="dropdown" role="button"
-            | Order by rating
+          .dropdown
+
+            a#sortby.sortby.dropdown-toggle data-toggle="dropdown" href="#" role="button"
+              | Sort by...
+            ul#sortby-list.sortby.dropdown-menu aria-labelledby="sortby" role="menu"
+              - ['rating', 'discount', 'newest', 'popularity'].each do |name|
+                li
+                  a href="#{name}"
+                    ="Sort by " + name
+
+
           .clear
           #thead
             span.th1 Restaurant

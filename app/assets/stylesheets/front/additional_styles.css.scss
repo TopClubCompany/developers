@@ -221,3 +221,11 @@
 .place:hover div[id^='favorites_small'], place div[id^='favorites_small'] .i_like_this_place {
   display: block;
 }
+
+#sortby-list {
+  display: none;
+}
+.dropdown.open #sortby-list {
+  display: block;
+  left: 576px;
+}
