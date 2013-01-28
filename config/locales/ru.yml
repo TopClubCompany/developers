@@ -204,6 +204,8 @@ ru:
     become_a_prtner: Become a partner!
     earn_point: Earn points and get discounts!
     need_clients: Need more clients?
+  forgot_password: 
+    reset_pass: "Сбросить пароль"
   front_js: 
     comments: 
       chat_title: "Переписка"
@@ -242,6 +244,7 @@ ru:
     number_of_people: Number of people
     price: Price
     refine: Refine your results
+    location: "Location"
   simple_form: 
     error_notification: 
       default_message: "При сохранении возникли ошибки"
@@ -274,5 +277,3 @@ ru:
       next: "След &raquo;"
       previous: "&laquo; Пред"
       truncate: ...
-  forgot_password:
-    reset_pass: "Сбросить пароль"
