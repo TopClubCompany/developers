@@ -2,30 +2,44 @@
   = review_form.simple_fields_for :marks do |mark_form|
     .span3
       .criteria
-        .rating.rating_big
-          label.required
-            = mark_type.title.capitalize
-          /- if mark_type.title == 'noise level'
-          .set_rating
-            - 5.times do |i|
-              = link_to '','', class: 'rate', data: {mark: i + 1 }
-            .overlay
-            .bar
-            .bg
-          /- else
-          /  .set_noise
-          /    a#noise_1.set
-          /    a#noise_2.set
-          /    a#noise_3.set
-          /    a#noise_4.set
-          /    a#noise_5.set
-          /  .noise_level.noise_3
-          /  .p
-          /    | 4
-          .stars
-            .stars_overlay
-            .stars_bar style="left: 20px;"
-            .stars_bg
-          .p 1
-          = mark_form.input :value, as: 'hidden', input_html: { value: 1, class: 'review_mark_value' }
-          = mark_form.input :mark_type_id, as: 'hidden', input_html: { value: mark_type.id }
+        = mark_form.input :value, as: 'hidden', input_html: { value: 1, class: 'review_mark_value' }
+        = mark_form.input :mark_type_id, as: 'hidden', input_html: { value: mark_type.id }
+        - if mark_type.title == 'noise level'
+          .noise.noise_big
+            label=mark_type.title.capitalize
+            .set_noise
+              - 5.times do |i|
+                = link_to '','', class: 'set', id: "noise_#{i + 1}"
+            .noise_level.noise_1
+            .p 1
+        - else
+          .rating.rating_big
+            label.required= mark_type.title.capitalize
+            .set_rating
+              - 5.times do |i|
+                = link_to '','', class: 'rate', data: { mark: i + 1 }
+              .overlay
+              .bar
+              .bg
+            .stars
+              .stars_overlay
+              .stars_bar style="left: 20px;"
+              .stars_bg
+            .p 1
+
+    /  .span3
+    /    .criteria
+    /      .noise.noise_big
+    /        label Noise level
+    /        .set_noise
+    /          a#noise_1.set
+    /          a#noise_2.set
+    /          a#noise_3.set
+    /          a#noise_4.set
+    /          a#noise_5.set
+    /        .noise_level.noise_3
+    /        .p
+    /          | 4
+
+
+

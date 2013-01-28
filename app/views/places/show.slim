@@ -28,10 +28,6 @@
             .clear
       .page_content.zz itemscope="" itemtype="http://data-vocabulary.org/Review-aggregate"
         .place_img
-          /- unless @place.all_images.empty?
-            - place_image_gallery = @place.all_images.map { |image| image.url(:content)}
-            - place_image_gallery.drop(1).each do |image_src|
-              a.fancybox rel='gallery' href=image_src
           a.fancybox rel='gallery' href=(@place.place_image.url(:content)if @place.place_image)
             img alt="#{@place.title}" height="180" itemprop="photo" src=(@place.place_image.url(:place_show)if @place.place_image) width="240"
           ul.carousel_bullets
@@ -70,8 +66,9 @@
           small
             span itemprop="count"
             ' #{@place.reviews.count} reviews ·
-            a#write_review href="#review_form"
-              |Write a review
+            - if signed_in?
+              a#write_review href="#review_form"
+                |Write a review
         - if signed_in?
           a.set_unset_favorite href=set_unset_favorite_place_path(@place) data-remote='true' data-method='post'
             #favorites
@@ -98,7 +95,7 @@
               br
           #place_links
             = link_to "More detalis ›", '#share', {:class => "show_popup"}
-            = link_to "View menu ›", '#place_menu', {:class => "show_popup"}
+            = link_to "View menu ›", '#place_menu', {:class => "show_popup menu"}
         .clear
         .place_desc
           h5 A few words from #{@place.title}
@@ -110,7 +107,6 @@
           = link_to t('words.expand'), '#', class: 'desc_expand', data: { expand: t('words.expand'), rollup: t('words.roll_up') }
         - if signed_in?
           #review_form
-            /= raise @review.inspect
             = simple_form_for @review, url: review_create_path, method: 'post', wrapper: :front_reg_form, nested: true do |f|
               .line2
               h5 #{current_user.try(:first_name)}, submit a review:
@@ -119,19 +115,6 @@
                   .row
                     = render partial: 'place_mark', locals: { review_form: f, marks: marks }
               = render partial: 'overall_mark', locals: { marks: [MarkType.new(name: 'overall')] }
-              /  .span3
-              /    .criteria
-              /      .noise.noise_big
-              /        label Noise level
-              /        .set_noise
-              /          a#noise_1.set
-              /          a#noise_2.set
-              /          a#noise_3.set
-              /          a#noise_4.set
-              /          a#noise_5.set
-              /        .noise_level.noise_3
-              /        .p
-              /          | 4
               .clear
               a href="#"
                 img.user_pic height="50" src=get_user_avatar width="50"
@@ -147,7 +130,7 @@
           a#sortby.sortby.dropdown-toggle data-target="#" data-toggle="dropdown" role="button"
             |Sort by
           - reviews.each do |review|
-            .review itemprop="review" itemscope="" itemtype="http://schema.org/Review"
+            .review itemprop="review" itemscope="" itemtype="http://schema.org/Review" style="min-height: 151px;"
               a href="#"
                 img.user_pic height="32" src=get_user_avatar(review.user) width="32"
               .review_content
@@ -156,10 +139,12 @@
                     = user_menu_name review.user
                   '
                 meta content="2012-10-21" itemprop="datePublished"
+                  small.created_time_ago title=review.created_at.getutc.iso8601
+                    /' Dined yesterday ·
+                    = review.created_at
                   small
-                    ' Dined yesterday ·
-                    a href="#"
-                      | #
+                    '  ·
+                    a href="#" #
                     br
                   span itemprop="description"
                     = review.content
@@ -174,7 +159,7 @@
                     - marks = review.marks.to_a.push(temp_overall_mark)
                     - marks.each_with_index do |mark, i|
                       - if mark.mark_type.title == 'noise level'
-                        .noise
+                        .noise style="height: 20px;"
                           label= mark.mark_type.title.try(:capitalize)
                           .noise_level class="noise_#{mark.value}"
                           br
@@ -201,8 +186,8 @@
             - data = { trigger: 'hover', title: offer_title, content: offer.description + offer_time, placement: 'left' }
             = link_to offer.title, '#', class: 'popoverable', data: data
     #map.span4 style='width:300px; height: 300px;' *{'data-lat'=>"#{@location.split(',')[0]}", "data-lng" => "#{@location.split(',')[1]}"}
-
-  = render 'place_menu_popup'
-  = render 'place_share_popup'
+  #popups style="display:none"
+    = render 'place_menu_popup'
+    = render 'place_share_popup'
 script type='text/html' id='review_template'
   /= render 'review'
