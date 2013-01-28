@@ -139,8 +139,13 @@ $ ->
     e.preventDefault();
     console.log 'haha'
     $(this).fancybox()
-  $("a.show_popup#share").click (e) ->
+  $("a.show_popup.share").click (e) ->
     e.preventDefault();
     console.log 'haha'
-    $(this).fancybox()
+    $(this).fancybox(
+      autoSize: false,
+      height: 300,
+      width: 900,
+      minWidth:450,
+      width: 450)
 #    $("#place_menu.fancybox.popup").fancybox()
