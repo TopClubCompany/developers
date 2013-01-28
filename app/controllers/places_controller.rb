@@ -47,6 +47,8 @@ class PlacesController < ApplicationController
     end
   end
 
+
+
   private
 
   def find_place

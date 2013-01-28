@@ -44,13 +44,8 @@
             = ', ' if (i + 1) < categories.count
           '  ·
           - data = { trigger: 'hover', title: 'Average check', content: @place.bill.try(:title), placement: 'top' }
-          span.pricing.popoverable data=data
           = content_tag :span, class: 'pricing popoverable', data: data do
-            strong
-              - @place.bill.try(:id).to_i.times do
-                | $
-            - (4 - @place.bill.try(:id).to_i).times do
-              | $
+            = get_pricing @place
         .rating.rating_big.rating_topclub
           .stars
             .stars_overlay
@@ -77,9 +72,8 @@
                 br
                 | favorites
         .share_btns
-          a#fb href="#"
-          a#vk href="#"
-          a#tw href="#"
+          - %w|fb vk tw|.each do |soc_network|
+            = link_to '', '#share', class: "show_popup share", id: soc_network
         ul.place_features
           li.location
             strong
@@ -87,14 +81,14 @@
             = @place.location.address
           li.cuisine
             strong
-              'Kitchen:
+              = t('words.kitchen').capitalize + ': '
             = @place.kitchens.map(&:name).join(', ')
           li.timing
             - @place.humanable_schedule.each do |time|
               = time.html_safe
               br
           #place_links
-            = link_to "More detalis ›", '#share', {:class => "show_popup share"}
+            = link_to "More detalis ›", '#'
             = link_to "View menu ›", '#place_menu', {:class => "show_popup menu"}
         .clear
         .place_desc
@@ -189,5 +183,6 @@
   #popups style="display:none"
     = render 'place_menu_popup'
     = render 'place_share_popup'
+    = render 'links_for_share'
 script type='text/html' id='review_template'
   /= render 'review'
