@@ -22,6 +22,9 @@ class ApplicationController < ActionController::Base
 
   def set_time
     h,m = params[:reserve_time].try(:split,':')
-    @time = {:h => (h or '10'), :m => (m or '30') }
+    unless h and m
+      h,m = (DateTime.now + 90.minutes).strftime("%k:%M").split(':')
+    end
+    @time = {:h => h.to_s, :m => m.to_s }
   end
 end
