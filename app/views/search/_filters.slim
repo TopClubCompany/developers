@@ -1,6 +1,8 @@
 .span2
   #refine
     h2= I18n.t('search.refine')
+    label.checkbox data-type="opened"
+      input type="checkbox" data-type="opened" value=1 Currently opened
     h4= I18n.t('search.category')
     - Category.children.first(4).each do |category|
       label.checkbox
