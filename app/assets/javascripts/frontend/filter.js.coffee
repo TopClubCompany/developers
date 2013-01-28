@@ -117,6 +117,8 @@ class PlacesCollection
     I18n = $('#language .active').attr('id')
     properKitchensName = if place.kitchens.length > 18 then place.kitchens.substring(0, 18) + '...' else place.kitchens
     source   = $("#list_place_template").html()
+    # TODO add proper popover for special offer
+#    data = { trigger: 'click', title: 'Special Offer', content: "", placement: 'top' }
     listBlock = Mustache.to_html(source, place)
     source   = $("#map_place_template").html()
     mapBlock = Mustache.to_html(source, place)
@@ -305,6 +307,9 @@ class FilterInput
       when 'reserve_date'
        regexpMatch = /reserve_date=(\d+\%+\w+)/
        regexpReplace = /reserve_date=[\d+\%+\w+]*/
+      when 'sortby'
+        regexpMatch = /sortby=(\w+)/
+        regexpReplace = /sortby=[\w+]*/
 
     baseURL = window.location.pathname
     oldQuery = window.location.search || ''
@@ -404,6 +409,10 @@ class FilterInput
       headlineText = $('#map_details > h3:first-child').html().replace(/\d+(?=\speople)/, number)
       $('#map_details > h3:first-child').html headlineText
       window.filter.get 'number_of_people', number
+
+    $("#sortby-list a").on 'click', (e) ->
+      e.preventDefault()
+      window.filter.get "sortby", $(e.target).attr('href')
 
 
   askAJAX = (serializedData, placesObj, page) =>
