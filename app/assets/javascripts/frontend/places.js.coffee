@@ -132,3 +132,15 @@ $ ->
       google.maps.event.trigger($("#map")[0], 'resize');
   ), 1000)
 
+  # menu popup
+  $("a.show_popup.menu").fancybox()
+  $("a.show_popup.share").fancybox()
+  $("a.show_popup.menu").click (e) ->
+    e.preventDefault();
+    console.log 'haha'
+    $(this).fancybox()
+  $("a.show_popup#share").click (e) ->
+    e.preventDefault();
+    console.log 'haha'
+    $(this).fancybox()
+#    $("#place_menu.fancybox.popup").fancybox()
