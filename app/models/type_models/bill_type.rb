@@ -1,4 +1,5 @@
 class BillType
+  #must defining from cheapest to more expensive for place helper(get_pricing)
   include EnumField::DefineEnum
 
   def initialize(code)
