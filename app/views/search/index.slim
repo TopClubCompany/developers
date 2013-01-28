@@ -14,14 +14,32 @@
     = render 'filters'
     #listing.span10
       #mapcontainer
-        h3 Results for #{(params[:reserve_date] || Time.now.strftime("%d/%m/%Y"))}, #{@time[:h]}:#{@time[:m]} for #{params[:number_of_people] || 2} people
         #map_places style="background: rgba(128,128,128,0.5);" *{'data-lat'=>"50.451118", "data-lng" => "30.522301"}
         #map_details
+          h3 Results for #{(params[:reserve_date] || Time.now.strftime("%d/%m/%Y"))}, #{@time[:h]}:#{@time[:m]} for #{params[:number_of_people] || 2} people
           #map_details_wrapper
             - @result.each do |place|
               - location = place.lat_lng.split(',')
               = render 'shared/map_place', :mustache => Place.for_mustache(place, params).merge(lat: location[0]).merge(lng: location[1])
         #list_grid_view.none
+          #filters.filters
+            | Filters:
+          .dropdown
+
+            a#sortby.sortby.dropdown-toggle data-toggle="dropdown" href="#" role="button"
+              | Sort by...
+            ul#sortby-list.sortby.dropdown-menu aria-labelledby="sortby" role="menu"
+              - ['rating', 'discount', 'newest', 'popularity'].each do |name|
+                li
+                  a href="#{name}"
+                    ="Sort by " + name
+
+
+          .clear
+          #thead
+            span.th1 Restaurant
+            span.th2 Availability (click time to reserve)
+
           - @result.each do |place|
             = render 'shared/list_place', :mustache => Place.for_mustache(place, params)
           #total style="display:none" = @result.total.to_i

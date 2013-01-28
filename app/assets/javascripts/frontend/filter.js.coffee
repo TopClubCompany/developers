@@ -2,7 +2,7 @@ class Pagination
   constructor: (total_elements, per_page = 4, @max_visible = 5, @elSelector = '#list_grid_view .paginate') ->
     @$el = $(@elSelector)
     @total_pages = Math.ceil (total_elements / per_page ) || 0
-    console.log total_elements, per_page, @total_pages
+#    console.log total_elements, per_page, @total_pages
     if @total_pages > 1
       @bindListener()
       @goTo 1
@@ -48,7 +48,6 @@ class Pagination
 class PlacesCollection
   constructor: ( blocksThatExist = [], page = 1 ) ->
     number = parseInt($('#total').text())
-    console.log number
     new Pagination(number, blocksThatExist.length).goTo(page)
     @places = []
     @ids = []
@@ -78,7 +77,6 @@ class PlacesCollection
 
   useNewData: (json, page) ->
     $('#total').text json.total
-    console.log $('#total').text()
     new Pagination(json.total).goTo(page)
     placesData = json.result
     newIds = _.pluck(placesData, 'id')
@@ -119,6 +117,8 @@ class PlacesCollection
     I18n = $('#language .active').attr('id')
     properKitchensName = if place.kitchens.length > 18 then place.kitchens.substring(0, 18) + '...' else place.kitchens
     source   = $("#list_place_template").html()
+    # TODO add proper popover for special offer
+#    data = { trigger: 'click', title: 'Special Offer', content: "", placement: 'top' }
     listBlock = Mustache.to_html(source, place)
     source   = $("#map_place_template").html()
     mapBlock = Mustache.to_html(source, place)
@@ -206,6 +206,36 @@ class FilterInput
     @bindChangeListener()
     @give_more() if $(".more").length > 0
     @dirtyHack()
+    @bindFilterChangeListener()
+
+  bindFilterChangeListener: () ->
+    needToDisplay = _.reduce($("#refine input[type=checkbox]:checked"), ((memo,checkbox) ->
+      type = $(checkbox).data('type')
+      memo.push type unless _.contains memo, type
+      memo
+    ), [])
+
+    for filter in needToDisplay
+      @displayFilterType filter
+
+    $('#refine input[type=checkbox]').on 'change', (e) =>
+      type = $(e.target).data('type')
+      if $(e.target).is(":checked")
+        @displayFilterType(type) if $("##{type}_filter").length is 0
+      else
+        if $("#refine input[type=checkbox][data-type=#{type}]:checked").length is 0
+          $("##{type}_filter")?.fadeOut("fast", () -> $(this).remove())
+
+  displayFilterType: (filter_type) ->
+    if $("##{filter_type}_filter").length is 0
+      filterBlock = "<span style='display: none;' id='#{filter_type}_filter'>#{filter_type}<b>×</b></span>"
+      $('#filters').append(filterBlock)
+      $("##{filter_type}_filter").fadeIn("fast").find('b').on 'click', (e) ->
+        type = $(e.target).parent().fadeOut("fast", () -> $(this).remove()).attr('id').slice(0, -7)
+        $("#refine input[type=checkbox][data-type=#{type}]:checked").click()
+
+
+
 
 
   dirtyHack: () ->
@@ -258,8 +288,6 @@ class FilterInput
 
   getPageNum: () ->
     page = window.location.search.match( /page=\d*/)?[0].slice(5) || 1
-    # if $(".paginate .current").attr('href') isnt "##{page}" or $(".paginate .current").length is 0
-      # $(".paginate a[href=##{page}]").addClass('current')
 
   get: (entity = 'page', entityTo) =>
     obj = {}
@@ -279,6 +307,9 @@ class FilterInput
       when 'reserve_date'
        regexpMatch = /reserve_date=(\d+\%+\w+)/
        regexpReplace = /reserve_date=[\d+\%+\w+]*/
+      when 'sortby'
+        regexpMatch = /sortby=(\w+)/
+        regexpReplace = /sortby=[\w+]*/
 
     baseURL = window.location.pathname
     oldQuery = window.location.search || ''
@@ -313,7 +344,7 @@ class FilterInput
 
   bindChangeListener: () =>
     $('#refine input[type=checkbox]').off 'change'
-    $('#refine input[type=checkbox]').on 'change', =>
+    $('#refine input[type=checkbox]').on 'change', (e) =>
       result = {}
       $('#refine input').each( ->
         type = $(this).data('type')
@@ -345,22 +376,43 @@ class FilterInput
     self = @
     $('input[name="reserve_date"]').data('Zebra_DatePicker').update(
       onSelect: (dateText) ->
-        headlineText = $('#mapcontainer > h3:first-child').html().replace(/(\d+\/?){3}(?=,)/, dateText)
-        $('#mapcontainer > h3:first-child').html headlineText
+        headlineText = $('#map_details > h3:first-child').html().replace(/(\d+\/?){3}(?=,)/, dateText)
+        $('#map_details > h3:first-child').html headlineText
         window.filter.get 'reserve_date', dateText
     )
 
     $("select[name=reserve_time]").on 'change', ->
-      time = $(this).val()
-      headlineText = $('#mapcontainer > h3:first-child').html().replace(/\d+\:\d+(?=\sfor\s)/, time)
-      $('#mapcontainer > h3:first-child').html headlineText
-      self.places.updateTime time
+      dateText = $('input[name="reserve_date"]').val()
+      date = new Date()
+      res = []
+      res.push curr_date = date.getDate()
+      res.push curr_month = if (month = date.getMonth() + 1) < 10 then '0' + month else month  #Months are zero based
+      res.push curr_year = date.getFullYear()
+      if dateText == res.join('-') or dateText == res.join('/')
+        # it's today we should check for the hour
+        time = $(this).val()
+        if date.getHours() >= time
+          headlineText = $('#map_details > h3:first-child').html().replace(/\d+\:\d+(?=\sfor\s)/, time)
+          $('#map_details > h3:first-child').html headlineText
+          self.places.updateTime time
+        else
+          alert "The time has passed. Please select current time"
+          # the last bit for 00, 30 part
+          valid_date = new Date(date.setMinutes(date.getMinutes() + 90 - date.getMinutes() % 30))
+          valid_hours = valid_date.getHours()
+          valid_minutes = ["00", "30"][(valid_date.getMinutes() / 30)]
+          validHourString = valid_hours + ":" + valid_minutes
+          $(this).val(validHourString)
 
     $("select[name=number_of_people]").on 'change', ->
       number = $(this).val()
-      headlineText = $('#mapcontainer > h3:first-child').html().replace(/\d+(?=\speople)/, number)
-      $('#mapcontainer > h3:first-child').html headlineText
+      headlineText = $('#map_details > h3:first-child').html().replace(/\d+(?=\speople)/, number)
+      $('#map_details > h3:first-child').html headlineText
       window.filter.get 'number_of_people', number
+
+    $("#sortby-list a").on 'click', (e) ->
+      e.preventDefault()
+      window.filter.get "sortby", $(e.target).attr('href')
 
 
   askAJAX = (serializedData, placesObj, page) =>

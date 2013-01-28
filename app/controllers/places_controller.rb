@@ -4,7 +4,7 @@ class PlacesController < ApplicationController
 
   def show
     @date = params[:reserve_date] || Date.today.strftime('%d/%m/%Y')
-    time = Time.parse(params[:reserve_time]) rescue Time.now
+    time = Time.parse(params[:reserve_time]) rescue Time.now + 90.minute
     minutes = %w(00 30)[time.min / 30]
     @time = {:h => time.hour.to_s, :m => minutes}
     @location = @place.lat_lng
