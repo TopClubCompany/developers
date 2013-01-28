@@ -377,10 +377,27 @@ class FilterInput
     )
 
     $("select[name=reserve_time]").on 'change', ->
-      time = $(this).val()
-      headlineText = $('#map_details > h3:first-child').html().replace(/\d+\:\d+(?=\sfor\s)/, time)
-      $('#map_details > h3:first-child').html headlineText
-      self.places.updateTime time
+      dateText = $('input[name="reserve_date"]').val()
+      date = new Date()
+      res = []
+      res.push curr_date = date.getDate()
+      res.push curr_month = if (month = date.getMonth() + 1) < 10 then '0' + month else month  #Months are zero based
+      res.push curr_year = date.getFullYear()
+      if dateText == res.join('-') or dateText == res.join('/')
+        # it's today we should check for the hour
+        time = $(this).val()
+        if date.getHours() >= time
+          headlineText = $('#map_details > h3:first-child').html().replace(/\d+\:\d+(?=\sfor\s)/, time)
+          $('#map_details > h3:first-child').html headlineText
+          self.places.updateTime time
+        else
+          alert "The time has passed. Please select current time"
+          # the last bit for 00, 30 part
+          valid_date = new Date(date.setMinutes(date.getMinutes() + 90 - date.getMinutes() % 30))
+          valid_hours = valid_date.getHours()
+          valid_minutes = ["00", "30"][(valid_date.getMinutes() / 30)]
+          validHourString = valid_hours + ":" + valid_minutes
+          $(this).val(validHourString)
 
     $("select[name=number_of_people]").on 'change', ->
       number = $(this).val()
