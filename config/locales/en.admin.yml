@@ -80,13 +80,22 @@ en:
         form: ""
         info: ""
     day_type: 
-      friday: ""
-      monday: ""
-      saturday: ""
-      sunday: ""
-      thursday: ""
-      tuesday: ""
-      wednesday: ""
+      full: 
+        friday: ""
+        monday: ""
+        saturday: ""
+        sunday: ""
+        thursday: ""
+        tuesday: ""
+        wednesday: ""
+      short: 
+        friday: ""
+        monday: ""
+        saturday: ""
+        sunday: ""
+        thursday: ""
+        tuesday: ""
+        wednesday: ""
     delete: ""
     delete_confirmation: ""
     details: ""
@@ -113,6 +122,17 @@ en:
       female: ""
       male: ""
     geo_autocomplete: ""
+    geo_type: 
+      distance: 
+        close: ""
+        drive: ""
+        far: ""
+        walk: ""
+      kind: 
+        close: ""
+        drive: ""
+        far: ""
+        walk: ""
     group: 
       kind: 
         admin: ""

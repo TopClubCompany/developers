@@ -204,6 +204,8 @@ ua:
     become_a_prtner: Become a partner!
     earn_point: Earn points and get discounts!
     need_clients: Need more clients?
+  forgot_password: 
+    reset_pass: "Скинути пароль"
   front_js: 
     comments: 
       chat_title: ""
@@ -274,5 +276,3 @@ ua:
       next: ""
       previous: ""
       truncate: ""
-  forgot_password:
-    reset_pass: "Скинути пароль"
