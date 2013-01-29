@@ -8,6 +8,10 @@ class PlaceImageUploader < Utils::CarrierWave::BaseUploader
     process :resize_to_fill => [80, 80]
   end
 
+  version :share_fancy do
+    process :resize_to_fill => [120, 80]
+  end
+
   version :content do
     process :resize_to_fit => [575, 500]
   end

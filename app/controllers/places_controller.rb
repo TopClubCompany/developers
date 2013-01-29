@@ -4,9 +4,6 @@ class PlacesController < ApplicationController
 
   def show
     @date = params[:reserve_date] || Date.today.strftime('%d/%m/%Y')
-    time = Time.parse(params[:reserve_time]) rescue Time.now + 90.minute
-    minutes = %w(00 30)[time.min / 30]
-    @time = {:h => time.hour.to_s, :m => minutes}
     @location = @place.lat_lng
     @special_offers =  @place.day_discounts.special
     if signed_in?
@@ -46,6 +43,8 @@ class PlacesController < ApplicationController
       format.json { render json: reviews.map(&:for_mustache) }
     end
   end
+
+
 
   private
 

@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
   before_filter :current_city
   before_filter :set_time
+  before_filter :set_user_location
   helper_method :current_city
 
   protected
@@ -20,8 +21,20 @@ class ApplicationController < ActionController::Base
       end
     end
 
+  def set_user_location
+    @user_location = cookies[:current_point].try(:split,',')
+    if @user_location.present?
+      @user_location.map(&:strip)
+    else
+      @user_location = ["50.451118","30.522301"]
+    end
+  end
+
   def set_time
     h,m = params[:reserve_time].try(:split,':')
-    @time = {:h => (h or '10'), :m => (m or '30') }
+    unless h and m
+      h,m = (DateTime.now + (90 - DateTime.now.min % 15).minutes).strftime("%k:%M").split(':')
+    end
+    @time = {:h => h.to_s, :m => m.to_s }
   end
 end

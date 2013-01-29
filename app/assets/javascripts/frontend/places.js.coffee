@@ -137,15 +137,16 @@ $ ->
   $("a.show_popup.share").fancybox()
   $("a.show_popup.menu").click (e) ->
     e.preventDefault();
-    console.log 'haha'
     $(this).fancybox()
+
+  # share popup
   $("a.show_popup.share").click (e) ->
     e.preventDefault();
-    console.log 'haha'
-    $(this).fancybox(
-      autoSize: false,
-      height: 300,
-      width: 900,
-      minWidth:450,
-      width: 450)
-#    $("#place_menu.fancybox.popup").fancybox()
+    soc_id = $(this).attr('id')
+    $("ul.share_selector li").removeClass('active')
+    $("ul.share_selector li#"+ soc_id).addClass('active')
+    $(this).fancybox()
+
+  # click on social networks buttons in share popup
+  $("ul.share_selector li").live 'click', ->
+    $(this).toggleClass('active')

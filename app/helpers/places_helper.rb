@@ -33,5 +33,12 @@ module PlacesHelper
     BillType.find(avg_id).title rescue ''
   end
 
+  def get_pricing place
+    count_of_diff_prices = BillType.all.count
+    price_bill = place.bill.try(:id).to_i.times.map {"$"}.join('')
+    result = content_tag :strong, price_bill.to_s
+    left_price = (count_of_diff_prices - @place.bill.try(:id).to_i).times.map {"$"}.join('')
+    result + left_price
+  end
 
 end

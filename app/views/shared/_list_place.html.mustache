@@ -39,7 +39,9 @@
     <h5>Special offers:</h5>
     <h5>
       {{#special_offers}}
-        <a class="popoverable" data={{popover_data}} href="#">{{title}}</a>
+         {{#popover_data}}
+          <a class="popoverable" data-trigger="{{trigger}}" data-title="{{title}}" data-content="{{content}}" data-placement="{{placement}}"  href="{{place_url}}">{{title}}</a>
+         {{/popover_data}}
       {{/special_offers}}
     </h5>
   </div>
