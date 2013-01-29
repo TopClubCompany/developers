@@ -1,4 +1,15 @@
 $ ->
+  #temp handle noise mark
+  $(".set_noise a.set").click (e) ->
+    e.preventDefault()
+    id = $(this).attr('id')
+    noise_level_el = $(".noise.noise_big .noise_level")
+    noise_label_el = $(".noise.noise_big .p")
+    noise_input_el = $(".noise.noise_big").closest('.criteria').find('input.review_mark_value')
+    noise_level_el.removeClass('noise_1 noise_2 noise_3 noise_4 noise_5')
+    noise_level_el.addClass(id)
+    noise_label_el.text(id[id.length - 1])
+    noise_input_el.val(id[id.length - 1])
   #handle reviews marks
   $(".set_rating a.rate").on
     'mouseenter': (e) ->
@@ -32,11 +43,11 @@ $ ->
   #computing overall mark
   set_overall_mark = () ->
     sum = 0
-    $('.marks .criteria').each ->
+    $('.marks .criteria.included').each ->
       console.log $(this).data('old_mark')
       value = parseInt($(this).data('old_mark')) || 1
       sum += value
-    quantity = $('.marks .criteria').length
+    quantity = $('.marks .criteria.included').length
     overall_mark_value = sum / quantity
     overall_mark_css_value = "#{overall_mark_value * 20}%"
     overall_mark_el = $(".overall_mark .stars_bar")

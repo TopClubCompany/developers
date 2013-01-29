@@ -1,8 +1,12 @@
 class MarkType < ActiveRecord::Base
 
-  attr_accessible :name, :description
+  attr_accessible :name, :description, :included_in_overall
+
+  scope :included, where(included_in_overall: true)
 
   translates :name, :description
+
+
 
   include Utils::Models::Base
   include Utils::Models::Translations
