@@ -161,3 +161,16 @@ $ ->
   # click on social networks buttons in share popup
   $("ul.share_selector li").live 'click', ->
     $(this).toggleClass('active')
+
+  #twitter share
+  not ((d, s, id) ->
+    fjs = undefined
+    js = undefined
+    js = undefined
+    fjs = d.getElementsByTagName(s)[0]
+    unless d.getElementById(id)
+      js = d.createElement(s)
+      js.id = id
+      js.src = "https://platform.twitter.com/widgets.js"
+      fjs.parentNode.insertBefore js, fjs
+    )(document, "script", "twitter-wjs")
