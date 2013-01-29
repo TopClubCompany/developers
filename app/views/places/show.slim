@@ -1,3 +1,5 @@
+= javascript_include_tag "http://connect.facebook.net/en_US/all.js"
+= javascript_include_tag "http://platform.twitter.com/widgets.js"
 #place.content
   .row
     .span8
@@ -183,6 +185,6 @@
   #popups style="display:none"
     = render 'place_menu_popup'
     = render 'place_share_popup'
-    = render 'links_for_share'
+  = render 'links_for_share'
 script type='text/html' id='review_template'
   /= render 'review'

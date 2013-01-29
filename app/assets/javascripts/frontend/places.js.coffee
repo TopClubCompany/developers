@@ -156,21 +156,67 @@ $ ->
     soc_id = $(this).attr('id')
     $("ul.share_selector li").removeClass('active')
     $("ul.share_selector li#"+ soc_id).addClass('active')
+    if soc_id == 'tw'
+      tw_button = $(".tw_button")
+      standart_share_bt = $(".standart_share_button")
+      tw_button.css('display', 'inline-block')
+      standart_share_bt.css('display', 'none')
     $(this).fancybox()
 
   # click on social networks buttons in share popup
   $("ul.share_selector li").live 'click', ->
     $(this).toggleClass('active')
+    if $(this).attr('id') == 'tw'
+      tw_button = $(".tw_button")
+      standart_share_bt = $(".standart_share_button")
+      if $(this).hasClass('active')
+        tw_button.css('display', 'inline-block')
+        standart_share_bt.css('display', 'none')
+      else
+        tw_button.css('display', 'none')
+        standart_share_bt.css('display', 'inline-block')
+
+#  tw_case=(id) ->
+
 
   #twitter share
-  not ((d, s, id) ->
-    fjs = undefined
-    js = undefined
-    js = undefined
-    fjs = d.getElementsByTagName(s)[0]
-    unless d.getElementById(id)
-      js = d.createElement(s)
-      js.id = id
-      js.src = "https://platform.twitter.com/widgets.js"
-      fjs.parentNode.insertBefore js, fjs
-    )(document, "script", "twitter-wjs")
+  init_twitter = ->
+    not ((d, s, id) ->
+      fjs = undefined
+      js = undefined
+      js = undefined
+      fjs = d.getElementsByTagName(s)[0]
+      unless d.getElementById(id)
+        js = d.createElement(s)
+        js.id = id
+#        js.src = "https://platform.twitter.com/widgets.js"
+        fjs.parentNode.insertBefore js, fjs
+      )(document, "script", "twitter-wjs")
+
+    twttr.events.bind "click", (event) ->
+      active_soc_el = $("ul.share_selector li.active")
+      active_soc_el.each ->
+        if (this).attr('id') == 'fb'
+          $("a.share.facebook").click()
+        if (this).attr('id') == 'vk'
+          $("a.share.google").click()
+      $.fancybox.close()
+
+  init_twitter()
+
+  $("#share_text_input").keyup ->
+    console.log 'change'
+
+
+  #facebook share handle
+  FB.init
+    appId: "373546769386190"
+#    $("a.share.facebook").bind "ajax:success", (evt, data, status, xhr) ->
+    $("a.share.facebook").click ->
+      FB.ui
+        method: "feed"
+        name: "Official HitMaker Report"
+        link: 'hohoho'
+        picture: 'dadada'
+        caption: " "
+        description: "louojojo"
