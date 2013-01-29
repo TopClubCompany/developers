@@ -1,5 +1,4 @@
 #share.popup style="margin-left: 0px;"
-  - form_tag
   button.close aria-hidden="true" data-dismiss="modal" type="button"
   h5= t('short_strings.share_with_friends')
   .shared_content
@@ -22,10 +21,14 @@
           strong= t('words.kitchen').capitalize + ': '
           = @place.kitchens.map(&:name).join(', ')
       .clear
-  textarea name="shared_comment" placeholder="Add a comment..."
+  textarea#share_text_input name="shared_comment" placeholder="Add a comment..."
   ul.share_selector
     strong= t('short_strings.share_on').capitalize + ': '
-    li#fb.active
-    li#vk.active
+    li#fb
+    li#vk
     li#tw
-  input type="submit" value="Share"
+  #multi-share-button
+    .tw_button.custom-tweet-button style="display: none;"
+      a.twitter-share-button data-lang=locale.to_s href='https://twitter.com/share' data-url="#{place_url(@place)}" data-text="some text" data-count="none"
+    .standart_share_button
+      input type="submit" value="Share"
