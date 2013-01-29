@@ -24,7 +24,7 @@
                 option value="#{i}" selected="selected" #{i}
               - else
                 option value="#{i}" #{i}
-          input type="submit" value="Find a table"
+          input type="submit" data-title="#{@place.name}" value="Find a table"
             .clear
       .page_content.zz itemscope="" itemtype="http://data-vocabulary.org/Review-aggregate"
         .place_img

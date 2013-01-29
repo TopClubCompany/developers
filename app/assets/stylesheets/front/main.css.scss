@@ -1,8 +1,8 @@
 @font-face{
-    font-family: 'univers_condensedmedium';
-    src: url('/univers_condensedmedium.eot?#iefix') format('embedded-opentype'),
-    url('/univers_condensedmedium.woff') format('woff'),
-    url('/univers_condensedmedium.ttf') format('truetype');
+  font-family: 'univers_condensedmedium';
+  src: url('/univers_condensedmedium.eot?#iefix') format('embedded-opentype'),
+  url('/univers_condensedmedium.woff') format('woff'),
+  url('/univers_condensedmedium.ttf') format('truetype');
 }
 
 html, body {height: 100%; margin: 0; padding: 0;}
@@ -84,7 +84,7 @@ ul, li {
 
 input[type='submit'] {
   background: #79ad53;
-  font-family: 'univers_condensedmedium', 'Arial Narrow';
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
   color: #fff;
   font-size: 24px;
   line-height: 24px;
@@ -242,7 +242,7 @@ input[type='submit']:hover {
 }
 
 #header .few-words {
-  font-family: 'univers_condensedmedium', 'Arial Narrow';
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
   color: #666;
   font-size: 24px;
   float: left;
@@ -314,7 +314,7 @@ input[type='submit']:hover {
 }
 
 #header #top_points strong {
-  font-family: 'univers_condensedmedium', 'Arial Narrow';
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
   font-size: 32px;
   float: left;
   display: inline-block;
@@ -399,7 +399,7 @@ input[type='submit']:hover {
 
 .page_content h2 {
   font-size: 24px;
-  font-family: 'univers_condensedmedium', 'Arial Narrow';
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
   margin: 0 0 0 0;
   padding: 0;
   font-weight: normal;
@@ -467,17 +467,23 @@ input[type='submit']:hover {
   color: 333;
   margin: 0 0 15px 0;
   padding: 0;
-  font-family: 'univers_condensedmedium', 'Arial Narrow';
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
   line-height: 24px;
   font-weight: normal;
 }
 
 #social_login #fb_login, #social_login #vk_login, #social_login #tw_login, #social_login #gp_login {
-  width: 220px;
+  width: 178px;
   height: 37px;
   display: block;
   margin: 0 0 10px 0;
   background-image: image_url('social_login.png');
+  padding-left: 42px;
+  font-size: 15px;
+  line-height: 37px;
+  color: #fff !important;
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.5);
 }
 
 #vk_login { background-position: 0 -47px; }
@@ -486,6 +492,31 @@ input[type='submit']:hover {
 
 #social_login a:hover {
   opacity: 0.9;
+}
+
+#social_login b {
+  display: block;
+  float: left;
+  width: 37px;
+  height: 37px;
+  background: image_url('icons9.png');
+  margin: 0 5px 0 0;
+}
+
+#social_login b#fb {
+  background-position: 0 0;
+}
+
+#social_login b#vk {
+  background-position: 0 -47px;
+}
+
+#social_login b#gp {
+  background-position: 0 -94px;
+}
+
+#social_login b#tw {
+  background-position: 0 -141px;
 }
 
 
@@ -519,7 +550,7 @@ input[type='submit']:hover {
 
 #search_form input[type='text'] {
   font-size: 20px;
-  font-family: 'univers_condensedmedium', 'Arial Narrow';
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
   border: none;
   box-shadow: none;
   padding: 10px 17px 10px 10px;
@@ -646,7 +677,7 @@ input[type='submit']:hover {
 }
 
 #refine h2 {
-  font-family: 'univers_condensedmedium', 'Arial Narrow';
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
   font-size: 18px;
   color: #333;
   margin: 0 0 8px 0;
@@ -996,7 +1027,7 @@ h4 .discount_label {
 }
 
 
-#listing #map {
+#listing #map_places {
   float: left;
   width: 510px;
   height: 450px;
@@ -1004,7 +1035,7 @@ h4 .discount_label {
   position: relative;
 }
 
-#listing #map .place_map {
+#listing #map_places .place_map {
   position: absolute;
   top: 30%;
   left: 10%;
@@ -1012,29 +1043,32 @@ h4 .discount_label {
   padding-bottom: 40px;
 }
 
-#listing #map .popover {
+#listing #map_places .popover {
   min-width: 340px;
 }
 
-#listing #map .popover .popover-content {
+#listing #map_places .popover .popover-content {
   padding: 10px;
 }
 
-#listing #map .popover .popover-content .place_features {
+#listing #map_places .popover .popover-content .place_features {
   width: auto;
 }
 
-#listing #map .popover .place {
+#listing #map_places .popover .place {
   border: none;
   background: #fff !important;
 }
 
 #listing #map_details {
-  float: right;
-  width: 270px;
   height: 450px;
   overflow-y: scroll;
   overflow-x: hidden;
+}
+
+#listing #map_details #map_details_wrapper {
+  width: 270px;
+  float: right;
 }
 
 #listing #map_details .place {
@@ -1191,7 +1225,7 @@ h4 .discount_label {
   background: image_url('icons6.gif') center -50px no-repeat;
 }
 
-#place .line2 {
+.line2 {
   background: image_url('line2.gif') top repeat-x;
   height: 11px;
   margin-left: -20px;
@@ -1234,14 +1268,12 @@ h4 .discount_label {
   display: none;
 }
 
-#place #review_form .criteria .rating:hover {
-  .set_rating {
-    display: block;
-    position: absolute;
-    .bar {
-      left: 0;
-      background-color: rgba(121, 173, 83, 0.5);
-    }
+#place #review_form .criteria .rating:hover .set_rating {
+  display: block;
+  position: absolute;
+  .bar {
+    left: 0;
+    background-color: rgba(121, 173, 83, 0.5);
   }
 }
 
@@ -1358,7 +1390,7 @@ h4 .discount_label {
   margin: 10px 0 20px 0;
 }
 
-.place #favorites_small .add_to_favorites {
+.place div[id^='favorites_small'] .add_to_favorites {
   position: absolute;
   bottom: 5px;
   right: 20px;
@@ -1370,20 +1402,20 @@ h4 .discount_label {
   cursor: pointer;
 }
 
-.place #favorites_small .add_to_favorites:hover, .place #favorites_small .i_like_this_place {
+.place div[id^='favorites_small'] .add_to_favorites:hover, .place div[id^='favorites_small'] .i_like_this_place {
   color: #666;
   background: image_url('icons8.png') 0 -16px no-repeat;
 }
 
-.place #favorites_small .i_like_this_place {
+.place div[id^='favorites_small'] .i_like_this_place {
   font-weight: bold;
 }
 
-.place #favorites_small {
+.place div[id^='favorites_small'] {
   display: none;
 }
 
-.place:hover #favorites_small, place #favorites_small .i_like_this_place {
+.place:hover div[id^='favorites_small'], place div[id^='favorites_small'] .i_like_this_place {
   display: block;
 }
 
@@ -1480,6 +1512,40 @@ h4 .discount_label {
   padding: 10px 10px 10px 15px;
 }
 
+#place #search_form.place_timing .header {
+  font-size: 18px;
+  color: #333;
+}
+
+#place #search_form.place_timing label {
+  margin-left: -10px;
+}
+
+#place #search_form.place_timing .timing a {
+  display: block;
+  float: left;
+  background: #f3f1eb image_url('grad4.gif') bottom repeat-x;
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
+  font-size: 20px;
+  font-weight: normal;
+  padding: 5px 8px;
+  border: 2px solid #d2d1ce;
+  margin: 3px 8px 0 0;
+  border-radius: 3px;
+  text-decoration: none !important;
+  color: #333;
+}
+
+#place #search_form.place_timing .timing a.bold, #place #search_form.place_timing .timing a:hover {
+  color: #df5b49;
+}
+
+#place #search_form.place_timing .timing a.na {
+  background: #fff !important;
+  color: #dfdeda !important;
+  cursor: default;
+}
+
 .header_special {
   display: inline-block;
   color: #df5b49;
@@ -1545,6 +1611,7 @@ h4 .discount_label {
   font-size: 12px;
   line-height: 18px;
   width: 390px;
+  float: left;
 }
 
 #place #reviews .review .topclub_review {
@@ -1568,12 +1635,13 @@ h4 .discount_label {
 }
 
 #place #reviews .review .ratings {
-  position: absolute;
-  top: 10px;
-  right: 0;
   font-size: 11px !important;
-  padding-left: 10px;
+  padding: 0 0 0 10px;
+  margin: 5px 0 0 0;
   border-left: 1px solid #f2f0ea;
+  display: table-cell;
+  float: right;
+  display: table-cell;
 }
 
 #place #reviews .review .ratings label {
@@ -1592,6 +1660,20 @@ h4 .discount_label {
   line-height: 14px;
   color: #999;
   text-align: center;
+}
+
+#place #reviews .rb_topclub {
+  width: 67px;
+  color: #999;
+  font-size: 10px;
+  line-height: 14px;
+  padding-top: 5px;
+  clear: both;
+}
+
+#place #reviews .rb_topclub img {
+  width: 67px;
+  height: 14px;
 }
 
 #place #reviews .ratings .noise label {
@@ -1698,7 +1780,8 @@ h4 .discount_label {
   color: #333;
   font-size: 18px;
   line-height: 18px;
-  font-family: 'univers_condensedmedium', 'Arial Narrow';
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif
+  ;
   margin: 0;
   padding: 10px 10px 5px 10px;
   font-weight: normal;
@@ -1840,14 +1923,26 @@ h4 .discount_label {
   display: block;
   font-size: 13px;
   margin: 0 0 10px 0;
-  font-weight: bold;
+}
+
+#user #dash_blocks .dash_block ul.settings li small {
+  color: #999;
+  display: block;
 }
 
 #user label {
   font-size: 13px;
   margin-bottom: 0;
-  color: #999;
+  color: #666;
   font-weight: normal;
+}
+
+#user b.secure {
+  display: inline-block;
+  width: 8px;
+  height: 10px;
+  background: image_url('secure.gif');
+  margin-right: 2px;
 }
 
 #user #dash_blocks #upcoming_reservations.dash_block {
@@ -1860,9 +1955,9 @@ h4 .discount_label {
 
 #user #dash_blocks #upcoming_reservations.dash_block small {
   color: #999;
-  font-size: 10px;
+  font-size: 12px;
   display: block;
-  margin: 0 0 5px 0;
+  margin: -3px 0 5px 0;
 }
 
 #user #dash_blocks #upcoming_reservations .reservation {
@@ -1883,7 +1978,7 @@ h4 .discount_label {
 }
 
 #user #dash_blocks #my_reviews {
-  margin-left: 20px;
+  margin-top: 20px;
 }
 
 #user #dash_blocks #my_reviews .rating {
@@ -1997,6 +2092,10 @@ h4 .discount_label {
   opacity: 0.4;
 }
 
+.settings {
+  width: 500px !important;
+}
+
 .settings #dash_blocks .dash_block {
   width: auto !important;
 }
@@ -2009,8 +2108,37 @@ h4 .discount_label {
   font-weight: normal;
 }
 
+.settings #dash_blocks .dash_block input[type='text'] {
+  width: 190px !important;
+}
+
+.settings #dash_blocks .dash_block input[type='text'], .settings #dash_blocks .dash_block select {
+  margin-bottom: 2px;
+}
+
 .settings #dash_blocks .dash_block input[type='submit'] {
-  margin: 10px 0 50px 0;
+  margin: 10px 0 10px 0;
+}
+
+.settings .line2 {
+  width: 540px;
+  margin-top: 10px;
+}
+
+.social_connect {
+  width: 220px !important;
+  color: #333;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.social_connect .connected {
+  margin-bottom: 20px;
+
+}
+
+.social_connect .sc_btn {
+  margin: 5px 0 20px 0 !important;
 }
 
 
@@ -2032,7 +2160,7 @@ h4 .discount_label {
 
 #user .invite_block h4, #user #invite_friends h4 {
   font-size: 24px;
-  font-family: 'univers_condensedmedium', 'Arial Narrow';
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
   margin: 0 0 10px 0;
   padding: 0;
   font-weight: normal;
@@ -2057,7 +2185,7 @@ h4 .discount_label {
   border: 0;
   border-radius: 0 3px 3px 0;
   color: #fff;
-  font-family: 'univers_condensedmedium', 'Arial Narrow';
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
   font-size: 18px;
   height: 29px;
   width: 42px;
@@ -2242,7 +2370,7 @@ h4 .discount_label {
   display: block;
   background: #df5b49;
   margin: 10px 20px;
-  font-family: 'univers_condensedmedium', 'Arial Narrow';
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
   color: #fff;
   font-size: 24px;
   border-radius: 3px;
@@ -2322,7 +2450,7 @@ h4 .discount_label {
 }
 
 #search_results #search_form #title_or_location {
-  width: 195px !important;
+  width: 165px !important;
   font-size: 24px;
   border-right: 0;
   line-height: 30px;
@@ -2495,7 +2623,7 @@ h4 .discount_label {
   display: block;
   background: #79ad53;
   margin: 0 0 10px 0;
-  font-family: 'univers_condensedmedium', 'Arial Narrow';
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
   color: #fff !important;
   font-size: 24px;
   border-radius: 3px;
@@ -2523,7 +2651,7 @@ h4 .discount_label {
   background: #fff;
   border-radius: 3px;
   padding: 20px 10px;
-  font-family: 'univers_condensedmedium', 'Arial Narrow';
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
 }
 
 #promo_block_sm {
@@ -2554,7 +2682,7 @@ h4 .discount_label {
 }
 
 #footer #footer_nav {
-  font-family: 'univers_condensedmedium', 'Arial Narrow';
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
   font-size: 18px;
   text-transform: uppercase;
   display: block;
@@ -2675,7 +2803,7 @@ h4 .discount_label {
   display: block;
   padding: 20px 30px;
   margin: 0;
-  font-family: 'univers_condensedmedium', 'Arial Narrow';
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
   font-weight: normal;
   font-size: 24px;
   color: #666;
@@ -2767,7 +2895,7 @@ h4 .discount_label {
 }
 
 #share .shared_content .header_info {
-  line-height: 18px;
+  line-height: 18	px;
   font-size: 12px;
 }
 
@@ -2841,20 +2969,6 @@ h4 .discount_label {
 #share input[type='submit']:hover {
   background: #4b67a1;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -171,16 +171,16 @@
 #place #review_form textarea.not_empty {
   min-height: 100px;
 }
-#place #review_form .criteria .rating:hover {
-  .set_rating {
-    display: block;
-    position: absolute;
-    .bar {
-      left: 0;
-      background-color: rgba(121, 173, 83, 0.5);
-    }
-  }
-}
+//#place #review_form .criteria .rating:hover {
+//  .set_rating {
+//    display: block;
+//    position: absolute;
+//    .bar {
+//      left: 0;
+//      background-color: rgba(121, 173, 83, 0.5);
+//    }
+//  }
+//}
 @import "compass/css3/transition";
 
 .overall_mark .stars_bar {
@@ -193,34 +193,34 @@
   width: 56px;
 }
 
-.place div[id^='favorites_small'] .add_to_favorites {
-  position: absolute;
-  bottom: 5px;
-  right: 20px;
-  padding: 0 0 0 17px;
-  background: image_url('icons8.png') 0 4px no-repeat;
-  color: #df5b49;
-  font-weight: bold;
-  font-size: 9px;
-  cursor: pointer;
-}
+//.place div[id^='favorites_small'] .add_to_favorites {
+//  position: absolute;
+//  bottom: 5px;
+//  right: 20px;
+//  padding: 0 0 0 17px;
+//  background: image_url('icons8.png') 0 4px no-repeat;
+//  color: #df5b49;
+//  font-weight: bold;
+//  font-size: 9px;
+//  cursor: pointer;
+//}
+//
+//.place div[id^='favorites_small'] .add_to_favorites:hover, .place div[id^='favorites_small'] .i_like_this_place {
+//  color: #666;
+//  background: image_url('icons8.png') 0 -16px no-repeat;
+//}
 
-.place div[id^='favorites_small'] .add_to_favorites:hover, .place div[id^='favorites_small'] .i_like_this_place {
-  color: #666;
-  background: image_url('icons8.png') 0 -16px no-repeat;
-}
-
-.place div[id^='favorites_small'] .i_like_this_place {
-  font-weight: bold;
-}
-
-.place div[id^='favorites_small'] {
-  display: none;
-}
-
-.place:hover div[id^='favorites_small'], place div[id^='favorites_small'] .i_like_this_place {
-  display: block;
-}
+//.place div[id^='favorites_small'] .i_like_this_place {
+//  font-weight: bold;
+//}
+//
+//.place div[id^='favorites_small'] {
+//  display: none;
+//}
+//
+//.place:hover div[id^='favorites_small'], place div[id^='favorites_small'] .i_like_this_place {
+//  display: block;
+//}
 
 #sortby-list {
   display: none;
