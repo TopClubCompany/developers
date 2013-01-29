@@ -2,7 +2,7 @@ class Pagination
   constructor: (total_elements, per_page = 4, @max_visible = 5, @elSelector = '#list_grid_view .paginate') ->
     @$el = $(@elSelector)
     @total_pages = Math.ceil (total_elements / per_page ) || 0
-#    console.log total_elements, per_page, @total_pages
+    console.log total_elements, per_page, @total_pages
     if @total_pages > 1
       @bindListener()
       @goTo 1
@@ -64,14 +64,17 @@ class PlacesCollection
 
   createMap: () ->
     initialData = $('#map_places').data()
+    center = new google.maps.LatLng(initialData.lat, initialData.lng)
     mapOptions =
-      center: new google.maps.LatLng(initialData.lat, initialData.lng),
+      center: center,
       zoom: 12,
       disableDefaultUI: true,
       zoomControl: true,
       minZoom: 9,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     @map = new google.maps.Map(document.getElementById("map_places"), mapOptions)
+    new google.maps.LatLng(initialData.lat, initialData.lng)
+    @addCenter center
     window.googleMap = @map
 
 
@@ -112,18 +115,27 @@ class PlacesCollection
       markerToRemove[0]?.setMap(null)
 
       $("#place_#{removeId}").add("#list_place_#{removeId}").fadeOut('fast').remove()
+  addPopoverData: (place) =>
+    if (offers = place["special_offers"])?
+      _.each offers, (offer, index) ->
+        _.extend offer, {popover_data:
+          trigger: 'click'
+          title: offer.title.replace(/"/, '')
+          content: "From #{offer.time_start} to #{offer.time_end}"
+          placement: "top"
+        }
 
   addBlock: (place) =>
     I18n = $('#language .active').attr('id')
     properKitchensName = if place.kitchens.length > 18 then place.kitchens.substring(0, 18) + '...' else place.kitchens
     source   = $("#list_place_template").html()
-    # TODO add proper popover for special offer
-#    data = { trigger: 'click', title: 'Special Offer', content: "", placement: 'top' }
+    @addPopoverData place
     listBlock = Mustache.to_html(source, place)
     source   = $("#map_place_template").html()
     mapBlock = Mustache.to_html(source, place)
     $el = $('#map_details_wrapper').append(mapBlock)
     $listEl = $(listBlock).insertBefore('#list_grid_view .paginate')
+    $(".popoverable").on('click', () -> return false).popover(html: true)
     time = $("select[name=reserve_time]").val()
     updateSingleTime.call(@, time, $el, $listEl)
 
@@ -155,6 +167,9 @@ class PlacesCollection
       $listEl.find(".timing a:eq(#{index})").attr('href', newLink)
 
   updateSingleTime = (time, els...) ->
+    # TODO REFACTOR
+
+
     if els.length is 2
       [$listEl, $el] = els
     [base_time, minutes] = time.split ':'
@@ -162,15 +177,25 @@ class PlacesCollection
     possibilities = ['00', '15', '30', '45']
     length = possibilities.length
     index = possibilities.indexOf(minutes)
-    values = [ "#{base_time + Math.floor( (index + 2) / 4 ) }:#{possibilities[(index + 2) % 4]}",
-    "#{base_time + Math.floor( (index + 1) / 4 ) }:#{possibilities[(index + 1) % 4]}",
-    "#{base_time}:#{minutes}",
-    "#{base_time - ( if (index - 1) < 0 then 1 else 0 ) }:#{possibilities[(if (index - 1) < 0 then index - 1 + length else index - 1) % 4]}",
-    "#{base_time - ( if (index - 2) < 0 then 1 else 0 ) }:#{possibilities[(if (index - 2) < 0 then index - 2 + length else index - 2) % 4]}"]
+    values = []
+    for delta in [30, 15, 0, -15, -30]
+      [base_time, minutes] = time.split ':'
+      date = new Date(1995, 8, 24, base_time, minutes)
+      valid_date = new Date(date.setMinutes(date.getMinutes() + delta - date.getMinutes() % 15))
+      valid_hours = valid_date.getHours()
+      valid_minutes = ["00", "15","30", "45"][(valid_date.getMinutes() / 15)]
+      validHourString = valid_hours + ":" + valid_minutes
+      values.push validHourString
     _.each values, (time, index, values) ->
       $el.find(".timing a:eq(#{index})").html time
       $listEl.find(".timing a:eq(#{index})").html time
 
+  addCenter: (googleObjLatLng) =>
+    marker = new google.maps.Marker(
+      position: googleObjLatLng
+      title: "You're here!"
+    )
+    marker.setMap(@map)
 
   addMarker: (obj) =>
     marker = new google.maps.Marker(
@@ -181,6 +206,13 @@ class PlacesCollection
     )
     @markers.push marker
     marker.setMap(@map)
+    map = @map
+    contentString = "<div class='popover-content place'><a href='#' class='place_img_sm'><h4><a href='#'>Sowa Cafe<span class='discount_label'>-10%</span></a></h4><div class='rating'><div class='stars'><div class='stars_overlay'></div><div class='stars_bar' style='left: 33%'></div><div class='stars_bg'></div></div><small><a href='#'></a><a href='#'>1 review</a></small>     </div><ul class='place_features'><li class='location'>Sribnokilskaya st., 3d</li><li class='cuisine'>European, Japaneese</li><li class='pricing'>200 UAH</li></ul><div class='clear'></div></div>"
+    infowindow = new google.maps.InfoWindow(content: contentString)
+    google.maps.event.addListener marker, "click", (e) ->
+      infowindow.open(map, marker)
+
+
     google.maps.event.addListener marker, "mouseover", ->
       selector = '#' + obj.id
       console.log selector
@@ -326,7 +358,8 @@ class FilterInput
       newQuery = newQuery.replace(/(\+PM){2,}/, '+PM')
       newQuery = newQuery.replace(/\+AM\+PM/, '+PM')
       newQuery = newQuery.replace(/\+PM\+AM/, '+AM')
-    newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '?')
+
+    newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '?').replace("/??", '?')
     window.history.replaceState('',null, newUrl)
 
     if entity is 'page'
@@ -391,7 +424,8 @@ class FilterInput
       if dateText == res.join('-') or dateText == res.join('/')
         # it's today we should check for the hour
         time = $(this).val()
-        if date.getHours() >= time
+        console.log date.getHours(),  parseInt(time.split(':')[0]), date.getHours() >= parseInt(time.split(':')[0])
+        if date.getHours() <= parseInt(time.split(':')[0])
           headlineText = $('#map_details > h3:first-child').html().replace(/\d+\:\d+(?=\sfor\s)/, time)
           $('#map_details > h3:first-child').html headlineText
           self.places.updateTime time
@@ -412,25 +446,31 @@ class FilterInput
 
     $("#sortby-list a").on 'click', (e) ->
       e.preventDefault()
-      window.filter.get "sortby", $(e.target).attr('href')
+      filterSelected = $(e.target)
+      if filterSelected.text() != $("#sortby").text()
+        $("#sortby").text(filterSelected.text())
+        text =  filterSelected.attr('href')
+        window.filter.get "sortby", text
+        window.filter.get "page", 1
 
 
   askAJAX = (serializedData, placesObj, page) =>
     $.ajaxSetup
-       dataType: "json",
-       url: "/search/",
-       type: "GET"
-       error: (xhr, error) ->
-         $.noop()
-#          console.log xhr, error
-       success: (json) ->
-          placesObj.useNewData(json, page)
-       beforeSend: () ->
-         $.noop()
-#        sending ajax request, can do animation here'
-       complete: () ->
-         $.noop()
-#        ajax request completed, can remove animation here'
+#      cache: false
+      dataType: "json",
+      url: "/search/",
+      type: "GET"
+      error: (xhr, error) ->
+        $.noop()
+#         console.log xhr, error
+      success: (json) ->
+         placesObj.useNewData(json, page)
+      beforeSend: () ->
+        $.noop()
+#       sending ajax request, can do animation here'
+      complete: () ->
+        $.noop()
+#       ajax request completed, can remove animation here'
 
     $.ajax({ data: serializedData });
 

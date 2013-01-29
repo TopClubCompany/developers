@@ -1,28 +1,30 @@
 #share.popup style="margin-left: 0px;"
+  - form_tag
   button.close aria-hidden="true" data-dismiss="modal" type="button"
-  h5 Share with friends
+  h5= t('short_strings.share_with_friends')
   .shared_content
-    img height="80" src="#" width="120"
-      h6 Avalon
+    img height="80" src=(@place.place_image.url(:share_fancy) if @place.place_image) width="120"
+      h6= @place.title
       span.header_info
-        a href="#"
-        | ,
-        a href="#"
-        span.pricing
-          | .
-          strong $$$
-          |$
+        - categories = @place.categories
+        - categories.each_with_index do |category, i|
+          = link_to category.title, '#'
+          = ', ' if (i + 1) < categories.count
+        '  ·
+        - data = { trigger: 'hover', title: 'Average check', content: @place.bill.try(:title), placement: 'top' }
+        = content_tag :span, class: 'pricing popoverable', data: data do
+          = get_pricing @place
       ul.place_features
         li.location
-          strong Location:
-          | Sribnokilskaya st., 3d
+          strong= t('search.location') + ': '
+          = @place.location.address
         li.cuisine
-          strong Kitchen:
-          | European, Italian
+          strong= t('words.kitchen').capitalize + ': '
+          = @place.kitchens.map(&:name).join(', ')
       .clear
   textarea name="shared_comment" placeholder="Add a comment..."
   ul.share_selector
-    strong Share on:
+    strong= t('short_strings.share_on').capitalize + ': '
     li#fb.active
     li#vk.active
     li#tw
