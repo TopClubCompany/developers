@@ -13,7 +13,7 @@ class Review < ActiveRecord::Base
   self.per_page = 6
 
   def avg_mark
-    marks.average(:value).to_f
+    marks.included.average(:value).to_f
   end
 
   def for_mustache
