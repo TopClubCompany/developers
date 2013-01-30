@@ -1,4 +1,4 @@
-.twitter.option#custom-tweet-button
-  a.option.twitter.twitter-mention-button  data-lang=locale.to_s href='https://twitter.com/share' data-url="#{place_url(@place)}" data-text="some text"
-a.option.google href="https://plus.google.com/share?url=#{place_url(@place)}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
-/= link_to '', get_report_info_for_facebook_path(report.id), class: 'option facebook', remote: true, method: 'post'
+/.twitter-share
+  a.twitter-share-button.twitter-count-none data-lang=locale.to_s href='https://twitter.com/share' data-url="#{place_url(@place)}" data-text="some text" data-count="none"
+a.share.google href="https://plus.google.com/share?url=#{place_url(@place)}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
+= link_to '', '', class: 'share facebook'

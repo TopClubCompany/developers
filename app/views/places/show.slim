@@ -1,3 +1,5 @@
+= javascript_include_tag "http://connect.facebook.net/en_US/all.js"
+= javascript_include_tag "http://platform.twitter.com/widgets.js"
 #place.content
   .row
     .span8
@@ -65,12 +67,12 @@
               a#write_review href="#review_form"
                 |Write a review
         - if signed_in?
-          a.set_unset_favorite href=set_unset_favorite_place_path(@place) data-remote='true' data-method='post'
-            #favorites
-              .add_to_favorites class="#{'i_like_this_place' if current_user.favorite_place?(@place)}"
-                | Add to
-                br
-                | favorites
+          /a.set_unset_favorite href=set_unset_favorite_place_path(@place) data-remote='true' data-method='post'
+          #favorites
+            .add_to_favorites class="#{'i_like_this_place' if current_user.favorite_place?(@place)}" data-id=@place.to_param
+              | Add to
+              br
+              | favorites
         .share_btns
           - %w|fb vk tw|.each do |soc_network|
             = link_to '', '#share', class: "show_popup share", id: soc_network
@@ -183,6 +185,6 @@
   #popups style="display:none"
     = render 'place_menu_popup'
     = render 'place_share_popup'
-    = render 'links_for_share'
+  = render 'links_for_share'
 script type='text/html' id='review_template'
   /= render 'review'

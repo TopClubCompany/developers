@@ -3,6 +3,8 @@ class Mark < ActiveRecord::Base
   belongs_to :review
   belongs_to :mark_type
 
+  scope :included, joins(:mark_type).where("mark_types.included_in_overall = ?", true)
+
   validates_inclusion_of :value, in: 1..5, :message => "can only be between 1 and 5."
 
 end
