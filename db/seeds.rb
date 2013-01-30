@@ -129,7 +129,8 @@ end
 def insert_mark_types
   MarkType.full_truncate
   %w(pricing service food ambiance noise\ level).each do |type|
-    MarkType.create(name: type, description: Faker::Lorem.sentence(10))
+    included = (type == 'noise level' ? false : true)
+    MarkType.create(name: type, description: Faker::Lorem.sentence(10), included_in_overall: included)
   end
   puts 'mark types added successfully'
 end

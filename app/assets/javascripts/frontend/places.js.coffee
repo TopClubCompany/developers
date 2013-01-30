@@ -1,4 +1,15 @@
 $ ->
+  #temp handle noise mark
+  $(".set_noise a.set").click (e) ->
+    e.preventDefault()
+    id = $(this).attr('id')
+    noise_level_el = $(".noise.noise_big .noise_level")
+    noise_label_el = $(".noise.noise_big .p")
+    noise_input_el = $(".noise.noise_big").closest('.criteria').find('input.review_mark_value')
+    noise_level_el.removeClass('noise_1 noise_2 noise_3 noise_4 noise_5')
+    noise_level_el.addClass(id)
+    noise_label_el.text(id[id.length - 1])
+    noise_input_el.val(id[id.length - 1])
   #handle reviews marks
   $(".set_rating a.rate").on
     'mouseenter': (e) ->
@@ -32,11 +43,11 @@ $ ->
   #computing overall mark
   set_overall_mark = () ->
     sum = 0
-    $('.marks .criteria').each ->
+    $('.marks .criteria.included').each ->
       console.log $(this).data('old_mark')
       value = parseInt($(this).data('old_mark')) || 1
       sum += value
-    quantity = $('.marks .criteria').length
+    quantity = $('.marks .criteria.included').length
     overall_mark_value = sum / quantity
     overall_mark_css_value = "#{overall_mark_value * 20}%"
     overall_mark_el = $(".overall_mark .stars_bar")
@@ -145,8 +156,67 @@ $ ->
     soc_id = $(this).attr('id')
     $("ul.share_selector li").removeClass('active')
     $("ul.share_selector li#"+ soc_id).addClass('active')
+    if soc_id == 'tw'
+      tw_button = $(".tw_button")
+      standart_share_bt = $(".standart_share_button")
+      tw_button.css('display', 'inline-block')
+      standart_share_bt.css('display', 'none')
     $(this).fancybox()
 
   # click on social networks buttons in share popup
   $("ul.share_selector li").live 'click', ->
     $(this).toggleClass('active')
+    if $(this).attr('id') == 'tw'
+      tw_button = $(".tw_button")
+      standart_share_bt = $(".standart_share_button")
+      if $(this).hasClass('active')
+        tw_button.css('display', 'inline-block')
+        standart_share_bt.css('display', 'none')
+      else
+        tw_button.css('display', 'none')
+        standart_share_bt.css('display', 'inline-block')
+
+#  tw_case=(id) ->
+
+
+  #twitter share
+  init_twitter = ->
+    not ((d, s, id) ->
+      fjs = undefined
+      js = undefined
+      js = undefined
+      fjs = d.getElementsByTagName(s)[0]
+      unless d.getElementById(id)
+        js = d.createElement(s)
+        js.id = id
+#        js.src = "https://platform.twitter.com/widgets.js"
+        fjs.parentNode.insertBefore js, fjs
+      )(document, "script", "twitter-wjs")
+
+    twttr.events.bind "click", (event) ->
+      active_soc_el = $("ul.share_selector li.active")
+      active_soc_el.each ->
+        if (this).attr('id') == 'fb'
+          $("a.share.facebook").click()
+        if (this).attr('id') == 'vk'
+          $("a.share.google").click()
+      $.fancybox.close()
+
+  init_twitter()
+
+  $("#share_text_input").keyup ->
+    console.log 'change'
+
+
+  #facebook share handle
+  FB.init
+    appId: "373546769386190"
+#    $("a.share.facebook").bind "ajax:success", (evt, data, status, xhr) ->
+    $("a.share.facebook").click ->
+      FB.ui
+        method: "feed"
+        name: "Official HitMaker Report"
+        link: 'hohoho'
+        picture: 'dadada'
+        caption: " "
+        description: "louojojo"
