@@ -193,7 +193,7 @@ $ ->
         fjs.parentNode.insertBefore js, fjs
       )(document, "script", "twitter-wjs")
 
-    twttr.events.bind "click", (event) ->
+    window.twttr.events.bind "click", (event) ->
       active_soc_el = $("ul.share_selector li.active")
       active_soc_el.each ->
         if (this).attr('id') == 'fb'
