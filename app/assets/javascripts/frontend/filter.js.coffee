@@ -250,7 +250,7 @@ class FilterInput
     for filter in needToDisplay
       @displayFilterType filter
 
-    $('#refine input[type=checkbox]').on 'change', (e) =>
+    $('#refine input[type=checkbox]').on 'change.filterType', (e) =>
       type = $(e.target).data('type')
       if $(e.target).is(":checked")
         @displayFilterType(type) if $("##{type}_filter").length is 0
@@ -376,8 +376,8 @@ class FilterInput
         $("#refine input[value='#{value}'][data-type='#{filter}']").click() unless $("#refine input[value='#{value}'][data-type='#{filter}']").is(':checked')
 
   bindChangeListener: () =>
-    $('#refine input[type=checkbox]').off 'change'
-    $('#refine input[type=checkbox]').on 'change', (e) =>
+    $('#refine input[type=checkbox]').off 'change.addressBar'
+    $('#refine input[type=checkbox]').on 'change.addressBar', (e) =>
       result = {}
       $('#refine input').each( ->
         type = $(this).data('type')
