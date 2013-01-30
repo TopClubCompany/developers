@@ -19,7 +19,6 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
 gem 'ffaker'
 
 gem 'geokit'
