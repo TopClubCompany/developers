@@ -315,6 +315,7 @@ class FilterInput
         $("a.more[data-type='#{filter}']").click()
         setTimeout(( ->
           self.getFilterseNeedToTriggerPaginate(needToCheck)
+          self.bindChangeListener()
         ), 500)
     needed
 
