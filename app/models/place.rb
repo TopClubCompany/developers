@@ -117,23 +117,22 @@ class Place < ActiveRecord::Base
     end
 
     if filters.empty? && options.empty?
-      self.best_places(15, options)
+      self.best_places(10, options)
     else
 
       if options[:city].present?
         filters << {query: {flt: {like_text: options[:city], fields: I18n.available_locales.map { |l| "city_#{l}" }} }}
       end
 
-      tire.search(page: options[:page], per_page: options[:per_page] || 4) do
+      tire.search(page: options[:page], per_page: options[:per_page] || 10) do
         if options[:title].present?
           fields = I18n.available_locales.map { |l| "name_#{l}" }.concat(Location.all_translated_attribute_names)
           query do
             flt options[:title].lucene_escape, :fields => fields, :min_similarity => 0.9
           end
-          sort { by "overall_mark", "desc" }
+          sort { by (options[:sort_by] || 'overall_mark'), "desc" }
         end
         filter(:and, :filters => filters)
-        puts to_curl
       end
     end
 
