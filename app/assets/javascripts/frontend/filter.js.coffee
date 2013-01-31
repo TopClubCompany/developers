@@ -230,6 +230,7 @@ class PlacesCollection
 
 class FilterInput
   constructor: (needToShowMap = no)->
+    self = @
     if needToShowMap
       blocksThatExist = $("#map_details_wrapper .place")
       page = @getPageNum()
@@ -239,7 +240,10 @@ class FilterInput
     @bindChangeListener()
     @bindFilterChangeListener()
     @give_more() if $(".more").length > 0
-    @dirtyHack()
+    setTimeout(( ->
+      self.dirtyHack()
+    ), 500)
+    @
 
 
   bindFilterChangeListener: () ->
