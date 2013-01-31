@@ -234,9 +234,10 @@ class FilterInput
       blocksThatExist = $("#map_details_wrapper .place")
       page = @getPageNum()
       @places = new PlacesCollection(blocksThatExist, page) if $("#map_places").length > 0
-    @bindFilterChangeListener()
+
     @checkIfNeeded()
     @bindChangeListener()
+    @bindFilterChangeListener()
     @give_more() if $(".more").length > 0
     @dirtyHack()
 
@@ -315,7 +316,7 @@ class FilterInput
         $("a.more[data-type='#{filter}']").click()
         setTimeout(( ->
           self.getFilterseNeedToTriggerPaginate(needToCheck)
-          self.bindChangeListener()
+
         ), 500)
     needed
 
@@ -493,6 +494,7 @@ class FilterInput
       $el.prev().prev().after(@more_template(obj))
     @checkIfNeeded()
     @bindChangeListener()
+    @bindFilterChangeListener()
     $el.hide()
 
 $ ->
