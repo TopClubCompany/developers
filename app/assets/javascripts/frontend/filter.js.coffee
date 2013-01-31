@@ -234,11 +234,12 @@ class FilterInput
       blocksThatExist = $("#map_details_wrapper .place")
       page = @getPageNum()
       @places = new PlacesCollection(blocksThatExist, page) if $("#map_places").length > 0
+    @bindFilterChangeListener()
     @checkIfNeeded()
     @bindChangeListener()
     @give_more() if $(".more").length > 0
     @dirtyHack()
-    @bindFilterChangeListener()
+
 
   bindFilterChangeListener: () ->
     needToDisplay = _.reduce($("#refine input[type=checkbox]:checked"), ((memo,checkbox) ->
