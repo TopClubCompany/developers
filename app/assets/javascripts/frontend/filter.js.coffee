@@ -1,5 +1,5 @@
 class Pagination
-  constructor: (total_elements, per_page = 4, @max_visible = 5, @elSelector = '#list_grid_view .paginate') ->
+  constructor: (total_elements, per_page = 10, @max_visible = 5, @elSelector = '#list_grid_view .paginate') ->
     @$el = $(@elSelector)
     @total_pages = Math.ceil (total_elements / per_page ) || 0
     console.log total_elements, per_page, @total_pages
@@ -48,7 +48,7 @@ class Pagination
 class PlacesCollection
   constructor: ( blocksThatExist = [], page = 1 ) ->
     number = parseInt($('#total').text())
-    new Pagination(number, blocksThatExist.length).goTo(page)
+    new Pagination(number).goTo(page)
     @places = []
     @ids = []
     @createMap()
@@ -130,6 +130,7 @@ class PlacesCollection
     properKitchensName = if place.kitchens.length > 18 then place.kitchens.substring(0, 18) + '...' else place.kitchens
     source   = $("#list_place_template").html()
     @addPopoverData place
+    _.extend place, {special_offer: true} if place.special_offers?.length > 0
     listBlock = Mustache.to_html(source, place)
     source   = $("#map_place_template").html()
     mapBlock = Mustache.to_html(source, place)
@@ -189,6 +190,9 @@ class PlacesCollection
     _.each values, (time, index, values) ->
       $el.find(".timing a:eq(#{index})").html time
       $listEl.find(".timing a:eq(#{index})").html time
+      handleClick.call @
+
+
 
   addCenter: (googleObjLatLng) =>
     marker = new google.maps.Marker(
@@ -227,6 +231,7 @@ class PlacesCollection
       selector = '#' + obj.id
       console.log selector
       $(selector).removeClass 'target'
+
 
 class FilterInput
   constructor: (needToShowMap = no)->
@@ -366,9 +371,10 @@ class FilterInput
       newQuery = newQuery.replace(/\+AM\+PM/, '+PM')
       newQuery = newQuery.replace(/\+PM\+AM/, '+AM')
 
-    newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '?').replace("/??", '?')
-    window.history.replaceState('',null, newUrl)
-
+    newUrl = (baseURL + '/' + newQuery).replace(/\/*\?+/, '?').replace("/??", '?')
+    newQuery = newQuery.replace(/\?/g, '')
+    window.history.pushState('',null, newUrl)
+    console.log newUrl
     if entity is 'page'
       pageTo = entityTo
       askAJAX.call(@, newQuery, @places, pageTo)
@@ -420,30 +426,27 @@ class FilterInput
         $('#map_details > h3:first-child').html headlineText
         window.filter.get 'reserve_date', dateText
     )
-
-    $("select[name=reserve_time]").on 'change', ->
+    $("select[name=reserve_time]").off 'change.filters'
+    $("select[name=reserve_time]").on 'change.filters', ->
       dateText = $('input[name="reserve_date"]').val()
       date = new Date()
       res = []
-      res.push curr_date = date.getDate()
+      res.push curr_date = if (day = date.getDate()) < 10 then '0' + day else day
       res.push curr_month = if (month = date.getMonth() + 1) < 10 then '0' + month else month  #Months are zero based
       res.push curr_year = date.getFullYear()
-      if dateText == res.join('-') or dateText == res.join('/')
-        # it's today we should check for the hour
-        time = $(this).val()
-        console.log date.getHours(),  parseInt(time.split(':')[0]), date.getHours() >= parseInt(time.split(':')[0])
-        if date.getHours() <= parseInt(time.split(':')[0])
-          headlineText = $('#map_details > h3:first-child').html().replace(/\d+\:\d+(?=\sfor\s)/, time)
-          $('#map_details > h3:first-child').html headlineText
-          self.places.updateTime time
-        else
-          alert "The time has passed. Please select current time"
-          # the last bit for 00, 30 part
-          valid_date = new Date(date.setMinutes(date.getMinutes() + 90 - date.getMinutes() % 30))
-          valid_hours = valid_date.getHours()
-          valid_minutes = ["00", "30"][(valid_date.getMinutes() / 30)]
-          validHourString = valid_hours + ":" + valid_minutes
-          $(this).val(validHourString)
+      time = $(this).val()
+      if (dateText == res.join('-') or dateText == res.join('/')) and (date.getHours() >= parseInt(time.split(':')[0]))
+        alert "The time has passed. Please select current time"
+        # the last bit for 00, 30 part
+        valid_date = new Date(date.setMinutes(date.getMinutes() + 90 - date.getMinutes() % 30))
+        valid_hours = valid_date.getHours()
+        valid_minutes = ["00", "30"][(valid_date.getMinutes() / 30)]
+        validHourString = valid_hours + ":" + valid_minutes
+        $(this).val(validHourString)
+      else
+        headlineText = $('#map_details > h3:first-child').html().replace(/\d+\:\d+(?=\sfor\s)/, time)
+        $('#map_details > h3:first-child').html headlineText
+        self.places.updateTime time
 
     $("select[name=number_of_people]").on 'change', ->
       number = $(this).val()
@@ -465,7 +468,7 @@ class FilterInput
     $.ajaxSetup
 #      cache: false
       dataType: "json",
-      url: "/search/",
+      url: "/search",
       type: "GET"
       error: (xhr, error) ->
         $.noop()
@@ -508,8 +511,11 @@ $ ->
   if $('.paginate').length isnt 0
     total = parseInt($('#total').html())
     new Pagination( total )
+  handleClick()
 
-  $('.timing a').on 'click', (e) ->
+handleClick = ()->
+  $('.timing a').off 'click.reserve', (e) ->
+  $('.timing a').on 'click.reserve', (e) ->
     e.preventDefault()
     return false if $(e.target).hasClass('na')
     language = $('#language .active').attr('id')
