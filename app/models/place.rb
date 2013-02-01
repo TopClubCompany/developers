@@ -289,7 +289,7 @@ class Place < ActiveRecord::Base
 
 
   def self.for_mustache(place, options={})
-    time_now = Time.now
+    time_now = options[:time] || Time.now
     truncated_time_now = Time.at(time_now.to_i - time_now.sec - time_now.min % 15 * 60)
     time = options[:reserve_time]? Time.parse(options[:reserve_time]) : truncated_time_now
     options[:image_url] ||= :slider_url
