@@ -124,7 +124,7 @@
           a#sortby.sortby.dropdown-toggle data-target="#" data-toggle="dropdown" role="button"
             |Sort by
           - reviews.each do |review|
-            .review itemprop="review" itemscope="" itemtype="http://schema.org/Review" style="min-height: 151px;"
+            .review itemprop="review" itemscope="" itemtype="http://schema.org/Review"
               a href="#"
                 img.user_pic height="32" src=get_user_avatar(review.user) width="32"
               .review_content
@@ -139,36 +139,38 @@
                   small
                     '  ·
                     a href="#" #
-                    br
                   span itemprop="description"
                     = review.content
                   - can_vote = signed_in? && (review.user_id != current_user.id)
+                  /span.review_specials
+                    | Special offers:
+                    a href="#" #
                   .review_vote
                     - %w|helpful unhelpful|.each do |usefulness|
                       a href="#{can_vote ? set_review_usefulness_path(review.id, usefulness) : ''}" class=usefulness data-method="post"
                         = usefulness
                         strong= review.votes.send(usefulness.to_sym).count
-                  .ratings
-                    - temp_overall_mark = Hashie::Mash.new(value: review.avg_mark, id: 0, mark_type: { title: t('words.overall') })
-                    - marks = review.marks.to_a.push(temp_overall_mark)
-                    - marks.each_with_index do |mark, i|
-                      - if mark.mark_type.title == 'noise level'
-                        .noise style="height: 20px;"
-                          label= mark.mark_type.title.try(:capitalize)
-                          .noise_level class="noise_#{mark.value}"
-                          br
-                      - else
-                        div
-                          label style="font-weight: #{'bold' if mark.id.zero?}"
-                            = mark.mark_type.title.try(:capitalize)
-                          .rating itemprop="reviewRating"
-                            .stars
-                              .stars_overlay
-                              .stars_bar style="left: #{mark.value * 20}%"
-                              .stars_bg
-                            meta content=mark.value
-
-        a.load_more data-type='reviews' data-displayed=2 data-template-id="#review_template" data-base-url="/places/#{@place.id}/more?" href="#"= t(".more")
+              .ratings
+                - temp_overall_mark = Hashie::Mash.new(value: review.avg_mark, id: 0, mark_type: { title: t('words.overall') })
+                - marks = review.marks.to_a.push(temp_overall_mark)
+                - marks.each_with_index do |mark, i|
+                  - if mark.mark_type.title == 'noise level'
+                    .div
+                      .noise style="height: 20px;"
+                        label= mark.mark_type.title.try(:capitalize)
+                        .noise_level class="noise_#{mark.value}"
+                  - else
+                    div
+                      label style="font-weight: #{'bold' if mark.id.zero?}"
+                        = mark.mark_type.title.try(:capitalize)
+                      .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
+                        .stars
+                          .stars_overlay
+                          .stars_bar style="left: #{mark.value * 20}%"
+                          .stars_bg
+                        meta content=mark.value itemprop="ratingValue"
+              .clear
+          a.load_more data-type='reviews' data-displayed=2 data-template-id="#review_template" data-base-url="/places/#{@place.id}/more?" href="#"= t(".more")
 
     #sidebar.specials.span4
       h3 Special offers from #{@place.title}
@@ -186,3 +188,6 @@
   = render 'links_for_share'
 script type='text/html' id='review_template'
   /= render 'review'
+
+
+

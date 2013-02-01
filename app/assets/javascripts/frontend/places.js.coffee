@@ -189,20 +189,27 @@ $ ->
       unless d.getElementById(id)
         js = d.createElement(s)
         js.id = id
-#        js.src = "https://platform.twitter.com/widgets.js"
         fjs.parentNode.insertBefore js, fjs
       )(document, "script", "twitter-wjs")
 
     window.twttr.events.bind "click", (event) ->
-      active_soc_el = $("ul.share_selector li.active")
-      active_soc_el.each ->
-        if (this).attr('id') == 'fb'
-          $("a.share.facebook").click()
-        if (this).attr('id') == 'vk'
-          $("a.share.google").click()
+      check_what_share_open()
       $.fancybox.close()
 
+  check_what_share_open =() ->
+    active_soc_el = $("ul.share_selector li.active")
+    active_soc_el.each ->
+      if $(this).attr('id') == 'fb'
+        $("a.share.facebook").click()
+      if $(this).attr('id') == 'vk'
+        $('#vk_share_button').find('a').first().click()
+
+  #vk share
+  init_vk = ->
+    $('#vk_share_button').html(VK.Share.button({url: document.URL, title: 'hohoo', description: 'what are you doing'}, {type: 'link_noicon'}))
+
   init_twitter()
+  init_vk()
 
   $("#share_text_input").keyup ->
     console.log 'change'
@@ -211,12 +218,15 @@ $ ->
   #facebook share handle
   FB.init
     appId: "373546769386190"
-#    $("a.share.facebook").bind "ajax:success", (evt, data, status, xhr) ->
-    $("a.share.facebook").click ->
-      FB.ui
-        method: "feed"
-        name: "Official HitMaker Report"
-        link: 'hohoho'
-        picture: 'dadada'
-        caption: " "
-        description: "louojojo"
+  $("a.share.facebook").click ->
+    FB.ui
+      method: "feed"
+      name: "Official HitMaker Report"
+      link: 'google.com'
+#      picture: 'dadada'
+      caption: " "
+      description: "louojojo"
+
+  $(".standart_share_button").click ->
+    check_what_share_open()
+    $.fancybox.close()

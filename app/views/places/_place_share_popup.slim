@@ -28,7 +28,10 @@
     li#vk
     li#tw
   #multi-share-button
-    .tw_button.custom-tweet-button style="display: none;"
+    /.test
+    .tw_button#custom-tweet-button style="display: none;"
       a.twitter-share-button data-lang=locale.to_s href='https://twitter.com/share' data-url="#{place_url(@place)}" data-text="some text" data-count="none"
+    .test
+      input type="submit" value="Share"
     .standart_share_button
       input type="submit" value="Share"
