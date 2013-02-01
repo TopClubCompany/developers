@@ -36,14 +36,17 @@
     {{/timing}}
   </div>
   <div class="special_offers">
-    <h5>Special offers:</h5>
-    <h5>
+      {{#special_offer}}
+        <h5>Special offers:</h5>
+      {{/special_offer}}
       {{#special_offers}}
+      <h5>
          {{#popover_data}}
           <a class="popoverable" data-trigger="{{trigger}}" data-title="{{title}}" data-content="{{content}}" data-placement="{{placement}}"  href="{{place_url}}">{{title}}</a>
          {{/popover_data}}
+      </h5>
       {{/special_offers}}
-    </h5>
+    
   </div>
   {{#is_favourite}}
     <div id="favorites_small_{{id}}" style="display: block;">
