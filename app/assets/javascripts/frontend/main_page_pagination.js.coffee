@@ -8,7 +8,11 @@ class Paginator
     $(@options.containerId()).find('.load_more').on 'click', (e) =>
       e.preventDefault()
       @htmlToSet = $(e.target).html()
-      $(e.target).html("<img src='/assets/ajax_loader_transp.gif'>")
+      # $(e.target).html("<img src='/assets/ajax_loader_transp.gif'>")
+      $(e.target).hide().after("<img id='js-spinner' src='/assets/ajax-loader.gif'>")
+      $("#js-spinner").css
+        "display":"block",
+        "margin": "auto"
       @next_page()
 
   initDefaults: (opts) ->
@@ -55,7 +59,8 @@ class Paginator
           showMoreButton.remove()
         else
           # reseting gif image of loader with html previously saved
-          showMoreButton.html(self.htmlToSet)
+          showMoreButton.show().html(self.htmlToSet)
+          $("#js-spinner").remove()
           showMoreButton.add(clear).detach().appendTo($(self.options.containerId()))
           self.nextPage = self.nextPage + 1
 
@@ -78,21 +83,29 @@ $ ->
       new Paginator($(element).data())
 
   if $('#search_form').length > 0 and $('#refine').length == 0
-    $('select[name=reserve_time]').on 'change', (e) ->
+    $('select[name=reserve_time]').on 'change.mainPage', (e) ->
       dateText = $('input[name="reserve_date"]').val()
       date = new Date()
       res = []
-      res.push curr_date = date.getDate()
+      res.push curr_date = if (day = date.getDate()) < 10 then '0' + day else day
       res.push curr_month = if (month = date.getMonth() + 1) < 10 then '0' + month else month  #Months are zero based
       res.push curr_year = date.getFullYear()
       if dateText == res.join('-') or dateText == res.join('/')
         # it's today we should check for the hour
         time = $("select[name=reserve_time]").val()
-        unless date.getHours() >= time
-          alert "The time has passed. Please select current time"
-          # the last bit for 00, 30 part
-          valid_date = new Date(date.setMinutes(date.getMinutes() + 90 - date.getMinutes() % 30))
-          valid_hours = valid_date.getHours()
-          valid_minutes = ["00", "30"][(valid_date.getMinutes() / 30)]
-          validHourString = valid_hours + ":" + valid_minutes
-          $("select[name=reserve_time]").val(validHourString)
+        if is_english.call @, time
+          # TODO HANDLE ENGLISH TIME
+        else
+          hour = parseInt(time.split(':')[0])
+          unless date.getHours() <= hour
+            alert "The time has passed. Please select current time"
+            # the last bit for 00, 30 part
+            valid_date = new Date(date.setMinutes(date.getMinutes() + 90 - date.getMinutes() % 30))
+            valid_hours = valid_date.getHours()
+            valid_minutes = ["00", "30"][(valid_date.getMinutes() / 30)]
+            validHourString = valid_hours + ":" + valid_minutes
+            $("select[name=reserve_time]").val(validHourString)
+
+
+  is_english = (time_argument) ->
+    (time_argument.indexOf("AM") isnt -1) or (time_argument.indexOf("FM") isnt -1)

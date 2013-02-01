@@ -230,20 +230,27 @@ module ApplicationHelper
 
 
   def time_with_locale(time)
+    if time[:m] == '15'
+      minutes = '00'
+    end
+    if time[:m] == '45'
+      minutes = '30'
+    end
+    time_no_quarters = {:h => time[:h].strip, :m => minutes || time[:m]}  
     if I18n.locale.to_s == "en"
-      en_time(time)
+      en_time(time_no_quarters)
     else
-      other_time(time)
+      other_time(time_no_quarters)
     end
   end
 
   def other_time time
     times = []
-    (0...24).each do |minutes|
-      %w(00 30).each do |_time|
+    (0...24).each do |hour|
+      %w(00 30).each do |minutes|
         minutes = '00' if minutes == 0
-        key = "#{minutes}:#{_time}"
-        if minutes.to_s == time[:h] and _time == time[:m]
+        key = "#{hour}:#{minutes}"
+        if hour.to_s == time[:h] and minutes == time[:m]
           times.push({key => true})
         else
           times.push({key => false})
