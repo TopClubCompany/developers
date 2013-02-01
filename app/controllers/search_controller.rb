@@ -5,7 +5,7 @@ class SearchController < ApplicationController
   def index
     respond_to do |format|
       format.json do
-        render :json => {result: @result.map{|e| Place.for_mustache(e, params) },
+        render :json => {result: @result.map{|e| Place.for_mustache(e, params.merge(time: @time)) },
                          total: @result.total}
       end
       format.html do
