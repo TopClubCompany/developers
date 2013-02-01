@@ -315,7 +315,15 @@ class Place < ActiveRecord::Base
     res[:lat_lng] = place["lat_lng"]
     offers = self.today_discount(place["discounts"], options)
     unless offers[1].is_a? NilClass
-      res[:special_offers] = offers[1].map {|obj|
+      # res[:special_offers] = offers[1].map {|obj|
+      #     {:title => obj["title_#{I18n.locale}"],
+      #      :time_start => '%.2f' % obj["from_time"].to_f ,
+      #     :time_end => '%.2f' % obj["to_time"].to_f
+      #     }
+      # }
+      res[:special_offers] = offers[1].select {|obj|
+        (obj["from_time"].to_f...obj["to_time"].to_f).cover? time.hour.to_i + time.min.to_i / 100
+        }.map {|obj|
           {:title => obj["title_#{I18n.locale}"],
            :time_start => '%.2f' % obj["from_time"].to_f ,
           :time_end => '%.2f' % obj["to_time"].to_f
