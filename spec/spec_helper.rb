@@ -3,6 +3,7 @@ require File.expand_path("../../config/environment", __FILE__)
 require "active_support"
 require 'spork'
 require 'rspec/rails'
+require 'rspec/autorun'
 require 'capybara/rails'
 require 'simplecov'
 
