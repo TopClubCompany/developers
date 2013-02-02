@@ -134,7 +134,6 @@ class Place < ActiveRecord::Base
           sort { by (options[:sort_by] || 'overall_mark'), "desc" }
         end
         filter(:and, :filters => filters)
-        puts to_curl
       end
     end
 
@@ -329,15 +328,24 @@ class Place < ActiveRecord::Base
     res[:star_rating] = self.get_star_rating(place)
     # TODO: replace with actual values of availability and being_favourite
     res[:is_favourite] = [true, false].sample
-    res[:timing] = self.order_time(time)
+    res[:timing] = self.order_time(place, time)
     res
   end
 
 
-  def self.order_time time
-    [30, 15, 0, -15, -30].map do |i|
-      {:time => (time + i.minutes).strftime("%H:%M").to_sym, :available => true}
+  def self.order_time place, time
+    [30, 15, 0, -15, -30].each_with_index.map do |i, index|
+      if index == 3 || index == 4
+        {:time => (time + i.minutes).strftime("%H:%M").to_sym, :available => false}
+      else
+        {:time => (time + i.minutes).strftime("%H:%M").to_sym, :available => true}
+      end
     end
+  end
+
+
+  def self.check_place_avalilable place, time
+
   end
 
 
