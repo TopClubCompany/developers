@@ -169,7 +169,7 @@ class Place < ActiveRecord::Base
   end
 
   def self.tonight_available amount, options={}
-    current_day = PlaceUtils::PlaceTime.wday(DateTime.now.wday) + 1
+    current_day = DateTime.now.wday + 1
     field = "week_day_#{current_day}_end_at"
     filters = []
     filters << {query: {range: {:"#{field}" => {from: "23:55", to: "10:00", boost: 2.0}} }}
@@ -258,14 +258,13 @@ class Place < ActiveRecord::Base
         .group("marks.mark_type_id")
     marks = {}
     count_reviews.each do |review|
-      marks.update(MarkType.find(review.mark_type_id).name => {sum: review.sum_value.to_f, avg: review.avg_value.to_f,
-                                                               id: review.mark_type_id})
+      marks.update(MarkType.find(review.mark_type_id).name => {sum: review.sum_value.to_f, avg: review.avg_value.to_f})
     end
     marks.deep_symbolize_keys!
   end
 
   def overall_mark
-    marks.values.select { |mark| MarkType.find(mark[:id]).included_in_overall }.map { |mark| mark[:avg] }.avg.round(1)
+    marks.values.map { |mark| mark[:avg] }.avg.round(1)
   end
 
   def avg_bill_title
@@ -281,7 +280,6 @@ class Place < ActiveRecord::Base
     if options[:reserve_time].present?
       time = self.en_to_time(options[:reserve_time])
       current_day = options[:reserve_date].present? ? DateTime.parse(options[:reserve_date]).wday : DateTime.now.wday
-      current_day = PlaceUtils::PlaceTime.wday(current_day)
       field = "week_day_#{current_day}_start_at"
       fields << {query: {range: {:"#{field}" => {lte: time, boost: 2.0}} }}
       field = "week_day_#{current_day}_end_at"
@@ -337,9 +335,8 @@ class Place < ActiveRecord::Base
 
   def self.order_time place, time
     [30, 15, 0, -15, -30].each_with_index.map do |i, index|
-      wday = PlaceUtils::PlaceTime.wday(time.wday)
-      start_time = place["week_day_#{wday}_start_at"].sub(":",".").to_f
-      end_time = place["week_day_#{wday}_end_at"].sub(":",".").to_f
+      start_time = place["week_day_#{time.wday}_start_at"].sub(":",".").to_f
+      end_time = place["week_day_#{time.wday}_end_at"].sub(":",".").to_f
       ::PlaceUtils::PlaceTime.find_available_time(i, time, start_time, end_time)
     end
   end
@@ -429,7 +426,6 @@ class Place < ActiveRecord::Base
       time = nil
     end
       current_day = options[:reserve_date].present? ? DateTime.parse(options[:reserve_date]).wday : DateTime.now.wday
-      current_day = PlaceUtils::PlaceTime.wday(current_day)
       discounts = discounts.select do |discount|
         if time
           discount["day"] == current_day && time > discount["from_time"].to_f && time <  discount["to_time"].to_f
