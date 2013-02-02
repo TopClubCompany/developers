@@ -12,6 +12,17 @@ module PlaceUtils
       def is_available?(time, range_time)
         range_time.cover? time.strftime("%H.%M").to_f
       end
+
+      def wday wday
+        if I18n.locale.to_sym == :en
+          case wday
+            when 0
+              7
+          end
+        else
+          wday
+        end
+      end
     end
   end
 end
