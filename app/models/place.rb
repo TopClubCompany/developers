@@ -112,8 +112,9 @@ class Place < ActiveRecord::Base
     filters += self.time_filter(options)
 
     if options[:distance].present? && options[:current_point].present?
-      distance = options[:distance].split(',').map { |dist| PlaceGeoType.find(dist.to_i).distance }.max
-      filters << { geo_distance: { distance: "#{distance}km", lat_lng: options[:current_point] } }
+      distance = options[:distance].split(',').map(&:to_i).max
+      distance = PlaceGeoType.find(distance).distance
+      filters << { geo_distance_range: {lat_lng: options[:current_point] }.merge(distance) }
     end
 
     if filters.empty? && options.empty?
@@ -133,6 +134,7 @@ class Place < ActiveRecord::Base
           sort { by (options[:sort_by] || 'overall_mark'), "desc" }
         end
         filter(:and, :filters => filters)
+        puts self.to_curl
       end
     end
 
@@ -394,9 +396,9 @@ class Place < ActiveRecord::Base
   end
 
 
-  def to_param
-    "#{slug}-#{location.try(:city_en).downcase.gsub(' ','_')}"
-  end
+  #def to_param
+  #  "#{slug}-#{location.try(:city_en).downcase.gsub(' ','_')}"
+  #end
 
   private
 
