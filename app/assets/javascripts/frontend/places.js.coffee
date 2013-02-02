@@ -164,6 +164,9 @@ $ ->
       tw_button.css('display', 'none')
       standart_share_bt.css('display', 'inline-block')
     $(this).fancybox()
+    share_text_input = $("#share_text_input")
+    share_text_input.val(share_text_input.data('description'))
+    console.log share_text_input.data('description')
 
   # click on social networks buttons in share popup
   $("ul.share_selector li").live 'click', ->
@@ -194,6 +197,7 @@ $ ->
         fjs.parentNode.insertBefore js, fjs
       )(document, "script", "twitter-wjs")
 
+    window.twttr.events.unbind "click"
     window.twttr.events.bind "click", (event) ->
       check_what_share_open()
       $.fancybox.close()
@@ -207,9 +211,8 @@ $ ->
         $('#vk_share_button').find('a').first().click()
 
   #vk share
-  init_vk = ->
+  init_vk =(data) ->
     vk_skin = $("#vk_share_button")
-    data = vk_skin.data()
     vk_skin.html VK.Share.button(
       url: document.URL
       title: data?.title
@@ -219,23 +222,33 @@ $ ->
       type: data?.link
     )
 
-  init_twitter()
-  init_vk()
-
-
-  #facebook share handle
   FB.init
     appId: "373546769386190"
-  $("a.share.facebook").click ->
-    data = $(this).data()
-    FB.ui
-      method: "feed"
-      name: data.title
-      link: data.link
-      picture: data.picture
-      caption: " "
-      description: data.description
+
+  #facebook share handle
+  init_fb =(data) ->
+    fb_link = $("a.share.facebook")
+    fb_link.unbind('click')
+    fb_link.bind 'click', ->
+      FB.ui
+        method: "feed"
+        name: data.title
+        link: data.link
+        picture: data.picture
+        caption: " "
+        description: data.description
 
   $(".standart_share_button").click ->
     check_what_share_open()
     $.fancybox.close()
+
+  $("#share_text_input").change ->
+    data = $(this).data()
+    data_for_soc = $.extend({}, data)
+    data_for_soc.description = $(this).val()
+    console.log $(this).data('description')
+    init_twitter()
+    init_vk(data_for_soc)
+    init_fb(data_for_soc)
+
+  $("#share_text_input").change()

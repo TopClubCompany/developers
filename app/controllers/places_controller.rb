@@ -10,8 +10,8 @@ class PlacesController < ApplicationController
       @review = Review.new(reviewable_id: @place.id, reviewable_type: Place.name)
       @review.marks.build
     end
-    @stuff_for_share = { title: @place.title, link: place_url(@place), description: "test description",
-                         picture: root_url + @place.place_image.url(:slider).sub('/','') }
+    @stuff_for_share = { title: @place.title, link: place_url(@place), description: t('share.description'),
+                         picture: @place.place_image ? root_url + @place.place_image.url(:slider).sub('/','') : root_url}
   end
 
   def index
