@@ -12,6 +12,15 @@ module PlaceUtils
       def is_available?(time, range_time)
         range_time.cover? time.strftime("%H.%M").to_f
       end
+
+      def wday wday
+        case wday
+          when 0
+            7
+          else
+            wday
+        end
+      end
     end
   end
 end
