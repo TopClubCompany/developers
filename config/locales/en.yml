@@ -261,6 +261,8 @@ en:
     reserve_at: Reserve at
     share_with_friends: Share with friends
     share_on: Share on
+  share:
+    description: 'test description'
   long_strings:
     review_placeholder: Have you been here? Tell us your story about dinner at this place!
   words:
