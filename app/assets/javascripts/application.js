@@ -20,6 +20,7 @@
 //=require jquery.lionbars.0.3
 //=require jquery.custom_checkbox.min
 //=require jquery.raty
+//=require goole.infobox
 //=require jquery.deparam
 //=require zebra_datepicker
 //=require html5
