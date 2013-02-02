@@ -261,16 +261,6 @@ en:
     reserve_at: Reserve at
     share_with_friends: Share with friends
     share_on: Share on
-    sort_by: Sort by
-    view_menu: View menu ›
-    more_detalis: More detalis ›
-    few_words: A few words from
-    submit_review: "Submit review"
-    submit_a_review: 'submit a review:'
-    special_offers: Special offers from
-    write_review: Write a review
-    add_to_favorites: Add to <br> favorite
-
   share:
     description: 'test description'
   long_strings:
@@ -287,12 +277,3 @@ en:
     roll_up: roll up
     overall: overall
     kitchen: kitchen
-    helpful: helpful
-    unhelpful: unhelpful
-    reviews: reviews
-    menu: Menu
-
-  sort_by:
-    overall_mark: overall mark
-    usefulness_count: usefulness count
-    date: date
