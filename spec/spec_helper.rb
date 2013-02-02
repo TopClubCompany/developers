@@ -1,15 +1,18 @@
-require 'rubygems'
+ENV["RAILS_ENV"] ||= 'test'
+require File.expand_path("../../config/environment", __FILE__)
+require "active_support"
 require 'spork'
+require 'rspec/rails'
+require 'rspec/autorun'
 require 'capybara/rails'
+require 'simplecov'
 
 Spork.prefork do
   unless ENV['DRB']
-    require 'simplecov'
     SimpleCov.start 'rails'
   end
   ENV['RAILS_ENV'] ||= 'test'
-  require File.expand_path('../../config/environment', __FILE__)
-  require 'rspec/rails'
+  #require File.expand_path('../../config/environment', __FILE__)
   Dir[Rails.root.join('spec/test/*.rb')].each{|f| require f}
 
   RSpec.configure do |config|
@@ -44,16 +47,20 @@ Spork.prefork do
       info:  { name: "Twitter Smith", nickname: 'joesmith', uid: 'tw_id' },
       extra: {raw_info: { name: "Twitter Smith" } }})
 end
-
+#
+#
+#
+#
 Spork.each_run do
   if ENV['DRB']
-    require 'simplecov'
     SimpleCov.start 'rails'
   end
   load "#{Rails.root}/config/routes.rb"
-  #Dir["#{Rails.root}/lib/utils**/*.rb"].each {|f| load f}
   Dir["#{Rails.root}/app/**/*.rb"].each {|f| load f}
 
   Dir[Rails.root.join('spec/test/*.rb')].each{|f| require f}
   FactoryGirl.reload
 end
+#
+#
+#
