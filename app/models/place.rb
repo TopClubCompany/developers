@@ -345,8 +345,9 @@ class Place < ActiveRecord::Base
 
 
   def self.check_place_avalilable place, time
-    work_end = place["week_day_#{time.wday}_end_at"]
-    true
+    start_time = place["week_day_#{time.wday}_start_at"].sub(":",".").to_f
+    end_time = place["week_day_#{time.wday}_end_at"].sub(":",".").to_f
+    (start_time...end_time).cover? time.strftime("%H.%M").to_f
   end
 
 
