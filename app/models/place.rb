@@ -368,7 +368,6 @@ class Place < ActiveRecord::Base
   end
 
   def humanable_schedule
-    result = []
     groups = week_days.group_by do |day|
       [:start_at, :end_at].map do |point|
         if I18n.locale.to_sym == :en
@@ -378,10 +377,9 @@ class Place < ActiveRecord::Base
         end
       end.join('-')
     end
-    groups.each do |time, days|
-      result << "<b>#{days.map { |day| day.day_type_title(:short) }.join('-')}:</b> #{time}"
+    groups.map do |time, days|
+      "<b>#{days.map { |day| day.day_type_title(:short) }.join('-')}:</b> #{time}"
     end
-    result
   end
 
 
