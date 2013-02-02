@@ -156,11 +156,14 @@ $ ->
     soc_id = $(this).attr('id')
     $("ul.share_selector li").removeClass('active')
     $("ul.share_selector li#"+ soc_id).addClass('active')
+    tw_button = $(".tw_button")
+    standart_share_bt = $(".standart_share_button")
     if soc_id == 'tw'
-      tw_button = $(".tw_button")
-      standart_share_bt = $(".standart_share_button")
       tw_button.css('display', 'inline-block')
       standart_share_bt.css('display', 'none')
+    else
+      tw_button.css('display', 'none')
+      standart_share_bt.css('display', 'inline-block')
     $(this).fancybox()
 
   # click on social networks buttons in share popup
@@ -206,26 +209,33 @@ $ ->
 
   #vk share
   init_vk = ->
-    $('#vk_share_button').html(VK.Share.button({url: document.URL, title: 'hohoo', description: 'what are you doing'}, {type: 'link_noicon'}))
+    vk_skin = $("#vk_share_button")
+    data = vk_skin.data()
+    vk_skin.html VK.Share.button(
+      url: document.URL
+      title: data.title
+      description: data.description
+      image: data.picture
+    ,
+      type: data.link
+    )
 
   init_twitter()
   init_vk()
-
-  $("#share_text_input").keyup ->
-    console.log 'change'
 
 
   #facebook share handle
   FB.init
     appId: "373546769386190"
   $("a.share.facebook").click ->
+    data = $(this).data()
     FB.ui
       method: "feed"
-      name: "Official HitMaker Report"
-      link: 'google.com'
-#      picture: 'dadada'
+      name: data.title
+      link: data.link
+      picture: data.picture
       caption: " "
-      description: "louojojo"
+      description: data.description
 
   $(".standart_share_button").click ->
     check_what_share_open()
