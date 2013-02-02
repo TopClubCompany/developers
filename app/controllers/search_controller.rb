@@ -43,15 +43,15 @@ class SearchController < ApplicationController
 
   def search
     @result = Place.search(params.merge(city: current_city, current_point: cookies[:current_point]))
-    @geo_point_array = get_geo_points(@result)
+    @geo_point_array = get_geo_points()
   end
 
   def set_gon_params
     gon.category = [@category.id]
   end
 
-  def get_geo_points result
-    result.map do |e|
+  def get_geo_points
+    @result.map do |e|
       if e.lat_lng.present?
         lat_long = e.lat_lng.split(',')
         {lat: lat_long[0].to_f, lng: lat_long[1].to_f}
