@@ -347,7 +347,6 @@ class Place < ActiveRecord::Base
   def self.check_place_avalilable place, time
     start_time = place["week_day_#{time.wday}_start_at"].sub(":",".").to_f
     end_time = place["week_day_#{time.wday}_end_at"].sub(":",".").to_f
-    #raise (start_time...end_time).inspect
     (start_time...end_time).cover? time.strftime("%H.%M").to_f
   end
 
@@ -372,7 +371,11 @@ class Place < ActiveRecord::Base
     result = []
     groups = week_days.group_by do |day|
       [:start_at, :end_at].map do |point|
-        ("%5.2f" % day.send(point).to_s).sub(".",":")
+        if I18n.locale.to_sym == :en
+          Time.parse(("%5.2f" % day.send(point).to_s).sub(".",":")).strftime("%I:%M%p")
+        else
+          Time.parse(("%5.2f" % day.send(point).to_s).sub(".",":")).strftime("%H:%M")
+        end
       end.join('-')
     end
     groups.each do |time, days|
