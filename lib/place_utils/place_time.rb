@@ -14,13 +14,11 @@ module PlaceUtils
       end
 
       def wday wday
-        if I18n.locale.to_sym == :en
-          case wday
-            when 0
-              7
-          end
-        else
-          wday
+        case wday
+          when 0
+            7
+          else
+            wday
         end
       end
     end
