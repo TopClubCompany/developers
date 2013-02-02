@@ -134,6 +134,7 @@ class Place < ActiveRecord::Base
           sort { by (options[:sort_by] || 'overall_mark'), "desc" }
         end
         filter(:and, :filters => filters)
+        puts to_curl
       end
     end
 
