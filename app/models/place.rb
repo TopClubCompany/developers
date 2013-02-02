@@ -338,15 +338,16 @@ class Place < ActiveRecord::Base
       if index == 3 || index == 4
         {:time => (time + i.minutes).strftime("%H:%M").to_sym, :available => false}
       else
-        {:time => (time + i.minutes).strftime("%H:%M").to_sym, :available => check_place_avalilable(place, time)}
+        {:time => (time + i.minutes).strftime("%H:%M").to_sym, :available => check_place_avalilable(place, time + i.minutes)}
       end
     end
   end
 
 
   def self.check_place_avalilable place, time
-    work_end = place["week_day_#{time.wday}_end_at"]
-    true
+    start_time = place["week_day_#{time.wday}_start_at"].sub(":",".").to_f
+    end_time = place["week_day_#{time.wday}_end_at"].sub(":",".").to_f
+    (start_time...end_time).cover? time.strftime("%H.%M").to_f
   end
 
 
@@ -367,16 +368,18 @@ class Place < ActiveRecord::Base
   end
 
   def humanable_schedule
-    result = []
     groups = week_days.group_by do |day|
       [:start_at, :end_at].map do |point|
-        Time.strptime(day.send(point).to_s, "%H.%M").strftime("%I:%M%p")
+        if I18n.locale.to_sym == :en
+          Time.parse(("%5.2f" % day.send(point).to_s).sub(".",":")).strftime("%I:%M%p")
+        else
+          Time.parse(("%5.2f" % day.send(point).to_s).sub(".",":")).strftime("%H:%M")
+        end
       end.join('-')
     end
-    groups.each do |time, days|
-      result << "<b>#{days.map { |day| day.day_type_title(:short) }.join('-')}:</b> #{time}"
+    groups.map do |time, days|
+      "<b>#{days.map { |day| day.day_type_title(:short) }.join('-')}:</b> #{time}"
     end
-    result
   end
 
 
