@@ -109,11 +109,12 @@ class Place < ActiveRecord::Base
       filters << {query: {terms: {avg_bill: options[:price].split(',')} }}
     end
 
-    filters += self.time_filter(options)
+    filters += self.time_filter(options) if options[:opened].present?
 
     if options[:distance].present? && options[:current_point].present?
-      distance = options[:distance].split(',').map { |dist| PlaceGeoType.find(dist.to_i).distance }.max
-      filters << { geo_distance: { distance: "#{distance}km", lat_lng: options[:current_point] } }
+      distance = options[:distance].split(',').map(&:to_i).max
+      distance = PlaceGeoType.find(distance).distance
+      filters << { geo_distance_range: {lat_lng: options[:current_point] }.merge(distance) }
     end
 
     if filters.empty? && options.empty?
@@ -327,15 +328,26 @@ class Place < ActiveRecord::Base
     res[:star_rating] = self.get_star_rating(place)
     # TODO: replace with actual values of availability and being_favourite
     res[:is_favourite] = [true, false].sample
-    res[:timing] = self.order_time(time)
+    res[:timing] = self.order_time(place, time)
     res
   end
 
 
-  def self.order_time time
-    [30, 15, 0, -15, -30].map do |i|
-      {:time => (time + i.minutes).strftime("%H:%M").to_sym, :available => true}
+  def self.order_time place, time
+    [30, 15, 0, -15, -30].each_with_index.map do |i, index|
+      if index == 3 || index == 4
+        {:time => (time + i.minutes).strftime("%H:%M").to_sym, :available => false}
+      else
+        {:time => (time + i.minutes).strftime("%H:%M").to_sym, :available => check_place_avalilable(place, time)}
+      end
     end
+  end
+
+
+  def self.check_place_avalilable place, time
+    start_time = place["week_day_#{time.wday}_start_at"].sub(":",".").to_f
+    end_time = place["week_day_#{time.wday}_end_at"].sub(":",".").to_f
+    (start_time...end_time).cover? time.strftime("%H.%M").to_f
   end
 
 
@@ -394,9 +406,9 @@ class Place < ActiveRecord::Base
   end
 
 
-  def to_param
-    "#{slug}-#{location.try(:city_en).downcase.gsub(' ','_')}"
-  end
+  #def to_param
+  #  "#{slug}-#{location.try(:city_en).downcase.gsub(' ','_')}"
+  #end
 
   private
 

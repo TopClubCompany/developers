@@ -27,15 +27,15 @@ class PlaceGeoType
   def distance
      case @code.to_sym
        when :close
-          0.5
+         {lte: "0.5km"}
        when :walk
-          1
+         {lte: "1km"}
        when :drive
-          5
+         {lte: "5km"}
        when :far
-          10
+         {lte: "10km"}
        else
-          100
+         {lte: "100km"}
      end
   end
 
