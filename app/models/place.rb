@@ -290,7 +290,7 @@ class Place < ActiveRecord::Base
 
 
   def self.for_mustache(place, options={})
-    time_now = Time.now
+    time_now = Time.now + 90.minute
     truncated_time_now = Time.at(time_now.to_i - time_now.sec - time_now.min % 15 * 60)
     time = options[:reserve_time]? Time.parse(options[:reserve_time]) : truncated_time_now
     options[:image_url] ||= :slider_url
@@ -335,23 +335,11 @@ class Place < ActiveRecord::Base
 
   def self.order_time place, time
     [30, 15, 0, -15, -30].each_with_index.map do |i, index|
-      if index == 3 || index == 4
-        {:time => (time + i.minutes).strftime("%H:%M").to_sym, :available => false}
-      else
-        {:time => (time + i.minutes).strftime("%H:%M").to_sym, :available => check_place_avalilable(place, time + i.minutes)}
-      end
+      start_time = place["week_day_#{time.wday}_start_at"].sub(":",".").to_f
+      end_time = place["week_day_#{time.wday}_end_at"].sub(":",".").to_f
+      ::PlaceUtils::PlaceTime.find_available_time(i, time, start_time, end_time)
     end
   end
-
-
-  def self.check_place_avalilable place, time
-    start_time = place["week_day_#{time.wday}_start_at"].sub(":",".").to_f
-    end_time = place["week_day_#{time.wday}_end_at"].sub(":",".").to_f
-    #raise (start_time...end_time).inspect
-    (start_time...end_time).cover? time.strftime("%H.%M").to_f
-  end
-
-
 
   def discounts_index
     self.send(:day_discounts).with_translation.includes(:week_day).map do |day_discount|
@@ -369,16 +357,18 @@ class Place < ActiveRecord::Base
   end
 
   def humanable_schedule
-    result = []
     groups = week_days.group_by do |day|
       [:start_at, :end_at].map do |point|
-        ("%5.2f" % day.send(point).to_s).sub(".",":")
+        if I18n.locale.to_sym == :en
+          Time.parse(("%5.2f" % day.send(point).to_s).sub(".",":")).strftime("%I:%M%p")
+        else
+          Time.parse(("%5.2f" % day.send(point).to_s).sub(".",":")).strftime("%H:%M")
+        end
       end.join('-')
     end
-    groups.each do |time, days|
-      result << "<b>#{days.map { |day| day.day_type_title(:short) }.join('-')}:</b> #{time}"
+    groups.map do |time, days|
+      "<b>#{days.map { |day| day.day_type_title(:short) }.join('-')}:</b> #{time}"
     end
-    result
   end
 
 
