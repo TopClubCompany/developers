@@ -335,22 +335,11 @@ class Place < ActiveRecord::Base
 
   def self.order_time place, time
     [30, 15, 0, -15, -30].each_with_index.map do |i, index|
-      if index == 3 || index == 4
-        {:time => (time + i.minutes).strftime("%H:%M").to_sym, :available => false}
-      else
-        {:time => (time + i.minutes).strftime("%H:%M").to_sym, :available => check_place_avalilable(place, time + i.minutes)}
-      end
+      start_time = place["week_day_#{time.wday}_start_at"].sub(":",".").to_f
+      end_time = place["week_day_#{time.wday}_end_at"].sub(":",".").to_f
+      ::PlaceUtils::PlaceTime.find_available_time(i, time, start_time, end_time)
     end
   end
-
-
-  def self.check_place_avalilable place, time
-    start_time = place["week_day_#{time.wday}_start_at"].sub(":",".").to_f
-    end_time = place["week_day_#{time.wday}_end_at"].sub(":",".").to_f
-    (start_time...end_time).cover? time.strftime("%H.%M").to_f
-  end
-
-
 
   def discounts_index
     self.send(:day_discounts).with_translation.includes(:week_day).map do |day_discount|
