@@ -7,7 +7,6 @@ module PlaceUtils
         end_time = (Time.parse(end_time.to_s.sub(".",":")) - 60.minutes).strftime("%H.%M").to_f
         range_time = (start_time...end_time)
           {:time => (time + i.minutes).strftime("%H:%M").to_sym, :available => is_available?(time+i.minutes, range_time)}
-        end
       end
 
       def is_available?(time, range_time)
