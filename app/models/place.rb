@@ -338,14 +338,15 @@ class Place < ActiveRecord::Base
       if index == 3 || index == 4
         {:time => (time + i.minutes).strftime("%H:%M").to_sym, :available => false}
       else
-        {:time => (time + i.minutes).strftime("%H:%M").to_sym, :available => true}
+        {:time => (time + i.minutes).strftime("%H:%M").to_sym, :available => check_place_avalilable(place, time)}
       end
     end
   end
 
 
   def self.check_place_avalilable place, time
-
+    work_end = place["week_day_#{time.wday}_end_at"]
+    true
   end
 
 
