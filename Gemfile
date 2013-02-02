@@ -126,12 +126,12 @@ group :development, :test do
 
   gem 'database_cleaner'
   gem 'simplecov', :require => false
-  gem "rspec-rails", ">= 2.10.1"
+  gem "rspec-rails",        :git => "git://github.com/rspec/rspec-rails.git"
 
   gem 'quiet_assets'
   gem 'jasmine-rails'
   gem "capybara"
-  gem 'capybara-webkit', '0.12.1'
+  #gem 'capybara-webkit', '0.12.1'
   gem 'cucumber-rails', :require => false
   gem "spork"
   gem "guard-rspec"
