@@ -55,10 +55,7 @@ class PlacesCollection
     @markers = []
     window.googleMarkers = @markers
     for block in blocksThatExist
-      obj =
-        id: $(block).data('id')
-        lat: $(block).data('lat')
-        lng: $(block).data('lng')
+      obj = $(block).data()
       @ids.push obj.id
       @addMarker obj
 
@@ -211,10 +208,39 @@ class PlacesCollection
     @markers.push marker
     marker.setMap(@map)
     map = @map
-    contentString = "<div class='popover-content place'><a href='#' class='place_img_sm'><h4><a href='#'>Sowa Cafe<span class='discount_label'>-10%</span></a></h4><div class='rating'><div class='stars'><div class='stars_overlay'></div><div class='stars_bar' style='left: 33%'></div><div class='stars_bg'></div></div><small><a href='#'></a><a href='#'>1 review</a></small>     </div><ul class='place_features'><li class='location'>Sribnokilskaya st., 3d</li><li class='cuisine'>European, Japaneese</li><li class='pricing'>200 UAH</li></ul><div class='clear'></div></div>"
-    infowindow = new google.maps.InfoWindow(content: contentString)
+    
+    boxText = document.createElement("div")
+    boxText.className = "place popover-content"
+    boxText.style.cssText = "border: 1px solid black; margin-top: 8px; padding: 10px; border-radius: 4px; background: white; padding: 5px;"
+    boxText.innerHTML = "<img src='#{obj.image_path}' class='place_img_sm'/><h4><a href='#'>Sowa Cafe<span class='discount_label'>-10%</span></a></h4><div class='rating'><div class='stars'><div class='stars_overlay'></div><div class='stars_bar' style='left: 33%'></div><div class='stars_bg'></div></div><small><a href='#'></a><a href='#'>1 review</a></small>     </div><ul class='place_features'><li class='location'>Sribnokilskaya st., 3d</li><li class='cuisine'>European, Japaneese</li><li class='pricing'>200 UAH</li></ul><div class='clear'></div>"
+    myOptions =
+      content: boxText
+      disableAutoPan: false
+      maxWidth: 0
+      pixelOffset: new google.maps.Size(-140, -130)
+      zIndex: null
+      boxStyle:
+        opacity: 1
+        width: "340px"
+
+      closeBoxMargin: "10px 2px 2px 2px"
+      infoBoxClearance: new google.maps.Size(1, 1)
+      isHidden: false
+      pane: "floatPane"
+      enableEventPropagation: false
+    
+    ib = new InfoBox(myOptions)
+
     google.maps.event.addListener marker, "click", (e) ->
-      infowindow.open(map, marker)
+      ib.open map, this
+
+
+
+
+    
+    # infowindow = new google.maps.InfoWindow({content: contentString})
+    # google.maps.event.addListener marker, "click", (e) ->
+      # infowindow.open(map, marker)
 
 
     google.maps.event.addListener marker, "mouseover", ->
