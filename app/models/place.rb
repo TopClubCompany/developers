@@ -258,13 +258,14 @@ class Place < ActiveRecord::Base
         .group("marks.mark_type_id")
     marks = {}
     count_reviews.each do |review|
-      marks.update(MarkType.find(review.mark_type_id).name => {sum: review.sum_value.to_f, avg: review.avg_value.to_f})
+      marks.update(MarkType.find(review.mark_type_id).name => {sum: review.sum_value.to_f, avg: review.avg_value.to_f,
+                                                               id: review.mark_type_id})
     end
     marks.deep_symbolize_keys!
   end
 
   def overall_mark
-    marks.values.map { |mark| mark[:avg] }.avg.round(1)
+    marks.values.select { |mark| MarkType.find(mark[:id]).included_in_overall }.map { |mark| mark[:avg] }.avg.round(1)
   end
 
   def avg_bill_title
