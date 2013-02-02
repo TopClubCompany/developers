@@ -109,7 +109,7 @@ class Place < ActiveRecord::Base
       filters << {query: {terms: {avg_bill: options[:price].split(',')} }}
     end
 
-    filters += self.time_filter(options)
+    filters += self.time_filter(options) if options[:opened].present?
 
     if options[:distance].present? && options[:current_point].present?
       distance = options[:distance].split(',').map(&:to_i).max
@@ -134,7 +134,6 @@ class Place < ActiveRecord::Base
           sort { by (options[:sort_by] || 'overall_mark'), "desc" }
         end
         filter(:and, :filters => filters)
-        puts self.to_curl
       end
     end
 
