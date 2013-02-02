@@ -44,7 +44,6 @@ $ ->
   set_overall_mark = () ->
     sum = 0
     $('.marks .criteria.included').each ->
-      console.log $(this).data('old_mark')
       value = parseInt($(this).data('old_mark')) || 1
       sum += value
     quantity = $('.marks .criteria.included').length
@@ -213,11 +212,11 @@ $ ->
     data = vk_skin.data()
     vk_skin.html VK.Share.button(
       url: document.URL
-      title: data.title
-      description: data.description
-      image: data.picture
+      title: data?.title
+      description: data?.description
+      image: data?.picture
     ,
-      type: data.link
+      type: data?.link
     )
 
   init_twitter()
