@@ -164,6 +164,9 @@ $ ->
       tw_button.css('display', 'none')
       standart_share_bt.css('display', 'inline-block')
     $(this).fancybox()
+    share_text_input = $("#share_text_input")
+    share_text_input.val(share_text_input.data('description'))
+    $("#share_text_input").keyup()
 
   # click on social networks buttons in share popup
   $("ul.share_selector li").live 'click', ->
@@ -193,7 +196,6 @@ $ ->
         js.id = id
         fjs.parentNode.insertBefore js, fjs
       )(document, "script", "twitter-wjs")
-
     window.twttr.events.bind "click", (event) ->
       check_what_share_open()
       $.fancybox.close()
@@ -207,35 +209,63 @@ $ ->
         $('#vk_share_button').find('a').first().click()
 
   #vk share
-  init_vk = ->
+  init_vk =(data) ->
     vk_skin = $("#vk_share_button")
-    data = vk_skin.data()
     vk_skin.html VK.Share.button(
       url: document.URL
-      title: data?.title
-      description: data?.description
-      image: data?.picture
+      title: data.title
+      description: data.description
+      image: data.picture
     ,
-      type: data?.link
+      type: data.link
     )
 
-  init_twitter()
-  init_vk()
 
+  fb_link = $("a.share.facebook")
+  if fb_link.length
+    FB.init
+      appId: fb_link.data('app-id')
 
   #facebook share handle
-  FB.init
-    appId: "373546769386190"
-  $("a.share.facebook").click ->
-    data = $(this).data()
-    FB.ui
-      method: "feed"
-      name: data.title
-      link: data.link
-      picture: data.picture
-      caption: " "
-      description: data.description
+  init_fb =(data) ->
+    fb_link = $("a.share.facebook")
+    fb_link.unbind('click')
+    fb_link.bind 'click', ->
+      FB.ui
+        method: "feed"
+        name: data.title
+        link: data.link
+        picture: data.picture
+        caption: " "
+        description: data.description
 
   $(".standart_share_button").click ->
     check_what_share_open()
     $.fancybox.close()
+
+  tweet_dynamyc_text_magick =(data) ->
+    tweet_button = $(".twitter-share-button")
+    tweet_main_div = $(".tw_button#custom-tweet-button")
+    tweet_button.remove()
+    $("<a/>",
+      "class": 'twitter-share-button'
+      "data-lang": 'en'
+      "href": 'https://twitter.com/share'
+      "data-url": data.link
+      "data-text": data.description
+      "data-count": 'none'
+    ).appendTo(tweet_main_div)
+    twttr.widgets.load();
+  init_twitter()
+
+  $("#share_text_input").keyup ->
+    data = $(this).data()
+    data_for_soc = $.extend({}, data)
+    data_for_soc.description = $(this).val()
+    tweet_dynamyc_text_magick(data_for_soc)
+    init_vk(data_for_soc)
+    init_fb(data_for_soc)
+
+
+
+
