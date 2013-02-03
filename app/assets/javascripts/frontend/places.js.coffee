@@ -166,7 +166,7 @@ $ ->
     $(this).fancybox()
     share_text_input = $("#share_text_input")
     share_text_input.val(share_text_input.data('description'))
-    console.log share_text_input.data('description')
+    $("#share_text_input").keyup()
 
   # click on social networks buttons in share popup
   $("ul.share_selector li").live 'click', ->
@@ -196,8 +196,6 @@ $ ->
         js.id = id
         fjs.parentNode.insertBefore js, fjs
       )(document, "script", "twitter-wjs")
-
-    window.twttr.events.unbind "click"
     window.twttr.events.bind "click", (event) ->
       check_what_share_open()
       $.fancybox.close()
@@ -215,11 +213,11 @@ $ ->
     vk_skin = $("#vk_share_button")
     vk_skin.html VK.Share.button(
       url: document.URL
-      title: data?.title
-      description: data?.description
-      image: data?.picture
+      title: data.title
+      description: data.description
+      image: data.picture
     ,
-      type: data?.link
+      type: data.link
     )
 
   FB.init
@@ -242,13 +240,29 @@ $ ->
     check_what_share_open()
     $.fancybox.close()
 
-  $("#share_text_input").change ->
+  tweet_dynamyc_text_magick =(data) ->
+    tweet_button = $(".twitter-share-button")
+    tweet_main_div = $(".tw_button#custom-tweet-button")
+    tweet_button.remove()
+    $("<a/>",
+      "class": 'twitter-share-button'
+      "data-lang": 'en'
+      "href": 'https://twitter.com/share'
+      "data-url": data.link
+      "data-text": data.description
+      "data-count": 'none'
+    ).appendTo(tweet_main_div)
+    twttr.widgets.load();
+  init_twitter()
+
+  $("#share_text_input").keyup ->
     data = $(this).data()
     data_for_soc = $.extend({}, data)
     data_for_soc.description = $(this).val()
-    console.log $(this).data('description')
-    init_twitter()
+    tweet_dynamyc_text_magick(data_for_soc)
     init_vk(data_for_soc)
     init_fb(data_for_soc)
 
-  $("#share_text_input").change()
+
+
+
