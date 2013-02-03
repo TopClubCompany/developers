@@ -1,6 +1,6 @@
 #place_menu.popup style="margin-left: 0px;"
   button.close aria-hidden="true" data-dismiss="modal" type="button"
-  h5 Menu
+  h5= t('words.menu')
   - @place.place_menus.each do |menu|
     h6= menu.title
     ul
