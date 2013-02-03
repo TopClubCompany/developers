@@ -6,6 +6,21 @@ class PlacesController < ApplicationController
     @date = params[:reserve_date] || Date.today.strftime('%d/%m/%Y')
     @location = @place.lat_lng
     @special_offers =  @place.day_discounts.special
+    @reviews = case params[:sort_by]
+                 when 'date'
+                   @place.reviews.order('created_at')
+                 when 'usefulness_count'
+                   reviews = @place.reviews.map { |review|  {id: review.id, votes_count: review.votes.count} }
+                   reviews = reviews.sort {|a,b| b[:votes_count] - a[:votes_count]}
+                   reviews.map { |review| Review.find(review[:id]) }
+                 when 'overall_mark'
+                   reviews = @place.reviews.map { |review|  {id: review.id, overall_mark: review.avg_mark} }
+                   reviews = reviews.sort {|a,b| b[:overall_mark] - a[:overall_mark]}
+                   reviews.map { |review| Review.find(review[:id]) }
+                 else
+                   @place.reviews
+
+    end
     if signed_in?
       @review = Review.new(reviewable_id: @place.id, reviewable_type: Place.name)
       @review.marks.build
@@ -41,7 +56,9 @@ class PlacesController < ApplicationController
 
 
   def more
-    reviews = @place.reviews.paginate(:page => params[:page])
+    #raise params.inspect
+    reviews = @place.reviews#.paginate(page: params[:page], per_page: params[:size])
+    #raise @place.reviews.inspect
     respond_to do |format|
       format.json { render json: reviews.map(&:for_mustache) }
     end
