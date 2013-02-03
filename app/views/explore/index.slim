@@ -1,6 +1,6 @@
 #index.content
-  - cache [I18n.locale, 'explorer', 'main_video'] do
-    - unless user_signed_in?
+  - unless user_signed_in?
+    - cache [I18n.locale, 'explorer', 'main_video'] do
       .row
         .span8 id="teaser"
           .video_player
