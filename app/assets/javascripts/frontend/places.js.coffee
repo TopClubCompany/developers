@@ -220,8 +220,11 @@ $ ->
       type: data.link
     )
 
-  FB.init
-    appId: "373546769386190"
+
+  fb_link = $("a.share.facebook")
+  if fb_link.length
+    FB.init
+      appId: fb_link.data('app-id')
 
   #facebook share handle
   init_fb =(data) ->

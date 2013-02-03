@@ -60,17 +60,15 @@
           .clear
           small
             span itemprop="count"
-            ' #{@place.reviews.count} reviews ·
+            ' #{@place.reviews.count} #{t('words.reviews')} ·
             - if signed_in?
               a#write_review href="#review_form"
-                |Write a review
+                = t('short_strings.write_review')
         - if signed_in?
           /a.set_unset_favorite href=set_unset_favorite_place_path(@place) data-remote='true' data-method='post'
           #favorites
             .add_to_favorites class="#{'i_like_this_place' if current_user.favorite_place?(@place)}" data-id=@place.to_param
-              | Add to
-              br
-              | favorites
+              =raw t('short_strings.add_to_favorites')
         .share_btns
           - %w|fb vk tw|.each do |soc_network|
             = link_to '', '#share', class: "show_popup share", id: soc_network
@@ -88,11 +86,11 @@
               = time.html_safe
               br
           #place_links
-            = link_to "More detalis ›", '#'
-            = link_to "View menu ›", '#place_menu', {:class => "show_popup menu"}
+            = link_to t('short_strings.more_detalis'), '#'
+            = link_to t('short_strings.view_menu'), '#place_menu', {:class => "show_popup menu"}
         .clear
         .place_desc
-          h5 A few words from #{@place.title}
+          h5 #{t('short_strings.few_words')} #{@place.title}
           .short_description.active_desc
             = truncate(@place.description, length: 100)
           .full_description
@@ -103,7 +101,7 @@
           #review_form
             = simple_form_for @review, url: review_create_path, method: 'post', wrapper: :front_reg_form, nested: true do |f|
               .line2
-              h5 #{current_user.try(:first_name)}, submit a review:
+              h5 #{current_user.try(:first_name)}, #{t('short_strings.submit_a_review')}
               .marks
                 - MarkType.all.each_slice(2) do |marks|
                   .row
@@ -115,17 +113,17 @@
               = f.input :reviewable_id, as: 'hidden'
               = f.input :reviewable_type, as: 'hidden'
               = f.input :content, placeholder: t('long_strings.review_placeholder'), label: false, input_html: {rows: '0',cols: '0', id: 'review_text'}
-              = f.submit "Submit review"
+              = f.submit t('short_strings.submit_review')
               .clear
               .line2
         #reviews
           h6 All #{@reviews.count} reviews for #{@place.title}
           .dropdown style="float: right;"
             a#sortby.sortby.dropdown-toggle data-target="#" data-toggle="dropdown" role="button"
-              |Sort by
+              = t('short_strings.sort_by')
             ul class="dropdown-menu" role="menu" aria-labelledby="dLabel"
               - %w|overall_mark usefulness_count date|.each do |sort_type|
-                li= link_to sort_type, place_path(@place, sort_by: sort_type)
+                li= link_to t("sort_by.#{sort_type}"), place_path(@place, sort_by: sort_type)
 
 
 
@@ -154,7 +152,7 @@
                   .review_vote
                     - %w|helpful unhelpful|.each do |usefulness|
                       a href="#{can_vote ? set_review_usefulness_path(review.id, usefulness) : ''}" class=usefulness data-method="post"
-                        = usefulness
+                        = t("words.#{usefulness}")
                         strong= review.votes.send(usefulness.to_sym).count
               .ratings
                 - temp_overall_mark = Hashie::Mash.new(value: review.avg_mark, id: 0, mark_type: { title: t('words.overall') })
@@ -183,7 +181,7 @@
           /a.load_more data-type='reviews' data-displayed=6 data-template-id="#review_template" data-base-url="/places/#{@place.to_param}/more?" href="#"= t(".more")
 
     #sidebar.specials.span4
-      h3 Special offers from #{@place.title}
+      h3 #{t('short_strings.special_offers')} #{@place.title}
       ul
         - @special_offers.each do |offer|
           li
