@@ -96,13 +96,20 @@ class Place < ActiveRecord::Base
 
   def self.search(options = {})
     filters = []
+    categories = []
 
     if options[:kitchen].present?
       filters << {query: {terms: {kitchen_ids: options[:kitchen].split(',')} }}
     end
 
-    if options[:category].present?
-      filters << {query: {terms: {category_ids: options[:category].split(',')} }}
+
+    categories << options[:category].split(',') if options[:category].present?
+    if options[:id].present?
+      categories << Category.find(options[:id].split(',')).map(&:id)
+    end
+
+    unless categories.empty?
+      filters << {query: {terms: {category_ids: categories.flatten} }}
     end
 
     if options[:price].present?
