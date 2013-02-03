@@ -16,7 +16,7 @@
       #mapcontainer
 
         #map_details
-          h3 Results for #{(params[:reserve_date] || Time.now.strftime("%d/%m/%Y"))}, #{@time[:h]}:#{@time[:m]} for #{params[:number_of_people] || 2} people
+          h3 #{I18n.t("search.result_for")}  #{(params[:reserve_date] || Time.now.strftime("%d/%m/%Y"))}, #{@time[:h]}:#{@time[:m]} for #{params[:number_of_people] || 2} #{I18n.t('search.people')}
           #map_places style="background: rgba(128,128,128,0.5);" *{'data-lat'=>"#{@user_location[0]}", "data-lng" => "#{@user_location[1]}"}
           #map_details_wrapper
             - @result.each do |place|
@@ -57,9 +57,11 @@
               a href="##{(current.to_i + 1).to_s}" next ›
             - else
               a.current href="#1" 1
-= render 'shared/more_template'
-script type='text/html' id='map_place_template'
-  = render 'shared/map_place'
 
-script type='text/html' id='list_place_template'
-  = render 'shared/list_place'
+- cache [I18n.locale, 'search', 'more_templates'] do
+  = render 'shared/more_template'
+  script type='text/html' id='map_place_template'
+    = render 'shared/map_place'
+
+  script type='text/html' id='list_place_template'
+    = render 'shared/list_place'

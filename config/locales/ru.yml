@@ -245,6 +245,8 @@ ru:
     price: Price
     refine: Refine your results
     location: "Location"
+    result_for: "Results for"
+    people: "people"
   simple_form: 
     error_notification: 
       default_message: "При сохранении возникли ошибки"
