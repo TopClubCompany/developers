@@ -21,7 +21,7 @@
           strong= t('words.kitchen').capitalize + ': '
           = @place.kitchens.map(&:name).join(', ')
       .clear
-  textarea#share_text_input name="shared_comment" placeholder="Add a comment..."
+  = text_area_tag 'shared_coment', @stuff_for_share[:description], placeholder: "Add a comment...", id: 'share_text_input', data: @stuff_for_share
   ul.share_selector
     strong= t('short_strings.share_on').capitalize + ': '
     li#fb

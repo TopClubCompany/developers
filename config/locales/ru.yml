@@ -277,3 +277,61 @@ ru:
       next: "След &raquo;"
       previous: "&laquo; Пред"
       truncate: ...
+
+  short_strings:
+    my_reservations: Мои резервации
+    add_to_favorites: Добавить в избранное
+    view_your_reservation: Посмотреть свои резервации
+    number_of_people: Количество людей
+    phone_number: Телефонный номер
+    first_name: Имя
+    last_name: Фамилия
+    special_notes: Специальные заметки
+    edit_reservation: Редактировать резервацию
+    invite_friends: Пригласить друзей
+    print_this_page: Напечатаь это место
+    edit_your_reservation: Редактировать вашу резервацию
+    reserve_at: Забронировано в
+    share_with_friends: Поделится с друзьями
+    share_on: Делится на
+    sort_by: Сортировать по
+    view_menu: Посмотреть меню ›
+    more_detalis: Детальней ›
+    few_words: Пару слов о
+    submit_review: Оставить отзыв
+    submit_a_review: 'оставить отзыв:'
+    special_offers: Специальные предложения от
+    write_review: Написать отзыв
+    add_to_favorites: Добавить <br> в избранное
+  share:
+    description: 'тестовое описание'
+  long_strings:
+    review_placeholder: Бывали здесь? Расскажите нам свою историю об этом месте!
+  words:
+    cancel: отмена
+    invite: пригласить
+    view: посмотреть
+    edit: редактировать
+    date: дата
+    time: время
+    email: электронная почта
+    expand: развернуть
+    roll_up: свернуть
+    overall: Общая
+    kitchen: кухня
+    helpful: полезный
+    unhelpful: бесполезный
+    reviews: отзывов
+    menu: Меню
+
+  sign_up:
+    by_click: "By clicking “Join Reserve” you confirm that you accept"
+    term_cond: "Terms and conditions"
+    for_successful_reservations: "for succesfull reservations!"
+  forgot_password:
+    reset_pass: "Reset password"
+
+  sort_by:
+    overall_mark: общей оценке
+    usefulness_count: количеству полез./безполез.
+    date: дате
