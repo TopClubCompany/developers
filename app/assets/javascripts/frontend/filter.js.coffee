@@ -199,6 +199,7 @@ class PlacesCollection
     marker.setMap(@map)
 
   addMarker: (obj) =>
+    console.log obj.image_path
     marker = new google.maps.Marker(
       position: new google.maps.LatLng(obj.lat, obj.lng)
       title: "Hello from #{obj.id}!"
@@ -377,9 +378,9 @@ class FilterInput
       when 'reserve_date'
        regexpMatch = /reserve_date=(\d+\%+\w+)/
        regexpReplace = /reserve_date=[\d+\%+\w+]*/
-      when 'sortby'
-        regexpMatch = /sortby=(\w+)/
-        regexpReplace = /sortby=[\w+]*/
+      when 'sort_by'
+        regexpMatch = /sort_by=(\w+)/
+        regexpReplace = /sort_by=[\w+]*/
 
     baseURL = window.location.pathname
     oldQuery = window.location.search || ''
@@ -486,7 +487,7 @@ class FilterInput
       if filterSelected.text() != $("#sortby").text()
         $("#sortby").text(filterSelected.text())
         text =  filterSelected.attr('href')
-        window.filter.get "sortby", text
+        window.filter.get "sort_by", text
         window.filter.get "page", 1
 
 
