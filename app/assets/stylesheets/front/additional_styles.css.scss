@@ -282,6 +282,10 @@ ul.sortby {
 
 .infoBox .place_features {
   width: auto;
+
+}
+.infoBox > img {
+  z-index: 999;
 }
 
 div.fixed_ajax_loader {
