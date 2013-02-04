@@ -269,13 +269,13 @@ class FilterInput
     @give_more(true) if $(".more").length > 0
     @checkIfNeeded()
     @dirtyHack()
-
-
     @
+
   nextStep: =>
     console.log 'did it'
     @bindFilterChangeListener()
     @bindChangeListener()
+    @give_more() if $(".more").length > 0
 
 
   bindFilterChangeListener: () ->
@@ -412,7 +412,7 @@ class FilterInput
       newQuery = newQuery.replace(/\+AM\+PM/, '+PM')
       newQuery = newQuery.replace(/\+PM\+AM/, '+AM')
 
-    newUrl = (baseURL + '/' + newQuery).replace(/\/*\?+/, '?').replace("/??", '?')
+    newUrl = (baseURL + '?' + newQuery).replace(/\/*\?+/, '?').replace("/??", '?')
     newQuery = newQuery.replace(/\?/g, '')
     window.history.pushState('',null, newUrl)
     if entity is 'page'
@@ -432,8 +432,10 @@ class FilterInput
         $("#refine input[value='#{value}'][data-type='#{filter}']").click() unless $("#refine input[value='#{value}'][data-type='#{filter}']").is(':checked')
 
   bindChangeListener: () =>
+    console.log 'bindChangeListener'
     $('#refine input[type=checkbox]').off 'change.addressBar'
     $('#refine input[type=checkbox]').on 'change.addressBar', (e) =>
+      console.log 'doing nothing in fact'
       result = {}
       $('#refine input').each( ->
         type = $(this).data('type')
@@ -532,6 +534,7 @@ class FilterInput
   give_more: (no_binding = false) =>
     @more_template = Handlebars.compile($("#more_template").html())
     self = @
+    $("a.more").off 'click'
     $("a.more").one 'click', (e) ->
       e.preventDefault()
       $el = $(this)
@@ -578,4 +581,4 @@ handleClick = ()->
     time = $(e.target).html()
     people = $("select[name=number_of_people]").val()
     newLink = "/#{language}/new_reservation/#{date},#{id},h=#{time.split(':')[0]}&m=#{time.split(':')[1]},#{people}"
-    window.location.pushState '', null, newLink
+    window.location.replace newLink
