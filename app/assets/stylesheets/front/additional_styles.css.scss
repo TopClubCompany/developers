@@ -189,6 +189,9 @@
 }
 
 #listing .timing a:nth-child(3) {
+  &.na {
+    color: #dfdeda;
+  }
   color: #df5b49;
   width: 56px;
 }
@@ -279,4 +282,23 @@ ul.sortby {
 
 .infoBox .place_features {
   width: auto;
+}
+
+div.fixed_ajax_loader {
+  display: block;
+  position: fixed;
+  background: rgba(128, 128, 128, 0.8)  image_url('ajax_loader_transp.gif') center center no-repeat;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  strong {
+    color: white;
+    display: block;
+    text-align: center;
+    line-height: 225px;
+    font-size: 25px;
+    font-weight: bold;
+  }
 }
