@@ -54,8 +54,8 @@ class PlacesCollection
     new Pagination(number).goTo(page)
     @places = []
     @ids = []
-    @createMap()
     @markers = []
+    @createMap()
     window.googleMarkers = @markers
     for block in blocksThatExist
       obj = $(block).data()
@@ -96,7 +96,7 @@ class PlacesCollection
 
     setTimeout((=>
       @updateTime placesData
-    ), 500)
+    ), 50)
 
 
 
@@ -107,9 +107,8 @@ class PlacesCollection
       if coords.length > 0
         place.lat = coords[0]
         place.lng = coords[1]
-
-      @addMarker place
       @addBlock place
+      @addMarker place
 
   multipleRemove: (placeIdsToRemove) =>
     for removeId in placeIdsToRemove
@@ -143,6 +142,8 @@ class PlacesCollection
     $listEl = $(listBlock).insertBefore('#list_grid_view .paginate')
     $(".popoverable").on('click', () -> return false).popover(html: true)
 
+
+
   updateTime: (placesData) =>
     $('#map_details_wrapper').find('.place').each (index, el) ->
       time = _.find(placesData, (place) -> parseInt(place.id) == $(el).data('id')).timing
@@ -173,22 +174,27 @@ class PlacesCollection
       $el.find(".timing a:eq(#{index})").html time.time
       $listEl.find(".timing a:eq(#{index})").html time.time
       if time.available
-        $el.find(".timing a:eq(#{index})").removeClass('na')
-        $listEl.find(".timing a:eq(#{index})").removeClass('na')
+        $listEl.add($el).tooltip('hide')
+        $listEl.add($el).find(".timing a:eq(#{index})").removeClass('na')
       else
-        $el.find(".timing a:eq(#{index})").addClass('na')
-        $listEl.find(".timing a:eq(#{index})").addClass('na')
-
+        $listEl.add($el).find(".timing a:eq(#{index})").addClass('na')
+          .tooltip({"title": "this time is unavailable, sorry", "placement": "top"})
       handleClick.call @
 
-
+  removeCenter: =>
+    center = _.where(@markers, {type: "Client"})
+    _.without(@markers, center)
+    center[0]?.setMap(null)
 
   addCenter: (googleObjLatLng) =>
     marker = new google.maps.Marker(
       position: googleObjLatLng
       title: "You're here!"
+      icon: "/assets/pin.png"
+      type: "Client"
     )
     marker.setMap(@map)
+    @markers.push marker
 
   addMarker: (obj) =>
     marker = new google.maps.Marker(
@@ -196,26 +202,30 @@ class PlacesCollection
       title: "Hello from #{obj.id}!"
       placeId: obj.id
       html: "<a class='marker' href='##{obj.id}'>place</a>"
+      icon: "/assets/pin.png"
     )
     @markers.push marker
     marker.setMap(@map)
     map = @map
-    
+    stub = $('#list_place_' + obj.id).clone(false)
+    stub.find('.timing, .special_offers, [id^=favorites_small]').remove()
     boxText = document.createElement("div")
     boxText.className = "place popover-content"
     boxText.style.cssText = "border: 1px solid black; margin-top: 8px; padding: 10px; border-radius: 4px; background: white; padding: 5px;"
-    boxText.innerHTML = "<img src='#{obj.image_path}' class='place_img_sm'/><h4><a href='#'>Sowa Cafe<span class='discount_label'>-10%</span></a></h4><div class='rating'><div class='stars'><div class='stars_overlay'></div><div class='stars_bar' style='left: 33%'></div><div class='stars_bg'></div></div><small><a href='#'></a><a href='#'>1 review</a></small>     </div><ul class='place_features'><li class='location'>Sribnokilskaya st., 3d</li><li class='cuisine'>European, Japaneese</li><li class='pricing'>200 UAH</li></ul><div class='clear'></div>"
+    console.log stub.html()
+    boxText.innerHTML = stub.html()
     myOptions =
       content: boxText
       disableAutoPan: false
       maxWidth: 0
       pixelOffset: new google.maps.Size(-140, -130)
-      zIndex: null
+      zIndex: 0
       boxStyle:
         opacity: 1
         width: "340px"
-
       closeBoxMargin: "10px 2px 2px 2px"
+      closeBoxZIndex: 999
+      closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
       infoBoxClearance: new google.maps.Size(1, 1)
 #      map.setCenter(lat_lon)
       isHidden: false
@@ -226,9 +236,6 @@ class PlacesCollection
 
     google.maps.event.addListener marker, "click", (e) ->
       ib.open map, this
-
-
-
 
     
     # infowindow = new google.maps.InfoWindow({content: contentString})
@@ -544,6 +551,8 @@ class FilterInput
     $el.hide()
 
 $ ->
+  if $("[id^='list_place'], [id^='place_']").length > 0
+    $("[id^='list_place'], [id^='place_']").find('.timing .na').tooltip({"title": "this time is unavailable, sorry", "placement": "top"})
   if $('#refine').length isnt 0
     window.filter = new FilterInput yes
 
