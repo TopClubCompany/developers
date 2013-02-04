@@ -1,23 +1,45 @@
+#food_teaser
+  .teaser_heading
+    h5 Find a perfect restaurant and pay lower prices.
+    p Select one of 94 restaurants in Kyiv and save up to 50% off your total bill.
+  #search_form
+    = render :partial => 'shared/search_form'
+  .arrows
+    .left
+    .right
+
+  ul.slideWrapper
+    - 4.times do |i|
+    - css_class = (i == 1? 'current' : 'hidden')
+      li  id="slide_#{i}" class="#{css_class}"
+        img.place_food src="assets/gfx/#{i}.jpg"
+  .caption
+    a href="#"
+      img src="assets/gfx/4.jpg"
+      .caption_c
+        h6 Mangal
+        | Moskovsky ave, 32
+
 #index.content
-  - unless user_signed_in?
-    - cache [I18n.locale, 'explorer', 'main_video'] do
-      .row
-        .span8 id="teaser"
-          .video_player
-            h5= t('.how_it_works')
-            video#video-container class="projekktor" width="620" height="350" title="How it works?" poster="/img/video/dummy.jpg" controls=true
-              source src="/media/intro.ogv" type="video/ogg"  /
-        .span4 id="signup_promo"
-          img src="/img/gfx/1.jpg"
-            ul
-              li= t('.find_restorants')
-              li= t('.reserv_online')
-              li= t('.save_up')
-            a.btn1 href="#{new_user_registration_path}"= t('auth.links.sign_up')
+  /- unless user_signed_in?
+  /  - cache [I18n.locale, 'explorer', 'main_video'] do
+  /    .row
+  /      .span8 id="teaser"
+  /        .video_player
+  /          h5= t('.how_it_works')
+  /          video#video-container class="projekktor" width="620" height="350" title="How it works?" poster="/img/video/dummy.jpg" controls=true
+  /            source src="/media/intro.ogv" type="video/ogg"  /
+  /      .span4 id="signup_promo"
+  /        img src="/img/gfx/1.jpg"
+  /          ul
+  /            li= t('.find_restorants')
+  /            li= t('.reserv_online')
+  /            li= t('.save_up')
+  /          a.btn1 href="#{new_user_registration_path}"= t('auth.links.sign_up')
   .row
     .span12
-      #search_form
-        = render :partial => 'shared/search_form'
+      /#search_form
+      /  = render :partial => 'shared/search_form'
 
   - cache [I18n.locale, 'explorer', 'categories', Category.max_time, "main"] do
     = render 'shared/main_category'
