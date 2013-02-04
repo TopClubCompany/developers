@@ -1,8 +1,8 @@
 class Pagination
-  constructor: (total_elements, per_page = 10, @max_visible = 5, @elSelector = '#list_grid_view .paginate') ->
+  constructor: (@total_elements, per_page = 10, @max_visible = 5, @elSelector = '#list_grid_view .paginate') ->
     @$el = $(@elSelector)
-    @total_pages = Math.ceil (total_elements / per_page ) || 0
-    console.log total_elements, per_page, @total_pages
+    @total_pages = Math.ceil (@total_elements / per_page ) || 0
+    console.log @total_elements, per_page, @total_pages
     if @total_pages > 1
       @bindListener()
       @goTo 1
@@ -30,18 +30,21 @@ class Pagination
 
   goTo: (page) ->
     @$el.empty()
-    page = parseInt(page)
-    endPage = Math.min(@total_pages, page + @max_visible)
-    startPage = Math.max(endPage - @max_visible, 1)
-    if startPage > 1
-      @$el.append "<a href='##{page - 1}'>prev</a>"
-    for i in [startPage..endPage]
-      @$el.append "<a href='##{i}'>#{i}</a>"
-    if endPage < @total_pages
-      @$el.append "<a href='##{page + 1}'>next</a>"
+    if @total_elements is 0
+      @stub()
+    else
+      page = parseInt(page)
+      endPage = Math.min(@total_pages, page + @max_visible)
+      startPage = Math.max(endPage - @max_visible, 1)
+      if startPage > 1
+        @$el.append "<a href='##{page - 1}'>prev</a>"
+      for i in [startPage..endPage]
+        @$el.append "<a href='##{i}'>#{i}</a>"
+      if endPage < @total_pages
+        @$el.append "<a href='##{page + 1}'>next</a>"
 
-    $("#{@elSelector} a[href=##{page}]").addClass('current').siblings().removeClass('current')
-    @
+      $("#{@elSelector} a[href=##{page}]").addClass('current').siblings().removeClass('current')
+      @
 
 
 
@@ -51,8 +54,8 @@ class PlacesCollection
     new Pagination(number).goTo(page)
     @places = []
     @ids = []
-    @createMap()
     @markers = []
+    @createMap()
     window.googleMarkers = @markers
     for block in blocksThatExist
       obj = $(block).data()
@@ -86,23 +89,26 @@ class PlacesCollection
     if needToAddIds.length > 0
       needToAdd = _.filter(placesData, (place) -> needToAddIds.indexOf(place.id) isnt -1  )
       @multipleAdd($.makeArray(needToAdd))
-      @updateTime($("select[name=reserve_time]").val())
     if needToRemoveIds.length > 0
       @multipleRemove needToRemoveIds
 
     @ids = _.without(_.union(@ids, needToAddIds), needToRemoveIds)
 
+    setTimeout((=>
+      @updateTime placesData
+    ), 50)
+
+
+
   multipleAdd: (placesToAdd = []) =>
-    #console.log placesToAdd
     _.each placesToAdd, (place) =>
       @places.push place
       coords =  place.lat_lng.split(',')
       if coords.length > 0
         place.lat = coords[0]
         place.lng = coords[1]
-
-      @addMarker place
       @addBlock place
+      @addMarker place
 
   multipleRemove: (placeIdsToRemove) =>
     for removeId in placeIdsToRemove
@@ -125,23 +131,22 @@ class PlacesCollection
   addBlock: (place) =>
     I18n = $('#language .active').attr('id')
     properKitchensName = if place.kitchens.length > 18 then place.kitchens.substring(0, 18) + '...' else place.kitchens
-    source   = $("#list_place_template").html()
+
     @addPopoverData place
     _.extend place, {special_offer: true} if place.special_offers?.length > 0
+    source   = $("#list_place_template").html()
     listBlock = Mustache.to_html(source, place)
     source   = $("#map_place_template").html()
     mapBlock = Mustache.to_html(source, place)
     $el = $('#map_details_wrapper').append(mapBlock)
     $listEl = $(listBlock).insertBefore('#list_grid_view .paginate')
     $(".popoverable").on('click', () -> return false).popover(html: true)
-    time = $("select[name=reserve_time]").val()
-    updateSingleTime.call(@, time, $el, $listEl)
 
-  updateTime: (time) =>
-    #TODO create ajax responder for batch of ids
-    #@batchUpdate @ids, time
-    window.filter.get 'reserve_time', time
+
+
+  updateTime: (placesData) =>
     $('#map_details_wrapper').find('.place').each (index, el) ->
+      time = _.find(placesData, (place) -> parseInt(place.id) == $(el).data('id')).timing
       $el = $(el)
       $listEl = $('#list_' + $(el).attr('id'))
       updateSingleTime.call(@, time, $el, $listEl)
@@ -164,68 +169,65 @@ class PlacesCollection
       $el.find(".timing a:eq(#{index})").attr('href', newLink)
       $listEl.find(".timing a:eq(#{index})").attr('href', newLink)
 
-  updateSingleTime = (time, els...) ->
-    # TODO REFACTOR
-
-
-    if els.length is 2
-      [$listEl, $el] = els
-    [base_time, minutes] = time.split ':'
-    base_time = parseInt base_time
-    possibilities = ['00', '15', '30', '45']
-    length = possibilities.length
-    index = possibilities.indexOf(minutes)
-    values = []
-    for delta in [30, 15, 0, -15, -30]
-      [base_time, minutes] = time.split ':'
-      date = new Date(1995, 8, 24, base_time, minutes)
-      valid_date = new Date(date.setMinutes(date.getMinutes() + delta - date.getMinutes() % 15))
-      valid_hours = valid_date.getHours()
-      valid_minutes = ["00", "15","30", "45"][(valid_date.getMinutes() / 15)]
-      validHourString = valid_hours + ":" + valid_minutes
-      values.push validHourString
+  updateSingleTime = (values, $el, $listEl) ->
     _.each values, (time, index, values) ->
-      $el.find(".timing a:eq(#{index})").html time
-      $listEl.find(".timing a:eq(#{index})").html time
+      $el.find(".timing a:eq(#{index})").html time.time
+      $listEl.find(".timing a:eq(#{index})").html time.time
+      if time.available
+        $listEl.add($el).tooltip('hide')
+        $listEl.add($el).find(".timing a:eq(#{index})").removeClass('na')
+      else
+        $listEl.add($el).find(".timing a:eq(#{index})").addClass('na')
+          .tooltip({"title": "this time is unavailable, sorry", "placement": "top"})
       handleClick.call @
 
-
+  removeCenter: =>
+    center = _.where(@markers, {type: "Client"})
+    _.without(@markers, center)
+    center[0]?.setMap(null)
 
   addCenter: (googleObjLatLng) =>
     marker = new google.maps.Marker(
       position: googleObjLatLng
       title: "You're here!"
+      icon: "/assets/pin.png"
+      type: "Client"
     )
     marker.setMap(@map)
+    @markers.push marker
 
   addMarker: (obj) =>
-    console.log obj.image_path
     marker = new google.maps.Marker(
       position: new google.maps.LatLng(obj.lat, obj.lng)
       title: "Hello from #{obj.id}!"
       placeId: obj.id
       html: "<a class='marker' href='##{obj.id}'>place</a>"
+      icon: "/assets/pin.png"
     )
     @markers.push marker
     marker.setMap(@map)
     map = @map
-    
+    stub = $('#list_place_' + obj.id).clone(false)
+    stub.find('.timing, .special_offers, [id^=favorites_small]').remove()
     boxText = document.createElement("div")
     boxText.className = "place popover-content"
     boxText.style.cssText = "border: 1px solid black; margin-top: 8px; padding: 10px; border-radius: 4px; background: white; padding: 5px;"
-    boxText.innerHTML = "<img src='#{obj.image_path}' class='place_img_sm'/><h4><a href='#'>Sowa Cafe<span class='discount_label'>-10%</span></a></h4><div class='rating'><div class='stars'><div class='stars_overlay'></div><div class='stars_bar' style='left: 33%'></div><div class='stars_bg'></div></div><small><a href='#'></a><a href='#'>1 review</a></small>     </div><ul class='place_features'><li class='location'>Sribnokilskaya st., 3d</li><li class='cuisine'>European, Japaneese</li><li class='pricing'>200 UAH</li></ul><div class='clear'></div>"
+    console.log stub.html()
+    boxText.innerHTML = stub.html()
     myOptions =
       content: boxText
       disableAutoPan: false
       maxWidth: 0
       pixelOffset: new google.maps.Size(-140, -130)
-      zIndex: null
+      zIndex: 0
       boxStyle:
         opacity: 1
         width: "340px"
-
       closeBoxMargin: "10px 2px 2px 2px"
+      closeBoxZIndex: 999
+      closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
       infoBoxClearance: new google.maps.Size(1, 1)
+#      map.setCenter(lat_lon)
       isHidden: false
       pane: "floatPane"
       enableEventPropagation: false
@@ -234,9 +236,6 @@ class PlacesCollection
 
     google.maps.event.addListener marker, "click", (e) ->
       ib.open map, this
-
-
-
 
     
     # infowindow = new google.maps.InfoWindow({content: contentString})
@@ -267,15 +266,16 @@ class FilterInput
       blocksThatExist = $("#map_details_wrapper .place")
       page = @getPageNum()
       @places = new PlacesCollection(blocksThatExist, page) if $("#map_places").length > 0
-
+    @give_more(true) if $(".more").length > 0
     @checkIfNeeded()
-    @bindChangeListener()
-    @bindFilterChangeListener()
-    @give_more() if $(".more").length > 0
-    setTimeout(( ->
-      self.dirtyHack()
-    ), 500)
+    @dirtyHack()
+
+
     @
+  nextStep: =>
+    console.log 'did it'
+    @bindFilterChangeListener()
+    @bindChangeListener()
 
 
   bindFilterChangeListener: () ->
@@ -317,6 +317,7 @@ class FilterInput
       needToCheck = _.extend({}, $.deparam(querystring.slice(1)), gon)
     else
       needToCheck = $.deparam querystring.slice(1)
+    window.neededForCategory = {}
     @getFilterseNeedToTriggerPaginate(needToCheck)
 
   strip: (obj) ->
@@ -341,10 +342,15 @@ class FilterInput
       alreadyThere[type].push(parseInt( $(this).val() ))
     )
     needed = {}
+
     for filter, values of needToCheck
       needed[filter] = false if needed[filter] is undefined
       needed[filter] = true if _.reject(values, (num) ->
+
         $("#refine input[value='#{num}'][data-type='#{filter}']").click() unless $("#refine input[value='#{num}'][data-type='#{filter}']").is(':checked')
+        $("#refine input[value='#{num}'][data-type='#{filter}']").one 'click', ->
+          window.history.pushState '', null, "/search" + window.location.search
+
         parseInt(num) in alreadyThere[filter]
       ).length > 0
     for filter, flag of needed
@@ -352,9 +358,17 @@ class FilterInput
         $("a.more[data-type='#{filter}']").click()
         setTimeout(( ->
           self.getFilterseNeedToTriggerPaginate(needToCheck)
-
-        ), 500)
+        ), 50)
     needed
+    if _.values(needed).length > 1
+      done = _.reduce(_.values(needed), (memo = true, val) ->
+        memo = false if val
+        memo
+      )
+    else
+      done = not(_.values(needed)[0])
+    if done
+      @nextStep()
 
 
   getPageNum: () ->
@@ -401,9 +415,11 @@ class FilterInput
     newUrl = (baseURL + '/' + newQuery).replace(/\/*\?+/, '?').replace("/??", '?')
     newQuery = newQuery.replace(/\?/g, '')
     window.history.pushState('',null, newUrl)
-    console.log newUrl
     if entity is 'page'
       pageTo = entityTo
+      askAJAX.call(@, newQuery, @places, pageTo)
+    if entity is 'reserve_time'
+      pageTo = @getPageNum()
       askAJAX.call(@, newQuery, @places, pageTo)
 
   checkIfNeeded: () ->
@@ -443,7 +459,7 @@ class FilterInput
       baseURL =  window.location.pathname
       newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '?')
 
-      window.history.replaceState('',null, newUrl)
+      window.history.pushState('',null, newUrl)
       askAJAX.call(@, newQuery, @places, startPage)
 
     self = @
@@ -473,13 +489,15 @@ class FilterInput
       else
         headlineText = $('#map_details > h3:first-child').html().replace(/\d+\:\d+(?=\sfor\s)/, time)
         $('#map_details > h3:first-child').html headlineText
-        self.places.updateTime time
+        window.filter.get 'reserve_time', time
+
 
     $("select[name=number_of_people]").on 'change', ->
       number = $(this).val()
       headlineText = $('#map_details > h3:first-child').html().replace(/\d+(?=\speople)/, number)
       $('#map_details > h3:first-child').html headlineText
       window.filter.get 'number_of_people', number
+
 
     $("#sortby-list a").on 'click', (e) ->
       e.preventDefault()
@@ -511,7 +529,7 @@ class FilterInput
 
     $.ajax({ data: serializedData });
 
-  give_more: =>
+  give_more: (no_binding = false) =>
     @more_template = Handlebars.compile($("#more_template").html())
     self = @
     $("a.more").one 'click', (e) ->
@@ -519,19 +537,22 @@ class FilterInput
       $el = $(this)
       type = $el.data('type')
       if type
-        $.getJSON '/search/get_more',{type: type}, (data) => parse_more_objects.call(self, data, $el, type)
+        $.getJSON '/search/get_more',{type: type}, (data) => parse_more_objects.call(self, data, $el, type, no_binding)
 
   #private methods
-  parse_more_objects = (data, $el, type) ->
+  parse_more_objects = (data, $el, type, no_binding) ->
     _.each data, (obj) =>
       _.extend obj, {type: type}
       $el.prev().prev().after(@more_template(obj))
-    @checkIfNeeded()
-    @bindChangeListener()
-    @bindFilterChangeListener()
+      @checkIfNeeded()
+      unless no_binding
+        @bindChangeListener()
+        @bindFilterChangeListener()
     $el.hide()
 
 $ ->
+  if $("[id^='list_place'], [id^='place_']").length > 0
+    $("[id^='list_place'], [id^='place_']").find('.timing .na').tooltip({"title": "this time is unavailable, sorry", "placement": "top"})
   if $('#refine').length isnt 0
     window.filter = new FilterInput yes
 
@@ -539,6 +560,12 @@ $ ->
     total = parseInt($('#total').html())
     new Pagination( total )
   handleClick()
+  $('body').on 'ajaxStart', ->
+    loader   = $("#ajax_fixed_loader_template").html()
+    $('body').append loader if $("#ajax_loader_overlay").length is 0
+  $('body').on 'ajaxStop', ->
+    $("#ajax_loader_overlay").fadeOut ->
+      $(@).remove()
 
 handleClick = ()->
   $('.timing a').off 'click.reserve', (e) ->
@@ -551,4 +578,4 @@ handleClick = ()->
     time = $(e.target).html()
     people = $("select[name=number_of_people]").val()
     newLink = "/#{language}/new_reservation/#{date},#{id},h=#{time.split(':')[0]}&m=#{time.split(':')[1]},#{people}"
-    window.location.replace newLink
+    window.location.pushState '', null, newLink
