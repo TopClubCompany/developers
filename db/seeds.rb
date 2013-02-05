@@ -35,7 +35,7 @@ def add_categories
 
   night = Category.create(name: "Ночная жизнь", description: "Ночная жизнь", user_id: User.first.id)
 
-  %w(Nightъ clubs Karaoke).each_with_index do |category, index|
+  %w(Night clubs Karaoke).each_with_index do |category, index|
     params = case index
                when 0
                  {css_id: "night_clubs", is_visible_on_main: true, position: 6}

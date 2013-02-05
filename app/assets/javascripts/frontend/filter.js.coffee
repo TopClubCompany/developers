@@ -52,30 +52,37 @@ class PlacesCollection
   constructor: ( blocksThatExist = [], page = 1 ) ->
     number = parseInt($('#total').text())
     new Pagination(number).goTo(page)
+    objArray = []
     @places = []
     @ids = []
     @markers = []
-    @createMap()
-    window.googleMarkers = @markers
     for block in blocksThatExist
-      obj = $(block).data()
-      @ids.push obj.id
+      objArray.push $(block).data()
+      @ids.push block.id
+    lattitudes = _.pluck objArray, 'lat'
+    longtitudes = _.pluck objArray, 'lat'
+    SouthWest = new google.maps.LatLng(_.max(lattitudes) + 0.3, _.min(longtitudes) - 0.3)
+    NorthEast = new google.maps.LatLng(_.min(lattitudes) - 0.3, _.max(longtitudes) + 0.3)
+
+    window.googleMarkers = @markers
+    @createMap(SouthWest, NorthEast)
+    for obj in objArray
       @addMarker obj
 
-  createMap: () ->
+  createMap: (SouthWest, NorthEast) ->
     initialData = $('#map_places').data()
     center = new google.maps.LatLng(initialData.lat, initialData.lng)
     mapOptions =
-      center: center,
+#      center: center,
       zoom: 12,
       disableDefaultUI: true,
       zoomControl: true,
       minZoom: 9,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     @map = new google.maps.Map(document.getElementById("map_places"), mapOptions)
-    new google.maps.LatLng(initialData.lat, initialData.lng)
-    @addCenter center
+    @adjustMap SouthWest, NorthEast
     window.googleMap = @map
+
 
 
   useNewData: (json, page) ->
@@ -98,6 +105,18 @@ class PlacesCollection
       @updateTime placesData
     ), 50)
 
+#    @wrapAdjustMap _.pluck(placesData, "lat"), _.pluck(placesData, "lng")
+#
+#  wrapAdjustMap: (lattitudes, longtitudes ) ->
+##    lattitudes = _.pluck objArray, 'lat'
+##    longtitudes = _.pluck objArray, 'lat'
+#    SouthWest = new google.maps.LatLng(_.max(lattitudes), _.min(longtitudes))
+#    NorthEast = new google.maps.LatLng(_.min(lattitudes), _.max(longtitudes))
+#    @adjustMap SouthWest, NorthEast
+
+  adjustMap: (SouthWest, NorthEast) ->
+    bounds = new google.maps.LatLngBounds(SouthWest, NorthEast)
+    @map.fitBounds(bounds)
 
 
   multipleAdd: (placesToAdd = []) =>
@@ -146,10 +165,11 @@ class PlacesCollection
 
   updateTime: (placesData) =>
     $('#map_details_wrapper').find('.place').each (index, el) ->
-      time = _.find(placesData, (place) -> parseInt(place.id) == $(el).data('id')).timing
-      $el = $(el)
-      $listEl = $('#list_' + $(el).attr('id'))
-      updateSingleTime.call(@, time, $el, $listEl)
+      time = _.find(placesData, (place) -> parseInt(place.id) == $(el).data('id'))?.timing
+      if time
+        $el = $(el)
+        $listEl = $('#list_' + $(el).attr('id'))
+        updateSingleTime.call(@, time, $el, $listEl)
 
   updateSingleDate = (date, els...) ->
     if els.length is 2
@@ -182,19 +202,23 @@ class PlacesCollection
       handleClick.call @
 
   removeCenter: =>
-    center = _.where(@markers, {type: "Client"})
-    _.without(@markers, center)
-    center[0]?.setMap(null)
+    console.log 'called removecenter'
+    center = _.find(@markers, (marker) -> marker.type is "Client")
+    center?.setMap(null)
+    @markers = _.without(@markers, center)
+
 
   addCenter: (googleObjLatLng) =>
-    marker = new google.maps.Marker(
-      position: googleObjLatLng
-      title: "You're here!"
-      icon: "/assets/pin.png"
-      type: "Client"
-    )
-    marker.setMap(@map)
-    @markers.push marker
+    unless _.find(@markers, (marker) -> marker.type is "Client")?.length > 0
+      marker = new google.maps.Marker(
+        position: googleObjLatLng
+        title: "You're here!"
+        icon: "/assets/customer.png"
+        type: "Client"
+      )
+      marker.setMap(@map)
+      @map.setCenter googleObjLatLng
+      @markers.push marker
 
   addMarker: (obj) =>
     marker = new google.maps.Marker(
@@ -212,7 +236,6 @@ class PlacesCollection
     boxText = document.createElement("div")
     boxText.className = "place popover-content"
     boxText.style.cssText = "border: 1px solid black; margin-top: 8px; padding: 10px; border-radius: 4px; background: white; padding: 5px;"
-    console.log stub.html()
     boxText.innerHTML = stub.html()
     myOptions =
       content: boxText
@@ -279,6 +302,7 @@ class FilterInput
 
 
   bindFilterChangeListener: () ->
+    self = @
     needToDisplay = _.reduce($("#refine input[type=checkbox]:checked"), ((memo,checkbox) ->
       type = $(checkbox).data('type')
       memo.push type unless _.contains memo, type
@@ -295,13 +319,24 @@ class FilterInput
       else
         if $("#refine input[type=checkbox][data-type=#{type}]:checked").length is 0
           $("##{type}_filter")?.fadeOut("fast", () -> $(this).remove())
+          if type is 'distance'
+            self.places.removeCenter()
+
 
   displayFilterType: (filter_type) ->
+    self = @
+    if filter_type is 'distance'
+      initialData = $('#map_places').data()
+      center = new google.maps.LatLng(initialData.lat, initialData.lng)
+      self.places.addCenter center
+
     if $("##{filter_type}_filter").length is 0
       filterBlock = "<span style='display: none;' id='#{filter_type}_filter'>#{filter_type}<b>×</b></span>"
       $('#filters').append(filterBlock)
       $("##{filter_type}_filter").fadeIn("fast").find('b').on 'click', (e) ->
         type = $(e.target).parent().fadeOut("fast", () -> $(this).remove()).attr('id').slice(0, -7)
+        if type is 'distance'
+          self.places.removeCenter()
         $("#refine input[type=checkbox][data-type=#{type}]:checked").click()
 
 
@@ -432,10 +467,8 @@ class FilterInput
         $("#refine input[value='#{value}'][data-type='#{filter}']").click() unless $("#refine input[value='#{value}'][data-type='#{filter}']").is(':checked')
 
   bindChangeListener: () =>
-    console.log 'bindChangeListener'
     $('#refine input[type=checkbox]').off 'change.addressBar'
     $('#refine input[type=checkbox]').on 'change.addressBar', (e) =>
-      console.log 'doing nothing in fact'
       result = {}
       $('#refine input').each( ->
         type = $(this).data('type')
