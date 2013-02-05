@@ -239,7 +239,7 @@ ru:
     category: Category
     grid_view: Grid view
     kitchen: Kitchen
-    main_text: Free reservations at %{count} restaurants in %{city}
+    main_text: Free reservations at %{count} %{type} in %{city}
     map_view: Map view
     number_of_people: Number of people
     price: Price

@@ -57,6 +57,7 @@ class Paginator
         self.options.displayed = self.options.displayed + data.result.length
         if self.options.displayed is data.total or not data.total?
           showMoreButton.remove()
+          $("#js-spinner")?.remove()
         else
           # reseting gif image of loader with html previously saved
           showMoreButton.show().html(self.htmlToSet)
