@@ -99,6 +99,10 @@ Topclub::Application.routes.draw do
 
     resources :dashboards
 
+    resources :main_sliders do
+
+    end
+
     resources :categories do
       post :batch, :on => :collection
       post :rebuild, :on => :collection

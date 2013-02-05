@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130129070457) do
+ActiveRecord::Schema.define(:version => 20130205092837) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -330,6 +330,12 @@ ActiveRecord::Schema.define(:version => 20130129070457) do
   end
 
   add_index "locations", ["locationable_id", "locationable_type"], :name => "index_locations_on_locationable_id_and_locationable_type"
+
+  create_table "main_sliders", :force => true do |t|
+    t.integer  "position",   :default => 0
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
 
   create_table "mark_type_translations", :force => true do |t|
     t.integer  "mark_type_id"

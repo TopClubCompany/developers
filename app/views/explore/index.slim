@@ -8,11 +8,12 @@
     .left
     .right
 
-  ul.slideWrapper
-    - 4.times do |i|
-    - css_class = (i == 1? 'current' : 'hidden')
-      li  id="slide_#{i}" class="#{css_class}"
-        img.place_food src="assets/gfx/#{i}.jpg"
+  - cache [I18n.locale, 'explorer', MainSlider.max_time, 'slider'] do
+    ul.slideWrapper
+      - MainSlider.all.each_with_index do |slider, index|
+      - css_class = (index == 1 ? 'current' : 'hidden')
+        li id="slide_#{index}" class="#{css_class}"
+          img.place_food src=slider.slider.url(:main)
   .caption
     a href="#"
       img src="assets/gfx/4.jpg"
