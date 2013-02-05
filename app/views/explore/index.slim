@@ -10,10 +10,10 @@
 
   - cache [I18n.locale, 'explorer', Place.max_time, 'slider'] do
     ul.slideWrapper
-      - Place.first(4).each_with_index do |place, index|
+      - Place.for_slider.each_with_index do |place, index|
       - css_class = (index == 1 ? 'current' : 'hidden')
         li id="slide_#{index}" class="#{css_class}"
-          img.place_food src=place.slider.url(:main)
+          img.place_food src=place.slider.url
   .caption
     a href="#"
       img src="assets/gfx/4.jpg"
