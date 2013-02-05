@@ -60,6 +60,9 @@
   = input_set t('admin.place_images') do
     = f.attach_file_field :place_images, :file_max_size => 2
 
+  = input_set t('admin.sliders') do
+    = f.attach_file_field :slider, :file_max_size => 20
+
   = f.hidden_field :fileupload_guid if f.object.new_record?
 
   = geo_input 'place_location_attributes'
