@@ -33,6 +33,7 @@ class Place < ActiveRecord::Base
   has_one :place_image, :as => :assetable, :dependent => :destroy, :conditions => {:is_main => true}
   has_many :place_images, :as => :assetable, :dependent => :destroy, :conditions => {:is_main => false}
   has_many :all_place_images, :class_name => 'PlaceImage', :as => :assetable, :dependent => :destroy, :order => 'is_main DESC'
+  has_one :slider, :as => :assetable, :dependent => :destroy
 
 
   has_one :location, :as => :locationable, :dependent => :destroy, :autosave => true
@@ -91,6 +92,17 @@ class Place < ActiveRecord::Base
 
   def self.paginate(options = {})
     includes(:kitchens, :categories, :place_feature_items, :location).paginate(:page => options[:page], :per_page => options[:per_page]).to_a
+  end
+
+  def self.for_slider options={}
+    tire.search(page: options[:page], per_page: options[:per_page] || 4) do
+      query do
+        custom_score({script: "random()*20"}) do
+          all {}
+        end
+      end
+      sort { by("_score", "desc") }
+    end
   end
 
 
@@ -235,6 +247,11 @@ class Place < ActiveRecord::Base
         json.main_url image.url(:main)
         json.is_main image.is_main
       end
+
+      json.slider do |json|
+        json.id slider.id
+        json.url slider.url(:main)
+      end if slider
 
       json.place_image do |json|
         json.id place_image.id
