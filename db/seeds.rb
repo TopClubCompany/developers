@@ -161,12 +161,10 @@ end
 
 
 def insert_slider
-  MainSlider.all.map(&:destroy)
   pictures_path = Rails.root.join('public', 'images', 'slider', '*.{jpg, png, jpeg}')
   pictures = Dir.glob(pictures_path).map { |entry| File.new(entry)}
-  4.times do |i|
-    slider = MainSlider.create(position: i)
-    slider.slider = Slider.new(data: pictures[i], is_main: true)
+  Place.all.each do |place|
+    place.slider = Slider.new(data: pictures.sample, is_main: true)
   end
 end
 
