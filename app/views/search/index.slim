@@ -2,7 +2,8 @@
   .row
     .span12
       #search_form
-        h1= I18n.t('search.main_text', count: Place.count_visible(city: current_city), city: current_city)
+        - type ||= "restaurants"
+        h1= I18n.t('search.main_text', type: type , count: Place.count_visible(city: current_city), city: current_city)
         form.shorten action=localization_link("search")
           = render :partial => 'shared/search_form'
         #view_switch

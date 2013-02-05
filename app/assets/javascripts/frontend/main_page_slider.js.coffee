@@ -74,4 +74,5 @@ class SimpleSlider
     parseInt(id.replace(/slide_/, '')) - 1
 
 $ ->
-  new SimpleSlider(".slideWrapper", "[id^='slide_']", 1000, 4000)
+  if $(".slideWrapper").length > 0
+    new SimpleSlider(".slideWrapper", "[id^='slide_']", 1000, 4000)
