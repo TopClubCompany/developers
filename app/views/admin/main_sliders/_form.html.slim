@@ -1,0 +1,10 @@
+= admin_form_for @main_slider do |f|
+
+  = f.input :position
+
+  = input_set t('admin.sliders') do
+    = f.attach_file_field :slider, :file_max_size => 20
+
+  = f.hidden_field :fileupload_guid if f.object.new_record?
+
+  = f.save_buttons

@@ -159,6 +159,17 @@ def insert_default_place_pictures
   puts 'place images added successfully'
 end
 
+
+def insert_slider
+  MainSlider.all.map(&:destroy)
+  pictures_path = Rails.root.join('public', 'images', 'slider', '*.{jpg, png, jpeg}')
+  pictures = Dir.glob(pictures_path).map { |entry| File.new(entry)}
+  4.times do |i|
+    slider = MainSlider.create(position: i)
+    slider.slider = Slider.new(data: pictures[i], is_main: true)
+  end
+end
+
 def insert_default_reservations
   Reservation.full_truncate
   10.times do
@@ -188,15 +199,16 @@ def insert_default_vote_types
   %w|helpful unhelpful|.each { |title| VoteType.create(title: title, description: Faker::Lorem.sentence)}
 end
 
-User.full_truncate
-insert_default_user('admin@adm.com', :admin)
-insert_default_user('user@usr.com')
-add_categories
-add_kitchens
-insert_mark_types
-add_test_stuff
-insert_default_place_pictures
-insert_group_feature
-insert_city
-insert_default_reservations
-insert_default_vote_types
+#User.full_truncate
+#insert_default_user('admin@adm.com', :admin)
+#insert_default_user('user@usr.com')
+#add_categories
+#add_kitchens
+#insert_mark_types
+#add_test_stuff
+#insert_default_place_pictures
+#insert_group_feature
+#insert_city
+#insert_default_reservations
+#insert_default_vote_types
+insert_slider
