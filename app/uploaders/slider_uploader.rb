@@ -13,7 +13,7 @@ class SliderUploader < Utils::CarrierWave::BaseUploader
   end
 
   version :main do
-    process :resize_to_fill => [1600, 571]
+    process :resize_to_fill => [1600, 500]
   end
 
   def extension_white_list
