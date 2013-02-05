@@ -94,6 +94,17 @@ class Place < ActiveRecord::Base
     includes(:kitchens, :categories, :place_feature_items, :location).paginate(:page => options[:page], :per_page => options[:per_page]).to_a
   end
 
+  def self.for_slider options={}
+    tire.search(page: options[:page], per_page: options[:per_page] || 4) do
+      query do
+        custom_score({script: "random()*20"}) do
+          all {}
+        end
+      end
+      sort { by("_score", "desc") }
+    end
+  end
+
 
   def self.search(options = {})
     filters = []
