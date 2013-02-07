@@ -272,10 +272,16 @@ $ ->
     init_vk(data_for_soc)
     init_fb(data_for_soc)
 
-  $("#custom-tweet-button").hover ->
-    $("#fake_for_twitter").mouseover()
-    console.log $("#fake_for_twitter")
+#  $("#custom-tweet-button").hover ->
+#    $("#fake_for_twitter").mouseover()
+#    console.log $("#fake_for_twitter")
 
+  $('#custom-tweet-button').on 'mouseenter', ->
+    $('#fake_for_twitter').mouseenter()
+    console.log 'enter'
+  $('#custom-tweet-button').on 'mouseleave', ->
+    $('#fake_for_twitter').mouseleave()
+    console.log 'leave'
   prepare_tweet_button =() ->
     button = $("#custom-tweet-button")
     fake = $("#fake_for_twitter")
