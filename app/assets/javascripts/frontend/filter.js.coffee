@@ -58,7 +58,7 @@ class PlacesCollection
     @markers = []
     for block in blocksThatExist
       objArray.push $(block).data()
-      @ids.push block.id
+      @ids.push $(block).data('id')
     lattitudes = _.pluck objArray, 'lat'
     longtitudes = _.pluck objArray, 'lat'
     SouthWest = new google.maps.LatLng(_.max(lattitudes) + 0.3, _.min(longtitudes) - 0.3)
