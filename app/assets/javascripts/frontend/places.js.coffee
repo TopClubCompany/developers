@@ -156,12 +156,15 @@ $ ->
     $("ul.share_selector li").removeClass('active')
     $("ul.share_selector li#"+ soc_id).addClass('active')
     tw_button = $(".tw_button")
+    fake_submit = $("#fake_for_twitter")
     standart_share_bt = $(".standart_share_button")
     if soc_id == 'tw'
       tw_button.css('display', 'inline-block')
+      fake_submit.css('display', 'inline-block')
       standart_share_bt.css('display', 'none')
     else
       tw_button.css('display', 'none')
+      fake_submit.css('display', 'none')
       standart_share_bt.css('display', 'inline-block')
     $(this).fancybox()
     share_text_input = $("#share_text_input")
@@ -174,11 +177,14 @@ $ ->
     if $(this).attr('id') == 'tw'
       tw_button = $(".tw_button")
       standart_share_bt = $(".standart_share_button")
+      fake_submit = $("#fake_for_twitter")
       if $(this).hasClass('active')
         tw_button.css('display', 'inline-block')
+        fake_submit.css('display', 'inline-block')
         standart_share_bt.css('display', 'none')
       else
         tw_button.css('display', 'none')
+        fake_submit.css('display', 'none')
         standart_share_bt.css('display', 'inline-block')
 
 #  tw_case=(id) ->
@@ -266,6 +272,14 @@ $ ->
     init_vk(data_for_soc)
     init_fb(data_for_soc)
 
+  $("#custom-tweet-button").hover ->
+    $("#fake_for_twitter").mouseover()
+    console.log $("#fake_for_twitter")
 
+  prepare_tweet_button =() ->
+    button = $("#custom-tweet-button")
+    fake = $("#fake_for_twitter")
+    button.attr('width', fake.attr('width')).attr('height', '26px')
 
+  prepare_tweet_button()
 
