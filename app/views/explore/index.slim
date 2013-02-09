@@ -13,7 +13,7 @@
       - Place.for_slider.each_with_index do |place, index|
       - css_class = (index == 1 ? 'current' : 'hidden')
         li id="slide_#{index}" class="#{css_class}"
-          img.place_food src=place.slider.url
+          img.place_food src=place.slider.try(:url)
   .caption
     a href="#"
       img src="assets/gfx/4.jpg"
@@ -50,6 +50,7 @@
     .row
       .span12
         ul#promo_tabs
+          /@tabs is hash
           - @tabs.each do |category, tabs|
             li class="#{'active' if category == :best}"
               a href="##{category}"= t(".#{category}")

@@ -253,8 +253,10 @@ ul.sortby {
 
 #custom-tweet-button {
   overflow: hidden;
-  background-color: #4B67A1;
-
+  //background-color: #4B67A1;
+  position: absolute;
+  margin-left: 225px;
+  margin-top: 2px;
   * {
     margin: 0;
     padding: 0;

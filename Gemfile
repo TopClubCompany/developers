@@ -151,3 +151,6 @@ gem "factory_girl", '>=4.0.0'
 gem 'mustache'
 #work with soap
 gem 'soap4r', :git => 'git://github.com/felipec/soap4r.git'
+
+#meta tag
+gem 'meta-tags', :require => 'meta_tags'

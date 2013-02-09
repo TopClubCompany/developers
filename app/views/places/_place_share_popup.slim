@@ -1,4 +1,4 @@
-#share.popup style="margin-left: 0px;"
+#share.popup style="margin-left: 0px;padding: 0px;"
   button.close aria-hidden="true" data-dismiss="modal" type="button"
   h5= t('short_strings.share_with_friends')
   .shared_content
@@ -30,5 +30,6 @@
   #multi-share-button
     .tw_button#custom-tweet-button style="display: none;"
       a.twitter-share-button data-lang=locale.to_s href='https://twitter.com/share' data-url=@stuff_for_share[:link] data-text=@stuff_for_share[:description] data-count="none"
+    input#fake_for_twitter type="submit" value="Share" style="display: none; margin-bottom: 5px;"
     .standart_share_button
-      input type="submit" value="Share"
+      input type="submit" value="Share" style="margin-left: 226px;"
