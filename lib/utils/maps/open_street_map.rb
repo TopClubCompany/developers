@@ -4,10 +4,10 @@ module Utils
     class OpenStreetMap
 
       class << self
-        @@url = 'http://nominatim.openstreetmap.org'
+        URL = 'http://nominatim.openstreetmap.org'
 
         def reverse_geocode options={}
-          url = (options.delete(:url) || "#{@@url}/reverse")
+          url = (options.delete(:url) || "#{URL}/reverse")
           options[:format] ||= "json"
           languages = options.delete(:"accept-language")
           places = Hashie::Mash.new

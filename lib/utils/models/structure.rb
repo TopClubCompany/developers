@@ -26,7 +26,7 @@ module Utils
             scope :visible, where(:is_visible => true)
             scope :with_kind, proc {|structure_type| where(:kind => structure_type.id) }
             scope :with_depth, proc {|level| where(:depth => level.to_i) }
-            scope :with_position, proc {|position_type| where(:position => position_type.id).order('lft DESC') }
+            scope :with_position, proc {|position_type| includes(:headers => [:translations, :og_tag => :translations]).where(:position => position_type.id).order('lft DESC') }
           end
         end
         
@@ -38,7 +38,7 @@ module Utils
         def find_by_permalink!(value)
           record = find_by_permalink(value)
           raise ActiveRecord::RecordNotFound, "Couldn't find structure by #{value}" if record.nil?
-          return record
+          record
         end
       end
       
