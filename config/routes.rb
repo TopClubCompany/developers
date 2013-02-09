@@ -144,6 +144,12 @@ Topclub::Application.routes.draw do
       post :batch, :on => :collection
     end
 
+    resources :structures do
+      post :rebuild, :on => :collection
+      resource :static_page
+      post :batch, :on => :collection
+    end
+
   end
   mount Ckeditor::Engine => "/ckeditor"
 

@@ -5,11 +5,13 @@ class CreateHeaders < ActiveRecord::Migration
       
       t.string    :headerable_type, :limit => 30, :null => false
       t.integer   :headerable_id, :null => false
+      t.integer :tag_type_id, :null => false
       
       t.timestamps
     end
     
-    add_index :headers, [:headerable_type, :headerable_id], :unique => true, :name => "fk_headerable"
+    add_index :headers, [:headerable_type, :headerable_id]
+    add_index :headers, :tag_type_id
   end
 
   def self.down

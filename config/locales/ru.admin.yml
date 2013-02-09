@@ -54,6 +54,20 @@ ru:
       sign_out: "Выход"
     avatar: "Аватар"
     batch_actions: "Действия"
+    meta_tag:
+      title: Title
+      description: Description
+      keywords: Keywords
+      noindex: Noindex
+      nofollow: Nofollow
+      canonical: Canonical
+      open_graph: Open_graph
+    structure:
+      position:
+        index: "Главная страница"
+        search: "Страница поиска"
+        place: "Страница места"
+        profile: "Страница профайла"
     bill: 
       code: 
         cheap: Cheap
@@ -139,7 +153,7 @@ ru:
         default: "По умолчанию"
         private: "Приватная"
         public: "Публичная"
-    keywords: "Ключевые слова"
+    keywords: "Теги"
     langs: 
       en: En
       it: It
