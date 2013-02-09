@@ -846,7 +846,7 @@ input[type='submit']:hover {
   padding: 0;
   font-size: 16px;
   line-height: 16px;
-  width: 300px;
+  max-width: 500px;
 }
 
 h4 .discount_label {
@@ -2450,7 +2450,7 @@ h4 .discount_label {
 }
 
 #search_results #search_form #title_or_location {
-  width: 165px !important;
+  width: 160px !important;
   font-size: 24px;
   border-right: 0;
   line-height: 30px;
@@ -2981,16 +2981,25 @@ h4 .discount_label {
   position: relative;
 }
 
+#food_teaser ul {
+  display: block;
+  width: 100%;
+  height: 500px;
+}
+
+#food_teaser ul li {
+  display: block;
+}
+
 #food_teaser img.place_food {
-  height: 570px;
-  width: 1600px;
-  width: auto;
+  z-index: 0;
+  max-width: none;
   position: absolute;
+  height: 500px;
+  width: 1600px;
   top: 0;
   left: 50%;
   margin-left: -800px;
-  max-width: none;
-  z-index: 0;
 }
 
 #food_teaser .arrows div {
@@ -3033,7 +3042,6 @@ h4 .discount_label {
   top: 120px;
 }
 
-
 #food_teaser h5 {
   font-size: 32px;
   margin: 0 0 15px 0;
@@ -3043,7 +3051,6 @@ h4 .discount_label {
   font-size: 18px;
   margin: 20px 0 25px 0;
 }
-
 
 #food_teaser .caption {
   position: absolute;
@@ -3090,13 +3097,6 @@ h4 .discount_label {
   top: 40%;
   left: 50%;
   margin-left: -470px;
-  #title_or_location {
-    width: 270px !important;
-    font-size: 24px;
-  }
-  //#title_or_location {
-  //  width: 203px;
-  //}
 }
 
 #search_form input[type="text"] {
@@ -3107,7 +3107,15 @@ h4 .discount_label {
   cursor: default !important;
 }
 
+#food_teaser #search_form label {
+  margin-bottom: 0;
+}
 
+#food_teaser #search_form #title_or_location {
+  width: 270px !important;
+  font-size: 24px;
+}
 
-
-
+#food_teaser #search_form #title_or_location:focus {
+  color: #333;
+}
