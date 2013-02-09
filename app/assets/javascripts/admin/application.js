@@ -40,6 +40,7 @@
 //= require admin/components/gmaps
 //= require admin/components/nested_filelds_adder.js
 //= require admin/components/decimal_zero_fix
+//= require admin/components/og
 //= require admin/pretty-slide-checkbox
 //= require admin/main
 //= require_tree ./place

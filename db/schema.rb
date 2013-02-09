@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130205092837) do
+ActiveRecord::Schema.define(:version => 20130209125053) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -260,11 +260,9 @@ ActiveRecord::Schema.define(:version => 20130205092837) do
   create_table "header_translations", :force => true do |t|
     t.integer  "header_id"
     t.string   "locale"
-    t.string   "title"
-    t.string   "keywords"
-    t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "header_translations", ["header_id"], :name => "index_header_translations_on_header_id"
@@ -273,11 +271,13 @@ ActiveRecord::Schema.define(:version => 20130205092837) do
   create_table "headers", :force => true do |t|
     t.string   "headerable_type", :limit => 30, :null => false
     t.integer  "headerable_id",                 :null => false
+    t.integer  "tag_type_id",                   :null => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
   end
 
-  add_index "headers", ["headerable_type", "headerable_id"], :name => "fk_headerable", :unique => true
+  add_index "headers", ["headerable_type", "headerable_id"], :name => "index_headers_on_headerable_type_and_headerable_id"
+  add_index "headers", ["tag_type_id"], :name => "index_headers_on_tag_type_id"
 
   create_table "kitchen_translations", :force => true do |t|
     t.integer  "kitchen_id"
@@ -331,12 +331,6 @@ ActiveRecord::Schema.define(:version => 20130205092837) do
 
   add_index "locations", ["locationable_id", "locationable_type"], :name => "index_locations_on_locationable_id_and_locationable_type"
 
-  create_table "main_sliders", :force => true do |t|
-    t.integer  "position",   :default => 0
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-  end
-
   create_table "mark_type_translations", :force => true do |t|
     t.integer  "mark_type_id"
     t.string   "locale"
@@ -374,6 +368,30 @@ ActiveRecord::Schema.define(:version => 20130205092837) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "og_tag_translations", :force => true do |t|
+    t.integer  "og_tag_id"
+    t.string   "locale"
+    t.string   "title"
+    t.text     "description"
+    t.string   "url"
+    t.string   "image"
+    t.string   "site_name"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "og_tag_translations", ["locale"], :name => "index_og_tag_translations_on_locale"
+  add_index "og_tag_translations", ["og_tag_id"], :name => "index_og_tag_translations_on_og_tag_id"
+
+  create_table "og_tags", :force => true do |t|
+    t.string   "og_type"
+    t.integer  "header_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "og_tags", ["header_id"], :name => "index_og_tags_on_header_id"
 
   create_table "place_administrators", :force => true do |t|
     t.integer  "place_id"
@@ -545,7 +563,6 @@ ActiveRecord::Schema.define(:version => 20130205092837) do
     t.integer  "structure_id",                   :null => false
     t.integer  "user_id"
     t.boolean  "is_visible",   :default => true, :null => false
-    t.boolean  "delta",        :default => true, :null => false
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
   end
@@ -557,7 +574,6 @@ ActiveRecord::Schema.define(:version => 20130205092837) do
     t.integer  "structure_id"
     t.string   "locale"
     t.string   "title"
-    t.string   "redirect_url"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
@@ -571,7 +587,6 @@ ActiveRecord::Schema.define(:version => 20130205092837) do
     t.integer  "position",   :limit => 2,  :default => 1
     t.integer  "user_id"
     t.boolean  "is_visible",               :default => true, :null => false
-    t.boolean  "delta",                    :default => true, :null => false
     t.integer  "parent_id"
     t.integer  "lft",                      :default => 0
     t.integer  "rgt",                      :default => 0

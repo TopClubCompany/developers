@@ -17,7 +17,7 @@ module Utils
       
       module InstanceMethods
         def empty?
-          [keywords, description, title].map(&:blank?).all?
+          [content].map(&:blank?).all?
         end
 
         def has_info?
