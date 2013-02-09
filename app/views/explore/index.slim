@@ -1,6 +1,6 @@
 #food_teaser
   .teaser_heading
-    h5 Find a perfect restaurant and pay lower prices.
+    h5= I18n.t('explore.index.main_slider_text')
     p Select one of #{Place.count_visible(city: current_city)} restaurants in #{current_city.capitalize} and save up to 50% off your total bill.
   #search_form
     = render :partial => 'shared/search_form'
