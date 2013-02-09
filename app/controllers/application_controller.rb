@@ -37,4 +37,27 @@ class ApplicationController < ActionController::Base
     end
     @time = {:h => h.to_s, :m => m.to_s }
   end
+
+  def setting_meta_tags struct
+    if struct
+      struct.headers.each do |header|
+        tag_type = header.tag_type.code.to_sym
+        case tag_type
+          when :open_graph
+            set_meta_tags :open_graph => {
+                :title => header.og_tag.title,
+                :type  => header.og_tag.og_type.to_sym,
+                :url   => header.og_tag.url,
+                :image =>  header.og_tag.image,
+                :site_name =>  header.og_tag.site_name,
+                :description =>  header.og_tag.description
+            }
+          when :keywords
+            set_meta_tags  tag_type => header.content.split(',')
+          else
+            set_meta_tags tag_type => header.content
+        end
+      end
+    end
+  end
 end

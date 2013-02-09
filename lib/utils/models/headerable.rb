@@ -5,11 +5,11 @@ module Utils
       extend ActiveSupport::Concern
 
       included do
-        has_one :header, :as => :headerable, :dependent => :delete
+        has_many :headers, :as => :headerable, :dependent => :destroy
 
-        attr_accessible :header_attributes
+        attr_accessible :headers_attributes
 
-        accepts_nested_attributes_for :header, :reject_if => :all_blank
+        accepts_nested_attributes_for :headers, :reject_if => :all_blank
 
         ::Header.all_translated_attribute_names.each do |attr|
           define_method "header_#{attr}=" do |val|

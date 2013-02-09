@@ -1,0 +1,10 @@
+.header
+  = f.input :tag_type_id, :collection => MetaTagType.all, :include_blank => false, :input_html => {:class => "tag_type_header"}
+  - css_class = f.get_value(:tag_type_id) == 7 ? 'none' : ''
+  div class="#{css_class}"
+    = f.locale_tabs do |l|
+      = f.input :content, :locale => l, :as => :text
+  .nested_fields
+    = f.simple_fields_for :og_tag do |object|
+      = render 'admin/headers/og_tag', f: object
+    = f.link_to_add t('admin.add'), :og_tag, class: 'btn hide'

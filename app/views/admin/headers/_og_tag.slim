@@ -1,0 +1,7 @@
+= f.input :og_type
+= f.locale_tabs do |l|
+    = f.input :title, :locale => l
+    = f.input :url, :locale => l
+    = f.input :site_name, :locale => l
+    = f.input :image, :locale => l
+    = f.input :description, :locale => l, :as => :text

@@ -2,8 +2,8 @@
 class Glob3 < ActiveRecord::Migration
   def self.up
     StaticPage.create_translation_table! :title => :string, :content => :text
-    Header.create_translation_table! :title => :string, :keywords => :string, :description => :text
-    Structure.create_translation_table! :title => :string, :redirect_url => :string
+    Header.create_translation_table! :content => :text
+    Structure.create_translation_table! :title => :string
   end
 
   def self.down
