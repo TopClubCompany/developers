@@ -1,5 +1,7 @@
 class ExploreController < ApplicationController
 
+  before_filter :find_page
+
   def index
     params.merge!(city: current_city)
     places = Place.best_places(6, params)
@@ -27,5 +29,11 @@ class ExploreController < ApplicationController
 
   end
 
+
+  private
+  def find_page
+    structure = Structure.with_position(::PositionType.index).first
+    setting_meta_tags structure
+  end
 
 end

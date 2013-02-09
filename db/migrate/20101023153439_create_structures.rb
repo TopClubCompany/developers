@@ -2,14 +2,11 @@
 class CreateStructures < ActiveRecord::Migration
   def self.up
     create_table :structures do |t|
-      #t.string    :title, :null => false
-      #t.string    :redirect_url
       t.string    :slug, :null => false, :limit => 50
       t.integer   :kind, :limit => 1, :default => 1
       t.integer   :position, :limit => 2, :default => 1
       t.references :user
       t.boolean :is_visible, :default => true, :null => false
-      t.boolean :delta, :default => true, :null => false
 
       t.integer  "parent_id"
       t.integer  "lft",                          :default => 0
