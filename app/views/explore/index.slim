@@ -10,16 +10,19 @@
 
   - cache [I18n.locale, 'explorer', Place.max_time, 'slider'] do
     ul.slideWrapper
+      .overlay
       - Place.for_slider.each_with_index do |place, index|
-      - css_class = (index == 1 ? 'current' : 'hidden')
-        li id="slide_#{index}" class="#{css_class}"
+        li id="slide_#{index}"
           img.place_food src=place.slider.try(:url)
-  .caption
-    a href="#"
-      img src="assets/gfx/4.jpg"
-      .caption_c
-        h6 Mangal
-        | Moskovsky ave, 32
+          .caption
+            a href="/#{I18n.locale}/#{place.slug}-#{place['city_en'].downcase.gsub(' ','_')}"
+              /img src="assets/gfx/4.jpg"
+              img src="#{place.place_image.show_place_image}" width="74px" height="54px"
+              .caption_c
+                h6
+                  =place["name_#{I18n.locale}"]
+                -house_number = ", #{place.house_number}" unless place.house_number.nil?
+                ="#{place["street_#{I18n.locale}"]}#{house_number}"
 
 #index.content
   /- unless user_signed_in?
