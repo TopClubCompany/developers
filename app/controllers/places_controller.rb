@@ -68,7 +68,7 @@ class PlacesController < ApplicationController
   end
 
   def find_time
-    if params[:reserve_date].present && params[:reserve_time].present?
+    if params[:reserve_date].present? && params[:reserve_time].present?
       place = {}
       wday = PlaceUtils::PlaceTime.wday(DateTime.parse(options[:reserve_date]).wday)
       time = Time.parse(options[:reserve_time])
