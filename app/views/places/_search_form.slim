@@ -1,7 +1,7 @@
 #search_form
   span.header #{t('short_strings.reserve_at')} #{@place.name}
   .header_special Up to 30% off
-  form
+  form action=localization_link("search")
     label for="reserve_date"
     input class='dateFormatNeeded' type="text" name="reserve_date" autocomplete="off" value="#{@date}"
     label for="reserve_time"
@@ -21,5 +21,6 @@
           option value="#{i}" selected="selected" #{i}
         - else
           option value="#{i}" #{i}
+    input type="hidden" name="place_slug" value="#{@place.slug}"
     input type="submit" data-title="#{@place.name}" value="Find a table"
       .clear
