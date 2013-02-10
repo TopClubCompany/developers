@@ -52,9 +52,7 @@ class PlacesController < ApplicationController
 
 
   def more
-    #raise params.inspect
     reviews = @place.reviews#.paginate(page: params[:page], per_page: params[:size])
-    #raise @place.reviews.inspect
     respond_to do |format|
       format.json { render json: reviews.map(&:for_mustache) }
     end
@@ -66,6 +64,14 @@ class PlacesController < ApplicationController
 
   def find_place
     @place = Place.find Place.deparam(params[:id])
+  end
+
+  def find_time
+    if params[:reserve_date].present && params[:reserve_time].present?
+      place = {}
+      time = Time.parse(options[:reserve_time])
+    end
+
   end
 
 
