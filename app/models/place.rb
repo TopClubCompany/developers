@@ -81,6 +81,7 @@ class Place < ActiveRecord::Base
       indexes :overall_mark, type: 'double'
       indexes :created_at, type: 'date', format: 'dateOptionalTime'
       indexes :lat_lng, type: 'geo_point'
+
       DayType.all.each do |day|
         %w(start_at end_at).each do |work_time|
           indexes "week_day_#{day.id}_#{work_time}", type: :date, format: :hour_minute
