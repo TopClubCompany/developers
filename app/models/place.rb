@@ -81,6 +81,7 @@ class Place < ActiveRecord::Base
       indexes :overall_mark, type: 'double'
       indexes :created_at, type: 'date', format: 'dateOptionalTime'
       indexes :lat_lng, type: 'geo_point'
+
       DayType.all.each do |day|
         %w(start_at end_at).each do |work_time|
           indexes "week_day_#{day.id}_#{work_time}", type: :date, format: :hour_minute
@@ -109,6 +110,7 @@ class Place < ActiveRecord::Base
   def self.search(options = {})
     filters = []
     categories = []
+    sort = self.case_order(options[:sort_by] || 'overall_mark')
 
     if options[:kitchen].present?
       filters << {query: {terms: {kitchen_ids: options[:kitchen].split(',')} }}
@@ -126,6 +128,10 @@ class Place < ActiveRecord::Base
 
     if options[:price].present?
       filters << {query: {terms: {avg_bill: options[:price].split(',')} }}
+    end
+
+    if options[:place_slug].present?
+      filters << {query: {match: {slug: options[:place_slug]} }}
     end
 
     filters += self.time_filter(options) if options[:opened].present?
@@ -150,9 +156,10 @@ class Place < ActiveRecord::Base
           query do
             flt options[:title].lucene_escape, :fields => fields, :min_similarity => 0.9
           end
-          sort { by (options[:sort_by] || 'overall_mark'), "desc" }
+          sort { by sort, "desc" }
         end
         filter(:and, :filters => filters)
+        puts to_curl
       end
     end
 
@@ -317,6 +324,8 @@ class Place < ActiveRecord::Base
 
   def self.for_mustache(place, options={})
     time_now = Time.now + 90.minute
+    current_day = options[:reserve_date].present? ? DateTime.parse(options[:reserve_date]).wday : DateTime.now.wday
+    current_day = PlaceUtils::PlaceTime.wday(current_day)
     truncated_time_now = Time.at(time_now.to_i - time_now.sec - time_now.min % 15 * 60)
     time = options[:reserve_time]? Time.parse(options[:reserve_time]) : truncated_time_now
     options[:image_url] ||= :slider_url
@@ -354,14 +363,13 @@ class Place < ActiveRecord::Base
     res[:star_rating] = self.get_star_rating(place)
     # TODO: replace with actual values of availability and being_favourite
     res[:is_favourite] = [true, false].sample
-    res[:timing] = self.order_time(place, time)
+    res[:timing] = self.order_time(place, time, current_day)
     res
   end
 
 
-  def self.order_time place, time
+  def self.order_time place, time, wday
     [30, 15, 0, -15, -30].each_with_index.map do |i, index|
-      wday = PlaceUtils::PlaceTime.wday(time.wday)
       start_time = place["week_day_#{wday}_start_at"].sub(":",".").to_f
       end_time = place["week_day_#{wday}_end_at"].sub(":",".").to_f
       ::PlaceUtils::PlaceTime.find_available_time(i, time, start_time, end_time)
@@ -463,6 +471,22 @@ class Place < ActiveRecord::Base
       end
     discounts = discounts.group_by{|arr| arr["is_discount"]}
     [discounts[true].try(:first), discounts[false]]
+  end
+
+
+  def self.case_order(type)
+    case type.to_sym
+      when :newest
+        "created_at"
+      when :overall_mark
+        "overall_mark"
+      when :discount
+        "discount"
+      when :reserving
+        "reserving"
+      else
+        "overall_mark"
+    end
   end
 
 

@@ -1,6 +1,7 @@
 #coding: utf-8
 class PlacesController < ApplicationController
   before_filter :find_place, only: [:show, :more, :set_unset_favorite]
+  before_filter :find_time, only: [:show]
 
   def show
     @date = params[:reserve_date] || Date.today.strftime('%d/%m/%Y')
@@ -52,9 +53,7 @@ class PlacesController < ApplicationController
 
 
   def more
-    #raise params.inspect
     reviews = @place.reviews#.paginate(page: params[:page], per_page: params[:size])
-    #raise @place.reviews.inspect
     respond_to do |format|
       format.json { render json: reviews.map(&:for_mustache) }
     end
@@ -66,6 +65,21 @@ class PlacesController < ApplicationController
 
   def find_place
     @place = Place.find Place.deparam(params[:id])
+  end
+
+  def find_time
+    @filtered_time = nil
+    if params[:reserve_date].present? && params[:reserve_time].present?
+      place = {}
+      wday = PlaceUtils::PlaceTime.wday(DateTime.parse(params[:reserve_date]).wday)
+      time = Time.parse(params[:reserve_time])
+      @place.week_days.where(:day_type_id => wday).each do |week_day|
+        place["week_day_#{wday}_start_at"] = week_day.start_at.to_s.split(".").join(":")
+        place["week_day_#{wday}_end_at"] = week_day.end_at.to_s.split(".").join(":")
+      end
+      @filtered_time = Place.order_time(place, time, wday)
+    end
+
   end
 
 

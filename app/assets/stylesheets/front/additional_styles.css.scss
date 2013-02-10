@@ -348,3 +348,16 @@ div.fixed_ajax_loader {
   }
 }
 
+.infoBox .arrow {
+  position: absolute;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  bottom: -10px;
+  left: 50%;
+  margin-left: -10px;
+  border-top-color: #fff;
+  border-width: 10px 10px 0;
+}

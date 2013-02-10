@@ -30,10 +30,10 @@
           a#sortby.sortby.dropdown-toggle data-toggle="dropdown" href="#" role="button"
             | Sort by...
           ul#sortby-list.sortby.dropdown-menu aria-labelledby="sortby" role="menu"
-            - ['rating', 'discount', 'newest', 'overall_mark'].each do |name|
+            - %w(newest overall_mark).each do |name|
               li
                 a href="#{name}"
-                  ="Sort by " + name
+                  = I18n.t("search.sort.#{name}")
 
 
           .clear

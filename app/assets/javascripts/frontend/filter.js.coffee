@@ -11,9 +11,9 @@ class Pagination
     @
 
   bindListener: () ->
-    $("#{@elSelector} a").off 'click'
+    $("#{@elSelector} a").off 'click.page'
     setTimeout ( =>
-      $("#{@elSelector} a").on 'click', (e) =>
+      $("#{@elSelector} a").on 'click.page', (e) =>
         e.preventDefault()
         unless $(e.target).hasClass('current')
           pageNum = $(e.target).attr('href').slice(1)
@@ -58,7 +58,9 @@ class PlacesCollection
     @markers = []
     for block in blocksThatExist
       objArray.push $(block).data()
-      @ids.push $(block).data('id')
+      id = $(block).data('id')
+      @ids.push id
+      bindBlockListeners.call @, $("#list_place_#{id}"), $("#place_#{id}")
     lattitudes = _.pluck objArray, 'lat'
     longtitudes = _.pluck objArray, 'lat'
     SouthWest = new google.maps.LatLng(_.max(lattitudes) + 0.3, _.min(longtitudes) - 0.3)
@@ -159,7 +161,39 @@ class PlacesCollection
     mapBlock = Mustache.to_html(source, place)
     $el = $('#map_details_wrapper').append(mapBlock)
     $listEl = $(listBlock).insertBefore('#list_grid_view .paginate')
-    $(".popoverable").on('click', () -> return false).popover(html: true)
+
+    setTimeout(( ->
+      bindBlockListeners.call @, $("#list_place_#{place.id}"), $("#place_#{place.id}")
+    ), 50)
+
+
+
+  bindBlockListeners = (elMap, elList) ->
+    $(elMap, elList).find(".popoverable").on('click', () -> return false).popover(html: true)
+
+    $(elMap, elList).find("h4 > a").off 'click'
+    $(elMap, elList).find("h4 > a").on 'click', (e) ->
+      e.preventDefault()
+      searchQuery = window.location.search
+
+      if searchQuery.match(/reserve_date=(\d+\-){2,}\d+/)
+        dateString = searchQuery.match(/reserve_date=(\d+\-){2,}\d+/)[0]
+        dateString = dateString.replace(/-/g, '%2F')
+        searchQuery = searchQuery.replace(/reserve_date=(\d+\-){2,}\d+/, dateString).replace(/&{2,}/,'&')
+
+      [params, match] = ['?', 0]
+      for regexp in [/reserve_time=(\d+\W+\w+)/, /number_of_people=(\d+)/,/reserve_date=[\d+\%+\w+]*/]
+        if exactMatch = searchQuery.match(regexp)?[0]
+          params += exactMatch + '&'
+          match += 1
+      if match is 3
+        newUrl = $(e.target).attr('href') + params + 'is_strim=true'
+      else
+        newUrl = $(e.target).attr('href')
+      window.history.pushState '', null, window.location.search
+      window.location.replace newUrl
+
+
 
 
 
@@ -170,6 +204,9 @@ class PlacesCollection
         $el = $(el)
         $listEl = $('#list_' + $(el).attr('id'))
         updateSingleTime.call(@, time, $el, $listEl)
+        setTimeout(( ->
+          bindBlockListeners.call(@, $el, $listEl)
+        ), 50)
 
   updateSingleDate = (date, els...) ->
     if els.length is 2
@@ -200,6 +237,7 @@ class PlacesCollection
         $listEl.add($el).find(".timing a:eq(#{index})").addClass('na')
           .tooltip({"title": "this time is unavailable, sorry", "placement": "top"})
       handleClick.call @
+
 
   removeCenter: =>
     console.log 'called removecenter'
@@ -235,17 +273,17 @@ class PlacesCollection
     stub.find('.timing, .special_offers, [id^=favorites_small]').remove()
     boxText = document.createElement("div")
     boxText.className = "place popover-content"
-    boxText.style.cssText = "border: 1px solid black; margin-top: 8px; padding: 10px; border-radius: 4px; background: white; padding: 5px;"
-    boxText.innerHTML = stub.html()
+    boxText.style.cssText = "border: 1px solid rgba(0,0,0,0.2); margin-top: 8px; padding: 10px; border-radius: 4px; background: white;"
+    boxText.innerHTML = stub.html() + "<div class='arrow'></div>"
     myOptions =
       content: boxText
       disableAutoPan: false
       maxWidth: 0
-      pixelOffset: new google.maps.Size(-140, -130)
+      pixelOffset: new google.maps.Size(-175, -162)
       zIndex: 0
       boxStyle:
         opacity: 1
-        width: "340px"
+        width: "350px"
       closeBoxMargin: "10px 2px 2px 2px"
       closeBoxZIndex: 999
       closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
@@ -295,7 +333,6 @@ class FilterInput
     @
 
   nextStep: =>
-    console.log 'did it'
     @bindFilterChangeListener()
     @bindChangeListener()
     @give_more() if $(".more").length > 0
@@ -548,7 +585,7 @@ class FilterInput
     $.ajaxSetup
 #      cache: false
       dataType: "json",
-      url: "/search",
+      url: window.location.pathname || "/search",
       type: "GET"
       error: (xhr, error) ->
         $.noop()
@@ -567,8 +604,8 @@ class FilterInput
   give_more: (no_binding = false) =>
     @more_template = Handlebars.compile($("#more_template").html())
     self = @
-    $("a.more").off 'click'
-    $("a.more").one 'click', (e) ->
+    $("a.more").off 'click.more'
+    $("a.more").one 'click.more', (e) ->
       e.preventDefault()
       $el = $(this)
       type = $el.data('type')
@@ -608,10 +645,15 @@ handleClick = ()->
   $('.timing a').on 'click.reserve', (e) ->
     e.preventDefault()
     return false if $(e.target).hasClass('na')
+    querystring = window.location.search
+    params = $.deparam querystring.slice(1)
+    defaults =
+      "reserve_date": $("input[name='reserve_date']").val()
+      "number_of_people": $("select[name=number_of_people]").val()
+    result = _.extend {}, defaults, params
+    result["reserve_date"] = result["reserve_date"].replace(/\//g,'-')
     language = $('#language .active').attr('id')
-    date = $("input[name='reserve_date']").val().replace(/\//g,'-')
     id = $(e.target).parents('.place').data('id')
     time = $(e.target).html()
-    people = $("select[name=number_of_people]").val()
-    newLink = "/#{language}/new_reservation/#{date},#{id},h=#{time.split(':')[0]}&m=#{time.split(':')[1]},#{people}"
+    newLink = "/#{language}/new_reservation/#{result["reserve_date"]},#{id},h=#{time.split(':')[0]}&m=#{time.split(':')[1]},#{result["number_of_people"]}"
     window.location.replace newLink
