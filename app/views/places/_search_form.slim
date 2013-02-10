@@ -1,0 +1,25 @@
+#search_form
+  span.header #{t('short_strings.reserve_at')} #{@place.name}
+  .header_special Up to 30% off
+  form
+    label for="reserve_date"
+    input class='dateFormatNeeded' type="text" name="reserve_date" autocomplete="off" value="#{@date}"
+    label for="reserve_time"
+    select name="reserve_time"
+      - time_with_locale(@time).each do |time_el|
+        - time_el.each do |k, v|
+          - if v
+            option value=k selected="selected" #{k}
+          - else
+            option value=k #{k}
+    label for="number_of_people"
+      nobr #{t('short_strings.number_of_people')}
+    select name="number_of_people" type="text"
+      - number = (params[:number_of_people] || 2)
+      - (1..10).each do |i|
+        - if i == number.to_i
+          option value="#{i}" selected="selected" #{i}
+        - else
+          option value="#{i}" #{i}
+    input type="submit" data-title="#{@place.name}" value="Find a table"
+      .clear
