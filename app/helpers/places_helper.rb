@@ -41,4 +41,16 @@ module PlacesHelper
     result + left_price
   end
 
+  def get_time_class time, param_time
+    if time[:available]
+      if time == time[:time]
+        'bold'
+      else
+        ''
+      end
+    else
+      'na'
+    end
+  end
+
 end
