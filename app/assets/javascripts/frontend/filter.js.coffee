@@ -586,7 +586,7 @@ class FilterInput
     $.ajaxSetup
 #      cache: false
       dataType: "json",
-      url: "/search",
+      url: window.location.pathname || "/search",
       type: "GET"
       error: (xhr, error) ->
         $.noop()
@@ -646,6 +646,8 @@ handleClick = ()->
   $('.timing a').on 'click.reserve', (e) ->
     e.preventDefault()
     return false if $(e.target).hasClass('na')
+#    querystring = window.location.search
+#    params = $.deparam querystring.slice(1)
     language = $('#language .active').attr('id')
     date = $("input[name='reserve_date']").val().replace(/\//g,'-')
     id = $(e.target).parents('.place').data('id')
