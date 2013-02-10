@@ -1,6 +1,7 @@
 #coding: utf-8
 class PlacesController < ApplicationController
   before_filter :find_place, only: [:show, :more, :set_unset_favorite]
+  before_filter :find_time, only: [:show]
 
   def show
     @date = params[:reserve_date] || Date.today.strftime('%d/%m/%Y')
@@ -69,7 +70,13 @@ class PlacesController < ApplicationController
   def find_time
     if params[:reserve_date].present && params[:reserve_time].present?
       place = {}
+      wday = PlaceUtils::PlaceTime.wday(DateTime.parse(options[:reserve_date]).wday)
       time = Time.parse(options[:reserve_time])
+      @place.week_days.where(:day_type_id => wday).each do |week_day|
+        place["week_day_#{wday}_start_at"] = week_day.start_at.to_s.split(".").join(":")
+        place["week_day_#{wday}_end_at"] = week_day.end_at.to_s.split(".").join(":")
+      end
+      @filtered_time = Place.order_time(palce, time, wday)
     end
 
   end
