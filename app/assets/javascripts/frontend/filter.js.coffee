@@ -333,7 +333,6 @@ class FilterInput
     @
 
   nextStep: =>
-    console.log 'did it'
     @bindFilterChangeListener()
     @bindChangeListener()
     @give_more() if $(".more").length > 0
@@ -646,12 +645,15 @@ handleClick = ()->
   $('.timing a').on 'click.reserve', (e) ->
     e.preventDefault()
     return false if $(e.target).hasClass('na')
-#    querystring = window.location.search
-#    params = $.deparam querystring.slice(1)
+    querystring = window.location.search
+    params = $.deparam querystring.slice(1)
+    defaults =
+      "reserve_date": $("input[name='reserve_date']").val()
+      "number_of_people": $("select[name=number_of_people]").val()
+    result = _.extend {}, defaults, params
+    result["reserve_date"] = result["reserve_date"].replace(/\//g,'-')
     language = $('#language .active').attr('id')
-    date = $("input[name='reserve_date']").val().replace(/\//g,'-')
     id = $(e.target).parents('.place').data('id')
     time = $(e.target).html()
-    people = $("select[name=number_of_people]").val()
-    newLink = "/#{language}/new_reservation/#{date},#{id},h=#{time.split(':')[0]}&m=#{time.split(':')[1]},#{people}"
+    newLink = "/#{language}/new_reservation/#{result["reserve_date"]},#{id},h=#{time.split(':')[0]}&m=#{time.split(':')[1]},#{result["number_of_people"]}"
     window.location.replace newLink
