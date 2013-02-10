@@ -92,7 +92,7 @@ $ ->
   $("a#write_review").click (e) ->
     e.preventDefault()
     $('html,body').animate
-      'scrollTop': $('#review_text').offset().top - 35
+      'scrollTop': $('#review_text').offset().top - 55
     ,
       "duration": 1000
       "complete": ->
