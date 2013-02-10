@@ -5,7 +5,7 @@ $ ->
     delimiter: /(,|;)\s*/
     # maxHeight:400,
     width:268
-    zIndex: 8
+    zIndex: 10
     deferRequestBy: 0
     # params: { q:'Yes' }, //aditional parameters
     # noCache: false, //default is false, set to true to disable caching

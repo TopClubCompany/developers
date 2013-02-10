@@ -236,7 +236,10 @@ ru:
   reservation: 
     new_reservation: 
       complete_reservation: Complete your reservation
-  search: 
+  search:
+    sort:
+      newest: Сортировать по дате добавления
+      overall_mark: Сортировать по популярности
     category: Category
     grid_view: Grid view
     kitchen: Kitchen
