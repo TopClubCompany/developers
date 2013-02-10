@@ -309,9 +309,42 @@ div.fixed_ajax_loader {
   }
 }
 
+
+#food_teaser .teaser_heading,
+#food_teaser .arrows div,
+#food_teaser #search_form {
+  z-index: 10;
+}
+#food_teaser .slideWrapper .caption {
+  display: inline-block;
+  bottom: -500px;
+}
+
 .slideWrapper {
-  .hidden {
-    display: none;
+  position: relative;
+
+  [id^='slide'] {
+    z-index: 1;
+    position: relative;
+  }
+  .overlay {
+    z-index: 2;
+    position: absolute;
+    display: block;
+    background: black;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .current {
+    z-index: 6;
+  }
+  .upcoming {
+    z-index: 5;
+    .caption {
+      opacity: 0 !important;
+    }
   }
 }
 
