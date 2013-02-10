@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   before_filter :current_city
   before_filter :set_time
   before_filter :set_user_location
+  before_filter :find_page
+
   helper_method :current_city
 
   protected
@@ -36,6 +38,11 @@ class ApplicationController < ActionController::Base
       h,m = (DateTime.now + (90 - DateTime.now.min % 15).minutes).strftime("%k:%M").split(':')
     end
     @time = {:h => h.to_s, :m => m.to_s }
+  end
+
+  def find_page
+    structure = Structure.with_position(::PositionType.index).first
+    setting_meta_tags structure
   end
 
   def setting_meta_tags struct
