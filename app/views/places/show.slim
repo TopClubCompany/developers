@@ -2,7 +2,7 @@
   .row
     .span8
       - if @filtered_time.present?
-        = render 'reserv_form'
+        = render 'reserv_form', time: @filtered_time
       - else
         = render 'search_form'
       .page_content.zz itemscope="" itemtype="http://data-vocabulary.org/Review-aggregate"
