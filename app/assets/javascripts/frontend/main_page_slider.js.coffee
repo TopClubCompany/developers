@@ -1,5 +1,5 @@
 class SimpleSlider
-  constructor: (@sliderSelector, @slideSelector, @delay = 1000, @showingTime = 10000) ->
+  constructor: (@sliderSelector, @slideSelector, @delay = 1000, @showingTime = 10000, @captionDelay = 500) ->
     @slider = $(@sliderSelector)
     @slides = $(@slideSelector)
     @lengthTotal = @slides.length
@@ -9,22 +9,26 @@ class SimpleSlider
       return true  if v.pop() + "Transition" of document.body.style  while v.length
       false
     )()
-#    @bindClick()
+    @bindClick()
+    @fadeChange(0, 4000)
 
-    @fadeChange(0, 4000, 0)
+  setClass: ->
+    @slides.eq(0).addClass('current')
+    @slides.eq(1).addClass('upcoming')
 
   bindClick: () ->
-    @slider.find('.indicator').on 'click', (e) =>
-      $(e.target).addClass('active').siblings().removeClass('active')
-      jumpTo = @getIndex $(e.target).data('target-id')
+    @slider.siblings('.arrows').on 'click', (e) =>
+      jumpTo = (if $(e.target).hasClass('right')
+         @number + 1
+      else
+        jumpTo = if (@number - 1) < 0 then @lengthTotal - 1 else @number - 1)
+      clearInterval @showNextSlideId
       @fadeChange jumpTo
 
   fadeChange: (number = 0, showingTime = @showingTime, delay = @delay) ->
+    @number = number
     self = @
     number = number % @lengthTotal
-    console.log number
-#    unless @slider.find(".indicator:eq(#{number})").hasClass('active')
-#      @slider.find(".indicator:eq(#{number})").addClass('active').siblings().removeClass('active')
 
     if @supportsTransitions
       @slides.css
@@ -33,45 +37,55 @@ class SimpleSlider
         "-moz-transition": "opacity #{delay / 1000}s"
         "-o-transition": "opacity #{delay / 1000}s"
         "transition": "opacity #{delay / 1000}s"
+      @slider.find('.caption').css
+        "-webkit-transition": "#{@captionDelay / 1000}s"
+        "-khtml-transition": "#{@captionDelay / 1000}s"
+        "-moz-transition": "#{@captionDelay / 1000}s"
+        "-o-transition": "#{@captionDelay / 1000}s"
+        "transition": "#{@captionDelay / 1000}s"
 
-      @slides.css
+
+      @slides.eq(number).addClass 'upcoming'
+      @slides.filter('.current').css
         'opacity': '0'
 
       setTimeout ( ->
-        $(self.slideSelector).removeClass('current').addClass('hidden')
-        $(self.slideSelector).eq(number).addClass('current').removeClass('hidden')
+        $(self.slideSelector).filter('.current').removeClass('current')
+        $(self.slideSelector).filter('.upcoming').toggleClass('current upcoming')
 
         self.slides.css
           'opacity': '1'
-
       ), self.delay
+
       # we can use @ here for id, but we need self for inner func anyway
       clearTimeout self.showNextSlideId
       self.showNextSlideId = setTimeout ( ->
           self.fadeChange(number + 1)
         ), showingTime
     else
-      @slides.each (i, el) ->
-        $(el).stop(true,false).animate
+      if @slides.filter('.current').length is 0
+        @slides.eq(@number)._addClass 'current'
+        setTimeout ( =>
+          @fadeChange 1
+        ), showingTime
+      else
+        @slides.eq(number).addClass 'upcoming'
+
+        @slides.filter('.current').animate
           "opacity": "0"
         ,
           duration: delay
           complete: () ->
-            if i is number
-              $(this).addClass('current').removeClass('hidden')
-              $(this).siblings().removeClass('current').addClass('hidden')
-            $(this).animate
-              "opacity": "1"
+            $(@).removeClass('current').css('opacity', '1').find('.caption').css('opacity', '0')
+            $(self.slideSelector).filter('.upcoming').toggleClass('current upcoming').find('.caption').animate
+              'opacity': 0.9
             ,
-              duration: delay
-              complete: clearTimeout self.showNextSlideId; self.showNextSlideId = setTimeout ( ->
-                  self.fadeChange(number + 1)
-                ), showingTime
+              duration: @captionDelay
+            clearTimeout self.showNextSlideId
+            self.showNextSlideId = setTimeout ( ->
+              self.fadeChange(number + 1)
+            ), showingTime
 
-
-
-  getIndex: (id) ->
-    parseInt(id.replace(/slide_/, '')) - 1
 
 $ ->
   if $(".slideWrapper").length > 0
