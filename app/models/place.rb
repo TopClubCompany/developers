@@ -317,6 +317,8 @@ class Place < ActiveRecord::Base
 
   def self.for_mustache(place, options={})
     time_now = Time.now + 90.minute
+    current_day = options[:reserve_date].present? ? DateTime.parse(options[:reserve_date]).wday : DateTime.now.wday
+    current_day = PlaceUtils::PlaceTime.wday(current_day)
     truncated_time_now = Time.at(time_now.to_i - time_now.sec - time_now.min % 15 * 60)
     time = options[:reserve_time]? Time.parse(options[:reserve_time]) : truncated_time_now
     options[:image_url] ||= :slider_url
@@ -354,14 +356,13 @@ class Place < ActiveRecord::Base
     res[:star_rating] = self.get_star_rating(place)
     # TODO: replace with actual values of availability and being_favourite
     res[:is_favourite] = [true, false].sample
-    res[:timing] = self.order_time(place, time)
+    res[:timing] = self.order_time(place, time, current_day)
     res
   end
 
 
-  def self.order_time place, time
+  def self.order_time place, time, wday
     [30, 15, 0, -15, -30].each_with_index.map do |i, index|
-      wday = PlaceUtils::PlaceTime.wday(time.wday)
       start_time = place["week_day_#{wday}_start_at"].sub(":",".").to_f
       end_time = place["week_day_#{wday}_end_at"].sub(":",".").to_f
       ::PlaceUtils::PlaceTime.find_available_time(i, time, start_time, end_time)
