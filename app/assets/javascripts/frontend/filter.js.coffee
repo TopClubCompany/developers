@@ -294,8 +294,7 @@ class PlacesCollection
       enableEventPropagation: false
     
     ib = new InfoBox(myOptions)
-    $('#place_' + obj.id).on 'click', (e) ->
-      ib.open map, marker
+
     google.maps.event.addListener marker, "click", (e) ->
       ib.open map, this
 
@@ -308,6 +307,10 @@ class PlacesCollection
       selector = '#' + obj.id
       console.log selector
       console.log $(selector).attr('href')
+    setTimeout((->
+      $('#place_' + obj.id).on 'click', (e) ->
+        ib.open map, marker
+    ), 50)
 
     google.maps.event.addListener marker, "mouseout", ->
       selector = '#place_' + obj.id
