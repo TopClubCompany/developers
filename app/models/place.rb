@@ -130,6 +130,10 @@ class Place < ActiveRecord::Base
       filters << {query: {terms: {avg_bill: options[:price].split(',')} }}
     end
 
+    if options[:place_slug].present?
+      filters << {query: {match: {slug: options[:place_slug]} }}
+    end
+
     filters += self.time_filter(options) if options[:opened].present?
 
     if options[:distance].present? && options[:current_point].present?
@@ -155,6 +159,7 @@ class Place < ActiveRecord::Base
           sort { by sort, "desc" }
         end
         filter(:and, :filters => filters)
+        puts to_curl
       end
     end
 
