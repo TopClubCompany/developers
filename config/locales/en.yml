@@ -197,7 +197,7 @@ en:
   reservation: 
     new_reservation: 
       complete_reservation: Complete your reservation
-  search: 
+  search:
     category: ""
     grid_view: ""
     kitchen: ""
