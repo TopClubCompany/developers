@@ -294,18 +294,13 @@ class PlacesCollection
       enableEventPropagation: false
     
     ib = new InfoBox(myOptions)
-
+    $('#place_' + obj.id).on 'click', (e) ->
+      ib.open map, marker
     google.maps.event.addListener marker, "click", (e) ->
       ib.open map, this
 
-    
-    # infowindow = new google.maps.InfoWindow({content: contentString})
-    # google.maps.event.addListener marker, "click", (e) ->
-      # infowindow.open(map, marker)
-
-
     google.maps.event.addListener marker, "mouseover", ->
-      selector = '#' + obj.id
+      selector = '#place_' + obj.id
       console.log selector
       $(selector).addClass 'target'
 
@@ -315,7 +310,7 @@ class PlacesCollection
       console.log $(selector).attr('href')
 
     google.maps.event.addListener marker, "mouseout", ->
-      selector = '#' + obj.id
+      selector = '#place_' + obj.id
       console.log selector
       $(selector).removeClass 'target'
 
