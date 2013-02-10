@@ -16,7 +16,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(128,128,128, 0.5);
+  background: rgba(128,128,128, 0.1);
 }
 #fixed a{
   -webkit-transition: none;
@@ -360,4 +360,11 @@ div.fixed_ajax_loader {
   margin-left: -10px;
   border-top-color: #fff;
   border-width: 10px 10px 0;
+}
+
+.place.target {
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(1, #F8F7F4));
+  background-image: -moz-linear-gradient(top, #FFFFFF 0%, #F8F7F4 100%);
+  background-image: -o-linear-gradient(top, #FFFFFF 0%, #F8F7F4 100%);
+  background-image: -ms-linear-gradient(top, #FFFFFF 0%, #F8F7F4 100%);
 }
