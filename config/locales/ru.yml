@@ -180,7 +180,8 @@ ru:
       second: "Секунд"
       year: "Год"
   explore: 
-    index: 
+    index:
+      main_slider_text: "Find a perfect restaurant and pay lower prices."
       all: "Browse all ›"
       available: Available tonight
       best: Best restaurants
