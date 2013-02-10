@@ -232,7 +232,7 @@ class PlacesCollection
       $listEl.find(".timing a:eq(#{index})").html time.time
       if time.available
         $listEl.add($el).tooltip('hide')
-        $listEl.add($el).find(".timing a:eq(#{index})").removeClass('na')
+        $listEl.add($el).find(".timing a:eq(#{index})").removeClass('na').tooltip('disable')
       else
         $listEl.add($el).find(".timing a:eq(#{index})").addClass('na')
           .tooltip({"title": "this time is unavailable, sorry", "placement": "top"})
