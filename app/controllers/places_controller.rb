@@ -68,15 +68,16 @@ class PlacesController < ApplicationController
   end
 
   def find_time
+    @filtered_time = nil
     if params[:reserve_date].present? && params[:reserve_time].present?
       place = {}
-      wday = PlaceUtils::PlaceTime.wday(DateTime.parse(options[:reserve_date]).wday)
-      time = Time.parse(options[:reserve_time])
+      wday = PlaceUtils::PlaceTime.wday(DateTime.parse(params[:reserve_date]).wday)
+      time = Time.parse(params[:reserve_time])
       @place.week_days.where(:day_type_id => wday).each do |week_day|
         place["week_day_#{wday}_start_at"] = week_day.start_at.to_s.split(".").join(":")
         place["week_day_#{wday}_end_at"] = week_day.end_at.to_s.split(".").join(":")
       end
-      @filtered_time = Place.order_time(palce, time, wday)
+      @filtered_time = Place.order_time(place, time, wday)
     end
 
   end

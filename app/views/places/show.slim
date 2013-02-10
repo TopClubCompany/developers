@@ -1,7 +1,7 @@
 #place.content
   .row
     .span8
-      - if params[:is_trim].present?
+      - if @filtered_time.present?
         = render 'reserv_form'
       - else
         = render 'search_form'
