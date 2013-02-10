@@ -33,7 +33,7 @@
             - %w(newest overall_mark).each do |name|
               li
                 a href="#{name}"
-                  ="Sort by " + name
+                  = I18n.t("search.sort.#{name}")
 
 
           .clear

@@ -109,7 +109,7 @@ class Place < ActiveRecord::Base
   def self.search(options = {})
     filters = []
     categories = []
-    model = self
+    sort = self.case_order(options[:sort_by] || 'overall_mark')
 
     if options[:kitchen].present?
       filters << {query: {terms: {kitchen_ids: options[:kitchen].split(',')} }}
@@ -151,7 +151,7 @@ class Place < ActiveRecord::Base
           query do
             flt options[:title].lucene_escape, :fields => fields, :min_similarity => 0.9
           end
-          sort { by (model.case_order(options[:sort_by] || 'overall_mark'), "desc") }
+          sort { by sort, "desc" }
         end
         filter(:and, :filters => filters)
       end
@@ -478,6 +478,8 @@ class Place < ActiveRecord::Base
         "discount"
       when :reserving
         "reserving"
+      else
+        "overall_mark"
     end
   end
 
