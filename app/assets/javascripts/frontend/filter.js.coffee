@@ -648,11 +648,12 @@ handleClick = ()->
     defaults =
       "reserve_date": $("input[name='reserve_date']").val()
       "number_of_people": $("select[name=number_of_people]").val()
-      "id": $('#place').data('id')
+
     result = _.extend {}, defaults, params
     result["reserve_date"] = result["reserve_date"].replace(/\//g,'-')
     language = $('#language .active').attr('id')
-    id = $(e.target).parents('.place').data('id')
+    id = $('#place').data('id') || $(e.target).parents('.place').data('id')
+
     time = $(e.target).html()
     newLink = "/#{language}/new_reservation/#{result["reserve_date"]},#{id},h=#{time.split(':')[0]}&m=#{time.split(':')[1]},#{result["number_of_people"]}"
     window.location.replace newLink
