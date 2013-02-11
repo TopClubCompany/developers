@@ -29,7 +29,7 @@ def add_categories
                 {}
               end
 
-    cat_params = {name: category, description: category, user_id: User.first.id, parent_id: main_rest.id}.merge!(params)
+    cat_params = {name: category, plural_name: category, description: category, user_id: User.first.id, parent_id: main_rest.id}.merge!(params)
     Category.create(cat_params)
   end
 
@@ -144,6 +144,7 @@ def insert_city
     City.create do |c|
       c.name = city[:name]
       c.slug = city[:slug]
+      c.plural_name = city[:name]
     end.save!
   end
   puts 'cities added successfully'
