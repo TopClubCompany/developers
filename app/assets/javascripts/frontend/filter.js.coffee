@@ -294,8 +294,7 @@ class PlacesCollection
       enableEventPropagation: false
     
     ib = new InfoBox(myOptions)
-    $('#place_' + obj.id).on 'click', (e) ->
-      ib.open map, marker
+
     google.maps.event.addListener marker, "click", (e) ->
       ib.open map, this
 
@@ -308,6 +307,10 @@ class PlacesCollection
       selector = '#' + obj.id
       console.log selector
       console.log $(selector).attr('href')
+    setTimeout((->
+      $('#place_' + obj.id).on 'click', (e) ->
+        ib.open map, marker
+    ), 50)
 
     google.maps.event.addListener marker, "mouseout", ->
       selector = '#place_' + obj.id
@@ -645,10 +648,12 @@ handleClick = ()->
     defaults =
       "reserve_date": $("input[name='reserve_date']").val()
       "number_of_people": $("select[name=number_of_people]").val()
+
     result = _.extend {}, defaults, params
     result["reserve_date"] = result["reserve_date"].replace(/\//g,'-')
     language = $('#language .active').attr('id')
-    id = $(e.target).parents('.place').data('id')
+    id = $('#place').data('id') || $(e.target).parents('.place').data('id')
+
     time = $(e.target).html()
     newLink = "/#{language}/new_reservation/#{result["reserve_date"]},#{id},h=#{time.split(':')[0]}&m=#{time.split(':')[1]},#{result["number_of_people"]}"
     window.location.replace newLink

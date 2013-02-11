@@ -131,7 +131,7 @@ class Place < ActiveRecord::Base
     end
 
     if options[:place_slug].present?
-      filters << {query: {match: {slug: options[:place_slug]} }}
+      filters << {query: {term: {id: options[:place_id]} }}
     end
 
     filters += self.time_filter(options) if options[:opened].present?
