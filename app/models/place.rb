@@ -130,7 +130,7 @@ class Place < ActiveRecord::Base
       filters << {query: {terms: {avg_bill: options[:price].split(',')} }}
     end
 
-    if options[:place_slug].present?
+    if options[:place_id].present?
       filters << {query: {term: {id: options[:place_id]} }}
     end
 
