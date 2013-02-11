@@ -81,6 +81,7 @@ class Place < ActiveRecord::Base
       indexes :overall_mark, type: 'double'
       indexes :created_at, type: 'date', format: 'dateOptionalTime'
       indexes :lat_lng, type: 'geo_point'
+      indexes :is_has_slider_image, type: 'boolean'
 
       DayType.all.each do |day|
         %w(start_at end_at).each do |work_time|
@@ -102,9 +103,13 @@ class Place < ActiveRecord::Base
           all {}
         end
       end
+      filter :exists, :field => :is_has_slider_image
       sort { by("_score", "desc") }
+      puts to_curl
     end
   end
+
+  #slider
 
 
   def self.search(options = {})
@@ -255,10 +260,13 @@ class Place < ActiveRecord::Base
         json.is_main image.is_main
       end
 
-      json.slider do |json|
-        json.id slider.id
-        json.url slider.url(:main)
-      end if slider
+      if slider
+        json.slider do |json|
+          json.id slider.id
+          json.url slider.url(:main)
+        end
+        json.set!("is_has_slider_image", true)
+      end
 
       json.place_image do |json|
         json.id place_image.id

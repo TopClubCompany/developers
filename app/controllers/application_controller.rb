@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_user_location
   before_filter :find_page
 
-  helper_method :current_city
+  helper_method :current_city, :current_city_plural
 
   protected
 
@@ -15,8 +15,8 @@ class ApplicationController < ActionController::Base
       current_user.try(:city).try(param) || session['city'] || session[:city] || 'kyiv'
     end
 
-    def current_city_plural
-      City.find(current_city).plural_name
+    def current_city_plural name = :plural_name
+      City.find(current_city).send(name)
     end
 
     def set_locale

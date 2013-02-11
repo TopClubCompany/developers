@@ -3,7 +3,7 @@
     .span12
       #search_form
         - type ||= "restaurants"
-        h1= I18n.t('search.main_text', type: type , count: Place.count_visible(city: current_city), city: current_city)
+        h1= I18n.t('search.main_text', type: type , count: Place.count_visible(city: current_city), city: current_city_plural(:name))
         form.shorten action=localization_link("search")
           = render :partial => 'shared/search_form'
         #view_switch
@@ -25,10 +25,10 @@
               = render 'shared/map_place', :mustache => Place.for_mustache(place, params).merge(lat: location[0]).merge(lng: location[1])
       #list_grid_view.none
         #filters.filters
-          | Filters:
+          = I18n.t('search.filters')
         .dropdown
           a#sortby.sortby.dropdown-toggle data-toggle="dropdown" href="#" role="button"
-            | Sort by...
+            = I18n.t('search.sort_labeled')
           ul#sortby-list.sortby.dropdown-menu aria-labelledby="sortby" role="menu"
             - %w(newest overall_mark).each do |name|
               li
@@ -38,8 +38,8 @@
 
           .clear
           #thead
-            span.th1 Restaurant
-            span.th2 Availability (click time to reserve)
+            span.th1= I18n.t('search.thead.th1')
+            span.th2= I18n.t('search.thead.th2')
 
           - @result.each do |place|
             = render 'shared/list_place', :mustache => Place.for_mustache(place, params)
@@ -70,5 +70,5 @@
   script type='text/html' id='ajax_fixed_loader_template'
     div#ajax_loader_overlay.fixed_ajax_loader
       strong
-        | Грузим самые свежие результаты
+        = I18n.t('search.load')
 
