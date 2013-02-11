@@ -9,10 +9,10 @@
         = @date.strftime('%A, %B %e, %Y at %I:%M %p') + " for #{@persons} people"
         span.complete_edit
           i.icon-pencil.icon-white
-          | edit
+          = I18n.t('reservation.edit')
       #sign_up_page.page_content.complete
         h2
-          | Special offer:
+          = I18n.t('reservation.special_offers')
           a href="#"
         = simple_form_for @reservation, url: complete_reservation_path, method: 'post', :wrapper => :front_reg_form do |f|
           = f.error_notification

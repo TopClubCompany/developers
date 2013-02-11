@@ -237,6 +237,8 @@ ru:
   reservation: 
     new_reservation: 
       complete_reservation: Complete your reservation
+    edit: "edit"
+    special_offers: "Special offer:"
   search:
     thead:
       th1: "Restaurant"
@@ -336,6 +338,8 @@ ru:
     unhelpful: бесполезный
     reviews: отзывов
     menu: Меню
+  place:
+    is: "из"
 
   sign_up:
     by_click: "By clicking “Join Reserve” you confirm that you accept"
