@@ -648,6 +648,7 @@ handleClick = ()->
     defaults =
       "reserve_date": $("input[name='reserve_date']").val()
       "number_of_people": $("select[name=number_of_people]").val()
+      "id": $('#place').data('id')
     result = _.extend {}, defaults, params
     result["reserve_date"] = result["reserve_date"].replace(/\//g,'-')
     language = $('#language .active').attr('id')
