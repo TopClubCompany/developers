@@ -182,6 +182,7 @@ ru:
   explore: 
     index:
       main_slider_text: "Find a perfect restaurant and pay lower prices."
+      second_big_text: "Select one of %{count} restaurants in %{city} and save up to %{discount} off your total bill."
       all: "Browse all ›"
       available: Available tonight
       best: Best restaurants
@@ -236,7 +237,15 @@ ru:
   reservation: 
     new_reservation: 
       complete_reservation: Complete your reservation
+    edit: "edit"
+    special_offers: "Special offer:"
   search:
+    thead:
+      th1: "Restaurant"
+      th2: "Availability (click time to reserve)"
+    load: "Грузим самые свежие результаты"
+    filters: "Filters:"
+    sort_labeled: "Sort by..."
     sort:
       newest: Сортировать по дате добавления
       overall_mark: Сортировать по популярности
@@ -329,6 +338,8 @@ ru:
     unhelpful: бесполезный
     reviews: отзывов
     menu: Меню
+  place:
+    is: "из"
 
   sign_up:
     by_click: "By clicking “Join Reserve” you confirm that you accept"
