@@ -238,6 +238,12 @@ ru:
     new_reservation: 
       complete_reservation: Complete your reservation
   search:
+    thead:
+      th1: "Restaurant"
+      th2: "Availability (click time to reserve)"
+    load: "Грузим самые свежие результаты"
+    filters: "Filters:"
+    sort_labeled: "Sort by..."
     sort:
       newest: Сортировать по дате добавления
       overall_mark: Сортировать по популярности
