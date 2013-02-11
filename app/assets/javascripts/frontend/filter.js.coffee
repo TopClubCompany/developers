@@ -63,15 +63,15 @@ class PlacesCollection
       bindBlockListeners.call @, $("#list_place_#{id}"), $("#place_#{id}")
     lattitudes = _.pluck objArray, 'lat'
     longtitudes = _.pluck objArray, 'lat'
-    SouthWest = new google.maps.LatLng(_.max(lattitudes) + 0.3, _.min(longtitudes) - 0.3)
-    NorthEast = new google.maps.LatLng(_.min(lattitudes) - 0.3, _.max(longtitudes) + 0.3)
 
     window.googleMarkers = @markers
-    @createMap(SouthWest, NorthEast)
+    @createMap()
     for obj in objArray
       @addMarker obj
-
-  createMap: (SouthWest, NorthEast) ->
+    setTimeout((=> 
+      @adjustMap()
+    ), 500)
+  createMap: () ->
     initialData = $('#map_places').data()
     center = new google.maps.LatLng(initialData.lat, initialData.lng)
     mapOptions =
@@ -79,10 +79,10 @@ class PlacesCollection
       zoom: 12,
       disableDefaultUI: true,
       zoomControl: true,
-      minZoom: 9,
+      minZoom: 8,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     @map = new google.maps.Map(document.getElementById("map_places"), mapOptions)
-    @adjustMap SouthWest, NorthEast
+    
     window.googleMap = @map
 
 
@@ -98,6 +98,10 @@ class PlacesCollection
     if needToAddIds.length > 0
       needToAdd = _.filter(placesData, (place) -> needToAddIds.indexOf(place.id) isnt -1  )
       @multipleAdd($.makeArray(needToAdd))
+      setTimeout((=> 
+        @adjustMap()
+      ), 500)
+      
     if needToRemoveIds.length > 0
       @multipleRemove needToRemoveIds
 
@@ -107,19 +111,16 @@ class PlacesCollection
       @updateTime placesData
     ), 50)
 
-#    @wrapAdjustMap _.pluck(placesData, "lat"), _.pluck(placesData, "lng")
-#
-#  wrapAdjustMap: (lattitudes, longtitudes ) ->
-##    lattitudes = _.pluck objArray, 'lat'
-##    longtitudes = _.pluck objArray, 'lat'
-#    SouthWest = new google.maps.LatLng(_.max(lattitudes), _.min(longtitudes))
-#    NorthEast = new google.maps.LatLng(_.min(lattitudes), _.max(longtitudes))
-#    @adjustMap SouthWest, NorthEast
-
-  adjustMap: (SouthWest, NorthEast) ->
-    bounds = new google.maps.LatLngBounds(SouthWest, NorthEast)
-    @map.fitBounds(bounds)
-
+  adjustMap: () =>
+    bounds = new google.maps.LatLngBounds()
+    for marker in @markers
+      bounds.extend marker.position
+    @map.fitBounds bounds
+  
+  average = (arr) ->
+    _.reduce(arr, (memo, num) ->
+      memo + num
+    , 0) / arr.length
 
   multipleAdd: (placesToAdd = []) =>
     _.each placesToAdd, (place) =>
@@ -259,63 +260,70 @@ class PlacesCollection
       @markers.push marker
 
   addMarker: (obj) =>
-    marker = new google.maps.Marker(
-      position: new google.maps.LatLng(obj.lat, obj.lng)
-      title: "Hello from #{obj.id}!"
-      placeId: obj.id
-      html: "<a class='marker' href='##{obj.id}'>place</a>"
-      icon: "/assets/pin.png"
-    )
-    @markers.push marker
-    marker.setMap(@map)
-    map = @map
-    stub = $('#list_place_' + obj.id).clone(false)
-    stub.find('.timing, .special_offers, [id^=favorites_small]').remove()
-    boxText = document.createElement("div")
-    boxText.className = "place popover-content"
-    boxText.style.cssText = "border: 1px solid rgba(0,0,0,0.2); margin-top: 8px; padding: 10px; border-radius: 4px; background: white;"
-    boxText.innerHTML = stub.html() + "<div class='arrow'></div>"
-    myOptions =
-      content: boxText
-      disableAutoPan: false
-      maxWidth: 0
-      pixelOffset: new google.maps.Size(-175, -162)
-      zIndex: 0
-      boxStyle:
-        opacity: 1
-        width: "350px"
-      closeBoxMargin: "10px 2px 2px 2px"
-      closeBoxZIndex: 999
-      closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
-      infoBoxClearance: new google.maps.Size(1, 1)
-#      map.setCenter(lat_lon)
-      isHidden: false
-      pane: "floatPane"
-      enableEventPropagation: false
-    
-    ib = new InfoBox(myOptions)
+    unless _.find(@markers, (marker) -> marker.placeId = obj.id)?.length
+      marker = new google.maps.Marker(
+        position: new google.maps.LatLng(obj.lat, obj.lng)
+        title: "Hello from #{obj.id}!"
+        placeId: obj.id
+        html: "<a class='marker' href='##{obj.id}'>place</a>"
+        icon: "/assets/pin.png"
+      )
+      @markers.push marker
+      marker.setMap(@map)
+      map = @map
+      stub = $('#list_place_' + obj.id).clone(false)
+      stub.find('.timing, .special_offers, [id^=favorites_small]').remove()
+      boxText = document.createElement("div")
+      boxText.className = "place popover-content"
+      boxText.style.cssText = "border: 1px solid rgba(0,0,0,0.2); margin-top: 8px; padding: 10px; border-radius: 4px; background: white;"
+      boxText.innerHTML = stub.html() + "<div class='arrow'></div>"
+      myOptions =
+        content: boxText
+        disableAutoPan: false
+        maxWidth: 0
+        pixelOffset: new google.maps.Size(-175, -162)
+        zIndex: 0
+        boxStyle:
+          opacity: 1
+          width: "350px"
+        closeBoxMargin: "10px 2px 2px 2px"
+        closeBoxZIndex: 999
+        closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif"
+        infoBoxClearance: new google.maps.Size(1, 1)
+  #      map.setCenter(lat_lon)
+        isHidden: false
+        pane: "floatPane"
+        enableEventPropagation: false
+      
+      google.maps.ib = ib = new InfoBox(myOptions)
 
-    google.maps.event.addListener marker, "click", (e) ->
-      ib.open map, this
+      google.maps.event.addListener marker, "click", (e) ->
+        google.maps.ib.close()
+        ib.open map, this
+        google.maps.ib = ib
 
-    google.maps.event.addListener marker, "mouseover", ->
-      selector = '#place_' + obj.id
-      console.log selector
-      $(selector).addClass 'target'
+      google.maps.event.addListener marker, "mouseover", ->
+        selector = '#place_' + obj.id
+        console.log selector
+        $(selector).addClass 'target'
 
-    google.maps.event.addListener marker, "click", ->
-      selector = '#' + obj.id
-      console.log selector
-      console.log $(selector).attr('href')
-    setTimeout((->
-      $('#place_' + obj.id).on 'click', (e) ->
-        ib.open map, marker
-    ), 50)
+      google.maps.event.addListener marker, "click", ->
+        selector = '#' + obj.id
+        console.log selector
+        console.log $(selector).attr('href')
+      setTimeout((->
+        $('#place_' + obj.id).on 'mouseleave', (e) ->
+          marker.setIcon '/assets/pin.png'
+        $('#place_' + obj.id).on 'mouseenter', (e) ->
+          marker.setIcon '/assets/pin_hover.png'
+        $('#place_' + obj.id).on 'click', (e) ->
+          ib.open map, marker
+      ), 50)
 
-    google.maps.event.addListener marker, "mouseout", ->
-      selector = '#place_' + obj.id
-      console.log selector
-      $(selector).removeClass 'target'
+      google.maps.event.addListener marker, "mouseout", ->
+        selector = '#place_' + obj.id
+        console.log selector
+        $(selector).removeClass 'target'
 
 
 class FilterInput

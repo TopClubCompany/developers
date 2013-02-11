@@ -230,7 +230,8 @@
 }
 .dropdown.open #sortby-list {
   display: block;
-  left: 576px;
+  left: auto;
+  right: 0px;
   top: 0px;
 }
 
@@ -321,6 +322,7 @@ div.fixed_ajax_loader {
 }
 
 .slideWrapper {
+  height: auto;
   position: relative;
 
   [id^='slide'] {
