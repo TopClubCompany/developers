@@ -11,8 +11,12 @@ class ApplicationController < ActionController::Base
 
   protected
 
-    def current_city
-      current_user.try(:city).try(:slug) || session['city'] || session[:city] || 'kyiv'
+    def current_city param=:slug
+      current_user.try(:city).try(param) || session['city'] || session[:city] || 'kyiv'
+    end
+
+    def current_city_plural
+      City.find(current_city).plural_name
     end
 
     def set_locale

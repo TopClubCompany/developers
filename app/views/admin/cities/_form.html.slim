@@ -2,8 +2,10 @@
   = f.locale_tabs do |l|
     = f.input :name, :locale => l
     = f.input :description, :locale => l, :as => :ckeditor
+    = f.input :plural_name, :locale => l, :as => :ckeditor
 
   = f.input :is_visible, input_html: {class: 'pretty-slide-checkbox'}
+  = f.input :position
 
 
   = f.save_buttons
