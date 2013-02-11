@@ -182,6 +182,7 @@ ru:
   explore: 
     index:
       main_slider_text: "Find a perfect restaurant and pay lower prices."
+      second_big_text: "Select one of %{count} restaurants in %{city} and save up to %{discount} off your total bill."
       all: "Browse all ›"
       available: Available tonight
       best: Best restaurants
