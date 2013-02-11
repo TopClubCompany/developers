@@ -16,7 +16,9 @@ class SearchController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
-    proper_name = get_proper_name params[:id]
+    #@category.plural_name  #in views current_city_plural get city
+
+    proper_name = @category.plural_name
     set_gon_params
     respond_to do |format|
       format.json do
@@ -28,23 +30,7 @@ class SearchController < ApplicationController
       end
     end
   end
-  def get_proper_name name
-    # TODO add field to database to describe place name
-    # TODO Add pluralize for places where count > 1
-    result = ''
-    result << name + " "
-    case name.downcase
-      when 'sushi', 'karaoke'
-        result << 'bar'
-      when 'night'
-        result << 'club'
-      when 'coffee'
-        result << 'shop'
-      when 'pizza'
-        result << 'restaurant'
-    end
-    result
-  end
+
 
   def get_more
     type = params[:type]

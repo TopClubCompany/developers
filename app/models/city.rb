@@ -1,10 +1,10 @@
 class City < ActiveRecord::Base
 
-  attr_accessible :is_visible, :position
+  attr_accessible :is_visible, :position, :name, :description, :plural_name
 
   has_many :users
 
-  translates :name, :description
+  translates :name, :description, :plural_name
 
   include Utils::Models::Base
   include Utils::Models::Translations
