@@ -21,3 +21,6 @@ $ ->
     initPickers()
     initChosen()
     initTokens()
+
+
+  $('body').append("<div style='")
