@@ -317,7 +317,9 @@ class PlacesCollection
         $('#place_' + obj.id).on 'mouseenter', (e) ->
           marker.setIcon '/assets/pin_hover.png'
         $('#place_' + obj.id).on 'click', (e) ->
+          google.maps.ib.close()
           ib.open map, marker
+          google.maps.ib = ib
       ), 50)
 
       google.maps.event.addListener marker, "mouseout", ->
