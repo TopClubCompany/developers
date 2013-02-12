@@ -190,7 +190,7 @@ class PlacesCollection
       if match is 3
         newUrl = $(e.target).attr('href') + params + 'is_strim=true'
       else
-        newUrl = $(e.target).attr('href')
+        newUrl = $(e.target).attr('href') + params
       window.history.pushState '', null, window.location.search
       window.location.replace newUrl
 
