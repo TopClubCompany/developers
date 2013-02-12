@@ -46,6 +46,10 @@ module ApplicationHelper
     I18n.locale == I18n.default_locale ? '' : "/#{I18n.locale}"
   end
 
+  def with_local_link link
+    locale_path + link
+  end
+
   def front_form_for(object, *args, &block)
     options = args.extract_options!
     options[:builder] ||= ::Utils::Views::FrontFormBuilder
