@@ -19,7 +19,7 @@
         span.header_info
           - categories = @place.categories
           - categories.each_with_index do |category, i|
-            = link_to category.title, '#'
+            = link_to category.title, "/#{I18n.locale}/search/#{category.slug}"
             = ', ' if (i + 1) < categories.count
           '  ·
           - data = { trigger: 'hover', title: 'Average check', content: @place.bill.try(:title), placement: 'top' }
