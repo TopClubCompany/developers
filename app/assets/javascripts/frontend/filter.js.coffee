@@ -172,8 +172,9 @@ class PlacesCollection
   bindBlockListeners = (elMap, elList) ->
     $(elMap, elList).find(".popoverable").on('click', () -> return false).popover(html: true)
 
-    $(elMap, elList).find("h4 > a").off 'click'
-    $(elMap, elList).find("h4 > a").on 'click', (e) ->
+    $(elMap, elList).find("h4 > a, .place_img_sm").off 'click'
+    $(elMap, elList).find("h4 > a, .place_img_sm").on 'click', (e) ->
+      target = if $(e.target).attr('href') then $(e.target) else $(e.target).parent('.place_img_sm')
       e.preventDefault()
       searchQuery = window.location.search
 
@@ -187,10 +188,10 @@ class PlacesCollection
         if exactMatch = searchQuery.match(regexp)?[0]
           params += exactMatch + '&'
           match += 1
-      if match is 3
-        newUrl = $(e.target).attr('href') + params + 'is_strim=true'
-      else
-        newUrl = $(e.target).attr('href') + params
+
+      newUrl = target.attr('href') + params
+      newUrl +=  'is_strim=true' if match is 3
+
       window.history.pushState '', null, window.location.search
       window.location.replace newUrl
 
