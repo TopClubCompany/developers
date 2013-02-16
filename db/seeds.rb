@@ -200,7 +200,7 @@ def insert_default_vote_types
 end
 
 def create_pages
-  %w(ABOUT\ US FAQ JOBS RESTAURATEURS CONTACT).each do |name|
+  %w(ABOUT\ US FAQ JOBS RESTAURATEURS CONTACT Help).each do |name|
     Structure.create do |s|
       s.name = name
       s.position = 5

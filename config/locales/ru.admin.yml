@@ -68,6 +68,7 @@ ru:
         search: "Страница поиска"
         place: "Страница места"
         profile: "Страница профайла"
+        static_page: "Статическая страница"
     bill: 
       code: 
         cheap: Cheap
@@ -173,9 +174,7 @@ ru:
     main: "Главным"
     main_image: "Сделать главным"
     max_size: "Макс разм."
-    navigation: 
-      beer_bike: "Бирбайки"
-      beer_quotes: "Пивные цитаты"
+    navigation:
       companies: "Компании"
       option_data: "Данные опций"
       system: "Система"
@@ -206,15 +205,9 @@ ru:
         resources: "Весь ресурс"
         subject: "По ресурсу"
     perms: 
-      actions: 
-        add_styles: "Редактировать стили"
+      actions:
         create: "Создавать"
         delete: "Удалять"
-        import: "Импорт менеджер"
-        journalist: "Журналист"
-        moderator: "Модератор"
-        publish: "Публиковать"
-        publish_BeerBike: "Публиковать в соц"
         read: "Просматривать"
         update: "Редактировать"
       assocs: 
