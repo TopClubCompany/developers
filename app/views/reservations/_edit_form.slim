@@ -1,0 +1,29 @@
+#search_form style='display:none'
+  span.header Edit your reservation at #{@place.title}
+  form action=localization_link("Save")
+    label for="reserve_date"
+    input class='dateFormatNeeded' name="reserve_date" autocomplete="off" type="text" value=(@date.strftime('%d/%m/%Y'))
+    - time = @options[:reserve_time].gsub(/[hm=]/,'').split('&')
+    - time[0][0]='' if time[0].match /^0/
+    - time_hash = {:h => time[0], :m => time[1]}
+    label for="reserve_time"
+    select name="reserve_time"
+      - time_with_locale(time_hash).each do |time_el|
+        - time_el.each do |k, v|
+          - if v
+            option value=k selected="selected" #{k}
+          - else
+            option value=k #{k}
+    label for="number_of_people"
+      nobr= I18n.t('search.number_of_people')
+    select name="number_of_people" type="text"
+      - number = (params[:number_of_people] || 2)
+      - (1..10).each do |i|
+        - if i == number.to_i
+          option value="#{i}" selected="selected" #{i}
+        - else
+          option value="#{i}" #{i}
+    input type="submit" value="Save"
+    .clear
+
+
