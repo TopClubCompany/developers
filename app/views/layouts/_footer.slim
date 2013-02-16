@@ -1,21 +1,10 @@
 #footer
   .content
     ul#footer_nav
-      li
-        a href="#"
-          | About us
-      li
-        a href="/faq"
-          | FAQ
-      li
-        a href="#"
-          | Jobs 
-      li
-        a href="#"
-          | Restaurateurs
-      li
-        a href="/contacts"
-          | Contact
+      - Structure.with_position(::PositionType.static_page).each do |structure|
+        li
+          a href="#{page_path(structure.slug)}"
+            = structure.name
     span.copyright
       | © Topreserve, 2013. -
       a href="#"
