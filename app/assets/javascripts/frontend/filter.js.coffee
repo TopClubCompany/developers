@@ -137,8 +137,11 @@ class PlacesCollection
       self = @
       markerToRemove = _.filter( self.markers, (marker) ->
         marker.placeId is removeId)
-      markerToRemove[0]?.setMap(null)
-
+      if markerToRemove.length > 0
+        _.each markerToRemove, (marker) ->
+          marker?.setMap(null)
+      else
+        markerToRemove[0]?.setMap(null)
       $("#place_#{removeId}").add("#list_place_#{removeId}").fadeOut('fast').remove()
   addPopoverData: (place) =>
     if (offers = place["special_offers"])?

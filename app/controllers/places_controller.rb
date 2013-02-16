@@ -6,7 +6,7 @@ class PlacesController < ApplicationController
   def show
     @date = params[:reserve_date] || Date.today.strftime('%d/%m/%Y')
     @location = @place.lat_lng
-    @special_offers =  @place.day_discounts.special
+    @special_offers = @place.day_discounts.special
     reviews = @place.reviews.includes(:votes, :marks)
     @reviews = case params[:sort_by]
                  when 'date'

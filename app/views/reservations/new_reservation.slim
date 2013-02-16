@@ -11,9 +11,12 @@
           i.icon-pencil.icon-white
           = I18n.t('reservation.edit')
       #sign_up_page.page_content.complete
-        h2
-          = I18n.t('reservation.special_offers')
-          a href="#"
+        - if @special_offers.length > 0
+          h2
+            = I18n.t('reservation.special_offers')
+            - @special_offers.each do |offer|
+              a href="#"
+                = offer.title
         = simple_form_for @reservation, url: complete_reservation_path, method: 'post', :wrapper => :front_reg_form do |f|
           = f.error_notification
           label
@@ -44,3 +47,5 @@
             ' Sign in
           | and earn 5 points
         p All members get rewards for online reservations!
+
+= render "edit_form"

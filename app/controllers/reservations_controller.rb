@@ -1,15 +1,19 @@
 class ReservationsController < ApplicationController
 
   def new_reservation
+
     @persons = params[:amount_of_person]
     @place   = Place.find(params[:place_id])
     @date = DateTime.parse("#{params[:date]} #{params[:time].gsub(/[hm=]/,'').gsub('&',':')}")
+    @options = {:reserve_date => params[:date], :reserve_time => params[:time]}
+    @special_offers = Place.today_discount(@place.discounts_index, @options).compact
     @reservation = Reservation.create_from_place_and_user(current_user, @place)
     @reservation.persons = @persons.to_i
   end
 
   def reservation_confirmed
     @reservation = Reservation.find(params[:reservation_id])
+
     @place = @reservation.try(:place)
     @date  = DateTime.parse(@reservation.try{|res| res.time.to_s})
     redirect_to root_path, flash: { error: 'no such reservation' } unless @reservation && @place
