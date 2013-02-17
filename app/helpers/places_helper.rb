@@ -43,7 +43,7 @@ module PlacesHelper
 
   def get_time_class time, param_time
     if time[:available]
-      if time == time[:time]
+      if param_time == time[:time].to_s
         'bold'
       else
         ''

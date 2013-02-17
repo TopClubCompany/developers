@@ -6,7 +6,7 @@ class PlacesController < ApplicationController
   def show
     @date = params[:reserve_date] || Date.today.strftime('%d/%m/%Y')
     @location = @place.lat_lng
-    @special_offers =  @place.day_discounts.special
+    @special_offers = @place.day_discounts.special
     reviews = @place.reviews.includes(:votes, :marks)
     @reviews = case params[:sort_by]
                  when 'date'
@@ -38,7 +38,6 @@ class PlacesController < ApplicationController
   end
 
   def set_unset_favorite
-    #raise @place.inspect
     if signed_in? && @place
       already_favorite = current_user.user_favorite_places.pluck(:place_id).include? @place.id
       if already_favorite
