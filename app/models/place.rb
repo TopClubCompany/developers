@@ -369,8 +369,7 @@ class Place < ActiveRecord::Base
     res[:discount] = offers[0].try{|offer| offer.discount.try(:to_i) }
     res[:place_url] = "/#{I18n.locale}/#{place.slug}-#{place['city_en'].downcase.gsub(' ','_')}"
     res[:star_rating] = self.get_star_rating(place)
-    # TODO: replace with actual values of availability and being_favourite
-    res[:is_favourite] = [true, false].sample
+    res[:is_favourite] = UserFavoritePlace.liked?(options[:current_user].try(:id), place.id)
     res[:timing] = self.order_time(place, time, current_day)
     res
   end
