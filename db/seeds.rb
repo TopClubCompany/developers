@@ -199,16 +199,26 @@ def insert_default_vote_types
   %w|helpful unhelpful|.each { |title| VoteType.create(title: title, description: Faker::Lorem.sentence)}
 end
 
-User.full_truncate
-insert_default_user('admin@adm.com', :admin)
-insert_default_user('user@usr.com')
-add_categories
-add_kitchens
-insert_mark_types
-add_test_stuff
-insert_default_place_pictures
-insert_group_feature
-insert_city
-insert_default_reservations
-insert_default_vote_types
-insert_slider
+def create_pages
+  %w(ABOUT\ US FAQ JOBS RESTAURATEURS CONTACT Help).each do |name|
+    Structure.create do |s|
+      s.name = name
+      s.position = 5
+    end.save!
+  end
+end
+
+#User.full_truncate
+#insert_default_user('admin@adm.com', :admin)
+#insert_default_user('user@usr.com')
+#add_categories
+#add_kitchens
+#insert_mark_types
+#add_test_stuff
+#insert_default_place_pictures
+#insert_group_feature
+#insert_city
+#insert_default_reservations
+#insert_default_vote_types
+#insert_slider
+create_pages

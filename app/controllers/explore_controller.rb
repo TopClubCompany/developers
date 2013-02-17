@@ -1,7 +1,5 @@
 class ExploreController < ApplicationController
 
-  before_filter :find_page
-
   def index
     params.merge!(city: current_city)
     places = Place.best_places(6, params)

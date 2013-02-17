@@ -49,7 +49,7 @@ class SearchController < ApplicationController
   private
 
   def search
-    @result = Place.search(params.merge(city: current_city, current_point: cookies[:current_point]))
+    @result = Place.search(params.merge!(city: current_city, current_point: cookies[:current_point], current_user: current_user))
     @geo_point_array = get_geo_points()
   end
 

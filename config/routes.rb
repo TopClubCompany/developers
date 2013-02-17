@@ -61,6 +61,10 @@ Topclub::Application.routes.draw do
     end
   end
 
+
+  resources :pages do
+
+  end
   #resources :assets, :only => [:create, :destroy], :module => "admin" do
   #end
 
