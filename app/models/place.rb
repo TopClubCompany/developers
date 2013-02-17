@@ -468,8 +468,8 @@ class Place < ActiveRecord::Base
     else
       time = nil
     end
-      current_day = options[:reserve_date].present? ? DateTime.parse(options[:reserve_date]).wday : DateTime.now.wday
-      current_day = PlaceUtils::PlaceTime.wday(current_day)
+    current_day = options[:reserve_date].present? ? DateTime.parse(options[:reserve_date]).wday : DateTime.now.wday
+    current_day = PlaceUtils::PlaceTime.wday(current_day)
       discounts = discounts.select do |discount|
         if time
           discount["day"] == current_day && time > discount["from_time"].to_f && time <  discount["to_time"].to_f
