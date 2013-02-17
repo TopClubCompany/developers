@@ -38,7 +38,6 @@ class PlacesController < ApplicationController
   end
 
   def set_unset_favorite
-    #raise @place.inspect
     if signed_in? && @place
       already_favorite = current_user.user_favorite_places.pluck(:place_id).include? @place.id
       if already_favorite

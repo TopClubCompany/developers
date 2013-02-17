@@ -3,6 +3,11 @@ class UserFavoritePlace < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :place
+
+  def self.liked?(user_id, place_id)
+    where("user_id = ? AND place_id = ?", user_id, place_id).size > 0
+  end
+
 end
 # == Schema Information
 #
