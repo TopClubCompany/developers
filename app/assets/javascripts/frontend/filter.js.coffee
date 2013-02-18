@@ -149,8 +149,6 @@ class PlacesCollection
   addBlock: (place) =>
     I18n = $('#language .active').attr('id')
     properKitchensName = if place.kitchens.length > 18 then place.kitchens.substring(0, 18) + '...' else place.kitchens
-
-    _.extend place, {special_offer: true} if place.special_offers?.length > 0
     source   = $("#list_place_template").html()
     listBlock = Mustache.to_html(source, place)
     source   = $("#map_place_template").html()
@@ -198,8 +196,11 @@ class PlacesCollection
       $el.add($listEl).find(".special_offers").empty()
 
       if place.special_offer
+        $el.add($listEl).find(".special_offers").append("<h5>Special offers:</h5>")
+
         for offer in place.special_offers
           console.log offer
+
           $a = $("<h5><a class='popoverable' href='#{place.place_url}'>#{offer.popover_data.title}</a></h5>")
             .appendTo($el.add($listEl).find(".special_offers"))
           for key, value of offer.popover_data
