@@ -22,5 +22,6 @@
         - else
           option value="#{i}" #{i}
     input type="hidden" name="place_id" value="#{@place.id}"
+    input type="hidden" name="title_or_location" value="#{@place.title}"
     input type="submit" data-title="#{@place.name}" value="Find a table"
       .clear
