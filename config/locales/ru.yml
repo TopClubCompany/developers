@@ -296,6 +296,7 @@ ru:
   short_strings:
     my_reservations: Мои резервации
     add_to_favorites: Добавить в избранное
+    remove_from_favorites: Убрать из избранного
     view_your_reservation: Посмотреть свои резервации
     number_of_people: Количество людей
     phone_number: Телефонный номер
@@ -317,7 +318,6 @@ ru:
     submit_a_review: 'оставить отзыв:'
     special_offers: Специальные предложения от
     write_review: Написать отзыв
-    add_to_favorites: Добавить <br> в избранное
   share:
     description: 'тестовое описание'
   long_strings:
@@ -338,6 +338,7 @@ ru:
     unhelpful: бесполезный
     reviews: отзывов
     menu: Меню
+    new_reservation: "Забронировать стол"
   place:
     is: "из"
 
