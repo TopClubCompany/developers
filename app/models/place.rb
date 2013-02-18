@@ -360,6 +360,7 @@ class Place < ActiveRecord::Base
     res[:lat_lng] = place["lat_lng"]
     offers = self.today_discount(place["discounts"], options)
     unless offers[1].is_a? NilClass
+      res[:special_offer] = offers[1].size > 0
       res[:special_offers] = offers[1].map do |obj|
         {
            :popover_data => {
