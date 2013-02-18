@@ -88,6 +88,7 @@ class PlacesCollection
 
 
   useNewData: (json, page) ->
+    $('.popoverable').popover('hide')
     $('#total').text json.total
     new Pagination(json.total).goTo(page)
     placesData = json.result
@@ -108,6 +109,7 @@ class PlacesCollection
     @ids = _.without(_.union(@ids, needToAddIds), needToRemoveIds)
 
     setTimeout((=>
+      @updateOffers placesData
       @updateTime placesData
     ), 50)
 
@@ -188,9 +190,23 @@ class PlacesCollection
       window.history.pushState '', null, window.location.search
       window.location.replace newUrl
 
+  updateOffers: (placesData) =>
+    $('#map_details_wrapper').find('.place').each (index, el) ->
+      $el = $(el)
+      $listEl = $('#list_' + $(el).attr('id'))
+      place = _.find(placesData, (place) -> parseInt(place.id) == $(el).data('id'))
+      $el.add($listEl).find(".special_offers").empty()
 
-
-
+      if place.special_offer
+        for offer in place.special_offers
+          console.log offer
+          $a = $("<h5><a class='popoverable' href='#{place.place_url}'>#{offer.popover_data.title}</a></h5>")
+            .appendTo($el.add($listEl).find(".special_offers"))
+          for key, value of offer.popover_data
+            $a.data("#{key}", "#{value}")
+          $a.click (e) -> e.preventDefault()
+          $a.popover()
+      console.log 'updatedOffers'
 
   updateTime: (placesData) =>
     $('#map_details_wrapper').find('.place').each (index, el) ->
