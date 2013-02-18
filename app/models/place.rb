@@ -44,7 +44,7 @@ class Place < ActiveRecord::Base
 
   translates :name, :description
 
-  fileuploads :place_image, :place_images
+  fileuploads :place_image, :place_images, :slider
 
   elasticsearch
 
