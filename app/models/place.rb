@@ -44,7 +44,7 @@ class Place < ActiveRecord::Base
 
   translates :name, :description
 
-  fileuploads :place_image, :place_images
+  fileuploads :place_image, :place_images, :slider
 
   elasticsearch
 
@@ -336,6 +336,7 @@ class Place < ActiveRecord::Base
     current_day = PlaceUtils::PlaceTime.wday(current_day)
     truncated_time_now = Time.at(time_now.to_i - time_now.sec - time_now.min % 15 * 60)
     time = options[:reserve_time]? Time.parse(options[:reserve_time]) : truncated_time_now
+    options[:reserve_time] = time_now.strftime("%H:%M") unless options[:reserve_time].present?
     options[:image_url] ||= :slider_url
     res = {}
     res[:id] = place.id
@@ -359,12 +360,17 @@ class Place < ActiveRecord::Base
     res[:lat_lng] = place["lat_lng"]
     offers = self.today_discount(place["discounts"], options)
     unless offers[1].is_a? NilClass
-      res[:special_offers] = offers[1].map {|obj|
-          {:title => obj["title_#{I18n.locale}"],
-           :time_start => '%.2f' % obj["from_time"].to_f ,
-          :time_end => '%.2f' % obj["to_time"].to_f
+      res[:special_offer] = offers[1].size > 0
+      res[:special_offers] = offers[1].map do |obj|
+        {
+           :popover_data => {
+            trigger: 'click',
+            title: obj["title_#{I18n.locale}"],
+            content: "From #{'%.2f' % obj["from_time"].to_f} to #{'%.2f' % obj["to_time"].to_f}",
+            placement: "top"
           }
-      }
+        }
+      end
     end
     res[:discount] = offers[0].try{|offer| offer.discount.try(:to_i) }
     res[:place_url] = "/#{I18n.locale}/#{place.slug}-#{place['city_en'].downcase.gsub(' ','_')}"

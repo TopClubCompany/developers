@@ -88,6 +88,7 @@ class PlacesCollection
 
 
   useNewData: (json, page) ->
+    $('.popoverable').popover('hide')
     $('#total').text json.total
     new Pagination(json.total).goTo(page)
     placesData = json.result
@@ -108,6 +109,7 @@ class PlacesCollection
     @ids = _.without(_.union(@ids, needToAddIds), needToRemoveIds)
 
     setTimeout((=>
+      @updateOffers placesData
       @updateTime placesData
     ), 50)
 
@@ -143,22 +145,10 @@ class PlacesCollection
       else
         markerToRemove[0]?.setMap(null)
       $("#place_#{removeId}").add("#list_place_#{removeId}").fadeOut('fast').remove()
-  addPopoverData: (place) =>
-    if (offers = place["special_offers"])?
-      _.each offers, (offer, index) ->
-        _.extend offer, {popover_data:
-          trigger: 'click'
-          title: offer.title.replace(/"/, '')
-          content: "From #{offer.time_start} to #{offer.time_end}"
-          placement: "top"
-        }
 
   addBlock: (place) =>
     I18n = $('#language .active').attr('id')
     properKitchensName = if place.kitchens.length > 18 then place.kitchens.substring(0, 18) + '...' else place.kitchens
-
-    @addPopoverData place
-    _.extend place, {special_offer: true} if place.special_offers?.length > 0
     source   = $("#list_place_template").html()
     listBlock = Mustache.to_html(source, place)
     source   = $("#map_place_template").html()
@@ -198,9 +188,26 @@ class PlacesCollection
       window.history.pushState '', null, window.location.search
       window.location.replace newUrl
 
+  updateOffers: (placesData) =>
+    $('#map_details_wrapper').find('.place').each (index, el) ->
+      $el = $(el)
+      $listEl = $('#list_' + $(el).attr('id'))
+      place = _.find(placesData, (place) -> parseInt(place.id) == $(el).data('id'))
+      $el.add($listEl).find(".special_offers").empty()
 
+      if place.special_offer
+        $el.add($listEl).find(".special_offers").append("<h5>Special offers:</h5>")
 
+        for offer in place.special_offers
+          console.log offer
 
+          $a = $("<h5><a class='popoverable' href='#{place.place_url}'>#{offer.popover_data.title}</a></h5>")
+            .appendTo($el.add($listEl).find(".special_offers"))
+          for key, value of offer.popover_data
+            $a.data("#{key}", "#{value}")
+          $a.click (e) -> e.preventDefault()
+          $a.popover()
+      console.log 'updatedOffers'
 
   updateTime: (placesData) =>
     $('#map_details_wrapper').find('.place').each (index, el) ->
