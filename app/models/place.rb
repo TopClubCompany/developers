@@ -359,12 +359,16 @@ class Place < ActiveRecord::Base
     res[:lat_lng] = place["lat_lng"]
     offers = self.today_discount(place["discounts"], options)
     unless offers[1].is_a? NilClass
-      res[:special_offers] = offers[1].map {|obj|
-          {:title => obj["title_#{I18n.locale}"],
-           :time_start => '%.2f' % obj["from_time"].to_f ,
-          :time_end => '%.2f' % obj["to_time"].to_f
+      res[:special_offers] = offers[1].map do |obj|
+        {
+           :popover_data => {
+            trigger: 'click',
+            title: obj["title_#{I18n.locale}"],
+            content: "From #{'%.2f' % obj["from_time"].to_f} to #{'%.2f' % obj["to_time"].to_f}",
+            placement: "top"
           }
-      }
+        }
+      end
     end
     res[:discount] = offers[0].try{|offer| offer.discount.try(:to_i) }
     res[:place_url] = "/#{I18n.locale}/#{place.slug}-#{place['city_en'].downcase.gsub(' ','_')}"
