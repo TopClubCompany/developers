@@ -156,10 +156,10 @@ class Place < ActiveRecord::Base
       end
 
       tire.search(page: options[:page], per_page: options[:per_page] || 10) do
-        if options[:title].present?
+        if options[:title_or_location].present?
           fields = I18n.available_locales.map { |l| "name_#{l}" }.concat(Location.all_translated_attribute_names)
           query do
-            flt options[:title].lucene_escape, :fields => fields, :min_similarity => 0.9
+            flt options[:title_or_location].lucene_escape, :fields => fields, :min_similarity => 0.9
           end
           sort { by sort, "desc" }
         end
