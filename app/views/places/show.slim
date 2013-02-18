@@ -9,6 +9,7 @@
         .place_img
           a.fancybox rel='gallery' href=(@place.place_image.url(:content)if @place.place_image)
             img alt="#{@place.title}" height="180" itemprop="photo" src=(@place.place_image.url(:place_show)if @place.place_image) width="240"
+
           ul.carousel_bullets
             - place_images = @place.all_images
             - place_images.each_with_index do |image, i|
