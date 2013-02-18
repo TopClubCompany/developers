@@ -36,6 +36,10 @@ class Users::ProfileController < ApplicationController
 
   end
 
+  def favourites
+    @places = current_user.user_favorite_places
+  end
+
   def edit_settings
 
   end
