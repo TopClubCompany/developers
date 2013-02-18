@@ -143,21 +143,11 @@ class PlacesCollection
       else
         markerToRemove[0]?.setMap(null)
       $("#place_#{removeId}").add("#list_place_#{removeId}").fadeOut('fast').remove()
-  addPopoverData: (place) =>
-    if (offers = place["special_offers"])?
-      _.each offers, (offer, index) ->
-        _.extend offer, {popover_data:
-          trigger: 'click'
-          title: offer.title.replace(/"/, '')
-          content: "From #{offer.time_start} to #{offer.time_end}"
-          placement: "top"
-        }
 
   addBlock: (place) =>
     I18n = $('#language .active').attr('id')
     properKitchensName = if place.kitchens.length > 18 then place.kitchens.substring(0, 18) + '...' else place.kitchens
 
-    @addPopoverData place
     _.extend place, {special_offer: true} if place.special_offers?.length > 0
     source   = $("#list_place_template").html()
     listBlock = Mustache.to_html(source, place)
