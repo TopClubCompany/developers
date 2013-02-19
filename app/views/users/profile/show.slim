@@ -6,12 +6,37 @@
       .row
         .span2
           h1= user_menu_name
-          img.user_pic_big height="128" src=get_user_avatar width="128"
-            #status.gourmand
-              b *
-              | GOURMAND
-              b *
+          #user_pic_big
+            a
+              img.user_pic_big height="128" src=get_user_avatar width="128"
+          #status.gourmand
+            | GOURMAND
         #dash_blocks.span8
+          #personal_information.dash_block
+            h2
+              | Personal Information
+              a.edit href="#"
+                i.icon-edit
+                | edit
+            ul.settings style="width: 260px !important;"
+              li
+                label Name
+                | Eugene Vasin
+              li
+                label City
+                | Las Vegas
+              li
+                label Phone
+                | +380443000010
+              li
+                label Gender
+                | Male
+              li
+                label Birthday
+                | December 25 1986
+            a.user_btn href="#"
+              i.icon-pencil
+              strong Edit profile
           #upcoming_reservations.dash_block
             h2
               | Upcoming Reservations
@@ -23,10 +48,6 @@
               .btns
                 a href="#"
                   | View / Edit
-                a href="#"
-                  | Invite
-                a href="#"
-                  | Cancel
                 .clear
             .reservation
               a href="#"
@@ -35,13 +56,9 @@
               .btns
                 a href="#"
                   | View / Edit
-                a href="#"
-                  | Invite
-                a href="#"
-                  | Cancel
                 .clear
             a.all href="#"
-              | View details
+              | View all reservations
 
           #my_reviews.dash_block
             h2
