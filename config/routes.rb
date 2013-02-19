@@ -32,6 +32,7 @@ Topclub::Application.routes.draw do
       get :self_reviews
       get :settings
       get :edit_settings
+      get :favourites
       put :update_settings
       #put :update_reservation
       get :my_reservations
