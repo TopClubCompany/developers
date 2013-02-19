@@ -11,17 +11,15 @@
             img.user_pic_big height="128" src=(current_user.avatar ? current_user.avatar.url(:sidebar) : '/assets/no_avatar.gif') width="128"
           #status.gourmand GOURMAND
         #dash_blocks.span8
-          #upcoming_reservations.dash_block style="width: 600px;"
+          #upcoming_reservations.dash_block style="width: 590px;"
             h2
-              =' t('short_strings.my_reservations')
-              - active_reservations = Reservation.active_reservations(current_user.id)
-              - old_reservations    = Reservation.old_reservations(current_user.id)
-              span (#{active_reservations.count} upcoming!)
-            - reservations = active_reservations + old_reservations
-            - reservations.each do |reservation|
+              | My Favourites
+            - if @places.length == 0
+              | Nothing here. You should eat out. Then come and like the place.
+            - @places.each do |reservation|
               - place = reservation.place
-              .reservation.place class=('past' if reservation.time.to_i < DateTime.now.to_i)
-                a.place_img_sm href="#"
+              .reservation.place
+                a.place_img_sm href="/#{I18n.locale}/#{place.slug}-#{place.location.city_en.downcase.gsub(' ','_')}"
                   img height="100" src=place.place_image.url(:slider) width="140"
                     span.discount.minus_5
                 h4 style="width: auto;"
@@ -39,16 +37,17 @@
                     a href="#"
                       = place_reviews
                       |  #{place_reviews == 1 ? 'review' : 'reviews'}
-                small= reservation.time
+                - binding.pry
+                ul.place_features
+                  li.location Sribnokilskaya st., 3d
+                  li.cuisine European, Japaneese
+                  li.pricing 200 UAH
                 .btns
                   a href="#"
-                    = t('words.cancel')
-                  a href="#"
-                    = t('words.invite')
-                  a href=show_profile_reservation_path(place.user_id, reservation.id)
-                    | #{t('words.view').capitalize} / #{t('words.edit').capitalize}
+                    = t('words.new_reservation')
+
                   .clear
                 #favorites_small
                   .add_to_favorites
-                    = t('short_strings.add_to_favorites')
+                    = t('short_strings.remove_from_favorites')
                 .clear
