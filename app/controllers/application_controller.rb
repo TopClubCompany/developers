@@ -55,14 +55,16 @@ class ApplicationController < ActionController::Base
         tag_type = header.tag_type.code.to_sym
         case tag_type
           when :open_graph
-            set_meta_tags :open_graph => {
-                :title => header.og_tag.title,
-                :type  => header.og_tag.og_type.to_sym,
-                :url   => header.og_tag.url,
-                :image =>  header.og_tag.image,
-                :site_name =>  header.og_tag.site_name,
-                :description =>  header.og_tag.description
-            }
+            if header.og_tag
+              set_meta_tags :open_graph => {
+                  :title => header.og_tag.title,
+                  :type  => header.og_tag.og_type.to_sym,
+                  :url   => header.og_tag.url,
+                  :image =>  header.og_tag.image,
+                  :site_name =>  header.og_tag.site_name,
+                  :description =>  header.og_tag.description
+              }
+            end
           when :keywords
             set_meta_tags  tag_type => header.content.split(',')
           else
