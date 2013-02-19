@@ -1,6 +1,8 @@
 class FormValidate
 
-  constructor: ->
+  constructor: (el)->
+    @selector = '#' + el.slice(5)
+    @$el = $(el)
     @validate_email()
     @enter_phone()
     @validPass()
@@ -9,7 +11,7 @@ class FormValidate
 
   validate_email: ->
     self = @
-    $email  = $('#new_user #user_email')
+    $email  = @$el.find("#{@selector}_email")
     $email.keyup (event) ->
       $el = $(this)
       value = $el.val()
@@ -60,7 +62,7 @@ class FormValidate
 
   enter_phone: ->
     #event enter phone (only numbers)
-    $user_phone = $("#new_user #user_phone")
+    $user_phone = @$el.find("#{@selector}_phone")
     $user_phone.keyup (event) ->
       $el = $(this)
       $el.tipsy
@@ -96,7 +98,7 @@ class FormValidate
       $el.tipsy "hide"
 
   validPass:  ->
-    $user_pass = $("#new_user #user_password")
+    $user_pass = @$el.find("#{@selector}_password")
     $user_pass.keyup (event) ->
       $el = $(this)
       value = $el.val()
@@ -131,7 +133,7 @@ class FormValidate
           $el.tipsy "hide"
 
   validNameLastname: ->
-    $user_first_name = $("#new_user #user_first_name")
+    $user_first_name = @$el.find("#{@selector}_first_name")
     $user_first_name.keyup (event) ->
       $el = $(this)
       value = $el.val()
@@ -164,7 +166,7 @@ class FormValidate
         else
           $el.tipsy "hide"
 
-    $user_last_name = $("#new_user #user_last_name")
+    $user_last_name = @$el.find("#{@selector}_last_name")
     $user_last_name.keyup (event) ->
       $el = $(this)
       value = $el.val()
@@ -207,4 +209,5 @@ class FormValidate
     $el.attr "original-title", "Разрешается вводить латиницу, кириллицу, \"-\", \"_\""
 
 $ ->
-  new FormValidate() if $("#new_user").size() > 0
+  new FormValidate("#new_user") if $("#new_user").size() > 0
+  new FormValidate("#new_reservation") if $("#new_reservation").size() > 0
