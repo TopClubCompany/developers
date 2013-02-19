@@ -311,6 +311,7 @@ class PlacesCollection
       google.maps.event.addListener marker, "click", (e) ->
         google.maps.ib.close()
         ib.open map, this
+        bindBlockListeners.call @, $(ib.content_)
         google.maps.ib = ib
 
       google.maps.event.addListener marker, "mouseover", ->
