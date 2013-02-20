@@ -1,7 +1,7 @@
 form action=localization_link("search")
   #tol_c
     - unless defined? show_title
-      input id='title_or_location' name="title_or_location" placeholder="title or location" type="text" value=(params[:title_or_location])
+      input id='title_or_location' name="title_or_location" data-rightadd="55" placeholder="title or location" type="text" value=(params[:title_or_location])
   label for="reserve_date"
   input class='dateFormatNeeded' name="reserve_date" autocomplete="off" type="text" value=(params[:reserve_date] || Time.now.strftime("%d/%m/%Y"))
   label for="reserve_time"

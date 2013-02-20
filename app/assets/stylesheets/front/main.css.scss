@@ -1034,7 +1034,7 @@ h4 .discount_label {
 
 #listing #map_places {
   float: left;
-  width: 490px;
+  width: 510px;
   height: 450px;
   overflow: hidden;
   position: relative;
@@ -1067,13 +1067,15 @@ h4 .discount_label {
 
 #listing #map_details {
   height: 450px;
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
 
 #listing #map_details #map_details_wrapper {
   width: 270px;
+  max-width: 280px;
+  height: 450px;
   float: right;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 #listing #map_details .place {
@@ -1165,6 +1167,7 @@ h4 .discount_label {
   color: #dfdeda;
   font-size: 10px;
   letter-spacing: 1px;
+  display: inline-block;
 }
 
 .header_info .pricing:hover {
@@ -1734,7 +1737,7 @@ h4 .discount_label {
   border-radius: 3px;
   line-height: 11px;
   background: #f2f0ea;
-  margin: 10px 3px 0 0;
+  margin: 10px 7px 0 0;
 }
 
 #place #reviews .review .review_vote a {
