@@ -14,7 +14,7 @@
 //=require jquery-ui
 //=require jquery_ujs
 
-//= require twitter/bootstrap
+//q= require twitter/bootstrap
 //=require jquery.browser
 //=require jquery.extend
 //=require jquery.lionbars.0.3
@@ -35,7 +35,8 @@
 //= require manage-fileuploader.js
 //= require jquery.tmpl.min
 //= require jquery.cookie
-//=require_tree ./frontend
+
 //=require jquery.autocomplete
 //=require mustache
 //= require fancybox
+//=require_tree ./frontend
