@@ -4,9 +4,11 @@ $ ->
     minChars: 1
     delimiter: /(,|;)\s*/
     # maxHeight:400,
-    width:268
+    # width:
     zIndex: 10
     deferRequestBy: 0
+    wrapper: '#tol_c'
+    # appendTo: '#tol_c'
     # params: { q:'Yes' }, //aditional parameters
     # noCache: false, //default is false, set to true to disable caching
     onSelect: (value, data) ->
