@@ -112,7 +112,11 @@ gem 'curb'
 #for uploads
 gem 'sunrise-file-upload', :git => 'git://github.com/leschenko/sunrise-file-upload.git', :ref => '4d4722c'
 
-group :development, :test do
+group :development do
+  gem 'rack-mini-profiler'
+end
+
+group :test do
   if RUBY_PLATFORM.downcase.include?("darwin")
     gem 'rb-fsevent', '~> 0.9.1'
     gem 'terminal-notifier-guard'
