@@ -5,6 +5,7 @@ gem 'mysql2'
 gem 'redis'
 gem 'slim-rails'
 gem 'fancybox2-rails', :git => 'git://github.com/kyparn/fancybox2-rails.git', :tag => 'v0.2.2'
+#gem 'fancybox-rails', :git => 'git://github.com/sverigemeny/fancybox-rails.git'
 gem 'dalli'
 
 gem 'globalize3', :git => 'git://github.com/leschenko/globalize3.git', :ref => '586ccbd'
