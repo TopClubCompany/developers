@@ -1,24 +1,27 @@
 form action=localization_link("search")
-  - unless defined? show_title
-    input id='title_or_location' name="title_or_location" placeholder="title or location" type="text" value=(params[:title_or_location])
+  #tol_c
+    - unless defined? show_title
+      input id='title_or_location' name="title_or_location" placeholder="title or location" type="text" value=(params[:title_or_location])
   label for="reserve_date"
   input class='dateFormatNeeded' name="reserve_date" autocomplete="off" type="text" value=(params[:reserve_date] || Time.now.strftime("%d/%m/%Y"))
   label for="reserve_time"
-  select name="reserve_time"
-    - time_with_locale(@time).each do |time_el|
-      - time_el.each do |k, v|
-        - if v
-          option value=k selected="selected" #{k}
-        - else
-          option value=k #{k}
+  #fixwidth.reserve_time_c
+    select name="reserve_time"
+      - time_with_locale(@time).each do |time_el|
+        - time_el.each do |k, v|
+          - if v
+            option value=k selected="selected" #{k}
+          - else
+            option value=k #{k}
   label for="number_of_people"
     nobr= I18n.t('search.number_of_people')
-  select name="number_of_people" type="text"
-    - number = (params[:number_of_people] || 2)
-    - (1..10).each do |i|
-      - if i == number.to_i
-        option value="#{i}" selected="selected" #{i}
-      - else
-        option value="#{i}" #{i}
+  .reserve_time_c
+    select name="number_of_people" type="text"
+      - number = (params[:number_of_people] || 2)
+      - (1..10).each do |i|
+        - if i == number.to_i
+          option value="#{i}" selected="selected" #{i}
+        - else
+          option value="#{i}" #{i}
   input type="submit" value="Find a table"
   .clear
