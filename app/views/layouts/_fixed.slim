@@ -14,8 +14,7 @@
 
     #header_links
       a.first href="#{localization_link('pages/help')}"= Structure.find('help').name
-      a href="#{localization_link('pages/faq')}"=  Structure.find('faq').name
-      a href="#{localization_link('pages/contact')}"= Structure.find('help').name
+      a href="#{localization_link('pages/contact')}"= Structure.find('contact').name
     - if user_signed_in?
       #user_block
         ul#user_dropdown

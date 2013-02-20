@@ -73,12 +73,12 @@
 .content
   .row
     #promo_block_sm.promo_block.span4
-      = t('footer.earn_point')
+      =' t('footer.earn_point')
       a href=new_user_registration_path
         = t('auth.links.sign_up')
     #promo_block_big.promo_block.span8
-      = t('footer.need_clients')
-      a href="/partner_info" &nbsp; #{t('footer.become_a_prtner')}
+      =' t('footer.need_clients')
+      a href="/partner_info" #{t('footer.become_a_prtner')}
 
 - cache [I18n.locale, 'explorer', 'more_template', 'render'] do
   = render 'shared/more_template'

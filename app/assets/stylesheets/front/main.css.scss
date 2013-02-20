@@ -558,7 +558,7 @@ input[type='submit']:hover {
   width: 100px;
   margin: 0 10px 0 0;
   background: #fff image_url('arr2.gif') right center no-repeat;
-  border-right: 10px solid transparent;
+  //border-right: 10px solid transparent;
   position: relative;
   z-index: 1;
 }
@@ -578,7 +578,7 @@ input[type='submit']:hover {
 #search_form input[name='title_or_location'] { width: 133px; }
 #search_form input[name='reserve_date'] { width: 87px; box-shadow: none !important; }
 #search_form input[name='reserve_time'] { width: 70px; }
-#search_form input[name='number_of_people'] { width: 30px; }
+#search_form input[name='number_of_people'] { width: 110px; }
 
 #search_form .reserve_time_c {
   width: 75px;
@@ -587,6 +587,10 @@ input[type='submit']:hover {
   background: #fff image_url('arr2-1.gif') top right no-repeat;
   float: left;
   margin: 0 10px 0 0;
+}
+
+#search_form #fixwidth {
+  width: 100px;
 }
 
 #search_form label {
@@ -607,6 +611,7 @@ input[type='submit']:hover {
 #search_form input[type='submit'] {
   float: left;
   margin-top: 0;
+  max-width: 134px;
 }
 
 #search_form #suggetions {
@@ -1029,7 +1034,7 @@ h4 .discount_label {
 
 #listing #map_places {
   float: left;
-  width: 490px;
+  width: 510px;
   height: 450px;
   overflow: hidden;
   position: relative;
@@ -1062,13 +1067,15 @@ h4 .discount_label {
 
 #listing #map_details {
   height: 450px;
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
 
 #listing #map_details #map_details_wrapper {
   width: 270px;
+  max-width: 280px;
+  height: 450px;
   float: right;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 #listing #map_details .place {
@@ -1160,6 +1167,7 @@ h4 .discount_label {
   color: #dfdeda;
   font-size: 10px;
   letter-spacing: 1px;
+  display: inline-block;
 }
 
 .header_info .pricing:hover {
@@ -1729,7 +1737,7 @@ h4 .discount_label {
   border-radius: 3px;
   line-height: 11px;
   background: #f2f0ea;
-  margin: 10px 3px 0 0;
+  margin: 10px 7px 0 0;
 }
 
 #place #reviews .review .review_vote a {
@@ -2393,15 +2401,17 @@ h4 .discount_label {
   padding: 5px 10px 10px 10px;
 }
 
-#search_form input[type="text"] {
-  background-image: none;
+#search_form input[name='reserve_date'] {
+  cursor: default !important;
+  background: #fff url('/assets/arr2-1.gif') top right no-repeat;
+  width: 95px;
 }
 
 #search_form .reserve_time_c select {
   font-size: 20px;
   line-height: 24px;
   font-family: 'univers_condensedmedium','Arial Narrow';
-  width: 110px;
+  width: 130px;
   border: none;
   margin-right: 10px;
   float: left;
@@ -2450,7 +2460,7 @@ h4 .discount_label {
 }
 
 #search_results #search_form #title_or_location {
-  width: 160px !important;
+  width: 140px !important;
   font-size: 24px;
   border-right: 0;
   line-height: 30px;
@@ -3099,12 +3109,9 @@ h4 .discount_label {
   margin-left: -470px;
 }
 
-#search_form input[type="text"] {
-  background-image: none;
-}
-
 #food_teaser #search_form input[name='reserve_date'], #search_form button {
   cursor: default !important;
+  background: white url(/assets/arr2-1.gif) top right no-repeat;
 }
 
 #food_teaser #search_form label {
@@ -3112,7 +3119,7 @@ h4 .discount_label {
 }
 
 #food_teaser #search_form #title_or_location {
-  width: 270px !important;
+  width: 260px !important;
   font-size: 24px;
 }
 
