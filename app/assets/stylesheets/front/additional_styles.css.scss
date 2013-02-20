@@ -114,7 +114,7 @@
 
 [id^=AutocompleteContainter] [class^=autocomplete-] {
   position: relative;
-  top: -3px;
+  top: 36px;
   left: 0px;
   font-size: 13px;
   webkit-border-radius: 0 0 3px 3px;
@@ -375,6 +375,6 @@ div.fixed_ajax_loader {
   background-image: -ms-linear-gradient(top, #FFFFFF 0%, #F8F7F4 100%);
 }
 
-.Zebra_DatePicker_Icon {
-  opacity: 0;
+#tol_c {
+  position: relative;
 }
