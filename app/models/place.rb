@@ -444,10 +444,17 @@ class Place < ActiveRecord::Base
     replace_url
   end
 
+  def address
+    if location
+      [location.street, location.house_number].join(". ")
+    end
+  end
 
-  #def to_param
-  #  "#{slug}-#{location.try(:city_en).downcase.gsub(' ','_')}"
-  #end
+
+
+  def max_discount
+    day_discounts.special.max{|x| x.discount}.discount
+  end
 
   private
 

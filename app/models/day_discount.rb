@@ -10,6 +10,8 @@ class DayDiscount < ActiveRecord::Base
 
   scope :special, -> { where(is_discount: false) }
 
+  scope :discount, -> { where(is_discount: true) }
+
   def nice_offer_time
     [from_time, to_time].map{ |point| Time.strptime(point.to_s, "%H.%M").strftime("%I:%M%p") }.join('-')
   end

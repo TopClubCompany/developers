@@ -353,3 +353,16 @@ ru:
     overall_mark: общей оценке
     usefulness_count: количеству полез./безполез.
     date: дате
+
+  user_sidebar:
+    h3_link: "Admin"
+    view_reservations: "View reservations"
+    view_places: "View places"
+    my_account: "My account"
+    my_reservations: "My reservations"
+    my_favourites: "My favourites"
+    my_reviews: "My reviews"
+    settings: "Settings"
+    diner_style: "Diner style"
+    top_points: "TOP points"
+    invite_friends: "Invite friends"
