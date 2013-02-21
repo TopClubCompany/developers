@@ -23,10 +23,10 @@
                   img height="100" src=place.place_image.url(:slider) width="140"
                     span.discount.minus_5
                 h4 style="width: auto;"
-                  a href="#"
+                  a href="/#{I18n.locale}/#{place.slug}-#{place.location.city_en.downcase.gsub(' ','_')}"
                     = place.title
                     span.discount_label
-                      |  -5%
+                      = "-#{place.max_discount}%"
                 .rating
                   .stars
                     .stars_overlay
@@ -37,11 +37,10 @@
                     a href="#"
                       = place_reviews
                       |  #{place_reviews == 1 ? 'review' : 'reviews'}
-                - binding.pry
                 ul.place_features
-                  li.location Sribnokilskaya st., 3d
-                  li.cuisine European, Japaneese
-                  li.pricing 200 UAH
+                  li.location= place.address
+                  li.cuisine= place.kitchens.map(&:title).join(', ')
+                  li.pricing= place.avg_bill_title
                 .btns
                   a href="#"
                     = t('words.new_reservation')

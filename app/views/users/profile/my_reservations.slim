@@ -14,8 +14,8 @@
           #upcoming_reservations.dash_block style="width: 600px;"
             h2
               =' t('short_strings.my_reservations')
-              - active_reservations = Reservation.active_reservations(current_user.id)
-              - old_reservations    = Reservation.old_reservations(current_user.id)
+              - active_reservations = Reservation.includes(:place).active_reservations(current_user.id)
+              - old_reservations    = Reservation.includes(:place).old_reservations(current_user.id)
               span (#{active_reservations.count} upcoming!)
             - reservations = active_reservations + old_reservations
             - reservations.each do |reservation|
@@ -28,7 +28,7 @@
                   a href="#"
                     = place.title
                     span.discount_label
-                      |  -5%
+                      = "#{reservation.discount}%"
                 .rating
                   .stars
                     .stars_overlay
@@ -39,7 +39,6 @@
                     a href="#"
                       = place_reviews
                       |  #{place_reviews == 1 ? 'review' : 'reviews'}
-                small= reservation.time
                 .btns
                   a href="#"
                     = t('words.cancel')

@@ -9,14 +9,22 @@ class Reservation < ActiveRecord::Base
 
   validates_presence_of :email, :first_name, :last_name, :phone, :time, :persons
 
+  def discount
+    day = PlaceUtils::PlaceTime.wday(created_at.wday)
+    discounts = place.week_days.includes(:day_discounts).where(:day_type_id => day).map(&:day_discounts).first
+    discounts.find{|x| x.is_discount }.discount
+  end
+
   def full_name
-    "#{first_name} #{last_name}"#.strip
+    "#{first_name} #{last_name}"
   end
 
   def self.create_from_place_and_user(current_user, place)
-    self.new(first_name: current_user.try(:first_name), last_name: current_user.try(:last_name),
-         phone: current_user.try(:phone), user_id: current_user.try(:id), place_id: place.try(:id),
-         email: current_user.try(:email))
+    if current_user
+      new(first_name: current_user.first_name, last_name: current_user.last_name,
+          phone: current_user.phone, user_id: current_user.id, place_id: place.id,
+          email: current_user.email)
+    end
   end
 
 
