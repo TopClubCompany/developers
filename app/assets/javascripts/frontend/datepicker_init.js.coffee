@@ -7,6 +7,7 @@ $ ->
       "format": 'd/m/Y'
       'direction': true
       'zIndex': 8
+      'always_show_clear': false
     )
     magic_number = $datepicker.offset().top + $datepicker.height() + 20
     $('.Zebra_DatePicker').css('top', magic_number)

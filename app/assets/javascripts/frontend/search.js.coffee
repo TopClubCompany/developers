@@ -7,14 +7,12 @@ class ViewToggler
 
   bindScrollMapListener: =>
     $(window).scroll ->
-      topOffset = $(window).scrollTop() - 50
+      topOffset = $(window).scrollTop()
       if $("#map_places").is(':visible')
-        if topOffset >= $("#mapcontainer").offset().top - 70 and not $("#mapcontainer").hasClass("fixed")
+        if topOffset >=  192
           $("#mapcontainer").addClass "fixed"
-          $("#mapcontainer").css "margin-left", "-" + ($("#mapcontainer").width() / 2 - 28)  + "px"
-        if topOffset <= 250 and $("#mapcontainer").hasClass("fixed")
+        else if topOffset < 192
           $("#mapcontainer").removeClass "fixed"
-          $("#mapcontainer").css "margin-left", "auto"
 
   bind_change_view: =>
     self = @
