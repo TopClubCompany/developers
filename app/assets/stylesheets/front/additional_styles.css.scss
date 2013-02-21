@@ -149,12 +149,13 @@
 }
 
 .fixed {
+  padding-top: 10px;
+  margin:38px 0 0 -310px;
   position: fixed;
   top: 0px;
   left: 50%;
   background: white;
   z-index: 9;
-  border: 1px gray solid;
 }
 
 .margin_right_place{
