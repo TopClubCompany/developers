@@ -86,8 +86,15 @@ $ ->
     link_for_fancy.attr('href', $(this).data('big_image_src'))
 
   $(".popoverable").popover(html: true)
+  array = []
+  $('.carousel_bullets li').each (index, bullet) ->
+    array.push
+      href: $(bullet).data('big_image_src')
+      title: "#{index + 1}ая фотография"
 
-  $(".fancybox").fancybox()
+  $('.fancybox').on 'click', (e) ->
+    e.preventDefault()
+    $.fancybox(array, {})
 
   $("a#write_review").click (e) ->
     e.preventDefault()
