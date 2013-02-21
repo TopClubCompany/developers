@@ -1,7 +1,6 @@
 class ReservationsController < ApplicationController
 
   def new_reservation
-
     @persons = params[:amount_of_person]
     @place   = Place.find(params[:place_id])
     @date = DateTime.parse("#{params[:date]} #{params[:time].gsub(/[hm=]/,'').gsub('&',':')}")
