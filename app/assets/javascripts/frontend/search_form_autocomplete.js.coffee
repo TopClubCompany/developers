@@ -17,3 +17,11 @@ $ ->
 
 
   $("#title_or_location").oautocomplete(options)
+$ ->
+  divAutoComplete = $('#tol_c div:first').hide()
+  $('#tol_c #title_or_location').keyup ->
+    val = $(this).val()
+    if(val || val != '')
+      divAutoComplete.show()
+    else
+      divAutoComplete.hide()
