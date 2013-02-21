@@ -15,7 +15,7 @@
           #edit_reservation.dash_block style="width: 600px;"
             h2
               = t('short_strings.view_your_reservation')
-              a.edit href="#"
+              a.edit href=edit_profile_reservation_path(@reservation.user.id, @reservation.id)
                 i.icon-edit
                 = t('words.edit')
             .place
@@ -25,7 +25,7 @@
               h4 style="width: auto;"
                 a href="#"
                   = @place.title
-                  span.discount_label -5%
+                  span.discount_label= "-#{@reservation.discount} %"
               .rating
                 .stars
                   .stars_overlay

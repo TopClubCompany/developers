@@ -10,7 +10,6 @@ class UserFavoritePlace < ActiveRecord::Base
     else
       false
     end
-
   end
 
 end
