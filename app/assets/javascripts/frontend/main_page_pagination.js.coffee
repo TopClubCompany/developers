@@ -20,9 +20,13 @@ class Paginator
     @nextPage = 2
     # options pattern, default values will be overwritten by options object given to constructor
     @defaults =
+      # after what number of items we append div.clear
+      clearSize: 3
+      # whether we append div.clear
+      clear: false
       # per page
       size: 6
-      # already displayer
+      # already displayed
       displayed: 0
       # button selector
       button: '.load_more'
@@ -48,11 +52,13 @@ class Paginator
           # rendering template and appending it 
           source   = $(self.options.templateId).html()
           place = Mustache.to_html(source, place)
+          place = place + "<div class='clear non-movable'></div>" if (self.options.clear and ((index + 1) % self.options.clearSize is 0))
           $(self.options.containerId()).append(place)
+
    
         # finding button, which triggers next page request
         showMoreButton = $(self.options.containerId()).find(self.options.button)
-        clear = showMoreButton.siblings('.clear')
+        clear = showMoreButton.siblings('.clear').not('.non-movable')
 
         self.options.displayed = self.options.displayed + data.result.length
         if self.options.displayed is data.total or not data.total?
