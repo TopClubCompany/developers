@@ -3,7 +3,7 @@ $ ->
     serviceUrl: '/autocomplete'
     minChars: 1
     delimiter: /(,|;)\s*/
-    # maxHeight:400,
+    maxHeight: 230
     # width:
     zIndex: 10
     deferRequestBy: 0
