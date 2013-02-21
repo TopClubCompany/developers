@@ -2411,7 +2411,7 @@ h4 .discount_label {
   font-size: 20px;
   line-height: 24px;
   font-family: 'univers_condensedmedium','Arial Narrow';
-  width: 130px;
+  width: 140px;
   border: none;
   margin-right: 10px;
   float: left;
@@ -2588,9 +2588,6 @@ h4 .discount_label {
   display: block;
   border-radius: 3px 3px 0 0;
   margin: 0 20px 20px 0;
-  -moz-box-shadow:    inset 0 0 5px rgba(0,0,0,0.3);
-  -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
-  box-shadow:         inset 0 0 5px rgba(0,0,0,0.3);
 }
 
 #promo_places .promo_place img {
@@ -2627,6 +2624,14 @@ h4 .discount_label {
   float: left;
   font-size: 12px;
   font-weight: bold;
+}
+
+.promo_place > a {
+  width: 300px;
+  height: 165px;
+  border-radius: 3px 3px 0 0;
+  display: block;
+  overflow: hidden;
 }
 
 .load_more {
