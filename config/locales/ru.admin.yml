@@ -54,21 +54,6 @@ ru:
       sign_out: "Выход"
     avatar: "Аватар"
     batch_actions: "Действия"
-    meta_tag:
-      title: Title
-      description: Description
-      keywords: Keywords
-      noindex: Noindex
-      nofollow: Nofollow
-      canonical: Canonical
-      open_graph: Open_graph
-    structure:
-      position:
-        index: "Главная страница"
-        search: "Страница поиска"
-        place: "Страница места"
-        profile: "Страница профайла"
-        static_page: "Статическая страница"
     bill: 
       code: 
         cheap: Cheap
@@ -174,7 +159,15 @@ ru:
     main: "Главным"
     main_image: "Сделать главным"
     max_size: "Макс разм."
-    navigation:
+    meta_tag: 
+      canonical: Canonical
+      description: Description
+      keywords: Keywords
+      nofollow: Nofollow
+      noindex: Noindex
+      open_graph: Open_graph
+      title: Title
+    navigation: 
       companies: "Компании"
       option_data: "Данные опций"
       system: "Система"
@@ -205,7 +198,7 @@ ru:
         resources: "Весь ресурс"
         subject: "По ресурсу"
     perms: 
-      actions:
+      actions: 
         create: "Создавать"
         delete: "Удалять"
         read: "Просматривать"
@@ -262,6 +255,13 @@ ru:
       attr: "Атрибут"
       value: "Значение"
     sort: "Сортировать"
+    structure: 
+      position: 
+        index: "Главная страница"
+        place: "Страница места"
+        profile: "Страница профайла"
+        search: "Страница поиска"
+        static_page: "Статическая страница"
     table: 
       actions: "Действия"
     title: drive&drink
