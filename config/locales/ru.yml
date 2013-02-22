@@ -6,7 +6,20 @@ ru:
         password: "Пароль"
         password_confirmation: "Подтверждение пароля"
         remember_me: "Запомнить"
-  auth: 
+
+  head: "Restaurant Reservations. Free · Fat · Instant"
+  auth:
+    points: "and earn 5 points"
+    merge: "I want merge accounts"
+    logout: "Logout"
+    enter: "Войти"
+    enter_with: "Войти через:"
+    not_a_user: "Еще не заригестрированы?"
+    remember_me: "Запомнить"
+    change_password: "Change your password"
+    change_my_password: "Change my password"
+    confirm_you_password: "Confirm your new password"
+    new_password: "New password"
     edit_passwords: 
       confirm_new_password: "Подтвердите пароль"
       new_password: "Новый пароль"
@@ -206,6 +219,9 @@ ru:
     become_a_prtner: Become a partner!
     earn_point: Earn points and get discounts!
     need_clients: Need more clients?
+    privacy_police: "Privacy Policy"
+    terms_of_service: "Terms of Service"
+    copy: " &copy; Topreserve, 2013. -"
   forgot_password: 
     reset_pass: "Сбросить пароль"
   front_js: 
@@ -239,6 +255,23 @@ ru:
       complete_reservation: Complete your reservation
     edit: "edit"
     special_offers: "Special offer:"
+    edit_with_place: "Edit your reservation at %{place}"
+    complete: "Complete Free Reservation"
+    rewards: "All members get rewards for online reservations!"
+    confirmed: "Your reservation is confirmed!"
+    confirmation: "Confirmation #:"
+    confirmed_text: "Your reservation is confirmed and saved in the restaurant's computer reservation system. You'll receive an email copy of this confirmation."
+    diner_name: "Diner Name:"
+    address: "Address:"
+    phone: "Phone:"
+    dress_code: "Dress Code:"
+    message_from_restoran: "Message from the Restaurant:"
+    more_info: "More Info:"
+    i_go: "Where do i go from here?"
+    view_or_change: "View or change your reservation"
+    print: "Print reservation details"
+    view_on_map: "View restaurant on map"
+    invite_friends: "Invite friends"
   search:
     thead:
       th1: "Restaurant"
@@ -249,6 +282,7 @@ ru:
     sort:
       newest: Сортировать по дате добавления
       overall_mark: Сортировать по популярности
+    browse_category: "Browse places by category"
     category: Category
     grid_view: Grid view
     kitchen: Kitchen
@@ -285,6 +319,7 @@ ru:
     max_size: "Макс.р."
     upload_avatar: "Загрузите фото"
     upload_image: "Загрузите фото"
+    upload: "Загрузить"
   views: 
     pagination: 
       first: "Первая"
@@ -341,6 +376,9 @@ ru:
     new_reservation: "Забронировать стол"
   place:
     is: "из"
+    share: "Share"
+    vailability: "Availability on %{reserve_date} around %{reserve_time} for %{number_of_people} people"
+    up_to: "Up to %{discount}% off"
 
   sign_up:
     by_click: "By clicking “Join Reserve” you confirm that you accept"
@@ -366,3 +404,25 @@ ru:
     diner_style: "Diner style"
     top_points: "TOP points"
     invite_friends: "Invite friends"
+  profile:
+    gourmand: "GOURMAND"
+    date: "Date"
+    time: "Time"
+    first_name: "First name"
+    last_name: "Last name"
+    save_changes: "Save changes"
+    personal_information: "Personal Information"
+    settings: "Settings"
+    notifications: "Notifications"
+    my_favourites: "My Favourites"
+    nothing_favourites: "Nothing here. You should eat out. Then come and like the place."
+    send_email: "Send email"
+    upcoming: "upcoming!"
+    city_not_specified: "not specified"
+    edit: "edit"
+    read_more: "read more ›"
+    my_reviews: "My reviews"
+    read_all_reviews: "Read all reviews"
+
+
+

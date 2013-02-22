@@ -10,11 +10,11 @@
           .span2
             h1= user_menu_name
             = f.attach_file_field :avatar, :file_max_size => 2
-            #status.gourmand GOURMAND
+            #status.gourmand= I18n.t('profile.gourmand')
           #dash_blocks.span8
             #personal_information.dash_block
               h2
-                | Personal Information
+                = I18n.t('profile.personal_information')
               ul.settings
                 li
                   = f.input :first_name
@@ -30,17 +30,17 @@
                   = f.date_select :birthday, as: 'date', start_year: Date.today.year - 8, end_year: Date.today.year - 90, order: [:month, :day, :year]
             #settings.dash_block
               h2
-                | Settings
+                = I18n.t('profile.settings')
               ul.settings
                 li
                   = f.input :email
                 li
                   = f.input :password, placeholder: "••••••••••", required: false
-                li
-                  label Notifications
+                /li
+                  label= I18n.t('profile.notifications')
                   select name="user_notifications"
                     option value="1986" 1986
                     option value="1987" 1990
                     option value="1988" 2932
             .clear
-            = f.submit 'Save changes'
+            = f.submit I18n.t('profile.save_changes')

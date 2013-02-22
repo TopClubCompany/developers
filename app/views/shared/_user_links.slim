@@ -1,0 +1,7 @@
+li= link_to I18n.t('user_sidebar.my_reservations'), my_reservations_profile_path(current_user)
+li= link_to I18n.t('user_sidebar.my_favourites'), favourites_profile_path(current_user)
+li= link_to I18n.t('user_sidebar.my_reviews'), self_reviews_profile_path(current_user)
+li= link_to I18n.t('user_sidebar.settings'), settings_profile_path(current_user)
+/li= link_to I18n.t('user_sidebar.diner_style'), '/user#style'
+/li= link_to I18n.t('user_sidebar.top_points'), '/user#points'
+li= link_to I18n.t('user_sidebar.invite_friends'), invite_friends_profile_path(current_user)

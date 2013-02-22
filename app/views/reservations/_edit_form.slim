@@ -1,5 +1,5 @@
 #search_form style='display:none'
-  span.header Edit your reservation at #{@place.title}
+  span.header= I18n.t('reservation.edit_with_place', place: @place.title)
   form action=localization_link("Save")
     label for="reserve_date"
     input class='dateFormatNeeded' name="reserve_date" autocomplete="off" type="text" value=(@date.strftime('%d/%m/%Y'))

@@ -4,39 +4,9 @@
       = render 'shared/user_sidebar'
     #dashboard.span10.page_content
       .row
-        .span2
-          h1= user_menu_name
-          #user_pic_big
-            a
-              img.user_pic_big height="128" src=get_user_avatar width="128"
-          #status.gourmand
-            | GOURMAND
+        = render 'user_head'
         #dash_blocks.span8
-          #personal_information.dash_block
-            h2
-              | Personal Information
-              a.edit href="#"
-                i.icon-edit
-                | edit
-            ul.settings style="width: 260px !important;"
-              li
-                label Name
-                | Eugene Vasin
-              li
-                label City
-                | Las Vegas
-              li
-                label Phone
-                | +380443000010
-              li
-                label Gender
-                | Male
-              li
-                label Birthday
-                | December 25 1986
-            a.user_btn href="#"
-              i.icon-pencil
-              strong Edit profile
+          = render 'dash_block'
           #upcoming_reservations.dash_block
             h2
               | Upcoming Reservations
@@ -62,7 +32,7 @@
 
           #my_reviews.dash_block
             h2
-              | My reviews
+              = I18n.t('profile.my_reviews')
               span (#{current_user.reviews.count})
             - current_user.reviews.order('created_at desc').first(2).each do |review|
               .review
@@ -84,5 +54,5 @@
                   span
                     = review.content
                   a.read_more href="#"
-                    nobr read more ›
-            = link_to 'Read all reviews', self_reviews_profile_path(current_user), class: 'all'
+                    nobr #{I18n.t('profile.read_more')}
+            = link_to I18n.t('read_all_reviews'), self_reviews_profile_path(current_user), class: 'all'

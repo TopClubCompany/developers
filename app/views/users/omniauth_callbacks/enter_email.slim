@@ -5,6 +5,6 @@ form action=enter_email_path method='GET'
   - if params[:used_email]
     br
     label for='merge'
-      | I want merge accounts
+      = I18n.t('auth.merge')
     input type='checkbox' name='merge'
   input#enter_email_button type='submit'  value='create'
