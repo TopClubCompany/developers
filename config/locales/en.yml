@@ -6,15 +6,15 @@ en:
         password: ""
         password_confirmation: ""
         remember_me: ""
-  auth:
-    social:
-      sign_in_with_twitter: Sign in with Twitter
-      sign_in_with_facebook: Sign in with Facebook
-      sign_in_with_google: Sign in with Google
-      sign_in_with_vk: Sign in with Vkontakte
-    edit_passwords:
+  auth: 
+    change_my_password: ""
+    change_password: ""
+    confirm_you_password: ""
+    edit_passwords: 
       confirm_new_password: ""
       new_password: ""
+    enter: ""
+    enter_with: ""
     links: 
       join_reserve: Join reserve
       receive_confirmation: ""
@@ -27,6 +27,7 @@ en:
       sign_in: ""
       sign_out: ""
       sign_up: ""
+    logout: ""
     mailer: 
       confirmation: 
         after_notes: ""
@@ -45,6 +46,11 @@ en:
         body: ""
         subject: ""
         title: ""
+    merge: ""
+    new_password: ""
+    not_a_user: ""
+    points: ""
+    remember_me: ""
     submit: 
       change_password: ""
       receive_confirmation: ""
@@ -66,16 +72,12 @@ en:
     create: ""
     delete_comment: ""
     edit_comment: ""
-  date: 
-    abbr_day_names: ""
-    abbr_month_names: ""
-    day_names: ""
-    formats: 
+  date:
+    formats:
       default: ""
       long: ""
       short: ""
-    month_names: ""
-    order: ""
+    order: [ :day, :month, :year ]
   datetime: 
     distance_in_words: 
       about_x_hours: 
@@ -142,18 +144,18 @@ en:
       second: ""
       year: ""
   explore: 
-    index:
-      main_slider_text: "Find a perfect restaurant and pay lower prices."
+    index: 
       all: "Browse all ›"
       available: Available tonight
       best: Best restaurants
       best_restaurants: Best restaurants
       find_restorants: Find a restaurants
       how_it_works: How it works?
+      main_slider_text: Find a perfect restaurant and pay lower prices.
       new: New restaurants
       reserv_online: Reserve your table online for free
       save_up: Save up to 30% off all food and drinks
-      more: "Show more restaurants"
+      second_big_text: ""
   flash: 
     auth: 
       failure: ""
@@ -166,8 +168,13 @@ en:
         notice: ""
   footer: 
     become_a_prtner: Become a partner!
+    copy: ""
     earn_point: Earn points and get discounts!
     need_clients: Need more clients?
+    privacy_police: ""
+    terms_of_service: ""
+  forgot_password: 
+    reset_pass: Reset password
   front_js: 
     comments: 
       chat_title: ""
@@ -178,6 +185,7 @@ en:
         onLeave: ""
         sizeError: ""
         typeError: ""
+  head: ""
   label: 
     close: ""
   langs: 
@@ -192,24 +200,116 @@ en:
     en: eng
     ru: "рус"
     uk: "укр"
+  long_strings: 
+    review_placeholder: Have you been here? Tell us your story about dinner at this place!
+  place: 
+    is: ""
+    share: ""
+    up_to: ""
+    vailability: ""
+  profile: 
+    city_not_specified: ""
+    date: ""
+    edit: ""
+    first_name: ""
+    gourmand: ""
+    last_name: ""
+    my_favourites: ""
+    my_reviews: ""
+    nothing_favourites: ""
+    notifications: ""
+    personal_information: ""
+    read_all_reviews: ""
+    read_more: ""
+    save_changes: ""
+    send_email: ""
+    settings: ""
+    time: ""
+    upcoming: ""
   registration_form: 
     or: " or "
   reservation: 
+    address: ""
+    complete: ""
+    confirmation: ""
+    confirmed: ""
+    confirmed_text: ""
+    diner_name: ""
+    dress_code: ""
+    edit: ""
+    edit_with_place: ""
+    i_go: ""
+    invite_friends: ""
+    message_from_restoran: ""
+    more_info: ""
     new_reservation: 
       complete_reservation: Complete your reservation
-  search:
+    phone: ""
+    print: ""
+    rewards: ""
+    special_offers: ""
+    view_on_map: ""
+    view_or_change: ""
+  search: 
+    browse_category: ""
     category: ""
+    filters: ""
     grid_view: ""
     kitchen: ""
+    load: ""
+    location: Location
     main_text: ""
     map_view: ""
     number_of_people: ""
+    people: ""
     price: ""
     refine: ""
-    location: "Location"
+    result_for: ""
+    sort: 
+      newest: ""
+      overall_mark: ""
+    sort_labeled: ""
+    thead: 
+      th1: ""
+      th2: ""
+  share: 
+    description: test description
+  short_strings: 
+    add_to_favorites: Add to <br> favorite
+    edit_reservation: Edit reservation
+    edit_your_reservation: Edit your reservation
+    few_words: A few words from
+    first_name: First name
+    invite_friends: Invite friends
+    last_name: Last name
+    more_detalis: "More detalis ›"
+    my_reservations: My Reservations
+    number_of_people: Number of people
+    phone_number: Phone number
+    print_this_page: Print this page
+    remove_from_favorites: ""
+    reserve_at: Reserve at
+    share_on: Share on
+    share_with_friends: Share with friends
+    sort_by: Sort by
+    special_notes: Special notes
+    special_offers: Special offers from
+    submit_a_review: "submit a review:"
+    submit_review: Submit review
+    view_menu: "View menu ›"
+    view_your_reservation: View your reservation
+    write_review: Write a review
+  sign_up: 
+    by_click: "By clicking “Join Reserve” you confirm that you accept"
+    for_successful_reservations: for succesfull reservations!
+    term_cond: Terms and conditions
   simple_form: 
     error_notification: 
       default_message: ""
+  sort_by: 
+    date: date
+    overall_mark: overall mark
+    usefulness_count: usefulness count
   styles: 
     show: 
       about: ""
@@ -230,8 +330,21 @@ en:
   uploader: 
     add_file: ""
     max_size: ""
+    upload: ""
     upload_avatar: ""
     upload_image: ""
+  user_sidebar: 
+    diner_style: ""
+    h3_link: ""
+    invite_friends: ""
+    my_account: ""
+    my_favourites: ""
+    my_reservations: ""
+    my_reviews: ""
+    settings: ""
+    top_points: ""
+    view_places: ""
+    view_reservations: ""
   views: 
     pagination: 
       first: ""
@@ -239,61 +352,21 @@ en:
       next: ""
       previous: ""
       truncate: ""
-  sign_up:
-    by_click: "By clicking “Join Reserve” you confirm that you accept"
-    term_cond: "Terms and conditions"
-    for_successful_reservations: "for succesfull reservations!"
-  forgot_password:
-    reset_pass: "Reset password"
-
-  short_strings:
-    my_reservations: My Reservations
-    add_to_favorites: Add to favorites
-    view_your_reservation: View your reservation
-    number_of_people: Number of people
-    phone_number: Phone number
-    first_name: First name
-    last_name: Last name
-    special_notes: Special notes
-    edit_reservation: Edit reservation
-    invite_friends: Invite friends
-    print_this_page: Print this page
-    edit_your_reservation: Edit your reservation
-    reserve_at: Reserve at
-    share_with_friends: Share with friends
-    share_on: Share on
-    sort_by: Sort by
-    view_menu: View menu ›
-    more_detalis: More detalis ›
-    few_words: A few words from
-    submit_review: "Submit review"
-    submit_a_review: 'submit a review:'
-    special_offers: Special offers from
-    write_review: Write a review
-    add_to_favorites: Add to <br> favorite
-
-  share:
-    description: 'test description'
-  long_strings:
-    review_placeholder: Have you been here? Tell us your story about dinner at this place!
-  words:
+  words: 
     cancel: cancel
-    invite: invite
-    view: view
-    edit: edit
     date: date
-    time: time
+    edit: edit
     email: email
     expand: expand
-    roll_up: roll up
-    overall: overall
-    kitchen: kitchen
     helpful: helpful
-    unhelpful: unhelpful
-    reviews: reviews
+    invite: invite
+    kitchen: kitchen
     menu: Menu
+    new_reservation: ""
+    overall: overall
+    reviews: reviews
+    roll_up: roll up
+    time: time
+    unhelpful: unhelpful
+    view: view
 
-  sort_by:
-    overall_mark: overall mark
-    usefulness_count: usefulness count
-    date: date

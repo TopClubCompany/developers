@@ -159,9 +159,15 @@ ua:
     main: ""
     main_image: ""
     max_size: ""
+    meta_tag: 
+      canonical: ""
+      description: ""
+      keywords: ""
+      nofollow: ""
+      noindex: ""
+      open_graph: ""
+      title: ""
     navigation: 
-      beer_bike: ""
-      beer_quotes: ""
       companies: ""
       option_data: ""
       system: ""
@@ -193,14 +199,8 @@ ua:
         subject: ""
     perms: 
       actions: 
-        add_styles: ""
         create: ""
         delete: ""
-        import: ""
-        journalist: ""
-        moderator: ""
-        publish: ""
-        publish_BeerBike: ""
         read: ""
         update: ""
       assocs: 
@@ -255,6 +255,13 @@ ua:
       attr: ""
       value: ""
     sort: ""
+    structure: 
+      position: 
+        index: ""
+        place: ""
+        profile: ""
+        search: ""
+        static_page: ""
     table: 
       actions: ""
     title: ""
