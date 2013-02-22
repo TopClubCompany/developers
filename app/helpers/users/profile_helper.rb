@@ -9,7 +9,15 @@ module Users::ProfileHelper
   end
 
   def get_user_avatar user = current_user, avatar_size = :sidebar
-    user.try(:avatar) ? user.avatar.url(avatar_size) : '/assets/no_avatar.gif'
+    if user.try(:avatar)
+       user.avatar.url(avatar_size)
+    else
+      if user.account.try(:photo)
+        user.account.photo
+      else
+        '/assets/no_avatar.gif'
+      end
+    end
   end
 
 end
