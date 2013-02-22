@@ -6,23 +6,15 @@ ru:
         password: "Пароль"
         password_confirmation: "Подтверждение пароля"
         remember_me: "Запомнить"
-
-  head: "Restaurant Reservations. Free · Fat · Instant"
-  auth:
-    points: "and earn 5 points"
-    merge: "I want merge accounts"
-    logout: "Logout"
-    enter: "Войти"
-    enter_with: "Войти через:"
-    not_a_user: "Еще не заригестрированы?"
-    remember_me: "Запомнить"
-    change_password: "Change your password"
-    change_my_password: "Change my password"
-    confirm_you_password: "Confirm your new password"
-    new_password: "New password"
+  auth: 
+    change_my_password: Change my password
+    change_password: Change your password
+    confirm_you_password: Confirm your new password
     edit_passwords: 
       confirm_new_password: "Подтвердите пароль"
       new_password: "Новый пароль"
+    enter: "Войти"
+    enter_with: "Войти через:"
     links: 
       join_reserve: "Зарегистрироваться"
       receive_confirmation: "Не получили письма с подтверждением регистрации?"
@@ -35,6 +27,7 @@ ru:
       sign_in: "Вход"
       sign_out: "Выход"
       sign_up: "Регистрация"
+    logout: Logout
     mailer: 
       confirmation: 
         after_notes: "C уважением,  Всегда рады приветствовать Вас на страницах нашего ресурса! <br/>Полезная информация <br/>- При регистрации, подтверждая ее, вы принимаете Соглашение (ссылка на соглашение). <br/>- Если у вас возникли проблемы с регистрацией, пожалуйста, свяжитесь с администратором (ссылка на форму) или ознакомьтесь с разделом «Помощь» (начинаем раздел «Помощь» со страницы с кратким «FAQ»)»."
@@ -53,6 +46,11 @@ ru:
         body: "Уточните, пожалуйста, данные о себе, отредактировав свой профайл (ссылка на профайл пользователя), если вы еще не успели его заполнить ранее. Там же вы можете сменить свой пароль.<br/><br/> ABITANT.com всегда рад помочь Вам сориентироваться в ярком и разнообразном мире архитектуры и дизайна!<br/><br/> Далее будут анонсы функционала разделов сайта с перечнем функций."
         subject: "Поздравляем! Вы успешно прошли регистрацию на , используя почтовый ящик «%{email}»."
         title: "Поздравляем! Вы успешно прошли регистрацию на, используя почтовый ящик «%{email}»."
+    merge: I want merge accounts
+    new_password: New password
+    not_a_user: "Еще не заригестрированы?"
+    points: and earn 5 points
+    remember_me: "Запомнить"
     submit: 
       change_password: "Изменить пароль"
       receive_confirmation: "Выслать подтверждение"
@@ -193,18 +191,18 @@ ru:
       second: "Секунд"
       year: "Год"
   explore: 
-    index:
-      main_slider_text: "Find a perfect restaurant and pay lower prices."
-      second_big_text: "Select one of %{count} restaurants in %{city} and save up to %{discount} off your total bill."
+    index: 
       all: "Browse all ›"
       available: Available tonight
       best: Best restaurants
       best_restaurants: Best restaurants
       find_restorants: Find a restaurants
       how_it_works: How it works?
+      main_slider_text: Find a perfect restaurant and pay lower prices.
       new: New restaurants
       reserv_online: Reserve your table online for free
       save_up: Save up to 30% off all food and drinks
+      second_big_text: Select one of %{count} restaurants in %{city} and save up to %{discount} off your total bill.
   flash: 
     auth: 
       failure: "Ошибка авторизации"
@@ -217,13 +215,13 @@ ru:
         notice: "Данные успешно обновлены"
   footer: 
     become_a_prtner: Become a partner!
+    copy: " &copy; Topreserve, 2013. -"
     earn_point: Earn points and get discounts!
     need_clients: Need more clients?
-    privacy_police: "Privacy Policy"
-    terms_of_service: "Terms of Service"
-    copy: " &copy; Topreserve, 2013. -"
+    privacy_police: Privacy Policy
+    terms_of_service: Terms of Service
   forgot_password: 
-    reset_pass: "Сбросить пароль"
+    reset_pass: Reset password
   front_js: 
     comments: 
       chat_title: "Переписка"
@@ -234,6 +232,7 @@ ru:
         onLeave: "Файлы загружаются, файлы не загрузятся если Вы покинете страницу."
         sizeError: "{file} очень большой, максимальный размер файла {sizeLimit}."
         typeError: "{file} имеет не правильное расширение. Только {extensions} разрешены."
+  head: "Restaurant Reservations. Free · Fat · Instant"
   label: 
     close: "Закрыть"
   langs: 
@@ -248,55 +247,116 @@ ru:
     en: eng
     ru: "рус"
     uk: "укр"
+  long_strings: 
+    review_placeholder: "Бывали здесь? Расскажите нам свою историю об этом месте!"
+  place: 
+    is: "из"
+    share: Share
+    up_to: Up to %{discount}% off
+    vailability: Availability on %{reserve_date} around %{reserve_time} for %{number_of_people} people
+  profile: 
+    city_not_specified: not specified
+    date: Date
+    edit: edit
+    first_name: First name
+    gourmand: GOURMAND
+    last_name: Last name
+    my_favourites: My Favourites
+    my_reviews: My reviews
+    nothing_favourites: Nothing here. You should eat out. Then come and like the place.
+    notifications: Notifications
+    personal_information: Personal Information
+    read_all_reviews: Read all reviews
+    read_more: "read more ›"
+    save_changes: Save changes
+    send_email: Send email
+    settings: Settings
+    time: Time
+    upcoming: upcoming!
   registration_form: 
     or: " or "
   reservation: 
-    new_reservation: 
-      complete_reservation: Complete your reservation
-    edit: "edit"
-    special_offers: "Special offer:"
-    edit_with_place: "Edit your reservation at %{place}"
-    complete: "Complete Free Reservation"
-    rewards: "All members get rewards for online reservations!"
-    confirmed: "Your reservation is confirmed!"
-    confirmation: "Confirmation #:"
-    confirmed_text: "Your reservation is confirmed and saved in the restaurant's computer reservation system. You'll receive an email copy of this confirmation."
-    diner_name: "Diner Name:"
     address: "Address:"
-    phone: "Phone:"
+    complete: Complete Free Reservation
+    confirmation: "Confirmation #:"
+    confirmed: Your reservation is confirmed!
+    confirmed_text: Your reservation is confirmed and saved in the restaurant's computer reservation system. You'll receive an email copy of this confirmation.
+    diner_name: "Diner Name:"
     dress_code: "Dress Code:"
+    edit: edit
+    edit_with_place: Edit your reservation at %{place}
+    i_go: Where do i go from here?
+    invite_friends: Invite friends
     message_from_restoran: "Message from the Restaurant:"
     more_info: "More Info:"
-    i_go: "Where do i go from here?"
-    view_or_change: "View or change your reservation"
-    print: "Print reservation details"
-    view_on_map: "View restaurant on map"
-    invite_friends: "Invite friends"
-  search:
-    thead:
-      th1: "Restaurant"
-      th2: "Availability (click time to reserve)"
-    load: "Грузим самые свежие результаты"
-    filters: "Filters:"
-    sort_labeled: "Sort by..."
-    sort:
-      newest: Сортировать по дате добавления
-      overall_mark: Сортировать по популярности
-    browse_category: "Browse places by category"
+    new_reservation: 
+      complete_reservation: Complete your reservation
+    phone: "Phone:"
+    print: Print reservation details
+    rewards: All members get rewards for online reservations!
+    special_offers: "Special offer:"
+    view_on_map: View restaurant on map
+    view_or_change: View or change your reservation
+  search: 
+    browse_category: Browse places by category
     category: Category
+    filters: "Filters:"
     grid_view: Grid view
     kitchen: Kitchen
+    load: "Грузим самые свежие результаты"
+    location: Location
     main_text: Free reservations at %{count} %{type} in %{city}
     map_view: Map view
     number_of_people: Number of people
+    people: people
     price: Price
     refine: Refine your results
-    location: "Location"
-    result_for: "Results for"
-    people: "people"
+    result_for: Results for
+    sort: 
+      newest: "Сортировать по дате добавления"
+      overall_mark: "Сортировать по популярности"
+    sort_labeled: Sort by...
+    thead: 
+      th1: Restaurant
+      th2: Availability (click time to reserve)
+  share: 
+    description: "тестовое описание"
+  short_strings: 
+    add_to_favorites: "Добавить в избранное"
+    edit_reservation: "Редактировать резервацию"
+    edit_your_reservation: "Редактировать вашу резервацию"
+    few_words: "Пару слов о"
+    first_name: "Имя"
+    invite_friends: "Пригласить друзей"
+    last_name: "Фамилия"
+    more_detalis: "Детальней ›"
+    my_reservations: "Мои резервации"
+    number_of_people: "Количество людей"
+    phone_number: "Телефонный номер"
+    print_this_page: "Напечатаь это место"
+    remove_from_favorites: "Убрать из избранного"
+    reserve_at: "Забронировано в"
+    share_on: "Делится на"
+    share_with_friends: "Поделится с друзьями"
+    sort_by: "Сортировать по"
+    special_notes: "Специальные заметки"
+    special_offers: "Специальные предложения от"
+    submit_a_review: "оставить отзыв:"
+    submit_review: "Оставить отзыв"
+    view_menu: "Посмотреть меню ›"
+    view_your_reservation: "Посмотреть свои резервации"
+    write_review: "Написать отзыв"
+  sign_up: 
+    by_click: "By clicking “Join Reserve” you confirm that you accept"
+    for_successful_reservations: for succesfull reservations!
+    term_cond: Terms and conditions
   simple_form: 
     error_notification: 
       default_message: "При сохранении возникли ошибки"
+  sort_by: 
+    date: "дате"
+    overall_mark: "общей оценке"
+    usefulness_count: "количеству полез./безполез."
   styles: 
     show: 
       about: "Описание"
@@ -317,9 +377,21 @@ ru:
   uploader: 
     add_file: "Добавить файл"
     max_size: "Макс.р."
+    upload: "Загрузить"
     upload_avatar: "Загрузите фото"
     upload_image: "Загрузите фото"
-    upload: "Загрузить"
+  user_sidebar: 
+    diner_style: Diner style
+    h3_link: Admin
+    invite_friends: Invite friends
+    my_account: My account
+    my_favourites: My favourites
+    my_reservations: My reservations
+    my_reviews: My reviews
+    settings: Settings
+    top_points: TOP points
+    view_places: View places
+    view_reservations: View reservations
   views: 
     pagination: 
       first: "Первая"
@@ -327,102 +399,20 @@ ru:
       next: "След &raquo;"
       previous: "&laquo; Пред"
       truncate: ...
-
-  short_strings:
-    my_reservations: Мои резервации
-    add_to_favorites: Добавить в избранное
-    remove_from_favorites: Убрать из избранного
-    view_your_reservation: Посмотреть свои резервации
-    number_of_people: Количество людей
-    phone_number: Телефонный номер
-    first_name: Имя
-    last_name: Фамилия
-    special_notes: Специальные заметки
-    edit_reservation: Редактировать резервацию
-    invite_friends: Пригласить друзей
-    print_this_page: Напечатаь это место
-    edit_your_reservation: Редактировать вашу резервацию
-    reserve_at: Забронировано в
-    share_with_friends: Поделится с друзьями
-    share_on: Делится на
-    sort_by: Сортировать по
-    view_menu: Посмотреть меню ›
-    more_detalis: Детальней ›
-    few_words: Пару слов о
-    submit_review: Оставить отзыв
-    submit_a_review: 'оставить отзыв:'
-    special_offers: Специальные предложения от
-    write_review: Написать отзыв
-  share:
-    description: 'тестовое описание'
-  long_strings:
-    review_placeholder: Бывали здесь? Расскажите нам свою историю об этом месте!
-  words:
-    cancel: отмена
-    invite: пригласить
-    view: посмотреть
-    edit: редактировать
-    date: дата
-    time: время
-    email: электронная почта
-    expand: развернуть
-    roll_up: свернуть
-    overall: Общая
-    kitchen: кухня
-    helpful: полезный
-    unhelpful: бесполезный
-    reviews: отзывов
-    menu: Меню
+  words: 
+    cancel: "отмена"
+    date: "дата"
+    edit: "редактировать"
+    email: "электронная почта"
+    expand: "развернуть"
+    helpful: "полезный"
+    invite: "пригласить"
+    kitchen: "кухня"
+    menu: "Меню"
     new_reservation: "Забронировать стол"
-  place:
-    is: "из"
-    share: "Share"
-    vailability: "Availability on %{reserve_date} around %{reserve_time} for %{number_of_people} people"
-    up_to: "Up to %{discount}% off"
-
-  sign_up:
-    by_click: "By clicking “Join Reserve” you confirm that you accept"
-    term_cond: "Terms and conditions"
-    for_successful_reservations: "for succesfull reservations!"
-  forgot_password:
-    reset_pass: "Reset password"
-
-  sort_by:
-    overall_mark: общей оценке
-    usefulness_count: количеству полез./безполез.
-    date: дате
-
-  user_sidebar:
-    h3_link: "Admin"
-    view_reservations: "View reservations"
-    view_places: "View places"
-    my_account: "My account"
-    my_reservations: "My reservations"
-    my_favourites: "My favourites"
-    my_reviews: "My reviews"
-    settings: "Settings"
-    diner_style: "Diner style"
-    top_points: "TOP points"
-    invite_friends: "Invite friends"
-  profile:
-    gourmand: "GOURMAND"
-    date: "Date"
-    time: "Time"
-    first_name: "First name"
-    last_name: "Last name"
-    save_changes: "Save changes"
-    personal_information: "Personal Information"
-    settings: "Settings"
-    notifications: "Notifications"
-    my_favourites: "My Favourites"
-    nothing_favourites: "Nothing here. You should eat out. Then come and like the place."
-    send_email: "Send email"
-    upcoming: "upcoming!"
-    city_not_specified: "not specified"
-    edit: "edit"
-    read_more: "read more ›"
-    my_reviews: "My reviews"
-    read_all_reviews: "Read all reviews"
-
-
-
+    overall: "Общая"
+    reviews: "отзывов"
+    roll_up: "свернуть"
+    time: "время"
+    unhelpful: "бесполезный"
+    view: "посмотреть"
