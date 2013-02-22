@@ -7,9 +7,14 @@ ua:
         password_confirmation: ""
         remember_me: ""
   auth: 
+    change_my_password: ""
+    change_password: ""
+    confirm_you_password: ""
     edit_passwords: 
       confirm_new_password: ""
       new_password: ""
+    enter: ""
+    enter_with: ""
     links: 
       join_reserve: ""
       receive_confirmation: ""
@@ -22,6 +27,7 @@ ua:
       sign_in: ""
       sign_out: ""
       sign_up: ""
+    logout: ""
     mailer: 
       confirmation: 
         after_notes: ""
@@ -40,6 +46,11 @@ ua:
         body: ""
         subject: ""
         title: ""
+    merge: ""
+    new_password: ""
+    not_a_user: ""
+    points: ""
+    remember_me: ""
     submit: 
       change_password: ""
       receive_confirmation: ""
@@ -187,9 +198,11 @@ ua:
       best_restaurants: Best restaurants
       find_restorants: Find a restaurants
       how_it_works: How it works?
+      main_slider_text: ""
       new: New restaurants
       reserv_online: Reserve your table online for free
       save_up: Save up to 30% off all food and drinks
+      second_big_text: ""
   flash: 
     auth: 
       failure: ""
@@ -202,8 +215,11 @@ ua:
         notice: ""
   footer: 
     become_a_prtner: Become a partner!
+    copy: ""
     earn_point: Earn points and get discounts!
     need_clients: Need more clients?
+    privacy_police: ""
+    terms_of_service: ""
   forgot_password: 
     reset_pass: "Скинути пароль"
   front_js: 
@@ -216,6 +232,7 @@ ua:
         onLeave: ""
         sizeError: ""
         typeError: ""
+  head: ""
   label: 
     close: ""
   langs: 
@@ -230,23 +247,116 @@ ua:
     en: eng
     ru: "рус"
     uk: "укр"
+  long_strings: 
+    review_placeholder: ""
+  place: 
+    is: ""
+    share: ""
+    up_to: ""
+    vailability: ""
+  profile: 
+    city_not_specified: ""
+    date: ""
+    edit: ""
+    first_name: ""
+    gourmand: ""
+    last_name: ""
+    my_favourites: ""
+    my_reviews: ""
+    nothing_favourites: ""
+    notifications: ""
+    personal_information: ""
+    read_all_reviews: ""
+    read_more: ""
+    save_changes: ""
+    send_email: ""
+    settings: ""
+    time: ""
+    upcoming: ""
   registration_form: 
     or: " or "
   reservation: 
+    address: ""
+    complete: ""
+    confirmation: ""
+    confirmed: ""
+    confirmed_text: ""
+    diner_name: ""
+    dress_code: ""
+    edit: ""
+    edit_with_place: ""
+    i_go: ""
+    invite_friends: ""
+    message_from_restoran: ""
+    more_info: ""
     new_reservation: 
       complete_reservation: Complete your reservation
+    phone: ""
+    print: ""
+    rewards: ""
+    special_offers: ""
+    view_on_map: ""
+    view_or_change: ""
   search: 
+    browse_category: ""
     category: ""
+    filters: ""
     grid_view: ""
     kitchen: ""
+    load: ""
+    location: ""
     main_text: ""
     map_view: ""
     number_of_people: ""
+    people: ""
     price: ""
     refine: ""
+    result_for: ""
+    sort: 
+      newest: ""
+      overall_mark: ""
+    sort_labeled: ""
+    thead: 
+      th1: ""
+      th2: ""
+  share: 
+    description: ""
+  short_strings: 
+    add_to_favorites: ""
+    edit_reservation: ""
+    edit_your_reservation: ""
+    few_words: ""
+    first_name: ""
+    invite_friends: ""
+    last_name: ""
+    more_detalis: ""
+    my_reservations: ""
+    number_of_people: ""
+    phone_number: ""
+    print_this_page: ""
+    remove_from_favorites: ""
+    reserve_at: ""
+    share_on: ""
+    share_with_friends: ""
+    sort_by: ""
+    special_notes: ""
+    special_offers: ""
+    submit_a_review: ""
+    submit_review: ""
+    view_menu: ""
+    view_your_reservation: ""
+    write_review: ""
+  sign_up: 
+    by_click: ""
+    for_successful_reservations: ""
+    term_cond: ""
   simple_form: 
     error_notification: 
       default_message: ""
+  sort_by: 
+    date: ""
+    overall_mark: ""
+    usefulness_count: ""
   styles: 
     show: 
       about: ""
@@ -267,8 +377,21 @@ ua:
   uploader: 
     add_file: ""
     max_size: ""
+    upload: ""
     upload_avatar: ""
     upload_image: ""
+  user_sidebar: 
+    diner_style: ""
+    h3_link: ""
+    invite_friends: ""
+    my_account: ""
+    my_favourites: ""
+    my_reservations: ""
+    my_reviews: ""
+    settings: ""
+    top_points: ""
+    view_places: ""
+    view_reservations: ""
   views: 
     pagination: 
       first: ""
@@ -276,3 +399,20 @@ ua:
       next: ""
       previous: ""
       truncate: ""
+  words: 
+    cancel: ""
+    date: ""
+    edit: ""
+    email: ""
+    expand: ""
+    helpful: ""
+    invite: ""
+    kitchen: ""
+    menu: ""
+    new_reservation: ""
+    overall: ""
+    reviews: ""
+    roll_up: ""
+    time: ""
+    unhelpful: ""
+    view: ""
