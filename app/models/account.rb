@@ -17,7 +17,7 @@ class Account < ActiveRecord::Base
     account = Account.find_by_uid_and_provider(data[:uid], data[:provider])
     return account.user if account
     data_for_account = data.except(:patronymic)
-    data_for_user    = data.except(:uid, :gender, :url, :photo, :name, :provider, :secret, :refresh_token, :language, :token)
+    data_for_user    = data.except(:uid, :gender, :url, :photo, :birthday, :name, :provider, :secret, :refresh_token, :language, :token)
     user             = User.find_by_email(data[:email])
     account          = Account.create(data_for_account)
     account.user     = (user or prepare_user_for_account(data_for_user))
@@ -27,6 +27,7 @@ class Account < ActiveRecord::Base
 
 
   def self.prepare_user_for_account(data)
+    raise data.inspect
     data[:password]     = Devise.friendly_token[0,20]
     user                = User.new(data)
     user.trust_state    = UserState.active.id
