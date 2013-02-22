@@ -19,15 +19,9 @@
       #user_block
         ul#user_dropdown
           li.active
-            img height="20" src="" width="20"
+            img height="20" src=get_user_avatar width="20"
               a href=profile_path(current_user)
                 nobr
                   = user_menu_name
-          li= link_to 'My reservations', my_reservations_profile_path(current_user)
-          li= link_to 'My favourites', '/user#favourites'
-          li= link_to 'My reviews', self_reviews_profile_path(current_user)
-          li= link_to 'Settings', settings_profile_path(current_user)
-          li= link_to 'Diner style', '/user#style'
-          li= link_to 'TOP points', '/user#points'
-          li= link_to 'Invite friends', invite_friends_profile_path(current_user)
-          li= link_to 'Logout', quit_path, method: 'delete'
+          = render 'shared/user_links'
+          li= link_to I18n.t('auth.logout'), quit_path, method: 'delete'

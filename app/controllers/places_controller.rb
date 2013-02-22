@@ -26,8 +26,6 @@ class PlacesController < ApplicationController
                          picture: @place.place_image ? root_url + @place.place_image.url(:slider).sub('/','') : root_url}
   end
 
-  def index
-  end
 
   def set_location
     session[:city] = params[:location_slug]

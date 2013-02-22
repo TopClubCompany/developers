@@ -10,25 +10,4 @@
 #sidebar.specials
   h3= I18n.t('user_sidebar.my_account')
   ul
-    li
-      a href=my_reservations_profile_path(current_user)
-        = I18n.t('user_sidebar.my_reservations')
-    li
-      a href=favourites_profile_path(current_user)
-        = I18n.t('user_sidebar.my_favourites')
-    li
-      a href=self_reviews_profile_path(current_user)
-        = I18n.t('user_sidebar.my_reviews')
-    li
-      a href=settings_profile_path(current_user)
-        = I18n.t('user_sidebar.settings')
-    li
-      a href="#"
-        = I18n.t('user_sidebar.diner_style')
-    li
-      a href="#"
-        = I18n.t('user_sidebar.top_points')
-        strong
-    li
-      a href=invite_friends_profile_path(current_user)
-        = I18n.t('user_sidebar.invite_friends')
+    = render 'shared/user_links'
