@@ -5,10 +5,10 @@
         #logo
           a href="/"
             img src="/assets/topreserve.png"
-        span.few-words Restaurant Reservations. Free · Fat · Instant
+        span.few-words= I18n.t('head')
       .span3
         - unless user_signed_in?
-          a.sign_up href=new_user_registration_path Sign up
-          a.sign_in href=new_user_session_path Sign in
+          a.sign_up href=new_user_registration_path #{I18n.t('auth.links_short.sign_up')}
+          a.sign_in href=new_user_session_path #{I18n.t('auth.links_short.sign_in')}
 
 =render "layouts/breadcrumbs"

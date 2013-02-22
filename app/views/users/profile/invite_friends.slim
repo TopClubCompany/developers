@@ -21,7 +21,7 @@
                 = t('user_profile.invite_friends.email_friends')
               = text_area_tag "emails", nil, placeholder: "john@smith.com, valera@yandex.ru..."
               = text_area_tag "message"
-              = submit_tag "Send email"
+              = submit_tag I18n.t('profile.send_email')
         #invite_friends
           h4
             = t('user_profile.invite_friends.inv_friends')
@@ -33,7 +33,7 @@
             '
             a.invite_vk href="vk.com"
               = t('user_profile.invite_friends.vkontakte')
-          form
+          /form
             ul#friends_list
               li.checked
                 label.checkbox

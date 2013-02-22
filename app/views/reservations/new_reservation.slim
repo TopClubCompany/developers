@@ -38,14 +38,14 @@
           = f.input :place_id, as: 'hidden', input_html: { value: @reservation.try(:place_id) }
           = f.input :persons, as: 'hidden', input_html: { value: @persons }
           .clear
-          = f.submit "Complete Free Reservation"
+          = f.submit I18n.t('reservation.complete')
 
     - unless signed_in?
       #sidebar.span4
         h3
           a href=new_user_session_path
-            ' Sign in
-          | and earn 5 points
-        p All members get rewards for online reservations!
+            = I18n.t('auth.links_short.sign_in')
+          = I18n.t('auth.points')
+        p= I18n.t('reservation.rewards')
 
 = render "edit_form"

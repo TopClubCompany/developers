@@ -2,152 +2,48 @@
   .row
     .span8
       #confirmed.heading
-        h1 Your reservation is confirmed!
+        h1= I18n.t('reservation.confirmed')
         strong 
           = @place.title
         = @date.strftime('%A, %B %e, %Y at %I:%M %p') + " for #{@persons} people"
       #sign_up_page.page_content.complete.confirmed
         h2
-          | Confirmation #: 
+          = I18n.t('reservation.confirmation')
           a href='#'
             = @reservation.id
             
           
-        p Your reservation is confirmed and saved in the restaurant's computer reservation system. You'll receive an email copy of this confirmation.
+        p= I18n.t('reservation.confirmed_text')
         p
-          strong Diner Name:
+          strong= I18n.t('reservation.diner_name')
           = @reservation.full_name
           br
-            strong Address:
-            /| 1 Lawson Ln, Burlington, VT 05401
+            strong= I18n.t('reservation.address')
             = @place.location.address
             br
-              strong Phone:
+              strong= I18n.t('reservation.phone')
               = @reservation.phone
         p
-          strong Dress Code:
+          strong= I18n.t('reservation.dress_code')
           | Smart Casual
         p
-          strong Message from the Restaurant:
-          | Thank you for choosing Avalon. Should your plans change, please let us know. We look forward to serving you.
+          strong= I18n.t('reservation.message_from_restoran')
+          | Thank you
         p
-          strong More Info:
+          strong= I18n.t('reservation.more_info')
           = @place.description
     #sidebar.span4.confirmed
-      h3 Where do i go from here?
+      h3= I18n.t('reservation.i_go')
       ul
         li.view
           a href="#"
-            | View or change your reservation
+            = I18n.t('reservation.view_or_change')
         li.print
           a href="#"
-            | Print reservation details
+            = I18n.t('reservation.print')
         li.map
           a href="#"
-            | View restaurant on map
+            = I18n.t('reservation.view_on_map')
         li.invite
           a href="#"
-            | Invite friends
-
-/ #user.content
-/   .row
-/     .span2
-/       #sidebar.specials
-/         h3 Admin
-/         ul
-/           li
-/             a href="#" View reservations
-/           li
-/             a href="#" View places
-/       #sidebar.specials
-/         h3 My account
-/         ul
-/           li
-/             a href="#" My reservations
-/           li
-/             a href="#" My favourites
-/           li
-/             a href="#" My reviews
-/           li
-/             a href="#" Settings
-/           li Diner style
-/           li
-/             | TOP points
-/             strong 5
-/           li
-/             a href="#" Invite friends
-/     #dashboard.span10.page_content
-/       .row
-/         .span2
-/           h1 Eugene V.
-/           #user_pic_big
-/             img.user_pic_big height="128" src="userPic.jpg" width="128"
-/               a.edit href="#"
-/                 i.icon-edit.icon-white
-/                 | upload
-/           #status.gourmand GOURMAND
-/         #dash_blocks.span8
-/           #edit_reservation.dash_block style="width: 600px;"
-/             h2
-/               | View your reservation
-/               a.edit href="#"
-/                 i.icon-edit
-/                 | edit
-/             .place
-/               a.place_img_sm href="#"
-/                 img height="100" src="img/content/2.jpg" width="140"
-/                   span.discount.minus_5
-/               h4
-/                 a href="#"
-/                   | Sowa Cafe
-/                   span.discount_label -5%
-/               .rating
-/                 .stars
-/                   .stars_overlay
-/                   .stars_bar
-/                   .stars_bg
-/                 small
-/                   a href="#" 1 review
-/               ul.place_features
-/                 li.location Sribnokilskaya st., 3d
-/                 li.cuisine European, Japaneese
-/                 li.pricing 200 UAH
-/               .clear
-/             #reservation_details
-/               label for="reserve_date"
-/               | 11/07/2012
-/               .clear
-/               label for="reserve_time"
-/               | 7:00 PM
-/               .clear
-/               label for="number_of_people"
-/                 nobr Number of people
-/               | 4
-/               .clear
-/               label First name
-/               | Eugene
-/               .clear
-/               label Last name
-/               | Vasin
-/               .clear
-/               label Phone number
-/               | +380981101010
-/               .clear
-/               label Email
-/               | hello@topclub.ua
-/               .clear
-/               label Special notes:
-/               | All i want for Christmas is you
-/               .clear
-/               a.user_btn href="#"
-/                 i.icon-pencil
-/                 strong Edit
-/               a.user_btn href="#"
-/                 i.icon-remove
-/                 strong Cancel
-/               a.user_btn href="#"
-/                 i.icon-print
-/                 strong Print
-/               a.user_btn href="#"
-/                 i.icon-plus
-/                 strong Invite friends            
+            = I18n.t('reservation.invite_friends')
