@@ -27,7 +27,6 @@ class Account < ActiveRecord::Base
 
 
   def self.prepare_user_for_account(data)
-    raise data.inspect
     data[:password]     = Devise.friendly_token[0,20]
     user                = User.new(data)
     user.trust_state    = UserState.active.id
