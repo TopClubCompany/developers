@@ -5,15 +5,7 @@
 
     #dashboard.span10.page_content
       .row
-        .span2
-          h1= user_menu_name
-          #user_pic_big
-            img.user_pic_big height="128" src=(current_user.avatar ? current_user.avatar.url(:sidebar) : '/assets/no_avatar.gif') width="128"
-          #status.gourmand GOURMAND
-
-
-
-
+        = render 'user_head'
         #dash_blocks.span8
           #edit_reservation.dash_block style="width: 600px;"
             h2= t('short_strings.edit_your_reservation')
@@ -24,7 +16,7 @@
               h4 style="width: auto;"
                 a href="#"
                   = @place.title
-                  span.discount_label -5%
+                  span.discount_label= "-#{@place.max_discount}%"
               .rating
                 .stars
                   .stars_overlay
@@ -43,17 +35,17 @@
             = simple_form_for @reservation, url: update_reservation_path(@reservation.id), wrapper: :front_reg_form do |f|
               .row
                 .span3
-                  label for="reservation_date"  Date
-                  = f.text_field :date, label: "Date", value: "#{@reservation.time.strftime("%D")}"
+                  label for="reservation_date"= I18n.t('profile.date')
+                  = f.text_field :date, label: I18n.t('profile.date'), value: "#{@reservation.time.strftime("%D")}"
                 .span3
-                  label for="reservation_time"  Time
-                  = f.text_field :time, label: "Time", value: "#{@reservation.time.strftime("%I:%M %p")}"
+                  label for="reservation_time"= I18n.t('profile.time')
+                  = f.text_field :time, label: I18n.t('profile.time'), value: "#{@reservation.time.strftime("%I:%M %p")}"
               = f.input :persons, label: "#{t('short_strings.number_of_people')}"
               .row
                 .span3
-                  = f.input :first_name, placeholder: "First name"
+                  = f.input :first_name, placeholder: I18n.t('profile.first_name')
                 .span3
-                  = f.input :last_name, placeholder: "Last name"
+                  = f.input :last_name, placeholder: I18n.t('profile.last_name')
               .row
                 .span3
                   = f.input :phone, placeholder: "+38 ( _ _ _ ) _ _ _ - _ _ - _ _"
@@ -61,4 +53,4 @@
                   = f.input :email
               = f.input :special_notes, input_html: {rows: '3'}
               .clear
-              = f.submit "Save changes"
+              = f.submit I18n.t('profile.save_changes')

@@ -5,45 +5,22 @@
 
     #dashboard.span10.page_content
       .row
-        .span2
-          h1= user_menu_name
-          #user_pic_big
-            img.user_pic_big height="128" src=(current_user.avatar ? current_user.avatar.url(:sidebar) : '/assets/no_avatar.gif') width="128"
-          #status.gourmand GOURMAND
+        = render 'user_head'
         #dash_blocks.span8
-          #personal_information.dash_block
-            h2
-              | Personal Information
-            ul.settings
-              li
-                label Name
-                = current_user.full_name
-              li
-                label City
-                = current_user.city.try(:title) or 'not specified'
-              li
-                label Phone
-                = current_user.phone
-              li
-                label Gender
-                = current_user.gender_title or 'not specified'
-              li
-                label Birthday
-                /| December 25 1986
-                = current_user.birthday.try { |birthday| birthday.strftime("%B %e %Y") } or 'not specified'
+          = render 'dash_block'
           #settings.dash_block
             h2
-              | Settings
+              = I18n.t('profile.settings')
               a.edit href=edit_settings_profile_path(current_user)
                 i.icon-edit
-                | edit
+                = I18n.t('profile.edit')
             ul.settings
               li
-                label Email
+                label= User.human_attribute_name(:email)
                 = current_user.email
               li
-                label Password
+                label= User.human_attribute_name(:password)
                 | ••••••••••
-              li
+              /li
                 label Notifications
                 | Weekly Digest

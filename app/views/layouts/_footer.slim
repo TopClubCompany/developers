@@ -6,9 +6,9 @@
           a href="#{page_path(structure.slug)}"
             = structure.name
     span.copyright
-      ' &copy; Topreserve, 2013. -
+      == I18n.t('footer.copy')
       a href="#"
-        |  Terms of Service
+        = I18n.t('footer.terms_of_service')
       ' &nbsp;-
       a href="#"          
-        |  Privacy Policy
+        = I18n.t('footer.privacy_police')

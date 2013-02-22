@@ -25,21 +25,6 @@
                 = "#{place["street_#{I18n.locale}"]}#{house_number}"
 
 #index.content
-  /- unless user_signed_in?
-  /  - cache [I18n.locale, 'explorer', 'main_video'] do
-  /    .row
-  /      .span8 id="teaser"
-  /        .video_player
-  /          h5= t('.how_it_works')
-  /          video#video-container class="projekktor" width="620" height="350" title="How it works?" poster="/img/video/dummy.jpg" controls=true
-  /            source src="/media/intro.ogv" type="video/ogg"  /
-  /      .span4 id="signup_promo"
-  /        img src="/img/gfx/1.jpg"
-  /          ul
-  /            li= t('.find_restorants')
-  /            li= t('.reserv_online')
-  /            li= t('.save_up')
-  /          a.btn1 href="#{new_user_registration_path}"= t('auth.links.sign_up')
   .row
     .span12
       /#search_form

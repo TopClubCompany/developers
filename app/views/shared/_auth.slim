@@ -1,7 +1,7 @@
 .well.sidebar-nav
   - if !user_signed_in?
     = form_for :user, url: new_user_session_path do |f|
-      legend Войти
+      legend= I18n.t('auth.enter')
       div
         = f.label :email
         = f.email_field :email
@@ -10,16 +10,16 @@
         = f.password_field :password
         p
           small
-            = link_to 'Забыли пароль?', '#'
+            = link_to I18n.t('auth.links.recover_password'), new_user_password_path
       div
         label.checkbox
           = f.check_box :remember_me
-          |Запомнить меня
+          = I18n.t('auth.remember_me')
       br
       div align='center'
-        = f.submit 'Войти', class: 'btn btn-success'
+        = f.submit I18n.t('auth.enter'), class: 'btn btn-success'
       br
-      |Войти через:
+      = I18n.t('auth.enter_with')
       p.social_icons
         = link_to image_tag('/images/vkontakte.jpg'), user_omniauth_authorize_path(:vkontakte), title: 'Vkontakte', id: 'vkontakte_btn'
         = link_to image_tag('/images/facebook.png'), user_omniauth_authorize_path(:facebook), title: 'Facebook', id: 'facebook_btn'
@@ -27,28 +27,7 @@
         = link_to image_tag('/images/twitter.png'), user_omniauth_authorize_path(:twitter), title: 'Twitter', id: 'twitter_btn'
 
       p
-        |Еще не заригестрированы?
+        = I18n.t('auth.not_a_user')
         small
           a href=new_user_session_path
-            |  Регистрация
-  /- else
-  /  img.img-polaroid src="#{current_user.respond_to?(:avatar) ? current_user.avatar : '/images/noavatar.gif'}" width='100%' height='100%'
-  /  br
-  /  br
-  /  div.btn-group
-  /    a.btn.btn-primary href="#"
-  /      i.icon-user.icon-white
-  /      = current_user.email
-  /    a.btn.btn-primary.dropdown-toggle data-toggle="dropdown" href="#"
-  /      span.caret
-  /    ul.dropdown-menu
-  /      li
-  /        a href="#{edit_user_path(current_user)}"
-  /          i.i
-  /          |Edit
-  /      li.divider
-  /      li
-  /        a href="#{destroy_user_session_path}"
-  /          i.i
-  /          |logout
-  /  br
+            = I18n.t('auth.links_short.sign_up')
