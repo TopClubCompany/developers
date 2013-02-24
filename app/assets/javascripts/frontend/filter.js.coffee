@@ -69,7 +69,7 @@ class PlacesCollection
     for obj in objArray
       @addMarker obj
     setTimeout((=> 
-      @adjustMap()
+      @adjustMap() if @ids.length > 3
     ), 500)
   createMap: () ->
     initialData = $('#map_places').data()
@@ -100,7 +100,7 @@ class PlacesCollection
       needToAdd = _.filter(placesData, (place) -> needToAddIds.indexOf(place.id) isnt -1  )
       @multipleAdd($.makeArray(needToAdd))
       setTimeout((=> 
-        @adjustMap()
+        @adjustMap() if @ids.length > 3
       ), 500)
       
     if needToRemoveIds.length > 0
@@ -162,11 +162,12 @@ class PlacesCollection
 
 
 
-  bindBlockListeners = (elMap, elList) ->
+  bindBlockListeners = (elList, elMap) ->
     $(elMap, elList).find(".popoverable").on('click', () -> return false).popover(html: true)
 
     $(elMap, elList).find("h4 > a, .place_img_sm").off 'click'
     $(elMap, elList).find("h4 > a, .place_img_sm").on 'click', (e) ->
+      console.log 'clicked the link'
       target = if $(e.target).attr('href') then $(e.target) else $(e.target).parent('.place_img_sm')
       e.preventDefault()
       searchQuery = window.location.search
@@ -181,9 +182,9 @@ class PlacesCollection
         if exactMatch = searchQuery.match(regexp)?[0]
           params += exactMatch + '&'
           match += 1
-
+      params = "?" + $.param({"reserve_time": $("select[name='reserve_time']").val()}) if match is 0 and $(e.target).parents(elMap).length > 0
       newUrl = target.attr('href') + params
-      newUrl +=  'is_strim=true' if match is 3
+      newUrl +=  'is_trim=true' if match is 3
 
       window.history.pushState '', null, window.location.search
       window.location.replace newUrl
@@ -217,7 +218,7 @@ class PlacesCollection
         $listEl = $('#list_' + $(el).attr('id'))
         updateSingleTime.call(@, time, $el, $listEl)
         setTimeout(( ->
-          bindBlockListeners.call(@, $el, $listEl)
+          bindBlockListeners.call(@, $listEl, $el)
         ), 50)
 
   updateSingleDate = (date, els...) ->
@@ -311,7 +312,7 @@ class PlacesCollection
       google.maps.event.addListener marker, "click", (e) ->
         google.maps.ib.close()
         ib.open map, this
-        bindBlockListeners.call @, $(ib.content_)
+        bindBlockListeners.call @, $(''), $(ib.content_)
         google.maps.ib = ib
 
       google.maps.event.addListener marker, "mouseover", ->
