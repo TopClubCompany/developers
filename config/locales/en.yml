@@ -370,3 +370,15 @@ en:
     unhelpful: unhelpful
     view: view
 
+  confirmation_resend: "Resend confirmation instructions"
+  welcome: "Welcome"
+  confirm_message: "You can confirm your account email through the link below:"
+  account_confirm: "Confirm my account"
+  message_reset: "Someone has requested a link to change your password, and you can do this through the link below."
+  password_change_mesage: "Change my password"
+  message_fraud: "If you didn't request this, please ignore this email."
+  message_wont_change: "Your password won't change until you access the link above and create a new one."
+  lock_message: "Your account has been locked due to an excessive amount of unsuccessful sign in attempts."
+  message_unlock: "Click the link below to unlock your account:"
+  unlock: "Unlock my account"
+  your_email: "Your email"

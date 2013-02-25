@@ -15,10 +15,10 @@
     = render 'filters'
     #listing.span10
       #mapcontainer
-
         #map_details
           h3 #{I18n.t("search.result_for")}  #{(params[:reserve_date] || Time.now.strftime("%d/%m/%Y"))}, #{@time[:h]}:#{@time[:m]} for #{params[:number_of_people] || 2} #{I18n.t('search.people')}
-          #map_places style="background: rgba(128,128,128,0.5);" *{'data-lat'=>"#{@user_location[0]}", "data-lng" => "#{@user_location[1]}"}
+          - center_point = @result.length == 1? @result[0].lat_lng.split(',') : @user_location
+          #map_places style="background: rgba(128,128,128,0.5);" *{'data-lat'=>"#{center_point[0]}", "data-lng" => "#{center_point[1]}"}
           #map_details_wrapper
             - @result.each do |place|
               - location = place.lat_lng.split(',')

@@ -7,7 +7,7 @@ class ReservationsController < ApplicationController
     @options = {:reserve_date => params[:date], :reserve_time => params[:time]}
     @special_offers = Place.today_discount(@place.discounts_index, @options).compact
     @reservation = Reservation.create_from_place_and_user(current_user, @place)
-    redirect_to new_user_session_path unless @reservation.present?
+    redirect_to new_user_session_path and return unless @reservation.present?
     @reservation.persons = @persons.to_i
   end
 

@@ -65,6 +65,8 @@ ru:
       sign_in: "Вход в систему"
       sign_out: "Выход из системы"
       sign_up: "Регистрация"
+    social:
+      sign_in_with: "Используя "
   comments: 
     add_comment: "Создать"
     comment: "Комментировать"
@@ -221,7 +223,8 @@ ru:
     privacy_police: Privacy Policy
     terms_of_service: Terms of Service
   forgot_password: 
-    reset_pass: Reset password
+    reset_pass: Скинуть пароль
+    description: "Введите email, который Вы указывали при регистрации."
   front_js: 
     comments: 
       chat_title: "Переписка"
@@ -274,25 +277,25 @@ ru:
     time: Time
     upcoming: upcoming!
   registration_form: 
-    or: " or "
+    or: " или "
   reservation: 
-    address: "Address:"
-    complete: Complete Free Reservation
-    confirmation: "Confirmation #:"
-    confirmed: Your reservation is confirmed!
+    address: "Адрес:"
+    complete: Заполните форму заказа
+    confirmation: "Подтверждение #:"
+    confirmed: Ваш заказ подтверджен
     confirmed_text: Your reservation is confirmed and saved in the restaurant's computer reservation system. You'll receive an email copy of this confirmation.
-    diner_name: "Diner Name:"
+    diner_name: "Имя обедающего:"
     dress_code: "Dress Code:"
-    edit: edit
+    edit: Править
     edit_with_place: Edit your reservation at %{place}
-    i_go: Where do i go from here?
-    invite_friends: Invite friends
-    message_from_restoran: "Message from the Restaurant:"
-    more_info: "More Info:"
+    i_go: Что дальше?
+    invite_friends: Пригласить друзей
+    message_from_restoran: "Сообщение от ресторана:"
+    more_info: "Подробнее:"
     new_reservation: 
-      complete_reservation: Complete your reservation
-    phone: "Phone:"
-    print: Print reservation details
+      complete_reservation: Заполните Ваш заказ
+    phone: "Номер телефона:"
+    print: Распечатать детали резерва
     rewards: All members get rewards for online reservations!
     special_offers: "Special offer:"
     view_on_map: View restaurant on map
@@ -347,9 +350,17 @@ ru:
     view_your_reservation: "Посмотреть свои резервации"
     write_review: "Написать отзыв"
   sign_up: 
-    by_click: "By clicking “Join Reserve” you confirm that you accept"
-    for_successful_reservations: for succesfull reservations!
-    term_cond: Terms and conditions
+    by_click: "Нажимая 'Зарегистрироваться', Вы подтвреждаете, что прочитали и согласны с"
+    for_successful_reservations: за успешные резервации
+    term_cond: "Условиями пользовательского соглашения"
+    become_member: "Присоединяйтесь"
+    sign_in: "ввойдите в систему"
+    sign_up_and: "Зарегистрируйтесь и"
+    earn_points: "зарабатывайте очки"
+    diner_name: "Имя обедающего"
+    name: "Имя"
+    profile_photo: "Аватар"
+    sign_in_acc: "Ввойти в систему"
   simple_form: 
     error_notification: 
       default_message: "При сохранении возникли ошибки"
@@ -416,3 +427,28 @@ ru:
     time: "время"
     unhelpful: "бесполезный"
     view: "посмотреть"
+  confirmation_resend: "Повторно выслать письмо для подтверждения e-mail."
+  welcome: "Приветствуем"
+  confirm_message: "Вы можете подтвердить Ваш почтовый адрес пройдя по следующей ссылке:"
+  account_confirm: "Подтвердить мою учетную запись"
+  hello: "Приветствуем"
+  message_reset: "Кто-то запросил ссылку для изменения Вашего пароля."
+  password_change_mesage: "Изменить пароль"
+  message_fraud: "В случае, если это были не Вы, пожалуйста, проигнорируйте это  послание."
+  message_wont_change: "Ваш пароль будет изменен, как только Вы перейдете по ссылке и создадите новый."
+  lock_message: "Ваша учетная запись была  заблокирована по причине чрезмерного количества неудавшихся входов."
+  message_unlock: "Вы можете разблокировать Вашу учётную запись пройдя по следующей ссылке:"
+  unlock: "Разблокировать мою учётную запись"
+  your_email: "Ваш email"
+  sign_in:
+    forgot_pass: "Забыли пароль?"
+  First_name: "Имя"
+  Last_name: "фамилия"
+  city: "город"
+  admin:
+    gender:
+      gender: "Пол"
+  facebook: "Facebook"
+  vk: "VK"
+  google: "Google"
+  twitter: "Twitter"

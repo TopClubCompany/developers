@@ -18,10 +18,10 @@
         = simple_form_for @user, url: user_registration_path, :wrapper => :front_reg_form do |f|
           = f.error_notification
           label
-            = t('sign_up.diner_name')
+            = t('sign_up.name')
             b  *
-          = f.input :first_name, placeholder: "First name", label: false
-          = f.input :last_name, placeholder: "Last name",label: false
+          = f.input :first_name, placeholder: t("First_name"), label: false
+          = f.input :last_name, placeholder: locale_cap(t("Last_name")),label: false
           .clear
           = f.input :phone, placeholder: "+38(___)___-__-__", label: get_reg_form_attr_name(:phone, true), required: true
           .clear
@@ -29,9 +29,9 @@
           .clear
           = f.input :password, label: get_reg_form_attr_name(:password)
           .clear
-          = f.input :city_id, collection: City.all, include_blank: false
+          = f.input :city_id, label: locale_cap(t('city')), collection: City.all, include_blank: false
           .clear
-          = f.input :gender,  collection: GenderType.all, include_blank: false
+          = f.input :gender,  label: t('admin.gender.gender'), collection: GenderType.all, include_blank: false
           .clear
           = f.label :birthday, label: get_reg_form_attr_name(:birthday)
           = f.date_select :birthday, :start_year => 1995
@@ -42,7 +42,7 @@
           .clear
           p
             =' t('sign_up.by_click')
-            = link_to t('sign_up.term_cond'), '#'
+            = link_to locale_down(t('sign_up.term_cond')), "/#{I18n.locale}/pages/TAC"
             |.
           = f.submit t('auth.links.join_reserve')
     #social_login.span4

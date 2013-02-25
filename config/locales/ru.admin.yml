@@ -121,6 +121,7 @@ ru:
     gender: 
       female: "Женский"
       male: "Мужской"
+      unknown: "Затрудняюсь ответить"
     geo_autocomplete: "Введите адрес"
     geo_type: 
       distance: 
