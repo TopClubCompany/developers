@@ -36,6 +36,10 @@ class User < ActiveRecord::Base
   has_many :user_favorite_places
   has_many :favorite_places, through: :user_favorite_places, source: :place, class_name: 'Place'
 
+  has_many :u_user_notifications, :dependent => :destroy
+
+  has_many :user_notifications, :through => :u_user_notifications
+
   alias_attribute :name, :title
 
   before_validation :generate_login

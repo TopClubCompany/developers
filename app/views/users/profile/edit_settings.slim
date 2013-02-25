@@ -36,11 +36,9 @@
                   = f.input :email
                 li
                   = f.input :password, placeholder: "••••••••••", required: false
-                /li
+                li
                   label= I18n.t('profile.notifications')
-                  select name="user_notifications"
-                    option value="1986" 1986
-                    option value="1987" 1990
-                    option value="1988" 2932
+                  - UserNotification.by_position.each do |notification|
+                    = check_box_tag 'notification', notification.id, @user.user_notification_ids.include?(notification.id)
             .clear
             = f.submit I18n.t('profile.save_changes')
