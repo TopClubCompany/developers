@@ -500,7 +500,7 @@ input[type='submit']:hover {
   width: 37px;
   height: 37px;
   background: image_url('icons9.png');
-  margin: 0 5px 0 0;
+  margin: -3px 10px 0 0;
 }
 
 #social_login b#fb {
@@ -2141,13 +2141,28 @@ h4 .discount_label {
 }
 
 .social_connect .connected {
-  margin-bottom: 20px;
+  margin-bottom: 17px;
+  height: 34px;
+  position: relative;
+}
 
+.social_connect .connected i {
+  display: block;
+  width: 19px;
+  height: 19px;
+  background: transparent image_url('check3.png');
+  z-index: 2;
+  position: absolute;
+  top: -11px;
+  left: 28px;
 }
 
 .social_connect .sc_btn {
   margin: 5px 0 20px 0 !important;
 }
+
+
+
 
 
 
