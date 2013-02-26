@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :login, :email, :password, :password_confirmation, :remember_me,
                   :first_name, :last_name, :patronymic, :phone, :address, :birthday,
-                  :city_id, :gender, :kind, :time_zone, :locale
+                  :city_id, :gender, :kind, :time_zone, :locale, :user_notification_ids
 
   attr_accessible :user_role_id, :trust_state, :as => :admin
 

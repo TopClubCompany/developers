@@ -20,4 +20,30 @@ module Users::ProfileHelper
     end
   end
 
+  def find_account_id(account)
+    case account.provider
+      when "twitter"
+        "tw"
+      when "facebook"
+        "fb"
+      when "google"
+        "gp"
+      when "vkontakte"
+        "vk"
+    end
+  end
+
+  def find_account_name(account)
+    case account.provider
+      when "twitter"
+        "Twitter"
+      when "facebook"
+        "Facebook"
+      when "google"
+        "Google+"
+      when "vkontakte"
+        "VK.com"
+    end
+  end
+
 end

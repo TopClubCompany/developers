@@ -6,7 +6,8 @@ ru:
         password: "Пароль"
         password_confirmation: "Подтверждение пароля"
         remember_me: "Запомнить"
-  auth: 
+  auth:
+    successfully_sing_in: "Successfully sign in"
     change_my_password: Change my password
     change_password: Change your password
     confirm_you_password: Confirm your new password
@@ -276,6 +277,10 @@ ru:
     settings: Settings
     time: Time
     upcoming: upcoming!
+    social:
+      connect_social_accounts: "Connect social accounts"
+      connected: "Your %{account} is connected"
+      disconnect: "Disconnect"
   registration_form: 
     or: " или "
   reservation: 
