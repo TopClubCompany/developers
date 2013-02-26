@@ -2,32 +2,108 @@
   .row
     .span2
       = render 'shared/user_sidebar'
-
-    #dashboard.span10.page_content
+    #dashboard.span10.page_content.settings
       .row
+        #dash_blocks.span8
+          h2 = locale_cap(I18n.t('profile.settings'))
+          #personal_information.dash_block
+            .line2
+            h3 = I18n.t('profile.personal_information')
+            - @user = current_user
+            = simple_form_for @user, url: update_settings_profile_path, builder: Utils::Views::FrontFormBuilder, wrapper: :front_reg_form do |f|
+              #user_pic_big
+                = f.attach_file_field :avatar, :file_max_size => 2
+
+              .clear
+              /ul.settings
+              ul.settings
+                li
+                  = f.input :user_name, :label => 'Username', :wrapper => :append do
+                    = f.input :first_name, :label => false
+                    = f.input :last_name, :label => false
+                li
+                  = f.input :city_id, collection: City.all, include_blank: false
+                li
+                  = f.input :phone
+                  small
+                    b.secure
+                    | Private. For SMS notifications about your reservations only
+                li
+                  = f.input :email
+                  small
+                    b.secure
+                    | Private. For E-mail notifications about your reservations. only
+                li
+                  = f.input :gender, collection: GenderType.all, include_blank: false
+                  small
+                    b.secure
+                    | Private. This data is confidential and used for statistics only.
+                li
+                  label.select.optional.control-label Birthday
+                  = f.date_select :birthday, as: 'date', start_year: Date.today.year - 8, end_year: Date.today.year - 90, order: [:month, :day, :year]
+                  small
+                    b.secure
+                    | This data is confidential and used for statistics only
+                .clear
+              = f.submit I18n.t('profile.save_changes')
+          .clear
+          #settings_password.dash_block
+            .line2
+            = simple_form_for @user, url: update_settings_profile_path, builder: Utils::Views::FrontFormBuilder, wrapper: :front_reg_form do |f|
+              h3
+                = I18n.t('profile.settings')
+              ul.settings
+                li
+                  = f.input :password, placeholder: "••••••••••", required: true
+                li
+                  = f.input :new_password, placeholder: "••••••••••", required: true
+                li
+                  = f.input :confirm_password, placeholder: "••••••••••", required: true
+
+
+                /li
+                /  label Your current password
+                /  input name="user_pass" placeholder="••••••••••" type="password"
+                /li
+                /  label New password
+                /  input name="user_pass" placeholder="••••••••••" type="password"
+                /li
+                /  label New password again
+                /  input name="user_pass" placeholder="••••••••••" type="password"
+              .clear
+              = f.submit I18n.t('profile.save_changes')
+          .clear
+          #settings_notifications.dash_block
+            .line2
+            = simple_form_for @user, url: update_settings_profile_path, builder: Utils::Views::FrontFormBuilder, wrapper: :front_reg_form do |f|
+              h3 = I18n.t('profile.notifications')
+              ul.settings
+                - UserNotification.by_position.each do |notification|
+                  = label_tag "notification-#{notification.id}", class: "checkbox" do
+                    = check_box_tag "notification-#{notification.id}", notification.id, @user.user_notification_ids.include?(notification.id)
+                    = "notification-#{notification.id}"
+                /
+                /li
+                /  label.checkbox
+                /    input type="checkbox"
+                /      | Subscribe for news & updates
+                /li
+                /  label.checkbox
+                /    input type="checkbox"
+                /      | Send reservation details on my email
+              .clear
+              = f.submit I18n.t('profile.save_changes')
+          .clear
+    /#dashboard.span10.page_content
+      .row
+        # USED TO BE LIKE THIS
         - @user = current_user
         = simple_form_for @user, url: update_settings_profile_path, builder: Utils::Views::FrontFormBuilder, wrapper: :front_reg_form do |f|
           .span2
             h1= user_menu_name
             = f.attach_file_field :avatar, :file_max_size => 2
             #status.gourmand= I18n.t('profile.gourmand')
-          #dash_blocks.span8
-            #personal_information.dash_block
-              h2
-                = I18n.t('profile.personal_information')
-              ul.settings
-                li
-                  = f.input :first_name
-                li
-                  = f.input :last_name
-                li
-                  = f.input :city_id, collection: City.all, include_blank: false
-                li
-                  = f.input :phone
-                li
-                  = f.input :gender, collection: GenderType.all, include_blank: false
-                li
-                  = f.date_select :birthday, as: 'date', start_year: Date.today.year - 8, end_year: Date.today.year - 90, order: [:month, :day, :year]
+
             #settings.dash_block
               h2
                 = I18n.t('profile.settings')
@@ -36,11 +112,63 @@
                   = f.input :email
                 li
                   = f.input :password, placeholder: "••••••••••", required: false
-                /li
+                li
                   label= I18n.t('profile.notifications')
-                  select name="user_notifications"
-                    option value="1986" 1986
-                    option value="1987" 1990
-                    option value="1988" 2932
+                  - UserNotification.by_position.each do |notification|
+                    = check_box_tag 'notification', notification.id, @user.user_notification_ids.include?(notification.id)
             .clear
             = f.submit I18n.t('profile.save_changes')
+    #social_login.span4.social_connect
+      h3 Connect social accounts
+      .connected
+        b#tw
+        i
+        | Your Twitter is connected
+        br
+          small
+            a href="#"
+              strong Disconnect
+          .clear
+      .connected
+        b#fb
+        i
+        | Your Facebook is connected
+        br
+          small
+            a href="#"
+              strong Disconnect
+          .clear
+      .connected
+        b#gp
+        i
+        | Your Google+ is connected
+        br
+          small
+            a href="#"
+              strong Disconnect
+          .clear
+      .connected
+        b#vk
+        i
+        | Your VK.com is connected
+        br
+          small
+            a href="#"
+              strong Disconnect
+          .clear
+      div
+        | Connect your Connect vs Facebook account for easy sharing with your friends
+        a#tw_login.sc_btn href="#"
+          | Connect vs Facebook
+      div
+        | Connect your Facebook account for easy sharing with your friends
+        a#fb_login.sc_btn href="#"
+          | Connect vs Facebook
+      div
+        | Connect Вконтакте if you are тру юзер
+        a#vk_login.sc_btn href="#"
+          | Connect vs Вконтакте
+      div
+        | Connect Google+ if you think you're cool
+        a#gp_login.sc_btn href="#"
+          | Connect vs Google+
