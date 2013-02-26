@@ -13,8 +13,6 @@ html
         /= render "shared/social_links"
     - cache [I18n.locale, 'layouts', 'application'] do
       = render "layouts/footer"
-    - key = current_user ? current_user.id : 'not_auth'
-    - cache [I18n.locale, 'layouts', 'fixed', key] do
-      = render "layouts/fixed"
+    = render "layouts/fixed"
     = render "fileupload/tmpl"
 /! render "layouts/footer_include" for js include for non-blocking pages
