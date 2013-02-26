@@ -19,7 +19,7 @@ class Users::OmniauthCallbacksController < ApplicationController
       end
       #raise vk_friends.inspect
     end
-    if session[:redirect_aut_path].present?
+    if session[:redirect_aut_path].present? && current_user.present?
       merge_from_account(data, current_user.email)
     else
       data[:email].present? ? auth_with_email(data) : auth_without_email(data)
