@@ -10,15 +10,18 @@
           a href=disconnected_profile_path(current_user.id, type: account.provider)
             strong= I18n.t('profile.social.disconnect')
         .clear
-  div
-    | Connect your Connect vs Twitter account for easy sharing with your friends
-    a#tw_login.sc_btn href=user_omniauth_authorize_path(:twitter)
-      | Connect vs Twitter
-  div
-    | Connect your Facebook account for easy sharing with your friends
-    a#fb_login.sc_btn href=user_omniauth_authorize_path(:facebook)
-      | Connect vs Facebook
-  div
-    | Connect Вконтакте if you are тру юзер
-    a#vk_login.sc_btn href=user_omniauth_authorize_path(:vkontakte)
-      | Connect vs Вконтакте
+  - if !current_user.accounts.pluck(:provider).include?("twitter")
+    div
+      | Connect your Connect vs Twitter account for easy sharing with your friends
+      a#tw_login.sc_btn href=user_omniauth_authorize_path(:twitter)
+        | Connect vs Twitter
+  - if !current_user.accounts.pluck(:provider).include?("facebook")
+    div
+      | Connect your Facebook account for easy sharing with your friends
+      a#fb_login.sc_btn href=user_omniauth_authorize_path(:facebook)
+        | Connect vs Facebook
+  - if !current_user.accounts.pluck(:provider).include?("vkontakte")
+    div
+      | Connect Вконтакте if you are тру юзер
+      a#vk_login.sc_btn href=user_omniauth_authorize_path(:vkontakte)
+        | Connect vs Вконтакте
