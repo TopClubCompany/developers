@@ -41,11 +41,16 @@ class Users::ProfileController < ApplicationController
   end
 
   def edit_settings
-
+    session[:redirect_aut_path] = edit_settings_profile_path(current_user.id)
   end
 
   def my_reservations
 
+  end
+
+  def disconnected
+    current_user.accounts.by_type(params[:type]).first.try(:destroy)
+    redirect_to edit_settings_profile_path(current_user.id)
   end
 
   def show_reservation
@@ -59,9 +64,8 @@ class Users::ProfileController < ApplicationController
   end
 
   def update_settings
-    #user.password = params[:user][:password].present? ?  params[:user][:password] : current_user.password
     if current_user.update_attributes(params[:user])
-      redirect_to settings_profile_path(current_user.id)
+      redirect_to edit_settings_profile_path(current_user.id)
       sign_in(current_user, by_pass: true)
     else
       render action: 'edit_settings'

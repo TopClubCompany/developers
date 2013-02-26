@@ -19,8 +19,11 @@ class Users::OmniauthCallbacksController < ApplicationController
       end
       #raise vk_friends.inspect
     end
-
-    data[:email].present? ? auth_with_email(data) : auth_without_email(data)
+    if session[:redirect_aut_path].present?
+      merge_from_account(data, current_user.email)
+    else
+      data[:email].present? ? auth_with_email(data) : auth_without_email(data)
+    end
   end
 
   [:facebook, :vkontakte, :google, :twitter].each { |provider| alias_method provider, :auth }
@@ -54,7 +57,7 @@ class Users::OmniauthCallbacksController < ApplicationController
     @user.skip_confirmation! #remove for normal registration with confirm email
     if @user.save
       (@user.avatar = Avatar.new(data: avatar)) if avatar
-      auth_user @user  #remove for normal registration with confirm email
+      auth_user @user
       #redirect_to root_path, flash: { success: "for end of registration you need to confirm you email." } #uncoment for normal registration with confirm email
     else
       redirect_to new_user_registration_path(@user), flash: { error: @user.errors.full_messages.join(', ') }
@@ -70,6 +73,12 @@ class Users::OmniauthCallbacksController < ApplicationController
     else
       redirect_to enter_email_path(email.gsub('.','#')), flash: { error: "Already exist user with that email and social provider" }
     end
+  end
+
+  def merge_from_account(data, email)
+    data[:email] = email
+    Account.create_or_find_by_oauth_data data
+    redirect_to session[:redirect_aut_path]
   end
 
   def send_letter_for_confirm_email(data)
@@ -91,7 +100,7 @@ class Users::OmniauthCallbacksController < ApplicationController
   def auth_user user
     session[:user_data] = nil
     sign_in user
-    redirect_to root_path, flash: { success: 'Successfully sign in' }
+    redirect_to root_path, flash: { success: I18n.t('auth.successfully_sing_in') }
   end
 
   def get_user_email data
