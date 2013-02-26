@@ -12,6 +12,8 @@ class Account < ActiveRecord::Base
 
   enumerated_attribute :gender_type, :id_attribute => :gender, :class => ::GenderType
 
+  scope :by_type, lambda{ |type| where(:provider => type) }
+
 
   def self.create_or_find_by_oauth_data data
     data = self.check_first_name_last_name(data)

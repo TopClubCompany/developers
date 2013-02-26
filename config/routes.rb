@@ -34,7 +34,7 @@ Topclub::Application.routes.draw do
       get :edit_settings
       get :favourites
       put :update_settings
-      #put :update_reservation
+      get :disconnected
       get :my_reservations
     end
 

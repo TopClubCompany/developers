@@ -1,0 +1,24 @@
+#social_login.span4.social_connect
+  h3= I18n.t('profile.social.connect_social_accounts')
+  - current_user.accounts.each do |account|
+    .connected
+      b id=find_account_id(account)
+      i
+      = I18n.t('profile.social.connected', account: find_account_name(account))
+      br
+        small
+          a href=disconnected_profile_path(current_user.id, type: account.provider)
+            strong= I18n.t('profile.social.disconnect')
+        .clear
+  div
+    | Connect your Connect vs Twitter account for easy sharing with your friends
+    a#tw_login.sc_btn href=user_omniauth_authorize_path(:twitter)
+      | Connect vs Twitter
+  div
+    | Connect your Facebook account for easy sharing with your friends
+    a#fb_login.sc_btn href=user_omniauth_authorize_path(:facebook)
+      | Connect vs Facebook
+  div
+    | Connect Вконтакте if you are тру юзер
+    a#vk_login.sc_btn href=user_omniauth_authorize_path(:vkontakte)
+      | Connect vs Вконтакте
