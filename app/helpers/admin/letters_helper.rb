@@ -1,0 +1,2 @@
+module Admin::LettersHelper
+end

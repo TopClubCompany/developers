@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130225085115) do
+ActiveRecord::Schema.define(:version => 20130227111019) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -156,6 +156,8 @@ ActiveRecord::Schema.define(:version => 20130225085115) do
     t.integer  "assetable_id"
     t.string   "assetable_type",    :limit => 30
     t.string   "type",              :limit => 30
+    t.integer  "width"
+    t.integer  "height"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
   end
@@ -303,6 +305,25 @@ ActiveRecord::Schema.define(:version => 20130225085115) do
 
   add_index "kitchens", ["slug"], :name => "index_kitchens_on_slug", :unique => true
   add_index "kitchens", ["user_id"], :name => "index_kitchens_on_user_id"
+
+  create_table "letter_translations", :force => true do |t|
+    t.integer  "letter_id"
+    t.string   "locale"
+    t.string   "topic"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "letter_translations", ["letter_id"], :name => "index_letter_translations_on_letter_id"
+  add_index "letter_translations", ["locale"], :name => "index_letter_translations_on_locale"
+
+  create_table "letters", :force => true do |t|
+    t.integer  "kind",                         :null => false
+    t.boolean  "is_visible", :default => true
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
 
   create_table "location_translations", :force => true do |t|
     t.integer  "location_id"
