@@ -35,7 +35,7 @@
 //= require manage-fileuploader.js
 //= require jquery.tmpl.min
 //= require jquery.cookie
-
+//= require i18n/translations.js
 //=require jquery.autocomplete
 //=require mustache
 //= require fancybox
