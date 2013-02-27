@@ -218,19 +218,19 @@ def insert_notifications
 end
 
 
-#User.full_truncate
-#insert_default_user('admin@adm.com', :admin)
-#insert_default_user('user@usr.com')
-#add_categories
-#add_kitchens
-#insert_mark_types
-#add_test_stuff
-#insert_default_place_pictures
-#insert_group_feature
-#insert_city
-#insert_default_reservations
-#insert_default_vote_types
-#insert_slider
-#create_pages
-#insert_notifications
+User.full_truncate
+insert_default_user('admin@adm.com', :admin)
+insert_default_user('user@usr.com')
+add_categories
+add_kitchens
+insert_mark_types
+add_test_stuff
+insert_default_place_pictures
+insert_group_feature
+insert_city
+insert_default_reservations
+insert_default_vote_types
+insert_slider
+create_pages
+insert_notifications
 LetterSeed.insert_letters
