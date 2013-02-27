@@ -1,4 +1,5 @@
 #encoding: utf-8
+require_relative "letter_seed"
 
 def insert_default_user(email, role = :default)
   user = FactoryGirl.build(:user, role.to_sym, email: email, phone: "+38(044)111-11-11")
@@ -200,6 +201,7 @@ def insert_default_vote_types
 end
 
 def create_pages
+  Structure.full_truncate
   %w(ABOUT\ US FAQ JOBS RESTAURATEURS CONTACT Help).each do |name|
     Structure.create do |s|
       s.name = name
@@ -209,10 +211,12 @@ def create_pages
 end
 
 def insert_notifications
+  UserNotification.full_truncate
   ["Subscribe for news & updates", "Send reservation details on my email"].each_with_index do |name, index|
     UserNotification.create(title: name, position: index)
   end
 end
+
 
 #User.full_truncate
 #insert_default_user('admin@adm.com', :admin)
@@ -228,4 +232,5 @@ end
 #insert_default_vote_types
 #insert_slider
 #create_pages
-insert_notifications
+#insert_notifications
+LetterSeed.insert_letters
