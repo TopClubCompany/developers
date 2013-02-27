@@ -8,6 +8,10 @@ class Letter < ActiveRecord::Base
   include Utils::Models::Base
   include Utils::Models::Translations
   include Utils::Models::AdminAdds
+
+  def title
+    kind
+  end
 end
 # == Schema Information
 #
