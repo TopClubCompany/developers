@@ -214,9 +214,9 @@ def insert_notifications
   end
 end
 
-#User.full_truncate
-#insert_default_user('admin@adm.com', :admin)
-#insert_default_user('user@usr.com')
+User.full_truncate
+insert_default_user('admin@adm.com', :admin)
+insert_default_user('user@usr.com')
 #add_categories
 #add_kitchens
 #insert_mark_types
@@ -227,5 +227,5 @@ end
 #insert_default_reservations
 #insert_default_vote_types
 #insert_slider
-#create_pages
+create_pages
 insert_notifications

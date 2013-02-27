@@ -286,4 +286,8 @@ module ApplicationHelper
     "/#{I18n.locale}/#{resource}"
   end
 
+  def addcustomjs(*files)
+    javascript_include_tag(*files)
+  end
+
 end

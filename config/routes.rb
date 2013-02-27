@@ -1,5 +1,7 @@
 Topclub::Application.routes.draw do
 
+  mount Ckeditor::Engine => '/ckeditor'
+
   filter :locale
 
   post '/set_location/:location_slug' => 'places#set_location', as: 'set_location'
@@ -131,6 +133,10 @@ Topclub::Application.routes.draw do
       post :batch, :on => :collection
     end
     resources(:group_features) do
+      post :batch, :on => :collection
+    end
+
+    resources :letters do
       post :batch, :on => :collection
     end
 
