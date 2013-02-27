@@ -156,18 +156,16 @@ class PlacesCollection
     $el = $('#map_details_wrapper').append(mapBlock)
     $listEl = $(listBlock).insertBefore('#list_grid_view .paginate')
 
-    setTimeout(( ->
+    setTimeout(( =>
       bindBlockListeners.call @, $("#list_place_#{place.id}"), $("#place_#{place.id}")
     ), 50)
 
 
 
   bindBlockListeners = (elList, elMap) ->
-    $(elMap, elList).find(".popoverable").on('click', () -> return false).popover(html: true)
-
-    $(elMap, elList).find("h4 > a, .place_img_sm").off 'click'
-    $(elMap, elList).find("h4 > a, .place_img_sm").on 'click', (e) ->
-      console.log 'clicked the link'
+    $(elMap).add(elList).find(".popoverable").on('click', () -> return false).popover(html: true)
+    $(elMap).add(elList).find("h4 > a, .place_img_sm").off 'click'
+    $(elMap).add(elList).find("h4 > a, .place_img_sm").on 'click', (e) ->
       target = if $(e.target).attr('href') then $(e.target) else $(e.target).parent('.place_img_sm')
       e.preventDefault()
       searchQuery = window.location.search
