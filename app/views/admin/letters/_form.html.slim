@@ -1,9 +1,9 @@
 = admin_form_for @letter do |f|
   = f.locale_tabs do |l|
-    = f.input :topic, :locale => l, :as => :ckeditor
+    = f.input :topic, :locale => l
     = f.input :content, :locale => l, :as => :ckeditor
 
-  = f.input :kind
+  = f.input :kind, :collection => LetterType.all, :include_blank => false
   = f.input :is_visible, input_html: {class: 'pretty-slide-checkbox'}
 
 
