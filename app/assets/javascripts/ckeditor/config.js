@@ -77,11 +77,11 @@ CKEDITOR.editorConfig = function( config )
 
   /* Extra plugins */
   // works only with en, ru, uk locales
-  config.extraPlugins = "embed,attachment";
+//  config.extraPlugins = "embed,attachment";
 
     //for orfografii
   config.disableNativeSpellChecker = false;
-  config.removePlugins = 'contextmenu';
+//  config.removePlugins = 'contextmenu';
 
 
   /* Toolbars */

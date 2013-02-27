@@ -54,6 +54,15 @@ ru:
       sign_out: "Выход"
     avatar: "Аватар"
     batch_actions: "Действия"
+    letters:
+      successful_reserve_sms_user: "Успешное смс уведомление о резерве для юзера"
+      successful_reserve_sms_place: "Успешное смс уведомление о резерве для ресторана"
+      successful_reserve_email_user: "Успешное email уведомление о резерве для юзера"
+      successful_reserve_email_place: "Успешное email уведомление о резерве для ресторана"
+      cancel_reserve_email_user: "Отмена брони email юзер"
+      cancel_reserve_email_place: "Отмена брони email ресторан"
+      edit_reserve_email_user: "Изменение брони email юзер"
+      new_reserve_email_top_club: "Новый резерв email TopClub"
     bill: 
       code: 
         cheap: Cheap

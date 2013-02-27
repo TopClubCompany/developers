@@ -1,4 +1,3 @@
-# -*- encoding : utf-8 -*-
 # Use this hook to configure ckeditor
 if Object.const_defined?("Ckeditor")
   Ckeditor.setup do |config|
@@ -15,5 +14,8 @@ if Object.const_defined?("Ckeditor")
     # Allowed attachment file types for upload.
     # Set to nil or [] (empty array) for all file types
     # config.attachment_file_types = ["doc", "docx", "xls", "odt", "ods", "pdf", "rar", "zip", "tar", "swf"]
+
+    # Setup authorization to be run as a before filter
+    # config.authorize_with :cancan
   end
 end
