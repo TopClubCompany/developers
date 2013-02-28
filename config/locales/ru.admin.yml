@@ -336,6 +336,19 @@ ru:
       - "Чт"
       - "Пт"
       - "Сб"
+    validation_message:
+      email_incorrect: "Введите корректный e-mail"
+      phone_incorrect: 'Введите корректный телефон'
+      pass_incorrect: 'Введите корректный пароль'
+      pass_too_short: 'Пароль должен содержать не меньше 5 символов'
+      latin_only: "Только латиница"
+      chars_permited: "Разрешается вводить латиницу, кириллицу, \"-\", \"_\""
+      empty_field: 'Заполните поле'
+      enter_name: 'Введите корректное имя'
+      name_too_short: 'Слишком короткое имя'
+      enter_surname: 'Введите корректную фамилию'
+      surname_too_short: 'Слишком короткую фамилию'
+
     name: "Название"
     no_results: "Ничего не найдено"
     search: "Идет поиск..."

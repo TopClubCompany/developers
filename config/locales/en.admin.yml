@@ -332,7 +332,18 @@ en:
       - "Thu"
       - "Fri"
       - "Sat"
-
+    validation_message:
+      email_incorrect: "Enter correct e-mail"
+      phone_incorrect: "Enter correct phone number"
+      latin_only: "Latin characters only"
+      chars_permited: "A-Za-z, А-Яа-я and \"-\", \"_\" are allowed"
+      pass_incorrect: 'Enter valid password'
+      pass_too_short: 'Password should be more than 5 symbols'
+      empty_field: 'Fill this'
+      enter_name: 'Enter valid name'
+      name_too_short: 'Name too short'
+      enter_surname: 'Enter valid last name'
+      surname_too_short: 'Last name too short'
   attrs: 
     en: ""
     it: ""

@@ -198,16 +198,17 @@ class FormValidate
 
 
     #private methods
-    # Todo use I18n.js for translations
+
   input_correct_email = ($el) ->
-    $el.attr "original-title", "Введите корректный e-mail"
+    $el.attr "original-title", I18n.translations[window.language].admin_js.validation_message.email_incorrect
 
   only_latin_words = ($el) ->
-    $el.attr "original-title", "Только латиница"
+    $el.attr "original-title", I18n.translations[window.language].admin_js.validation_message.latin_only
 
   only_latin_cyril= ($el) ->
-    $el.attr "original-title", "Разрешается вводить латиницу, кириллицу, \"-\", \"_\""
+    $el.attr "original-title", I18n.translations[window.language].admin_js.validation_message.chars_permited
 
 $ ->
+  window.language = $('#language .active').attr('id')
   new FormValidate("#new_user") if $("#new_user").size() > 0
   new FormValidate("#new_reservation") if $("#new_reservation").size() > 0
