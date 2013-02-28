@@ -35,7 +35,7 @@ class LetterSeed
         user_email_en = """
         Dear {Name} {Surname},
 
-        Your reservation for {number_of_people} at {restaurant_name} is confirmed for {day_of_week}, {Mnth} {Date}, {Year} at {Time}. The reservation is held under: {Name} {Surname}. Be sure to check in with the maitre d' when you arrive.
+        Your reservation for {number_of_people} at {restaurant_name} is confirmed for {day_of_week}, {mnth} {day}, {year} at {time}. The reservation is held under: {first_name} {last_name}. Be sure to check in with the maitre d' when you arrive.
 
         From the restaurant:
         Thank you for choosing {restaurant_name}. We are pleased to confirm your dining reservation made through TopReserve.com.ua. If you have a change of plans and need to cancel or reschedule, please let us know. We look forward to welcoming you!

@@ -13,9 +13,9 @@ class AccountMailer < ActionMailer::Base
     mail(to: email, subject: "Your friend #{sender} invite you")
   end
 
-  def new_reservation email, reservation_id
-    @reservation_id = reservation_id
-    mail(to: email, subject: "new reservation_id #{reservation_id}")
+  def new_reservation email, subject, text
+    @text = text
+    mail(to: email, subject: subject)
   end
 
 end

@@ -88,4 +88,8 @@ class Users::ProfileController < ApplicationController
     end
   end
 
+  def cancel_reservation
+
+  end
+
 end
