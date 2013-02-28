@@ -22,7 +22,7 @@ class Location < ActiveRecord::Base
 
 
   def address
-    street
+    "#{street} #{house_number}"
   end
 
   private
