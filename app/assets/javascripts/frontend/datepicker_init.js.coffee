@@ -8,8 +8,9 @@ $ ->
       'direction': true
       'zIndex': 8
       'always_show_clear': false
-      'days': I18n.translations.ru.admin_js.day.split(',')
-      'months': I18n.translations.ru.admin_js.month.split(',')
+      'days': I18n.translations.ru.admin_js.day
+      'days_abbr': I18n.translations.ru.admin_js.abbr_day_names
+      'months': I18n.translations.ru.admin_js.month
     )
 
     magic_number = $datepicker.offset().top + $datepicker.height() + 20
