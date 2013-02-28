@@ -9,9 +9,14 @@ class Letter < ActiveRecord::Base
   include Utils::Models::Translations
   include Utils::Models::AdminAdds
 
+  scope :with_kind, lambda { |kind| where(:kind => kind) }
+
+
   def title
     kind
   end
+
+
 end
 # == Schema Information
 #

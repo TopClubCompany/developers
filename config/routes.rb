@@ -18,6 +18,7 @@ Topclub::Application.routes.draw do
 
   get '/profile/:user_id/show_reservation/:reservation_id' => 'users/profile#show_reservation', as: 'show_profile_reservation'
   get '/profile/:user_id/edit_reservation/:reservation_id' => 'users/profile#edit_reservation', as: 'edit_profile_reservation'
+  get '/profile/:user_id/cancel_reservation/:reservation_id' => 'users/profile#cancel_reservation', as: 'cancel_profile_reservation'
   put '/update_reservation/:reservation_id' => 'users/profile#update_reservation', as: 'update_reservation'
 
   post '/reviews/:review_id/:vote_type' => 'reviews#set_usefulness', as: 'set_review_usefulness'

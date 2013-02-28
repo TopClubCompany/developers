@@ -381,11 +381,13 @@ ru:
     formats: 
       datepicker: "%d-%m-%Y"
       day: "%d"
+      day_name: "%A"
       dm: "%d.%m"
       long: "%d-%m-%Y"
       month: "%B"
       year: "%Y"
       ymd: "%d %B %Y"
+      hour_min: "%H:%M"
     pm: "вечера"
   unauthorized: 
     default: "Нет прав для просмотра"
