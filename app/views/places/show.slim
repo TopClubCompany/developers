@@ -55,11 +55,9 @@
         ul.place_features
           li.location
             strong
-              t('words.Location')
             = @place.location.address
           li.cuisine
             strong
-              = t('words.kitchen').capitalize + ': '
             = @place.kitchens.map(&:name).join(', ')
           li.timing
             - @place.humanable_schedule.each do |time|
