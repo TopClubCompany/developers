@@ -1,6 +1,8 @@
 class Users::ProfileController < ApplicationController
   before_filter :authenticate_user!
 
+  include ReservationsHelper
+
   def show
 
   end
@@ -79,6 +81,7 @@ class Users::ProfileController < ApplicationController
       time = DateTime.strptime(params[:reservation].delete(:date) + ' ' + params[:reservation].delete(:time), "%D %I:%M %p")
       params[:reservation][:time] = time
       if reservation.update_attributes(params[:reservation])
+        send_messages(reservation, [7])
         redirect_to show_profile_reservation_path(reservation.user.id, reservation.id), flash: {success: 'reservation updated successfully'}
       else
         render action: 'edit_reservation'
@@ -89,7 +92,8 @@ class Users::ProfileController < ApplicationController
   end
 
   def cancel_reservation
-
+    reservation = Reservation.find_by_id(params[:reservation_id])
+    send_messages(reservation, [5,6])
   end
 
 end

@@ -1,5 +1,7 @@
 class ReservationsController < ApplicationController
 
+  include ReservationsHelper
+
   def new_reservation
     @persons = params[:amount_of_person]
     @place   = Place.find(params[:place_id])
@@ -23,26 +25,12 @@ class ReservationsController < ApplicationController
   def complete_reservation
     reservation = Reservation.new(params[:reservation])
     if reservation.save
-      send_messages(reservation)
+      send_messages(reservation, [1,2,3,4,8])
       redirect_to reservation_confirmed_path(reservation.id)
     else
       redirect_to new_reservation_path(@reservation), flash: { error: @reservation.errors.full_messages.join(', ') }
     end
   end
 
-  def send_messages(reservation)
-    options = {reservation_path: show_profile_reservation_path(current_user.id, reservation.id),
-               place_path: place_path(reservation.place),
-               edit_reservation_path: edit_profile_reservation_path(current_user.id, reservation.id),
-               cancel_reservation_path: cancel_profile_reservation_path(current_user.id, reservation.id)}
-    [1, 3].each do |type|
-      text, caption = ::Utils::LetterParser.parse_params(reservation.to_mail(options).merge({letter_type: type}))
-      if type == 3
-        AccountMailer.new_reservation(reservation.email, caption, text).deliver
-      else
-        Utils::Soap::TurboSms.send_sms(reservation.phone, text) if reservation.phone
-      end
-    end
-  end
 
 end
