@@ -381,11 +381,13 @@ ru:
     formats: 
       datepicker: "%d-%m-%Y"
       day: "%d"
+      day_name: "%A"
       dm: "%d.%m"
       long: "%d-%m-%Y"
       month: "%B"
       year: "%Y"
       ymd: "%d %B %Y"
+      hour_min: "%H:%M"
     pm: "вечера"
   unauthorized: 
     default: "Нет прав для просмотра"
@@ -432,6 +434,7 @@ ru:
     time: "время"
     unhelpful: "бесполезный"
     view: "посмотреть"
+    location: "Адрес"
   confirmation_resend: "Повторно выслать письмо для подтверждения e-mail."
   welcome: "Приветствуем"
   confirm_message: "Вы можете подтвердить Ваш почтовый адрес пройдя по следующей ссылке:"
