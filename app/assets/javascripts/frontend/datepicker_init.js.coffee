@@ -11,7 +11,7 @@ $ ->
       'always_show_clear': false
       'days': I18n.translations[window.language].admin_js.day
       'days_abbr': I18n.translations[window.language].admin_js.abbr_day_names
-      'months': I18n.translations[windowlanguage].admin_js.month
+      'months': I18n.translations[window.language].admin_js.month
     )
 
     magic_number = $datepicker.offset().top + $datepicker.height() + 20
