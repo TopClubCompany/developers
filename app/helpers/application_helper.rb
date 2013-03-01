@@ -234,13 +234,13 @@ module ApplicationHelper
 
 
   def time_with_locale(time)
-    if time[:m] == '15'
+    if time[:m] == '15' or time[:m] == '15'
       minutes = '00'
     end
-    if time[:m] == '45'
+    if time[:m] == '45' or time[:m] == '45'
       minutes = '30'
     end
-    time_no_quarters = {:h => time[:h].strip, :m => minutes || time[:m]}  
+    time_no_quarters = {:h => time[:h].strip, :m => minutes || time[:m].gsub(/AM|PM/,'')}
     if I18n.locale.to_s == "en"
       en_time(time_no_quarters)
     else

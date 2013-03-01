@@ -18,10 +18,10 @@ function checkNewUser(){
     else{
         //check email
         if(user_email.val() == ''){
-            user_email.attr('original-title','Заполните поле');
+            user_email.attr('original-title',I18n.translations["#{window.language}"].admin_js.validation_message.empty_field);
             user_email.tipsy('show');
         }  else if(!patternEmail.test(user_email.val())){
-            user_email.attr('original-title','Введите корректный email');
+            user_email.attr('original-title',I18n.translations["#{window.language}"].admin_js.validation_message.email_incorrect);
             user_email.tipsy('show');
         }
         function hideEmail (){
@@ -31,11 +31,11 @@ function checkNewUser(){
 
         //check phone
         if(!patternPhone.test(user_phone.val())){
-            user_phone.attr('original-title','Введите корректный телефон');
+            user_phone.attr('original-title',I18n.translations["#{window.language}"].admin_js.validation_message.phone_incorrect);
             user_phone.tipsy('show');
         }
         else if(user_phone.val() == ''){
-            user_phone.attr('original-title','Заполните поле');
+            user_phone.attr('original-title',I18n.translations["#{window.language}"].admin_js.validation_message.empty_field);
             user_phone.tipsy('show');
         }
         function hidePhone (){
@@ -45,15 +45,15 @@ function checkNewUser(){
 
         //check pass
         if(!patternPass.test(user_pass.val())){
-            user_pass.attr('original-title','Введите корректный пароль');
+            user_pass.attr('original-title',I18n.translations["#{window.language}"].admin_js.validation_message.pass_incorrect);
             user_pass.tipsy('show');
         }
         else if(user_pass.val().length < 5){
-            user_pass.attr('original-title','Пароль должен содержать не меньше 5 символов');
+            user_pass.attr('original-title',I18n.translations["#{window.language}"].admin_js.validation_message.pass_too_short);
             user_pass.tipsy('show');
         }
         else if(user_pass.val() == ''){
-            user_pass.attr('original-title','Заполните поле');
+            user_pass.attr('original-title',I18n.translations["#{window.language}"].admin_js.validation_message.empty_field);
             user_pass.tipsy('show');
         }
         function hidePass (){
@@ -63,15 +63,15 @@ function checkNewUser(){
 
         //check first name
         if(!patternNameLastname.test(user_first_name.val())){
-            user_first_name.attr('original-title','Введите корректое имя');
+            user_first_name.attr('original-title',I18n.translations["#{window.language}"].admin_js.validation_message.enter_name);
             user_first_name.tipsy('show');
         }
         else if(user_first_name.val().length < 2){
-            user_first_name.attr('original-title','Слишком короткое имя');
+            user_first_name.attr('original-title',I18n.translations["#{window.language}"].admin_js.validation_message.name_too_short);
             user_first_name.tipsy('show');
         }
         else if(user_first_name.val() == ''){
-            user_first_name.attr('original-title','Заполните поле');
+            user_first_name.attr('original-title',I18n.translations["#{window.language}"].admin_js.validation_message.empty_field);
             user_first_name.tipsy('show');
         }
         function hideFirstName (){
@@ -81,15 +81,15 @@ function checkNewUser(){
 
         //check last name
         if(!patternNameLastname.test(user_last_name.val())){
-            user_last_name.attr('original-title','Введите корректую фамилию');
+            user_last_name.attr('original-title',I18n.translations["#{window.language}"].admin_js.validation_message.enter_surname);
             user_last_name.tipsy('show');
         }
         else if(user_last_name.val().length < 2){
-            user_last_name.attr('original-title','Слишком короткая фамилия');
+            user_last_name.attr('original-title',I18n.translations["#{window.language}"].admin_js.validation_message.surname_too_short);
             user_last_name.tipsy('show');
         }
         else if(user_last_name.val() == ''){
-            user_last_name.attr('original-title','Заполните поле');
+            user_last_name.attr('original-title',I18n.translations["#{window.language}"].admin_js.validation_message.empty_field);
             user_last_name.tipsy('show');
         }
         function hideLastName (){
@@ -106,6 +106,7 @@ $(document).ready(function(){
 //    enter_phone();
 //    validPass();
 //    validNameLastname();
+    window.language = $('#language .active').attr('id');
     $('#new_user #user_phone').mask('+38(999)999-99-99');
     $('#sign_up_page #new_user').submit(function(){
         if(!checkNewUser()){
