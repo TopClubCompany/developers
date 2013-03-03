@@ -44,6 +44,6 @@
                     | #{t('words.view').capitalize} / #{t('words.edit').capitalize}
                   .clear
                 #favorites_small
-                  .add_to_favorites
+                  .add_to_favorites data-id="#{place.id}"
                     = t('short_strings.add_to_favorites')
                 .clear
