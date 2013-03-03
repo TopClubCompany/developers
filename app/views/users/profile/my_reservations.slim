@@ -36,7 +36,7 @@
                       = place_reviews
                       |  #{place_reviews == 1 ? 'review' : 'reviews'}
                 .btns
-                  a href="#"
+                  a href=cancel_profile_reservation_path(place.user_id, reservation.id)
                     = t('words.cancel')
                   a href="#"
                     = t('words.invite')
@@ -44,6 +44,6 @@
                     | #{t('words.view').capitalize} / #{t('words.edit').capitalize}
                   .clear
                 #favorites_small
-                  .add_to_favorites
+                  .add_to_favorites data-id="#{place.id}"
                     = t('short_strings.add_to_favorites')
                 .clear
