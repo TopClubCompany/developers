@@ -36,7 +36,7 @@
                       = place_reviews
                       |  #{place_reviews == 1 ? 'review' : 'reviews'}
                 .btns
-                  a href="#"
+                  a href=cancel_profile_reservation_path(place.user_id, reservation.id)
                     = t('words.cancel')
                   a href="#"
                     = t('words.invite')
