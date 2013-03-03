@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   protected
 
     def current_city param=:slug
-      current_user.try(:city).try(param) || session['city'] || session[:city] || 'kyiv'
+      current_user.try(:city).try(param) ||  session[:city] || 'kyiv'
     end
 
     def current_city_plural name = :plural_name
