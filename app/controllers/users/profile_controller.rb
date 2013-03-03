@@ -93,7 +93,14 @@ class Users::ProfileController < ApplicationController
 
   def cancel_reservation
     reservation = Reservation.find_by_id(params[:reservation_id])
-    send_messages(reservation, [5,6])
+    if current_user.id == reservation.user_id
+      send_messages(reservation, [5,6])
+      reservation.destroy
+      redirect_to my_reservations_profile_path(current_user.id)
+    else
+      redirect_to root_path
+    end
+
   end
 
 end

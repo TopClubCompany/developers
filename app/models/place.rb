@@ -203,7 +203,7 @@ class Place < ActiveRecord::Base
     current_day = PlaceUtils::PlaceTime.wday(DateTime.now.wday) + 1
     field = "week_day_#{current_day}_end_at"
     filters = []
-    filters << {query: {range: {:"#{field}" => {from: "23:55", to: "10:00", boost: 2.0}} }}
+    filters << {query: {range: {:"#{field}" => {from: "19:00", to: "3:00", boost: 2.0}} }}
     tire.search(page: options[:page] || 1, per_page: amount) do
       sort { by("overall_mark", "desc") }
       if options[:city]
