@@ -234,52 +234,34 @@ module ApplicationHelper
 
 
   def time_with_locale(time)
-    if time[:m] == '15' or time[:m] == '15'
-      minutes = '00'
-    end
-    if time[:m] == '45' or time[:m] == '45'
-      minutes = '30'
-    end
-    time_no_quarters = {:h => time[:h].strip, :m => minutes || time[:m].gsub(/AM|PM/,'')}
+    minutes = '00' if time[:m] == '15'
+    minutes = '30' if time[:m] == '45'
+    minutes = (minutes || time[:m])
     if I18n.locale.to_s == "en"
+      time_no_quarters = Time.parse(time[:h] + ':' + minutes).strftime("%l:%M %p").sub( /^\s/, '')
       en_time(time_no_quarters)
     else
+      time_no_quarters =  Time.parse(time[:h] + ':' + minutes).strftime("%k:%M").sub( /^\s/, '')
       other_time(time_no_quarters)
     end
   end
 
-  def other_time time
+  def other_time time_string_to_obtain, format_string =  "%k:%M"
     times = []
-    (0...24).each do |hour|
-      %w(00 30).each do |minutes|
-        minutes = '00' if minutes == 0
-        key = "#{hour}:#{minutes}"
-        if hour.to_s == time[:h] and minutes == time[:m]
-          times.push({key => true})
-        else
-          times.push({key => false})
-        end
+    dummy_time = Time.new("0:00")
+    48.times do |shift|
+      key = (dummy_time + (shift * 30).minutes).strftime(format_string).sub( /^\s/, '')
+      if key == time_string_to_obtain
+        times.push({key => true})
+      else
+        times.push({key => false})
       end
     end
     times
   end
 
-  def en_time time
-    times = []
-    %w(AM PM).each do |_time|
-      (0...12).each do |hour|
-        %w(00 30).each do |minute|
-          hour = (_time == 'AM' ? '00' : '12') if hour == 0
-          key = "#{hour}:#{minute} #{_time}"
-          if hour.to_s == time[:h] and minute == time[:m]
-            times.push({key => true})
-          else
-            times.push({key => false})
-          end
-        end
-      end
-    end
-    times
+  def en_time time_string_to_obtain
+    other_time time_string_to_obtain, "%l:%M %p"
   end
 
   def localization_link(resource)
