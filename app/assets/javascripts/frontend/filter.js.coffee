@@ -569,25 +569,16 @@ class FilterInput
       need_suffex = false
       dateText = $('input[name="reserve_date"]').val()
       date = new Date()
+
       res = []
       res.push curr_date = if (day = date.getDate()) < 10 then '0' + day else day
       res.push curr_month = if (month = date.getMonth() + 1) < 10 then '0' + month else month  #Months are zero based
       res.push curr_year = date.getFullYear()
       time = $(this).val()
-      console.log "time was #{time}"
+      need_suffex = true if time.match(/(AM|PM)/)
+      dateToCompare = new Date("#{time} #{date.getMonth() + 1}/#{date.getDate()}/#{date.getFullYear()}")
 
-      if x = time.match(/(AM|PM)/)
-        need_suffex = true
-        splitted = time.split(' ')
-        if splitted[1] == 'AM'
-          hourToCompare = splitted[0].split(':')[0]
-        else
-          hourToCompare = splitted[0].split(':')[0] + 12
-      else
-        hourToCompare = parseInt(time.split(':')[0])
-
-
-      if (dateText == res.join('-') or dateText == res.join('/')) and (date.getHours() >= hourToCompare)
+      if (dateText == res.join('-') or dateText == res.join('/')) and (date >= dateToCompare)
         alert "The time has passed. Please select current time"
         # the last bit for 00, 30 part
         valid_date = new Date(date.setMinutes(date.getMinutes() + 90 - date.getMinutes() % 30))
