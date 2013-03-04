@@ -475,8 +475,12 @@ class FilterInput
        regexpMatch = /page=(\d+)/
        regexpReplace = /page=\d+/
       when 'reserve_time'
-       regexpMatch = /reserve_time=(\d+\W+\w+)/
-       regexpReplace = /reserve_time=(\d+\W+\w+)/
+        if window.language is 'en'
+          regexpMatch = /reserve_time=(\d+\W+\w+\+(AM|PM))/
+          regexpReplace = /reserve_time=(\d+\W+\w+\+(?:AM|PM))/
+        else
+         regexpMatch = /reserve_time=(\d+\W+\w+)/
+         regexpReplace = /reserve_time=(\d+\W+\w+)/
       when 'number_of_people'
        regexpMatch = /number_of_people=(\d+)/
        regexpReplace = /number_of_people=\d+/
@@ -562,6 +566,7 @@ class FilterInput
     )
     $("select[name=reserve_time]").off 'change.filters'
     $("select[name=reserve_time]").on 'change.filters', ->
+      need_suffex = false
       dateText = $('input[name="reserve_date"]').val()
       date = new Date()
       res = []
@@ -569,17 +574,39 @@ class FilterInput
       res.push curr_month = if (month = date.getMonth() + 1) < 10 then '0' + month else month  #Months are zero based
       res.push curr_year = date.getFullYear()
       time = $(this).val()
-      if (dateText == res.join('-') or dateText == res.join('/')) and (date.getHours() >= parseInt(time.split(':')[0]))
+      console.log "time was #{time}"
+
+      if x = time.match(/(AM|PM)/)
+        need_suffex = true
+        splitted = time.split(' ')
+        if splitted[1] == 'AM'
+          hourToCompare = splitted[0].split(':')[0]
+        else
+          hourToCompare = splitted[0].split(':')[0] + 12
+      else
+        hourToCompare = parseInt(time.split(':')[0])
+
+
+      if (dateText == res.join('-') or dateText == res.join('/')) and (date.getHours() >= hourToCompare)
         alert "The time has passed. Please select current time"
         # the last bit for 00, 30 part
         valid_date = new Date(date.setMinutes(date.getMinutes() + 90 - date.getMinutes() % 30))
         valid_hours = valid_date.getHours()
         valid_minutes = ["00", "30"][(valid_date.getMinutes() / 30)]
-        validHourString = valid_hours + ":" + valid_minutes
+        if need_suffex
+          suffex = (if (valid_hours >= 12) then " PM" else " AM")
+          valid_hours = (if (valid_hours > 12) then valid_hours - 12 else valid_hours)
+          valid_hours = (if (valid_hours is "00") then 12 else valid_hours)
+          validHourString = valid_hours + ":" + valid_minutes + suffex
+        else
+          validHourString = valid_hours + ":" + valid_minutes
+
+        console.log "validHourString #{validHourString}"
         $(this).val(validHourString)
       else
         headlineText = $('#map_details > h3:first-child').html().replace(/\d+\:\d+(?=\sfor\s)/, time)
         $('#map_details > h3:first-child').html headlineText
+        console.log "time = #{time}"
         window.filter.get 'reserve_time', time
 
 
