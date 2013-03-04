@@ -97,22 +97,20 @@ $ ->
       res.push curr_date = if (day = date.getDate()) < 10 then '0' + day else day
       res.push curr_month = if (month = date.getMonth() + 1) < 10 then '0' + month else month  #Months are zero based
       res.push curr_year = date.getFullYear()
-      if dateText == res.join('-') or dateText == res.join('/')
-        # it's today we should check for the hour
-        time = $("select[name=reserve_time]").val()
-        if is_english.call @, time
-          # TODO HANDLE ENGLISH TIME
+      time = $(this).val()
+      need_suffex = true if time.match(/(AM|PM)/)
+      dateToCompare = new Date("#{time} #{date.getMonth() + 1}/#{date.getDate()}/#{date.getFullYear()}")
+      if (dateText == res.join('-') or dateText == res.join('/')) and (date >= dateToCompare)
+        alert "The time has passed. Please select current time."
+        # the last bit for 00, 30 part
+        valid_date = new Date(date.setMinutes(date.getMinutes() + 90 - date.getMinutes() % 30))
+        valid_hours = valid_date.getHours()
+        valid_minutes = ["00", "30"][(valid_date.getMinutes() / 30)]
+        if need_suffex
+          suffex = (if (valid_hours >= 12) then " PM" else " AM")
+          valid_hours = (if (valid_hours > 12) then valid_hours - 12 else valid_hours)
+          valid_hours = (if (valid_hours is "00") then 12 else valid_hours)
+          validHourString = valid_hours + ":" + valid_minutes + suffex
         else
-          hour = parseInt(time.split(':')[0])
-          unless date.getHours() <= hour
-            alert "The time has passed. Please select current time"
-            # the last bit for 00, 30 part
-            valid_date = new Date(date.setMinutes(date.getMinutes() + 90 - date.getMinutes() % 30))
-            valid_hours = valid_date.getHours()
-            valid_minutes = ["00", "30"][(valid_date.getMinutes() / 30)]
-            validHourString = valid_hours + ":" + valid_minutes
-            $("select[name=reserve_time]").val(validHourString)
-
-
-  is_english = (time_argument) ->
-    (time_argument.indexOf("AM") isnt -1) or (time_argument.indexOf("FM") isnt -1)
+          validHourString = valid_hours + ":" + valid_minutes
+        $(this).val(validHourString)
