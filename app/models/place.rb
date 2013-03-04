@@ -414,8 +414,21 @@ class Place < ActiveRecord::Base
         end
       end.join('-')
     end
+
+    day_abbr = DayType.all.map {|day| day.title(:short)}
     groups.map do |time, days|
-      "<b>#{days.map { |day| day.day_type_title(:short) }.join('-')}:</b> #{time}"
+      present_abbr = days.map { |day| day.day_type_title(:short) }
+      (day_abbr.length).downto(2) do |length|
+        day_abbr.each_cons(length) do |day_abbr_con|
+          present_abbr.each_cons(day_abbr_con.length).with_index do |pres_abbr_con, index|
+            if day_abbr_con == pres_abbr_con
+              present_abbr[index, index + pres_abbr_con.length] = pres_abbr_con[0] + '-' + pres_abbr_con[-1]
+            end
+          end
+        end
+      end
+
+      "<b>#{present_abbr.join(', ')}:</b> #{time}"
     end
   end
 
