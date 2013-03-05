@@ -577,9 +577,8 @@ class FilterInput
       time = $(this).val()
       need_suffex = true if time.match(/(AM|PM)/)
       dateToCompare = new Date("#{time} #{date.getMonth() + 1}/#{date.getDate()}/#{date.getFullYear()}")
-
       if (dateText == res.join('-') or dateText == res.join('/')) and (date >= dateToCompare)
-        alert "The time has passed. Please select current time"
+        alert "The time has passed. Please select current time."
         # the last bit for 00, 30 part
         valid_date = new Date(date.setMinutes(date.getMinutes() + 90 - date.getMinutes() % 30))
         valid_hours = valid_date.getHours()
