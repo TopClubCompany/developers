@@ -1,7 +1,7 @@
 class FormValidate
 
-  constructor: (el)->
-    @selector = '#' + el.slice(5)
+  constructor: (el, selector)->
+    @selector = selector || '#' + el.slice(5)
     @$el = $(el)
     @validate_email()
     @enter_phone()
@@ -212,3 +212,4 @@ $ ->
   window.language = $('#language .active').attr('id')
   new FormValidate("#new_user") if $("#new_user").size() > 0
   new FormValidate("#new_reservation") if $("#new_reservation").size() > 0
+  new FormValidate('#edit_user_1', '#user_') if $('#edit_user_1').size() > 0
