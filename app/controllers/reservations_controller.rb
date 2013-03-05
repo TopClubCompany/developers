@@ -15,10 +15,13 @@ class ReservationsController < ApplicationController
 
   def reservation_confirmed
     @reservation = Reservation.find(params[:reservation_id])
-
-    @place = @reservation.try(:place)
-    @date  = DateTime.parse(@reservation.try{|res| res.time.to_s})
-    redirect_to root_path, flash: { error: 'no such reservation' } unless @reservation && @place
+    if current_user.id = @reservation.user_id
+      @place = @reservation.try(:place)
+      @date  = DateTime.parse(@reservation.try{|res| res.time.to_s})
+      redirect_to root_path, flash: { error: 'no such reservation' } unless @reservation && @place
+    else
+      redirect_to root_path
+    end
   end
 
 
