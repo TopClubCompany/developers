@@ -212,4 +212,6 @@ $ ->
   window.language = $('#language .active').attr('id')
   new FormValidate("#new_user") if $("#new_user").size() > 0
   new FormValidate("#new_reservation") if $("#new_reservation").size() > 0
-  new FormValidate('#edit_user_1', '#user_') if $('#edit_user_1').size() > 0
+  new FormValidate('#edit_user_1', '#user') if $('#edit_user_1').size() > 0
+  new FormValidate("#edit_reservation_2", '#reservation') if $("#edit_reservation_2").size() > 0
+  

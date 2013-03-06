@@ -104,4 +104,6 @@ $(document).ready ->
 
   new FormValidateTwo("#new_user") if $("#new_user").length > 0
   new FormValidateTwo("#new_reservation") if $("#new_reservation").length > 0
-  new FormValidateTwo('#edit_user_1', '#user') if $('#edit_user_1').size() > 0
+  new FormValidateTwo('#edit_user_1', '#user') if $('#edit_user_1').length > 0
+  new FormValidateTwo("#edit_reservation_2", '#reservation') if $("#edit_reservation_2").length > 0
+  
