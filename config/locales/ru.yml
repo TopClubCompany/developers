@@ -258,7 +258,10 @@ ru:
     share: Share
     up_to: Up to %{discount}% off
     vailability: Availability on %{reserve_date} around %{reserve_time} for %{number_of_people} people
-  profile: 
+  profile:
+    upcoming: Upcoming Reservations
+    view_all_reservations: View all reservations
+    view_edit: View / Edit
     city_not_specified: not specified
     date: Date
     edit: edit
