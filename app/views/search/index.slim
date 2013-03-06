@@ -20,9 +20,8 @@
           - center_point = @result.length == 1? @result[0].lat_lng.split(',') : @user_location
           #map_places style="background: rgba(128,128,128,0.5);" *{'data-lat'=>"#{center_point[0]}", "data-lng" => "#{center_point[1]}"}
           #map_details_wrapper
-            - @result.each_with_index do |place, i|
+            - @result.each do |place|
               - location = place.lat_lng.split(',')
-              /= raise  params[:reserve_time].inspect if i == 1
               = render 'shared/map_place', :mustache => Place.for_mustache(place, params).merge(lat: location[0]).merge(lng: location[1])
       #list_grid_view.none
         #filters.filters
