@@ -49,7 +49,7 @@ class Reservation < ActiveRecord::Base
     count.times do |time_item|
       times << ::PlaceUtils::PlaceTime.find_available_time(time_item * 30, time, start_time, end_time)
     end
-    times.group_by{|time| time[:available]}[true].map{|t|t[:time]}
+    times.group_by{|time| time[:available]}[true].try{|available|available.map{|t|t[:time]}}
   end
 
 

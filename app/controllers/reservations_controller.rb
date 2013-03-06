@@ -39,8 +39,10 @@ class ReservationsController < ApplicationController
     place = Place.find(params[:place_id])
     current_day = params[:reserve_date].present? ? DateTime.parse(params[:reserve_date]).wday : DateTime.now.wday
     current_day = PlaceUtils::PlaceTime.wday(current_day)
-    format.json do
-      render :json => {times: Reservation.available_time(current_day, place)}
+    respond_to do |format|
+      format.json do
+        render :json => {times: Reservation.available_time(current_day, place)}
+      end
     end
   end
 
