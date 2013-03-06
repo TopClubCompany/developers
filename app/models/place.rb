@@ -386,7 +386,7 @@ class Place < ActiveRecord::Base
     [30, 15, 0, -15, -30].each_with_index.map do |i, index|
       start_time = place["week_day_#{wday}_start_at"].sub(":",".").to_f
       end_time = place["week_day_#{wday}_end_at"].sub(":",".").to_f
-      ::PlaceUtils::PlaceTime.find_available_time(i, time, start_time, end_time)
+      ::PlaceUtils::PlaceTime.find_available_time(i, time, start_time, end_time, false)
     end
   end
 

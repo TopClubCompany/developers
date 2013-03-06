@@ -1,13 +1,17 @@
 module PlaceUtils
   class PlaceTime
     class << self
-      def find_available_time(i, time, start_time, end_time)
+      def find_available_time(i, time, start_time, end_time, with_en=true)
         time_now = DateTime.now.strftime("%H.%M").to_f
         reverse_time = time.strftime("%H.%M").to_f
         end_time = (Time.parse(end_time.to_s.sub(".",":")) - 60.minutes).strftime("%H.%M").to_f
         range_time = (start_time...end_time)
         if I18n.locale.to_sym == :en
-          {:time => (time + i.minutes).strftime("%l:%M %p").sub(/^ /,''), :available => is_available?(time+i.minutes, range_time)}
+          if with_en || i == 0
+            {:time => (time + i.minutes).strftime("%l:%M %p").sub(/^ /,''), :available => is_available?(time+i.minutes, range_time)}
+          else
+            {:time => (time + i.minutes).strftime("%l:%M").sub(/^ /,''), :available => is_available?(time+i.minutes, range_time)}
+          end
         else
           {:time => (time + i.minutes).strftime("%H:%M"), :available => is_available?(time+i.minutes, range_time)}
         end
