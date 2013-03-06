@@ -39,7 +39,7 @@ class Reservation < ActiveRecord::Base
     }
   end
 
-  def available_time day
+  def self.available_time day, place
     time = Time.parse (DateTime.now + (30 - DateTime.now.min % 15).minutes).strftime("%k:%M")
     work_times = place.week_days.where(:day_type_id => day).first
     start_time = work_times.start_at
