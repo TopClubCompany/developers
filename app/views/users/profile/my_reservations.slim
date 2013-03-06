@@ -10,40 +10,12 @@
           #upcoming_reservations.dash_block style="width: 600px;"
             h2
               =' t('short_strings.my_reservations')
-              - active_reservations = Reservation.includes(:place).active_reservations(current_user.id)
-              - old_reservations    = Reservation.includes(:place).old_reservations(current_user.id)
-              span (#{active_reservations.count} #{I18n.t('profile.upcoming')})
-            - reservations = active_reservations + old_reservations
-            - reservations.each do |reservation|
+              - coming = Reservation.coming(current_user.id)
+              - upcoming = Reservation.upcoming(current_user.id)
+              span (#{upcoming.count} #{I18n.t('profile.upcoming')})
+            - upcoming.each do |reservation|
               - place = reservation.place
-              .reservation.place class=('past' if reservation.time.to_i < DateTime.now.to_i)
-                a.place_img_sm href="#"
-                  img height="100" src=place.place_image.url(:slider) width="140"
-                    span.discount.minus_5
-                h4 style="width: auto;"
-                  a href="#"
-                    = place.title
-                    span.discount_label
-                      = "#{reservation.discount}%"
-                .rating
-                  .stars
-                    .stars_overlay
-                    .stars_bar style="left: #{place.overall_mark * 20}%"
-                    .stars_bg
-                  small
-                    - place_reviews = place.reviews.count
-                    a href="#"
-                      = place_reviews
-                      |  #{place_reviews == 1 ? 'review' : 'reviews'}
-                .btns
-                  a href=cancel_profile_reservation_path(place.user_id, reservation.id)
-                    = t('words.cancel')
-                  a href="#"
-                    = t('words.invite')
-                  a href=show_profile_reservation_path(place.user_id, reservation.id)
-                    | #{t('words.view').capitalize} / #{t('words.edit').capitalize}
-                  .clear
-                #favorites_small
-                  .add_to_favorites data-id="#{place.id}"
-                    = t('short_strings.add_to_favorites')
-                .clear
+              = render partial: 'reservation', locals: {place: place, reservation: reservation, css_class: ""}
+            - coming.each do |reservation|
+              - place = reservation.place
+              = render partial: 'reservation', locals: {place: place, reservation: reservation, css_class: "past"}

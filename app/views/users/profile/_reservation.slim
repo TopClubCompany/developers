@@ -1,0 +1,37 @@
+.reservation.place class="#{css_class}"
+  a.place_img_sm href="#"
+    img height="100" src=place.place_image.url(:slider) width="140"
+      span.discount.minus_5
+  h4 style="width: auto;"
+    a href=place_path(place)
+      = place.title
+      span.discount_label
+        = "#{reservation.discount}%"
+  .rating
+    .stars
+      .stars_overlay
+      .stars_bar style="left: #{place.overall_mark * 20}%"
+      .stars_bg
+    small
+      - place_reviews = place.reviews.count
+      a href=place_path(place)
+        = place_reviews
+        |  #{place_reviews == 1 ? 'review' : 'reviews'}
+  .btns
+    - unless css_class == "past"
+      a href=cancel_profile_reservation_path(place.user_id, reservation.id)
+        = t('words.cancel')
+      a href="#"
+        = t('words.invite')
+      a href=show_profile_reservation_path(place.user_id, reservation.id)
+        | #{t('words.view').capitalize} / #{t('words.edit').capitalize}
+    .clear
+  - if UserFavoritePlace.liked?(current_user.id, place.id)
+    #favorites_small style="display:block"
+      .add_to_favorites data-id="#{place.id}"
+        = t('short_strings.add_to_favorites')
+  - else
+    #favorites_small
+      .add_to_favorites data-id="#{place.id}"
+        = t('short_strings.add_to_favorites')
+  .clear
