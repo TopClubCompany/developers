@@ -44,7 +44,7 @@ class Reservation < ActiveRecord::Base
     start_time = work_times.start_at
     end_time = work_times.end_at
     time = Time.parse(start_time.to_f.to_s.sub(".",":"))
-    time = Time.parse((time + (30 - time.min % 15).minutes).strftime("%k:%M"))
+    time = Time.parse((time + (30 - time.min % 30).minutes).strftime("%k:%M"))
     count = ((end_time.floor - start_time.floor) * 2 + ((end_time - end_time.to_i) - (start_time - start_time.to_i)) / 0.3).floor
     times = []
     count.times do |time_item|
