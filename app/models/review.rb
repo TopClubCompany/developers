@@ -23,8 +23,8 @@ class Review < ActiveRecord::Base
     }
   end
 
-  def place
-    Place.find reviewable_id if reviewable_type == "Place"
+  def reviewable
+    reviewable_type.constantize.find(reviewable_id)
   end
 
   accepts_nested_attributes_for :marks, allow_destroy: true, reject_if: :all_blank
