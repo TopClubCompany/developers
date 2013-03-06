@@ -39,6 +39,19 @@ class Reservation < ActiveRecord::Base
     }
   end
 
+  def available_time day
+    time = Time.parse (DateTime.now + (30 - DateTime.now.min % 15).minutes).strftime("%k:%M")
+    work_times = place.week_days.where(:day_type_id => day).first
+    start_time = work_times.start_at
+    end_time = work_times.end_at
+    count = ((end_time.floor - start_time.floor) * 2 + ((end_time - end_time.to_i) - (start_time - start_time.to_i)) / 0.3).floor
+    times = []
+    count.times do |time_item|
+      times << ::PlaceUtils::PlaceTime.find_available_time(time_item * 30, time, start_time, end_time)
+    end
+    times.group_by{|time| time[:available]}[true].map{|t|t[:time]}
+  end
+
 
 end
 # == Schema Information
