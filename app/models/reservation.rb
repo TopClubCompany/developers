@@ -52,6 +52,10 @@ class Reservation < ActiveRecord::Base
     times.group_by{|time| time[:available]}[true].map{|t|t[:time]}
   end
 
+  def self.upcoming(user_id)
+    includes(:place).where("user_id = ? AND time > ?", user_id, DateTime.now)
+  end
+
 
 end
 # == Schema Information
