@@ -4,15 +4,16 @@ module ReservationsHelper
                place_path: wrapp_domain(place_path(reservation.place)),
                edit_reservation_path: wrapp_domain(edit_profile_reservation_path(current_user.id, reservation.id)),
                cancel_reservation_path: wrapp_domain(cancel_profile_reservation_path(current_user.id, reservation.id))}
+    phone = reservation.phone.try { |ph| ph.gsub(/[\(\)-]/, '') }
     types.each do |type|
       text, caption = ::Utils::LetterParser.parse_params(reservation.to_mail(options).merge({letter_type: type}))
       administrators = reservation.place.place_administrators
       case type
         when 1
-          Utils::Soap::TurboSms.send_sms(reservation.phone, text) if reservation.phone
+          Utils::Soap::TurboSms.send_sms(phone, text.no_html) if phone
         when 2
           administrators.each do |admin|
-            Utils::Soap::TurboSms.send_sms(admin.phone, text) if admin.phone
+            Utils::Soap::TurboSms.send_sms(admin.phone, text.no_html) if admin.phone
           end
         when 3
           AccountMailer.new_reservation(reservation.email, caption, text).deliver

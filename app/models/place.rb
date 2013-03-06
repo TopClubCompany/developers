@@ -335,8 +335,8 @@ class Place < ActiveRecord::Base
     current_day = options[:reserve_date].present? ? DateTime.parse(options[:reserve_date]).wday : DateTime.now.wday
     current_day = PlaceUtils::PlaceTime.wday(current_day)
     truncated_time_now = Time.at(time_now.to_i - time_now.sec - time_now.min % 15 * 60)
-    time = options[:reserve_time]? Time.parse(options[:reserve_time]) : truncated_time_now
-    options[:reserve_time] = truncated_time_now.strftime("%H:%M") unless options[:reserve_time].present?
+    time = options[:reserve_time].present? ? Time.parse(options[:reserve_time]) : truncated_time_now
+    #options[:reserve_time] = truncated_time_now.strftime("%H:%M") unless options[:reserve_time].present?
     options[:image_url] ||= :slider_url
     res = {}
     res[:id] = place.id
@@ -377,6 +377,7 @@ class Place < ActiveRecord::Base
     res[:star_rating] = self.get_star_rating(place)
     res[:is_favourite] = UserFavoritePlace.liked?(options[:current_user].try(:id), place.id)
     res[:timing] = self.order_time(place, time, current_day)
+    #raise self.order_time(place, time, current_day).inspect
     res
   end
 
@@ -477,9 +478,9 @@ class Place < ActiveRecord::Base
 
   def self.en_to_time(time)
     if time.include?("AM")
-      time.gsub!(" AM",'')
+      time = time.gsub(" AM",'')
     elsif time.include?("PM")
-      time = time.gsub!(" PM",'').split(":")
+      time = time.gsub(" PM",'').split(":")
       time[0] = (time[0].to_i + 12).to_s
       time = time.join(":")
     end
@@ -489,7 +490,8 @@ class Place < ActiveRecord::Base
 
   def self.today_discount(discounts, options={})
     if options[:reserve_time].present?
-      time = self.en_to_time(options[:reserve_time]).sub(":",".").to_f
+      time = options[:reserve_time].to_s
+      time = self.en_to_time(time).sub(":",".").to_f
     else
       time = nil
     end
