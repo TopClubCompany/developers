@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     end
 
     def set_locale
-      if params[:locale] && Globalize.available_locales.include?(params[:locale].to_sym) && !request.xhr?
+      if params[:locale] && Globalize.available_locales.include?(params[:locale].to_sym) #&& !request.xhr?
         I18n.locale = params[:locale].to_sym
       else
         I18n.locale = I18n.default_locale
