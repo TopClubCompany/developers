@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_time
   before_filter :set_user_location
   before_filter :find_page
+  before_filter :set_gon_current_user
 
   helper_method :current_city, :current_city_plural
 
@@ -73,4 +74,9 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+  def set_gon_current_user
+    gon.current_user = current_user if current_user
+  end
+
 end

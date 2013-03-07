@@ -401,7 +401,7 @@ class FilterInput
 
   dirtyHack: () ->
     querystring = window.location.search
-    if gon?
+    if gon? and gon.category
       gon["category"] = _.reduce gon["category"], (memo, num) ->
         memo + ',' + num
       gon["category"] = gon["category"] + ''
