@@ -303,6 +303,8 @@ en:
     search: ""
     set_img: ""
     value: ""
+    own_review: Can't vote for your own review
+    vote_twice: Can't vote twice
     month:
       - "January"
       - "February"
