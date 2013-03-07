@@ -60,12 +60,31 @@ class PlacesCollection
       objArray.push $(block).data()
       id = $(block).data('id')
       @ids.push id
-      bindBlockListeners.call @, $("#list_place_#{id}"), $("#place_#{id}")
+      $el = $("#place_#{id}")
+      $listEl = $("#list_place_#{id}") 
+      bindBlockListeners.call @, $listEl, @$el
+
+      $el.add($listEl).find('.timing').each (index, timeGroup) ->
+        $(timeGroup).find('a').each (index, timeButton) ->
+          timeButton = $(timeButton)
+          if index isnt 2
+            text = timeButton.text()
+            text = text.replace /AM|PM/, ''
+          else
+            text = timeButton.text()
+          timeButton.attr('value', timeButton.text())
+          timeButton.text(text)
+        
     lattitudes = _.pluck objArray, 'lat'
     longtitudes = _.pluck objArray, 'lat'
 
+
     window.googleMarkers = @markers
     @createMap()
+
+
+
+
     for obj in objArray
       @addMarker obj
     setTimeout((=> 
@@ -155,6 +174,16 @@ class PlacesCollection
     mapBlock = Mustache.to_html(source, place)
     $el = $('#map_details_wrapper').append(mapBlock)
     $listEl = $(listBlock).insertBefore('#list_grid_view .paginate')
+    $el.add($listEl).find('.timing').each (index, timeGroup) ->
+      $(timeGroup).find('a').each (index, timeButton) ->
+        timeButton = $(timeButton)
+        if index isnt 2
+          text = timeButton.text()
+          text = text.replace /AM|PM/, ''
+        else
+          text = timeButton.text()
+        timeButton.attr('value', timeButton.text())
+        timeButton.text(text)
 
     setTimeout(( =>
       bindBlockListeners.call @, $("#list_place_#{place.id}"), $("#place_#{place.id}")
@@ -198,7 +227,7 @@ class PlacesCollection
         $el.add($listEl).find(".special_offers").append("<h5>Special offers:</h5>")
 
         for offer in place.special_offers
-          console.log offer
+          # console.log offer
 
           $a = $("<h5><a class='popoverable' href='#{place.place_url}'>#{offer.popover_data.title}</a></h5>")
             .appendTo($el.add($listEl).find(".special_offers"))
@@ -206,7 +235,7 @@ class PlacesCollection
             $a.data("#{key}", "#{value}")
           $a.click (e) -> e.preventDefault()
           $a.popover()
-      console.log 'updatedOffers'
+      # console.log 'updatedOffers'
 
   updateTime: (placesData) =>
     $('#map_details_wrapper').find('.place').each (index, el) ->
@@ -237,10 +266,15 @@ class PlacesCollection
       $el.find(".timing a:eq(#{index})").attr('href', newLink)
       $listEl.find(".timing a:eq(#{index})").attr('href', newLink)
 
-  updateSingleTime = (values, $el, $listEl) ->
+  updateSingleTime = (values, $el, $listEl, index) ->
     _.each values, (time, index, values) ->
-      $el.find(".timing a:eq(#{index})").html time.time
-      $listEl.find(".timing a:eq(#{index})").html time.time
+      if index isnt 2
+        text = time.time
+        text = text.replace /AM|PM/, ''        
+      else 
+        text = time.time
+      $el.find(".timing a:eq(#{index})").html(text).attr('value', time.time)
+      $listEl.find(".timing a:eq(#{index})").html(text).attr('value', time.time)
       if time.available
         $listEl.add($el).tooltip('hide')
         $listEl.add($el).find(".timing a:eq(#{index})").removeClass('na').tooltip('disable')
@@ -594,10 +628,11 @@ class FilterInput
         console.log "validHourString #{validHourString}"
         $(this).val(validHourString)
       else
-        headlineText = $('#map_details > h3:first-child').html().replace(/\d+\:\d+(?=\sfor\s)/, time)
-        $('#map_details > h3:first-child').html headlineText
-        console.log "time = #{time}"
-        window.filter.get 'reserve_time', time
+        validHourString = time
+      headlineText = $('#map_details > h3:first-child').html().replace(/\d+\:\d+(?=\sfor\s)/, time)
+      $('#map_details > h3:first-child').html headlineText
+      # console.log "time = #{time}"
+      window.filter.get 'reserve_time', validHourString
 
 
     $("select[name=number_of_people]").on 'change', ->
