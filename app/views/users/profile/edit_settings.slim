@@ -49,7 +49,7 @@
           .clear
           #settings_password.dash_block
             .line2
-            = simple_form_for user, url: update_settings_profile_path, builder: Utils::Views::FrontFormBuilder, wrapper: :front_reg_form do |f|
+            = simple_form_for user, url: update_settings_profile_path, builder: Utils::Views::FrontFormBuilder, wrapper: :front_reg_form, html: {id: "user_form_2"} do |f|
               h3
                 = I18n.t('profile.settings')
               ul.settings
@@ -65,7 +65,7 @@
           .clear
           #settings_notifications.dash_block
             .line2
-            = simple_form_for user, url: update_settings_profile_path, builder: Utils::Views::FrontFormBuilder, wrapper: :front_reg_form do |f|
+            = simple_form_for user, url: update_settings_profile_path, builder: Utils::Views::FrontFormBuilder, wrapper: :front_reg_form, html: {id: "user_form_3"} do |f|
               h3 = I18n.t('profile.notifications')
               ul.settings
                 - UserNotification.by_position.each do |notification|
