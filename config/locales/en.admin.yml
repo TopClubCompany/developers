@@ -332,6 +332,10 @@ en:
       - "Thu"
       - "Fri"
       - "Sat"
+    at: 'at'
+    for: 'for'
+    person: 'person'
+    people: 'people'
     validation_message:
       email_incorrect: "Enter correct e-mail"
       phone_incorrect: "Enter correct phone number"

@@ -295,7 +295,12 @@ ru:
     diner_name: "Имя обедающего:"
     dress_code: "Dress Code:"
     edit: Править
-    edit_with_place: Edit your reservation at %{place}
+    edit_with_place: Изменить резерв в %{place}
+    at: 'в'
+    for: 'для'
+    people:
+      one: '1 персоны'
+      other: '%{count} персон'
     i_go: Что дальше?
     invite_friends: Пригласить друзей
     message_from_restoran: "Сообщение от ресторана:"

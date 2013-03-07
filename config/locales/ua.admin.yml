@@ -332,6 +332,10 @@ ua:
       - "Чт"
       - "Пт"
       - "Сб"
+    at: 'в'
+    for: 'для'
+    person: 'особи'
+    people: 'осіб'
     validation_message:
       email_incorrect: "Введіть корректний e-mail"
       latin_only: "Лише латиниця"

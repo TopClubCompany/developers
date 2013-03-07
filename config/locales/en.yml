@@ -238,10 +238,16 @@ en:
     dress_code: ""
     edit: ""
     edit_with_place: ""
+    at: at
+    for: for
+    people:
+      one: '1 person'
+      other: '%{count} people'
     i_go: ""
     invite_friends: ""
     message_from_restoran: ""
     more_info: ""
+    edit_with_place: Edit your reservation at %{place}
     new_reservation: 
       complete_reservation: Complete your reservation
     phone: ""
