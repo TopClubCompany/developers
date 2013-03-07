@@ -17,3 +17,7 @@
     li
       label= User.human_attribute_name(:birthday)
       = current_user.birthday.try { |birthday| birthday.strftime("%B %e %Y") } or I18n.t('profile.city_not_specified')
+  = link_to edit_settings_profile_path(current_user), class: 'user_btn' do
+    i.icon-pencil
+    strong
+      = I18n.t('profile.edit')

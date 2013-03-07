@@ -22,6 +22,7 @@
 //=require jquery.raty
 //=require goole.infobox
 //=require jquery.deparam
+//= require i18n/translations.js
 //=require zebra_datepicker
 //=require html5
 //=require textshadow
@@ -35,7 +36,6 @@
 //= require manage-fileuploader.js
 //= require jquery.tmpl.min
 //= require jquery.cookie
-//= require i18n/translations.js
 //=require jquery.autocomplete
 //=require mustache
 //= require fancybox
