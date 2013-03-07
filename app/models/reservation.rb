@@ -29,7 +29,7 @@ class Reservation < ActiveRecord::Base
 
 
   def to_mail(opts={})
-    {restaurant_name: place.title, restaurant_name_en: place.title_en,
+    {restaurant_name: place.title, restaurant_name_en: place.name_en,
      restaurant_id: place.id, reservation_id: id,
      percent_number: "10", number_of_people: persons, day_of_week: I18n.l(time, format: :day_name),
      mnth: I18n.l(time, format: :month), day: I18n.l(time, format: :day), year: I18n.l(time, format: :year),
