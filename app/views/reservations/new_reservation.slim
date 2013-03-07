@@ -6,7 +6,8 @@
         strong 
           = @place.title
           '
-        = @date.strftime('%A, %B %e, %Y at %I:%M %p') + " for #{@persons} people"
+        - time_format = I18n.locale == :en ? '%l:%M %p' : '%k:%M'
+        = @date.strftime("#{locale_cap t('admin_js.day_names')[@date.wday]}, #{t('admin_js.month')[@date.month - 1 ]} %e, %Y #{t('reservation.at')} #{time_format}") + " #{t('reservation.for')} #{t('reservation.people', :count => @persons.to_i)}"
         span.complete_edit
           i.icon-pencil.icon-white
           = I18n.t('reservation.edit')

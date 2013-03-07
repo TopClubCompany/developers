@@ -285,6 +285,11 @@ ua:
     dress_code: ""
     edit: ""
     edit_with_place: ""
+    at: 'в'
+    for: 'для'
+    people:
+      one: '1 особи'
+      other: '%{count} осіб'
     i_go: ""
     invite_friends: ""
     message_from_restoran: ""

@@ -336,6 +336,10 @@ ru:
       - "Чт"
       - "Пт"
       - "Сб"
+    at: 'в'
+    for: 'для'
+    person: 'персоны'
+    people: 'персон'
     validation_message:
       email_incorrect: "Введите корректный e-mail"
       phone_incorrect: 'Введите корректный телефон'
