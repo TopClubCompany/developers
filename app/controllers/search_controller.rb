@@ -49,6 +49,7 @@ class SearchController < ApplicationController
   private
 
   def search
+    #raise I18n.locale.inspect
     @result = Place.search(params.merge!(city: current_city, current_point: cookies[:current_point], current_user: current_user))
     @geo_point_array = get_geo_points()
   end
