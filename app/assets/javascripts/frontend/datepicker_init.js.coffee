@@ -9,7 +9,7 @@ $ ->
       'direction': true
       'zIndex': 8
       'always_show_clear': false
-      'days': I18n.translations[window.language].admin_js.day
+      'days': I18n.translations[window.language].admin_js.day_names
       'days_abbr': I18n.translations[window.language].admin_js.abbr_day_names
       'months': I18n.translations[window.language].admin_js.month
     )
