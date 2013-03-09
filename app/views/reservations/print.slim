@@ -7,10 +7,10 @@
         -else
           = @place.title + " " + @date.strftime('%A, %B %e, %Y at %H:%M ') + I18n.t('reservation.people', count: @reservation.persons)
       h2
-    div= I18n.t('reservation.discount', discount: @discount) if @discount
-    h2
-      = I18n.t('reservation.confirmation')
-      a href="#" #{@place.id} - #{@reservation.id}
+      div= I18n.t('reservation.discount', discount: @discount) if @discount
+      h2
+        = I18n.t('reservation.confirmation')
+        a href="#" #{@place.id} - #{@reservation.id}
 
   .row
     .span5
@@ -36,5 +36,5 @@
           strong= I18n.t('reservation.more_info')
           = @place.description
     .span3.print_map
-      img src="http://maps.googleapis.com/maps/api/staticmap?center=#{@place.lat_lng}&zoom=14&size=300x300&maptype=roadmap&sensor=false&markers=color:red%7Clabel:A%7C#{@place.lat_lng}"
+      img src="http://maps.googleapis.com/maps/api/staticmap?center=#{@place.lat_lng}&zoom=14&size=220x220&maptype=roadmap&sensor=false&markers=color:red%7Clabel:A%7C#{@place.lat_lng}"
         
