@@ -1,0 +1,38 @@
+#reservation_print
+  .row.heading
+    .span8
+      h1
+        - if I18n.locale.to_sym == :en
+          = @place.title + " " + @date.strftime('%A, %B %e, %Y at %I:%M %p ') + I18n.t('reservation.people', count: @reservation.persons)
+        -else
+          = @place.title + " " + @date.strftime('%A, %B %e, %Y at %H:%M ') + I18n.t('reservation.people', count: @reservation.persons)
+      h2
+    div= I18n.t('reservation.discount', discount: @discount) if @discount
+    h2
+      = I18n.t('reservation.confirmation')
+      a href="#" #{@place.id} - #{@reservation.id}
+
+    div.row
+	  .span5
+	    .page_content.complete.confirmed#sign_up_page
+		  p= I18n.t('reservation.confirmed_text')
+		  p
+            strong= I18n.t('reservation.diner_name')
+            = @reservation.full_name
+            br
+            strong= I18n.t('reservation.address')
+            = @place.location.address
+            br
+            strong= I18n.t('reservation.phone')
+            = @reservation.phone
+          p
+            strong= I18n.t('reservation.dress_code')
+            | Smart Casual
+          p
+            strong= I18n.t('reservation.message_from_restoran')
+            | Thank you
+          p
+            strong= I18n.t('reservation.more_info')
+            = @place.description
+      span3.print_map
+        iframe width="300" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=%D0%A1%D1%80%D0%B8%D0%B1%D0%BD%D0%BE%D0%BA%D0%BE%D0%BB%D1%8C%D1%81%D0%BA%D0%B0%D1%8F+%D1%83%D0%BB%D0%B8%D1%86%D0%B0+3%D0%B4&amp;aq=&amp;sll=50.398807,30.623939&amp;sspn=0.018493,0.026822&amp;ie=UTF8&amp;hq=&amp;hnear=Sribnokol'skaya+ulitsa,+3,+Kiyev,+gorod+Kiyev,+Ukraine&amp;t=m&amp;z=14&amp;ll=50.401324,30.631127&amp;output=embed"

@@ -29,7 +29,7 @@ class Reservation < ActiveRecord::Base
 
 
   def to_mail(opts={})
-    discount = place.today_discount_with_time(time)
+    discount = place.today_discount_with_time(time).max{|x| x.discount}
     skidka = discount.present? ? "Skidka #{discount}%" : ""
     {restaurant_name: place.title, restaurant_name_en: place.name_en,
      restaurant_id: place.id, reservation_id: id, skidka: skidka,
