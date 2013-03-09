@@ -313,12 +313,13 @@ $ ->
           data: 
             "id": data.id
             "useful": data.useful
-          success: (response) ->
-            if response.success
+          success: (response) =>
+            if response.success              
               num = parseInt($(@).find('strong').text())
               $(@).find('strong').text(num + 1)
             else
-              $(@).attr 'title', I18n.translations[window.language].admin_js.vote_twice
+              # $(@).attr 'title', I18n.translations[window.language].admin_js.vote_twice
+              $(@).attr 'title', response.error
               $(@).tipsy({ gravity: 's', fadeOut: 1500 }).tipsy('show')
               setTimeout((=> 
                 $(@).tipsy 'hide'
