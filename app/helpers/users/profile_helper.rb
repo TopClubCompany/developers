@@ -54,4 +54,10 @@ module Users::ProfileHelper
     end
   end
 
+  def time_hash(time)
+    time = time.strftime("%I:%M %p").split(':')
+    time[0][0]='' if time[0].match /^0/
+    {:h => time[0], :m => time[1]}
+  end
+
 end
