@@ -11,15 +11,18 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def set_usefulness
-    vote_type = params[:vote_type]
-    review = Review.find_by_id(params[:review_id])
-    redirect_to :back, flash: { error: 'already used vote' } and return if current_user.votes.pluck(:review_id).include? review.id
-    if %w(helpful unhelpful).include? vote_type
-      current_user.votes << Vote.new(review_id: review.id, vote_type_id: VoteType.find_by_title(vote_type).try(:id))
-      redirect_to :back, flash: { success: 'review successfully added' }
+  def vote
+    vote_type = params[:useful]
+    review = Review.find_by_id(params[:id])
+    if current_user.votes.pluck(:review_id).include? review.id
+      render :json => {error: "already used vote"}
     else
-      redirect_to :back, flash: { error: 'wrong vote type' }
+      if %w(helpful unhelpful).include? vote_type
+        current_user.votes << Vote.new(review_id: review.id, vote_type_id: VoteType.find_by_title(vote_type).try(:id))
+        render :json => {success: "review successfully added"}
+      else
+        render :json => {error: "wrong vote type"}
+      end
     end
   end
 
