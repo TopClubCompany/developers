@@ -12,7 +12,6 @@ doMagic = () ->
     fromDate = $("input[name='reserve_date']").val().split('/')
     fromTime = $("select[name='reserve_time']").val().split(/:|\ /)
     needSuffex = false
-#    console.log 'fromTime', fromTime.length, fromTime
     if fromTime.length > 2  and window.language is 'en'
       if (fromTime[2] is 'PM') and (1 < (hours = parseInt(fromTime[0])) < 11)
         fromTime[0] = hours + 12 + ''
@@ -35,8 +34,13 @@ doMagic = () ->
 
 
     console.log date.getDay(), days
+    atText = I18n.translations[window.language].admin_js.at
+    forText = I18n.translations[window.language].admin_js.for
+    person = I18n.translations[window.language].admin_js.person
+    people = I18n.translations[window.language].admin_js.people
     HTMLToSet = $('#complete > h1')[0].outerHTML + $('#complete > strong')[0].outerHTML +
-    " #{days[date.getDay()]}, #{months[date.getMonth()]} #{date.getDate()}, #{date.getFullYear()} at #{timeString} for #{person_num}" + $('#complete > .complete_edit')[0].outerHTML
+    " #{days[date.getDay()]}, #{months[date.getMonth()]} #{date.getDate()}, #{date.getFullYear()} #{atText} #{timeString} #{forText} #{person_num} #{if person_num is '1' then person else people}" + 
+    $('#complete > .complete_edit')[0].outerHTML
     $('#complete').html(HTMLToSet)
     $('#reservation_time').val(date.toJSON())
     $('#reservation_persons').val(person_num)
@@ -51,9 +55,11 @@ updateSelect = ->
       url: "/#{window.language}/reservations/available_time?place_id=#{id}&reserve_date=#{$("input[name='reserve_date']").val()}"
       success: (data) ->
         console.log data
+        time_was = $("select[name='reserve_time']").find("option[selected='selected']").text()
         $("select[name='reserve_time']").find('option').not("[selected='selected']").remove()
         for time in data.times
-          $("select[name='reserve_time']").append("<option value='#{time}'>#{time}</option>")
+          if time isnt time_was
+            $("select[name='reserve_time']").append("<option value='#{time}'>#{time}</option>") 
 
 
 initDatepicker = ->

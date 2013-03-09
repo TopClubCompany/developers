@@ -379,3 +379,7 @@ div.fixed_ajax_loader {
 #tol_c {
   position: relative;
 }
+
+#search_form label[for='number_of_people'] nobr {
+  display: none;
+}

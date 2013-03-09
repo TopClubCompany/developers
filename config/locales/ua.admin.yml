@@ -303,6 +303,8 @@ ua:
     search: ""
     set_img: ""
     value: ""
+    own_review: Не можна голосувати за власний огляд
+    vote_twice: Не можна голосувати двічі
     month:
       - "Січень"
       - "Лютий"
@@ -332,6 +334,10 @@ ua:
       - "Чт"
       - "Пт"
       - "Сб"
+    at: 'в'
+    for: 'для'
+    person: 'особи'
+    people: 'осіб'
     validation_message:
       email_incorrect: "Введіть корректний e-mail"
       latin_only: "Лише латиниця"

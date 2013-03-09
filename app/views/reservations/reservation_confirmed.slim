@@ -5,13 +5,17 @@
         h1= I18n.t('reservation.confirmed')
         strong 
           = @place.title
-        = @date.strftime('%A, %B %e, %Y at %I:%M %p') + " for #{@persons} people"
+        |&nbsp
+        - if I18n.locale.to_sym == :en
+          = @date.strftime('%A, %B %e, %Y at %I:%M %p ') + I18n.t('reservation.people', count: @reservation.persons)
+        -else
+          = @date.strftime('%A, %B %e, %Y at %H:%M ') + I18n.t('reservation.people', count: @reservation.persons)
+
       #sign_up_page.page_content.complete.confirmed
         h2
           = I18n.t('reservation.confirmation')
           a href='#'
-            = @reservation.id
-            
+            = "#{@place.id} - #{@reservation.id}"
           
         p= I18n.t('reservation.confirmed_text')
         p
@@ -36,13 +40,13 @@
       h3= I18n.t('reservation.i_go')
       ul
         li.view
-          a href="#"
+          a href=edit_profile_reservation_path(current_user.id, @reservation.id)
             = I18n.t('reservation.view_or_change')
         li.print
-          a href="#"
+          a href=print_reservation_path(@reservation)
             = I18n.t('reservation.print')
         li.map
-          a href="#"
+          a href=place_path(@reservation.place)
             = I18n.t('reservation.view_on_map')
         li.invite
           a href="#"

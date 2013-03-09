@@ -1,4 +1,6 @@
 $ ->
+  window.language ||= $('#language .active').attr('id')
+
   #temp handle noise mark
   $(".set_noise a.set").click (e) ->
     e.preventDefault()
@@ -63,12 +65,15 @@ $ ->
     $(this).toggleClass("roll_up").text(text)
 
   $('.add_to_favorites').click ->
-    $(this).toggleClass 'i_like_this_place'
-    if $(this).hasClass('i_like_this_place')
-      $(this).parent().css('display', 'block')
+    if gon?.current_user
+      $(this).toggleClass 'i_like_this_place'
+      if $(this).hasClass('i_like_this_place')
+        $(this).parent().css('display', 'block')
+      else
+        $(this).parent().removeAttr('style')
+      $.post("/set_unset_favorite_place/#{$(this).data('id')}")
     else
-      $(this).parent().removeAttr('style')
-    $.post("/set_unset_favorite_place/#{$(this).data('id')}")
+      window.location.replace "/users/sign_in"
 
   movingItself = setInterval (->
     if $("ul.carousel_bullets li.current").next().length > 0
@@ -296,3 +301,44 @@ $ ->
 
   prepare_tweet_button()
 
+  console.log 'i was here'
+  $('.review_vote a').on 'click', (e) ->
+    e.preventDefault()
+    data = $(@).data()
+    if gon?.current_user
+      if data.id isnt 'can not vote'
+        $.ajax
+          type: 'POST'
+          url: "/reviews/vote"
+          data: 
+            "id": data.id
+            "useful": data.useful
+          success: (response) =>
+            if response.success              
+              num = parseInt($(@).find('strong').text())
+              $(@).find('strong').text(num + 1)
+            else
+              # $(@).attr 'title', I18n.translations[window.language].admin_js.vote_twice
+              $(@).attr 'title', response.error
+              $(@).tipsy({ gravity: 's', fadeOut: 1500 }).tipsy('show')
+              setTimeout((=> 
+                $(@).tipsy 'hide'
+              ), 3000)              
+          error: (xhr, err) ->
+            $(@).attr 'title', err
+            $(@).tipsy({ gravity: 's', fadeOut: 1500 }).tipsy('show')
+            setTimeout((=> 
+              $(@).tipsy 'hide'
+            ), 3000)
+      else
+        $(@).attr 'title', I18n.translations[window.language].admin_js.own_review
+        $(@).tipsy { gravity: 's', fadeOut: 3000 }
+        $(@).tipsy 'show'
+        setTimeout((=> 
+          $(@).tipsy 'hide'
+        ), 3000)
+    else
+      window.location.replace "/users/sign_in"
+    console.log $(@).data(), gon?.current_user
+    # <a class="helpful" data-id="128" data-useful="helpful" href="#">
+  # "helpful" "unhelpful"

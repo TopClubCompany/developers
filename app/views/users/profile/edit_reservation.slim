@@ -7,9 +7,11 @@
       .row
         = render 'user_head'
         #dash_blocks.span8
-          #edit_reservation.dash_block style="width: 600px;"
+          - binding.pry
+          #edit_reservation.dash_block data-place-id="#{@reservation.place_id}" style="width: 600px;" 
             h2= t('short_strings.edit_your_reservation')
             .place
+
               a.place_img_sm href="#"
                 img height="100" src=(@place.place_image.url(:place_show)if @place.place_image) width="140"
                   span.discount.minus_5
@@ -36,11 +38,19 @@
               .row
                 .span3
                   label for="reservation_date"= I18n.t('profile.date')
-                  = f.text_field :date, label: I18n.t('profile.date'), value: "#{@reservation.time.strftime("%D")}"
+                  = f.text_field :date, label: I18n.t('profile.date'), value: "#{@reservation.time.strftime('%d/%m/%Y')}"
                 .span3
-                  label for="reservation_time"= I18n.t('profile.time')
-                  = f.text_field :time, label: I18n.t('profile.time'), value: "#{@reservation.time.strftime("%I:%M %p")}"
-              = f.input :persons, label: "#{t('short_strings.number_of_people')}"
+                  label for="reserve_time"= I18n.t('profile.time')
+                  #fixwidth.reserve_time_c
+                    select name="reserve_time"
+                      - time_with_locale(time_hash(@reservation.time)).each do |time_el|
+                        - time_el.each do |k, v|
+                          - if v
+                            option value=k selected="selected" #{k}
+                          - else
+                            option value=k #{k}
+              = f.input :persons, label: "#{t('short_strings.number_of_people')}", collection: 1..10, include_blank: false
+
               .row
                 .span3
                   = f.input :first_name, placeholder: I18n.t('profile.first_name')

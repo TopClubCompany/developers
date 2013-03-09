@@ -9,7 +9,7 @@ development:
   APP_EMAIL_PASSWORD: ---
   SMS_LOGIN: 'topclub'
   SMS_PASSWORD: '198666'
-  SMS_SENDER: 'TOPClub'
+  SMS_SENDER: 'TopReserve'
 
 test:
   FACEBOOK_APP_ID: 373546769386190
@@ -22,7 +22,7 @@ test:
   APP_EMAIL_PASSWORD: ---
   SMS_LOGIN: 'topclub'
   SMS_PASSWORD: '198666'
-  SMS_SENDER: 'TOPClub'
+  SMS_SENDER: 'TopReserve'
 
 production:
   FACEBOOK_APP_ID: 453952084669104
@@ -35,4 +35,4 @@ production:
   APP_EMAIL_PASSWORD: ---
   SMS_LOGIN: 'topclub'
   SMS_PASSWORD: '198666'
-  SMS_SENDER: 'TOPClub'
+  SMS_SENDER: 'TopReserve'
