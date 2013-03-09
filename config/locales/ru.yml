@@ -313,6 +313,7 @@ ru:
     special_offers: "Special offer:"
     view_on_map: View restaurant on map
     view_or_change: View or change your reservation
+    discount: "This document guarantees your reservation and <strong>%{discount}% discount</strong> for your bill"
   search: 
     browse_category: Browse places by category
     category: Category

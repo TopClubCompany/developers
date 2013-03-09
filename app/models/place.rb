@@ -475,7 +475,7 @@ class Place < ActiveRecord::Base
     current_day = PlaceUtils::PlaceTime.wday(current_day)
     time = time.strftime("%H:%M").gsub(":",".").to_f
     week_day = WeekDay.with_place_and_day(id, current_day).first
-    DayDiscount.with_day_and_time(week_day.id, time).max{|x| x.discount}
+    DayDiscount.with_day_and_time(week_day.id, time)
   end
 
   private

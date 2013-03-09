@@ -72,6 +72,9 @@ Topclub::Application.routes.draw do
   end
 
   resources :reservations do
+    member do
+      get :print
+    end
     collection do
       get :available_time
     end
