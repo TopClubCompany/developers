@@ -49,6 +49,10 @@
           #favorites
             .add_to_favorites class="#{'i_like_this_place' if current_user.favorite_place?(@place)}" data-id=@place.to_param
               =raw t('short_strings.add_to_favorites')
+        - else
+          #favorites
+            .add_to_favorites data-id=@place.to_param
+              =raw t('short_strings.add_to_favorites')
         .share_btns
           - %w|fb vk tw|.each do |soc_network|
             = link_to '', '#share', class: "show_popup share", id: soc_network
@@ -129,7 +133,7 @@
                     a href="#" #
                   .review_vote
                     - %w|helpful unhelpful|.each do |usefulness|
-                      a href="#{can_vote ? set_review_usefulness_path(review.id, usefulness) : ''}" class=usefulness data-method="post"
+                      a href="#" data-id="#{can_vote ? review.id : 'can not vote'}" data-useful="#{usefulness}" class=usefulness
                         = t("words.#{usefulness}")
                         strong= review.votes.send(usefulness.to_sym).count
               .ratings

@@ -10,10 +10,13 @@ class WeekDay < ActiveRecord::Base
 
   has_many :day_discounts, :dependent => :destroy
 
+  scope :with_place_and_day, lambda { |place, day| where("day_type_id = ? AND place_id = ?", day, place) }
+
   accepts_nested_attributes_for :day_discounts,
                                 :allow_destroy => true, :reject_if => :all_blank
 
   enumerated_attribute :day_type, :id_attribute => :day_type_id, :class => ::DayType
+
 
   def self.create_for_new_place
     ::DayType.all.map do |day|

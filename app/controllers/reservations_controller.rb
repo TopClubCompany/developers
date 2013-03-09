@@ -15,9 +15,9 @@ class ReservationsController < ApplicationController
 
   def reservation_confirmed
     @reservation = Reservation.find(params[:reservation_id])
-    if current_user.id = @reservation.user_id
+    if current_user.id == @reservation.user_id
       @place = @reservation.try(:place)
-      @date  = DateTime.parse(@reservation.try{|res| res.time.to_s})
+      @date  = @reservation.time
       redirect_to root_path, flash: { error: 'no such reservation' } unless @reservation && @place
     else
       redirect_to root_path
@@ -44,6 +44,20 @@ class ReservationsController < ApplicationController
         render :json => {times: Reservation.available_time(current_day, place)}
       end
     end
+  end
+
+  def print
+    @reservation = Reservation.find(params[:id])
+    if current_user.id == @reservation.user_id
+      @place = @reservation.try(:place)
+      @date  = @reservation.time
+      @discount = @place.today_discount_with_time(@date).max{|x| x.discount}
+      redirect_to root_path, flash: { error: 'no such reservation' } unless @reservation && @place
+      render "print", layout: false
+    else
+      redirect_to root_path
+    end
+
   end
 
 end

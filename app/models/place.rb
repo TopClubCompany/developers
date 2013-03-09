@@ -470,6 +470,14 @@ class Place < ActiveRecord::Base
     day_discounts.special.max{|x| x.discount}.discount
   end
 
+  def today_discount_with_time(time)
+    current_day = time.wday
+    current_day = PlaceUtils::PlaceTime.wday(current_day)
+    time = time.strftime("%H:%M").gsub(":",".").to_f
+    week_day = WeekDay.with_place_and_day(id, current_day).first
+    DayDiscount.with_day_and_time(week_day.id, time)
+  end
+
   private
 
   def self.get_star_rating place
@@ -486,6 +494,7 @@ class Place < ActiveRecord::Base
     end
     time
   end
+
 
 
   def self.today_discount(discounts, options={})

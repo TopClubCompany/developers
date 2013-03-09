@@ -65,7 +65,16 @@ Topclub::Application.routes.draw do
     end
   end
 
+  resources :reviews do
+    collection do
+      post :vote
+    end
+  end
+
   resources :reservations do
+    member do
+      get :print
+    end
     collection do
       get :available_time
     end
@@ -91,15 +100,6 @@ Topclub::Application.routes.draw do
     end
   end
 
-  resources :sandboxes do
-    collection do
-      get :search
-      get :explorer
-      get :search_map
-      get :places
-      get :stream
-    end
-  end
 
   namespace :admin do
 
