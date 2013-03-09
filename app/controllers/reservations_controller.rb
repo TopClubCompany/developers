@@ -53,7 +53,7 @@ class ReservationsController < ApplicationController
       @date  = @reservation.time
       @discount = @place.today_discount_with_time(@date).max{|x| x.discount}
       redirect_to root_path, flash: { error: 'no such reservation' } unless @reservation && @place
-      render "print", layout: false
+      render "print", layout: "print"
     else
       redirect_to root_path
     end
