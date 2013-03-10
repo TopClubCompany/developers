@@ -7,7 +7,6 @@
       .row
         = render 'user_head'
         #dash_blocks.span8
-          - binding.pry
           #edit_reservation.dash_block data-place-id="#{@reservation.place_id}" style="width: 600px;" 
             h2= t('short_strings.edit_your_reservation')
             .place
