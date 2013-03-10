@@ -284,6 +284,10 @@ ru:
       connect_social_accounts: "Connect social accounts"
       connected: "Your %{account} is connected"
       disconnect: "Disconnect"
+    private_for_sms: "Private. For SMS notifications about your reservations only"
+    private_for_email: "Private. For E-mail notifications about your reservations. only"
+    private_statistics: "Private. This data is confidential and used for statistics only"
+    birthday: "Birthday"
   registration_form: 
     or: " или "
   reservation: 
