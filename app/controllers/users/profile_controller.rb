@@ -63,7 +63,7 @@ class Users::ProfileController < ApplicationController
   def edit_reservation
     @reservation = Reservation.find_by_id(params[:reservation_id])
     @place       = @reservation.place
-    unless current_user.id == @reservation.id
+    unless current_user.id == @reservation.user_id
       redirect_to root_path
     end
   end
