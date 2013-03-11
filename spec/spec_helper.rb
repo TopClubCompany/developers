@@ -5,7 +5,7 @@ require 'spork'
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rails'
-require 'simplecov' 
+require 'simplecov'
 
 #Spork.prefork do
 #  unless ENV['DRB']
@@ -33,19 +33,19 @@ require 'simplecov'
 #    ActiveSupport::Dependencies.clear
 #  end
 #
-#  OmniAuth.config.test_mode = true
-#  OmniAuth.config.add_mock(:facebook, {
-#      info:  { name: "Facebook Smith", nickname: 'joesmith', email: 'facebook@haha.com', uid: 'fb_id' },
-#      extra: {raw_info: { name: "Facebook Smith" } }})
-#  OmniAuth.config.add_mock(:google, {
-#      info:  { name: "Google Smith", nickname: 'joesmith', email: 'google@haha.com', uid: 'google_id' },
-#      extra: {raw_info: { name: "Google Smith" } }})
-#  OmniAuth.config.add_mock(:vkontakte, {
-#      info:  { name: "Vkontakte Smith", nickname: 'joesmith', uid: 'vk_id' },
-#      extra: {raw_info: { name: "Joe Smith" } }})
-#  OmniAuth.config.add_mock(:twitter, {
-#      info:  { name: "Twitter Smith", nickname: 'joesmith', uid: 'tw_id' },
-#      extra: {raw_info: { name: "Twitter Smith" } }})
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.add_mock(:facebook, {
+      info:  { name: "Facebook Smith", nickname: 'joesmith', email: 'facebook@haha.com', uid: 'fb_id' },
+      extra: {raw_info: { name: "Facebook Smith" } }})
+  OmniAuth.config.add_mock(:google, {
+      info:  { name: "Google Smith", nickname: 'joesmith', email: 'google@haha.com', uid: 'google_id' },
+      extra: {raw_info: { name: "Google Smith" } }})
+  OmniAuth.config.add_mock(:vkontakte, {
+      info:  { name: "Vkontakte Smith", nickname: 'joesmith', uid: 'vk_id' },
+      extra: {raw_info: { name: "Joe Smith" } }})
+  OmniAuth.config.add_mock(:twitter, {
+      info:  { name: "Twitter Smith", nickname: 'joesmith', uid: 'tw_id' },
+      extra: {raw_info: { name: "Twitter Smith" } }})
 #end
 #
 #
