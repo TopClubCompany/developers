@@ -464,8 +464,6 @@ class Place < ActiveRecord::Base
     end
   end
 
-
-
   def max_discount
     day_discounts.special.max{|x| x.discount}.discount
   end
