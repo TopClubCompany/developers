@@ -19,7 +19,7 @@ class PlacesController < ApplicationController
                  else
                    reviews
     end
-    if signed_in?
+    if signed_in? && current_user.reservations.pluck(:place_id).include?(@place.id)
       @review = Review.new(reviewable_id: @place.id, reviewable_type: Place.name)
       @review.marks.build
     end

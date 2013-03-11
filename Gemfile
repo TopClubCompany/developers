@@ -86,7 +86,7 @@ gem 'has_scope'
 gem 'awesome_nested_set'
 gem 'galetahub-enum_field', "~> 0.2.0", :require => 'enum_field'
 gem 'activerecord-import'
-gem 'friendly_id'
+gem 'friendly_id', "~> 4.0.9"
 gem "squeel"
 gem "activevalidators", "~> 1.9.0"
 gem 'valium'
