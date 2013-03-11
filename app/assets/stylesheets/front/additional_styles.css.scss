@@ -383,3 +383,15 @@ div.fixed_ajax_loader {
 #search_form label[for='number_of_people'] nobr {
   display: none;
 }
+
+.overall_mark .rating_big {
+  width: 175px;
+}
+
+.overall_mark label {
+  width: auto !important;
+  padding-right: 10px;
+  margin-bottom: 0
+}
+
+.overall_mark .span3{width:auto !important;}
