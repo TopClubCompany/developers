@@ -7,3 +7,5 @@
       - time.sort{|a,b| a[:time] <=> b[:time]}.each do |reverse|
         a href="#" class="#{get_time_class(reverse, params[:reserve_time])}"= reverse[:time]
 
+  a href="javascript:history.go(-1)"
+    | Вернуться к выбору времени
