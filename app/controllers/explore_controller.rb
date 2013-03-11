@@ -29,7 +29,7 @@ class ExploreController < ApplicationController
   end
 
   protected
-  def set_breadcrumbs
+  def set_breadcrumbs_front
 
   end
 

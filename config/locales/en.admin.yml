@@ -121,6 +121,7 @@ en:
     gender: 
       female: ""
       male: ""
+      unknown: ""
     geo_autocomplete: ""
     geo_type: 
       distance: 
@@ -145,6 +146,15 @@ en:
       it: ""
       ru: ""
       uk: ""
+    letters: 
+      cancel_reserve_email_place: ""
+      cancel_reserve_email_user: ""
+      edit_reserve_email_user: ""
+      new_reserve_email_top_club: ""
+      successful_reserve_email_place: ""
+      successful_reserve_email_user: ""
+      successful_reserve_sms_place: ""
+      successful_reserve_sms_user: ""
     loading: ""
     locators: 
       cache_clear: ""
@@ -285,7 +295,16 @@ en:
       title: ""
       type: ""
   admin_js: 
+    abbr_day_names: 
+    - Sun
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat
     add_link: ""
+    at: at
     button_description: ""
     button_name_add: ""
     button_name_cancel: ""
@@ -295,61 +314,51 @@ en:
     confirm: ""
     create_product: ""
     day: ""
+    day_names: 
+    - sunday
+    - monday
+    - tuesday
+    - wednesday
+    - thursday
+    - friday
+    - saturday
     delete_nested_elements: ""
     edit: ""
-    month: ""
+    for: for
+    month: 
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
     name: ""
     no_results: ""
+    own_review: Can't vote for your own review
+    people: people
+    person: person
     search: ""
     set_img: ""
-    value: ""
-    own_review: Can't vote for your own review
-    vote_twice: Can't vote twice
-    month:
-      - "January"
-      - "February"
-      - "March"
-      - "April"
-      - "May"
-      - "June"
-      - "July"
-      - "August"
-      - "September"
-      - "October"
-      - "November"
-      - "December"
-    day_names:
-      - "sunday"
-      - "monday"
-      - "tuesday"
-      - "wednesday"
-      - "thursday"
-      - "friday"
-      - "saturday"
-    abbr_day_names:
-      - "Sun"
-      - "Mon"
-      - "Tue"
-      - "Wed"
-      - "Thu"
-      - "Fri"
-      - "Sat"
-    at: 'at'
-    for: 'for'
-    person: 'person'
-    people: 'people'
-    validation_message:
-      email_incorrect: "Enter correct e-mail"
-      phone_incorrect: "Enter correct phone number"
-      latin_only: "Latin characters only"
+    validation_message: 
       chars_permited: "A-Za-z, А-Яа-я and \"-\", \"_\" are allowed"
-      pass_incorrect: 'Enter valid password'
-      pass_too_short: 'Password should be more than 5 symbols'
-      empty_field: 'Fill this'
-      enter_name: 'Enter valid name'
-      name_too_short: 'Name too short'
-      enter_surname: 'Enter valid last name'
-      surname_too_short: 'Last name too short'
+      email_incorrect: Enter correct e-mail
+      empty_field: Fill this
+      enter_name: Enter valid name
+      enter_surname: Enter valid last name
+      latin_only: Latin characters only
+      name_too_short: Name too short
+      pass_incorrect: Enter valid password
+      pass_too_short: Password should be more than 5 symbols
+      phone_incorrect: Enter correct phone number
+      surname_too_short: Last name too short
+    value: ""
+    vote_twice: Can't vote twice
   attrs: 
     en: ""
     it: ""
