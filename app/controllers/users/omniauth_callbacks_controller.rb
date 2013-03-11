@@ -58,6 +58,7 @@ class Users::OmniauthCallbacksController < ApplicationController
     if @user.save
       (@user.avatar = Avatar.new(data: avatar)) if avatar
       auth_user @user
+      redirect_to (session[:return_path] || root_path)
       #redirect_to root_path, flash: { success: "for end of registration you need to confirm you email." } #uncoment for normal registration with confirm email
     else
       redirect_to new_user_registration_path(@user), flash: { error: @user.errors.full_messages.join(', ') }
@@ -100,7 +101,8 @@ class Users::OmniauthCallbacksController < ApplicationController
   def auth_user user
     session[:user_data] = nil
     sign_in user
-    redirect_to root_path, flash: { success: I18n.t('auth.successfully_sing_in') }
+    redirect_to (session[:return_path] || root_path)
+    #redirect_to root_path, flash: { success: I18n.t('auth.successfully_sing_in') }
   end
 
   def get_user_email data
