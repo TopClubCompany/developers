@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   before_filter :find_page
   before_filter :set_gon_current_user
   before_filter :set_user_path
+  before_filter :set_breadcrumbs, only: [:index, :show]
 
   helper_method :current_city, :current_city_plural
 
@@ -89,6 +90,15 @@ class ApplicationController < ActionController::Base
 
   def signed_in_root_path(resource_or_scope)
     session[:return_path] || root_path
+  end
+
+  def set_breadcrumbs
+    @breadcrumbs = ["<a href=#{with_locale("")}>#{I18n.t('breadcrumbs.main')}&nbsp</a>"]
+  end
+
+  def with_locale(path)
+    path = "/" + path if path[0] != "/"
+    "/" + I18n.locale.to_s + path
   end
 
 end

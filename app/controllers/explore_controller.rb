@@ -28,6 +28,11 @@ class ExploreController < ApplicationController
 
   end
 
+  protected
+  def set_breadcrumbs
+
+  end
+
 
   private
   def find_page
