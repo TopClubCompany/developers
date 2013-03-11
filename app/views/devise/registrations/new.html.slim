@@ -34,7 +34,7 @@
           = f.input :gender,  label: t('admin.gender.gender'), collection: GenderType.all, include_blank: false
           .clear
           = f.label :birthday, label: get_reg_form_attr_name(:birthday)
-          = f.date_select :birthday, :start_year => 1995
+          = f.date_select :birthday, :start_year => 1940, :end_year => DateTime.now.strftime("%Y").to_i
           .clear
           label
             = t('sign_up.profile_photo')
