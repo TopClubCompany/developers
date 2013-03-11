@@ -415,10 +415,10 @@ ru:
     diner_style: Diner style
     h3_link: Admin
     invite_friends: Invite friends
-    my_account: My account
-    my_favourites: My favourites
-    my_reservations: My reservations
-    my_reviews: My reviews
+    account: My account
+    favourites: My favourites
+    reservations: My reservations
+    reviews: My reviews
     settings: Settings
     top_points: TOP points
     view_places: View places
@@ -473,3 +473,7 @@ ru:
   vk: "VK"
   google: "Google"
   twitter: "Twitter"
+  breadcrumbs:
+    main: "Главная"
+    search: "Поиск"
+    profile: "Профиль"

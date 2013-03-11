@@ -81,7 +81,7 @@
           .short_description.active_desc
             = truncate(@place.description, length: 100)
           .full_description
-            = @place.description
+            = @place.description.no_html
           .clear
           = link_to t('words.expand'), '#', class: 'desc_expand', data: { expand: t('words.expand'), rollup: t('words.roll_up') }
         - if signed_in?

@@ -15,8 +15,7 @@ class SearchController < ApplicationController
   end
 
   def show
-    @category = Category.find(params[:id])
-    #@category.plural_name  #in views current_city_plural get city
+    @category ||= Category.find(params[:id])
 
     proper_name = @category.plural_name
     set_gon_params
@@ -66,6 +65,15 @@ class SearchController < ApplicationController
       else
         {lat: 0, lng: 0}
       end
+    end
+  end
+
+  def set_breadcrumbs
+    super
+    @breadcrumbs << ["<a href=#{with_locale("search")}>#{I18n.t('breadcrumbs.search')}&nbsp</a>"]
+    if params[:id].present?
+      @category ||= Category.find(params[:id])
+      @breadcrumbs << ["<a href=#{with_locale(search_path(@category.slug))}>#{@category.name}&nbsp</a>"]
     end
   end
 

@@ -2,6 +2,7 @@
 class PlacesController < ApplicationController
   before_filter :find_place, only: [:show, :more, :set_unset_favorite]
   before_filter :find_time, only: [:show]
+  before_filter :set_breadcrumbs, only: :show
 
   def show
     @date = params[:reserve_date] || Date.today.strftime('%d/%m/%Y')
@@ -80,5 +81,10 @@ class PlacesController < ApplicationController
 
   end
 
+  def set_breadcrumbs
+    super
+    @breadcrumbs << ["<a href=#{with_locale("search")}>#{I18n.t('breadcrumbs.search')}&nbsp</a>"]
+    @breadcrumbs << ["<a href=#{with_locale(place_path(@place))}>#{@place.name}&nbsp</a>"]
+  end
 
 end
