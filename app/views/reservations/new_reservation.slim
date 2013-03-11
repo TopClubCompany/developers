@@ -1,6 +1,6 @@
 .content
   .row
-    .span8 id="#{'new_reserve_center' if signed_in?}"
+    .span8
       #complete.heading
         h1= t('reservation.new_reservation.complete_reservation')
         strong 
@@ -40,8 +40,12 @@
           = f.input :persons, as: 'hidden', input_html: { value: @persons }
           .clear
           = f.submit I18n.t('reservation.complete')
+    #sidebar.span4
+      h3
+        = I18n.t('auth.points')
+      p= I18n.t('reservation.rewards')
 
-    - unless signed_in?
+    /- unless signed_in?
       #sidebar.span4
         h3
           a href=new_user_session_path
