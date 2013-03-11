@@ -27,7 +27,7 @@
           = content_tag :span, class: 'pricing popoverable', data: data do
             = get_pricing @place
         span itemprop="pricerange" style="display:none"
-          = get_pricing @place
+          = get_pricing_without_left @place
         .rating.rating_big.rating_topclub
           .stars
             .stars_overlay

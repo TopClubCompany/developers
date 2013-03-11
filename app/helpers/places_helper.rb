@@ -41,6 +41,11 @@ module PlacesHelper
     result + left_price
   end
 
+  def get_pricing_without_left place
+    price_bill = place.bill.try(:id).to_i.times.map {"$"}.join('')
+    content_tag :strong, price_bill.to_s
+  end
+
   def get_time_class time, param_time
     if time[:available]
       if param_time == time[:time].to_s
