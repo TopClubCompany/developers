@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_user_location
   before_filter :find_page
   before_filter :set_gon_current_user
+  before_filter :set_user_path
 
   helper_method :current_city, :current_city_plural
 
@@ -77,6 +78,17 @@ class ApplicationController < ActionController::Base
 
   def set_gon_current_user
     gon.current_user = current_user if current_user
+  end
+
+  def set_user_path
+    if !current_user && !request.env['PATH_INFO'].to_s.include?("/users/")
+      session[:return_path] = request.env['PATH_INFO']
+    end
+  end
+
+
+  def signed_in_root_path(resource_or_scope)
+    session[:return_path] || root_path
   end
 
 end
