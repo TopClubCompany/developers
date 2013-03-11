@@ -82,7 +82,7 @@ class ApplicationController < ActionController::Base
 
   def set_user_path
     if !current_user && !request.env['PATH_INFO'].to_s.include?("/users/")
-      session[:return_path] = request.env['PATH_INFO']
+      session[:return_path] = "/" + I18n.locale + request.env['PATH_INFO']
     end
   end
 
