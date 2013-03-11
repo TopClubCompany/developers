@@ -123,7 +123,7 @@
                   span itemprop="author"
                     = user_menu_name review.user
                   '
-                meta content="2012-10-21" itemprop="datePublished"
+                meta content="#{place.created_at.strftime("%Y-%m-%d")}" itemprop="datePublished"
                   small.created_time_ago title=review.created_at.getutc.iso8601
                     /' Dined yesterday ·
                     = review.created_at
