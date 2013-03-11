@@ -742,6 +742,6 @@ handleClick = ()->
     language = $('#language .active').attr('id')
     id = $('#place').data('id') || $(e.target).parents('.place').data('id')
 
-    time = $(e.target).html()
+    time = $(e.target).val().replace(/\s/, '')
     newLink = "/#{language}/new_reservation/#{result["reserve_date"]},#{id},h=#{time.split(':')[0]}&m=#{time.split(':')[1]},#{result["number_of_people"]}"
     window.location.replace newLink
