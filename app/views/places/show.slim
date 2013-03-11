@@ -26,13 +26,17 @@
           - data = { trigger: 'hover', title: 'Average check', content: @place.bill.try(:title), placement: 'top' }
           = content_tag :span, class: 'pricing popoverable', data: data do
             = get_pricing @place
+        span itemprop="pricerange" style="display:none"
+          | $$
         .rating.rating_big.rating_topclub
           .stars
             .stars_overlay
               span itemprop="rating" itemscope="" itemtype="http://data-vocabulary.org/Rating"
                 span itemprop="average"
+                  | 3.3
                 = I18n.t('place.is')
                 span itemprop="best"
+                  | 5
             .stars_bar style=get_star_rating(@place)
             .stars_bg
           a href=root_path
@@ -40,7 +44,8 @@
           .clear
           small
             span itemprop="count"
-            ' #{@place.reviews.count} #{t('words.reviews')} ·
+              ' #{@place.reviews.count}
+            ' #{t('words.reviews')} ·
             - if signed_in?
               a#write_review href="#review_form"
                 = t('short_strings.write_review')
@@ -68,7 +73,7 @@
               = time.html_safe
               br
           #place_links
-            = link_to t('short_strings.more_detalis'), '#'
+            /= link_to t('short_strings.more_detalis'), '#'
             = link_to t('short_strings.view_menu'), '#place_menu', {:class => "show_popup menu"}
         .clear
         .place_desc
