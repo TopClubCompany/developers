@@ -5,7 +5,9 @@ class ReservationsController < ApplicationController
   def new_reservation
     @persons = params[:amount_of_person]
     @place   = Place.find(params[:place_id])
-    @date = DateTime.parse("#{params[:date]} #{params[:time].gsub(/[hm=]/,'').gsub('&',':')}")
+    time = params[:time].gsub(/[hm=]/,'').gsub('&',':')
+    time = Place.en_to_time(time)
+    @date = DateTime.parse("#{params[:date]} #{time}")
     @options = {:reserve_date => params[:date], :reserve_time => params[:time]}
     @special_offers = Place.today_discount(@place.discounts_index, @options).compact
     @reservation = Reservation.create_from_place_and_user(current_user, @place)
