@@ -17,9 +17,9 @@ class PagesController < ApplicationController
     setting_meta_tags @structure
   end
 
-  def set_breadcrumbs
+  def set_breadcrumbs_front
     super
-    @breadcrumbs << ["<a href=#{with_locale(page_path(@structure))}>#{@structure.title}&nbsp</a>"]
+    @breadcrumbs_front << ["<a href=#{with_locale(page_path(@structure))}>#{@structure.title}&nbsp</a>"]
   end
 
 end

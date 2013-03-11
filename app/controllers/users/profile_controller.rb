@@ -1,6 +1,6 @@
 class Users::ProfileController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :set_breadcrumbs
+  before_filter :set_breadcrumbs_front
 
   include ReservationsHelper
 
@@ -107,10 +107,10 @@ class Users::ProfileController < ApplicationController
 
   end
 
-  def set_breadcrumbs
+  def set_breadcrumbs_front
     path = request.env['PATH_INFO'].to_s
-    @breadcrumbs = ["<a href=#{with_locale(profile_path(current_user))}>#{I18n.t('breadcrumbs.profile')}&nbsp</a>"]
-    @breadcrumbs << ["<a href=#{with_locale(path)}>#{find_tab(path)}&nbsp</a>"]
+    @breadcrumbs_front = ["<a href=#{with_locale(profile_path(current_user))}>#{I18n.t('breadcrumbs.profile')}&nbsp</a>"]
+    @breadcrumbs_front << ["<a href=#{with_locale(path)}>#{find_tab(path)}&nbsp</a>"]
   end
 
   private

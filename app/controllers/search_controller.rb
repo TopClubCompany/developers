@@ -68,12 +68,12 @@ class SearchController < ApplicationController
     end
   end
 
-  def set_breadcrumbs
+  def set_breadcrumbs_front
     super
-    @breadcrumbs << ["<a href=#{with_locale("search")}>#{I18n.t('breadcrumbs.search')}&nbsp</a>"]
+    @breadcrumbs_front << ["<a href=#{with_locale("search")}>#{I18n.t('breadcrumbs.search')}&nbsp</a>"]
     if params[:id].present?
       @category ||= Category.find(params[:id])
-      @breadcrumbs << ["<a href=#{with_locale(search_path(@category.slug))}>#{@category.name}&nbsp</a>"]
+      @breadcrumbs_front << ["<a href=#{with_locale(search_path(@category.slug))}>#{@category.name}&nbsp</a>"]
     end
   end
 
