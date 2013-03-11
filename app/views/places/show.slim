@@ -27,13 +27,13 @@
           = content_tag :span, class: 'pricing popoverable', data: data do
             = get_pricing @place
         span itemprop="pricerange" style="display:none"
-          | $$
+          = get_pricing @place
         .rating.rating_big.rating_topclub
           .stars
             .stars_overlay
               span itemprop="rating" itemscope="" itemtype="http://data-vocabulary.org/Rating"
                 span itemprop="average"
-                  | 3.3
+                  = @place.overall_mark
                 = I18n.t('place.is')
                 span itemprop="best"
                   | 5
