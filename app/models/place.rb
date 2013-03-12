@@ -244,7 +244,7 @@ class Place < ActiveRecord::Base
       json.set!("discounts", self.discounts_index)
 
       self.week_days.each do |week_day|
-        json.set!("week_day_#{week_day.day_type_id}", week_day.range_time.to_a)
+        json.set!("week_day_#{week_day.day_type_id}", week_day.range_time)
       end if self.week_days.any?
 
       json.(self, *related_ids)
