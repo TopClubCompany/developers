@@ -79,7 +79,7 @@
         .place_desc
           h5 #{t('short_strings.few_words')} #{@place.title}
           .short_description.active_desc
-            = truncate(@place.description, length: 100)
+            = truncate(@place.description.no_html, length: 100)
           .full_description
             = @place.description.no_html
           .clear
