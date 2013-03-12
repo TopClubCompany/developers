@@ -84,7 +84,7 @@
             = @place.description.no_html
           .clear
           = link_to t('words.expand'), '#', class: 'desc_expand', data: { expand: t('words.expand'), rollup: t('words.roll_up') }
-        - if signed_in?
+        - if signed_in? && @review
           #review_form
             = simple_form_for @review, url: review_create_path, method: 'post', wrapper: :front_reg_form, nested: true do |f|
               .line2
