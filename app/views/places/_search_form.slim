@@ -1,6 +1,6 @@
 #search_form
   span.header #{t('short_strings.reserve_at')} #{@place.name}
-  header_special= I18n.t("place.up_to", discount: @place.max_discount.to_i)
+  .header_special= I18n.t("place.up_to", discount: @place.max_discount.to_i)
   form action=localization_link("search")
     label for="reserve_date"
     input class='dateFormatNeeded' type="text" name="reserve_date" autocomplete="off" value="#{@date}"
