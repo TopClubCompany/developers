@@ -56,20 +56,20 @@ ru:
     batch_actions: "Действия"
     bill: 
       code: 
-        cheap: Cheap
-        moderate: Medium
-        spendy: Reasonable
-        splurge: Premium
+        cheap: "Недорогой"
+        moderate: "Средний"
+        spendy: "Умеренный"
+        splurge: "Премиум"
       image: 
         cheap: $
         moderate: $$
         spendy: $$$
         splurge: $$$$
       kind: 
-        cheap: Under $10
-        moderate: $11 - $3
-        spendy: $31 - $60
-        splurge: "> $61"
+        cheap: "до 100 грн."
+        moderate: "100 - 200 грн."
+        spendy: "200 - 500 грн."
+        splurge: "более 500 грн."
     cant_be_deleted: "Удаление невозможно"
     choose: "Выберите %{attr}"
     clear_cache: "Очистить кеш"
@@ -125,15 +125,15 @@ ru:
     geo_autocomplete: "Введите адрес"
     geo_type: 
       distance: 
-        close: " > 500 m."
-        drive: " > 5 km."
-        far: " Far < 10 km."
-        walk: " > 1 km."
+        close: " > 500 м."
+        drive: " > 5 км."
+        far: " более < 10 км."
+        walk: " > 1 км."
       kind: 
-        close: Close
-        drive: Drive
-        far: Far
-        walk: Walk
+        close: "Близко"
+        drive: "Проехать"
+        far: "Далеко"
+        walk: "Пешком"
     group: 
       kind: 
         admin: "Административная"
@@ -295,14 +295,7 @@ ru:
       title: "История"
       type: "Тип"
   admin_js: 
-    abbr_day_names: 
-    - "Вс"
-    - "Пн"
-    - "Вт"
-    - "Ср"
-    - "Чт"
-    - "Пт"
-    - "Сб"
+    abbr_day_names: "[\"Вс\", \"Пн\", \"Вт\", \"Ср\", \"Чт\", \"Пт\", \"Сб\"]"
     add_link: "Создать?"
     at: "в"
     button_description: "Описание"
@@ -314,30 +307,11 @@ ru:
     confirm: "Подвердить"
     create_product: "Создать новый товар"
     day: "Воскресенье,Понедельник,Вторник,Среда,Четверг,Пятница,Суббота"
-    day_names: 
-    - "воскресенье"
-    - "понедельник"
-    - "вторник"
-    - "среда"
-    - "четверг"
-    - "пятница"
-    - "суббота"
+    day_names: "[\"воскресенье\", \"понедельник\", \"вторник\", \"среда\", \"четверг\", \"пятница\", \"суббота\"]"
     delete_nested_elements: "Невозможно удалить"
     edit: "Редактировать"
     for: "для"
-    month: 
-    - "Январь"
-    - "Февраль"
-    - "Март"
-    - "Апрель"
-    - "Май"
-    - "Июнь"
-    - "Июль"
-    - "Август"
-    - "Сентябрь"
-    - "Октябрь"
-    - "Ноябрь"
-    - "Декабрь"
+    month: "[\"Январь\", \"Февраль\", \"Март\", \"Апрель\", \"Май\", \"Июнь\", \"Июль\", \"Август\", \"Сентябрь\", \"Октябрь\", \"Ноябрь\", \"Декабрь\"]"
     name: "Название"
     no_results: "Ничего не найдено"
     own_review: "Нельзя голосовать за собственный обзор"
