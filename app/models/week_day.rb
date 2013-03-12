@@ -29,11 +29,11 @@ class WeekDay < ActiveRecord::Base
   end
 
   def range_time
-    if !week_day.start_at.to_i.zero? || !week_day.end_at.to_i.zero?
-      if week_day.start_at.to_i >= week_day.end_at.to_i
-         (week_day.end_at.to_i..24).to_a + (0..week_day.end_at.to_i).to_a.uniq
+    if !start_at.to_i.zero? || !end_at.to_i.zero?
+      if start_at.to_i >= end_at.to_i
+         (end_at.to_i..24).to_a + (0..end_at.to_i).to_a.uniq
        else
-         (week_day.start_at.to_i..week_day.end_at.to_i).to_a.uniq
+         (start_at.to_i..end_at.to_i).to_a.uniq
        end
     else
       []
