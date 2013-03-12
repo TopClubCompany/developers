@@ -1,39 +1,39 @@
 --- 
 en: 
-  First_name: ""
-  Last_name: ""
+  First_name: Name
+  Last_name: Last name
   account_confirm: Confirm my account
   activerecord: 
     attributes: 
       user: 
-        password: ""
-        password_confirmation: ""
-        remember_me: ""
+        password: Password
+        password_confirmation: Password confirmation
+        remember_me: Remember me
   admin: 
     gender: 
-      gender: ""
+      gender: Gender
   auth: 
-    change_my_password: ""
-    change_password: ""
-    confirm_you_password: ""
+    change_my_password: Change my password
+    change_password: Change password
+    confirm_you_password: Confirm your password
     edit_passwords: 
-      confirm_new_password: ""
-      new_password: ""
-    enter: ""
-    enter_with: ""
+      confirm_new_password: Confirm your password
+      new_password: New password
+    enter: Sign in
+    enter_with: "Sign in using:"
     links: 
-      join_reserve: Join reserve
+      join_reserve: Join
       receive_confirmation: ""
-      recover_password: ""
+      recover_password: Forgot password?
       sign_in: ""
       sign_out: ""
-      sign_up: Sign up now!
+      sign_up: Sign up!
     links_short: 
       cabinet: ""
       sign_in: ""
       sign_out: ""
       sign_up: ""
-    logout: ""
+    logout: Logout
     mailer: 
       confirmation: 
         after_notes: ""
@@ -56,17 +56,17 @@ en:
     new_password: ""
     not_a_user: ""
     points: ""
-    remember_me: ""
+    remember_me: Remember me
     social: 
-      sign_in_with: ""
+      sign_in_with: Sign in with
     submit: 
-      change_password: ""
-      receive_confirmation: ""
-      recover_password: ""
-      sign_in: ""
-      sign_out: ""
-      sign_up: ""
-    successfully_sing_in: ""
+      change_password: Change password
+      receive_confirmation: Receive confirmation
+      recover_password: Recover password
+      sign_in: Sign in
+      sign_out: Sign out
+      sign_up: Sign up
+    successfully_sing_in: Successfully sign in
     title: 
       change_password: ""
       receive_confirmation: ""
@@ -78,7 +78,7 @@ en:
     main: ""
     profile: ""
     search: ""
-  city: ""
+  city: city
   comments: 
     add_comment: ""
     comment: ""
@@ -92,15 +92,6 @@ en:
     abbr_day_names: ""
     abbr_month_names: ""
     day_names: ""
-  formats:
-    default: ""
-    long: ""
-    short: ""
-    month_names: ""
-    order: 
-     - :day
-     - :month
-     - :year
   datetime: 
     distance_in_words: 
       about_x_hours: 
@@ -178,8 +169,8 @@ en:
       new: New restaurants
       reserv_online: Reserve your table online for free
       save_up: Save up to 30% off all food and drinks
-      second_big_text: ""
-  facebook: ""
+      second_big_text: Select one of %{count} restaurants in %{city} and save up to %{discount}% off your total bill.
+  facebook: Facebook
   flash: 
     auth: 
       failure: ""
@@ -192,14 +183,20 @@ en:
         notice: ""
   footer: 
     become_a_prtner: Become a partner!
-    copy: ""
+    copy: " &copy; Topreserve, 2013. - "
     earn_point: Earn points and get discounts!
     need_clients: Need more clients?
-    privacy_police: ""
-    terms_of_service: ""
+    privacy_police: Privacy Policy
+    terms_of_service: Terms of Service
   forgot_password: 
     description: ""
     reset_pass: Reset password
+  formats: 
+    default: ""
+    long: ""
+    month_names: ""
+    order: "[:day, :month, :year]"
+    short: "%d %b"
   front_js: 
     comments: 
       chat_title: ""
@@ -210,11 +207,11 @@ en:
         onLeave: ""
         sizeError: ""
         typeError: ""
-  google: ""
-  head: ""
-  hello: ""
+  google: Google
+  head: "Restaurant Reservations. Free · Fat · Instant"
+  hello: Hello
   label: 
-    close: ""
+    close: Close
   langs: 
     en: eng
     ru: rus
@@ -237,90 +234,90 @@ en:
   password_change_mesage: Change my password
   place: 
     is: ""
-    share: ""
-    up_to: ""
-    vailability: ""
+    share: Share
+    up_to: Up to %{discount}% off
+    vailability: Availability on %{reserve_date} around %{reserve_time} for %{number_of_people} people
   profile: 
-    birthday: ""
-    city_not_specified: ""
-    date: ""
-    edit: ""
-    first_name: ""
-    gourmand: ""
-    last_name: ""
-    my_favourites: ""
-    my_reviews: ""
-    nothing_favourites: ""
-    notifications: ""
-    personal_information: ""
-    private_for_email: ""
-    private_for_sms: ""
-    private_statistics: ""
-    read_all_reviews: ""
-    read_more: ""
-    save_changes: ""
-    send_email: ""
-    settings: ""
+    birthday: Birthday
+    city_not_specified: not specified
+    date: Date
+    edit: edit
+    first_name: First name
+    gourmand: GOURMAND
+    last_name: Last name
+    my_favourites: My Favourites
+    my_reviews: My reviews
+    nothing_favourites: Nothing here. You should eat out. Then come and like the place.
+    notifications: Notifications
+    personal_information: Personal Information
+    private_for_email: Private. For E-mail notifications about your reservations. only
+    private_for_sms: Private. For SMS notifications about your reservations only
+    private_statistics: Private. This data is confidential and used for statistics only
+    read_all_reviews: Read all reviews
+    read_more: "read more ›"
+    save_changes: Save changes
+    send_email: Send email
+    settings: Settings
     social: 
-      connect_social_accounts: ""
-      connected: ""
-      disconnect: ""
-    time: ""
-    upcoming: ""
-    view_all_reservations: ""
-    view_edit: ""
+      connect_social_accounts: Connect social accounts
+      connected: Your %{account} is connected
+      disconnect: Disconnect
+    time: Time
+    upcoming: Upcoming reservations
+    view_all_reservations: View all reservations
+    view_edit: View / Edit
   registration_form: 
     or: " or "
   reservation: 
-    address: ""
+    address: "Address:"
     at: at
     complete: ""
     confirmation: ""
     confirmed: ""
-    confirmed_text: ""
-    diner_name: ""
-    discount: ""
-    dress_code: ""
-    edit: ""
+    confirmed_text: Your reservation is confirmed and saved in the restaurant's computer reservation system. You'll receive an email copy of this confirmation.
+    diner_name: Diner name
+    discount: This document guarantees your reservation and <strong>%{discount}% discount</strong> for your bill
+    dress_code: Dress code
+    edit: Edit
     edit_with_place: Edit your reservation at %{place}
     for: for
-    i_go: ""
-    invite_friends: ""
-    message_from_restoran: ""
-    more_info: ""
+    i_go: What next?
+    invite_friends: Invite friends
+    message_from_restoran: "Message from restaurant:"
+    more_info: "More info:"
     new_reservation: 
       complete_reservation: Complete your reservation
     people: 
       one: 1 person
       other: "%{count} people"
-    phone: ""
-    print: ""
-    rewards: ""
-    special_offers: ""
-    view_on_map: ""
-    view_or_change: ""
+    phone: "Phone:"
+    print: Print details
+    rewards: All members get rewards for online reservations!
+    special_offers: "Special offer:"
+    view_on_map: View restaurant on map
+    view_or_change: View or change your reservation
   search: 
-    browse_category: ""
-    category: ""
-    filters: ""
-    grid_view: ""
-    kitchen: ""
-    load: ""
+    browse_category: Browse places by category
+    category: Category
+    filters: "Filters:"
+    grid_view: Grid view
+    kitchen: Cuisine
+    load: Loading results
     location: Location
-    main_text: ""
-    map_view: ""
-    number_of_people: ""
-    people: ""
-    price: ""
-    refine: ""
-    result_for: ""
+    main_text: Free reservations at %{count} %{type} in %{city}
+    map_view: Map view
+    number_of_people: Number of people
+    people: people
+    price: Price Range
+    refine: Refine your results
+    result_for: Results for
     sort: 
       newest: ""
       overall_mark: ""
-    sort_labeled: ""
+    sort_labeled: "Sort by:"
     thead: 
-      th1: ""
-      th2: ""
+      th1: Restaurant
+      th2: Availability (click time to reserve)
   share: 
     description: test description
   short_strings: 
@@ -336,7 +333,7 @@ en:
     number_of_people: Number of people
     phone_number: Phone number
     print_this_page: Print this page
-    remove_from_favorites: ""
+    remove_from_favorites: Remove from favourites
     reserve_at: Reserve at
     share_on: Share on
     share_with_friends: Share with friends
@@ -349,18 +346,18 @@ en:
     view_your_reservation: View your reservation
     write_review: Write a review
   sign_in: 
-    forgot_pass: ""
+    forgot_pass: Forgot pass?
   sign_up: 
-    become_member: ""
-    by_click: "By clicking “Join Reserve” you confirm that you accept"
-    diner_name: ""
-    earn_points: ""
+    become_member: Become a member
+    by_click: "By clicking “Join” you confirm that you accept"
+    diner_name: Diner name
+    earn_points: Earn points
     for_successful_reservations: for succesfull reservations!
-    name: ""
-    profile_photo: ""
-    sign_in: ""
-    sign_in_acc: ""
-    sign_up_and: ""
+    name: Name
+    profile_photo: Profile photo
+    sign_in: Sign in
+    sign_in_acc: Sign in
+    sign_up_and: Sign up and
     term_cond: Terms and conditions
   simple_form: 
     error_notification: 
@@ -371,10 +368,10 @@ en:
     usefulness_count: usefulness count
   styles: 
     show: 
-      about: ""
+      about: Description
   time: 
-    am: ""
-    formats:
+    am: AM
+    formats: 
       datepicker: "%d-%m-%Y"
       day: "%d"
       day_name: "%A"
@@ -384,38 +381,38 @@ en:
       month: "%B"
       year: "%Y"
       ymd: "%d %B %Y"
-    pm: ""
-  twitter: ""
+    pm: PM
+  twitter: Twitter
   unauthorized: 
-    default: ""
+    default: Unauthorized
   unlock: Unlock my account
-  update: ""
+  update: Update
   uploader: 
-    add_file: ""
-    max_size: ""
-    upload: ""
-    upload_avatar: ""
-    upload_image: ""
+    add_file: Add file
+    max_size: Max size
+    upload: Upload
+    upload_avatar: Upload avatar
+    upload_image: Upload image
   user_sidebar: 
-    account: ""
-    diner_style: ""
-    favourites: ""
-    h3_link: ""
-    invite_friends: ""
-    reservations: ""
-    reviews: ""
-    settings: ""
-    top_points: ""
-    view_places: ""
-    view_reservations: ""
+    account: My account
+    diner_style: Diner style
+    favourites: My favourites
+    h3_link: Admin
+    invite_friends: Invite friends
+    reservations: My reservations
+    reviews: My reviews
+    settings: Settings
+    top_points: TOP points
+    view_places: View places
+    view_reservations: View reservations
   views: 
     pagination: 
-      first: ""
-      last: ""
-      next: ""
-      previous: ""
+      first: First
+      last: Last
+      next: Next &raquo;
+      previous: "&laquo; Previous"
       truncate: ""
-  vk: ""
+  vk: Vkontakte
   welcome: Welcome
   words: 
     cancel: cancel
@@ -425,10 +422,10 @@ en:
     expand: expand
     helpful: helpful
     invite: invite
-    kitchen: kitchen
-    location: ""
+    kitchen: cuisine
+    location: Location
     menu: Menu
-    new_reservation: ""
+    new_reservation: Reserve a table
     overall: overall
     reviews: reviews
     roll_up: roll up

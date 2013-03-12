@@ -56,20 +56,20 @@ en:
     batch_actions: ""
     bill: 
       code: 
-        cheap: ""
-        moderate: ""
-        spendy: ""
-        splurge: ""
+        cheap: Cheap
+        moderate: Medium
+        spendy: Reasonable
+        splurge: Premium
       image: 
-        cheap: ""
-        moderate: ""
-        spendy: ""
-        splurge: ""
+        cheap: $
+        moderate: $$
+        spendy: $$$
+        splurge: $$$$
       kind: 
-        cheap: ""
-        moderate: ""
-        spendy: ""
-        splurge: ""
+        cheap: Under $10
+        moderate: $11 - $30
+        spendy: $31 - $60
+        splurge: over $61
     cant_be_deleted: ""
     choose: ""
     clear_cache: ""
@@ -81,8 +81,8 @@ en:
         info: ""
     day_type: 
       full: 
-        friday: ""
-        monday: ""
+        friday: Friday
+        monday: Monday
         saturday: ""
         sunday: ""
         thursday: ""
@@ -125,15 +125,15 @@ en:
     geo_autocomplete: ""
     geo_type: 
       distance: 
-        close: ""
-        drive: ""
-        far: ""
-        walk: ""
+        close: " > 500 m."
+        drive: " > 5 km."
+        far: " Far < 10 km."
+        walk: " > 1 km."
       kind: 
-        close: ""
-        drive: ""
-        far: ""
-        walk: ""
+        close: Close
+        drive: Drive
+        far: Far
+        walk: Walk
     group: 
       kind: 
         admin: ""
@@ -295,14 +295,7 @@ en:
       title: ""
       type: ""
   admin_js: 
-    abbr_day_names: 
-    - Sun
-    - Mon
-    - Tue
-    - Wed
-    - Thu
-    - Fri
-    - Sat
+    abbr_day_names: "[\"Sun\", \"Mon\", \"Tue\", \"Wed\", \"Thu\", \"Fri\", \"Sat\"]"
     add_link: ""
     at: at
     button_description: ""
@@ -314,30 +307,11 @@ en:
     confirm: ""
     create_product: ""
     day: ""
-    day_names: 
-    - sunday
-    - monday
-    - tuesday
-    - wednesday
-    - thursday
-    - friday
-    - saturday
+    day_names: "[\"sunday\", \"monday\", \"tuesday\", \"wednesday\", \"thursday\", \"friday\", \"saturday\"]"
     delete_nested_elements: ""
     edit: ""
     for: for
-    month: 
-    - January
-    - February
-    - March
-    - April
-    - May
-    - June
-    - July
-    - August
-    - September
-    - October
-    - November
-    - December
+    month: "[\"January\", \"February\", \"March\", \"April\", \"May\", \"June\", \"July\", \"August\", \"September\", \"October\", \"November\", \"December\"]"
     name: ""
     no_results: ""
     own_review: Can't vote for your own review

@@ -1,7 +1,7 @@
 --- 
 ru: 
   First_name: "Имя"
-  Last_name: "фамилия"
+  Last_name: "Фамилия"
   account_confirm: "Подтвердить мою учетную запись"
   activerecord: 
     attributes: 
@@ -13,9 +13,9 @@ ru:
     gender: 
       gender: "Пол"
   auth: 
-    change_my_password: Change my password
-    change_password: Change your password
-    confirm_you_password: Confirm your new password
+    change_my_password: "Изменить мой пароль"
+    change_password: "Изменить ваш пароль"
+    confirm_you_password: "Подтвердите пароль"
     edit_passwords: 
       confirm_new_password: "Подтвердите пароль"
       new_password: "Новый пароль"
@@ -33,7 +33,7 @@ ru:
       sign_in: "Вход"
       sign_out: "Выход"
       sign_up: "Регистрация"
-    logout: Logout
+    logout: "Выйти"
     mailer: 
       confirmation: 
         after_notes: "C уважением,  Всегда рады приветствовать Вас на страницах нашего ресурса! <br/>Полезная информация <br/>- При регистрации, подтверждая ее, вы принимаете Соглашение (ссылка на соглашение). <br/>- Если у вас возникли проблемы с регистрацией, пожалуйста, свяжитесь с администратором (ссылка на форму) или ознакомьтесь с разделом «Помощь» (начинаем раздел «Помощь» со страницы с кратким «FAQ»)»."
@@ -89,58 +89,9 @@ ru:
   confirm_message: "Вы можете подтвердить Ваш почтовый адрес пройдя по следующей ссылке:"
   confirmation_resend: "Повторно выслать письмо для подтверждения e-mail."
   date: 
-    abbr_day_names: 
-    - "Вс"
-    - "Пн"
-    - "Вт"
-    - "Ср"
-    - "Чт"
-    - "Пт"
-    - "Сб"
-    abbr_month_names: 
-    - 
-    - "янв."
-    - "февр."
-    - "марта"
-    - "апр."
-    - "мая"
-    - "июня"
-    - "июля"
-    - "авг."
-    - "сент."
-    - "окт."
-    - "нояб."
-    - "дек."
-    day_names: 
-    - "воскресенье"
-    - "понедельник"
-    - "вторник"
-    - "среда"
-    - "четверг"
-    - "пятница"
-    - "суббота"
-  formats:
-    default: "%d.%m.%Y"
-    long: "%d %B %Y"
-    short: "%d %b"
-    month_names: 
-    - 
-    - "января"
-    - "февраля"
-    - "марта"
-    - "апреля"
-    - "мая"
-    - "июня"
-    - "июля"
-    - "августа"
-    - "сентября"
-    - "октября"
-    - "ноября"
-    - "декабря"
-    order: 
-    - :day
-    - :month
-    - :year
+    abbr_day_names: "[\"Вс\", \"Пн\", \"Вт\", \"Ср\", \"Чт\", \"Пт\", \"Сб\"]"
+    abbr_month_names: "[nil, \"янв.\", \"февр.\", \"марта\", \"апр.\", \"мая\", \"июня\", \"июля\", \"авг.\", \"сент.\", \"окт.\", \"нояб.\", \"дек.\"]"
+    day_names: "[\"воскресенье\", \"понедельник\", \"вторник\", \"среда\", \"четверг\", \"пятница\", \"суббота\"]"
   datetime: 
     distance_in_words: 
       about_x_hours: 
@@ -218,7 +169,7 @@ ru:
       new: New restaurants
       reserv_online: Reserve your table online for free
       save_up: Save up to 30% off all food and drinks
-      second_big_text: Select one of %{count} restaurants in %{city} and save up to %{discount} off your total bill.
+      second_big_text: Select one of %{count} restaurants in %{city} and save up to %{discount}% off your total bill.
   facebook: Facebook
   flash: 
     auth: 
@@ -232,7 +183,7 @@ ru:
         notice: "Данные успешно обновлены"
   footer: 
     become_a_prtner: Become a partner!
-    copy: " &copy; Topreserve, 2013. -"
+    copy: " &copy; Topreserve, 2013. - "
     earn_point: Earn points and get discounts!
     need_clients: Need more clients?
     privacy_police: Privacy Policy
@@ -240,6 +191,12 @@ ru:
   forgot_password: 
     description: "Введите email, который Вы указывали при регистрации."
     reset_pass: "Скинуть пароль"
+  formats: 
+    default: "%d.%m.%Y"
+    long: "%d %B %Y"
+    month_names: "[nil, \"января\", \"февраля\", \"марта\", \"апреля\", \"мая\", \"июня\", \"июля\", \"августа\", \"сентября\", \"октября\", \"ноября\", \"декабря\"]"
+    order: "[:day, :month, :year]"
+    short: "%d %b"
   front_js: 
     comments: 
       chat_title: "Переписка"
@@ -251,7 +208,7 @@ ru:
         sizeError: "{file} очень большой, максимальный размер файла {sizeLimit}."
         typeError: "{file} имеет не правильное расширение. Только {extensions} разрешены."
   google: Google
-  head: "Restaurant Reservations. Free · Fat · Instant"
+  head: "Резерв столов онлайн. Бесплатно · Со скидкой"
   hello: "Приветствуем"
   label: 
     close: "Закрыть"
@@ -344,23 +301,23 @@ ru:
     category: Category
     filters: "Filters:"
     grid_view: Grid view
-    kitchen: Kitchen
+    kitchen: "Кухня"
     load: "Грузим самые свежие результаты"
     location: Location
     main_text: Free reservations at %{count} %{type} in %{city}
     map_view: Map view
     number_of_people: Number of people
     people: people
-    price: Price
+    price: "Средний чек"
     refine: Refine your results
     result_for: Results for
     sort: 
       newest: "Сортировать по дате добавления"
       overall_mark: "Сортировать по популярности"
-    sort_labeled: Sort by...
+    sort_labeled: "Сортировать..."
     thead: 
-      th1: Restaurant
-      th2: Availability (click time to reserve)
+      th1: "Ресторан"
+      th2: "Доступно (нажмите на время для резерва)"
   share: 
     description: "тестовое описание"
   short_strings: 

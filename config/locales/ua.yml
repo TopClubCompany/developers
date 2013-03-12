@@ -119,28 +119,6 @@ ua:
     - "четверг"
     - "пятница"
     - "суббота"
-    formats: 
-      default: "%d.%m.%Y"
-      long: "%d %B %Y"
-      short: "%d %b"
-    month_names: 
-    - 
-    - "января"
-    - "февраля"
-    - "марта"
-    - "апреля"
-    - "мая"
-    - "июня"
-    - "июля"
-    - "августа"
-    - "сентября"
-    - "октября"
-    - "ноября"
-    - "декабря"
-    order: 
-    - :day
-    - :month
-    - :year
   datetime: 
     distance_in_words: 
       about_x_hours: 
@@ -240,6 +218,12 @@ ua:
   forgot_password: 
     description: ""
     reset_pass: "Скинути пароль"
+  formats: 
+    default: ""
+    long: ""
+    month_names: ""
+    order: ""
+    short: ""
   front_js: 
     comments: 
       chat_title: ""
