@@ -73,8 +73,7 @@ class PlacesController < ApplicationController
       time = params[:reserve_time]
       time = Time.parse(Place.en_to_time(time))
       @place.week_days.where(:day_type_id => wday).each do |week_day|
-        place["week_day_#{wday}_start_at"] = week_day.start_at.to_s.split(".").join(":")
-        place["week_day_#{wday}_end_at"] = week_day.end_at.to_s.split(".").join(":")
+        place["week_day_#{wday}"] = week_day.range_time
       end
       @filtered_time = Place.order_time(place, time, wday)
     end
