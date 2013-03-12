@@ -8,6 +8,23 @@ module Utils
       def self.ru
         %w(А Б В Г Д Е Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Э Ю Я)
       end
+
+      def self.to_en(text)
+        ru_mapping = {"а" => "a", "б" => "b", "г" => "g", "д" => "d", "е" => "e", "ё" => "e", "ж" => "j",
+         "з" => "z", "и" => "i", "й" => "i", "к" => "k", "л" => "l", "м" => "m", "н" => "n",
+         "о" => "o", "п" => "p", "р" => "r", "с" => "c", "т" => "t", "у" => "y", "ф" => "f",
+         "х" => "x", "ц" => "c", "ч" => "ch", "ш" => "sh", "щ" => "sh", "ъ" => "", "ь" => "",
+         "э" => "e", "ю" => "y", "я" => "i"}
+        rec_text = ""
+        text.to_s.each do |char|
+          if ru_char = ru_mapping[char].presence
+            rec_text += ru_char
+          else
+            rec_text += char
+          end
+        end
+        rec_text
+      end
     end
   end
 end
