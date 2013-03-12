@@ -83,11 +83,11 @@ class Place < ActiveRecord::Base
       indexes :lat_lng, type: 'geo_point'
       indexes :is_has_slider_image, type: 'boolean'
 
-      DayType.all.each do |day|
-        %w(start_at end_at).each do |work_time|
-          indexes "week_day_#{day.id}_#{work_time}", type: :date, format: :hour_minute
-        end
-      end
+      #DayType.all.each do |day|
+      #  %w(start_at end_at).each do |work_time|
+      #    indexes "week_day_#{day.id}_#{work_time}", type: :double
+      #  end
+      #end
 
     end
   end
@@ -201,9 +201,9 @@ class Place < ActiveRecord::Base
 
   def self.tonight_available amount, options={}
     current_day = PlaceUtils::PlaceTime.wday(DateTime.now.wday) + 1
-    field = "week_day_#{current_day}_end_at"
+    field = "week_day_#{current_day}"
     filters = []
-    filters << {query: {range: {:"#{field}" => {from: "19:00", to: "3:00", boost: 2.0}} }}
+    filters << {query: {terms: {:"#{field}" => [19, 3], minimum_match: 2} }}
     tire.search(page: options[:page] || 1, per_page: amount) do
       sort { by("overall_mark", "desc") }
       if options[:city]
@@ -244,10 +244,8 @@ class Place < ActiveRecord::Base
       json.set!("discounts", self.discounts_index)
 
       self.week_days.each do |week_day|
-        json.set!("week_day_#{week_day.day_type_id}_start_at", week_day.start_at.to_s.split(".").join(":")) if  week_day.start_at
-        json.set!("week_day_#{week_day.day_type_id}_end_at", week_day.end_at.to_s.split(".").join(":")) if  week_day.end_at
+        json.set!("week_day_#{week_day.day_type_id}", week_day.range_time.to_a)
       end if self.week_days.any?
-
 
       json.(self, *related_ids)
 
@@ -321,10 +319,8 @@ class Place < ActiveRecord::Base
       time = self.en_to_time(options[:reserve_time])
       current_day = options[:reserve_date].present? ? DateTime.parse(options[:reserve_date]).wday : DateTime.now.wday
       current_day = PlaceUtils::PlaceTime.wday(current_day)
-      field = "week_day_#{current_day}_start_at"
-      fields << {query: {range: {:"#{field}" => {lte: time, boost: 2.0}} }}
-      field = "week_day_#{current_day}_end_at"
-      fields << {query: {range: {:"#{field}" => {gte: time, boost: 2.0}} }}
+      field = "week_day_#{current_day}"
+      fields << {query: {terms: {:"#{field}" => [time.split(":").first.to_i], minimum_match: 1} }}
     end
     fields
   end
@@ -384,9 +380,8 @@ class Place < ActiveRecord::Base
 
   def self.order_time place, time, wday
     [30, 15, 0, -15, -30].each_with_index.map do |i, index|
-      start_time = place["week_day_#{wday}_start_at"].sub(":",".").to_f
-      end_time = place["week_day_#{wday}_end_at"].sub(":",".").to_f
-      ::PlaceUtils::PlaceTime.find_available_time(i, time, start_time, end_time, false)
+      array_time = place["week_day_#{wday}"]
+      ::PlaceUtils::PlaceTime.find_available_time(i, time, array_time)
     end
   end
 
@@ -465,7 +460,7 @@ class Place < ActiveRecord::Base
   end
 
   def max_discount
-    day_discounts.special.max{|x| x.discount}.discount
+    day_discounts.special.try { |special| special.max { |x| x.discount if x }.try(:discount) if special }
   end
 
   def today_discount_with_time(time)
