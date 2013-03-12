@@ -83,23 +83,23 @@ en:
       full: 
         friday: Friday
         monday: Monday
-        saturday: ""
-        sunday: ""
-        thursday: ""
-        tuesday: ""
-        wednesday: ""
+        saturday: Saturday
+        sunday: Sunday
+        thursday: Thursday
+        tuesday: Tuesday
+        wednesday: Wednesday
       short: 
-        friday: ""
-        monday: ""
-        saturday: ""
-        sunday: ""
-        thursday: ""
-        tuesday: ""
-        wednesday: ""
-    delete: ""
-    delete_confirmation: ""
-    details: ""
-    empty: ""
+        friday: Fri
+        monday: Mon
+        saturday: Sat
+        sunday: Sun
+        thursday: Thu
+        tuesday: Tue
+        wednesday: Wed
+    delete: Delete
+    delete_confirmation: Delete confirmation?
+    details: Details
+    empty: Empty
     exit: ""
     features: ""
     fileupload: 
@@ -119,10 +119,10 @@ en:
       save_and_add_another: ""
       save_and_edit: ""
     gender: 
-      female: ""
-      male: ""
-      unknown: ""
-    geo_autocomplete: ""
+      female: Female
+      male: Male
+      unknown: Alien
+    geo_autocomplete: Enter address
     geo_type: 
       distance: 
         close: " > 500 m."
@@ -142,10 +142,10 @@ en:
         public: ""
     keywords: ""
     langs: 
-      en: ""
-      it: ""
-      ru: ""
-      uk: ""
+      en: En
+      it: It
+      ru: Ru
+      uk: Uk
     letters: 
       cancel_reserve_email_place: ""
       cancel_reserve_email_user: ""
@@ -155,7 +155,7 @@ en:
       successful_reserve_email_user: ""
       successful_reserve_sms_place: ""
       successful_reserve_sms_user: ""
-    loading: ""
+    loading: Loading...
     locators: 
       cache_clear: ""
       edit_file: ""
@@ -296,7 +296,7 @@ en:
       type: ""
   admin_js: 
     abbr_day_names: "[\"Sun\", \"Mon\", \"Tue\", \"Wed\", \"Thu\", \"Fri\", \"Sat\"]"
-    add_link: ""
+    add_link: Create?
     at: at
     button_description: ""
     button_name_add: ""
@@ -306,7 +306,7 @@ en:
     clear: ""
     confirm: ""
     create_product: ""
-    day: ""
+    day: Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday
     day_names: "[\"sunday\", \"monday\", \"tuesday\", \"wednesday\", \"thursday\", \"friday\", \"saturday\"]"
     delete_nested_elements: ""
     edit: ""
