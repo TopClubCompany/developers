@@ -15,10 +15,10 @@
     {{#timing}}
       {{#time}}
         {{#available}}
-            <a href="#">{{time}}</a>
+            <a href="#" data-value="{{time}}">{{time}}</a>
         {{/available}}
         {{^available}}
-            <a href="#" class="na">{{time}}</a>
+            <a href="#" data-value="{{time}}" class="na">{{time}}</a>
         {{/available}}
       {{/time}}
     {{/timing}}
