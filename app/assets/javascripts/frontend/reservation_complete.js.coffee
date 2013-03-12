@@ -12,7 +12,6 @@ doMagic = () ->
     fromDate = $("input[name='reserve_date']").val().split('/')
     timeString = $("select[name='reserve_time']").val()
     date = new Date(fromDate[2], fromDate[1] - 1, fromDate[0], 0, 0)
-    timeString = date.toLocaleTimeString()
     person_num = $("#search_form select[name='number_of_people']").val()
     atText = I18n.translations[window.language].admin_js.at
     forText = I18n.translations[window.language].admin_js.for
