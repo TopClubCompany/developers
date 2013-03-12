@@ -34,7 +34,7 @@
           = f.input :gender,  label: t('admin.gender.gender'), collection: GenderType.all, include_blank: false
           .clear
           = f.label :birthday, label: get_reg_form_attr_name(:birthday)
-          = f.date_select :birthday, :start_year => 1995
+          = f.date_select :birthday, :start_year => 1940, :end_year => DateTime.now.strftime("%Y").to_i
           .clear
           label
             = t('sign_up.profile_photo')
@@ -42,7 +42,7 @@
           .clear
           p
             =' t('sign_up.by_click')
-            = link_to locale_down(t('sign_up.term_cond')), "/#{I18n.locale}/pages/TAC"
+            = link_to locale_down(t('sign_up.term_cond')), "/#{I18n.locale}/pages/terms"
             |.
           = f.submit t('auth.links.join_reserve')
     #social_login.span4

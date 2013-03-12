@@ -1,13 +1,18 @@
 --- 
 ru: 
+  First_name: "Имя"
+  Last_name: "фамилия"
+  account_confirm: "Подтвердить мою учетную запись"
   activerecord: 
     attributes: 
       user: 
         password: "Пароль"
         password_confirmation: "Подтверждение пароля"
         remember_me: "Запомнить"
-  auth:
-    successfully_sing_in: "Successfully sign in"
+  admin: 
+    gender: 
+      gender: "Пол"
+  auth: 
     change_my_password: Change my password
     change_password: Change your password
     confirm_you_password: Confirm your new password
@@ -52,6 +57,8 @@ ru:
     not_a_user: "Еще не заригестрированы?"
     points: and earn 5 points
     remember_me: "Запомнить"
+    social: 
+      sign_in_with: "Используя "
     submit: 
       change_password: "Изменить пароль"
       receive_confirmation: "Выслать подтверждение"
@@ -59,6 +66,7 @@ ru:
       sign_in: "Зарегистрироваться"
       sign_out: "Выйти"
       sign_up: "Зарегистрироваться"
+    successfully_sing_in: Successfully sign in
     title: 
       change_password: "Изменение пароля"
       receive_confirmation: "Не получили письма с подтверждением регистрации?"
@@ -66,8 +74,11 @@ ru:
       sign_in: "Вход в систему"
       sign_out: "Выход из системы"
       sign_up: "Регистрация"
-    social:
-      sign_in_with: "Используя "
+  breadcrumbs: 
+    main: "Главная"
+    profile: "Профиль"
+    search: "Поиск"
+  city: "город"
   comments: 
     add_comment: "Создать"
     comment: "Комментировать"
@@ -75,6 +86,8 @@ ru:
     create: "Комментировать"
     delete_comment: "Удалить"
     edit_comment: "Редактировать"
+  confirm_message: "Вы можете подтвердить Ваш почтовый адрес пройдя по следующей ссылке:"
+  confirmation_resend: "Повторно выслать письмо для подтверждения e-mail."
   date: 
     abbr_day_names: 
     - "Вс"
@@ -106,10 +119,10 @@ ru:
     - "четверг"
     - "пятница"
     - "суббота"
-    formats: 
-      default: "%d.%m.%Y"
-      long: "%d %B %Y"
-      short: "%d %b"
+  formats:
+    default: "%d.%m.%Y"
+    long: "%d %B %Y"
+    short: "%d %b"
     month_names: 
     - 
     - "января"
@@ -206,6 +219,7 @@ ru:
       reserv_online: Reserve your table online for free
       save_up: Save up to 30% off all food and drinks
       second_big_text: Select one of %{count} restaurants in %{city} and save up to %{discount} off your total bill.
+  facebook: Facebook
   flash: 
     auth: 
       failure: "Ошибка авторизации"
@@ -224,8 +238,8 @@ ru:
     privacy_police: Privacy Policy
     terms_of_service: Terms of Service
   forgot_password: 
-    reset_pass: Скинуть пароль
     description: "Введите email, который Вы указывали при регистрации."
+    reset_pass: "Скинуть пароль"
   front_js: 
     comments: 
       chat_title: "Переписка"
@@ -236,7 +250,9 @@ ru:
         onLeave: "Файлы загружаются, файлы не загрузятся если Вы покинете страницу."
         sizeError: "{file} очень большой, максимальный размер файла {sizeLimit}."
         typeError: "{file} имеет не правильное расширение. Только {extensions} разрешены."
+  google: Google
   head: "Restaurant Reservations. Free · Fat · Instant"
+  hello: "Приветствуем"
   label: 
     close: "Закрыть"
   langs: 
@@ -251,17 +267,21 @@ ru:
     en: eng
     ru: "рус"
     uk: "укр"
+  lock_message: "Ваша учетная запись была  заблокирована по причине чрезмерного количества неудавшихся входов."
   long_strings: 
     review_placeholder: "Бывали здесь? Расскажите нам свою историю об этом месте!"
+  message_fraud: "В случае, если это были не Вы, пожалуйста, проигнорируйте это  послание."
+  message_reset: "Кто-то запросил ссылку для изменения Вашего пароля."
+  message_unlock: "Вы можете разблокировать Вашу учётную запись пройдя по следующей ссылке:"
+  message_wont_change: "Ваш пароль будет изменен, как только Вы перейдете по ссылке и создадите новый."
+  password_change_mesage: "Изменить пароль"
   place: 
     is: "из"
     share: Share
     up_to: Up to %{discount}% off
     vailability: Availability on %{reserve_date} around %{reserve_time} for %{number_of_people} people
-  profile:
-    upcoming: Upcoming Reservations
-    view_all_reservations: View all reservations
-    view_edit: View / Edit
+  profile: 
+    birthday: Birthday
     city_not_specified: not specified
     date: Date
     edit: edit
@@ -273,51 +293,52 @@ ru:
     nothing_favourites: Nothing here. You should eat out. Then come and like the place.
     notifications: Notifications
     personal_information: Personal Information
+    private_for_email: Private. For E-mail notifications about your reservations. only
+    private_for_sms: Private. For SMS notifications about your reservations only
+    private_statistics: Private. This data is confidential and used for statistics only
     read_all_reviews: Read all reviews
     read_more: "read more ›"
     save_changes: Save changes
     send_email: Send email
     settings: Settings
+    social: 
+      connect_social_accounts: Connect social accounts
+      connected: Your %{account} is connected
+      disconnect: Disconnect
     time: Time
     upcoming: upcoming!
-    social:
-      connect_social_accounts: "Connect social accounts"
-      connected: "Your %{account} is connected"
-      disconnect: "Disconnect"
-    private_for_sms: "Private. For SMS notifications about your reservations only"
-    private_for_email: "Private. For E-mail notifications about your reservations. only"
-    private_statistics: "Private. This data is confidential and used for statistics only"
-    birthday: "Birthday"
+    view_all_reservations: View all reservations
+    view_edit: View / Edit
   registration_form: 
     or: " или "
   reservation: 
     address: "Адрес:"
-    complete: Заполните форму заказа
+    at: "в"
+    complete: "Заполните форму заказа"
     confirmation: "Подтверждение #:"
-    confirmed: Ваш заказ подтверджен
+    confirmed: "Ваш заказ подтверджен"
     confirmed_text: Your reservation is confirmed and saved in the restaurant's computer reservation system. You'll receive an email copy of this confirmation.
     diner_name: "Имя обедающего:"
+    discount: This document guarantees your reservation and <strong>%{discount}% discount</strong> for your bill
     dress_code: "Dress Code:"
-    edit: Править
-    edit_with_place: Изменить резерв в %{place}
-    at: 'в'
-    for: 'для'
-    people:
-      one: '1 персоны'
-      other: '%{count} персон'
-    i_go: Что дальше?
-    invite_friends: Пригласить друзей
+    edit: "Править"
+    edit_with_place: "Изменить резерв в %{place}"
+    for: "для"
+    i_go: "Что дальше?"
+    invite_friends: "Пригласить друзей"
     message_from_restoran: "Сообщение от ресторана:"
     more_info: "Подробнее:"
     new_reservation: 
-      complete_reservation: Заполните Ваш заказ
+      complete_reservation: "Заполните Ваш заказ"
+    people: 
+      one: "1 персоны"
+      other: "%{count} персон"
     phone: "Номер телефона:"
-    print: Распечатать детали резерва
+    print: "Распечатать детали резерва"
     rewards: All members get rewards for online reservations!
     special_offers: "Special offer:"
     view_on_map: View restaurant on map
     view_or_change: View or change your reservation
-    discount: "This document guarantees your reservation and <strong>%{discount}% discount</strong> for your bill"
   search: 
     browse_category: Browse places by category
     category: Category
@@ -367,18 +388,20 @@ ru:
     view_menu: "Посмотреть меню ›"
     view_your_reservation: "Посмотреть свои резервации"
     write_review: "Написать отзыв"
+  sign_in: 
+    forgot_pass: "Забыли пароль?"
   sign_up: 
-    by_click: "Нажимая 'Зарегистрироваться', Вы подтвреждаете, что прочитали и согласны с"
-    for_successful_reservations: за успешные резервации
-    term_cond: "Условиями пользовательского соглашения"
     become_member: "Присоединяйтесь"
-    sign_in: "ввойдите в систему"
-    sign_up_and: "Зарегистрируйтесь и"
-    earn_points: "зарабатывайте очки"
+    by_click: "Нажимая 'Зарегистрироваться', Вы подтвреждаете, что прочитали и согласны с"
     diner_name: "Имя обедающего"
+    earn_points: "зарабатывайте очки"
+    for_successful_reservations: "за успешные резервации"
     name: "Имя"
     profile_photo: "Аватар"
+    sign_in: "ввойдите в систему"
     sign_in_acc: "Ввойти в систему"
+    sign_up_and: "Зарегистрируйтесь и"
+    term_cond: "Условиями пользовательского соглашения"
   simple_form: 
     error_notification: 
       default_message: "При сохранении возникли ошибки"
@@ -396,14 +419,16 @@ ru:
       day: "%d"
       day_name: "%A"
       dm: "%d.%m"
+      hour_min: "%H:%M"
       long: "%d-%m-%Y"
       month: "%B"
       year: "%Y"
       ymd: "%d %B %Y"
-      hour_min: "%H:%M"
     pm: "вечера"
+  twitter: Twitter
   unauthorized: 
     default: "Нет прав для просмотра"
+  unlock: "Разблокировать мою учётную запись"
   update: "редактирование"
   uploader: 
     add_file: "Добавить файл"
@@ -412,13 +437,13 @@ ru:
     upload_avatar: "Загрузите фото"
     upload_image: "Загрузите фото"
   user_sidebar: 
+    account: My account
     diner_style: Diner style
+    favourites: My favourites
     h3_link: Admin
     invite_friends: Invite friends
-    my_account: My account
-    my_favourites: My favourites
-    my_reservations: My reservations
-    my_reviews: My reviews
+    reservations: My reservations
+    reviews: My reviews
     settings: Settings
     top_points: TOP points
     view_places: View places
@@ -430,6 +455,8 @@ ru:
       next: "След &raquo;"
       previous: "&laquo; Пред"
       truncate: ...
+  vk: VK
+  welcome: "Приветствуем"
   words: 
     cancel: "отмена"
     date: "дата"
@@ -439,6 +466,7 @@ ru:
     helpful: "полезный"
     invite: "пригласить"
     kitchen: "кухня"
+    location: "Адрес"
     menu: "Меню"
     new_reservation: "Забронировать стол"
     overall: "Общая"
@@ -447,29 +475,4 @@ ru:
     time: "время"
     unhelpful: "бесполезный"
     view: "посмотреть"
-    location: "Адрес"
-  confirmation_resend: "Повторно выслать письмо для подтверждения e-mail."
-  welcome: "Приветствуем"
-  confirm_message: "Вы можете подтвердить Ваш почтовый адрес пройдя по следующей ссылке:"
-  account_confirm: "Подтвердить мою учетную запись"
-  hello: "Приветствуем"
-  message_reset: "Кто-то запросил ссылку для изменения Вашего пароля."
-  password_change_mesage: "Изменить пароль"
-  message_fraud: "В случае, если это были не Вы, пожалуйста, проигнорируйте это  послание."
-  message_wont_change: "Ваш пароль будет изменен, как только Вы перейдете по ссылке и создадите новый."
-  lock_message: "Ваша учетная запись была  заблокирована по причине чрезмерного количества неудавшихся входов."
-  message_unlock: "Вы можете разблокировать Вашу учётную запись пройдя по следующей ссылке:"
-  unlock: "Разблокировать мою учётную запись"
   your_email: "Ваш email"
-  sign_in:
-    forgot_pass: "Забыли пароль?"
-  First_name: "Имя"
-  Last_name: "фамилия"
-  city: "город"
-  admin:
-    gender:
-      gender: "Пол"
-  facebook: "Facebook"
-  vk: "VK"
-  google: "Google"
-  twitter: "Twitter"

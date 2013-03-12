@@ -2,6 +2,7 @@
 class PlacesController < ApplicationController
   before_filter :find_place, only: [:show, :more, :set_unset_favorite]
   before_filter :find_time, only: [:show]
+  before_filter :set_breadcrumbs_front, only: :show
 
   def show
     @date = params[:reserve_date] || Date.today.strftime('%d/%m/%Y')
@@ -18,7 +19,7 @@ class PlacesController < ApplicationController
                  else
                    reviews
     end
-    if signed_in?
+    if signed_in? && current_user.reservations.pluck(:place_id).include?(@place.id)
       @review = Review.new(reviewable_id: @place.id, reviewable_type: Place.name)
       @review.marks.build
     end
@@ -80,5 +81,10 @@ class PlacesController < ApplicationController
 
   end
 
+  def set_breadcrumbs_front
+    super
+    @breadcrumbs_front << ["<a href=#{with_locale("search")}>#{I18n.t('breadcrumbs.search')}&nbsp</a>"]
+    @breadcrumbs_front << ["<a href=#{with_locale(place_path(@place))}>#{@place.name}&nbsp</a>"]
+  end
 
 end

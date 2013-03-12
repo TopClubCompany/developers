@@ -72,7 +72,7 @@ class PlacesCollection
             text = text.replace /AM|PM/, ''
           else
             text = timeButton.text()
-          timeButton.attr('value', timeButton.text())
+          timeButton.data('value', timeButton.text())
           timeButton.text(text)
         
     lattitudes = _.pluck objArray, 'lat'
@@ -197,7 +197,7 @@ class PlacesCollection
           text = text.replace /AM|PM/, ''
         else
           text = timeButton.text()
-        timeButton.attr('value', timeButton.text())
+        timeButton.data('value', timeButton.text())
         timeButton.text(text)
 
     setTimeout(( =>
@@ -288,8 +288,8 @@ class PlacesCollection
         text = text.replace /AM|PM/, ''        
       else 
         text = time.time
-      $el.find(".timing a:eq(#{index})").html(text).attr('value', time.time)
-      $listEl.find(".timing a:eq(#{index})").html(text).attr('value', time.time)
+      $el.find(".timing a:eq(#{index})").html(text).data('value', time.time)
+      $listEl.find(".timing a:eq(#{index})").html(text).data('value', time.time)
       if time.available
         $listEl.add($el).tooltip('hide')
         $listEl.add($el).find(".timing a:eq(#{index})").removeClass('na').tooltip('disable')
@@ -741,7 +741,6 @@ handleClick = ()->
     result["reserve_date"] = result["reserve_date"].replace(/\//g,'-')
     language = $('#language .active').attr('id')
     id = $('#place').data('id') || $(e.target).parents('.place').data('id')
-
-    time = $(e.target).val().replace(/\s/, '')
+    time = $(e.target).data('value').replace(/\s/, '')
     newLink = "/#{language}/new_reservation/#{result["reserve_date"]},#{id},h=#{time.split(':')[0]}&m=#{time.split(':')[1]},#{result["number_of_people"]}"
     window.location.replace newLink

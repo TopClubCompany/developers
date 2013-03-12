@@ -6,7 +6,7 @@ html
   body
     div#wrapper
       = render "layouts/header"
-      /= render "shared/breadcrumbs" if not devise pages
+      = render "shared/breadcrumbs"
       = bootstrap_flash
 
       = yield

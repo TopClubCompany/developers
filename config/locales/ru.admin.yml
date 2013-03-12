@@ -54,15 +54,6 @@ ru:
       sign_out: "Выход"
     avatar: "Аватар"
     batch_actions: "Действия"
-    letters:
-      successful_reserve_sms_user: "Успешное смс уведомление о резерве для юзера"
-      successful_reserve_sms_place: "Успешное смс уведомление о резерве для ресторана"
-      successful_reserve_email_user: "Успешное email уведомление о резерве для юзера"
-      successful_reserve_email_place: "Успешное email уведомление о резерве для ресторана"
-      cancel_reserve_email_user: "Отмена брони email юзер"
-      cancel_reserve_email_place: "Отмена брони email ресторан"
-      edit_reserve_email_user: "Изменение брони email юзер"
-      new_reserve_email_top_club: "Новый резерв email TopClub"
     bill: 
       code: 
         cheap: Cheap
@@ -155,6 +146,15 @@ ru:
       it: It
       ru: Ru
       uk: Uk
+    letters: 
+      cancel_reserve_email_place: "Отмена брони email ресторан"
+      cancel_reserve_email_user: "Отмена брони email юзер"
+      edit_reserve_email_user: "Изменение брони email юзер"
+      new_reserve_email_top_club: "Новый резерв email TopClub"
+      successful_reserve_email_place: "Успешное email уведомление о резерве для ресторана"
+      successful_reserve_email_user: "Успешное email уведомление о резерве для юзера"
+      successful_reserve_sms_place: "Успешное смс уведомление о резерве для ресторана"
+      successful_reserve_sms_user: "Успешное смс уведомление о резерве для юзера"
     loading: "Загрузка..."
     locators: 
       cache_clear: "Очистить кеш"
@@ -295,7 +295,16 @@ ru:
       title: "История"
       type: "Тип"
   admin_js: 
+    abbr_day_names: 
+    - "Вс"
+    - "Пн"
+    - "Вт"
+    - "Ср"
+    - "Чт"
+    - "Пт"
+    - "Сб"
     add_link: "Создать?"
+    at: "в"
     button_description: "Описание"
     button_name_add: "Добавить"
     button_name_cancel: "Сбросить"
@@ -305,61 +314,51 @@ ru:
     confirm: "Подвердить"
     create_product: "Создать новый товар"
     day: "Воскресенье,Понедельник,Вторник,Среда,Четверг,Пятница,Суббота"
+    day_names: 
+    - "воскресенье"
+    - "понедельник"
+    - "вторник"
+    - "среда"
+    - "четверг"
+    - "пятница"
+    - "суббота"
     delete_nested_elements: "Невозможно удалить"
     edit: "Редактировать"
-    own_review: 'Нельзя голосовать за собственный обзор'
-    vote_twice: 'Нельзя голосовать дважды'
-    month:
-      - "Январь"
-      - "Февраль"
-      - "Март"
-      - "Апрель"
-      - "Май"
-      - "Июнь"
-      - "Июль"
-      - "Август"
-      - "Сентябрь"
-      - "Октябрь"
-      - "Ноябрь"
-      - "Декабрь"
-    day_names:
-      - "воскресенье"
-      - "понедельник"
-      - "вторник"
-      - "среда"
-      - "четверг"
-      - "пятница"
-      - "суббота"
-    abbr_day_names:
-      - "Вс"
-      - "Пн"
-      - "Вт"
-      - "Ср"
-      - "Чт"
-      - "Пт"
-      - "Сб"
-    at: 'в'
-    for: 'для'
-    person: 'персоны'
-    people: 'персон'
-    validation_message:
-      email_incorrect: "Введите корректный e-mail"
-      phone_incorrect: 'Введите корректный телефон'
-      pass_incorrect: 'Введите корректный пароль'
-      pass_too_short: 'Пароль должен содержать не меньше 5 символов'
-      latin_only: "Только латиница"
-      chars_permited: "Разрешается вводить латиницу, кириллицу, \"-\", \"_\""
-      empty_field: 'Заполните поле'
-      enter_name: 'Введите корректное имя'
-      name_too_short: 'Слишком короткое имя'
-      enter_surname: 'Введите корректную фамилию'
-      surname_too_short: 'Слишком короткую фамилию'
-
+    for: "для"
+    month: 
+    - "Январь"
+    - "Февраль"
+    - "Март"
+    - "Апрель"
+    - "Май"
+    - "Июнь"
+    - "Июль"
+    - "Август"
+    - "Сентябрь"
+    - "Октябрь"
+    - "Ноябрь"
+    - "Декабрь"
     name: "Название"
     no_results: "Ничего не найдено"
+    own_review: "Нельзя голосовать за собственный обзор"
+    people: "персон"
+    person: "персоны"
     search: "Идет поиск..."
     set_img: "Главным"
+    validation_message: 
+      chars_permited: "Разрешается вводить латиницу, кириллицу, \"-\", \"_\""
+      email_incorrect: "Введите корректный e-mail"
+      empty_field: "Заполните поле"
+      enter_name: "Введите корректное имя"
+      enter_surname: "Введите корректную фамилию"
+      latin_only: "Только латиница"
+      name_too_short: "Слишком короткое имя"
+      pass_incorrect: "Введите корректный пароль"
+      pass_too_short: "Пароль должен содержать не меньше 5 символов"
+      phone_incorrect: "Введите корректный телефон"
+      surname_too_short: "Слишком короткую фамилию"
     value: "Значение"
+    vote_twice: "Нельзя голосовать дважды"
   attrs: 
     en: "анг."
     it: "итал."
