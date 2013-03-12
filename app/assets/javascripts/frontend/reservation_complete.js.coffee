@@ -10,30 +10,10 @@ doMagic = () ->
     console.log 'binded submit'
     e.preventDefault()
     fromDate = $("input[name='reserve_date']").val().split('/')
-    fromTime = $("select[name='reserve_time']").val().split(/:|\ /)
-    needSuffex = false
-    if fromTime.length > 2  and window.language is 'en'
-      if (fromTime[2] is 'PM') and (1 < (hours = parseInt(fromTime[0])) < 11)
-        fromTime[0] = hours + 12 + ''
-      needSuffex = true
-
-    date = new Date(fromDate[2], fromDate[1] - 1, fromDate[0], fromTime[0], fromTime[1])
+    timeString = $("select[name='reserve_time']").val()
+    date = new Date(fromDate[2], fromDate[1] - 1, fromDate[0], 0, 0)
     timeString = date.toLocaleTimeString()
-    timeString = timeString.slice(0, -3) if timeString.match /(\d{1,2}\:){2}\d{2}/
-
-    if needSuffex
-      timeToFormat = timeString.split(':')
-      if timeToFormat[0] > 12
-        timeToFormat[0] = parseInt(timeToFormat[0]) - 12 + ''
-        timeToFormat[1] = timeToFormat[1] + ' PM'
-      else
-        timeToFormat[1] = timeToFormat[1] + ' AM'
-#      console.log timeString, timeToFormat.join(':')
-      timeString = timeToFormat.join(':')
     person_num = $("#search_form select[name='number_of_people']").val()
-
-
-    console.log date.getDay(), days
     atText = I18n.translations[window.language].admin_js.at
     forText = I18n.translations[window.language].admin_js.for
     person = I18n.translations[window.language].admin_js.person
