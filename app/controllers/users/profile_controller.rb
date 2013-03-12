@@ -1,5 +1,6 @@
 class Users::ProfileController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :set_breadcrumbs_front
 
   include ReservationsHelper
 
@@ -104,6 +105,17 @@ class Users::ProfileController < ApplicationController
       redirect_to root_path
     end
 
+  end
+
+  def set_breadcrumbs_front
+    path = request.env['PATH_INFO'].to_s
+    @breadcrumbs_front = ["<a href=#{with_locale(profile_path(current_user))}>#{I18n.t('breadcrumbs.profile')}&nbsp</a>"]
+    @breadcrumbs_front << ["<a href=#{with_locale(path)}>#{find_tab(path)}&nbsp</a>"]
+  end
+
+  private
+  def find_tab(path)
+    I18n.t("user_sidebar.#{path.split('/').last}")
   end
 
 end

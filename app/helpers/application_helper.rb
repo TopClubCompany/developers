@@ -272,4 +272,9 @@ module ApplicationHelper
     javascript_include_tag(*files)
   end
 
+  def with_locale(path)
+    path = "/" + path if path[0] != "/"
+    "/" + I18n.locale.to_s + path
+  end
+
 end

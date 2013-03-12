@@ -121,6 +121,7 @@ ua:
     gender: 
       female: ""
       male: ""
+      unknown: ""
     geo_autocomplete: ""
     geo_type: 
       distance: 
@@ -145,6 +146,15 @@ ua:
       it: ""
       ru: ""
       uk: ""
+    letters: 
+      cancel_reserve_email_place: ""
+      cancel_reserve_email_user: ""
+      edit_reserve_email_user: ""
+      new_reserve_email_top_club: ""
+      successful_reserve_email_place: ""
+      successful_reserve_email_user: ""
+      successful_reserve_sms_place: ""
+      successful_reserve_sms_user: ""
     loading: ""
     locators: 
       cache_clear: ""
@@ -285,7 +295,16 @@ ua:
       title: ""
       type: ""
   admin_js: 
+    abbr_day_names: 
+    - "Нд"
+    - "Пн"
+    - "Вт"
+    - "Ср"
+    - "Чт"
+    - "Пт"
+    - "Сб"
     add_link: ""
+    at: "в"
     button_description: ""
     button_name_add: ""
     button_name_cancel: ""
@@ -295,62 +314,52 @@ ua:
     confirm: ""
     create_product: ""
     day: ""
+    day_names: 
+    - "неділя"
+    - "понеділок"
+    - "вівторок"
+    - "середа"
+    - "четвер"
+    - "п’ятниця"
+    - "субота"
     delete_nested_elements: ""
     edit: ""
-    month: ""
+    for: "для"
+    month: 
+    - "Січень"
+    - "Лютий"
+    - "Березень"
+    - "Квітень"
+    - "Травень"
+    - "Червень"
+    - "Липень"
+    - "Серпень"
+    - "Вересень"
+    - "Жовтень"
+    - "Листопад"
+    - "Грудень"
     name: ""
     no_results: ""
+    own_review: "Не можна голосувати за власний огляд"
+    people: "осіб"
+    person: "особи"
     search: ""
     set_img: ""
-    value: ""
-    own_review: Не можна голосувати за власний огляд
-    vote_twice: Не можна голосувати двічі
-    month:
-      - "Січень"
-      - "Лютий"
-      - "Березень"
-      - "Квітень"
-      - "Травень"
-      - "Червень"
-      - "Липень"
-      - "Серпень"
-      - "Вересень"
-      - "Жовтень"
-      - "Листопад"
-      - "Грудень"
-    day_names:
-      - "неділя"
-      - "понеділок"
-      - "вівторок"
-      - "середа"
-      - "четвер"
-      - "п’ятниця"
-      - "субота"
-    abbr_day_names:
-      - "Нд"
-      - "Пн"
-      - "Вт"
-      - "Ср"
-      - "Чт"
-      - "Пт"
-      - "Сб"
-    at: 'в'
-    for: 'для'
-    person: 'особи'
-    people: 'осіб'
-    validation_message:
-      email_incorrect: "Введіть корректний e-mail"
-      latin_only: "Лише латиниця"
+    validation_message: 
       chars_permited: "Дозволяється вводити латинськи та кирилічні літери, \"-\", \"_\""
-      phone_incorrect: 'Введіть коректний телефон'
-      pass_incorrect: 'Введіть коректний пароль'
-      pass_too_short: 'Пароль мусить містити не менше 5 символів'
-      empty_field: 'Заповніть поле'
+      email_incorrect: "Введіть корректний e-mail"
+      empty_field: "Заповніть поле"
       enter_name: "Введіть коректне ім'я"
+      enter_surname: "Введіть коректне прізвище"
+      latin_only: "Лише латиниця"
       name_too_short: "Закоротке ім'я"
-      enter_surname: 'Введіть коректне прізвище'
-      surname_too_short: 'Закоротке прізвище'
-  attrs:
+      pass_incorrect: "Введіть коректний пароль"
+      pass_too_short: "Пароль мусить містити не менше 5 символів"
+      phone_incorrect: "Введіть коректний телефон"
+      surname_too_short: "Закоротке прізвище"
+    value: ""
+    vote_twice: "Не можна голосувати двічі"
+  attrs: 
     en: ""
     it: ""
     ru: ""

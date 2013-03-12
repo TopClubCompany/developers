@@ -44,12 +44,13 @@
     = f.simple_fields_for :location do |object|
       = object.input :latitude, :as => :hidden
       = object.input :longitude, :as => :hidden
-      = object.input :street
-      = object.input :city
-      = object.input :name_countries, :input_html => {:name => "place[location_attributes][country]"}
-      = object.input :county
-      = object.input :zip
+      = object.locale_tabs do |l|
+        = object.input :street, :locale => l
+        = object.input :city, :locale => l
+        = object.input :county, :locale => l
       = object.input :house_number
+      = object.input :name_countries, :input_html => {:name => "place[location_attributes][country]"}
+      = object.input :zip
 
   = f.input :phone
   = f.input :url

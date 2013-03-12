@@ -1,9 +1,0 @@
-- if !@breadcrumbs.blank?
-  #breadcrumbs
-    .content
-      - if (!@breadcrumbs[0..-2].blank?)
-        - @breadcrumbs[0..-2].each do |item|
-          div itemtype="http://data-vocabulary.org/Breadcrumb" itemscope=""
-            a itemprop="url" href="#{item[:url]}" #{item[:name]}
-            |&nbsp;›&nbsp;
-      h1 title="#{@breadcrumbs.last[:url]}" #{@breadcrumbs.last[:name]}

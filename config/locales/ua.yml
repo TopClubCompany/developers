@@ -1,11 +1,17 @@
 --- 
 ua: 
+  First_name: ""
+  Last_name: ""
+  account_confirm: ""
   activerecord: 
     attributes: 
       user: 
         password: ""
         password_confirmation: ""
         remember_me: ""
+  admin: 
+    gender: 
+      gender: ""
   auth: 
     change_my_password: ""
     change_password: ""
@@ -51,6 +57,8 @@ ua:
     not_a_user: ""
     points: ""
     remember_me: ""
+    social: 
+      sign_in_with: ""
     submit: 
       change_password: ""
       receive_confirmation: ""
@@ -58,6 +66,7 @@ ua:
       sign_in: ""
       sign_out: ""
       sign_up: ""
+    successfully_sing_in: ""
     title: 
       change_password: ""
       receive_confirmation: ""
@@ -65,6 +74,11 @@ ua:
       sign_in: ""
       sign_out: ""
       sign_up: ""
+  breadcrumbs: 
+    main: ""
+    profile: ""
+    search: ""
+  city: ""
   comments: 
     add_comment: ""
     comment: ""
@@ -72,6 +86,8 @@ ua:
     create: ""
     delete_comment: ""
     edit_comment: ""
+  confirm_message: ""
+  confirmation_resend: ""
   date: 
     abbr_day_names: 
     - "Вс"
@@ -203,6 +219,7 @@ ua:
       reserv_online: Reserve your table online for free
       save_up: Save up to 30% off all food and drinks
       second_big_text: ""
+  facebook: ""
   flash: 
     auth: 
       failure: ""
@@ -221,6 +238,7 @@ ua:
     privacy_police: ""
     terms_of_service: ""
   forgot_password: 
+    description: ""
     reset_pass: "Скинути пароль"
   front_js: 
     comments: 
@@ -232,7 +250,9 @@ ua:
         onLeave: ""
         sizeError: ""
         typeError: ""
+  google: ""
   head: ""
+  hello: ""
   label: 
     close: ""
   langs: 
@@ -247,14 +267,21 @@ ua:
     en: eng
     ru: "рус"
     uk: "укр"
+  lock_message: ""
   long_strings: 
     review_placeholder: ""
+  message_fraud: ""
+  message_reset: ""
+  message_unlock: ""
+  message_wont_change: ""
+  password_change_mesage: ""
   place: 
     is: ""
     share: ""
     up_to: ""
     vailability: ""
   profile: 
+    birthday: ""
     city_not_specified: ""
     date: ""
     edit: ""
@@ -266,36 +293,46 @@ ua:
     nothing_favourites: ""
     notifications: ""
     personal_information: ""
+    private_for_email: ""
+    private_for_sms: ""
+    private_statistics: ""
     read_all_reviews: ""
     read_more: ""
     save_changes: ""
     send_email: ""
     settings: ""
+    social: 
+      connect_social_accounts: ""
+      connected: ""
+      disconnect: ""
     time: ""
     upcoming: ""
+    view_all_reservations: ""
+    view_edit: ""
   registration_form: 
     or: " or "
   reservation: 
     address: ""
+    at: "в"
     complete: ""
     confirmation: ""
     confirmed: ""
     confirmed_text: ""
     diner_name: ""
+    discount: ""
     dress_code: ""
     edit: ""
     edit_with_place: ""
-    at: 'в'
-    for: 'для'
-    people:
-      one: '1 особи'
-      other: '%{count} осіб'
+    for: "для"
     i_go: ""
     invite_friends: ""
     message_from_restoran: ""
     more_info: ""
     new_reservation: 
       complete_reservation: Complete your reservation
+    people: 
+      one: "1 особи"
+      other: "%{count} осіб"
     phone: ""
     print: ""
     rewards: ""
@@ -351,9 +388,19 @@ ua:
     view_menu: ""
     view_your_reservation: ""
     write_review: ""
+  sign_in: 
+    forgot_pass: ""
   sign_up: 
+    become_member: ""
     by_click: ""
+    diner_name: ""
+    earn_points: ""
     for_successful_reservations: ""
+    name: ""
+    profile_photo: ""
+    sign_in: ""
+    sign_in_acc: ""
+    sign_up_and: ""
     term_cond: ""
   simple_form: 
     error_notification: 
@@ -370,14 +417,18 @@ ua:
     formats: 
       datepicker: ""
       day: ""
+      day_name: ""
       dm: ""
+      hour_min: ""
       long: ""
       month: ""
       year: ""
       ymd: ""
     pm: ""
+  twitter: ""
   unauthorized: 
     default: ""
+  unlock: ""
   update: ""
   uploader: 
     add_file: ""
@@ -386,13 +437,13 @@ ua:
     upload_avatar: ""
     upload_image: ""
   user_sidebar: 
+    account: ""
     diner_style: ""
+    favourites: ""
     h3_link: ""
     invite_friends: ""
-    my_account: ""
-    my_favourites: ""
-    my_reservations: ""
-    my_reviews: ""
+    reservations: ""
+    reviews: ""
     settings: ""
     top_points: ""
     view_places: ""
@@ -404,6 +455,8 @@ ua:
       next: ""
       previous: ""
       truncate: ""
+  vk: ""
+  welcome: ""
   words: 
     cancel: ""
     date: ""
@@ -413,6 +466,7 @@ ua:
     helpful: ""
     invite: ""
     kitchen: ""
+    location: ""
     menu: ""
     new_reservation: ""
     overall: ""
@@ -421,3 +475,4 @@ ua:
     time: ""
     unhelpful: ""
     view: ""
+  your_email: ""
