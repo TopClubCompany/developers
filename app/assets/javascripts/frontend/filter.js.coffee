@@ -220,10 +220,10 @@ class PlacesCollection
         searchQuery = searchQuery.replace(/reserve_date=(\d+\-){2,}\d+/, dateString).replace(/&{2,}/,'&')
 
       [params, match] = ['?', 0]
-      for regexp in [/reserve_time=(\d+\W+\w+)/, /number_of_people=(\d+)/,/reserve_date=[\d+\%+\w+]*/]
+      for regexp in [/reserve_time=(\d+\W+\w+\+?(?:AM|PM)?)/, /number_of_people=(\d+)/,/reserve_date=[\d+\%+\w+]*/]
         if exactMatch = searchQuery.match(regexp)?[0]
           params += exactMatch + '&'
-          match += 1
+          match  += 1
       params = "?" + $.param({"reserve_time": $("select[name='reserve_time']").val()}) if match is 0 and $(e.target).parents(elMap).length > 0
       newUrl = target.attr('href') + params
       newUrl +=  'is_trim=true' if match is 3
