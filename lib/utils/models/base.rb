@@ -33,9 +33,9 @@ module Utils
           if column_names.include?('slug')
             extend FriendlyId
             if column_names.include?('name') || translated_attribute_names.include?(:name)
-              friendly_id :name, :use => :globalize
+              friendly_id :name, :use => :slugged
             elsif column_names.include?('title') || translated_attribute_names.include?(:title)
-              friendly_id :title, :use => :globalize
+              friendly_id :title, :use => :slugged
             end
           end
 
