@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :clear_cache
   before_filter :set_locale
   before_filter :current_city
   before_filter :set_time
@@ -100,14 +99,6 @@ class ApplicationController < ActionController::Base
   def with_locale(path)
     path = "/" + path if path[0] != "/"
     "/" + I18n.locale.to_s + path
-  end
-
-  def clear_cache
-    if request.xhr?
-      response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
-      response.headers["Pragma"] = "no-cache"
-      response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
-    end
   end
 
 end
