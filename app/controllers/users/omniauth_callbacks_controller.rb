@@ -63,6 +63,10 @@ class Users::OmniauthCallbacksController < ApplicationController
     end
   end
 
+  def failure
+    redirect_to root_path, :flash => {:error => "Could not log you in. #{params[:message]}"}
+  end
+
   private
 
   def merge(data, email)
