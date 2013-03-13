@@ -3,7 +3,7 @@ $ ->
 
   if $('#search_form.place_timing').length
     if document.referrer
-      $('#search_form.place_timing a').show().on 'click', (e) ->
+      $('#search_form.place_timing a.back').show().on 'click', (e) ->
         e.preventDefault()
         window.location.href = document.referrer
 
