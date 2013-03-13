@@ -358,6 +358,7 @@ ru:
     price: "Средний чек"
     refine: "Сортировать"
     result_for: "Результаты для"
+    title_or_location: "title or location"
     sort: 
       newest: "Сортировать по дате добавления"
       overall_mark: "Сортировать по популярности"
