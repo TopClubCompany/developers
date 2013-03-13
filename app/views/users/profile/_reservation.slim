@@ -29,9 +29,9 @@
   - if UserFavoritePlace.liked?(current_user.id, place.id)
     #favorites_small style="display:block"
       .add_to_favorites data-id="#{place.id}"
-        = t('short_strings.add_to_favorites')
+        == t('short_strings.add_to_favorites')
   - else
     #favorites_small
       .add_to_favorites data-id="#{place.id}"
-        = t('short_strings.add_to_favorites')
+        == t('short_strings.add_to_favorites')
   .clear
