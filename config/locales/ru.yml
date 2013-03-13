@@ -89,58 +89,15 @@ ru:
   confirm_message: "Вы можете подтвердить Ваш почтовый адрес пройдя по следующей ссылке:"
   confirmation_resend: "Повторно выслать письмо для подтверждения e-mail."
   date: 
-    abbr_day_names: 
-    - "Вс"
-    - "Пн"
-    - "Вт"
-    - "Ср"
-    - "Чт"
-    - "Пт"
-    - "Сб"
-    abbr_month_names: 
-    - 
-    - "янв."
-    - "февр."
-    - "марта"
-    - "апр."
-    - "мая"
-    - "июня"
-    - "июля"
-    - "авг."
-    - "сент."
-    - "окт."
-    - "нояб."
-    - "дек."
-    day_names: 
-    - "воскресенье"
-    - "понедельник"
-    - "вторник"
-    - "среда"
-    - "четверг"
-    - "пятница"
-    - "суббота"
+    abbr_day_names: "[\"Вс\", \"Пн\", \"Вт\", \"Ср\", \"Чт\", \"Пт\", \"Сб\"]"
+    abbr_month_names: "[nil, \"янв.\", \"февр.\", \"марта\", \"апр.\", \"мая\", \"июня\", \"июля\", \"авг.\", \"сент.\", \"окт.\", \"нояб.\", \"дек.\"]"
+    day_names: "[\"воскресенье\", \"понедельник\", \"вторник\", \"среда\", \"четверг\", \"пятница\", \"суббота\"]"
     formats: 
       default: "%d.%m.%Y"
       long: "%d %B %Y"
       short: "%d %b"
-    month_names: 
-    - 
-    - "января"
-    - "февраля"
-    - "марта"
-    - "апреля"
-    - "мая"
-    - "июня"
-    - "июля"
-    - "августа"
-    - "сентября"
-    - "октября"
-    - "ноября"
-    - "декабря"
-    order: 
-    - :day
-    - :month
-    - :year
+    month_names: "[nil, \"января\", \"февраля\", \"марта\", \"апреля\", \"мая\", \"июня\", \"июля\", \"августа\", \"сентября\", \"октября\", \"ноября\", \"декабря\"]"
+    order: "[:day, :month, :year]"
   datetime: 
     distance_in_words: 
       about_x_hours: 
@@ -358,7 +315,6 @@ ru:
     price: "Средний чек"
     refine: "Сортировать"
     result_for: "Результаты для"
-    title_or_location: "title or location"
     sort: 
       newest: "Сортировать по дате добавления"
       overall_mark: "Сортировать по популярности"
@@ -366,6 +322,7 @@ ru:
     thead: 
       th1: "Ресторан"
       th2: "Нажмите на время для резерва"
+    title_or_location: title or location
   share: 
     description: "тестовое описание"
   short_strings: 
@@ -444,14 +401,14 @@ ru:
   user_sidebar: 
     account: "Мой профиль"
     diner_style: Diner style
+    edit_settings: "Настройки"
     favourites: "Любимые места"
     h3_link: Admin
     invite_friends: "Пригласить друзей"
     reservations: "Мои резервы"
     reviews: "Мои отзывы"
-    settings: "Настройки"
-    edit_settings: "Настройки"
     self_reviews: "Мои отзывы"
+    settings: "Настройки"
     top_points: "TOP баллы"
     view_places: "Посмотреть места"
     view_reservations: "Посмотреть резервы"
@@ -483,3 +440,4 @@ ru:
     unhelpful: "бесполезный"
     view: "посмотреть"
   your_email: "Ваш email"
+  like_place: "I like this place"
