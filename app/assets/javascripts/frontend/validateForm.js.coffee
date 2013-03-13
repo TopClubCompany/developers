@@ -88,8 +88,8 @@ window.checkNewUser = (selector, sb_sel) ->
 
 FormValidateTwo = (selector, sb_sel) ->
   console.log $("#{selector}"), sb_sel
-  $("#{selector} #user_phone").mask "+38(999)999-99-99"
-  $("#{selector} #reservation_phone").mask "+38(999)999-99-99"
+  $("#user_phone").mask "+38(999)999-99-99"
+  $("#reservation_phone").mask "+38(999)999-99-99"
   $("#{selector}").off 'submit'
   $("#{selector}").on 'submit', (e) ->
     e.preventDefault() unless window.checkNewUser(selector, sb_sel)
