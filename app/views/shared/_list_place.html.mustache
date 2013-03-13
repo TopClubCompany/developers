@@ -50,15 +50,15 @@
   </div>
   {{#is_favourite}}
     <div id="favorites_small_{{id}}" style="display: block;">
-        <div class="add_to_favorites i_like_this_place">
-            I like this place
+        <div class="add_to_favorites i_like_this_place" data-id="{{id}}">
+            {{like_place}}
         </div>
     </div>
   {{/is_favourite}}
   {{^is_favourite}}
     <div id="favorites_small_{{id}}">
         <div class="add_to_favorites" data-id="{{id}}">
-            I like this place
+            {{like_place}}
         </div>
     </div>
   {{/is_favourite}}

@@ -377,6 +377,7 @@ class Place < ActiveRecord::Base
     res[:star_rating] = self.get_star_rating(place)
     res[:is_favourite] = UserFavoritePlace.liked?(options[:current_user].try(:id), place.id)
     res[:timing] = self.order_time(place, time, current_day)
+    res[:like_place] = I18n.t('like_place')
     #raise self.order_time(place, time, current_day).inspect
     res
   end
