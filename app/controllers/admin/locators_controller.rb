@@ -2,8 +2,8 @@ class Admin::LocatorsController < Admin::BaseController
   load_and_authorize_resource
 
 
-  before_filter :find_locators, :only => [:index, :edit, :update]
-  before_filter :find_locator, :only => [:edit, :update]
+  #before_filter :find_locators, :only => [:index, :edit, :update]
+  #before_filter :find_locator, :only => [:edit, :update]
 
   def edit
     @main_locale_hash = @i18n_back.get_main_by_file(params[:id].to_i, params[:keys])
