@@ -10,6 +10,7 @@ development:
   SMS_LOGIN: 'topclub'
   SMS_PASSWORD: '198666'
   SMS_SENDER: 'TopReserve'
+  POINTS: 5
 
 test:
   FACEBOOK_APP_ID: 373546769386190
@@ -23,6 +24,7 @@ test:
   SMS_LOGIN: 'topclub'
   SMS_PASSWORD: '198666'
   SMS_SENDER: 'TopReserve'
+  POINTS: 5
 
 production:
   FACEBOOK_APP_ID: 453952084669104
@@ -36,3 +38,4 @@ production:
   SMS_LOGIN: 'topclub'
   SMS_PASSWORD: '198666'
   SMS_SENDER: 'TopReserve'
+  POINTS: 5

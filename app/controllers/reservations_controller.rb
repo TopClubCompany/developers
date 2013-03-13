@@ -30,6 +30,7 @@ class ReservationsController < ApplicationController
   def complete_reservation
     reservation = Reservation.new(params[:reservation])
     if reservation.save
+      add_points
       send_messages(reservation, [1,2,3,4,8])
       redirect_to reservation_confirmed_path(reservation.id)
     else
@@ -60,6 +61,13 @@ class ReservationsController < ApplicationController
       redirect_to root_path
     end
 
+  end
+
+  private
+
+  def add_points
+    current_user.points =+ Figaro.env.POINTS.to_f
+    current_user.save
   end
 
 end
