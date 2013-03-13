@@ -92,6 +92,12 @@ ua:
     abbr_day_names: "[\"Нд\", \"Пн\", \"Вт\", \"Ср\", \"Чт\", \"Пт\", \"Сб\"]"
     abbr_month_names: "[nil, \"січ.\", \"лют.\", \"бер.\", \"кві.\", \"трав.\", \"черв.\", \"лип.\", \"серп.\", \"вер.\", \"жов.\", \"лист.\", \"груд.\"]"
     day_names: "[\"неділя\", \"понеділок\", \"вівторок\", \"середа\", \"четвер\", \"п'ятниця\", \"субота\"]"
+    formats: 
+      default: ""
+      long: ""
+      short: ""
+    month_names: ""
+    order: ""
   datetime: 
     distance_in_words: 
       about_x_hours: 
@@ -231,6 +237,7 @@ ua:
   message_reset: "Хтось зробив запит на посилання для відновлення Вашого паролю."
   message_unlock: "Ви можете розблокувати Ваш аккаунт, перейшовши по даному посиланню:"
   message_wont_change: "Ваш пароль будет змінено, як тільки Ви перейдете по посиланню і створете новий."
+  order: ""
   password_change_mesage: "Змінити пароль"
   place: 
     is: ""
@@ -264,6 +271,7 @@ ua:
       disconnect: "Відключити"
     time: "Час"
     upcoming: "Майбутні резерви"
+    username: ""
     view_all_reservations: "Подивитись всі резерви"
     view_edit: "Деталі"
   registration_form: 
@@ -299,7 +307,9 @@ ua:
   search: 
     browse_category: "Місця за категоріями"
     category: "Категорія"
+    current_opened: ""
     filters: "Фільтри:"
+    find_a_table: ""
     grid_view: "Списком"
     kitchen: "Кухня"
     load: "Завантажуємо останні результати"

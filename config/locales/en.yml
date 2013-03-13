@@ -92,6 +92,12 @@ en:
     abbr_day_names: ""
     abbr_month_names: ""
     day_names: ""
+  formats:
+    default: ""
+    long: ""
+    short: ""
+  month_names: ""
+  order: ""
   datetime: 
     distance_in_words: 
       about_x_hours: 
@@ -191,12 +197,6 @@ en:
   forgot_password: 
     description: ""
     reset_pass: Reset password
-  formats: 
-    default: ""
-    long: ""
-    month_names: ""
-    order: "[:day, :month, :year]"
-    short: "%d %b"
   front_js: 
     comments: 
       chat_title: ""
@@ -264,6 +264,7 @@ en:
       disconnect: Disconnect
     time: Time
     upcoming: Upcoming reservations
+    username: ""
     view_all_reservations: View all reservations
     view_edit: View / Edit
   registration_form: 
@@ -299,7 +300,9 @@ en:
   search: 
     browse_category: Browse places by category
     category: Category
+    current_opened: ""
     filters: "Filters:"
+    find_a_table: ""
     grid_view: Grid view
     kitchen: Cuisine
     load: Loading results
