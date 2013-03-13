@@ -13,7 +13,7 @@ class Place < ActiveRecord::Base
   has_many :place_kitchens, :dependent => :destroy
   has_many :kitchens, :through => :place_kitchens
 
-  has_many :place_feature_items
+  has_many :place_feature_items, :dependent => :destroy
   has_many :feature_items, :through => :place_feature_items
 
   has_many :group_features, :through => :feature_items
