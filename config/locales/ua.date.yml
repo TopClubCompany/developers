@@ -1,0 +1,101 @@
+---
+ua:
+  date:
+    abbr_day_names:
+    - "Нд"
+    - "Пн"
+    - "Вт"
+    - "Ср"
+    - "Чт"
+    - "Пт"
+    - "Сб"
+    abbr_month_names: "[nil, \"січ.\", \"лют.\", \"бер.\", \"кві.\", \"трав.\", \"черв.\", \"лип.\", \"серп.\", \"вер.\", \"жов.\", \"лист.\", \"груд.\"]"
+    day_names: "[\"неділя\", \"понеділок\", \"вівторок\", \"середа\", \"четвер\", \"п'ятниця\", \"субота\"]"
+    formats:
+      default: ""
+      long: ""
+      short: ""
+      order: ""
+    month_names:
+    -
+    - "січня"
+    - "лютого"
+    - "березня"
+    - "квітня"
+    - "травня"
+    - "червня"
+    - "липня"
+    - "серпня"
+    - "вересня"
+    - "жовтня"
+    - "листопада"
+    - "грудня"
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        few: "близько %{count} годин"
+        many: "близько %{count} годин"
+        one: "близько %{count} години"
+        other: "близько %{count} години"
+      about_x_months:
+        few: "близько %{count} місяців"
+        many: "близько %{count} місяців"
+        one: "близько %{count} місяця"
+        other: "близько %{count} місяця"
+      about_x_years:
+        few: "близько %{count} років"
+        many: "близько %{count} років"
+        one: "близько %{count} року"
+        other: "близько %{count} років"
+      almost_x_years:
+        few: "майже %{count} років"
+        many: "майже %{count} років"
+        one: "майже 1 рік"
+        other: "майже %{count} років"
+      half_a_minute: "менш ніж хвилина"
+      less_than_x_minutes:
+        few: "менш ніж %{count} хвилин"
+        many: "менш ніж %{count} хвилин"
+        one: "менш ніж %{count} хвилини"
+        other: "менш ніж %{count} хвилини"
+      less_than_x_seconds:
+        few: "менш ніж %{count} секунд"
+        many: "менш ніж %{count} секунд"
+        one: "менш ніж %{count} секунд"
+        other: "менш ніж %{count} секунди"
+      over_x_years:
+        few: "більше %{count} років"
+        many: "більше %{count} років"
+        one: "більше %{count} року"
+        other: "більше %{count} років"
+      x_days:
+        few: "%{count} дня"
+        many: "%{count} днів"
+        one: "%{count} день"
+        other: "%{count} дня"
+      x_minutes:
+        few: "%{count} хвилини"
+        many: "%{count} хвилин"
+        one: "%{count} хвилину"
+        other: "%{count} хвилини"
+      x_months:
+        few: "%{count} місяця"
+        many: "%{count} месяців"
+        one: "%{count} місяць"
+        other: "%{count} місяця"
+      x_seconds:
+        few: "%{count} секунди"
+        many: "%{count} секунд"
+        one: "%{count} секунда"
+        other: "%{count} секунди"
+    prompts:
+      day: "День"
+      hour: "Годин"
+      minute: "Хвилин"
+      month: "Місяць"
+      second: "Секунд"
+      year: "Рік"
