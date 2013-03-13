@@ -1,0 +1,67 @@
+---
+en:
+  admin_js:
+    abbr_day_names:
+    - "Sun"
+    - "Mon"
+    - "Tue"
+    - "Wed"
+    - "Thu"
+    - "Fri"
+    - "Sat"
+    add_link: Create?
+    at: at
+    button_description: ""
+    button_name_add: ""
+    button_name_cancel: ""
+    button_name_remove: ""
+    cancel: ""
+    clear: ""
+    confirm: ""
+    create_product: ""
+    day: Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday
+    day_names:
+    - "sunday"
+    - "monday"
+    - "tuesday"
+    - "wednesday"
+    - "thursday"
+    - "friday"
+    - "saturday"
+    delete_nested_elements: ""
+    edit: ""
+    for: for
+    month:
+    - "January"
+    - "February"
+    - "March"
+    - "April"
+    - "May"
+    - "June"
+    - "July"
+    - "August"
+    - "September"
+    - "October"
+    - "November"
+    - "December"
+    name: ""
+    no_results: ""
+    own_review: Can't vote for your own review
+    people: people
+    person: person
+    search: ""
+    set_img: ""
+    validation_message:
+      chars_permited: "A-Za-z, А-Яа-я and \"-\", \"_\" are allowed"
+      email_incorrect: Enter correct e-mail
+      empty_field: Fill this
+      enter_name: Enter valid name
+      enter_surname: Enter valid last name
+      latin_only: Latin characters only
+      name_too_short: Name too short
+      pass_incorrect: Enter valid password
+      pass_too_short: Password should be more than 5 symbols
+      phone_incorrect: Enter correct phone number
+      surname_too_short: Last name too short
+    value: ""
+    vote_twice: Can't vote twice
