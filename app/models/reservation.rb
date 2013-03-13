@@ -12,7 +12,7 @@ class Reservation < ActiveRecord::Base
   def discount
     day = PlaceUtils::PlaceTime.wday(created_at.wday)
     discounts = place.week_days.includes(:day_discounts).where(:day_type_id => day).map(&:day_discounts).first
-    discounts.find{|x| x.is_discount }.discount
+    discounts.find{|x| x.is_discount }.try(:discount)
   end
 
   def full_name
