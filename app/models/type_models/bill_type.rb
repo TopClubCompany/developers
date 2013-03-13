@@ -13,16 +13,16 @@ class BillType
     builder.member :splurge, :object => new("splurge")
   end
 
-  def title
-    I18n.t(@code, :scope => [:admin, :bill, :kind])
+  def title(locale=I18n.locale.to_sym)
+    I18n.t(@code, :scope => [:admin, :bill, :kind], :locale => locale)
   end
 
-  def code_title
-    I18n.t(@code, :scope => [:admin, :bill, :code])
+  def code_title(locale=I18n.locale.to_sym)
+    I18n.t(@code, :scope => [:admin, :bill, :code], :locale => locale)
   end
 
-  def title_image
-    I18n.t(@code, :scope => [:admin, :bill, :image])
+  def title_image(locale=I18n.locale.to_sym)
+    I18n.t(@code, :scope => [:admin, :bill, :image], :locale => locale)
   end
 
 end
