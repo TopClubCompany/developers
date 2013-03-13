@@ -35,7 +35,7 @@
           | Thank you
         p
           strong= I18n.t('reservation.more_info')
-          = @place.description
+          = @place.description.no_html
     #sidebar.span4.confirmed
       h3= I18n.t('reservation.i_go')
       ul
