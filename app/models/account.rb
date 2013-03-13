@@ -73,7 +73,7 @@ class Account < ActiveRecord::Base
           end
         end
       else
-        gender.try(:to_i)
+        gender.try(:to_i) if gender
     end
   end
 
