@@ -45,7 +45,6 @@ class Paginator
       success: (data) ->
         data.result = [] unless data.result?
         _.each data.result, (place, index) ->
-          console.log data.result
           # main page specific feature
           css_class = if (index+1)%3 is 0 then 'margin_right_place' else ''
           _.extend place, {css_class: css_class}
@@ -77,7 +76,6 @@ class Paginator
 
   next_page: () ->
     self = @
-    console.log self.options.url()
     $.ajax
       type: "GET"
       url: self.options.url()

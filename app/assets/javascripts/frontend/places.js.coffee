@@ -59,7 +59,6 @@ $ ->
     overall_mark_value = sum / quantity
     overall_mark_css_value = "#{overall_mark_value * 20}%"
     overall_mark_el = $(".overall_mark .stars_bar")
-    console.log overall_mark_el[0]
     overall_mark_el.css('left', overall_mark_css_value)
     overall_mark_el.closest('.span3').find(".p").text(overall_mark_value)
 
@@ -297,10 +296,8 @@ $ ->
 
   $('#custom-tweet-button').on 'mouseenter', ->
     $('#fake_for_twitter').mouseenter()
-    console.log 'enter'
   $('#custom-tweet-button').on 'mouseleave', ->
     $('#fake_for_twitter').mouseleave()
-    console.log 'leave'
   prepare_tweet_button =() ->
     button = $("#custom-tweet-button")
     fake = $("#fake_for_twitter")
@@ -308,7 +305,6 @@ $ ->
 
   prepare_tweet_button()
 
-  console.log 'i was here'
   $('.review_vote a').on 'click', (e) ->
     e.preventDefault()
     data = $(@).data()
@@ -346,6 +342,3 @@ $ ->
         ), 3000)
     else
       window.location.replace "/users/sign_in"
-    console.log $(@).data(), gon?.current_user
-    # <a class="helpful" data-id="128" data-useful="helpful" href="#">
-  # "helpful" "unhelpful"

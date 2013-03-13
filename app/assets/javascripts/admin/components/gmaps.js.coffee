@@ -13,7 +13,6 @@ class window.GeoInput
     @initMarker()
 
   initGMap: ->
-    console.log 'inited map in gmaps.js.coffee'
     map_options =
       zoom: @zoom,
       center: @lat_lon,
