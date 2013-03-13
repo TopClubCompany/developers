@@ -1,5 +1,7 @@
 class Users::ProfileController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :find_user, :only => [:show, :settings, :invite_friends, :favourites, :edit_settings,
+                                      :edit_reservation, :update_settings, :my_reservations]
   before_filter :set_breadcrumbs_front
 
   include ReservationsHelper
@@ -36,7 +38,9 @@ class Users::ProfileController < ApplicationController
   end
 
   def settings
-
+    unless current_user.id == @user.id
+      redirect_to root_path
+    end
   end
 
   def favourites
@@ -47,7 +51,7 @@ class Users::ProfileController < ApplicationController
     session[:redirect_aut_path] = edit_settings_profile_path(current_user.id)
   end
 
-  def my_reservations
+  def reservations
 
   end
 
@@ -100,12 +104,14 @@ class Users::ProfileController < ApplicationController
     if current_user.id == reservation.user_id
       send_messages(reservation, [5,6])
       reservation.destroy
-      redirect_to my_reservations_profile_path(current_user.id)
+      redirect_to reservations_profile_path(current_user.id)
     else
       redirect_to root_path
     end
 
   end
+
+  protected
 
   def set_breadcrumbs_front
     path = request.env['PATH_INFO'].to_s
@@ -123,6 +129,13 @@ class Users::ProfileController < ApplicationController
       ""
     else
       path
+    end
+  end
+
+  def find_user
+    @user = User.find(params[:id])
+    unless current_user.id == @user.id
+      redirect_to root_path
     end
   end
 
