@@ -311,6 +311,8 @@ ru:
     price: "Средний чек"
     refine: "Сортировать"
     result_for: "Результаты для"
+    find_a_table: "Find a table"
+    current_opened: "Currently opened"
     sort: 
       newest: "Сортировать по дате добавления"
       overall_mark: "Сортировать по популярности"

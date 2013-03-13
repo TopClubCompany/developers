@@ -2,7 +2,7 @@
   #refine
     h2= I18n.t('search.refine')
     label.checkbox data-type="opened"
-      input type="checkbox" data-type="opened" value=1 Currently opened
+      input type="checkbox" data-type="opened" value=1 = I18n.t('search.current_opened')
     - cache [I18n.locale, 'search', 'categories', Category.max_time, "search"] do
       h4= I18n.t('search.category')
       - Category.children.first(4).each do |category|
