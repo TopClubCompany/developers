@@ -62,7 +62,7 @@ class PlacesCollection
       @ids.push id
       $el = $("#place_#{id}")
       $listEl = $("#list_place_#{id}") 
-      bindBlockListeners.call @, $listEl, @$el
+      bindBlockListeners.call @, $listEl, $el
 
       $el.add($listEl).find('.timing').each (index, timeGroup) ->
         $(timeGroup).find('a').each (index, timeButton) ->
@@ -210,8 +210,8 @@ class PlacesCollection
     $(elMap).add(elList).find(".popoverable").on('click', () -> return false).popover(html: true)
     $(elMap).add(elList).find("h4 > a, .place_img_sm").off 'click'
     $(elMap).add(elList).find("h4 > a, .place_img_sm").on 'click', (e) ->
-      target = if $(e.target).attr('href') then $(e.target) else $(e.target).parent('.place_img_sm')
       e.preventDefault()
+      target = if $(e.target).attr('href') then $(e.target) else $(e.target).parent('.place_img_sm')
       searchQuery = window.location.search
 
       if searchQuery.match(/reserve_date=(\d+\-){2,}\d+/)
@@ -220,13 +220,14 @@ class PlacesCollection
         searchQuery = searchQuery.replace(/reserve_date=(\d+\-){2,}\d+/, dateString).replace(/&{2,}/,'&')
 
       [params, match] = ['?', 0]
-      for regexp in [/reserve_time=(\d+\W+\w+\+?(?:AM|PM)?)/, /number_of_people=(\d+)/,/reserve_date=[\d+\%+\w+]*/]
+      for regexp in [/number_of_people=(\d+)/,/reserve_date=[\d+\%+\w+]*/]
         if exactMatch = searchQuery.match(regexp)?[0]
           params += exactMatch + '&'
           match  += 1
-      params = "?" + $.param({"reserve_time": $("select[name='reserve_time']").val()}) if match is 0 and $(e.target).parents(elMap).length > 0
+      params += $.param({"reserve_time": $("select[name='reserve_time']").val()}) 
+      params = "?" + $.param({"reserve_time": $("select[name='reserve_time']").val()}) if match is 0 and $(e.target).parents(elMap).length
       newUrl = target.attr('href') + params
-      newUrl +=  'is_trim=true' if match is 3
+      newUrl +=  '&is_trim=true' if match is 2
 
       window.history.pushState '', null, window.location.search
       window.location.replace newUrl
