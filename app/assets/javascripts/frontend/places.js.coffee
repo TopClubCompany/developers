@@ -1,6 +1,13 @@
 $ ->
   window.language ||= $('#language .active').attr('id')
 
+  if $('#search_form.place_timing').length
+    if document.referrer
+      $('#search_form.place_timing a').show().on 'click', (e) ->
+        e.preventDefault()
+        window.location.href = document.referrer
+
+
   #temp handle noise mark
   $(".set_noise a.set").click (e) ->
     e.preventDefault()
