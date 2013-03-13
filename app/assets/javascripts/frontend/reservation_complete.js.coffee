@@ -7,7 +7,6 @@ doMagic = () ->
     initDatepicker()
   $("#search_form input[type='submit']").off 'submit click'
   $("#search_form input[type='submit']").on 'submit click', (e) =>
-    console.log 'binded submit'
     e.preventDefault()
     fromDate = $("input[name='reserve_date']").val().split('/')
     timeString = $("select[name='reserve_time']").val()
@@ -33,7 +32,6 @@ updateSelect = ->
     $.ajax
       url: "/#{window.language}/reservations/available_time?place_id=#{id}&reserve_date=#{$("input[name='reserve_date']").val()}"
       success: (data) ->
-        console.log data
         time_was = $("select[name='reserve_time']").find("option[selected='selected']").text()
         $("select[name='reserve_time']").find('option').not("[selected='selected']").remove()
         for time in data.times
@@ -51,7 +49,6 @@ initDatepicker = ->
       'direction': true
       'zIndex': 8
       onSelect: (dateText) ->
-        console.log 'lol'
         updateSelect()
     )
     magic_number = $datepicker.offset().top + $datepicker.height() + 20
