@@ -225,7 +225,7 @@ class Place < ActiveRecord::Base
     related_ids = [:kitchen_ids, :category_ids, :place_feature_item_ids, :review_ids, :week_day_ids,
                    :day_discount_ids
     ]
-    methods = %w(lat_lng marks overall_mark avg_bill_title)
+    methods = %w(lat_lng marks overall_mark)
 
     Jbuilder.encode do |json|
       json.(self, *self.class.all_translated_attribute_names)
@@ -239,6 +239,10 @@ class Place < ActiveRecord::Base
         I18n.available_locales.each do |locale|
           json.set!("#{a}_names_#{locale}", self.send(a).map{|t| t.send("name_#{locale}")}.join(', '))
         end
+      end
+
+      I18n.available_locales.each do |locale|
+        json.set!("avg_bill_title_#{locale.to_s}", self.avg_bill_title(locale))
       end
 
       json.set!("discounts", self.discounts_index)
@@ -305,8 +309,8 @@ class Place < ActiveRecord::Base
     marks.values.select { |mark| MarkType.find(mark[:id]).included_in_overall }.map { |mark| mark[:avg] }.avg.round(1)
   end
 
-  def avg_bill_title
-    bill.try(:title)
+  def avg_bill_title(locale=I18n.locale.to_sym)
+    bill.title(locale) if bill
   end
 
   def all_images
@@ -349,7 +353,7 @@ class Place < ActiveRecord::Base
     res[:street] = place["street_#{I18n.locale}"]
     res[:county] = place["county_#{I18n.locale}"]
     res[:house_number] = place["house_number"]
-    res[:avg_bill_title] = place["avg_bill_title"]
+    res[:avg_bill_title] = place["avg_bill_title_#{I18n.locale}"]
     res[:overall_mark] = place["overall_mark"]
     res[:star_rating] = "left: #{place["overall_mark"] * 20}%"
     res[:marks] = place["marks"]
