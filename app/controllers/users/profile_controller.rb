@@ -1,7 +1,7 @@
 class Users::ProfileController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find_user, :only => [:show, :settings, :invite_friends, :favourites, :edit_settings,
-                                      :edit_reservation, :update_settings, :my_reservations]
+                                      :update_settings, :reservations]
   before_filter :set_breadcrumbs_front
 
   include ReservationsHelper
@@ -83,10 +83,9 @@ class Users::ProfileController < ApplicationController
   end
 
   def update_reservation
-    #raise params.to_yaml
     reservation = Reservation.find_by_id(params[:reservation_id])
     if current_user.reservations.map(&:id).include? reservation.id
-      time = DateTime.strptime(params[:reservation].delete(:date) + ' ' + params[:reservation].delete(:time), "%D %I:%M %p")
+      time = DateTime.parse(params[:reservation].delete(:date) + ' ' + params[:reservation].delete(:time))
       params[:reservation][:time] = time
       if reservation.update_attributes(params[:reservation])
         send_messages(reservation, [7])

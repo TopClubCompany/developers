@@ -39,9 +39,9 @@
                   label for="reservation_date"= I18n.t('profile.date')
                   = f.text_field :date, label: I18n.t('profile.date'), value: "#{@reservation.time.strftime('%d/%m/%Y')}"
                 .span3
-                  label for="reserve_time"= I18n.t('profile.time')
+                  label for="time"= I18n.t('profile.time')
                   #fixwidth.reserve_time_c
-                    select name="reserve_time"
+                    select name="reservation[time]"
                       - time_with_locale(time_hash(@reservation.time)).each do |time_el|
                         - time_el.each do |k, v|
                           - if v
