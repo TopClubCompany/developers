@@ -16,14 +16,15 @@
               = I18n.t('profile.upcoming')
               span (#{reservations.count})
             - reservations.each do |reservation|
-              .reservation
-                a href=place_path(reservation.place)
-                  = reservation.place.name
-                small= to_time_format(reservation.time)
-                .btns
-                  a href=edit_profile_reservation_path(current_user, reservation)
-                    = I18n.t('profile.view_edit')
-                  .clear
+              - if reservation.place
+                .reservation
+                  a href=place_path(reservation.place)
+                    = reservation.place.name
+                  small= to_time_format(reservation.time)
+                  .btns
+                    a href=edit_profile_reservation_path(current_user, reservation)
+                      = I18n.t('profile.view_edit')
+                    .clear
             - if reservations.length == 2
               a.all href=reservations_profile_path(current_user)
                 = I18n.t('profile.view_all_reservations')
@@ -34,24 +35,25 @@
               span (#{current_user.reviews.count})
             - current_user.reviews.includes(:place).order('created_at desc').first(2).each do |review|
               - place = review.reviewable
-              .review
-                .review_content
-                  a.user_link href=place_path(place)
-                    span itemprop="author"
-                      = place.name
-                  '
-                  small.created_time_ago title=review.created_at.getutc.iso8601
-                    = review.created_at
-                  '  ·
-                  a href="#"
-                    ' #
-                  .rating
-                    .stars
-                      .stars_overlay
-                      .stars_bar style="left: #{review.avg_mark * 20}%"
-                      .stars_bg
-                  span
-                    = review.content
-                  a.read_more href=place_path(place)
-                    nobr #{I18n.t('profile.read_more')}
+              - if place
+                .review
+                  .review_content
+                    a.user_link href=place_path(place)
+                      span itemprop="author"
+                        = place.name
+                    '
+                    small.created_time_ago title=review.created_at.getutc.iso8601
+                      = review.created_at
+                    '  ·
+                    a href="#"
+                      ' #
+                    .rating
+                      .stars
+                        .stars_overlay
+                        .stars_bar style="left: #{review.avg_mark * 20}%"
+                        .stars_bg
+                    span
+                      = review.content
+                    a.read_more href=place_path(place)
+                      nobr #{I18n.t('profile.read_more')}
             = link_to I18n.t('profile.read_all_reviews'), self_reviews_profile_path(current_user), class: 'all'
