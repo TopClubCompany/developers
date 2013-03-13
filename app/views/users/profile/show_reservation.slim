@@ -43,7 +43,10 @@
               .clear
               label for="reserve_time"
                 = t('words.time')
-              = @reservation.time.strftime("%I:%M %p")
+              - if I18n.locale.to_sym == :en
+                = @reservation.time.strftime("%I:%M %p")
+              -else
+                = @reservation.time.strftime("%H:%M")
               .clear
               label for="number_of_people"
                 nobr= t('short_strings.number_of_people')
