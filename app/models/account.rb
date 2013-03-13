@@ -21,7 +21,7 @@ class Account < ActiveRecord::Base
     return account.user if account
     data_for_account = data.except(:patronymic)
     data_for_user    = data.except(:uid, :url, :photo, :name, :provider, :secret, :refresh_token, :language, :token)
-    data_for_user.gender = GenderType.send(data_for_user.gender).id if data_for_user.gender.present?
+    data_for_user.gender = get_gender(data_for_user.gender, data[:provider])
     user             = User.find_by_email(data[:email])
     account          = Account.create(data_for_account)
     account.user     = (user or prepare_user_for_account(data_for_user))
@@ -54,6 +54,28 @@ class Account < ActiveRecord::Base
     Account.prepare_user_for_account(data_for_user)
   end
 
+
+  private
+
+  def self.get_gender(gender, provider)
+    case provider
+      when "facebook"
+        GenderType.send(gender).id if gender.present?
+      when "vkontakte"
+        if gender.present?
+          case gender.try(:to_i)
+            when 1
+              2
+            when 2
+              1
+            else
+              3
+          end
+        end
+      else
+        gender.try(:to_i)
+    end
+  end
 
 
 end
