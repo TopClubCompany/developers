@@ -13,7 +13,8 @@
           ul.carousel_bullets
             - place_images = @place.all_images
             - place_images.each_with_index do |image, i|
-              li data-small_image_src=image.url(:place_show) data-big_image_src=image.url(:content) class=('current' if i.zero?)
+              - if image
+                li data-small_image_src=image.url(:place_show) data-big_image_src=image.url(:content) class=('current' if i.zero?)
         h1 title="#{@place.title}"
           span itemprop="itemreviewed"
             = @place.title
@@ -79,9 +80,9 @@
         .place_desc
           h5 #{t('short_strings.few_words')} #{@place.title}
           .short_description.active_desc
-            = truncate(@place.description.no_html, length: 100)
+            == truncate_html(@place.description, {length: 100, omission: '...', word_boundary: false})
           .full_description
-            = @place.description.no_html
+            == @place.description
           .clear
           = link_to t('words.expand'), '#', class: 'desc_expand', data: { expand: t('words.expand'), rollup: t('words.roll_up') }
         - if signed_in? && @review
