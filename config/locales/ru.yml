@@ -358,7 +358,6 @@ ru:
     price: "Средний чек"
     refine: "Сортировать"
     result_for: "Результаты для"
-    title_or_location: "title or location"
     sort: 
       newest: "Сортировать по дате добавления"
       overall_mark: "Сортировать по популярности"
@@ -366,6 +365,7 @@ ru:
     thead: 
       th1: "Ресторан"
       th2: "Нажмите на время для резерва"
+    title_or_location: title or location
   share: 
     description: "тестовое описание"
   short_strings: 
@@ -444,14 +444,14 @@ ru:
   user_sidebar: 
     account: "Мой профиль"
     diner_style: Diner style
+    edit_settings: "Настройки"
     favourites: "Любимые места"
     h3_link: Admin
     invite_friends: "Пригласить друзей"
     reservations: "Мои резервы"
     reviews: "Мои отзывы"
-    settings: "Настройки"
-    edit_settings: "Настройки"
     self_reviews: "Мои отзывы"
+    settings: "Настройки"
     top_points: "TOP баллы"
     view_places: "Посмотреть места"
     view_reservations: "Посмотреть резервы"

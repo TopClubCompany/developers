@@ -92,12 +92,12 @@ en:
     abbr_day_names: ""
     abbr_month_names: ""
     day_names: ""
-  formats:
-    default: ""
-    long: ""
-    short: ""
-  month_names: ""
-  order: ""
+    formats: 
+      default: ""
+      long: ""
+      short: ""
+    month_names: ""
+    order: ""
   datetime: 
     distance_in_words: 
       about_x_hours: 
@@ -231,6 +231,7 @@ en:
   message_reset: Someone has requested a link to change your password, and you can do this through the link below.
   message_unlock: "Click the link below to unlock your account:"
   message_wont_change: Your password won't change until you access the link above and create a new one.
+  order: ""
   password_change_mesage: Change my password
   place: 
     is: ""
@@ -321,6 +322,7 @@ en:
     thead: 
       th1: Restaurant
       th2: Availability (click time to reserve)
+    title_or_location: ""
   share: 
     description: test description
   short_strings: 
@@ -399,11 +401,13 @@ en:
   user_sidebar: 
     account: My account
     diner_style: Diner style
+    edit_settings: ""
     favourites: My favourites
     h3_link: Admin
     invite_friends: Invite friends
     reservations: My reservations
     reviews: My reviews
+    self_reviews: ""
     settings: Settings
     top_points: TOP points
     view_places: View places
