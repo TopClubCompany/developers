@@ -16,7 +16,7 @@ module Utils
          "х" => "x", "ц" => "c", "ч" => "ch", "ш" => "sh", "щ" => "sh", "ъ" => "", "ь" => "",
          "э" => "e", "ю" => "y", "я" => "i"}
         rec_text = ""
-        text.to_s.each do |char|
+        text.to_s.each_char do |char|
           if ru_char = ru_mapping[char].presence
             rec_text += ru_char
           else
