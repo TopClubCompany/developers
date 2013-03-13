@@ -38,7 +38,7 @@ Topclub::Application.routes.draw do
       get :favourites
       put :update_settings
       get :disconnected
-      get :my_reservations
+      get :reservations
     end
 
     collection do

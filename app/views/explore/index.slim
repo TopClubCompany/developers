@@ -59,7 +59,7 @@
     #promo_block_sm.promo_block.span4
       =' t('footer.earn_point')
       - if signed_in?
-        = link_to I18n.t('user_sidebar.reservations'), my_reservations_profile_path(current_user)
+        = link_to I18n.t('user_sidebar.reservations'), reservations_profile_path(current_user)
       - else
         = link_to new_user_registration_path do
           = t('auth.links.sign_up')

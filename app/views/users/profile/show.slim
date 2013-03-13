@@ -25,7 +25,7 @@
                     = I18n.t('profile.view_edit')
                   .clear
             - if reservations.length == 2
-              a.all href=my_reservations_profile_path(current_user)
+              a.all href=reservations_profile_path(current_user)
                 = I18n.t('profile.view_all_reservations')
 
           #my_reviews.dash_block

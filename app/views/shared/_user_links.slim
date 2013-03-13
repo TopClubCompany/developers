@@ -1,4 +1,4 @@
-li= link_to I18n.t('user_sidebar.reservations'), with_locale(my_reservations_profile_path(current_user))
+li= link_to I18n.t('user_sidebar.reservations'), with_locale(reservations_profile_path(current_user))
 li= link_to I18n.t('user_sidebar.favourites'), with_locale(favourites_profile_path(current_user))
 li= link_to I18n.t('user_sidebar.reviews'), with_locale(self_reviews_profile_path(current_user))
 li= link_to I18n.t('user_sidebar.settings'), with_locale(edit_settings_profile_path(current_user))

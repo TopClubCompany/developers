@@ -450,6 +450,8 @@ ru:
     reservations: "Мои резервы"
     reviews: "Мои отзывы"
     settings: "Настройки"
+    edit_settings: "Настройки"
+    self_reviews: "Мои отзывы"
     top_points: "TOP баллы"
     view_places: "Посмотреть места"
     view_reservations: "Посмотреть резервы"
