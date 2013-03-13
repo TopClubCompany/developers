@@ -64,7 +64,7 @@ class Users::OmniauthCallbacksController < ApplicationController
   end
 
   def failure
-    redirect_to sing_in, :flash => {:error => "Could not log you in. #{params[:message]}"}
+    redirect_to root_path, :flash => {:error => "Could not log you in. #{params[:message]}"}
   end
 
   private
