@@ -20,7 +20,8 @@ class Account < ActiveRecord::Base
     account = Account.find_by_uid_and_provider(data[:uid], data[:provider])
     return account.user if account
     data_for_account = data.except(:patronymic)
-    data_for_user    = data.except(:uid, :gender, :url, :photo, :name, :provider, :secret, :refresh_token, :language, :token)
+    data_for_user    = data.except(:uid, :url, :photo, :name, :provider, :secret, :refresh_token, :language, :token)
+    data_for_user.gender = GenderType.send(data_for_user.gender).id if data_for_user.gender.present?
     user             = User.find_by_email(data[:email])
     account          = Account.create(data_for_account)
     account.user     = (user or prepare_user_for_account(data_for_user))
