@@ -126,8 +126,8 @@ class CopyScheduler
   copy_discounts: ($container, number_id) ->
     $parent =  $container.prev()
 #    $parent = $("#parent_id_container").parent()
-    fields = ["title_ru", "title_en", "title_ua", "description_ru", "description_en", "description_ua",
-              "from_time", "to_time", "discount"]
+    fields = ["title_ru", "title_en", "title_ua",
+              "from_time", "to_time", "[^is]_discount"]
     if $container.find(".discount_fields").size() == 0
       if $parent.find(".nested_fields .discount_fields").size() > 0
         _.each $parent.find(".nested_fields .discount_fields"), (discount) =>
@@ -137,6 +137,10 @@ class CopyScheduler
           _.each fields, (field) =>
             val = $discount.find("input:regex(id, #{field}$)")?.val()
             $current_container.find("input:regex(id, #{field}$)")?.val(val)
+          fields = ["description_ru", "description_en", "description_ua"]
+          _.each fields, (field) =>
+            val = $discount.find("textarea:regex(id, #{field}$)")?.val()
+            $current_container.find("textarea:regex(id, #{field}$)")?.text(val)
 
           $el = $current_container.find("input:regex(id, is_discount$)")
           $parent = $discount.find("input:regex(id, is_discount$)")
