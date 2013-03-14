@@ -2,7 +2,7 @@
   = f.input :is_discount, input_html: {class: "is_discount"}
   = f.locale_tabs do |l|
     = f.input :title, locale: l
-    = f.input :description, locale: l, :as => :ckeditor
+    = f.input :description, locale: l, :as => :text
   = f.input :from_time
   = f.input :to_time
   = f.input :discount
