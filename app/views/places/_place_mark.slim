@@ -4,7 +4,7 @@
       .criteria class="#{'included' if mark_type.included_in_overall}"
         = mark_form.input :value, as: 'hidden', input_html: { value: 1, class: 'review_mark_value' }
         = mark_form.input :mark_type_id, as: 'hidden', input_html: { value: mark_type.id }
-        - if mark_type.title == 'noise level'
+        - if mark_type.is_noise
           .noise.noise_big
             label=mark_type.title.capitalize
             .set_noise
