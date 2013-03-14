@@ -162,7 +162,7 @@ $ ->
 
   # menu popup
   $("a.show_popup.menu").fancybox({'padding':0})
-  $("a.show_popup.share").fancybox({'padding':0})
+  $("a.show_popup.share").fancybox({'padding':0, 'scrolling':no, 'autoScale':false})
   $("a.show_popup.menu").click (e) ->
     e.preventDefault();
     $(this).fancybox()
