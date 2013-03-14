@@ -1849,7 +1849,7 @@ h4 .discount_label {
   position: relative;
   overflow: hidden;
   border-radius: 3px;
-  background: #f2f0ea;
+
   margin: 0 10px 5px 0;
   float: left;
 }
@@ -2438,6 +2438,7 @@ h4 .discount_label {
   border-color: transparent;
   border-radius: 3px;
   background: transparent;
+  background: rgba(0, 0, 0, 0);
   outline-style: none !important;
   -webkit-appearance: none;
 }
@@ -2588,6 +2589,7 @@ h4 .discount_label {
 
 #promo_places #promo_tabs li.active {
   background: image_url('active1.gif') bottom center no-repeat;
+  margin-top: -1px;
 }
 
 #promo_places #promo_tabs li.active a {
