@@ -25,14 +25,14 @@ en:
       join_reserve: Join
       receive_confirmation: ""
       recover_password: Forgot password?
-      sign_in: ""
-      sign_out: ""
+      sign_in: Sign in
+      sign_out: Sign out
       sign_up: Sign up!
     links_short: 
-      cabinet: ""
-      sign_in: ""
-      sign_out: ""
-      sign_up: ""
+      cabinet: Cabinet
+      sign_in: Sign in
+      sign_out: Sign out
+      sign_up: Sign up
     logout: Logout
     mailer: 
       confirmation: 
@@ -52,10 +52,10 @@ en:
         body: ""
         subject: ""
         title: ""
-    merge: ""
-    new_password: ""
-    not_a_user: ""
-    points: ""
+    merge: Merge my accounts
+    new_password: New password
+    not_a_user: Not yet a member?
+    points: 5 points for this reservation.
     remember_me: Remember me
     social: 
       sign_in_with: Sign in with
@@ -68,16 +68,16 @@ en:
       sign_up: Sign up
     successfully_sing_in: Successfully sign in
     title: 
-      change_password: ""
+      change_password: Change password
       receive_confirmation: ""
       recover_password: ""
-      sign_in: ""
-      sign_out: ""
-      sign_up: ""
+      sign_in: Sign in
+      sign_out: Sign out
+      sign_up: Sign up
   breadcrumbs: 
-    main: ""
-    profile: ""
-    search: ""
+    main: Main
+    profile: Profile
+    search: Search
   city: city
   comments: 
     add_comment: ""
@@ -145,6 +145,7 @@ en:
     en: English
     ru: "Русский"
     ua: "Украинский"
+  like_place: I like this place
   links: 
     en: eng
     ru: "рус"
@@ -156,10 +157,10 @@ en:
   message_reset: Someone has requested a link to change your password, and you can do this through the link below.
   message_unlock: "Click the link below to unlock your account:"
   message_wont_change: Your password won't change until you access the link above and create a new one.
-  order: ""
+  order: "[:day, :month, :year]"
   password_change_mesage: Change my password
   place: 
-    is: ""
+    is: from
     share: Share
     up_to: Up to %{discount}% off
     vailability: Availability on %{reserve_date} around %{reserve_time} for %{number_of_people} people
@@ -190,7 +191,7 @@ en:
       disconnect: Disconnect
     time: Time
     upcoming: Upcoming reservations
-    username: ""
+    username: Username
     view_all_reservations: View all reservations
     view_edit: View / Edit
   registration_form: 
@@ -198,9 +199,9 @@ en:
   reservation: 
     address: "Address:"
     at: at
-    complete: ""
-    confirmation: ""
-    confirmed: ""
+    complete: Complete reservation
+    confirmation: "Confirmation #:"
+    confirmed: Your reservation is confirmed
     confirmed_text: Your reservation is confirmed and saved in the restaurant's computer reservation system. You'll receive an email copy of this confirmation.
     diner_name: Diner name
     discount: This document guarantees your reservation and <strong>%{discount}% discount</strong> for your bill
@@ -226,9 +227,9 @@ en:
   search: 
     browse_category: Browse places by category
     category: Category
-    current_opened: ""
+    current_opened: Currently opened
     filters: "Filters:"
-    find_a_table: ""
+    find_a_table: Find a table
     grid_view: Grid view
     kitchen: Cuisine
     load: Loading results
@@ -241,13 +242,13 @@ en:
     refine: Refine your results
     result_for: Results for
     sort: 
-      newest: ""
-      overall_mark: ""
+      newest: Show newest
+      overall_mark: Show popular
     sort_labeled: "Sort by:"
     thead: 
       th1: Restaurant
       th2: Availability (click time to reserve)
-    title_or_location: ""
+    title_or_location: title or location
   share: 
     description: test description
   short_strings: 
@@ -332,7 +333,7 @@ en:
     invite_friends: Invite friends
     reservations: My reservations
     reviews: My reviews
-    self_reviews: ""
+    self_reviews: My reviews
     settings: Settings
     top_points: TOP points
     view_places: View places
@@ -343,7 +344,7 @@ en:
       last: Last
       next: Next &raquo;
       previous: "&laquo; Previous"
-      truncate: ""
+      truncate: ...
   vk: Vkontakte
   welcome: Welcome
   words: 
@@ -365,4 +366,3 @@ en:
     unhelpful: unhelpful
     view: view
   your_email: Your email
-  like_place: "I like this place"
