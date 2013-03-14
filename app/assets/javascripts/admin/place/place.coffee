@@ -10,6 +10,17 @@ String::replaceAll = (token, newToken, ignoreCase) ->
       return @split(token).join(newToken)
   str
 
+jQuery.expr[":"].regex = (elem, index, match) ->
+  matchParams = match[3].split(",")
+  validLabels = /^(data|css):/
+  attr =
+    method: (if matchParams[0].match(validLabels) then matchParams[0].split(":")[0] else "attr")
+    property: matchParams.shift().replace(validLabels, "")
+
+  regexFlags = "ig"
+  regex = new RegExp(matchParams.join("").replace(/^\s+|\s+$/g, ""), regexFlags)
+  regex.test jQuery(elem)[attr.method](attr.property)
+
 class @PlaceForm
   @self = undefined
 
@@ -113,17 +124,22 @@ class CopyScheduler
       $el.click() if $el.is(":checked")
 
   copy_discounts: ($container, number_id, parent_id, id) ->
-    fileds = ["is_discount", "title_ru", "title_en", "title_ua", "description_ru", "description_en", "description_ua",
+    fields = ["title_ru", "title_en", "title_ua", "description_ru", "description_en", "description_ua",
               "from_time", "to_time", "discount"]
     if $container.find(".discount_fields").size() == 0
       $parent = $("#parent_id_container").parent()
       if $parent.find(".nested_fields .discount_fields").size() > 0
-        _.each $parent.find(".nested_fields .discount_fields"), (discount) ->
+        _.each $parent.find(".nested_fields .discount_fields"), (discount) =>
           $discount = $(discount)
           $container.find(".add_nested_fields").click()
           $current_container = $container.find(".discount_fields:last")
+          _.each fields, (field) =>
+            val = $discount.find("input:regex(id, #{field}$)")?.val()
+            $current_container.find("input:regex(id, #{field}$)")?.val(val)
 
-
+          $el = $current_container.find("input:regex(id, is_discount$)")
+          $parent = $discount.find("input:regex(id, is_discount$)")
+          @copy_check_box_field($el, $parent)
 $ ->
   new Discount()
   new CopyScheduler()
