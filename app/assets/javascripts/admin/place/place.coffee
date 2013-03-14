@@ -113,12 +113,16 @@ class CopyScheduler
       $el.click() if $el.is(":checked")
 
   copy_discounts: ($container, number_id, parent_id, id) ->
-    fileds = ["boolean.optional.is_discount", ""]
+    fileds = ["is_discount", "title_ru", "title_en", "title_ua", "description_ru", "description_en", "description_ua",
+              "from_time", "to_time", "discount"]
     if $container.find(".discount_fields").size() == 0
       $parent = $("#parent_id_container").parent()
       if $parent.find(".nested_fields .discount_fields").size() > 0
         _.each $parent.find(".nested_fields .discount_fields"), (discount) ->
           $discount = $(discount)
+          $container.find(".add_nested_fields").click()
+          $current_container = $container.find(".discount_fields:last")
+
 
 $ ->
   new Discount()
