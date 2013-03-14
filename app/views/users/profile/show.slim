@@ -54,6 +54,7 @@
                         .stars_bg
                     span
                       = review.content
+                    .clear
                     a.read_more href=place_path(place)
                       nobr #{I18n.t('profile.read_more')}
             = link_to I18n.t('profile.read_all_reviews'), self_reviews_profile_path(current_user), class: 'all'
