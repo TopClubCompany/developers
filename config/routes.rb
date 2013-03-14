@@ -24,10 +24,10 @@ Topclub::Application.routes.draw do
   post '/reviews/:review_id/:vote_type' => 'reviews#set_usefulness', as: 'set_review_usefulness'
   post '/reviews' => 'reviews#create', as: 'review_create'
   post '/set_unset_favorite_place/:id' => 'places#set_unset_favorite', as: 'set_unset_favorite_place'
-  #resources :reviews
 
-  #refactor this
-
+  devise_scope :user do
+    get '/users/auth/:provider' => 'users/omniauth_callbacks#auth'
+  end
 
   resources :profile, module: :users do
     member do
