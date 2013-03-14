@@ -487,7 +487,9 @@ class Place < ActiveRecord::Base
       time = time.gsub(" AM",'')
     elsif time.include?("PM")
       time = time.gsub(" PM",'').split(":")
-      time[0] = (time[0].to_i + 12).to_s
+      if time[0].to_i != 12
+        time[0] = (time[0].to_i + 12).to_s
+      end
       time = time.join(":")
     end
     time
