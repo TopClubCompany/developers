@@ -102,10 +102,10 @@ class CopyScheduler
     string_id = $($container.children("input")).attr('id')
     string_id = string_id.replace('_id',"")
     number_id = string_id.replace('place_week_days_attributes_',"")
-    parent_id = 0
+    parent_id = number_id - 1
     _.each ["start_at", "end_at", "is_working"], (field) =>
       @copy_field(string_id, parent_id, field)
-    @copy_discounts($container, number_id, $("#parent_id_container").attr('value'), id)
+    @copy_discounts($container, number_id)
 
   copy_field: (id, parent, field) ->
     string_parent_id = "#place_week_days_attributes_#{parent}_#{field}"
@@ -123,11 +123,12 @@ class CopyScheduler
     else
       $el.click() if $el.is(":checked")
 
-  copy_discounts: ($container, number_id, parent_id, id) ->
+  copy_discounts: ($container, number_id) ->
+    $parent =  $container.prev()
+#    $parent = $("#parent_id_container").parent()
     fields = ["title_ru", "title_en", "title_ua", "description_ru", "description_en", "description_ua",
               "from_time", "to_time", "discount"]
     if $container.find(".discount_fields").size() == 0
-      $parent = $("#parent_id_container").parent()
       if $parent.find(".nested_fields .discount_fields").size() > 0
         _.each $parent.find(".nested_fields .discount_fields"), (discount) =>
           $discount = $(discount)
