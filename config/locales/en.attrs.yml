@@ -2,6 +2,29 @@
 en: 
   activerecord: 
     attributes: 
+      account: 
+        account_email_confirmation: Account email confirmation
+        address: Address
+        birthday: Birthday
+        created_at: Created at
+        email: Email
+        first_name: First name
+        gender: Gender
+        language: Language
+        last_name: Last name
+        name: Name
+        nickname: Nickname
+        phone: Phone
+        photo: Photo
+        provider: Provider
+        refresh_token: Refresh token
+        secret: Secret
+        token: Token
+        uid: Uid
+        updated_at: Updated at
+        url: Url
+        user: User
+        user_id: User
       asset: 
         assetable: Assetable
         assetable_id: Assetable
@@ -26,97 +49,6 @@ en:
         updated_at: Updated at
         user: User
         user_id: User
-      header: 
-        content: Content
-        content_en: Content ()
-        content_ru: Content ()
-        content_ua: "Content (translation missing: en.attrs.ua)"
-        created_at: Created at
-        headerable: Headerable
-        headerable_id: Headerable
-        headerable_type: Headerable type
-        og_tag: Og tag
-        tag_type_id: Tag type
-        updated_at: Updated at
-      static_page: 
-        attachment_files: Attachment files
-        content: Content
-        content_en: Content ()
-        content_ru: Content ()
-        content_ua: "Content (translation missing: en.attrs.ua)"
-        created_at: Created at
-        is_visible: Is visible
-        photo: Photo
-        pictures: Pictures
-        structure: Structure
-        structure_id: Structure
-        title: Title
-        title_en: Title ()
-        title_ru: Title ()
-        title_ua: "Title (translation missing: en.attrs.ua)"
-        updated_at: Updated at
-        user_id: User
-      structure: 
-        children: Children
-        created_at: Created at
-        depth: Depth
-        headers: Headers
-        is_visible: Is visible
-        kind: Kind
-        lft: Lft
-        parent: Parent
-        parent_id: Parent
-        pictures: Pictures
-        position: Position
-        rgt: Rgt
-        slug: Slug
-        static_page: Static page
-        title: Title
-        title_en: Title ()
-        title_ru: Title ()
-        title_ua: "Title (translation missing: en.attrs.ua)"
-        updated_at: Updated at
-        user_id: User
-        visible_children: Visible children
-      user: 
-        account_id: Account
-        accounts: Accounts
-        address: Address
-        avatar: Avatar
-        birthday: Birthday
-        city: City
-        city_id: City
-        confirmation_sent_at: Confirmation sent at
-        confirmed_at: Confirmed at
-        created_at: Created at
-        current_sign_in_ip: Current sign in ip
-        email: Email
-        encrypted_password: Encrypted password
-        facebook_friends: Facebook friends
-        favorite_places: Favorite places
-        first_name: First name
-        gender: Gender
-        last_name: Last name
-        last_sign_in_at: Last sign in at
-        last_sign_in_ip: Last sign in ip
-        locked_at: Locked at
-        login: Login
-        patronymic: Patronymic
-        phone: Phone
-        points: Points
-        reservations: Reservations
-        reviews: Reviews
-        sign_in_count: Sign in count
-        trust_state: Trust state
-        u_user_notifications: U user notifications
-        unconfirmed_email: Unconfirmed email
-        unlock_token: Unlock token
-        updated_at: Updated at
-        user_favorite_places: User favorite places
-        user_notifications: User notifications
-        user_role_id: User role
-        vk_friends: Vk friends
-        votes: Votes
       category: 
         category_image: Category image
         children: Children
@@ -152,6 +84,33 @@ en:
         updated_at: Updated at
         user: User
         user_id: User
+      group_feature: 
+        categories: Categories
+        created_at: Created at
+        description: Description
+        description_en: Description ()
+        description_ru: Description ()
+        description_ua: "Description (translation missing: en.attrs.ua)"
+        feature_items: Feature items
+        group_feature_categories: Group feature categories
+        is_visible: Is visible
+        name: Name
+        name_en: Name ()
+        name_ru: Name ()
+        name_ua: "Name (translation missing: en.attrs.ua)"
+        updated_at: Updated at
+      header: 
+        content: Content
+        content_en: Content ()
+        content_ru: Content ()
+        content_ua: "Content (translation missing: en.attrs.ua)"
+        created_at: Created at
+        headerable: Headerable
+        headerable_id: Headerable
+        headerable_type: Headerable type
+        og_tag: Og tag
+        tag_type_id: Tag type
+        updated_at: Updated at
       kitchen: 
         created_at: Created at
         description: Description
@@ -170,59 +129,6 @@ en:
         updated_at: Updated at
         user: User
         user_id: User
-      place: 
-        all_place_images: All place images
-        avg_bill: Avg bill
-        categories: Categories
-        created_at: Created at
-        day_discounts: Day discounts
-        description: Description
-        description_en: Description ()
-        description_ru: Description ()
-        description_ua: "Description (translation missing: en.attrs.ua)"
-        events: Events
-        feature_items: Feature items
-        group_features: Group features
-        is_visible: Is visible
-        kitchens: Kitchens
-        location: Location
-        name: Name
-        name_en: Name ()
-        name_ru: Name ()
-        name_ua: "Name (translation missing: en.attrs.ua)"
-        notes: Notes
-        phone: Phone
-        place_administrators: Place administrators
-        place_categories: Place categories
-        place_feature_items: Place feature items
-        place_image: Place image
-        place_images: Place images
-        place_kitchens: Place kitchens
-        place_menus: Place menus
-        reservations: Reservations
-        reviews: Reviews
-        slider: Slider
-        slug: Slug
-        updated_at: Updated at
-        url: Url
-        user: User
-        user_id: User
-        week_days: Week days
-      group_feature: 
-        categories: Categories
-        created_at: Created at
-        description: Description
-        description_en: Description ()
-        description_ru: Description ()
-        description_ua: "Description (translation missing: en.attrs.ua)"
-        feature_items: Feature items
-        group_feature_categories: Group feature categories
-        is_visible: Is visible
-        name: Name
-        name_en: Name ()
-        name_ru: Name ()
-        name_ua: "Name (translation missing: en.attrs.ua)"
-        updated_at: Updated at
       letter: 
         content: Content
         content_en: Content ()
@@ -310,6 +216,44 @@ en:
         url_en: Url ()
         url_ru: Url ()
         url_ua: "Url (translation missing: en.attrs.ua)"
+      place: 
+        all_place_images: All place images
+        avg_bill: Avg bill
+        categories: Categories
+        created_at: Created at
+        day_discounts: Day discounts
+        description: Description
+        description_en: Description ()
+        description_ru: Description ()
+        description_ua: "Description (translation missing: en.attrs.ua)"
+        events: Events
+        feature_items: Feature items
+        group_features: Group features
+        is_visible: Is visible
+        kitchens: Kitchens
+        location: Location
+        name: Name
+        name_en: Name ()
+        name_ru: Name ()
+        name_ua: "Name (translation missing: en.attrs.ua)"
+        notes: Notes
+        phone: Phone
+        place_administrators: Place administrators
+        place_categories: Place categories
+        place_feature_items: Place feature items
+        place_image: Place image
+        place_images: Place images
+        place_kitchens: Place kitchens
+        place_menus: Place menus
+        reservations: Reservations
+        reviews: Reviews
+        slider: Slider
+        slug: Slug
+        updated_at: Updated at
+        url: Url
+        user: User
+        user_id: User
+        week_days: Week days
       place_administrator: 
         created_at: Created at
         email: Email
@@ -373,6 +317,85 @@ en:
         user: User
         user_id: User
         votes: Votes
+      static_page: 
+        attachment_files: Attachment files
+        content: Content
+        content_en: Content ()
+        content_ru: Content ()
+        content_ua: "Content (translation missing: en.attrs.ua)"
+        created_at: Created at
+        is_visible: Is visible
+        photo: Photo
+        pictures: Pictures
+        structure: Structure
+        structure_id: Structure
+        title: Title
+        title_en: Title ()
+        title_ru: Title ()
+        title_ua: "Title (translation missing: en.attrs.ua)"
+        updated_at: Updated at
+        user_id: User
+      structure: 
+        children: Children
+        created_at: Created at
+        depth: Depth
+        headers: Headers
+        is_visible: Is visible
+        kind: Kind
+        lft: Lft
+        parent: Parent
+        parent_id: Parent
+        pictures: Pictures
+        position: Position
+        rgt: Rgt
+        slug: Slug
+        static_page: Static page
+        title: Title
+        title_en: Title ()
+        title_ru: Title ()
+        title_ua: "Title (translation missing: en.attrs.ua)"
+        updated_at: Updated at
+        user_id: User
+        visible_children: Visible children
+      user: 
+        account_id: Account
+        accounts: Accounts
+        address: Address
+        avatar: Avatar
+        birthday: Birthday
+        city: City
+        city_id: City
+        confirmation_sent_at: Confirmation sent at
+        confirmed_at: Confirmed at
+        created_at: Created at
+        current_sign_in_ip: Current sign in ip
+        email: Email
+        encrypted_password: Encrypted password
+        facebook_friends: Facebook friends
+        favorite_places: Favorite places
+        first_name: First name
+        gender: Gender
+        last_name: Last name
+        last_sign_in_at: Last sign in at
+        last_sign_in_ip: Last sign in ip
+        locked_at: Locked at
+        login: Login
+        patronymic: Patronymic
+        phone: Phone
+        points: Points
+        reservations: Reservations
+        reviews: Reviews
+        sign_in_count: Sign in count
+        trust_state: Trust state
+        u_user_notifications: U user notifications
+        unconfirmed_email: Unconfirmed email
+        unlock_token: Unlock token
+        updated_at: Updated at
+        user_favorite_places: User favorite places
+        user_notifications: User notifications
+        user_role_id: User role
+        vk_friends: Vk friends
+        votes: Votes
       user_notification: 
         created_at: Created at
         description: Description
@@ -388,29 +411,6 @@ en:
         u_user_notifications: U user notifications
         updated_at: Updated at
         users: Users
-      account: 
-        account_email_confirmation: Account email confirmation
-        address: Address
-        birthday: Birthday
-        created_at: Created at
-        email: Email
-        first_name: First name
-        gender: Gender
-        language: Language
-        last_name: Last name
-        name: Name
-        nickname: Nickname
-        phone: Phone
-        photo: Photo
-        provider: Provider
-        refresh_token: Refresh token
-        secret: Secret
-        token: Token
-        uid: Uid
-        updated_at: Updated at
-        url: Url
-        user: User
-        user_id: User
       vote: 
         created_at: Created at
         review: Review
@@ -433,141 +433,141 @@ en:
         updated_at: Updated at
         votes: Votes
     models: 
-      asset: 
-        other: Asset
-        zero: Asset
-        one: Asset
-        few: Asset
-        many: Asset
-      header: 
-        other: Header
-        zero: Header
-        one: Header
-        few: Header
-        many: Header
-      static_page: 
-        other: Static page
-        zero: Static page
-        one: Static page
-        few: Static page
-        many: Static page
-      structure: 
-        other: Structure
-        zero: Structure
-        one: Structure
-        few: Structure
-        many: Structure
-      user: 
-        other: User
-        zero: User
-        one: User
-        few: User
-        many: User
-      category: 
-        other: Category
-        zero: Category
-        one: Category
-        few: Category
-        many: Category
-      kitchen: 
-        other: Kitchen
-        zero: Kitchen
-        one: Kitchen
-        few: Kitchen
-        many: Kitchen
-      place: 
-        other: Place
-        zero: Place
-        one: Place
-        few: Place
-        many: Place
-      group_feature: 
-        other: Group feature
-        zero: Group feature
-        one: Group feature
-        few: Group feature
-        many: Group feature
-      letter: 
-        other: Letter
-        zero: Letter
-        one: Letter
-        few: Letter
-        many: Letter
-      location: 
-        other: Location
-        zero: Location
-        one: Location
-        few: Location
-        many: Location
-      mark: 
-        other: Mark
-        zero: Mark
-        one: Mark
-        few: Mark
-        many: Mark
-      mark_type: 
-        other: Mark type
-        zero: Mark type
-        one: Mark type
-        few: Mark type
-        many: Mark type
-      og_tag: 
-        other: Og tag
-        zero: Og tag
-        one: Og tag
-        few: Og tag
-        many: Og tag
-      place_administrator: 
-        other: Place administrator
-        zero: Place administrator
-        one: Place administrator
-        few: Place administrator
-        many: Place administrator
-      place_menu: 
-        other: Place menu
-        zero: Place menu
-        one: Place menu
-        few: Place menu
-        many: Place menu
-      place_menu_item: 
-        other: Place menu item
-        zero: Place menu item
-        one: Place menu item
-        few: Place menu item
-        many: Place menu item
-      reservation: 
-        other: Reservation
-        zero: Reservation
-        one: Reservation
-        few: Reservation
-        many: Reservation
-      review: 
-        other: Review
-        zero: Review
-        one: Review
-        few: Review
-        many: Review
-      user_notification: 
-        other: User notification
-        zero: User notification
-        one: User notification
-        few: User notification
-        many: User notification
       account: 
-        other: Account
-        zero: Account
-        one: Account
         few: Account
         many: Account
+        one: Account
+        other: Account
+        zero: Account
+      asset: 
+        few: Asset
+        many: Asset
+        one: Asset
+        other: Asset
+        zero: Asset
+      category: 
+        few: Category
+        many: Category
+        one: Category
+        other: Category
+        zero: Category
+      group_feature: 
+        few: Group feature
+        many: Group feature
+        one: Group feature
+        other: Group feature
+        zero: Group feature
+      header: 
+        few: Header
+        many: Header
+        one: Header
+        other: Header
+        zero: Header
+      kitchen: 
+        few: Kitchen
+        many: Kitchen
+        one: Kitchen
+        other: Kitchen
+        zero: Kitchen
+      letter: 
+        few: Letter
+        many: Letter
+        one: Letter
+        other: Letter
+        zero: Letter
+      location: 
+        few: Location
+        many: Location
+        one: Location
+        other: Location
+        zero: Location
+      mark: 
+        few: Mark
+        many: Mark
+        one: Mark
+        other: Mark
+        zero: Mark
+      mark_type: 
+        few: Mark type
+        many: Mark type
+        one: Mark type
+        other: Mark type
+        zero: Mark type
+      og_tag: 
+        few: Og tag
+        many: Og tag
+        one: Og tag
+        other: Og tag
+        zero: Og tag
+      place: 
+        few: Place
+        many: Place
+        one: Place
+        other: Place
+        zero: Place
+      place_administrator: 
+        few: Place administrator
+        many: Place administrator
+        one: Place administrator
+        other: Place administrator
+        zero: Place administrator
+      place_menu: 
+        few: Place menu
+        many: Place menu
+        one: Place menu
+        other: Place menu
+        zero: Place menu
+      place_menu_item: 
+        few: Place menu item
+        many: Place menu item
+        one: Place menu item
+        other: Place menu item
+        zero: Place menu item
+      reservation: 
+        few: Reservation
+        many: Reservation
+        one: Reservation
+        other: Reservation
+        zero: Reservation
+      review: 
+        few: Review
+        many: Review
+        one: Review
+        other: Review
+        zero: Review
+      static_page: 
+        few: Static page
+        many: Static page
+        one: Static page
+        other: Static page
+        zero: Static page
+      structure: 
+        few: Structure
+        many: Structure
+        one: Structure
+        other: Structure
+        zero: Structure
+      user: 
+        few: User
+        many: User
+        one: User
+        other: User
+        zero: User
+      user_notification: 
+        few: User notification
+        many: User notification
+        one: User notification
+        other: User notification
+        zero: User notification
       vote: 
-        other: Vote
-        zero: Vote
-        one: Vote
         few: Vote
         many: Vote
+        one: Vote
+        other: Vote
+        zero: Vote
       vote_type: 
-        other: Vote type
-        zero: Vote type
-        one: Vote type
         few: Vote type
         many: Vote type
+        one: Vote type
+        other: Vote type
+        zero: Vote type

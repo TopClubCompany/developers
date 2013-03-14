@@ -38,8 +38,10 @@ ua:
       update_needs_confirmation: ""
       updated: ""
     sessions: 
+      remember_me: ""
       signed_in: ""
       signed_out: ""
+    social_singed: ""
     unlocks: 
       send_instructions: ""
       send_paranoid_instructions: ""
@@ -55,8 +57,3 @@ ua:
         many: ""
         one: ""
         other: ""
-  p_projects: 
-    form: 
-      email_error: ""
-      first_name_error: ""
-      last_name_error: ""

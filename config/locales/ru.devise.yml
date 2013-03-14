@@ -38,15 +38,15 @@ ru:
       update_needs_confirmation: "Ваша учётная запись обновлена, но нам нужно проверить ваш новый адрес e-mail. Через несколько минут вы получите письмо со ссылкой для подтверждения нового адреса e-mail."
       updated: "Ваша учётная запись изменена."
     sessions: 
+      remember_me: Remember me
       signed_in: "Вход в систему выполнен."
       signed_out: "Выход из системы выполнен."
-      remember_me: "Remember me"
+    social_singed: Sign in with another account
     unlocks: 
       send_instructions: "В течение нескольких минут вы получите письмо с инструкциями по разблокировке вашей учётной записи."
       send_paranoid_instructions: "Если ваша учётная запись существует, то в течение нескольких минут вы получите письмо с инструкциями по её разблокировке."
       unlocked: "Ваша учётная запись разблокирована. Теперь вы вошли в систему."
-    social_singed: "Sign in with another account"
-  errors:
+  errors: 
     messages: 
       already_confirmed: "уже подтверждена. Пожалуйста, попробуйте войти в систему"
       expired: "устарела. Пожалуйста, запросите новую"
@@ -57,4 +57,3 @@ ru:
         many: "%{resource}: сохранение не удалось из-за %{count} ошибок"
         one: "%{resource}: сохранение не удалось из-за %{count} ошибки"
         other: "%{resource}: сохранение не удалось из-за %{count} ошибки"
-
