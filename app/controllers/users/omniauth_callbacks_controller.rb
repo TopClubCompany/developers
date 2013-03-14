@@ -67,6 +67,10 @@ class Users::OmniauthCallbacksController < ApplicationController
     redirect_to root_path, :flash => {:error => "Could not log you in. #{params[:message]}"}
   end
 
+  def passthru
+    redirect_to root_path, :flash => {:error => "Could not find social"}
+  end
+
   private
 
   def merge(data, email)
