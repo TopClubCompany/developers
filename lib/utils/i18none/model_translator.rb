@@ -6,8 +6,8 @@ module Utils
     class ModelTranslator
 
       MODELS = [
-          Asset, Header, StaticPage, Structure, User, Category, Kitchen
-
+          Asset, Header, StaticPage, Structure, User, Category, Kitchen, Place, GroupFeature, Letter, Location, Mark, MarkType,
+          OgTag, PlaceAdministrator, PlaceMenu, PlaceMenuItem, Reservation, Review, UserNotification, Account, Vote, VoteType
       ]
 
       IGNORE_COLUMNS = %w(id reset_password_sent_at remember_created_at current_sign_in_at confirmation_token

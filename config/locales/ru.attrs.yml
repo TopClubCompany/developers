@@ -13,91 +13,38 @@ ru:
         description: Description
         description_en: "Description (анг.)"
         description_ru: "Description (рус.)"
-        description_uk: "Description (укр.)"
+        description_ua: "Description (translation missing: ru.attrs.ua)"
         guid: Guid
         is_main: Is main
         locale: Locale
         name: Name
         name_en: "Name (анг.)"
         name_ru: "Name (рус.)"
-        name_uk: "Name (укр.)"
+        name_ua: "Name (translation missing: ru.attrs.ua)"
         sort_order: Sort order
         type: Type
         updated_at: Updated at
         user: User
         user_id: User
-      category: 
-        category_image: Category image
-        children: Children
-        created_at: Created at
-        depth: Depth
-        description: Description
-        description_en: "Description (анг.)"
-        description_ru: "Description (рус.)"
-        description_uk: "Description (укр.)"
-        group_feature_categories: Group feature categories
-        group_features: Group features
-        header: Header
-        is_visible: Is visible
-        lft: Lft
-        name: Name
-        name_en: "Name (анг.)"
-        name_ru: "Name (рус.)"
-        name_uk: "Name (укр.)"
-        parent: Parent
-        parent_id: Parent
-        pictures: Pictures
-        place_categories: Place categories
-        places: Places
-        rgt: Rgt
-        slug: Slug
-        updated_at: Updated at
-        user: User
-        user_id: User
       header: 
+        content: Content
+        content_en: "Content (анг.)"
+        content_ru: "Content (рус.)"
+        content_ua: "Content (translation missing: ru.attrs.ua)"
         created_at: Created at
-        description: Description
-        description_en: "Description (анг.)"
-        description_ru: "Description (рус.)"
-        description_uk: "Description (укр.)"
         headerable: Headerable
         headerable_id: Headerable
         headerable_type: Headerable type
-        keywords: Keywords
-        keywords_en: "Keywords (анг.)"
-        keywords_ru: "Keywords (рус.)"
-        keywords_uk: "Keywords (укр.)"
-        title: Title
-        title_en: "Title (анг.)"
-        title_ru: "Title (рус.)"
-        title_uk: "Title (укр.)"
+        og_tag: Og tag
+        tag_type_id: Tag type
         updated_at: Updated at
-      kitchen: 
-        created_at: Created at
-        description: Description
-        description_en: "Description (анг.)"
-        description_ru: "Description (рус.)"
-        description_uk: "Description (укр.)"
-        is_visible: Is visible
-        name: Name
-        name_en: "Name (анг.)"
-        name_ru: "Name (рус.)"
-        name_uk: "Name (укр.)"
-        pictures: Pictures
-        place_kitchens: Place kitchens
-        places: Places
-        slug: Slug
-        updated_at: Updated at
-        user: User
-        user_id: User
       static_page: 
         attachment_files: Attachment files
         content: Content
         content_en: "Content (анг.)"
         content_ru: "Content (рус.)"
-        content_uk: "Content (укр.)"
+        content_ua: "Content (translation missing: ru.attrs.ua)"
         created_at: Created at
-        delta: Delta
         is_visible: Is visible
         photo: Photo
         pictures: Pictures
@@ -106,35 +53,28 @@ ru:
         title: Title
         title_en: "Title (анг.)"
         title_ru: "Title (рус.)"
-        title_uk: "Title (укр.)"
+        title_ua: "Title (translation missing: ru.attrs.ua)"
         updated_at: Updated at
         user_id: User
       structure: 
         children: Children
         created_at: Created at
-        delta: Delta
         depth: Depth
-        header: Header
+        headers: Headers
         is_visible: Is visible
         kind: Kind
         lft: Lft
-        linked: Linked
-        menu_image: Menu image
         parent: Parent
         parent_id: Parent
         pictures: Pictures
         position: Position
-        redirect_url: Redirect url
-        redirect_url_en: "Redirect url (анг.)"
-        redirect_url_ru: "Redirect url (рус.)"
-        redirect_url_uk: "Redirect url (укр.)"
         rgt: Rgt
         slug: Slug
         static_page: Static page
         title: Title
         title_en: "Title (анг.)"
         title_ru: "Title (рус.)"
-        title_uk: "Title (укр.)"
+        title_ua: "Title (translation missing: ru.attrs.ua)"
         updated_at: Updated at
         user_id: User
         visible_children: Visible children
@@ -144,6 +84,8 @@ ru:
         address: City
         avatar: Avatar
         birthday: Birthday
+        city: City
+        city_id: City
         confirmation_sent_at: Confirmation sent at
         confirmed_at: Confirmed at
         created_at: Created at
@@ -151,6 +93,7 @@ ru:
         email: Email
         encrypted_password: Encrypted password
         facebook_friends: Facebook friends
+        favorite_places: Favorite places
         first_name: First name
         gender: Gender
         last_name: Last name
@@ -160,54 +103,471 @@ ru:
         login: Login
         patronymic: Patronymic
         phone: Phone
+        points: Points
+        reservations: Reservations
         reviews: Reviews
         sign_in_count: Sign in count
         trust_state: Trust state
+        u_user_notifications: U user notifications
         unconfirmed_email: Unconfirmed email
         unlock_token: Unlock token
         updated_at: Updated at
+        user_favorite_places: User favorite places
+        user_notifications: User notifications
         user_role_id: User role
         vk_friends: Vk friends
+        votes: Votes
+      category: 
+        category_image: Category image
+        children: Children
+        created_at: Created at
+        css_id: Css
+        depth: Depth
+        description: Description
+        description_en: "Description (анг.)"
+        description_ru: "Description (рус.)"
+        description_ua: "Description (translation missing: ru.attrs.ua)"
+        group_feature_categories: Group feature categories
+        group_features: Group features
+        headers: Headers
+        is_visible: Is visible
+        is_visible_on_main: Is visible on main
+        lft: Lft
+        name: Name
+        name_en: "Name (анг.)"
+        name_ru: "Name (рус.)"
+        name_ua: "Name (translation missing: ru.attrs.ua)"
+        parent: Parent
+        parent_id: Parent
+        pictures: Pictures
+        place_categories: Place categories
+        places: Places
+        plural_name: Plural name
+        plural_name_en: "Plural name (анг.)"
+        plural_name_ru: "Plural name (рус.)"
+        plural_name_ua: "Plural name (translation missing: ru.attrs.ua)"
+        position: Position
+        rgt: Rgt
+        slug: Slug
+        updated_at: Updated at
+        user: User
+        user_id: User
+      kitchen: 
+        created_at: Created at
+        description: Description
+        description_en: "Description (анг.)"
+        description_ru: "Description (рус.)"
+        description_ua: "Description (translation missing: ru.attrs.ua)"
+        is_visible: Is visible
+        name: Name
+        name_en: "Name (анг.)"
+        name_ru: "Name (рус.)"
+        name_ua: "Name (translation missing: ru.attrs.ua)"
+        pictures: Pictures
+        place_kitchens: Place kitchens
+        places: Places
+        slug: Slug
+        updated_at: Updated at
+        user: User
+        user_id: User
+      place: 
+        all_place_images: All place images
+        avg_bill: Avg bill
+        categories: Categories
+        created_at: Created at
+        day_discounts: Day discounts
+        description: Description
+        description_en: "Description (анг.)"
+        description_ru: "Description (рус.)"
+        description_ua: "Description (translation missing: ru.attrs.ua)"
+        events: Events
+        feature_items: Feature items
+        group_features: Group features
+        is_visible: Is visible
+        kitchens: Kitchens
+        location: Location
+        name: Name
+        name_en: "Name (анг.)"
+        name_ru: "Name (рус.)"
+        name_ua: "Name (translation missing: ru.attrs.ua)"
+        notes: Notes
+        phone: Phone
+        place_administrators: Place administrators
+        place_categories: Place categories
+        place_feature_items: Place feature items
+        place_image: Place image
+        place_images: Place images
+        place_kitchens: Place kitchens
+        place_menus: Place menus
+        reservations: Reservations
+        reviews: Reviews
+        slider: Slider
+        slug: Slug
+        updated_at: Updated at
+        url: Url
+        user: User
+        user_id: User
+        week_days: Week days
+      group_feature: 
+        categories: Categories
+        created_at: Created at
+        description: Description
+        description_en: "Description (анг.)"
+        description_ru: "Description (рус.)"
+        description_ua: "Description (translation missing: ru.attrs.ua)"
+        feature_items: Feature items
+        group_feature_categories: Group feature categories
+        is_visible: Is visible
+        name: Name
+        name_en: "Name (анг.)"
+        name_ru: "Name (рус.)"
+        name_ua: "Name (translation missing: ru.attrs.ua)"
+        updated_at: Updated at
+      letter: 
+        content: Content
+        content_en: "Content (анг.)"
+        content_ru: "Content (рус.)"
+        content_ua: "Content (translation missing: ru.attrs.ua)"
+        created_at: Created at
+        is_visible: Is visible
+        kind: Kind
+        topic: Topic
+        topic_en: "Topic (анг.)"
+        topic_ru: "Topic (рус.)"
+        topic_ua: "Topic (translation missing: ru.attrs.ua)"
+        updated_at: Updated at
+      location: 
+        city: City
+        city_en: "City (анг.)"
+        city_ru: "City (рус.)"
+        city_ua: "City (translation missing: ru.attrs.ua)"
+        country: Country
+        country_code: Country code
+        country_en: "Country (анг.)"
+        country_ru: "Country (рус.)"
+        country_ua: "Country (translation missing: ru.attrs.ua)"
+        county: County
+        county_en: "County (анг.)"
+        county_ru: "County (рус.)"
+        county_ua: "County (translation missing: ru.attrs.ua)"
+        created_at: Created at
+        distance: Distance
+        house_number: House number
+        latitude: Latitude
+        locationable: Locationable
+        locationable_id: Locationable
+        locationable_type: Locationable type
+        longitude: Longitude
+        street: Street
+        street_en: "Street (анг.)"
+        street_ru: "Street (рус.)"
+        street_ua: "Street (translation missing: ru.attrs.ua)"
+        updated_at: Updated at
+        zip: Zip
+      mark: 
+        created_at: Created at
+        mark_type: Mark type
+        mark_type_id: Mark type
+        review: Review
+        review_id: Review
+        updated_at: Updated at
+        value: Value
+      mark_type: 
+        created_at: Created at
+        description: Description
+        description_en: "Description (анг.)"
+        description_ru: "Description (рус.)"
+        description_ua: "Description (translation missing: ru.attrs.ua)"
+        included_in_overall: Included in overall
+        name: Name
+        name_en: "Name (анг.)"
+        name_ru: "Name (рус.)"
+        name_ua: "Name (translation missing: ru.attrs.ua)"
+        updated_at: Updated at
+      og_tag: 
+        created_at: Created at
+        description: Description
+        description_en: "Description (анг.)"
+        description_ru: "Description (рус.)"
+        description_ua: "Description (translation missing: ru.attrs.ua)"
+        header: Header
+        header_id: Header
+        image: Image
+        image_en: "Image (анг.)"
+        image_ru: "Image (рус.)"
+        image_ua: "Image (translation missing: ru.attrs.ua)"
+        og_type: Og type
+        site_name: Site name
+        site_name_en: "Site name (анг.)"
+        site_name_ru: "Site name (рус.)"
+        site_name_ua: "Site name (translation missing: ru.attrs.ua)"
+        title: Title
+        title_en: "Title (анг.)"
+        title_ru: "Title (рус.)"
+        title_ua: "Title (translation missing: ru.attrs.ua)"
+        updated_at: Updated at
+        url: Url
+        url_en: "Url (анг.)"
+        url_ru: "Url (рус.)"
+        url_ua: "Url (translation missing: ru.attrs.ua)"
+      place_administrator: 
+        created_at: Created at
+        email: Email
+        name: Name
+        phone: Phone
+        place: Place
+        place_id: Place
+        updated_at: Updated at
+      place_menu: 
+        created_at: Created at
+        description: Description
+        description_en: "Description (анг.)"
+        description_ru: "Description (рус.)"
+        description_ua: "Description (translation missing: ru.attrs.ua)"
+        place: Place
+        place_id: Place
+        place_menu_items: Place menu items
+        title: Title
+        title_en: "Title (анг.)"
+        title_ru: "Title (рус.)"
+        title_ua: "Title (translation missing: ru.attrs.ua)"
+        updated_at: Updated at
+      place_menu_item: 
+        created_at: Created at
+        description: Description
+        description_en: "Description (анг.)"
+        description_ru: "Description (рус.)"
+        description_ua: "Description (translation missing: ru.attrs.ua)"
+        place_menu: Place menu
+        place_menu_id: Place menu
+        price: Price
+        title: Title
+        title_en: "Title (анг.)"
+        title_ru: "Title (рус.)"
+        title_ua: "Title (translation missing: ru.attrs.ua)"
+        updated_at: Updated at
+      reservation: 
+        created_at: Created at
+        email: Email
+        first_name: First name
+        last_name: Last name
+        persons: Persons
+        phone: Phone
+        place: Place
+        place_id: Place
+        special_notes: Special notes
+        time: Time
+        updated_at: Updated at
+        user: User
+        user_id: User
+      review: 
+        content: Content
+        created_at: Created at
+        marks: Marks
+        place: Place
+        reviewable_id: Reviewable
+        reviewable_type: Reviewable type
+        reviweable: Reviweable
+        title: Title
+        updated_at: Updated at
+        user: User
+        user_id: User
+        votes: Votes
+      user_notification: 
+        created_at: Created at
+        description: Description
+        description_en: "Description (анг.)"
+        description_ru: "Description (рус.)"
+        description_ua: "Description (translation missing: ru.attrs.ua)"
+        is_visible: Is visible
+        position: Position
+        title: Title
+        title_en: "Title (анг.)"
+        title_ru: "Title (рус.)"
+        title_ua: "Title (translation missing: ru.attrs.ua)"
+        u_user_notifications: U user notifications
+        updated_at: Updated at
+        users: Users
+      account: 
+        account_email_confirmation: Account email confirmation
+        address: Address
+        birthday: Birthday
+        created_at: Created at
+        email: Email
+        first_name: First name
+        gender: Gender
+        language: Language
+        last_name: Last name
+        name: Name
+        nickname: Nickname
+        phone: Phone
+        photo: Photo
+        provider: Provider
+        refresh_token: Refresh token
+        secret: Secret
+        token: Token
+        uid: Uid
+        updated_at: Updated at
+        url: Url
+        user: User
+        user_id: User
+      vote: 
+        created_at: Created at
+        review: Review
+        review_id: Review
+        updated_at: Updated at
+        user: User
+        user_id: User
+        vote_type: Vote type
+        vote_type_id: Vote type
+      vote_type: 
+        created_at: Created at
+        description: Description
+        description_en: "Description (анг.)"
+        description_ru: "Description (рус.)"
+        description_ua: "Description (translation missing: ru.attrs.ua)"
+        title: Title
+        title_en: "Title (анг.)"
+        title_ru: "Title (рус.)"
+        title_ua: "Title (translation missing: ru.attrs.ua)"
+        updated_at: Updated at
+        votes: Votes
     models: 
       asset: 
-        few: Asset
-        many: Asset
-        one: Asset
         other: Asset
         zero: Asset
-      category: 
-        few: "Категорий"
-        many: "Категорий"
-        one: "Категория"
-        other: "Категорий"
-        zero: "Категорий"
+        one: Asset
+        few: Asset
+        many: Asset
       header: 
-        few: Header
-        many: Header
-        one: Header
         other: Header
         zero: Header
-      kitchen: 
-        few: Kitchen
-        many: Kitchen
-        one: Kitchen
-        other: Kitchen
-        zero: Kitchen
+        one: Header
+        few: Header
+        many: Header
       static_page: 
-        few: Static page
-        many: Static page
-        one: Static page
         other: Static page
         zero: Static page
+        one: Static page
+        few: Static page
+        many: Static page
       structure: 
-        few: Structure
-        many: Structure
-        one: Structure
         other: Structure
         zero: Structure
+        one: Structure
+        few: Structure
+        many: Structure
       user: 
-        few: User
-        many: User
-        one: User
         other: User
         zero: User
+        one: User
+        few: User
+        many: User
+      category: 
+        other: "Категорий"
+        zero: "Категорий"
+        one: "Категория"
+        few: "Категорий"
+        many: "Категорий"
+      kitchen: 
+        other: Kitchen
+        zero: Kitchen
+        one: Kitchen
+        few: Kitchen
+        many: Kitchen
+      place: 
+        other: Place
+        zero: Place
+        one: Place
+        few: Place
+        many: Place
+      group_feature: 
+        other: Group feature
+        zero: Group feature
+        one: Group feature
+        few: Group feature
+        many: Group feature
+      letter: 
+        other: Letter
+        zero: Letter
+        one: Letter
+        few: Letter
+        many: Letter
+      location: 
+        other: Location
+        zero: Location
+        one: Location
+        few: Location
+        many: Location
+      mark: 
+        other: Mark
+        zero: Mark
+        one: Mark
+        few: Mark
+        many: Mark
+      mark_type: 
+        other: Mark type
+        zero: Mark type
+        one: Mark type
+        few: Mark type
+        many: Mark type
+      og_tag: 
+        other: Og tag
+        zero: Og tag
+        one: Og tag
+        few: Og tag
+        many: Og tag
+      place_administrator: 
+        other: Place administrator
+        zero: Place administrator
+        one: Place administrator
+        few: Place administrator
+        many: Place administrator
+      place_menu: 
+        other: Place menu
+        zero: Place menu
+        one: Place menu
+        few: Place menu
+        many: Place menu
+      place_menu_item: 
+        other: Place menu item
+        zero: Place menu item
+        one: Place menu item
+        few: Place menu item
+        many: Place menu item
+      reservation: 
+        other: Reservation
+        zero: Reservation
+        one: Reservation
+        few: Reservation
+        many: Reservation
+      review: 
+        other: Review
+        zero: Review
+        one: Review
+        few: Review
+        many: Review
+      user_notification: 
+        other: User notification
+        zero: User notification
+        one: User notification
+        few: User notification
+        many: User notification
+      account: 
+        other: Account
+        zero: Account
+        one: Account
+        few: Account
+        many: Account
+      vote: 
+        other: Vote
+        zero: Vote
+        one: Vote
+        few: Vote
+        many: Vote
+      vote_type: 
+        other: Vote type
+        zero: Vote type
+        one: Vote type
+        few: Vote type
+        many: Vote type

@@ -40,11 +40,13 @@ ru:
     sessions: 
       signed_in: "Вход в систему выполнен."
       signed_out: "Выход из системы выполнен."
+      remember_me: "Remember me"
     unlocks: 
       send_instructions: "В течение нескольких минут вы получите письмо с инструкциями по разблокировке вашей учётной записи."
       send_paranoid_instructions: "Если ваша учётная запись существует, то в течение нескольких минут вы получите письмо с инструкциями по её разблокировке."
       unlocked: "Ваша учётная запись разблокирована. Теперь вы вошли в систему."
-  errors: 
+    social_singed: "Sign in with another account"
+  errors:
     messages: 
       already_confirmed: "уже подтверждена. Пожалуйста, попробуйте войти в систему"
       expired: "устарела. Пожалуйста, запросите новую"
@@ -55,8 +57,4 @@ ru:
         many: "%{resource}: сохранение не удалось из-за %{count} ошибок"
         one: "%{resource}: сохранение не удалось из-за %{count} ошибки"
         other: "%{resource}: сохранение не удалось из-за %{count} ошибки"
-  p_projects: 
-    form: 
-      email_error: "Невалидный e-mail"
-      first_name_error: "Пустое имя"
-      last_name_error: "Пустая фамилия"
+

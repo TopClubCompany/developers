@@ -15,17 +15,14 @@
           .clear
           label.checkbox
             input class="boolean optional" id="user_remember_me" name="user[remember_me]" type="checkbox" value="1"
-              | Remember me
+              = I18n.t('devise.sessions.remember_me')
 
           .clear
           = f.submit t('auth.links.sign_in')
           = link_to t('auth.links.recover_password'), new_user_password_path, class: 'forgot_password'
 
-
-
-
     #social_login.span4
-      h3 Sign in with another account
+      h3= I18n.t('devise.social_singed')
       = render 'shared/social_links'
 
 
