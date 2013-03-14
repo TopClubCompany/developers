@@ -1065,6 +1065,13 @@ h4 .discount_label {
   background: #fff !important;
 }
 
+.popover-content .place_features li {
+  line-height: 17px;
+  margin-bottom: 5px;
+}
+
+.popover-content .fix-width-p {display:table-cell}
+
 #listing #map_details {
   height: 450px;
 }
