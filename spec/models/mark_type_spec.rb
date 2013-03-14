@@ -11,5 +11,6 @@ end
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  included_in_overall :boolean          default(TRUE)
+#  is_noise            :boolean          default(FALSE)
 #
 

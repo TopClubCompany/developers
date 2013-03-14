@@ -1,6 +1,6 @@
 class MarkType < ActiveRecord::Base
 
-  attr_accessible :name, :description, :included_in_overall
+  attr_accessible :name, :description, :included_in_overall, :is_noise
 
   scope :included, where(included_in_overall: true)
 
@@ -20,5 +20,6 @@ end
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  included_in_overall :boolean          default(TRUE)
+#  is_noise            :boolean          default(FALSE)
 #
 
