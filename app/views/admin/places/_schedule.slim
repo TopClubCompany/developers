@@ -2,9 +2,13 @@
   = f.input :start_at
   = f.input :end_at
   = f.input :day_type_id, as: :hidden
+  = f.input :is_working
   .nested_fields
     = input_set 'discounts' do
-      = f.input :is_working
       = f.simple_fields_for :day_discounts
       br
       = f.link_to_add t('admin.add'), :day_discounts, class: 'btn btn-primary'
+  - if f.get_value(:day_type_id) == 1
+    #parent_id_container value=f.get_value(:id)
+  - else
+    button.btn.btn-primary.clone_schedule type="button" Копировать
