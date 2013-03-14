@@ -13,7 +13,7 @@ $ ->
         else
           $('#batch_action_form').submit()
 
-    $('#confirm_delete').click (e) ->
+    $('#confirm_delete').live 'click', (e) ->
       e.preventDefault()
       $('#model_confirmation').modal('hide')
       $('#batch_action_form').submit()
