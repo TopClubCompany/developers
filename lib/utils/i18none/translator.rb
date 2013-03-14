@@ -10,7 +10,12 @@ module Utils
       def initialize(dirs, main_locale)
         @main_locale = main_locale
         @locale_files = dirs.reject { |f| File.extname(f) != '.yml' }.map { |y| LocaleFile.new(y) }
+        @locale_files.delete_if{|file| deleted_locators.include?(file.file_name)}
         @locales = {}
+      end
+
+      def deleted_locators
+        %w(en.date.yml ru.date.yml ua.date.yml en.admin_js.yml ru.admin_js.yml ua.admin_js.yml)
       end
 
       def self.prepare_from_env
