@@ -56,8 +56,13 @@ class Admin::LocatorsController < Admin::BaseController
     []
   end
 
+  def deleted_locators
+    %w(en.date.yml ru.date.yml ua.date.yml en.admin_js.yml ru.admin_js.yml ua.admin_js.yml)
+  end
+
   def find_locators
     @i18n_back = Utils::I18none::Translator.from_env
+    @i18n_back.locale_files.delete_if{|file| deleted_locators.include?(file.file_name)}
     @locators = {}
     @i18n_back.locale_files.each_with_index { |f, i| @locators[f.locale] ||= []; @locators[f.locale] << [f.file.sub(Rails.root.to_s, ''), i] }
   end
