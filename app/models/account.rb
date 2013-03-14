@@ -14,10 +14,12 @@ class Account < ActiveRecord::Base
 
   scope :by_type, lambda{ |type| where(:provider => type) }
 
+  scope :find_by_uid_and_provider, lambda { |uid, provider| where("uid = ? AND provider = ?", uid, provider) }
+
 
   def self.create_or_find_by_oauth_data data
     data = self.check_first_name_last_name(data)
-    account = Account.find_by_uid_and_provider(data[:uid], data[:provider])
+    account = Account.find_by_uid_and_provider(data[:uid], data[:provider]).last
     return account.user if account && account.user
     data_for_account = data.except(:patronymic)
     data_for_user    = data.except(:uid, :url, :photo, :name, :provider, :secret, :refresh_token, :language, :token)
