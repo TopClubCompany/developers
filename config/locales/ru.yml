@@ -116,7 +116,7 @@ ru:
     become_a_prtner: "Станьте партнером!"
     copy: " &copy; Topreserve, 2013. - "
     earn_point: "Получайте баллы за успешные резервы!"
-    need_clients: "Для бизнеса."
+    need_clients: "Для бизнеса —"
     privacy_police: "Политика конфиденциальности"
     terms_of_service: "Публичная оферта"
   forgot_password: 
@@ -145,6 +145,7 @@ ru:
     en: English
     ru: "Русский"
     ua: "Украинский"
+  like_place: I like this place
   links: 
     en: eng
     ru: "рус"
@@ -190,7 +191,7 @@ ru:
       disconnect: "Отключить"
     time: "Время"
     upcoming: "Грядущие резервы "
-    username: Username
+    username: "Имя пользователя"
     view_all_reservations: "Посмотреть все резервы"
     view_edit: "Детали"
   registration_form: 
@@ -228,7 +229,7 @@ ru:
     category: "Категория"
     current_opened: Currently opened
     filters: "Фильтры:"
-    find_a_table: Find a table
+    find_a_table: "Найти стол"
     grid_view: Grid view
     kitchen: "Кухня"
     load: "Грузим самые свежие результаты"
@@ -247,7 +248,7 @@ ru:
     thead: 
       th1: "Ресторан"
       th2: "Нажмите на время для резерва"
-    title_or_location: title or location
+    title_or_location: "название или адрес"
   share: 
     description: "тестовое описание"
   short_strings: 
@@ -279,12 +280,12 @@ ru:
     forgot_pass: "Забыли пароль?"
   sign_up: 
     become_member: "Присоединяйтесь"
-    by_click: "Нажимая 'Зарегистрироваться', Вы подтвреждаете, что прочитали и согласны с"
+    by_click: "Нажимая <b>Зарегистрироваться</b>, Вы подтвреждаете, что принимаете"
     diner_name: "Имя обедающего"
     earn_points: "зарабатывайте очки"
     for_successful_reservations: "за успешные резервации"
-    name: "Имя"
-    profile_photo: "Аватар"
+    name: "Имя: "
+    profile_photo: "Аватар: "
     sign_in: "войдите в систему"
     sign_in_acc: "Войти в систему"
     sign_up_and: "Зарегистрируйтесь и"
@@ -365,4 +366,3 @@ ru:
     unhelpful: "бесполезный"
     view: "посмотреть"
   your_email: "Ваш email"
-  like_place: "I like this place"
