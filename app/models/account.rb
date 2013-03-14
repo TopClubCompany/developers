@@ -18,7 +18,7 @@ class Account < ActiveRecord::Base
   def self.create_or_find_by_oauth_data data
     data = self.check_first_name_last_name(data)
     account = Account.find_by_uid_and_provider(data[:uid], data[:provider])
-    return account.user if account
+    return account.user if account && account.user
     data_for_account = data.except(:patronymic)
     data_for_user    = data.except(:uid, :url, :photo, :name, :provider, :secret, :refresh_token, :language, :token)
     data_for_user.gender = get_gender(data_for_user.gender, data[:provider])
