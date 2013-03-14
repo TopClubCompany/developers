@@ -6,6 +6,7 @@ Topclub::Application.routes.draw do
 
   post '/set_location/:location_slug' => 'places#set_location', as: 'set_location'
 
+  match "users/auth/:provider", :to => redirect("/users/auth/%{provider}")
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
   delete '/sign_out' => 'users/omniauth_callbacks#destroy_user_session', as: 'quit'
@@ -25,9 +26,7 @@ Topclub::Application.routes.draw do
   post '/reviews' => 'reviews#create', as: 'review_create'
   post '/set_unset_favorite_place/:id' => 'places#set_unset_favorite', as: 'set_unset_favorite_place'
 
-  devise_scope :user do
-    get '/users/auth/:provider' => 'users/omniauth_callbacks#auth'
-  end
+
 
   resources :profile, module: :users do
     member do
