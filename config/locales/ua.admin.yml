@@ -267,9 +267,13 @@ ua:
     sort: ""
     structure: 
       position: 
+        category: ""
+        confirmed_reservation: ""
         index: ""
+        new_reservation: ""
         place: ""
         profile: ""
+        profile_view_reservation: ""
         search: ""
         static_page: ""
     table: 
