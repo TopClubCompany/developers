@@ -167,6 +167,10 @@ Topclub::Application.routes.draw do
       post :batch, :on => :collection
     end
 
+    resources :user_notifications do
+      post :batch, :on => :collection
+    end
+
   end
   mount Ckeditor::Engine => "/ckeditor"
 
