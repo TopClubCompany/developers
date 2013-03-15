@@ -2,4 +2,5 @@
   = f.locale_tabs do |l|
     = f.input :title, locale: l
     = f.input :description, locale: l, as: :text
-    = f.input :price
+  = f.input :price
+= f.link_to_remove t('admin.delete'), class: 'btn btn-danger btn-mini pull-right', id: 'menu_item-destroy'
