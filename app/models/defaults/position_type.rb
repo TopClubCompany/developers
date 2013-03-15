@@ -10,6 +10,7 @@ class PositionType < Utils::Models::PositionType
     builder.member :category, :object => new("category")
     builder.member :new_reservation, :object => new("new_reservation")
     builder.member :confirmed_reservation, :object => new("confirmed_reservation")
+    builder.member :profile_view_reservation, :object => new("profile_view_reservation")
   end
 
 end

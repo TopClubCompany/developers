@@ -275,6 +275,7 @@ ru:
         category: "Страница Категории"
         new_reservation: "Страница Резерва новый"
         confirmed_reservation: "Страница Резерва confirmed"
+        profile_view_reservation: "Страница profile_view_reservation"
     table:
       actions: "Действия"
     title: drive&drink
