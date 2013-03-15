@@ -16,7 +16,7 @@
               = I18n.t('profile.upcoming')
               span (#{reservations.count})
               - if reservations.count.zero?
-                span= I18n.t('profile.no_reservation')
+            span= I18n.t('profile.no_reservation')
             - reservations.each do |reservation|
               - if reservation.place
                 .reservation
