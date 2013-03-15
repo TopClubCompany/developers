@@ -272,6 +272,7 @@ ru:
         profile: "Страница профайла"
         search: "Страница поиска"
         static_page: "Статическая страница"
+        category: "Страница Категории"
     table: 
       actions: "Действия"
     title: drive&drink

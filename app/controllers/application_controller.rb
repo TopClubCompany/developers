@@ -52,7 +52,7 @@ class ApplicationController < ActionController::Base
     setting_meta_tags structure
   end
 
-  def setting_meta_tags struct
+  def setting_meta_tags struct, hash={}
     if struct
       struct.headers.each do |header|
         tag_type = header.tag_type.code.to_sym
@@ -60,18 +60,18 @@ class ApplicationController < ActionController::Base
           when :open_graph
             if header.og_tag
               set_meta_tags :open_graph => {
-                  :title => header.og_tag.title,
+                  :title => merge_meta_tag(header.og_tag.title, hash),
                   :type  => header.og_tag.og_type.to_sym,
-                  :url   => header.og_tag.url,
-                  :image =>  header.og_tag.image,
-                  :site_name =>  header.og_tag.site_name,
-                  :description =>  header.og_tag.description
+                  :url   => merge_meta_tag(header.og_tag.url, hash),
+                  :image =>  merge_meta_tag(header.og_tag.image, hash),
+                  :site_name =>  merge_meta_tag(header.og_tag.site_name, hash),
+                  :description =>  merge_meta_tag(header.og_tag.description, hash)
               }
             end
           when :keywords
-            set_meta_tags  tag_type => header.content.split(',')
+            set_meta_tags  tag_type => merge_meta_tag(header.content, hash).split(',')
           else
-            set_meta_tags tag_type => header.content
+            set_meta_tags tag_type => merge_meta_tag(header.content, hash)
         end
       end
     end
@@ -99,6 +99,15 @@ class ApplicationController < ActionController::Base
   def with_locale(path)
     path = "/" + path if path[0] != "/"
     "/" + I18n.locale.to_s + path
+  end
+
+  private
+
+  def merge_meta_tag(tag, hash={})
+    hash.each do |key, value|
+      tag = tag.gsub("{#{key.to_s}}", value.to_s) if tag.present?
+    end
+    tag
   end
 
 end
