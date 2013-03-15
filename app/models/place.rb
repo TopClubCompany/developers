@@ -484,7 +484,7 @@ class Place < ActiveRecord::Base
 
   def place_path
     if location && location.city
-      "/#{I18n.locale}/#{slug}-#{location.city.downcase.gsub(' ', '_')}"
+      "/#{I18n.locale}/#{slug}-#{location.city_en.downcase.gsub(' ', '_')}"
     else
       "/#{I18n.locale}/#{slug}"
     end
