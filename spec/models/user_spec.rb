@@ -95,6 +95,7 @@ end# == Schema Information
 #  city_id                :integer
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  points                 :float            default(0.0)
 #
 # Indexes
 #

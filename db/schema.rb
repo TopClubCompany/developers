@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130313104134) do
+ActiveRecord::Schema.define(:version => 20130314211339) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -367,9 +367,10 @@ ActiveRecord::Schema.define(:version => 20130313104134) do
   add_index "mark_type_translations", ["mark_type_id"], :name => "index_mark_type_translations_on_mark_type_id"
 
   create_table "mark_types", :force => true do |t|
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.boolean  "included_in_overall", :default => true
+    t.boolean  "is_noise",            :default => false
   end
 
   create_table "marks", :force => true do |t|

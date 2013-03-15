@@ -2,7 +2,7 @@
   = f.locale_tabs do |l|
     = f.input :name, :locale => l
     = f.input :description, :locale => l, :as => :ckeditor
-
-
+  = f.input :is_noise, input_html: {class: "pretty-slide-checkbox preload"}
+  = f.input :included_in_overall, input_html: {class: "pretty-slide-checkbox preload"}
 
   = f.save_buttons
