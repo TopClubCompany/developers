@@ -3,6 +3,7 @@ class Users::ProfileController < ApplicationController
   before_filter :find_user, :only => [:show, :settings, :invite_friends, :favourites, :edit_settings,
                                       :update_settings, :reservations]
   before_filter :set_breadcrumbs_front
+  before_filter :find_page
 
   include ReservationsHelper
 
@@ -136,6 +137,13 @@ class Users::ProfileController < ApplicationController
     unless current_user.id == @user.id
       redirect_to root_path
     end
+  end
+
+  def find_page
+    path = find_tab(request.env['PATH_INFO'].to_s)
+    opts = {path: path, town: City.find(current_city).name}
+    structure = Structure.with_position(::PositionType.profile).first
+    setting_meta_tags structure, opts
   end
 
 end

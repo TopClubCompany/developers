@@ -146,16 +146,12 @@
                 - temp_overall_mark = Hashie::Mash.new(value: review.avg_mark, id: 0, mark_type: { title: t('words.overall') })
                 - marks = review.marks.to_a.push(temp_overall_mark)
                 - marks.each_with_index do |mark, i|
-                  - old_locale = locale
-                  - locale = :en
                   - if mark.mark_type.is_noise
                     .div
                       .noise style="height: 20px;"
                         label= mark.mark_type.title.try(:capitalize)
                         .noise_level class="noise_#{mark.value}"
-                    - locale = old_locale
                   - else
-                    - locale = old_locale
                     div
                       label style="font-weight: #{'bold' if mark.id.zero?}"
                         = mark.mark_type.title.try(:capitalize)
