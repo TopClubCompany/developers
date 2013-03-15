@@ -14,35 +14,36 @@
               = I18n.t('profile.nothing_favourites')
             - @places.each do |reservation|
               - place = reservation.place
-              .reservation.place
-                a.place_img_sm href="/#{I18n.locale}/#{place.slug}-#{place.location.city_en.downcase.gsub(' ','_')}"
-                  img height="100" src=place.place_image.url(:slider) width="140"
-                    span.discount.minus_5
-                h4 style="width: auto;"
-                  a href="/#{I18n.locale}/#{place.slug}-#{place.location.city_en.downcase.gsub(' ','_')}"
-                    = place.title
-                    span.discount_label
-                      = "-#{place.max_discount}%"
-                .rating
-                  .stars
-                    .stars_overlay
-                    .stars_bar style="left: #{place.overall_mark * 20}%"
-                    .stars_bg
-                  small
-                    - place_reviews = place.reviews.count
+              - if place
+                .reservation.place
+                  a.place_img_sm href="/#{I18n.locale}/#{place.slug}-#{place.location.city_en.downcase.gsub(' ','_')}"
+                    img height="100" src=place.place_image.url(:slider) width="140"
+                      span.discount.minus_5
+                  h4 style="width: auto;"
+                    a href="/#{I18n.locale}/#{place.slug}-#{place.location.city_en.downcase.gsub(' ','_')}"
+                      = place.title
+                      span.discount_label
+                        = "-#{place.max_discount}%"
+                  .rating
+                    .stars
+                      .stars_overlay
+                      .stars_bar style="left: #{place.overall_mark * 20}%"
+                      .stars_bg
+                    small
+                      - place_reviews = place.reviews.count
+                      a href="#"
+                        = place_reviews
+                        |  #{place_reviews == 1 ? 'review' : 'reviews'}
+                  ul.place_features
+                    li.location= place.address
+                    li.cuisine= place.kitchens.map(&:title).join(', ')
+                    li.pricing= place.avg_bill_title
+                  .btns
                     a href="#"
-                      = place_reviews
-                      |  #{place_reviews == 1 ? 'review' : 'reviews'}
-                ul.place_features
-                  li.location= place.address
-                  li.cuisine= place.kitchens.map(&:title).join(', ')
-                  li.pricing= place.avg_bill_title
-                .btns
-                  a href="#"
-                    = t('words.new_reservation')
+                      = t('words.new_reservation')
 
+                    .clear
+                  #favorites_small
+                    .add_to_favorites data-id=place.id
+                      = t('short_strings.remove_from_favorites')
                   .clear
-                #favorites_small
-                  .add_to_favorites data-id=place.id
-                    = t('short_strings.remove_from_favorites')
-                .clear

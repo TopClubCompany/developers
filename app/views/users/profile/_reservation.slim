@@ -1,7 +1,8 @@
 .reservation.place class="#{css_class}"
   a.place_img_sm href="#"
-    img height="100" src=place.place_image.url(:slider) width="140"
-      span.discount.minus_5
+    - if place.place_image
+      img height="100" src=place.place_image.url(:slider) width="140"
+        span.discount.minus_5
   h4 style="width: auto;"
     a href=place_path(place)
       = place.title
