@@ -25,7 +25,7 @@ header.navbar.revers
                 = "System"
                 b.caret
               ul.dropdown-menu
-                -[Category, Kitchen, Place, GroupFeature, FeatureItem, Locator, MarkType, City, Structure, Letter].each do |m|
+                -[Category, Kitchen, Place, GroupFeature, FeatureItem, Locator, MarkType, City, Structure, Letter, User].each do |m|
                   = admin_menu_link(m)
             /- if admin?
               li.dropdown
