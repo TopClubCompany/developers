@@ -10,7 +10,7 @@
           input type="checkbox" data-type="category" value=category.id = category.title
       .clear
       a.more data-type="category" href="#"
-        | more >
+        = I18n.t("search.more")
     - cache [I18n.locale, 'search', 'bill_types', "search"] do
       h4= I18n.t('search.price')
       - BillType.all.first(4).each do |bill|
@@ -28,7 +28,7 @@
           input type="checkbox" data-type="kitchen" value=kitchen.id = kitchen.title
       .clear
       a.more data-type="kitchen" href="#"
-        | more >
+        = I18n.t("search.more")
 
     - cache [I18n.locale, 'search', 'locations', "search"] do
       h4= I18n.t('search.location')

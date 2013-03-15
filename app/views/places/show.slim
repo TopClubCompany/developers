@@ -134,9 +134,6 @@
                   span itemprop="description"
                     = review.content
                   - can_vote = signed_in? && (review.user_id != current_user.id)
-                  /span.review_specials
-                    | Special offers:
-                    a href="#" #
                   .review_vote
                     - %w|helpful unhelpful|.each do |usefulness|
                       a href="#" data-id="#{can_vote ? review.id : 'can not vote'}" data-useful="#{usefulness}" class=usefulness
