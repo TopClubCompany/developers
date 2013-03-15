@@ -75,7 +75,7 @@ class SearchController < ApplicationController
     @breadcrumbs_front << ["<a href=#{with_locale("search")}>#{I18n.t('breadcrumbs.search')}&nbsp</a>"]
     if params[:id].present?
       @category ||= Category.find(params[:id])
-      @breadcrumbs_front << ["<a href=#{with_locale(search_path(@category.slug))}>#{@category.name}&nbsp</a>"]
+      @breadcrumbs_front << ["<a href=#{search_path(@category.slug)}>#{@category.name}&nbsp</a>"]
     end
   end
 
