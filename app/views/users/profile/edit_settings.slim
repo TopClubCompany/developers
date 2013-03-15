@@ -55,10 +55,10 @@
               ul.settings
                 li
                   = f.input :password, placeholder: "••••••••••", required: true
-                li
+                /li
                   = f.input :new_password, placeholder: "••••••••••", required: true
                 li
-                  = f.input :confirm_password, placeholder: "••••••••••", required: true
+                  = f.input :password_confirmation, placeholder: "••••••••••", required: true
 
               .clear
               = f.submit I18n.t('profile.save_changes')
