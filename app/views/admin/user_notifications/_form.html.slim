@@ -1,0 +1,10 @@
+= admin_form_for @user_notification do |f|
+  = f.locale_tabs do |l|
+    = f.input :title, :locale => l
+    = f.input :description, :locale => l, :as => :ckeditor
+
+  = f.input :position
+  = f.input :is_visible, input_html: {class: 'pretty-slide-checkbox'}
+
+
+  = f.save_buttons
