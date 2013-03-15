@@ -237,8 +237,9 @@ en:
     kitchen: Cuisine
     load: Loading results
     location: Location
-    main_text: Free reservations at %{count} %{type} in %{city}
+    main_text: Free reservations at %{count} restorans in %{city}
     map_view: Map view
+    more: ""
     number_of_people: Number of people
     people: people
     price: Price Range
@@ -248,6 +249,7 @@ en:
       newest: Show newest
       overall_mark: Show popular
     sort_labeled: "Sort by:"
+    special_offers: ""
     thead: 
       th1: Restaurant
       th2: Availability (click time to reserve)
