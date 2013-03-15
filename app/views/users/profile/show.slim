@@ -61,4 +61,5 @@
                     .clear
                     a.read_more href=place_path(place)
                       nobr #{I18n.t('profile.read_more')}
-            = link_to I18n.t('profile.read_all_reviews'), self_reviews_profile_path(current_user), class: 'all'
+            - if current_user.reviews.count > 2
+              = link_to I18n.t('profile.read_all_reviews'), self_reviews_profile_path(current_user), class: 'all'
