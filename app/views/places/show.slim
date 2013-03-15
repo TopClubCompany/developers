@@ -148,7 +148,7 @@
                 - marks.each_with_index do |mark, i|
                   - old_locale = locale
                   - locale = :en
-                  - if mark.mark_type.title == 'noise level'
+                  - if mark.mark_type.is_noise
                     .div
                       .noise style="height: 20px;"
                         label= mark.mark_type.title.try(:capitalize)
