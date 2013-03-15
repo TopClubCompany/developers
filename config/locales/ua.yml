@@ -161,6 +161,7 @@ ua:
   password_change_mesage: "Змінити пароль"
   place: 
     is: ""
+    review_for_place: ""
     share: "Поділитись"
     up_to: "Знижка до %{discount}%"
     vailability: "Доступно для бронювання %{reserve_date} близько %{reserve_time} для %{number_of_people} персон"
@@ -174,6 +175,8 @@ ua:
     last_name: "Фамілія"
     my_favourites: "Улюблені місця"
     my_reviews: "Мої відгуки"
+    no_reservation: ""
+    no_reviews: ""
     nothing_favourites: "У вас немає улюблених місць. Відвідайте ресторан, щоб мати можливість додати його до улюблених."
     notifications: "Повідомлення"
     personal_information: "Особиста інформація"

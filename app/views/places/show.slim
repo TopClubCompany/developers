@@ -105,7 +105,7 @@
               .clear
               .line2
         #reviews
-          h6 All #{@reviews.count} reviews for #{@place.title}
+          h6= I18n.t("place.review_for_place", count: @reviews.count, place: @place.title)
           .dropdown style="float: right;"
             a#sortby.sortby.dropdown-toggle data-target="#" data-toggle="dropdown" role="button"
               = t('short_strings.sort_by')

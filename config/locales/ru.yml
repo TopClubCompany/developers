@@ -161,6 +161,7 @@ ru:
   password_change_mesage: "Изменить пароль"
   place: 
     is: "из"
+    review_for_place: All %{count} reviews for %{place}
     share: "Поделиться"
     up_to: "Скидка до %{discount}%"
     vailability: "Доступное время %{reserve_date} в районе %{reserve_time} для %{number_of_people} человек"
@@ -174,6 +175,8 @@ ru:
     last_name: "Фамилия"
     my_favourites: "Любимые места"
     my_reviews: "Мои отзывы "
+    no_reservation: "Вы еще не бронировали ни одного ресторана"
+    no_reviews: "Вы еще не оставили ни одного отзыва к ресторанам"
     nothing_favourites: "Вы не добавили ни одного ресторана."
     notifications: "Уведомления"
     personal_information: "Персональные данные"
