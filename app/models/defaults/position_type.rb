@@ -7,6 +7,7 @@ class PositionType < Utils::Models::PositionType
     builder.member :place, :object => new("place")
     builder.member :profile, :object => new("profile")
     builder.member :static_page, :object => new("static_page")
+    builder.member :category, :object => new("category")
   end
 
 end

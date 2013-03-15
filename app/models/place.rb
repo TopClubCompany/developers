@@ -477,16 +477,16 @@ class Place < ActiveRecord::Base
   end
 
   def meta_tag
-    {title: title, town: location.try(:city), place_url: place_path, place_img: place_image.url(:place_show),
-     place_address: address, house_number: place.location.try(:house_number), max_percent_number: max_discount
+    {title: title, town: location.try(:city), place_url: place_path, place_img: place_image.try{|image| image.url(:place_show)},
+     place_address: address, house_number: location.try(:house_number), max_percent_number: max_discount
     }
   end
 
   def place_path
     if location && location.city
-      "/#{I18n.locale}/#{place.slug}-#{location.city.downcase.gsub(' ', '_')}"
+      "/#{I18n.locale}/#{slug}-#{location.city.downcase.gsub(' ', '_')}"
     else
-      "/#{I18n.locale}/#{place.slug}"
+      "/#{I18n.locale}/#{slug}"
     end
   end
 

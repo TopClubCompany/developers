@@ -1,6 +1,8 @@
 #coding: utf-8
 class PlacesController < ApplicationController
+
   before_filter :find_place, only: [:show, :more, :set_unset_favorite]
+  before_filter :find_page, only: :show
   before_filter :find_time, only: [:show]
   before_filter :set_breadcrumbs_front, only: :show
 
@@ -63,6 +65,11 @@ class PlacesController < ApplicationController
 
   def find_place
     @place = Place.find Place.deparam(params[:id])
+  end
+
+  def find_page
+    structure = Structure.with_position(::PositionType.place).first
+    setting_meta_tags structure, @place.meta_tag
   end
 
   def find_time

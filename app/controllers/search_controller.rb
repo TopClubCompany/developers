@@ -1,6 +1,8 @@
 class SearchController < ApplicationController
 
+
   before_filter :search, only: [:index, :show]
+  before_filter :find_page, only: [:index, :show]
 
   def index
     respond_to do |format|
@@ -75,6 +77,18 @@ class SearchController < ApplicationController
       @category ||= Category.find(params[:id])
       @breadcrumbs_front << ["<a href=#{with_locale(search_path(@category.slug))}>#{@category.name}&nbsp</a>"]
     end
+  end
+
+
+  def find_page
+    if params[:id].present?
+      structure = Structure.with_position(::PositionType.category).first
+      setting_meta_tags structure, @category.meta_tag(City.find(current_city).name)
+    else
+      structure = Structure.with_position(::PositionType.search).first
+      setting_meta_tags structure, {}
+    end
+
   end
 
 end

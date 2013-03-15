@@ -64,6 +64,12 @@ class Category < ActiveRecord::Base
     Category.for_main.sort_by { |category| category.position }
   end
 
+  def meta_tag(city)
+    {title: title, category_url: "/#{I18n.locale}/search/#{slug}", category_img: category_image.try{|image| image.url(:thumb)},
+     pluar_title: plural_name, town: city
+    }
+  end
+
 
 end
 # == Schema Information
