@@ -273,7 +273,9 @@ ru:
         search: "Страница поиска"
         static_page: "Статическая страница"
         category: "Страница Категории"
-    table: 
+        new_reservation: "Страница Резерва новый"
+        confirmed_reservation: "Страница Резерва confirmed"
+    table:
       actions: "Действия"
     title: drive&drink
     user: 
