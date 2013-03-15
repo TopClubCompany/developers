@@ -6,4 +6,5 @@
         = f.simple_fields_for :place_menu_items
         br
         = f.link_to_add t('admin.add'), :place_menu_items, class: 'btn btn-primary'
+  = f.link_to_remove t('admin.delete'), class: 'btn btn-danger btn-mini pull-right', id: 'menu-destroy'
       /= f.input :description, locale: l, :as => :ckeditor
