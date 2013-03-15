@@ -476,6 +476,20 @@ class Place < ActiveRecord::Base
     DayDiscount.with_day_and_time(week_day.id, time)
   end
 
+  def meta_tag
+    {title: title, town: location.try(:city), place_url: place_path, place_img: place_image.url(:place_show),
+     place_address: address, house_number: place.location.try(:house_number), max_percent_number: max_discount
+    }
+  end
+
+  def place_path
+    if location && location.city
+      "/#{I18n.locale}/#{place.slug}-#{location.city.downcase.gsub(' ', '_')}"
+    else
+      "/#{I18n.locale}/#{place.slug}"
+    end
+  end
+
   private
 
   def self.get_star_rating place
