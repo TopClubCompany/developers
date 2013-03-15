@@ -161,6 +161,7 @@ en:
   password_change_mesage: Change my password
   place: 
     is: from
+    review_for_place: ""
     share: Share
     up_to: Up to %{discount}% off
     vailability: Availability on %{reserve_date} around %{reserve_time} for %{number_of_people} people
@@ -174,6 +175,8 @@ en:
     last_name: Last name
     my_favourites: My Favourites
     my_reviews: My reviews
+    no_reservation: ""
+    no_reviews: ""
     nothing_favourites: Nothing here. You should eat out. Then come and like the place.
     notifications: Notifications
     personal_information: Personal Information
