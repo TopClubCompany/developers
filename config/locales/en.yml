@@ -292,6 +292,7 @@ en:
     sign_in: Sign in
     sign_in_acc: Sign in
     sign_up_and: Sign up and
+    sign_up_or: ""
     term_cond: Terms and conditions
   simple_form: 
     error_notification: 

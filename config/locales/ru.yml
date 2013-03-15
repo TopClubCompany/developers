@@ -292,7 +292,7 @@ ru:
     sign_in: "войдите в систему"
     sign_in_acc: "Войти в систему"
     sign_up_and: "Зарегистрируйтесь и"
-    sign_up_or: "or"
+    sign_up_or: or
     term_cond: "Условиями пользовательского соглашения"
   simple_form: 
     error_notification: 

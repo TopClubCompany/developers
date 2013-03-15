@@ -292,6 +292,7 @@ ua:
     sign_in: "увійдіть в профіль"
     sign_in_acc: "Увійти в профіль"
     sign_up_and: "Зареєструйтесь та"
+    sign_up_or: ""
     term_cond: "Умовами угоди для користувачів"
   simple_form: 
     error_notification: 

@@ -267,16 +267,16 @@ ru:
     sort: "Сортировать"
     structure: 
       position: 
+        category: "Страница Категории"
+        confirmed_reservation: "Страница Резерва confirmed"
         index: "Главная страница"
+        new_reservation: "Страница Резерва новый"
         place: "Страница места"
         profile: "Страница профайла"
+        profile_view_reservation: "Страница profile_view_reservation"
         search: "Страница поиска"
         static_page: "Статическая страница"
-        category: "Страница Категории"
-        new_reservation: "Страница Резерва новый"
-        confirmed_reservation: "Страница Резерва confirmed"
-        profile_view_reservation: "Страница profile_view_reservation"
-    table:
+    table: 
       actions: "Действия"
     title: drive&drink
     user: 
