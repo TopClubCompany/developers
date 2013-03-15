@@ -478,7 +478,7 @@ class Place < ActiveRecord::Base
 
   def meta_tag
     {title: title, town: location.try(:city), place_url: place_path, place_img: place_image.try{|image| image.url(:place_show)},
-     place_address: address, house_number: location.try(:house_number), max_percent_number: max_discount
+     place_address: address, house_number: location.try(:house_number), max_percent_number: max_discount.try(:to_i)
     }
   end
 
