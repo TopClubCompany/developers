@@ -15,21 +15,21 @@
               h2
                 = I18n.t('profile.upcoming')
                 span (#{reservations.count})
-                - if reservations.count.zero?
+              - if reservations.count.zero?
               span= I18n.t('profile.no_reservation')
-          - reservations.each do |reservation|
-            - if reservation.place
-              .reservation
-                a href=place_path(reservation.place)
-                  = reservation.place.name
-                small= to_time_format(reservation.time)
-                .btns
-                  a href=edit_profile_reservation_path(current_user, reservation)
-                    = I18n.t('profile.view_edit')
-                  .clear
-          - if reservations.length == 2
-            a.all href=reservations_profile_path(current_user)
-              = I18n.t('profile.view_all_reservations')
+              - reservations.each do |reservation|
+                - if reservation.place
+                  .reservation
+                    a href=place_path(reservation.place)
+                      = reservation.place.name
+                    small= to_time_format(reservation.time)
+                    .btns
+                      a href=edit_profile_reservation_path(current_user, reservation)
+                        = I18n.t('profile.view_edit')
+                      .clear
+              - if reservations.length == 2
+                a.all href=reservations_profile_path(current_user)
+                  = I18n.t('profile.view_all_reservations')
 
           #my_reviews.dash_block
             h2
