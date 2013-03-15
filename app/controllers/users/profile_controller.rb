@@ -3,7 +3,7 @@ class Users::ProfileController < ApplicationController
   before_filter :find_user, :only => [:show, :settings, :invite_friends, :favourites, :edit_settings,
                                       :update_settings, :reservations]
   before_filter :set_breadcrumbs_front
-  before_filter :find_page
+  before_filter :find_page, :except => [:show_reservation, :edit_reservation, :update_reservation]
 
   include ReservationsHelper
 
@@ -64,11 +64,13 @@ class Users::ProfileController < ApplicationController
   def show_reservation
     @reservation = Reservation.find_by_id(params[:reservation_id])
     @place       = @reservation.place
+    find_page
   end
 
   def edit_reservation
     @reservation = Reservation.find_by_id(params[:reservation_id])
     @place       = @reservation.place
+    find_page
     unless current_user.id == @reservation.user_id
       redirect_to root_path
     end
@@ -142,7 +144,12 @@ class Users::ProfileController < ApplicationController
   def find_page
     path = find_tab(request.env['PATH_INFO'].to_s)
     opts = {path: path, town: City.find(current_city).name}
-    structure = Structure.with_position(::PositionType.profile).first
+    if @place
+      structure = Structure.with_position(::PositionType.profile_view_reservation).first
+      opts.merge(title: @place.title)
+    else
+      structure = Structure.with_position(::PositionType.profile).first
+    end
     setting_meta_tags structure, opts
   end
 
