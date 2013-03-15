@@ -1,5 +1,7 @@
 class ReservationsController < ApplicationController
 
+  before_filter :find_page, only: :show
+
   include ReservationsHelper
 
   def new_reservation
@@ -11,12 +13,14 @@ class ReservationsController < ApplicationController
     @options = {:reserve_date => params[:date], :reserve_time => params[:time]}
     @special_offers = Place.today_discount(@place.discounts_index, @options).compact
     @reservation = Reservation.create_from_place_and_user(current_user, @place)
+    find_page(@reservation)
     redirect_to new_user_session_path and return unless @reservation.present?
     @reservation.persons = @persons.to_i
   end
 
   def reservation_confirmed
     @reservation = Reservation.find(params[:reservation_id])
+    find_page(@reservation, :confirmed_reservation)
     if current_user.id == @reservation.user_id
       @place = @reservation.try(:place)
       @date  = @reservation.time
@@ -68,6 +72,13 @@ class ReservationsController < ApplicationController
   def add_points
     current_user.points =+ Figaro.env.POINTS.to_f
     current_user.save
+  end
+
+  def find_page(reservation=nil, type=:new_reservation)
+    if reservation
+      structure = Structure.with_position(::PositionType.send(type)).first
+      setting_meta_tags structure, reservation.meta_tag(City.find(current_city).name)
+    end
   end
 
 end

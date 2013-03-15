@@ -54,6 +54,11 @@ class Reservation < ActiveRecord::Base
     times.group_by{|time| time[:available]}[true].try{|available|available.map{|t|t[:time]}}
   end
 
+  def meta_tag(city)
+    {title: place.title, town: city
+    }
+  end
+
 
 end
 # == Schema Information
