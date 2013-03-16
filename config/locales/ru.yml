@@ -160,13 +160,13 @@ ru:
   order: "[:day, :month, :year]"
   password_change_mesage: "Изменить пароль"
   place: 
+    add_comment: Add a comment...
+    average_bill: Average check
     is: "из"
     review_for_place: All %{count} reviews for %{place}
     share: "Поделиться"
     up_to: "Скидка до %{discount}%"
     vailability: "Доступное время %{reserve_date} в районе %{reserve_time} для %{number_of_people} человек"
-    average_bill: Average check
-    add_comment: "Add a comment..."
   profile: 
     birthday: "День рождения"
     city_not_specified: "не указан"
@@ -242,12 +242,12 @@ ru:
     main_text: "Бесплатный резерв столика в %{count} ресторанах %{city}а"
     map_view: Map view
     more: more >
+    next: "next ›"
     number_of_people: "Кол-во людей"
     people: "людей"
     price: "Средний чек"
     refine: "Сортировать"
     result_for: "Результаты для"
-    next: "next ›"
     sort: 
       newest: "Сортировать по дате добавления"
       overall_mark: "Сортировать по популярности"

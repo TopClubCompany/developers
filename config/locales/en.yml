@@ -160,6 +160,8 @@ en:
   order: "[:day, :month, :year]"
   password_change_mesage: Change my password
   place: 
+    add_comment: ""
+    average_bill: ""
     is: from
     review_for_place: ""
     share: Share
@@ -240,6 +242,7 @@ en:
     main_text: Free reservations at %{count} restorans in %{city}
     map_view: Map view
     more: ""
+    next: ""
     number_of_people: Number of people
     people: people
     price: Price Range

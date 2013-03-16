@@ -160,6 +160,8 @@ ua:
   order: ""
   password_change_mesage: "Змінити пароль"
   place: 
+    add_comment: ""
+    average_bill: ""
     is: ""
     review_for_place: "Відгуків для %{place}: %{count}"
     share: "Поділитись"
@@ -240,6 +242,7 @@ ua:
     main_text: "Безкоштовний резерв столика в %{count} ресторанах %{city}а"
     map_view: "На карті"
     more: ""
+    next: ""
     number_of_people: "Кількість персон"
     people: "персон"
     price: "Середній чек"
