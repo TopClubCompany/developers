@@ -1,36 +1,37 @@
-#share.popup style="margin-left: 0px;"
-  button.close aria-hidden="true" data-dismiss="modal" type="button"
-  h5= t('short_strings.share_with_friends')
-  .shared_content
-    img height="80" src=(@place.place_image.url(:share_fancy) if @place.place_image) width="120"
-      h6= @place.title
-      span.header_info
-        - categories = @place.categories
-        - categories.each_with_index do |category, i|
-          = link_to category.title, '#'
-          = ', ' if (i + 1) < categories.count
-        '  ·
-        - data = { trigger: 'hover', title: 'Average check', content: @place.bill.try(:title), placement: 'top' }
-        = content_tag :span, class: 'pricing popoverable', data: data do
-          = get_pricing @place
-      ul.place_features
-        li.location
-          strong= t('search.location') + ': '
-          = @place.location.address
-        li.cuisine
-          strong= t('words.kitchen').capitalize + ': '
-          = @place.kitchens.map(&:name).join(', ')
-      .clear
-  = text_area_tag 'shared_coment', @stuff_for_share[:description], placeholder: "Add a comment...", id: 'share_text_input', data: @stuff_for_share
-  ul.share_selector
-    strong= t('short_strings.share_on').capitalize + ': '
-    li#fb
-    li#vk
-    li#tw
-  #multi-share-button
-    .tw_button#custom-tweet-button style="display: none;"
-      a.twitter-share-button data-lang=locale.to_s href='https://twitter.com/share' data-url=@stuff_for_share[:link] data-text=@stuff_for_share[:description] data-count="none"
-    input#fake_for_twitter type="submit" value=I18n.t('place.share') style="display: none; margin-bottom: 5px;"
-    .standart_share_button
-      input type="submit" value=I18n.t('place.share')
-  .clear
+- cache [I18n.locale, 'place', 'share', @place.updated_at, "show"] do
+  #share.popup style="margin-left: 0px;"
+    button.close aria-hidden="true" data-dismiss="modal" type="button"
+    h5= t('short_strings.share_with_friends')
+    .shared_content
+      img height="80" src=(@place.place_image.url(:share_fancy) if @place.place_image) width="120"
+        h6= @place.title
+        span.header_info
+          - categories = @place.categories
+          - categories.each_with_index do |category, i|
+            = link_to category.title, '#'
+            = ', ' if (i + 1) < categories.count
+          '  ·
+          - data = { trigger: 'hover', title: I18n.t('place.average_bill'), content: @place.bill.try(:title), placement: 'top' }
+          = content_tag :span, class: 'pricing popoverable', data: data do
+            = get_pricing @place
+        ul.place_features
+          li.location
+            strong= t('search.location') + ': '
+            = @place.location.address
+          li.cuisine
+            strong= t('words.kitchen').capitalize + ': '
+            = @place.kitchens.map(&:name).join(', ')
+        .clear
+    = text_area_tag 'shared_coment', @stuff_for_share[:description], placeholder: I18n.t('place.add_comment'), id: 'share_text_input', data: @stuff_for_share
+    ul.share_selector
+      strong= t('short_strings.share_on').capitalize + ': '
+      li#fb
+      li#vk
+      li#tw
+    #multi-share-button
+      .tw_button#custom-tweet-button style="display: none;"
+        a.twitter-share-button data-lang=locale.to_s href='https://twitter.com/share' data-url=@stuff_for_share[:link] data-text=@stuff_for_share[:description] data-count="none"
+      input#fake_for_twitter type="submit" value=I18n.t('place.share') style="display: none; margin-bottom: 5px;"
+      .standart_share_button
+        input type="submit" value=I18n.t('place.share')
+    .clear

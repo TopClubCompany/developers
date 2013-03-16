@@ -1,13 +1,14 @@
-#place_menu.popup style="margin-left: 0px;"
-  button.close aria-hidden="true" data-dismiss="modal" type="button"
-  h5= t('words.menu')
-  - @place.place_menus.each do |menu|
-    h6= menu.title
-    ul
-      - menu.place_menu_items.each do |item|
-        li
-          span
-            = item.title
-            small= item.description
-          b= number_to_currency item.price
-          .clear
+- cache [I18n.locale, 'place', 'menu', PlaceMenuItem.max_time, "show"] do
+  #place_menu.popup style="margin-left: 0px;"
+    button.close aria-hidden="true" data-dismiss="modal" type="button"
+    h5= t('words.menu')
+    - @place.place_menus.each do |menu|
+      h6= menu.title
+      ul
+        - menu.place_menu_items.each do |item|
+          li
+            span
+              = item.title
+              small= item.description
+            b= number_to_currency item.price
+            .clear

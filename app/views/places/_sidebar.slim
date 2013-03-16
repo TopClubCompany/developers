@@ -1,9 +1,10 @@
-#sidebar.specials.span4
-  h3 #{t('short_strings.special_offers')} #{place.title}
-  ul
-    - special_offers.each do |offer|
-      li
-        - offer_time = "<br/>#{t('words.time')}: #{offer.nice_offer_time}"
-        - offer_title = offer.week_day.try { |week_day| week_day.day_type.title }
-        - data = { trigger: 'hover', title: offer_title, content: offer.description + offer_time, placement: 'left' }
-        = link_to offer.title, '#', class: 'popoverable', data: data
+- cache [I18n.locale, 'place', 'reviews', place.updated_at, "show"] do
+  #sidebar.specials.span4
+    h3 #{t('short_strings.special_offers')} #{place.title}
+    ul
+      - special_offers.each do |offer|
+        li
+          - offer_time = "<br/>#{t('words.time')}: #{offer.nice_offer_time}"
+          - offer_title = offer.week_day.try { |week_day| week_day.day_type.title }
+          - data = { trigger: 'hover', title: offer_title, content: offer.description + offer_time, placement: 'left' }
+          = link_to offer.title, '#', class: 'popoverable', data: data

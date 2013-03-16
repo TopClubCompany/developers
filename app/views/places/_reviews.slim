@@ -1,56 +1,55 @@
-#reviews
-  h6= I18n.t("place.review_for_place", count: reviews.count, place: place.title)
-  .dropdown style="float: right;"
-    a#sortby.sortby.dropdown-toggle data-target="#" data-toggle="dropdown" role="button"
-      = t('short_strings.sort_by')
-    ul class="dropdown-menu" role="menu" aria-labelledby="dLabel"
-      - %w|overall_mark usefulness_count date|.each do |sort_type|
-        li= link_to t("sort_by.#{sort_type}"), place_path(place, sort_by: sort_type)
+- cache [I18n.locale, 'place', 'reviews', Review.max_time, "show"] do
+  #reviews
+    h6= I18n.t("place.review_for_place", count: reviews.count, place: place.title)
+    .dropdown style="float: right;"
+      a#sortby.sortby.dropdown-toggle data-target="#" data-toggle="dropdown" role="button"
+        = t('short_strings.sort_by')
+      ul class="dropdown-menu" role="menu" aria-labelledby="dLabel"
+        - %w|overall_mark usefulness_count date|.each do |sort_type|
+          li= link_to t("sort_by.#{sort_type}"), place_path(place, sort_by: sort_type)
 
-
-
-  - reviews.each do |review|
-    .review itemprop="review" itemscope="" itemtype="http://schema.org/Review"
-      a href="#"
-        img.user_pic height="32" src=get_user_avatar(review.user) width="32"
-      .review_content
-        a.user_link href="#"
-          span itemprop="author"
-            = user_menu_name review.user
-          '
-        meta content="#{place.created_at.strftime("%Y-%m-%d")}" itemprop="datePublished"
-          small.created_time_ago title=review.created_at.getutc.iso8601
-            /' Dined yesterday ·
-            = review.created_at
-          small
-            '  ·
-            a href="#" #
-          span itemprop="description"
-            = review.content
-          - can_vote = signed_in? && (review.user_id != current_user.id)
-          .review_vote
-            - %w|helpful unhelpful|.each do |usefulness|
-              a href="#" data-id="#{can_vote ? review.id : 'can not vote'}" data-useful="#{usefulness}" class=usefulness
-                = t("words.#{usefulness}")
-                strong= review.votes.send(usefulness.to_sym).count
-      .ratings
-        - temp_overall_mark = Hashie::Mash.new(value: review.avg_mark, id: 0, mark_type: { title: t('words.overall') })
-        - marks = review.marks.to_a.push(temp_overall_mark)
-        - marks.each_with_index do |mark, i|
-          - if mark.mark_type.is_noise
-            .div
-              .noise style="height: 20px;"
-                label= mark.mark_type.title.try(:capitalize)
-                .noise_level class="noise_#{mark.value}"
-          - else
-            div
-              label style="font-weight: #{'bold' if mark.id.zero?}"
-                = mark.mark_type.title.try(:capitalize)
-              .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
-                .stars
-                  .stars_overlay
-                  .stars_bar style="left: #{mark.value * 20}%"
-                  .stars_bg
-                meta content=mark.value itemprop="ratingValue"
-      .clear
-  /a.load_more data-type='reviews' data-displayed=6 data-template-id="#review_template" data-base-url="/places/#{@place.to_param}/more?" href="#"= t(".more")
+    - reviews.each do |review|
+      .review itemprop="review" itemscope="" itemtype="http://schema.org/Review"
+        a href="#"
+          img.user_pic height="32" src=get_user_avatar(review.user) width="32"
+        .review_content
+          a.user_link href="#"
+            span itemprop="author"
+              = user_menu_name review.user
+            '
+          meta content="#{place.created_at.strftime("%Y-%m-%d")}" itemprop="datePublished"
+            small.created_time_ago title=review.created_at.getutc.iso8601
+              /' Dined yesterday ·
+              = review.created_at
+            small
+              '  ·
+              a href="#" #
+            span itemprop="description"
+              = review.content
+            - can_vote = signed_in? && (review.user_id != current_user.id)
+            .review_vote
+              - %w|helpful unhelpful|.each do |usefulness|
+                a href="#" data-id="#{can_vote ? review.id : 'can not vote'}" data-useful="#{usefulness}" class=usefulness
+                  = t("words.#{usefulness}")
+                  strong= review.votes.send(usefulness.to_sym).count
+        .ratings
+          - temp_overall_mark = Hashie::Mash.new(value: review.avg_mark, id: 0, mark_type: { title: t('words.overall') })
+          - marks = review.marks.to_a.push(temp_overall_mark)
+          - marks.each_with_index do |mark, i|
+            - if mark.mark_type.is_noise
+              .div
+                .noise style="height: 20px;"
+                  label= mark.mark_type.title.try(:capitalize)
+                  .noise_level class="noise_#{mark.value}"
+            - else
+              div
+                label style="font-weight: #{'bold' if mark.id.zero?}"
+                  = mark.mark_type.title.try(:capitalize)
+                .rating itemprop="reviewRating" itemscope="" itemtype="http://schema.org/Rating"
+                  .stars
+                    .stars_overlay
+                    .stars_bar style="left: #{mark.value * 20}%"
+                    .stars_bg
+                  meta content=mark.value itemprop="ratingValue"
+        .clear
+    /a.load_more data-type='reviews' data-displayed=6 data-template-id="#review_template" data-base-url="/places/#{@place.to_param}/more?" href="#"= t(".more")
