@@ -1,0 +1,13 @@
+.paginate
+  - current = params[:page] || 1
+  - per_page = 4
+  - number_of_pages = @result.total.to_i == per_page ?  1 : @result.total.to_i / per_page + 1
+  - if number_of_pages.to_i > 1
+    - (1..number_of_pages).each do |i|
+      -if current == i
+        a.current href="##{i}" #{i}
+      - else
+        a href="##{i}" #{i}
+    a href="##{(current.to_i + 1).to_s}"= I18n.t('search.next')
+  - else
+    a.current href="#1" 1
