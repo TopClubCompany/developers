@@ -1,0 +1,22 @@
+.rating.rating_big.rating_topclub
+  - cache [I18n.locale, 'place', 'stars', Review.max_time, "show"] do
+    .stars
+      .stars_overlay
+        span itemprop="rating" itemscope="" itemtype="http://data-vocabulary.org/Rating"
+          span itemprop="average"
+            = place.overall_mark
+          = I18n.t('place.is')
+          span itemprop="best"
+            | 5
+      .stars_bar style=get_star_rating(place)
+      .stars_bg
+  a href=root_path
+    img.topclub src="/assets/topclub.png"
+  .clear
+  small
+    span itemprop="count"
+      ' #{place.reviews.count}
+    ' #{t('words.reviews')} ·
+    - if signed_in?
+      a#write_review href="#review_form"
+        = t('short_strings.write_review')

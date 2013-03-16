@@ -29,27 +29,7 @@
             = get_pricing @place
         span itemprop="pricerange" style="display:none"
           = get_pricing_without_left @place
-        .rating.rating_big.rating_topclub
-          .stars
-            .stars_overlay
-              span itemprop="rating" itemscope="" itemtype="http://data-vocabulary.org/Rating"
-                span itemprop="average"
-                  = @place.overall_mark
-                = I18n.t('place.is')
-                span itemprop="best"
-                  | 5
-            .stars_bar style=get_star_rating(@place)
-            .stars_bg
-          a href=root_path
-            img.topclub src="/assets/topclub.png"
-          .clear
-          small
-            span itemprop="count"
-              ' #{@place.reviews.count}
-            ' #{t('words.reviews')} ·
-            - if signed_in?
-              a#write_review href="#review_form"
-                = t('short_strings.write_review')
+        = render partial: "rating", locals: {place: @place}
         - if signed_in?
           #favorites
             .add_to_favorites class="#{'i_like_this_place' if current_user.favorite_place?(@place)}" data-id=@place.to_param

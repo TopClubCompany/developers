@@ -166,6 +166,7 @@ ru:
     up_to: "Скидка до %{discount}%"
     vailability: "Доступное время %{reserve_date} в районе %{reserve_time} для %{number_of_people} человек"
     average_bill: Average check
+    add_comment: "Add a comment..."
   profile: 
     birthday: "День рождения"
     city_not_specified: "не указан"
