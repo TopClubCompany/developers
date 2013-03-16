@@ -1,0 +1,19 @@
+- if signed_in? && review
+  #review_form
+    = simple_form_for review, url: review_create_path, method: 'post', wrapper: :front_reg_form, nested: true do |f|
+      .line2
+      h5 #{current_user.try(:first_name)}, #{t('short_strings.submit_a_review')}
+      .marks
+        - MarkType.all.each_slice(2) do |marks|
+          .row
+            = render partial: 'place_mark', locals: { review_form: f, marks: marks }
+      = render partial: 'overall_mark', locals: { marks: [MarkType.new(name: 'overall')] }
+      .clear
+      a href="#"
+        img.user_pic height="50" src=get_user_avatar width="50"
+      = f.input :reviewable_id, as: 'hidden'
+      = f.input :reviewable_type, as: 'hidden'
+      = f.input :content, placeholder: t('long_strings.review_placeholder'), label: false, input_html: {rows: '0',cols: '0', id: 'review_text'}
+      = f.submit t('short_strings.submit_review')
+      .clear
+      .line2
