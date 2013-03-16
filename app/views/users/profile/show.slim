@@ -12,11 +12,11 @@
           /a href="#" class="user_btn"><i class="icon-pencil"></i><strong>Edit profile</strong></a>
           #upcoming_reservations.dash_block
             - reservations = Reservation.upcoming(current_user.id)
-            h2
-              = I18n.t('profile.upcoming')
-              span (#{reservations.count})
+              h2
+                = I18n.t('profile.upcoming')
+                span (#{reservations.count})
               - if reservations.count.zero?
-                span= I18n.t('profile.no_reservation')
+              span= I18n.t('profile.no_reservation')
             - reservations.each do |reservation|
               - if reservation.place
                 .reservation
@@ -35,8 +35,8 @@
             h2
               = I18n.t('profile.my_reviews')
               span (#{current_user.reviews.count})
-              - if current_user.reviews.count.zero?
-                span= I18n.t('profile.no_reviews')
+            - if current_user.reviews.count.zero?
+              span= I18n.t('profile.no_reviews')
             - current_user.reviews.includes(:place).order('created_at desc').first(2).each do |review|
               - place = review.reviewable
               - if place
