@@ -6,6 +6,7 @@ html lang="#{I18n.locale}" xml:lang="#{I18n.locale}" xmlns="http://www.w3.org/19
     - ([:en, :ru, :ua] - [I18n.locale]).each do |alterative_locale|
       link href="#{request.host + '/' + alterative_locale.to_s + request.fullpath}" hreflang="#{alterative_locale}" rel="alternate"
   body
+    div.notifications.top-right
     div#wrapper
       = render "layouts/header"
       = render "shared/breadcrumbs"
