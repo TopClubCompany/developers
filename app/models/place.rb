@@ -329,7 +329,6 @@ class Place < ActiveRecord::Base
     fields
   end
 
-
   def self.for_mustache(place, options={})
     time_now = Time.now + 90.minute
     current_day = options[:reserve_date].present? ? DateTime.parse(options[:reserve_date]).wday : DateTime.now.wday
@@ -409,10 +408,12 @@ class Place < ActiveRecord::Base
   def humanable_schedule
     groups = week_days.group_by do |day|
       [:start_at, :end_at].map do |point|
-        if I18n.locale.to_sym == :en
-          Time.parse(("%5.2f" % day.send(point).to_s).sub(".",":")).strftime("%I:%M%p")
-        else
-          Time.parse(("%5.2f" % day.send(point).to_s).sub(".",":")).strftime("%H:%M")
+        if day.send(point).to_s.present?
+          if I18n.locale.to_sym == :en
+            Time.parse(("%5.2f" % day.send(point).to_s).sub(".",":")).strftime("%I:%M%p")
+          else
+            Time.parse(("%5.2f" % day.send(point).to_s).sub(".",":")).strftime("%H:%M")
+          end
         end
       end.join('-')
     end
