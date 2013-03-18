@@ -74,10 +74,18 @@ $ ->
     if gon?.current_user
       $(this).toggleClass 'i_like_this_place'
       if $(this).hasClass('i_like_this_place')
+        message = 'add'
         $(this).parent().css('display', 'block')
       else
+        message = 'remove'
         $(this).parent().removeAttr('style')
-      $.post("/set_unset_favorite_place/#{$(this).data('id')}")
+      text = I18n.translations["#{window.language}"].admin_js.like["#{message}"]
+      $.ajax
+        type: "POST"
+        url: "/set_unset_favorite_place/#{$(this).data('id')}"
+        success: (data) ->
+          $('.top-right').notify({"message": {"text": text}}).show()
+      
     else
       window.location.replace "/users/sign_in"
 

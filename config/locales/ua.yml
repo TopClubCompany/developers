@@ -160,6 +160,7 @@ ua:
   order: ""
   password_change_mesage: "Змінити пароль"
   place: 
+    back_to_search: Повернутися до вибору часу
     add_comment: ""
     average_bill: ""
     is: ""
