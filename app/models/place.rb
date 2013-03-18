@@ -498,6 +498,19 @@ class Place < ActiveRecord::Base
   "left: #{place["overall_mark"] * 20}%" if place["overall_mark"].present?
   end
 
+
+  def self.time_range(from, to)
+    if !from.to_i.zero? || !to.to_i.zero?
+      if from.to_i >= to.to_i
+        (from.to_i..24).to_a + (0..to.to_i).to_a.uniq
+      else
+        (from.to_i..to.to_i).to_a.uniq
+      end
+    else
+      []
+    end
+  end
+
   def self.en_to_time(time)
     if time.include?("AM")
       time = time.gsub(" AM",'')
@@ -522,9 +535,9 @@ class Place < ActiveRecord::Base
     end
     current_day = options[:reserve_date].present? ? DateTime.parse(options[:reserve_date]).wday : DateTime.now.wday
     current_day = PlaceUtils::PlaceTime.wday(current_day)
-      discounts = discounts.select do |discount|
+    discounts = discounts.select do |discount|
         if time
-          discount["day"] == current_day && time > discount["from_time"].to_f && time <  discount["to_time"].to_f
+         discount["day"] == current_day && time_range(discount["from_time"].to_f, discount["to_time"].to_f).include?(time.to_i)
         else
           discount["day"] == current_day
         end
