@@ -240,7 +240,7 @@ class PlacesCollection
       $el.add($listEl).find(".special_offers").empty()
 
       if place.special_offer
-        $el.add($listEl).find(".special_offers").append("<h5>Special offers:</h5>")
+        $el.add($listEl).find(".special_offers").append("<h5>#{I18n.translations["#{window.language}"].admin_js.special_offers}:</h5>")
 
         for offer in place.special_offers
           # console.log offer
@@ -365,13 +365,13 @@ class PlacesCollection
 
       google.maps.event.addListener marker, "mouseover", ->
         selector = '#place_' + obj.id
-        console.log selector
+        # console.log selector
         $(selector).addClass 'target'
 
       google.maps.event.addListener marker, "click", ->
         selector = '#' + obj.id
-        console.log selector
-        console.log $(selector).attr('href')
+        # console.log selector
+        # console.log $(selector).attr('href')
       setTimeout((->
         $('#place_' + obj.id).on 'mouseleave', (e) ->
           marker.setIcon '/assets/pin.png'
@@ -385,7 +385,7 @@ class PlacesCollection
 
       google.maps.event.addListener marker, "mouseout", ->
         selector = '#place_' + obj.id
-        console.log selector
+        # console.log selector
         $(selector).removeClass 'target'
 
 

@@ -1,6 +1,10 @@
 ---
 ua:
   admin_js:
+    like: 
+      add: Додано в вибране
+      remove: Прибрано з вибраного
+    special_offers: Спеціальні пропозиції
     abbr_day_names:
     - "Нд"
     - "Пн"

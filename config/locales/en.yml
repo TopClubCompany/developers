@@ -160,6 +160,7 @@ en:
   order: "[:day, :month, :year]"
   password_change_mesage: Change my password
   place: 
+    back_to_search: Back to search
     add_comment: ""
     average_bill: ""
     is: from

@@ -1,6 +1,10 @@
 ---
 ru:
   admin_js:
+    like: 
+      add: Добавлено в избранное
+      remove: Убрано из избранного
+    special_offers: Специальные предложения
     abbr_day_names:
     - "Вс"
     - "Пн"
