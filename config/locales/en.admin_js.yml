@@ -1,6 +1,10 @@
 ---
 en:
   admin_js:
+    like: 
+      add: Successfully added to favourites
+      remove: Successfully removeded from favourites
+    special_offers: Special offers
     abbr_day_names:
     - "Sun"
     - "Mon"

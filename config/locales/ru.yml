@@ -160,6 +160,7 @@ ru:
   order: "[:day, :month, :year]"
   password_change_mesage: "Изменить пароль"
   place: 
+    back_to_search: Вернуться к выбору времени
     add_comment: Add a comment...
     average_bill: Average check
     is: "из"
