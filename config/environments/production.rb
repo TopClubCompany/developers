@@ -65,8 +65,18 @@ Topclub::Application.configure do
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default :charset => "utf-8"
 
-  config.action_mailer.default_url_options = {:host => 'topreserve.com.ua'}
-  config.action_mailer.delivery_method = :sendmail
+  #config.action_mailer.default_url_options = {:host => 'topreserve.com.ua'}
+  #config.action_mailer.delivery_method = :sendmail
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      address:              "smtp.yandex.ru",
+      port:                  587,
+      domain:               'topreserve.com.ua',
+      user_name:             "noreply@topreserve.com.ua",
+      password:              198666,
+      authentication:       'plain',
+      enable_starttls_auto:  true }
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
