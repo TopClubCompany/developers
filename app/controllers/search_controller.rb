@@ -6,12 +6,12 @@ class SearchController < ApplicationController
 
   def index
     respond_to do |format|
+      format.html do
+        render 'search/index'
+      end
       format.json do
         render :json => {result: @result.map{|e| Place.for_mustache(e, params) },
                          total: @result.total}
-      end
-      format.html do
-        render 'search/index'
       end
     end
   end
@@ -22,13 +22,14 @@ class SearchController < ApplicationController
     proper_name = @category.plural_name
     set_gon_params
     respond_to do |format|
+      format.html do
+        render action: :index, :locals => {:type => proper_name}
+      end
       format.json do
         render :json => {result: @result.map{|e| Place.for_mustache(e, params) },
                          total: @result.total}
       end
-      format.html do
-        render action: :index, :locals => {:type => proper_name}
-      end
+
     end
   end
 
