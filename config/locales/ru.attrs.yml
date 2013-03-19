@@ -4,18 +4,18 @@ ru:
     attributes: 
       account: 
         account_email_confirmation: Account email confirmation
-        address: Address
-        birthday: Birthday
+        address: "Адрес"
+        birthday: "День рождения"
         created_at: Created at
         email: Email
-        first_name: First name
-        gender: Gender
-        language: Language
-        last_name: Last name
+        first_name: "Имя"
+        gender: "Пол"
+        language: "Язык"
+        last_name: "Фамилия"
         name: Name
         nickname: Nickname
-        phone: Phone
-        photo: Photo
+        phone: "Телефон"
+        photo: "Фото"
         provider: Provider
         refresh_token: Refresh token
         secret: Secret
@@ -143,11 +143,11 @@ ru:
         topic_ua: "Topic (translation missing: ru.attrs.ua)"
         updated_at: Updated at
       location: 
-        city: City
+        city: "Город"
         city_en: "City (анг.)"
         city_ru: "City (рус.)"
         city_ua: "City (translation missing: ru.attrs.ua)"
-        country: Country
+        country: "Страна"
         country_code: Country code
         country_en: "Country (анг.)"
         country_ru: "Country (рус.)"
@@ -360,11 +360,11 @@ ru:
       user: 
         account_id: Account
         accounts: Accounts
-        address: City
+        address: "Город"
         avatar: Avatar
-        birthday: Birthday
-        city: City
-        city_id: City
+        birthday: "День рождения"
+        city: "Город"
+        city_id: "Город"
         confirmation_sent_at: Confirmation sent at
         confirmed_at: Confirmed at
         created_at: Created at

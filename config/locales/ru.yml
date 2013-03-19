@@ -145,7 +145,7 @@ ru:
     en: English
     ru: "Русский"
     ua: "Украинский"
-  like_place: I like this place
+  like_place: "Нравится это место"
   links: 
     en: eng
     ru: "рус"
@@ -160,11 +160,11 @@ ru:
   order: "[:day, :month, :year]"
   password_change_mesage: "Изменить пароль"
   place: 
-    back_to_search: Вернуться к выбору времени
     add_comment: Add a comment...
-    average_bill: Average check
+    average_bill: "Средний чек"
+    back_to_search: "Вернуться к выбору времени"
     is: "из"
-    review_for_place: All %{count} reviews for %{place}
+    review_for_place: "Все %{count} отзыв(а) о %{place}"
     share: "Поделиться"
     up_to: "Скидка до %{discount}%"
     vailability: "Доступное время %{reserve_date} в районе %{reserve_time} для %{number_of_people} человек"
@@ -233,7 +233,7 @@ ru:
   search: 
     browse_category: "Посмотреть места по категориям"
     category: "Категория"
-    current_opened: Currently opened
+    current_opened: "Доступные сейчас"
     filters: "Фильтры:"
     find_a_table: "Найти стол"
     grid_view: Grid view
@@ -242,8 +242,8 @@ ru:
     location: "Местоположение"
     main_text: "Бесплатный резерв столика в %{count} ресторанах %{city}а"
     map_view: Map view
-    more: more >
-    next: "next ›"
+    more: "еще >"
+    next: "след. ›"
     number_of_people: "Кол-во людей"
     people: "людей"
     price: "Средний чек"
@@ -253,7 +253,7 @@ ru:
       newest: "Сортировать по дате добавления"
       overall_mark: "Сортировать по популярности"
     sort_labeled: "Сортировать"
-    special_offers: "Special offers:"
+    special_offers: "Спец. предложения:"
     thead: 
       th1: "Ресторан"
       th2: "Нажмите на время для резерва"
@@ -268,7 +268,7 @@ ru:
     first_name: "Имя"
     invite_friends: "Пригласить друзей"
     last_name: "Фамилия"
-    more_detalis: "Детальней ›"
+    more_detalis: "Детальнее ›"
     my_reservations: "Мои резервы"
     number_of_people: "Количество людей"
     phone_number: "Телефонный номер"
@@ -289,7 +289,7 @@ ru:
     forgot_pass: "Забыли пароль?"
   sign_up: 
     become_member: "Присоединяйтесь"
-    by_click: "Нажимая <b>Зарегистрироваться</b>, Вы подтвреждаете, что принимаете"
+    by_click: "Нажимая «Зарегистрироваться», Вы подтвреждаете, что принимаете"
     diner_name: "Имя обедающего"
     earn_points: "зарабатывайте очки"
     for_successful_reservations: "за успешные резервации"
@@ -298,7 +298,7 @@ ru:
     sign_in: "войдите в систему"
     sign_in_acc: "Войти в систему"
     sign_up_and: "Зарегистрируйтесь и"
-    sign_up_or: or
+    sign_up_or: " или"
     term_cond: "Условиями пользовательского соглашения"
   simple_form: 
     error_notification: 
