@@ -29,13 +29,13 @@ class Reservation < ActiveRecord::Base
 
 
   def to_mail(opts={})
-    discount = place.today_discount_with_time(time).max{|x| x.discount}
+    discount = place.today_discount_with_time(time).max{|x| x.discount}.try{|x| x.discount.try(:to_i)}
     skidka = discount.present? ? "Skidka #{discount}%" : ""
     {restaurant_name: place.title, restaurant_name_en: place.name_en,
      restaurant_id: place.id, reservation_id: id, skidka: skidka,
      number_of_people: persons, day_of_week: I18n.l(time, format: :day_name),
      mnth: I18n.l(time, format: :month), day: I18n.l(time, format: :day), year: I18n.l(time, format: :year),
-     mnth_number: time.strftime("%m"),
+     mnth_number: time.strftime("%m"), user_phone: phone,
      time: I18n.l(time, format: :hour_min), first_name: first_name, last_name: last_name,
      town: place.location.try(:city), restaurant_address: place.location.try(:address), restaurant_phone_number: place.phone,
      link_to_place: opts[:place_path], link_to_show_reservation: opts[:reservation_path],
