@@ -66,7 +66,7 @@
 
     #promo_block_big.promo_block.span8
       =' t('footer.need_clients')
-      a href="/partner_info" #{t('footer.become_a_prtner')}
+      a href=page_path("restaurateurs") #{t('footer.become_a_prtner')}
 
 - cache [I18n.locale, 'explorer', 'more_template', 'render'] do
   = render 'shared/more_template'

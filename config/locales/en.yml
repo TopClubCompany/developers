@@ -240,7 +240,7 @@ en:
     kitchen: Cuisine
     load: Loading results
     location: Location
-    main_text: Free reservations at %{count} restorans in %{city}
+    main_text: Free reservations at %{count} %{type} in %{city}
     map_view: Map view
     more: more >
     next: "next ›"
@@ -249,6 +249,7 @@ en:
     price: Price Range
     refine: Refine your results
     result_for: Results for
+    restorans: "restorans"
     sort: 
       newest: Show newest
       overall_mark: Show popular
