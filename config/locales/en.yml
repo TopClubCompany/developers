@@ -22,7 +22,7 @@ en:
     enter: Sign in
     enter_with: "Sign in using:"
     links: 
-      join_reserve: Join
+      join_reserve: Join TopReserve
       receive_confirmation: ""
       recover_password: Forgot password?
       sign_in: Sign in
@@ -70,7 +70,7 @@ en:
     title: 
       change_password: Change password
       receive_confirmation: ""
-      recover_password: ""
+      recover_password: Forgot password?
       sign_in: Sign in
       sign_out: Sign out
       sign_up: Sign up
@@ -106,7 +106,7 @@ en:
     auth: 
       failure: ""
       logout: ""
-      success: ""
+      success: Successfully logged in
       success_again: ""
     users: 
       update: 
@@ -160,11 +160,11 @@ en:
   order: "[:day, :month, :year]"
   password_change_mesage: Change my password
   place: 
+    add_comment: Add a comment...
+    average_bill: Avarage check
     back_to_search: Back to search
-    add_comment: ""
-    average_bill: ""
     is: from
-    review_for_place: ""
+    review_for_place: All %{count} review(s) for %{place}
     share: Share
     up_to: Up to %{discount}% off
     vailability: Availability on %{reserve_date} around %{reserve_time} for %{number_of_people} people
@@ -178,8 +178,8 @@ en:
     last_name: Last name
     my_favourites: My Favourites
     my_reviews: My reviews
-    no_reservation: ""
-    no_reviews: ""
+    no_reservation: You havent reserved any restaurant yet
+    no_reviews: You havent left any review yet
     nothing_favourites: Nothing here. You should eat out. Then come and like the place.
     notifications: Notifications
     personal_information: Personal Information
@@ -242,8 +242,8 @@ en:
     location: Location
     main_text: Free reservations at %{count} restorans in %{city}
     map_view: Map view
-    more: ""
-    next: ""
+    more: more >
+    next: "next ›"
     number_of_people: Number of people
     people: people
     price: Price Range
@@ -252,14 +252,14 @@ en:
     sort: 
       newest: Show newest
       overall_mark: Show popular
-    sort_labeled: "Sort by:"
-    special_offers: ""
+    sort_labeled: Sort by
+    special_offers: "Special offers:"
     thead: 
       th1: Restaurant
       th2: Availability (click time to reserve)
     title_or_location: title or location
   share: 
-    description: test description
+    description: Up to 50% off free restaurant reservations - reviews, price, map
   short_strings: 
     add_to_favorites: Add to <br> favorite
     edit_reservation: Edit reservation
@@ -298,7 +298,7 @@ en:
     sign_in: Sign in
     sign_in_acc: Sign in
     sign_up_and: Sign up and
-    sign_up_or: ""
+    sign_up_or: " or"
     term_cond: Terms and conditions
   simple_form: 
     error_notification: 
@@ -337,7 +337,7 @@ en:
   user_sidebar: 
     account: My account
     diner_style: Diner style
-    edit_settings: ""
+    edit_settings: Settings
     favourites: My favourites
     h3_link: Admin
     invite_friends: Invite friends
