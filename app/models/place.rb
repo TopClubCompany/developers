@@ -475,7 +475,14 @@ class Place < ActiveRecord::Base
     current_day = PlaceUtils::PlaceTime.wday(current_day)
     time = time.strftime("%H:%M").gsub(":",".").to_f
     week_day = WeekDay.with_place_and_day(id, current_day).first
-    DayDiscount.with_day_and_time(week_day.id, time)
+    discounts = DayDiscount.with_day(week_day.id)
+    discounts.map do |discount|
+      if Place.time_range(discount.from_time.to_i, discount.to_time.to_i).include?(time.to_i)
+        discount
+      else
+        []
+      end
+    end
   end
 
   def meta_tag
