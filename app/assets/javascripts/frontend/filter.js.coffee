@@ -333,6 +333,8 @@ class PlacesCollection
       map = @map
       stub = $('#list_place_' + obj.id).clone(false)
       stub.find('.timing, .special_offers, [id^=favorites_small]').remove()
+      newContent = $("<div class='fix-width-p'></div>").append(stub.find('h4, .rating, .place_features').detach())
+      newContent.insertBefore(stub.find('.clear'))  
       boxText = document.createElement("div")
       boxText.className = "place popover-content"
       boxText.style.cssText = "border: 1px solid rgba(0,0,0,0.2); margin-top: 8px; padding: 10px; border-radius: 4px; background: white;"
