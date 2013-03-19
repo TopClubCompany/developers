@@ -1,12 +1,13 @@
-#sidebar.specials
-  h3= I18n.t('user_sidebar.h3_link')
-  ul
-    li
-      a href="#"
-        = I18n.t('user_sidebar.view_reservations')
-    li
-      a href="#"
-        = I18n.t('user_sidebar.view_places')
+- if current_user.admin?
+  #sidebar.specials
+    h3= I18n.t('user_sidebar.h3_link')
+    ul
+      li
+        a href="#"
+          = I18n.t('user_sidebar.view_reservations')
+      li
+        a href="#"
+          = I18n.t('user_sidebar.view_places')
 #sidebar.specials
   h3= I18n.t('user_sidebar.account')
   ul

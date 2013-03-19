@@ -4,4 +4,5 @@ li= link_to I18n.t('user_sidebar.reviews'), self_reviews_profile_path(current_us
 li= link_to I18n.t('user_sidebar.settings'), edit_settings_profile_path(current_user)
 /li= link_to I18n.t('user_sidebar.diner_style'), '/user#style'
 /li= link_to I18n.t('user_sidebar.top_points'), '/user#points'
-li= link_to I18n.t('user_sidebar.invite_friends'), invite_friends_profile_path(current_user)
+- if current_user.admin?
+  li= link_to I18n.t('user_sidebar.invite_friends'), invite_friends_profile_path(current_user)
