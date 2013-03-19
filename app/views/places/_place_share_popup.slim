@@ -1,4 +1,4 @@
-- cache [I18n.locale, 'place', 'share', @place.updated_at, "show"] do
+- cache [I18n.locale, 'place', 'share', place.id, @place.updated_at, "show"] do
   #share.popup style="margin-left: 0px;"
     button.close aria-hidden="true" data-dismiss="modal" type="button"
     h5= t('short_strings.share_with_friends')
