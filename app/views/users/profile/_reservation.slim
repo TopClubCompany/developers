@@ -1,3 +1,4 @@
+/ developers / app / views / users / profile / reservations.slim 
 .reservation.place class="#{'past' if past}"
   a.place_img_sm href=show_profile_reservation_path(place.user_id, reservation.id)
     - if place.place_image
@@ -34,10 +35,10 @@
     .clear
   - if UserFavoritePlace.liked?(current_user.id, place.id)
     #favorites_small style="display:block"
-      .add_to_favorites data-id="#{place.id}"
+      .add_to_favorites.html data-id="#{place.id}"
         == t('short_strings.add_to_favorites')
   - else
     #favorites_small
-      .add_to_favorites data-id="#{place.id}"
+      .add_to_favorites.html data-id="#{place.id}"
         == t('short_strings.add_to_favorites')
   .clear

@@ -1,3 +1,4 @@
+# developers / app / assets / javascripts / frontend / places.js.coffee
 $ ->
   window.language ||= $('#language .active').attr('id')
 
@@ -80,12 +81,14 @@ $ ->
         message = 'remove'
         $(this).parent().removeAttr('style')
       text = I18n.translations["#{window.language}"].admin_js.like["#{message}"]
+      if $(this).is('.html') then dataType = 'html' else dataType = 'json'
       $.ajax
         type: "POST"
+        dataType: dataType
         url: "/set_unset_favorite_place/#{$(this).data('id')}"
         success: (data) ->
           $('.top-right').notify({"message": {"text": text}}).show()
-      
+
     else
       window.location.replace "/users/sign_in"
 
@@ -136,7 +139,7 @@ $ ->
     hash = location.hash.replace(/#?(\w+)/, "$1")
     $('.tab_content').hide().eq(0).show()
     available_hashes = $('.tab_content').map () ->
-	    $(this).attr('id')
+      $(this).attr('id')
     if hash in available_hashes
       showHash.call @, hash
 
@@ -214,7 +217,7 @@ $ ->
         fake_submit.css('display', 'none')
         standart_share_bt.css('display', 'inline-block')
 
-#  tw_case=(id) ->
+  #  tw_case=(id) ->
 
 
   #twitter share
@@ -228,7 +231,7 @@ $ ->
         js = d.createElement(s)
         js.id = id
         fjs.parentNode.insertBefore js, fjs
-      )(document, "script", "twitter-wjs")
+    )(document, "script", "twitter-wjs")
     window.twttr.events.bind "click", (event) ->
       check_what_share_open()
       $.fancybox.close()
@@ -299,9 +302,9 @@ $ ->
     init_vk(data_for_soc)
     init_fb(data_for_soc)
 
-#  $("#custom-tweet-button").hover ->
-#    $("#fake_for_twitter").mouseover()
-#    console.log $("#fake_for_twitter")
+  #  $("#custom-tweet-button").hover ->
+  #    $("#fake_for_twitter").mouseover()
+  #    console.log $("#fake_for_twitter")
 
   $('#custom-tweet-button').on 'mouseenter', ->
     $('#fake_for_twitter').mouseenter()
@@ -322,31 +325,31 @@ $ ->
         $.ajax
           type: 'POST'
           url: "/reviews/vote"
-          data: 
+          data:
             "id": data.id
             "useful": data.useful
           success: (response) =>
-            if response.success              
+            if response.success
               num = parseInt($(@).find('strong').text())
               $(@).find('strong').text(num + 1)
             else
               # $(@).attr 'title', I18n.translations[window.language].admin_js.vote_twice
               $(@).attr 'title', response.error
               $(@).tipsy({ gravity: 's', fadeOut: 1500 }).tipsy('show')
-              setTimeout((=> 
+              setTimeout((=>
                 $(@).tipsy 'hide'
-              ), 3000)              
+              ), 3000)
           error: (xhr, err) ->
             $(@).attr 'title', err
             $(@).tipsy({ gravity: 's', fadeOut: 1500 }).tipsy('show')
-            setTimeout((=> 
+            setTimeout((=>
               $(@).tipsy 'hide'
             ), 3000)
       else
         $(@).attr 'title', I18n.translations[window.language].admin_js.own_review
         $(@).tipsy { gravity: 's', fadeOut: 3000 }
         $(@).tipsy 'show'
-        setTimeout((=> 
+        setTimeout((=>
           $(@).tipsy 'hide'
         ), 3000)
     else
