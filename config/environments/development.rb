@@ -11,11 +11,11 @@ Topclub::Application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      address:              "smtp.gmail.com",
+      address:              "smtp.yandex.ru",
       port:                  587,
-      domain:               'baci.lindsaar.net',
-      user_name:             Figaro.env.app_email_username,
-      password:              Figaro.env.app_email_password,
+      domain:               'topreserve.com.ua',
+      user_name:             "noreply@topreserve.com.ua",
+      password:              198666,
       authentication:       'plain',
       enable_starttls_auto:  true }
 
@@ -28,7 +28,7 @@ Topclub::Application.configure do
 
   config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.default_url_options = { :host => 'localhost:3005' }
+  config.action_mailer.default_url_options = { :host => 'localhost' }
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log

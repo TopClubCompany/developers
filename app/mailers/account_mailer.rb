@@ -1,5 +1,5 @@
 class AccountMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "noreply@topreserve.com.ua"
 
   def confirm_email(email, token)
     @token = token
