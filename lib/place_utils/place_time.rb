@@ -11,7 +11,11 @@ module PlaceUtils
 
       def is_available?(time, range_time)
         if range_time
-          range_time.include?(time.strftime("%H").to_i)
+          if time.strftime("%M").to_i > 0
+            range_time.include?(time.strftime("%H").to_i + 1)
+          else
+            range_time.include?(time.strftime("%H").to_i)
+          end
         else
           false
         end
