@@ -7,8 +7,9 @@
   h4 style="width: auto;"
     a href=show_profile_reservation_path(place.user_id, reservation.id)
       = place.title
-      span.discount_label
-        = "#{reservation.discount}%"
+      - if reservation.discount.present?
+        span.discount_label
+          = "#{reservation.discount.to_i}%"
   .rating
     .stars
       .stars_overlay
