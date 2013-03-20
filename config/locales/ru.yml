@@ -203,6 +203,7 @@ ru:
   registration_form: 
     or: " или "
   reservation: 
+    delete: "Удалить"
     address: "Адрес:"
     at: "в"
     complete: "Заполните форму заказа"

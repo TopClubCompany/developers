@@ -203,6 +203,7 @@ ua:
   registration_form: 
     or: " або "
   reservation: 
+    delete: "Видалити"
     address: "Адреса:"
     at: "в"
     complete: "Заповніть форму замовлення"

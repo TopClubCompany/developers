@@ -123,7 +123,8 @@ $ ->
       "duration": 1000
       "complete": ->
         $("#review_text").focus()
-
+  $(document).ready ->
+    $("a#write_review").click() if window.location.hash.match /write_review/
   $("#review_text").on 'blur', (e) ->
     if $(@).val().length > 0
       $(@).addClass 'not_empty'
