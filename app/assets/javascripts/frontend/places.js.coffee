@@ -81,13 +81,18 @@ $ ->
         message = 'remove'
         $(this).parent().removeAttr('style')
       text = I18n.translations["#{window.language}"].admin_js.like["#{message}"]
-      if $(this).is('.html') then dataType = 'html' else dataType = 'json'
+      if $(this).is('.html') 
+        cb = ->
+          location.reload()
+      else 
+        cb = ->
+          $('.top-right').notify({"message": {"text": text}}).show()
       $.ajax
         type: "POST"
-        dataType: dataType
+        dataType: 'json'
         url: "/set_unset_favorite_place/#{$(this).data('id')}"
-        success: (data) ->
-          $('.top-right').notify({"message": {"text": text}}).show()
+        success: cb
+          
 
     else
       window.location.replace "/users/sign_in"

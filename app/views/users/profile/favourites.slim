@@ -18,9 +18,7 @@
                 .reservation.place
                   = link_to place, class: "place_img_sm" do
                     img height="100" src=place.place_image.url(:slider) width="140"
-                  / a.place_img_sm href="/#{I18n.locale}/#{place.slug}-#{place.location.city_en.downcase.gsub(' ','_')}"
-                    
-                      / span.discount.minus_5
+                    / span.discount.minus_5
                   h4 style="width: auto;"
                     = link_to place do                    
                       = place.title
@@ -45,6 +43,6 @@
 
                     .clear
                   #favorites_small
-                    .add_to_favorites data-id=place.id
+                    .add_to_favorites.html data-id=place.id
                       = t('short_strings.remove_from_favorites')
                   .clear
