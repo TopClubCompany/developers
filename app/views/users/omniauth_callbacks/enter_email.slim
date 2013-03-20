@@ -1,10 +1,14 @@
 - if flash[:error]
   = flash[:error].to_yaml
-form action=enter_email_path method='GET'
-  input#email_for_registration name='email' value=(params[:used_email].gsub('#','.') if params[:used_email])
-  - if params[:used_email]
-    br
-    label for='merge'
-      = I18n.t('auth.merge')
-    input type='checkbox' name='merge'
-  input#enter_email_button type='submit'  value='create'
+  .content
+    .row
+      .span8
+        .page_content
+          form action=enter_email_path method='GET'
+            input#email_for_registration name='email' value=(params[:used_email].gsub('#','.') if params[:used_email])
+            - if params[:used_email]
+              br
+              label for='merge'
+                = I18n.t('auth.merge')
+              input type='checkbox' name='merge'
+            input#enter_email_button type='submit'  value='create'
