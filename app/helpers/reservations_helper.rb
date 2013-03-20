@@ -26,7 +26,7 @@ module ReservationsHelper
         when 7
           AccountMailer.new_reservation(reservation.email, caption, text).deliver
         when 8
-          AccountMailer.new_reservation("top_club@mail.ru", caption, text).deliver
+          AccountMailer.new_reservation(reservation.email, caption, text).deliver
       end
     end
   end
