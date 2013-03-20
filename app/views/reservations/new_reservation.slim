@@ -16,8 +16,10 @@
           h2
             = I18n.t('reservation.special_offers')
             - @special_offers.each do |offer|
-              a href="#"
-                = offer.title
+              - offer_time = "<br/>#{t('words.time')}: #{offer.nice_offer_time}"
+              - offer_title = offer.week_day.try { |week_day| week_day.day_type.title }
+              - data = { trigger: 'click', title: offer_title, content: offer.description + offer_time, placement: 'left' }
+              = link_to offer.title, '#', class: 'popoverable', data: data
         = simple_form_for @reservation, url: complete_reservation_path, method: 'post', :wrapper => :front_reg_form do |f|
           = f.error_notification
           label
