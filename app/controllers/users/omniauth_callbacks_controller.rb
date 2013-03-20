@@ -95,7 +95,7 @@ class Users::OmniauthCallbacksController < ApplicationController
   end
 
   def auth_without_email data
-    account = Account.find_by_uid_and_provider((data[:id] or data[:uid]), data[:provider]).first
+    account = Account.find_by_uid_and_provider((data[:id] or data[:uid]), data[:provider]).last
     (account.present? && account.email.present?) ? auth_user(account.user) : get_user_email(data)
   end
 
