@@ -33,7 +33,7 @@ class Users::OmniauthCallbacksController < ApplicationController
     email = params[:email]
     return merge(data, email) if params[:merge]
     check_email(email, data) unless email.nil?
-    redirect_to root_path, flash: { error: "You try to access to admin page"} unless data.present?
+    redirect_to root_path, flash: { error: I18n.t("auth.successfully_sing_in")} unless data.present?
   end
 
   def destroy_user_session
