@@ -401,18 +401,19 @@ div.fixed_ajax_loader {
 .alert {
   width: 890px;
   margin: 0 auto;
+  margin-bottom: 10px;
 }
 
 .btn_sm {
-  background: #df5b49;
-  border: 0;
-  border-radius: 0 3px 3px 0;
-  color: #fff;
-  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
-  font-size: 18px;
-  height: 26px;
-  line-height:16px;
-  margin:0;
-  padding:0 10px;
-  margin-left:-1px;
+  background: #df5b49 !important;
+  border: 0 !important;
+  border-radius: 0 3px 3px 0 !important;
+  color: #fff !important;
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif !important;
+  font-size: 18px !important;
+  height: 26px !important;
+  line-height:16px !important;
+  margin:0 !important;
+  padding:0 10px !important;
+  margin-left:-1px !important;
 }
