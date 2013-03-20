@@ -14,7 +14,7 @@
       #sign_up_page.page_content.complete
         - if @special_offers
           h2
-            = I18n.t('reservation.special_offers')
+            =' I18n.t('reservation.special_offers')
             - Array(@special_offers).each do |offer|
               - offer_time = "<br/>#{t('words.time')}: #{offer.nice_offer_time}"
               - offer_title = offer.week_day.try { |week_day| week_day.day_type.title }
