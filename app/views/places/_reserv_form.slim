@@ -6,6 +6,7 @@
     .timing
       - time.sort{|a,b| a[:time] <=> b[:time]}.each do |reverse|
         a href="#" data-value="#{reverse[:time]}" class="#{get_time_class(reverse, params[:reserve_time])}"= reverse[:time]
+      a href="#" data-value="17:00" class="get" Забронировать стол
 
   a.back style='display:none' href="#"
     = I18n.t('place.back_to_search')
