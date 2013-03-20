@@ -203,6 +203,7 @@ en:
   registration_form: 
     or: " or "
   reservation: 
+    delete: "Delete"
     address: "Address:"
     at: at
     complete: Complete reservation

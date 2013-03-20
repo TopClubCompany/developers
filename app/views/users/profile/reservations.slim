@@ -15,7 +15,7 @@
               span (#{upcoming.count} #{I18n.t('profile.upcoming')})
             - upcoming.each do |reservation|
               - place = reservation.place
-              = render partial: 'reservation', locals: {place: place, reservation: reservation, css_class: ""} if place
+              = render partial: 'reservation', locals: {place: place, reservation: reservation, past: false} if place
             - coming.each do |reservation|
               - place = reservation.place
-              = render partial: 'reservation', locals: {place: place, reservation: reservation, css_class: "past"} if place
+              = render partial: 'reservation', locals: {place: place, reservation: reservation, past: true} if place

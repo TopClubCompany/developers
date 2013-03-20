@@ -67,12 +67,12 @@
               label= t('short_strings.special_notes') + ':'
               = @reservation.special_notes
               .clear
-              a.user_btn href=edit_profile_reservation_path(@reservation.user.id, @reservation.id)
+              / a.user_btn href=edit_profile_reservation_path(@reservation.user.id, @reservation.id)
                 i.icon-pencil
                 strong= t('short_strings.edit_reservation')
-              a.user_btn href=print_reservation_path(@reservation.id)
+              = link_to(print_reservation_path(@reservation.id), class: "user_btn" , target: '_blank')  do
                 i.icon-print
                 strong= t('short_strings.print_this_page')
-              a.user_btn href="#"
+              / a.user_btn href="#"
                 i.icon-plus
                 strong= t('short_strings.invite_friends')

@@ -11,7 +11,8 @@ class ReservationsController < ApplicationController
     time = Place.en_to_time(time)
     @date = DateTime.parse("#{params[:date]} #{time}")
     @options = {:reserve_date => params[:date], :reserve_time => params[:time]}
-    @special_offers = Place.today_discount(@place.discounts_index, @options).compact
+    @special_offers = @place.day_discounts.special
+
     @reservation = Reservation.create_from_place_and_user(current_user, @place)
     find_page(@reservation)
     redirect_to new_user_session_path and return unless @reservation.present?

@@ -16,11 +16,13 @@
               - place = reservation.place
               - if place
                 .reservation.place
-                  a.place_img_sm href="/#{I18n.locale}/#{place.slug}-#{place.location.city_en.downcase.gsub(' ','_')}"
+                  = link_to place, class: "place_img_sm" do
                     img height="100" src=place.place_image.url(:slider) width="140"
-                      span.discount.minus_5
+                  / a.place_img_sm href="/#{I18n.locale}/#{place.slug}-#{place.location.city_en.downcase.gsub(' ','_')}"
+                    
+                      / span.discount.minus_5
                   h4 style="width: auto;"
-                    a href="/#{I18n.locale}/#{place.slug}-#{place.location.city_en.downcase.gsub(' ','_')}"
+                    = link_to place do                    
                       = place.title
                       span.discount_label
                         = "-#{place.max_discount}%"
@@ -39,8 +41,7 @@
                     li.cuisine= place.kitchens.map(&:title).join(', ')
                     li.pricing= place.avg_bill_title
                   .btns
-                    a href="#"
-                      = t('words.new_reservation')
+                    = link_to t('words.new_reservation'), place                   
 
                     .clear
                   #favorites_small

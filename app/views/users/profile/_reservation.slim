@@ -1,10 +1,10 @@
-.reservation.place class="#{css_class}"
-  a.place_img_sm href="#"
+.reservation.place class="#{'past' if past}"
+  a.place_img_sm href=show_profile_reservation_path(place.user_id, reservation.id)
     - if place.place_image
       img height="100" src=place.place_image.url(:slider) width="140"
         span.discount.minus_5
   h4 style="width: auto;"
-    a href=place_path(place)
+    a href=show_profile_reservation_path(place.user_id, reservation.id)
       = place.title
       span.discount_label
         = "#{reservation.discount}%"
@@ -19,13 +19,18 @@
         = place_reviews
         |  #{place_reviews == 1 ? 'review' : 'reviews'}
   .btns
-    - unless css_class == "past"
-      a href=cancel_profile_reservation_path(place.user_id, reservation.id)
-        = t('words.cancel')
-      a href="#"
-        = t('words.invite')
+    - if past
+      / a href=mark_invisible_profile_reservation_path(place.user_id, reservation.id)
       a href=show_profile_reservation_path(place.user_id, reservation.id)
-        | #{t('words.view').capitalize} / #{t('words.edit').capitalize}
+        = t('reservation.delete')
+      a href=place_path(place, anchor: 'write_review')
+        = t('short_strings.submit_review')
+    - else
+      a href=cancel_profile_reservation_path(place.user_id, reservation.id)
+        = locale_cap t('words.cancel')
+      a href=show_profile_reservation_path(place.user_id, reservation.id)
+        = locale_cap t('words.view')
+        / | #{locale_cap t('words.view')} / #{locale_cap t('words.edit')}
     .clear
   - if UserFavoritePlace.liked?(current_user.id, place.id)
     #favorites_small style="display:block"

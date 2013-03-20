@@ -43,8 +43,7 @@
           a href=edit_profile_reservation_path(current_user.id, @reservation.id)
             = I18n.t('reservation.view_or_change')
         li.print
-          a href=print_reservation_path(@reservation)
-            = I18n.t('reservation.print')
+          = link_to I18n.t('reservation.print'), print_reservation_path(@reservation.id), target: '_blank'          
         li.map
           a href=place_path(@reservation.place)
             = I18n.t('reservation.view_on_map')
