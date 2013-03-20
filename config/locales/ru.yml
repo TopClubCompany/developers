@@ -159,7 +159,8 @@ ru:
   message_wont_change: "Ваш пароль будет изменен, как только Вы перейдете по ссылке и создадите новый."
   order: "[:day, :month, :year]"
   password_change_mesage: "Изменить пароль"
-  place: 
+  place:
+    reservetion_table: "Забронировать стол"
     add_comment: Add a comment...
     average_bill: "Средний чек"
     back_to_search: "Вернуться к выбору времени"
