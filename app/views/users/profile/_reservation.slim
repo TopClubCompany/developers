@@ -35,11 +35,11 @@
         / | #{locale_cap t('words.view')} / #{locale_cap t('words.edit')}
     .clear
   - if UserFavoritePlace.liked?(current_user.id, place.id)
-    #favorites_small style="display:block"
+    #favorites_small style="display:none"
       .add_to_favorites.html data-id="#{place.id}"
         == t('short_strings.add_to_favorites')
   - else
-    #favorites_small
+    #favorites_small style="display:none"
       .add_to_favorites.html data-id="#{place.id}"
         == t('short_strings.add_to_favorites')
   .clear
