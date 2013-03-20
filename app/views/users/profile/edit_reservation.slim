@@ -17,7 +17,8 @@
               h4 style="width: auto;"
                 a href="#"
                   = @place.title
-                  span.discount_label= "-#{@place.max_discount}%"
+                  - unless place.max_discount.to_i == 0 
+                    span.discount_label= "-#{@place.max_discount.to_i}%"
               .rating
                 .stars
                   .stars_overlay
