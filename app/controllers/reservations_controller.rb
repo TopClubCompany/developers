@@ -11,7 +11,7 @@ class ReservationsController < ApplicationController
     time = Place.en_to_time(time)
     @date = DateTime.parse("#{params[:date]} #{time}")
     @options = {:reserve_date => params[:date], :reserve_time => params[:time]}
-    @special_offers = @place.day_discounts.special
+    @special_offers = @place.today_discount_with_time(@date, false)
 
     @reservation = Reservation.create_from_place_and_user(current_user, @place)
     find_page(@reservation)

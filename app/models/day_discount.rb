@@ -12,7 +12,7 @@ class DayDiscount < ActiveRecord::Base
 
   scope :discount, -> { where(is_discount: true) }
 
-  scope :with_day, lambda { |week_day_id| where("is_discount = ? AND week_day_id = ?", true, week_day_id) }
+  scope :with_day, lambda { |week_day_id, discount| where("is_discount = ? AND week_day_id = ?", discount, week_day_id) }
 
   def nice_offer_time
     [from_time, to_time].map{ |point| Time.strptime(point.to_s, "%H.%M").strftime("%I:%M%p") }.join('-')
