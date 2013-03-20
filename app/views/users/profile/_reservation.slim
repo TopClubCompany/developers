@@ -15,7 +15,7 @@
       .stars_bg
     small
       - place_reviews = place.reviews.count
-      a href=place_path(place)
+      a href=place_path(place.place_path)
         = place_reviews
         |  #{place_reviews == 1 ? 'review' : 'reviews'}
   .btns
@@ -23,7 +23,7 @@
       / a href=mark_invisible_profile_reservation_path(place.user_id, reservation.id)
       a href=cancel_profile_reservation_path(place.user_id, reservation.id)
         = t('reservation.delete')
-      a href=place_path(place, anchor: 'write_review')
+      a href=place_path(place.place_path, anchor: 'write_review')
         = t('short_strings.submit_review')
     - else
       a href=cancel_profile_reservation_path(place.user_id, reservation.id)
