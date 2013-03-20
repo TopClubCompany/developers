@@ -470,12 +470,12 @@ class Place < ActiveRecord::Base
     day_discounts.special.try { |special| special.max { |x| x.discount if x }.try(:discount) if special }
   end
 
-  def today_discount_with_time(time)
+  def today_discount_with_time(time, discount=true)
     current_day = time.wday
     current_day = PlaceUtils::PlaceTime.wday(current_day)
     time = time.strftime("%H:%M").gsub(":",".").to_f
     week_day = WeekDay.with_place_and_day(id, current_day).first
-    discounts = DayDiscount.with_day(week_day.id)
+    discounts = DayDiscount.with_day(week_day.id, discount)
     discounts.map do |discount|
       if Place.time_range(discount.from_time.to_i, discount.to_time.to_i).include?(time.to_i)
         discount
