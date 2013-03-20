@@ -395,6 +395,7 @@ input[type='submit']:hover {
   border-radius: 0 0 3px 3px;
   padding: 10px 20px 20px 20px;
   position: relative;
+  min-height:300px;
 }
 
 .page_content h2 {
@@ -2209,7 +2210,7 @@ h4 .discount_label {
   margin: 0 0 10px 0;
 }
 
-#user #share_a_link button, .copy {
+#user #share_a_link button {
   float: left;
   background: #df5b49;
   border: 0;
