@@ -48,7 +48,12 @@ class PlacesController < ApplicationController
         current_user.save
       end
     end
-    render nothing: true
+    respond_to do |format|
+      format.json { render json: {} }
+      format.html do
+        redirect_to  :back
+      end
+    end
   end
 
 
