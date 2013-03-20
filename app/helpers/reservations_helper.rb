@@ -26,7 +26,7 @@ module ReservationsHelper
         when 7
           AccountMailer.new_reservation(reservation.email, caption, text).deliver
         when 8
-          AccountMailer.new_reservation(reservation.email, caption, text).deliver
+          AccountMailer.new_reservation("eugeniy.kriukov@topclub.kiev.ua", caption, text).deliver
       end
     end
   end
@@ -38,6 +38,6 @@ module ReservationsHelper
   end
 
   def wrapp_domain(url)
-    "http://"+request.domain+url
+    "http://topreserve.com.ua/" + url
   end
 end
