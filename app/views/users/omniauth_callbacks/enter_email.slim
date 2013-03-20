@@ -2,6 +2,8 @@
   .row
     .span8
       .page_content
+        h1
+          |Введите Email
         - if flash[:error]
           = flash[:error].to_yaml
         form action=enter_email_path method='GET'
@@ -11,5 +13,7 @@
             label for='merge'
               = I18n.t('auth.merge')
             input type='checkbox' name='merge'
-          input#enter_email_button type='submit'  value='create'
-    .span4
+          input.btn_sm#enter_email_button type='submit'  value='create'
+    .span4#sidebar
+      p
+        |Введите E-mail адрес для подтверждения вашей учетной записи

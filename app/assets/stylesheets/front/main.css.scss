@@ -395,6 +395,7 @@ input[type='submit']:hover {
   border-radius: 0 0 3px 3px;
   padding: 10px 20px 20px 20px;
   position: relative;
+  min-height:200px;
 }
 
 .page_content h2 {
@@ -1426,9 +1427,9 @@ h4 .discount_label {
   font-weight: bold;
 }
 
-.place div[id^='favorites_small'] {
-  display: none;
-}
+//.place div[id^='favorites_small'] {
+  //display: none;
+//}
 
 .place:hover div[id^='favorites_small'], place div[id^='favorites_small'] .i_like_this_place {
   display: block;
