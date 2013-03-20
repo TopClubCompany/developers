@@ -21,7 +21,7 @@
   .btns
     - if past
       / a href=mark_invisible_profile_reservation_path(place.user_id, reservation.id)
-      a href=show_profile_reservation_path(place.user_id, reservation.id)
+      a href=cancel_profile_reservation_path(place.user_id, reservation.id)
         = t('reservation.delete')
       a href=place_path(place, anchor: 'write_review')
         = t('short_strings.submit_review')
