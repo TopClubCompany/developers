@@ -14,7 +14,7 @@ meta http-equiv="refresh" content="2;url=javascript:window.print()"
       div== I18n.t('reservation.discount', discount: @discount.discount.try(:to_i)) if @discount
       h2
         - if @discount.present?
-          strong = I18n.t('reservation.print_method.special')
+          strong =' I18n.t('reservation.print_method.special')
           a href='#'= @discount.title
       h4
         = I18n.t('reservation.confirmation')
