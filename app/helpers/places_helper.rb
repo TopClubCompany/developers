@@ -47,7 +47,7 @@ module PlacesHelper
   end
 
   def get_time_class time, param_time
-    if param_time.split(":")[0].size < 2
+    if param_time.split(":")[0].size < 2 && (I18n.locale.to_sym != :en)
       param_time = "0"+param_time
     end
     if time[:available]
