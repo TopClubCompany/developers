@@ -10,11 +10,13 @@
           = @date.strftime('%A, %B %e, %Y at %I:%M %p ') + I18n.t('reservation.people', count: @reservation.persons)
         -else
           = @date.strftime('%A, %B %e, %Y at %H:%M ') + I18n.t('reservation.people', count: @reservation.persons)
+        /div== I18n.t('reservation.discount', discount: @discount) if @discount
 
       #sign_up_page.page_content.complete.confirmed
         h2
-          strong {if exists}Спец. предложение:
-          a href='#' Скидка 30% на все меню{/if}
+          - if @special.present?
+            strong = I18n.t('reservation.print_method.special')
+            a href='#'= @special.title
         h4
           = I18n.t('reservation.confirmation')
           a href='#'
@@ -23,12 +25,10 @@
           = "#{@reservation.full_name},"
           br= I18n.t('reservation.confirmed_text')
         p
-          strong Special notes:
-          br
-            | Хочу много пива и курить!
+          strong= I18n.t('reservation.print_method.notes')
+          br= @reservation.special_notes
         p
-          strong
-            ' Название ресторана:
+          strong= I18n.t('reservation.print_method.place_name')
           = @place.title
           /br
           /strong=' I18n.t('reservation.diner_name')
@@ -41,20 +41,15 @@
           = @place.location.address
         p
           strong=' I18n.t('reservation.dress_code')
-          | Smart Casual
+          | -
         p
           strong= I18n.t('reservation.message_from_restoran')
           br
-            =' "Спасибо что выбрали #{@place.title}. Мы рады сообщить Вам о том, что Ваш резерв через сервис"
-            b
-              ' TopReserve.com.ua
-            | подтвержден. Если ваши планы поменяются и вы решите изменить время или отменить бронь, пожалуйста предупредите нас об этом. Ждем вас!
+            == I18n.t('reservation.print_method.thanks', title: @place.title)
         p
           strong= I18n.t('reservation.more_info')
           br
-            =' "Возникли вопросы по поводу вашей брони? Вы всегда можете связаться с #{@place.title} по номеру #{@place.phone}."
-            ' Также звоните на нашу горячую линию:
-            b (044) 300-00-10
+            == I18n.t('reservation.print_method.questions', title: @place.title, phone: @place.phone)
     #sidebar.span4.confirmed
       h3= I18n.t('reservation.i_go')
       ul
