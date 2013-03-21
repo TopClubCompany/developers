@@ -19,7 +19,7 @@
             img src="#{place.place_image.show_place_image}" width="74px" height="54px"
             .caption_c
               h6
-                = place["title_#{I18n.locale}"]
+                = place["name_#{I18n.locale}"]
               - house_number = ", #{place.house_number}" unless place.house_number.nil?
               = "#{place["street_#{I18n.locale}"]}#{house_number}"
 
