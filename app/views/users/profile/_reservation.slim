@@ -4,6 +4,7 @@
     - if place.place_image
       img height="100" src=place.place_image.url(:slider) width="140"
         span.discount.minus_5
+  small 17/11/2012, 8:00 PM
   h4 style="width: auto;"
     a href=show_profile_reservation_path(place.user_id, reservation.id)
       = place.title
@@ -25,7 +26,7 @@
       / a href=mark_invisible_profile_reservation_path(place.user_id, reservation.id)
       a href=cancel_profile_reservation_path(place.user_id, reservation.id)
         = t('reservation.delete')
-      a href=place_path(place, anchor: 'write_review')
+      a href=place_path(place.place_path, anchor: 'write_review')
         = t('short_strings.submit_review')
     - else
       a href=cancel_profile_reservation_path(place.user_id, reservation.id)
@@ -36,10 +37,10 @@
     .clear
   - if UserFavoritePlace.liked?(current_user.id, place.id)
     #favorites_small style="display:none"
-      .add_to_favorites data-id="#{place.id}"
+      .add_to_favorites.html data-id="#{place.id}"
         == t('short_strings.add_to_favorites')
   - else
     #favorites_small style="display:none"
-      .add_to_favorites data-id="#{place.id}"
+      .add_to_favorites.html data-id="#{place.id}"
         == t('short_strings.add_to_favorites')
   .clear
