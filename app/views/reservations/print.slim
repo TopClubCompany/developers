@@ -11,11 +11,11 @@ meta http-equiv="refresh" content="2;url=javascript:window.print()"
         -else
           = @place.title + " " + I18n.l(@date, :format => "%A, %B %e, %Y #{I18n.t('reservation.at')} %H:%M") + I18n.t('reservation.people', count: @reservation.persons)
       h2
-      div== I18n.t('reservation.discount', discount: @discount.to_i) if @discount
+      div== I18n.t('reservation.discount', discount: @discount.discount.try(:to_i)) if @discount
       h2
-        - if @special.present?
+        - if @discount.present?
           strong = I18n.t('reservation.print_method.special')
-          a href='#'= @special.title
+          a href='#'= @discount.title
       h4
         = I18n.t('reservation.confirmation')
         a href='#'
