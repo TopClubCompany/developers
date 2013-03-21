@@ -24,10 +24,10 @@
                     = reservation.place.name
                   small= to_time_format(reservation.time)
                   .btns
-                    a href=edit_profile_reservation_path(current_user, reservation)
+                    a href=show_profile_reservation_path(current_user, reservation)
                       = I18n.t('profile.view_edit')
                     .clear
-            - if reservations.length == 2
+            - if reservations.length > 1
               a.all href=reservations_profile_path(current_user)
                 = I18n.t('profile.view_all_reservations')
 
