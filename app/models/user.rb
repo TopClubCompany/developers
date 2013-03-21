@@ -55,6 +55,11 @@ class User < ActiveRecord::Base
   has_many :facebook_friends, :dependent => :destroy
   has_many :vk_friends, :dependent => :destroy
 
+  after_create :create_notifications
+
+  def create_notifications()
+    self.user_notification_ids = UserNotification.all.map(&:id)
+  end
 
   def activate
     self.trust_state = ::UserState.active.id
