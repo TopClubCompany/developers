@@ -160,10 +160,11 @@ ua:
   order: ""
   password_change_mesage: "Змінити пароль"
   place: 
-    back_to_search: Повернутися до вибору часу
     add_comment: ""
     average_bill: ""
+    back_to_search: "Повернутися до вибору часу"
     is: ""
+    reservetion_table: ""
     review_for_place: "Відгуків для %{place}: %{count}"
     share: "Поділитись"
     up_to: "Знижка до %{discount}%"
@@ -195,6 +196,12 @@ ua:
       connect_social_accounts: "Підключити соціальні мережі"
       connected: "Ваш %{account} підключено"
       disconnect: "Відключити"
+      facebook: ""
+      small_facebook: ""
+      small_twitter: ""
+      small_vk: ""
+      twitter: ""
+      vk: ""
     time: "Час"
     upcoming: "Майбутні резерви"
     username: "Ім'я користувача"
@@ -203,13 +210,13 @@ ua:
   registration_form: 
     or: " або "
   reservation: 
-    delete: "Видалити"
     address: "Адреса:"
     at: "в"
     complete: "Заповніть форму замовлення"
     confirmation: "Номер підтвердження: #"
     confirmed: "Ваше замовлення підтверджено"
     confirmed_text: "Ваш резерв підтверджено та збережено у системі обліку резервів ресторану. Ви отримаєте копію цього підтвердження."
+    delete: "Видалити"
     diner_name: "Ім'я:"
     discount: "Цей документ підтверджує ваш резерв та <strong>знижку %{discount}%</strong> на весь чек"
     dress_code: "Дресс код:"
@@ -231,6 +238,9 @@ ua:
     special_offers: "Спец. пропозиція:"
     view_on_map: "Відобразити ресторан на карті"
     view_or_change: "Подивитись деталі резерву"
+  review: 
+    one: ""
+    other: ""
   search: 
     browse_category: "Місця за категоріями"
     category: "Категорія"
@@ -249,8 +259,8 @@ ua:
     people: "персон"
     price: "Середній чек"
     refine: "Сортувати"
-    result_for: "Результати для"
     restorans: "ресторанах"
+    result_for: "Результати для"
     sort: 
       newest: "Сортувати по даті"
       overall_mark: "Сортувати за популярністю"
