@@ -4,10 +4,7 @@
     - if place.place_image
       img height="100" src=place.place_image.url(:slider) width="140"
         span.discount.minus_5
-  - if I18n.locale.to_sym == :en
-    small= I18n.l(reservation.time, :format => "%d/%m/%Y, %I:%M %p")
-  - else
-    small= I18n.l(reservation.time, :format => "%d/%m/%Y, %I:%M")
+  small = to_time_format(reservation.time)
   h4 style="width: auto;"
     a href=show_profile_reservation_path(place.user_id, reservation.id)
       = place.title
