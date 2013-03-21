@@ -54,14 +54,9 @@ meta http-equiv="refresh" content="2;url=javascript:window.print()"
         p
           strong= I18n.t('reservation.more_info')
           br
-<<<<<<< HEAD
-            =' "Возникли вопросы по поводу вашей брони? Вы всегда можете связаться с #{@place.title} по номеру #{@place.phone}."
-            ' Также звоните на нашу горячую линию:
-            b (044) 300-00-10
+          == I18n.t('reservation.print_method.questions', title: @place.title, phone: @place.phone)
         input.print-button type="button" onClick="window.print()" value="Print"
-=======
-            == I18n.t('reservation.print_method.questions', title: @place.title, phone: @place.phone)
->>>>>>> 00f01acb1d26581304eeddfb1198b1367efe10f2
+            
     .span4.print_map
       img src="http://maps.googleapis.com/maps/api/staticmap?center=#{@place.lat_lng}&zoom=14&size=300x300&maptype=roadmap&sensor=false&markers=color:red%7Clabel:A%7C#{@place.lat_lng}"
         
