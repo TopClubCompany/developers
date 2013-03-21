@@ -1,6 +1,10 @@
 #reservation_print
   .row.heading
     .span8
+      #logo
+        a href="#{with_local_link '/'}"
+          img src="/assets/topreserve.png"
+      p
       h1
         - if I18n.locale.to_sym == :en
           = @place.title + " " + @date.strftime('%A, %B %e, %Y at %I:%M %p ') + I18n.t('reservation.people', count: @reservation.persons)
