@@ -7,15 +7,15 @@
           = @place.title
         |&nbsp
         - if I18n.locale.to_sym == :en
-          = @date.strftime('%A, %B %e, %Y at %I:%M %p ') + I18n.t('reservation.people', count: @reservation.persons)
+          = I18n.l(@date, :format => "%A, %B %e, %Y #{I18n.t('reservation.at')} %I:%M %p") + I18n.t('reservation.people', count: @reservation.persons)
         -else
-          = @date.strftime('%A, %B %e, %Y at %H:%M ') + I18n.t('reservation.people', count: @reservation.persons)
+          = I18n.l(@date, :format => "%A, %B %e, %Y #{I18n.t('reservation.at')} %H:%M") + I18n.t('reservation.people', count: @reservation.persons)
         /div== I18n.t('reservation.discount', discount: @discount.discount) if @discount.present?
 
       #sign_up_page.page_content.complete.confirmed
         h2
           - if @discount.present?
-            strong = I18n.t('reservation.print_method.special')
+            strong =' I18n.t('reservation.print_method.special')
             a href='#'= @discount.title
         h4
           = I18n.t('reservation.confirmation')
