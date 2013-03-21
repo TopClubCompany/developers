@@ -234,6 +234,12 @@ en:
       other: "%{count} people"
     phone: "Phone:"
     print: Print details
+    print_method: 
+      notes: ""
+      place_name: ""
+      questions: ""
+      special: ""
+      thanks: ""
     rewards: All members get rewards for online reservations!
     special_offers: "Special offer:"
     view_on_map: View restaurant on map

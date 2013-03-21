@@ -234,6 +234,12 @@ ua:
       other: "%{count} осіб"
     phone: "Номер телефону:"
     print: "Роздрукувати деталі резерву"
+    print_method: 
+      notes: ""
+      place_name: ""
+      questions: ""
+      special: ""
+      thanks: ""
     rewards: "Усі користувачі TopReserve отримують бали за успішні резерви столів!"
     special_offers: "Спец. пропозиція:"
     view_on_map: "Відобразити ресторан на карті"
