@@ -48,9 +48,9 @@ module Users::ProfileHelper
 
   def to_time_format time
     if I18n.locale == :en
-      time.strftime("%d/%m/%Y%l:%M %p")
+      time.strftime("%d/%m/%Y%, l:%M %p")
     else
-      time.strftime("%d/%m/%Y %H:%M")
+      time.strftime("%d/%m/%Y, %H:%M")
     end
   end
 
