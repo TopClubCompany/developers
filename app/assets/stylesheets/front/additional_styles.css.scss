@@ -558,3 +558,117 @@ div.fixed_ajax_loader {
 #try .try_email { background-position: 6px -72px; }
 #try .try_place { background-position: 6px -111px; }
 #try .try_city { background-position: 6px -152px; }
+
+/***** How It Works page *****/
+
+#stepbystep h2 {
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  padding-bottom: 15px;
+  font-size: 22px;
+  line-height: 24px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  border-bottom: 1px solid #f2f0ea;
+  width: 620px;
+  margin-left: -20px;
+}
+
+#stepbystep h2 b, #stepbystep h3 b {
+  color: #2489c8;
+}
+
+#stepbystep h3 {
+  font-size: 30px;
+  margin: 0 0 5px 0;
+  padding: 0;
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
+  font-weight: normal;
+  letter-spacing: -0.03em;
+}
+
+#stepbystep ul {
+  display: block;
+  margin: 20px 0 0 0;
+}
+
+#stepbystep li {
+  display: block;
+  min-height: 214px;
+  width: 365px;
+  margin-left: -20px;
+}
+
+
+#stepbystep li.left {
+  padding-left: 255px;
+}
+
+#stepbystep li.left h3 {
+  margin-left: -30px;
+}
+
+#stepbystep li.right {
+  text-align: right;
+  padding-right: 255px;
+}
+
+#stepbystep li.right h3 {
+  margin-right: -20px;
+}
+
+#stepbystep #step1 {
+  background: url('../assets/howitworks/bg1.jpg') no-repeat;
+  padding-top: 20px;
+}
+
+#stepbystep #step2 {
+  background: url('../assets/howitworks/bg2.jpg') no-repeat;
+  padding-top: 30px;
+}
+
+#stepbystep #step3 {
+  background: url('../assets/howitworks/bg3.jpg') no-repeat;
+  padding-top: 20px;
+}
+
+#stepbystep #step4 {
+  background: url('../assets/howitworks/bg4.jpg') no-repeat;
+  padding-top: 25px;
+}
+
+#stepbystep #step5 {
+  background: url('../assets/howitworks/bg5.jpg') no-repeat;
+  padding-top: 10px;
+}
+
+#stepbystep #step6 {
+  text-align: center;
+  width: 620px;
+  padding-top: 10px;
+  min-height: 60px;
+}
+
+#stepbystep .signup_teaser {
+  color: #666;
+  font-size: 18px;
+  display: block;
+  text-align: center;
+  padding: 15px 0;
+}
+
+#easy_123 {
+}
+
+#easy_123 li {
+  margin: 0 0 20px 0;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+#easy_123 li img {
+  margin: 0 0 8px 0;
+}
