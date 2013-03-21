@@ -10,10 +10,11 @@
         -else
           = @place.title + " " + @date.strftime('%A, %B %e, %Y at %H:%M ') + I18n.t('reservation.people', count: @reservation.persons)
       h2
-      div= I18n.t('reservation.discount', discount: @discount) if @discount
+      div== I18n.t('reservation.discount', discount: @discount) if @discount
       h2
-        strong {if exists}Спец. предложение:
-        a href='#' Скидка 30% на все меню{/if}
+        - if @special.present?
+          strong = I18n.t('reservation.print_method.special')
+          a href='#'= @special.title
       h4
         = I18n.t('reservation.confirmation')
         a href='#'
@@ -28,10 +29,10 @@
           strong= I18n.t('reservation.diner_name')
           = @reservation.full_name
         p
-          strong Special notes:
-          br Хочу много пива и курить!
+          strong= I18n.t('reservation.print_method.notes')
+          br= @reservation.special_notes
         p
-          strong Название ресторана:
+          strong= I18n.t('reservation.print_method.place_name')
           = @place.title
           /br
           /strong=' I18n.t('reservation.diner_name')
@@ -44,20 +45,15 @@
           = @place.location.address
         p
           strong=' I18n.t('reservation.dress_code')
-          | Smart Casual
+          | -
         p
           strong= I18n.t('reservation.message_from_restoran')
           br
-            =' "Спасибо что выбрали #{@place.title}. Мы рады сообщить Вам о том, что Ваш резерв через сервис"
-            b
-              ' TopReserve.com.ua
-            | подтвержден. Если ваши планы поменяются и вы решите изменить время или отменить бронь, пожалуйста предупредите нас об этом. Ждем вас!
+            == I18n.t('reservation.print_method.thanks', title: @place.title)
         p
           strong= I18n.t('reservation.more_info')
           br
-            =' "Возникли вопросы по поводу вашей брони? Вы всегда можете связаться с #{@place.title} по номеру #{@place.phone}."
-            ' Также звоните на нашу горячую линию:
-            b (044) 300-00-10
+            == I18n.t('reservation.print_method.questions', title: @place.title, phone: @place.phone)
     .span4.print_map
       img src="http://maps.googleapis.com/maps/api/staticmap?center=#{@place.lat_lng}&zoom=14&size=300x300&maptype=roadmap&sensor=false&markers=color:red%7Clabel:A%7C#{@place.lat_lng}"
         
