@@ -12,16 +12,16 @@
         .clear
   - if !current_user.accounts.pluck(:provider).include?("twitter")
     div
-      | Connect your Connect vs Twitter account for easy sharing with your friends
+      = I18n.t('profile.social.twitter')
       a#tw_login.sc_btn href=user_omniauth_authorize_path(:twitter)
-        | Connect vs Twitter
+        = I18n.t('profile.social.small_twitter')
   - if !current_user.accounts.pluck(:provider).include?("facebook")
     div
-      | Connect your Facebook account for easy sharing with your friends
+      = I18n.t('profile.social.facebook')
       a#fb_login.sc_btn href=user_omniauth_authorize_path(:facebook)
-        | Connect vs Facebook
+        = I18n.t('profile.social.small_facebook')
   - if !current_user.accounts.pluck(:provider).include?("vkontakte")
     div
-      | Connect Вконтакте if you are тру юзер
+      = I18n.t('profile.social.vk')
       a#vk_login.sc_btn href=user_omniauth_authorize_path(:vkontakte)
-        | Connect vs Вконтакте
+        = I18n.t('profile.social.small_vk')

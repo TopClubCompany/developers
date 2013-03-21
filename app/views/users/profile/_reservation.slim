@@ -20,7 +20,7 @@
       - place_reviews = place.reviews.count
       a href=place_link(place)
         = place_reviews
-        |  #{place_reviews == 1 ? 'review' : 'reviews'}
+        = I18n.t('review', count: place_reviews)
   .btns
     - if past
       / a href=mark_invisible_profile_reservation_path(place.user_id, reservation.id)

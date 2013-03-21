@@ -159,12 +159,12 @@ ru:
   message_wont_change: "Ваш пароль будет изменен, как только Вы перейдете по ссылке и создадите новый."
   order: "[:day, :month, :year]"
   password_change_mesage: "Изменить пароль"
-  place:
-    reservetion_table: "Забронировать стол"
+  place: 
     add_comment: Add a comment...
     average_bill: "Средний чек"
     back_to_search: "Вернуться к выбору времени"
     is: "из"
+    reservetion_table: "Забронировать стол"
     review_for_place: "Все %{count} отзыв(а) о %{place}"
     share: "Поделиться"
     up_to: "Скидка до %{discount}%"
@@ -196,6 +196,12 @@ ru:
       connect_social_accounts: "Подключить социальные сети"
       connected: "Ваш %{account} подключен"
       disconnect: "Отключить"
+      facebook: Connect your Facebook account for easy sharing with your friends
+      small_facebook: Connect vs Facebook
+      small_twitter: Connect vs Twitter
+      small_vk: "Connect vs Вконтакте"
+      twitter: Connect your Connect vs Twitter account for easy sharing with your friends
+      vk: "Connect Вконтакте if you are тру юзер"
     time: "Время"
     upcoming: "Грядущие резервы "
     username: "Имя пользователя"
@@ -204,13 +210,13 @@ ru:
   registration_form: 
     or: " или "
   reservation: 
-    delete: "Удалить"
     address: "Адрес:"
     at: "в"
     complete: "Заполните форму заказа"
     confirmation: "Подтверждение #:"
     confirmed: "Ваш заказ подтверджен"
     confirmed_text: Your reservation is confirmed and saved in the restaurant's computer reservation system. You'll receive an email copy of this confirmation.
+    delete: "Удалить"
     diner_name: "Имя обедающего:"
     discount: This document guarantees your reservation and <strong>%{discount}% discount</strong> for your bill
     dress_code: "Dress Code:"
@@ -232,6 +238,9 @@ ru:
     special_offers: "Спец. предложение:"
     view_on_map: "Показать ресторан на карте"
     view_or_change: "Посмотреть детали резерва"
+  review: 
+    one: " review"
+    other: " reviews"
   search: 
     browse_category: "Посмотреть места по категориям"
     category: "Категория"
@@ -250,8 +259,8 @@ ru:
     people: "людей"
     price: "Средний чек"
     refine: "Сортировать"
-    result_for: "Результаты для"
     restorans: "ресторанах"
+    result_for: "Результаты для"
     sort: 
       newest: "Сортировать по дате добавления"
       overall_mark: "Сортировать по популярности"
