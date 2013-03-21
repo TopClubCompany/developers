@@ -7,11 +7,11 @@ meta http-equiv="refresh" content="2;url=javascript:window.print()"
           img src="/assets/topreserve.png"
       h1
         - if I18n.locale.to_sym == :en
-          = @place.title + " " + @date.strftime('%A, %B %e, %Y at %I:%M %p ') + I18n.t('reservation.people', count: @reservation.persons)
+          = @place.title + " " + I18n.l(@date, :format => "%A, %B %e, %Y #{I18n.t('reservation.at')} %I:%M %p") + I18n.t('reservation.people', count: @reservation.persons)
         -else
-          = @place.title + " " + @date.strftime('%A, %B %e, %Y at %H:%M ') + I18n.t('reservation.people', count: @reservation.persons)
+          = @place.title + " " + I18n.l(@date, :format => "%A, %B %e, %Y #{I18n.t('reservation.at')} %H:%M") + I18n.t('reservation.people', count: @reservation.persons)
       h2
-      div== I18n.t('reservation.discount', discount: @discount) if @discount
+      div== I18n.t('reservation.discount', discount: @discount.to_i) if @discount
       h2
         - if @special.present?
           strong = I18n.t('reservation.print_method.special')
@@ -56,7 +56,7 @@ meta http-equiv="refresh" content="2;url=javascript:window.print()"
           br
           == I18n.t('reservation.print_method.questions', title: @place.title, phone: @place.phone)
         input.print-button type="button" onClick="window.print()" value="Print"
-            
+
     .span4.print_map
       img src="http://maps.googleapis.com/maps/api/staticmap?center=#{@place.lat_lng}&zoom=14&size=300x300&maptype=roadmap&sensor=false&markers=color:red%7Clabel:A%7C#{@place.lat_lng}"
         
