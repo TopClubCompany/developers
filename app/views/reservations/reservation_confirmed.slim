@@ -13,40 +13,61 @@
 
       #sign_up_page.page_content.complete.confirmed
         h2
+          strong {if exists}Спец. предложение:
+          a href='#' Скидка 30% на все меню{/if}
+        h4
           = I18n.t('reservation.confirmation')
           a href='#'
-            = "#{@place.id} - #{@reservation.id}"
-          
-        p= I18n.t('reservation.confirmed_text')
+            = "000#{@place.id}-#{@reservation.id}"
         p
-          strong= I18n.t('reservation.diner_name')
-          = @reservation.full_name
+          = "#{@reservation.full_name},"
+          br= I18n.t('reservation.confirmed_text')
+        p
+          strong Special notes:
           br
-            strong= I18n.t('reservation.address')
-            = @place.location.address
-            br
-              strong= I18n.t('reservation.phone')
-              = @reservation.phone
+            | Хочу много пива и курить!
         p
-          strong= I18n.t('reservation.dress_code')
+          strong
+            ' Название ресторана:
+          = @place.title
+          /br
+          /strong=' I18n.t('reservation.diner_name')
+          /= @reservation.full_name
+          br
+          strong=' I18n.t('reservation.phone')
+          = @place.phone
+          br
+          strong=' I18n.t('reservation.address')
+          = @place.location.address
+        p
+          strong=' I18n.t('reservation.dress_code')
           | Smart Casual
         p
           strong= I18n.t('reservation.message_from_restoran')
-          | Thank you
+          br
+            =' "Спасибо что выбрали #{@place.title}. Мы рады сообщить Вам о том, что Ваш резерв через сервис"
+            b
+              ' TopReserve.com.ua
+            | подтвержден. Если ваши планы поменяются и вы решите изменить время или отменить бронь, пожалуйста предупредите нас об этом. Ждем вас!
         p
           strong= I18n.t('reservation.more_info')
-          = @place.description.no_html
+          br
+            =' "Возникли вопросы по поводу вашей брони? Вы всегда можете связаться с #{@place.title} по номеру #{@place.phone}."
+            ' Также звоните на нашу горячую линию:
+            b (044) 300-00-10
     #sidebar.span4.confirmed
       h3= I18n.t('reservation.i_go')
       ul
         li.view
-          a href=edit_profile_reservation_path(current_user.id, @reservation.id)
+          a href=show_profile_reservation_path(current_user.id, @reservation.id)
             = I18n.t('reservation.view_or_change')
         li.print
           = link_to I18n.t('reservation.print'), print_reservation_path(@reservation.id), target: '_blank'          
         li.map
-          a href=place_path(@reservation.place)
+          a href=place_link(@reservation.place)
             = I18n.t('reservation.view_on_map')
-        li.invite
+        /li.invite
           a href="#"
             = I18n.t('reservation.invite_friends')
+        .print_map
+          img src="http://maps.googleapis.com/maps/api/staticmap?center=#{@place.lat_lng}&zoom=14&size=300x300&maptype=roadmap&sensor=false&markers=color:red%7Clabel:A%7C#{@place.lat_lng}"

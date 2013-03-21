@@ -1,10 +1,9 @@
 #reservation_print
   .row.heading
     .span8
-      #logo
+      #logo style="margin-top:20px;margin-bottom:30px"
         a href="#{with_local_link '/'}"
           img src="/assets/topreserve.png"
-      p
       h1
         - if I18n.locale.to_sym == :en
           = @place.title + " " + @date.strftime('%A, %B %e, %Y at %I:%M %p ') + I18n.t('reservation.people', count: @reservation.persons)
@@ -13,32 +12,52 @@
       h2
       div= I18n.t('reservation.discount', discount: @discount) if @discount
       h2
+        strong {if exists}Спец. предложение:
+        a href='#' Скидка 30% на все меню{/if}
+      h4
         = I18n.t('reservation.confirmation')
-        a href="#" #{@place.id} - #{@reservation.id}
-
+        a href='#'
+          = "000#{@place.id}-#{@reservation.id}"
   .row
-    .span5
+    .span5  style="width:350px;"
       .page_content.complete.confirmed#sign_up_page
         p
-          = I18n.t('reservation.confirmed_text')
-        p
+          = "#{@reservation.full_name},"
+          br= I18n.t('reservation.confirmed_text')
+        /p
           strong= I18n.t('reservation.diner_name')
           = @reservation.full_name
-        br
-          strong= I18n.t('reservation.address')
-          = @place.location.address
-        br
-          strong= I18n.t('reservation.phone')
-          = @reservation.phone
         p
-          strong= I18n.t('reservation.dress_code')
+          strong Special notes:
+          br Хочу много пива и курить!
+        p
+          strong Название ресторана:
+          = @place.title
+          /br
+          /strong=' I18n.t('reservation.diner_name')
+          /= @reservation.full_name
+          br
+          strong=' I18n.t('reservation.phone')
+          = @place.phone
+          br
+          strong=' I18n.t('reservation.address')
+          = @place.location.address
+        p
+          strong=' I18n.t('reservation.dress_code')
           | Smart Casual
         p
           strong= I18n.t('reservation.message_from_restoran')
-          | Thank you
+          br
+            =' "Спасибо что выбрали #{@place.title}. Мы рады сообщить Вам о том, что Ваш резерв через сервис"
+            b
+              ' TopReserve.com.ua
+            | подтвержден. Если ваши планы поменяются и вы решите изменить время или отменить бронь, пожалуйста предупредите нас об этом. Ждем вас!
         p
           strong= I18n.t('reservation.more_info')
-          = @place.description
+          br
+            =' "Возникли вопросы по поводу вашей брони? Вы всегда можете связаться с #{@place.title} по номеру #{@place.phone}."
+            ' Также звоните на нашу горячую линию:
+            b (044) 300-00-10
     .span4.print_map
       img src="http://maps.googleapis.com/maps/api/staticmap?center=#{@place.lat_lng}&zoom=14&size=300x300&maptype=roadmap&sensor=false&markers=color:red%7Clabel:A%7C#{@place.lat_lng}"
         
