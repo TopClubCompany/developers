@@ -428,3 +428,133 @@ div.fixed_ajax_loader {
   max-width:300px;
   top:45px !important;
 }
+
+/****** Partners page ******/
+
+#partners h1 {
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
+  font-size: 30px;
+  margin: 0 0 10px 0;
+  padding: 0;
+  color: #333;
+  letter-spacing: -0.04em;
+  font-weight: normal;
+}
+
+#partners #how_123, #partners #how_123 li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  line-height: 16px;
+}
+
+#partners #how_123 {
+  width: 600px;
+  display: block;
+  margin: 0 0 30px 0;
+}
+
+#partners #how_123 li {
+  display: block;
+  float: left;
+  width: 184px;
+  text-align: center;
+  font-size: 12px;
+  margin-right: 14px;
+}
+
+#partners #how_123 li img {
+  margin: 0 10px 5px 0;
+}
+
+#partners #benefits {
+  display: block;
+  padding: 10px 0 30px 0;
+}
+
+#partners #benefits li {
+  display: block;
+  padding: 0 0 0 20px;
+  background: url('../img/check1.png') 0 3px no-repeat;
+  margin: 0 0 5px 0;
+}
+
+#partners #logos img {
+  width: 614px;
+  max-width: 614px;
+  height: 451px;
+  margin-left: -18px;
+}
+
+#partners #logos h2 {
+  display: block;
+  text-align: center;
+}
+
+.promo {
+  margin-bottom: 20px;
+}
+
+.promo .c {
+  padding: 10px;
+}
+
+.promo h3 {
+  font-size: 24px;
+  border-bottom: 1px solid #f2f0ea;
+  line-height: 24px;
+}
+
+.promo h3 a {
+  display: block;
+  font-size: 14px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, Sans-Serif;
+  font-weight: bold;
+}
+
+.promo label {
+  float: left;
+  width: 55px;
+  font-size: 13px;
+}
+
+.promo address {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.promo address small {
+  font-size: 10px;
+  font-weight: normal;
+  color: #666;
+}
+
+#contact_us {
+  font-size: 13px;
+}
+
+#try form {
+  padding: 10px 10px 0 10px;
+  margin: 0;
+  display: block;
+}
+
+#try form input[type='text'], #try form input[type='email'] {
+  width: 240px;
+  margin-bottom: 4px;
+}
+
+#try form input[type='submit'] {
+  margin: 0 0 10px 0;
+}
+
+#try .add-on {
+  background-image: url('../img/partners/app_icons.png');
+  background-repeat: no-repeat;
+}
+
+#try .try_name { background-position: 6px 8px; }
+#try .try_phone { background-position: 6px -32px; }
+#try .try_email { background-position: 6px -72px; }
+#try .try_place { background-position: 6px -111px; }
+#try .try_city { background-position: 6px -152px; }
