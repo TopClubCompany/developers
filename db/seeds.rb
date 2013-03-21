@@ -1,6 +1,58 @@
 #encoding: utf-8
 require_relative "letter_seed"
 
+def insert_fake_user(email, name, role = :default)
+  user = FactoryGirl.build(:user, role.to_sym, email: email, phone: "+38(044)111-11-11", name: name)
+  user.activate.skip_confirmation!
+  user.save!
+  p '=============== User ================='
+  p "email: #{user.email} password: #{user.password} role: #{user.role_title}"
+end
+
+def insert_fake_users(number = 100)
+  i = 0
+  #names = []
+  first_names_men_file = File.open('db/first_names_men.txt', 'r')
+  first_names_men = [];
+  first_names_men_file.each do |line|
+    first_names_men.append line.strip
+  end
+  first_names_men_file.close
+
+  second_names_men_file = File.open('db/second_names_men.txt', 'r')
+  second_names_men = []
+  second_names_men_file.each do |line|
+    second_names_men.append line.strip
+  end
+  second_names_men_file.close
+
+  first_names_women_file = File.open('db/first_names_women.txt', 'r')
+  first_names_women = [];
+  first_names_women_file.each do |line|
+    first_names_women.append line.strip
+  end
+  first_names_women_file.close
+
+  second_names_women_file = File.open('db/second_names_women.txt', 'r')
+  second_names_women = []
+  second_names_women_file.each do |line|
+    second_names_women.append line.strip
+  end
+  second_names_women_file.close
+  
+  i = 0
+  while i < number
+    if (i % 2 == 0)
+      name = first_names_men.sample + " " + second_names_men.sample 
+    else
+      name = first_names_women.sample + " " + second_names_women.sample
+    end
+    puts "User " + name + " added!"
+    #insert_fake_user("user" + i + "@topreserve.com.ua", name)
+    i += 1
+  end
+end
+
 def insert_default_user(email, role = :default)
   user = FactoryGirl.build(:user, role.to_sym, email: email, phone: "+38(044)111-11-11")
   user.activate.skip_confirmation!
@@ -217,10 +269,10 @@ def insert_notifications
   end
 end
 
-
-User.full_truncate
-insert_default_user('admin@adm.com', :admin)
-insert_default_user('user@usr.com')
+insert_fake_users
+#User.full_truncate
+#insert_default_user('admin@adm.com', :admin)
+#insert_default_user('user@usr.com')
 #add_categories
 #add_kitchens
 #insert_mark_types
