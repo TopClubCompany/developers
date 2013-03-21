@@ -10,46 +10,33 @@ def insert_fake_user(email, name, role = :default)
 end
 
 def insert_fake_users(number = 100)
-  i = 0
-  #names = []
-  first_names_men_file = File.open('db/first_names_men.txt', 'r')
-  first_names_men = [];
-  first_names_men_file.each do |line|
-    first_names_men.append line.strip
-  end
-  first_names_men_file.close
 
-  second_names_men_file = File.open('db/second_names_men.txt', 'r')
-  second_names_men = []
-  second_names_men_file.each do |line|
-    second_names_men.append line.strip
+  first_names_men = File.open('db/first_names_men.txt', 'r').map do |line|
+    line.strip
   end
-  second_names_men_file.close
 
-  first_names_women_file = File.open('db/first_names_women.txt', 'r')
-  first_names_women = [];
-  first_names_women_file.each do |line|
-    first_names_women.append line.strip
+  second_names_men = File.open('db/second_names_men.txt', 'r').map do |line|
+    line.strip
   end
-  first_names_women_file.close
 
-  second_names_women_file = File.open('db/second_names_women.txt', 'r')
-  second_names_women = []
-  second_names_women_file.each do |line|
-    second_names_women.append line.strip
+  first_names_women = File.open('db/first_names_women.txt', 'r').map do |line|
+    line.strip
   end
-  second_names_women_file.close
+
+  second_names_women = File.open('db/second_names_women.txt', 'r').map do |line|
+    line.strip
+  end
   
-  i = 0
-  while i < number
-    if (i % 2 == 0)
-      name = first_names_men.sample + " " + second_names_men.sample 
-    else
-      name = first_names_women.sample + " " + second_names_women.sample
+  loop do
+    if number == 0
+      break
     end
+
+    name = number % 2 == 0 ? first_names_men.sample + " " + second_names_men.sample : first_names_women.sample + " " + second_names_women.sample
+
     puts "User " + name + " added!"
-    #insert_fake_user("user" + i + "@topreserve.com.ua", name)
-    i += 1
+
+    number = number - 1
   end
 end
 
