@@ -16,7 +16,10 @@
       = current_user.gender_title or I18n.t('profile.city_not_specified')
     li
       label= User.human_attribute_name(:birthday)
-      = current_user.birthday.try { |birthday| birthday.strftime("%B %e %Y") } or I18n.t('profile.city_not_specified')
+      - if  current_user.birthday.present?
+        = I18n.l(current_user.birthday, :format => "%e %B %Y")
+      - else
+        = I18n.t('profile.city_not_specified')
   = link_to edit_settings_profile_path(current_user), class: 'user_btn' do
     i.icon-pencil
     strong
