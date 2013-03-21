@@ -1,14 +1,14 @@
 #footer
   .content
     ul#footer_nav
-      - Structure.with_position(::PositionType.static_page).each do |structure|
+      - Structure.visible.with_position(::PositionType.static_page).each do |structure|
         li
           a href="#{page_path(structure.slug)}"
             = structure.name
     span.copyright
       == I18n.t('footer.copy')
-      a href="#"
+      a href=page_path(Structure.find("terms-of-service").slug)
         = I18n.t('footer.terms_of_service')
       ' &nbsp;-
-      a href="#"          
+      a href=page_path(Structure.find("privacy").slug)
         = I18n.t('footer.privacy_police')
