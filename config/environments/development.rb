@@ -53,3 +53,4 @@ Topclub::Application.configure do
   config.assets.logger = false
   config.active_record.logger = false
 end
+Rails.application.routes.default_url_options[:host] = "localhost:3005"

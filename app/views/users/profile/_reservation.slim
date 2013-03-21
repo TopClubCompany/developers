@@ -4,7 +4,10 @@
     - if place.place_image
       img height="100" src=place.place_image.url(:slider) width="140"
         span.discount.minus_5
-  small 17/11/2012, 8:00 PM
+  - if I18n.locale.to_sym == :en
+    small= I18n.l(reservation.time, :format => "%d/%m/%Y, %I:%M %p")
+  - else
+    small= I18n.l(reservation.time, :format => "%d/%m/%Y, %I:%M")
   h4 style="width: auto;"
     a href=show_profile_reservation_path(place.user_id, reservation.id)
       = place.title
@@ -18,7 +21,7 @@
       .stars_bg
     small
       - place_reviews = place.reviews.count
-      a href=place_path(place.place_path)
+      a href=place_link(place)
         = place_reviews
         |  #{place_reviews == 1 ? 'review' : 'reviews'}
   .btns
@@ -26,7 +29,7 @@
       / a href=mark_invisible_profile_reservation_path(place.user_id, reservation.id)
       a href=cancel_profile_reservation_path(place.user_id, reservation.id)
         = t('reservation.delete')
-      a href=place_path(place.place_path, anchor: 'write_review')
+      a href=place_link(place, 'write_review')
         = t('short_strings.submit_review')
     - else
       a href=cancel_profile_reservation_path(place.user_id, reservation.id)

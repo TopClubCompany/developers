@@ -20,7 +20,7 @@
             - reservations.each do |reservation|
               - if reservation.place
                 .reservation
-                  a href=place_path(reservation.place.place_path)
+                  a href=place_link(reservation.place)
                     = reservation.place.name
                   small= to_time_format(reservation.time)
                   .btns
@@ -42,7 +42,7 @@
               - if place
                 .review
                   .review_content
-                    a.user_link href=place_path(place.place_path)
+                    a.user_link href=place_link(place)
                       span itemprop="author"
                         = place.name
                     '
@@ -59,7 +59,7 @@
                     span
                       = review.content
                     .clear
-                    a.read_more href=place_path(place.place_path)
+                    a.read_more href=place_link(place)
                       nobr #{I18n.t('profile.read_more')}
             - if current_user.reviews.count > 2
               = link_to I18n.t('profile.read_all_reviews'), self_reviews_profile_path(current_user), class: 'all'

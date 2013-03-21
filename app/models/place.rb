@@ -499,6 +499,18 @@ class Place < ActiveRecord::Base
     end
   end
 
+  def place_path_without_locale
+    path = if location && location.city
+      "/#{slug}-#{location.city_en.downcase.gsub(' ', '_')}"
+    else
+      "/#{slug}"
+    end
+    if I18n.locale.to_sym == I18n.default_locale.to_sym
+      path = "ru" + path
+    end
+    path
+  end
+
   private
 
   def self.get_star_rating place
