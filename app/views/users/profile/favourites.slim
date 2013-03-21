@@ -16,10 +16,10 @@
               - place = reservation.place
               - if place
                 .reservation.place
-                  = link_to place, class: "place_img_sm" do
+                  a.place_img_sm href=place_link(place)
                     img height="100" src=place.place_image.url(:slider) width="140"
                   h4 style="width: auto;"
-                    = link_to place do                    
+                    a href=place_link(place)
                       = place.title
                       - unless place.max_discount.to_i == 0 
                         span.discount_label
@@ -31,7 +31,7 @@
                       .stars_bg
                     small
                       - place_reviews = place.reviews.count
-                      a href="#"
+                      a href=place_link(place)
                         = place_reviews
                         |  #{place_reviews == 1 ? 'review' : 'reviews'}
                   ul.place_features

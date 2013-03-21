@@ -277,4 +277,10 @@ module ApplicationHelper
     "/" + I18n.locale.to_s + path
   end
 
+  def place_link(place, prefix="")
+    url = root_url + place.place_path_without_locale
+    url += "##{prefix}" if prefix.present?
+    url
+  end
+
 end
