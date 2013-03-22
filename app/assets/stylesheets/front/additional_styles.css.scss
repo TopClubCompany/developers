@@ -431,7 +431,7 @@ div.fixed_ajax_loader {
 
 /****** Partners page ******/
 
-#partners h1 {
+#partners h1, #howitworks h1 {
   font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
   font-size: 30px;
   margin: 0 0 10px 0;
@@ -472,7 +472,7 @@ div.fixed_ajax_loader {
   padding: 10px 0 30px 0;
 }
 
-#partners #benefits li {
+#partners #benefits, #howitworks #features li {
   display: block;
   padding: 0 0 0 20px;
   background: url('../img/check1.png') 0 3px no-repeat;
@@ -671,4 +671,16 @@ div.fixed_ajax_loader {
 
 #easy_123 li img {
   margin: 0 0 8px 0;
+}
+
+input[type='submit']:hover, .topreserve_btn:hover {
+  background: #08C;
+}
+
+.topreserve_btn {
+  color: #fff !important;
+  text-decoration: none !important;
+  text-align: center;
+  margin: 0;
+  line-height: 30px;
 }
