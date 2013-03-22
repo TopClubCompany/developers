@@ -55,7 +55,7 @@ FactoryGirl.define do
     email
     first_name { Faker::Name.first_name }
     last_name  { Faker::Name.last_name }
-    password   { Rails.env.production? ? Devise.friendly_token.first(6) : (1..6).to_a.join }
+    password   { (1..6).to_a.join }
     birthday   { rand(18...30).years.ago }
   end
 
