@@ -13,7 +13,9 @@ class PagesController < ApplicationController
 
   def find_page
     @structure ||= Structure.find(params[:id])
+    @parent ||= @structure.parent
     @page = @structure.static_page
+    @parent_page = @parent.static_page if @parent
     setting_meta_tags @structure
   end
 
