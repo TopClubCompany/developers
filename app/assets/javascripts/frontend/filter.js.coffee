@@ -472,6 +472,7 @@ class FilterInput
 
 
   getFilterseNeedToTriggerPaginate: (needToCheck) =>
+    self = @
     needToCheck = @strip needToCheck
     for own key, value of needToCheck
       unless $.isArray value
@@ -493,6 +494,8 @@ class FilterInput
         $("#refine input[value='#{num}'][data-type='#{filter}']").click() unless $("#refine input[value='#{num}'][data-type='#{filter}']").is(':checked')
         $("#refine input[value='#{num}'][data-type='#{filter}']").one 'click', ->
           window.history.pushState '', null, "/search" + window.location.search
+          self.get 'page', 1
+
 
         parseInt(num) in alreadyThere[filter]
       ).length > 0
