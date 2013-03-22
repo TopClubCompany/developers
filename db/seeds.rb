@@ -32,12 +32,26 @@ def insert_fake_users(number = 100)
       break
     end
 
-    name = number % 2 == 0 ? first_names_men.sample + " " + second_names_men.sample : first_names_women.sample + " " + second_names_women.sample
-    
-    insert_fake_user(("user" + number.to_s + "@topreserve.com.ua"), name)
-    
-    puts "User " + name + " added!"
-    
+    email = "user" + number.to_s + "@topreserve.com.ua"
+
+    if number % 2 == 0
+      first_name = first_names_men.sample
+      last_name  = second_names_men.sample
+    else
+      first_name = first_names_women.sample
+      last_name  = second_names_women.sample
+    end
+
+    password = (1..6).to_a.join
+    birthday = rand(18...30).years.ago
+
+    User.new(first_name: first_name, last_name: last_name, password: password, birthday: birthday, email: email).save
+
+    puts "User " + first_name + " " + last_name + " added!"
+
+    #insert_fake_user(email, name)
+
+
     number = number - 1
   end
 end
