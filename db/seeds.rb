@@ -33,9 +33,11 @@ def insert_fake_users(number = 100)
     end
 
     name = number % 2 == 0 ? first_names_men.sample + " " + second_names_men.sample : first_names_women.sample + " " + second_names_women.sample
-
+    
+    insert_fake_user(("user" + number.to_s + "@topreserve.com.ua"), name)
+    
     puts "User " + name + " added!"
-
+    
     number = number - 1
   end
 end
