@@ -11,21 +11,13 @@ end
 
 def insert_fake_users(number = 100)
 
-  first_names_men = File.open('db/first_names_men.txt', 'r').map do |line|
-    line.strip
-  end
+  first_names_men = File.open('db/first_names_men.txt', 'r').map(&:strip)
 
-  second_names_men = File.open('db/second_names_men.txt', 'r').map do |line|
-    line.strip
-  end
+  second_names_men = File.open('db/second_names_men.txt', 'r').map(&:strip)
 
-  first_names_women = File.open('db/first_names_women.txt', 'r').map do |line|
-    line.strip
-  end
+  first_names_women = File.open('db/first_names_women.txt', 'r').map(&:strip)
 
-  second_names_women = File.open('db/second_names_women.txt', 'r').map do |line|
-    line.strip
-  end
+  second_names_women = File.open('db/second_names_women.txt', 'r').map(&:strip)
   
   loop do
     if number == 0
@@ -44,8 +36,10 @@ def insert_fake_users(number = 100)
 
     password = (1..6).to_a.join
     birthday = rand(18...30).years.ago
+    user_role_id  = UserRoleType.default.id
 
-    User.new(first_name: first_name, last_name: last_name, password: password, birthday: birthday, email: email).save
+    User.new(first_name: first_name, last_name: last_name, password: password, birthday: birthday,
+             email: email, user_role_id: user_role_id).save
 
     puts "User " + first_name + " " + last_name + " added!"
 
