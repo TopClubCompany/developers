@@ -4,6 +4,4 @@
       .page_content
         == @page.try(:content)
     .span4
-
-/ for parent
-  == @parent_page.try(:content) if @parent_page
+      == @parent_page.try(:content) if @parent_page
