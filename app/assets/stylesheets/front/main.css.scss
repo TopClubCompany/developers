@@ -1773,7 +1773,7 @@ h4 .discount_label {
 }
 
 
-#sidebar {
+#sidebar, .sidebar {
   border-radius: 3px;
   background: #fff;
 }
@@ -1792,12 +1792,11 @@ h4 .discount_label {
   margin-bottom: 20px;;
 }
 
-#sidebar h3 {
+#sidebar h3, .sidebar h3 {
   color: #333;
   font-size: 18px;
   line-height: 18px;
-  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif
-  ;
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
   margin: 0;
   padding: 10px 10px 5px 10px;
   font-weight: normal;
