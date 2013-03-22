@@ -677,7 +677,7 @@ class FilterInput
     $.ajaxSetup
 #      cache: false
       dataType: "json",
-      url: window.location.pathname || "/search",
+      url: window.location.pathname + '.json'|| "/search" + '.json',
       type: "GET"
       error: (xhr, error) ->
         $.noop()
@@ -732,6 +732,13 @@ $ ->
     $("#ajax_loader_overlay").fadeOut ->
       $(@).remove()
 
+  if $('#search_form').length and $('#refine').length      
+    $('#search_form form').on 'submit', (e) ->
+      e.preventDefault()
+      categories = if window.location.search.match(/category=(?:\d+,?)+/) then window.location.search.match(/category=(?:\d+,?)+/) + '&' else ''
+      data_string = '?' + categories + $('#search_form form').serialize()
+      url = window.location.pathname + data_string
+      window.location.href = url
 handleClick = ()->
   $('.timing a').off 'click.reserve', (e) ->
   $('.timing a').on 'click.reserve', (e) ->
