@@ -88,6 +88,9 @@ ua:
     edit_comment: "Редагувати"
   confirm_message: "Ви можете підтвердити Вашу поштову адресу, перейшовши по даному посиланню:"
   confirmation_resend: ""
+  cooperation: 
+    error: ""
+    notice: ""
   explore: 
     index: 
       all: "Дивитись усі ›"
