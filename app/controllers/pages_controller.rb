@@ -8,6 +8,10 @@ class PagesController < ApplicationController
     redirect_to root
   end
 
+  def save_cooperation
+
+  end
+
 
   private
 

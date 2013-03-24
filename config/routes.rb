@@ -81,10 +81,8 @@ Topclub::Application.routes.draw do
 
 
   resources :pages do
-
+    post :save_cooperation
   end
-  #resources :assets, :only => [:create, :destroy], :module => "admin" do
-  #end
 
   resources :search do
     collection do
