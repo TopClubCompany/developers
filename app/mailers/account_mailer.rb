@@ -18,4 +18,9 @@ class AccountMailer < ActionMailer::Base
     mail(to: email, subject: subject)
   end
 
+  def new_cooperation email, subject, text
+    @text = text
+    mail(to: email, subject: subject)
+  end
+
 end

@@ -81,7 +81,9 @@ Topclub::Application.routes.draw do
 
 
   resources :pages do
-    post :save_cooperation
+    collection do
+      post :save_cooperation
+    end
   end
 
   resources :search do
@@ -166,6 +168,10 @@ Topclub::Application.routes.draw do
     end
 
     resources :user_notifications do
+      post :batch, :on => :collection
+    end
+
+    resources :cooperations do
       post :batch, :on => :collection
     end
 

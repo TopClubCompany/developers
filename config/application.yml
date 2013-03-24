@@ -11,6 +11,7 @@ development:
   SMS_PASSWORD: '198666'
   SMS_SENDER: 'TopReserve'
   POINTS: 5
+  COOPERATION_EMAIL: "partners@topreserve.com.ua"
 
 test:
   FACEBOOK_APP_ID: 373546769386190
@@ -25,6 +26,7 @@ test:
   SMS_PASSWORD: '198666'
   SMS_SENDER: 'TopReserve'
   POINTS: 5
+  COOPERATION_EMAIL: "partners@topreserve.com.ua"
 
 production:
   FACEBOOK_APP_ID: 453952084669104
@@ -39,3 +41,4 @@ production:
   SMS_PASSWORD: '198666'
   SMS_SENDER: 'TopReserve'
   POINTS: 5
+  COOPERATION_EMAIL: "partners@topreserve.com.ua"

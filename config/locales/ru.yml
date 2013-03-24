@@ -394,3 +394,6 @@ ru:
     unhelpful: "бесполезный"
     view: "посмотреть"
   your_email: "Ваш email"
+  cooperation:
+    error: "Ошибка при создании"
+    notice: "Спасибо Ваша заявки принята!"

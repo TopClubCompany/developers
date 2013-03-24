@@ -9,7 +9,14 @@ class PagesController < ApplicationController
   end
 
   def save_cooperation
-
+    cooperation = Cooperation.new(params[:cooperation])
+    if cooperation.save
+      flash = {notice: I18n.t('cooperation.notice')}
+      AccountMailer.new_cooperation(Figaro.env.COOPERATION_EMAIL, "cooperation", admin_cooperation_url(cooperation)).deliver
+    else
+      flash = {error: I18n.t('cooperation.error')}
+    end
+    redirect_to :back, flash: flash
   end
 
 
