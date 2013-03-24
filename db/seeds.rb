@@ -268,7 +268,7 @@ def insert_notifications
   end
 end
 
-insert_fake_users
+#insert_fake_users
 #User.full_truncate
 #insert_default_user('admin@adm.com', :admin)
 #insert_default_user('user@usr.com')
