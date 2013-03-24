@@ -269,9 +269,9 @@ def insert_notifications
 end
 
 #insert_fake_users
-User.full_truncate
-insert_default_user('admin@adm.com', :admin)
-insert_default_user('user@usr.com')
+#User.full_truncate
+#insert_default_user('admin@adm.com', :admin)
+#insert_default_user('user@usr.com')
 #add_categories
 #add_kitchens
 #insert_mark_types
