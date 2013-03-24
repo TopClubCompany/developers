@@ -177,7 +177,10 @@ Topclub::Application.routes.draw do
 
   end
   mount Ckeditor::Engine => "/ckeditor"
+  mount Resque::Server, :at => "/resque"
 
   match '/:id' => "places#show", :as => "place"
+
+
 
 end
