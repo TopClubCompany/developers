@@ -88,6 +88,9 @@ ru:
     edit_comment: "Редактировать"
   confirm_message: "Вы можете подтвердить Ваш почтовый адрес пройдя по следующей ссылке:"
   confirmation_resend: "Повторно выслать письмо для подтверждения e-mail."
+  cooperation: 
+    error: "Ошибка при создании"
+    notice: "Спасибо Ваша заявки принята!"
   explore: 
     index: 
       all: "Смотреть все ›"
@@ -394,6 +397,3 @@ ru:
     unhelpful: "бесполезный"
     view: "посмотреть"
   your_email: "Ваш email"
-  cooperation:
-    error: "Ошибка при создании"
-    notice: "Спасибо Ваша заявки принята!"

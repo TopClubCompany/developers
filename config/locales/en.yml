@@ -88,6 +88,9 @@ en:
     edit_comment: ""
   confirm_message: "You can confirm your account email through the link below:"
   confirmation_resend: Resend confirmation instructions
+  cooperation: 
+    error: ""
+    notice: ""
   explore: 
     index: 
       all: "Browse all ›"
