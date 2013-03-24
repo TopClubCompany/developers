@@ -2,6 +2,11 @@ class Cooperation < ActiveRecord::Base
 
   attr_accessible :email, :name, :phone, :place_name, :city
 
+  include Utils::Models::Base
+  include Utils::Models::AdminAdds
+
+
+
 end
 # == Schema Information
 #

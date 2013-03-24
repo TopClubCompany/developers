@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :current_city
   before_filter :set_time
   before_filter :set_user_location
-  before_filter :find_page
+  before_filter :find_page, except: [:save_cooperation]
   before_filter :set_gon_current_user
   before_filter :set_user_path
   before_filter :set_breadcrumbs_front, only: [:index, :show]
