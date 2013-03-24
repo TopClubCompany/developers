@@ -105,6 +105,8 @@ gem 'geocoder'
 gem 'geoip'
 gem 'auto_html'
 gem 'jbuilder'
+gem 'resque', :require => "resque/server"
+gem 'resque-scheduler', :require => 'resque_scheduler'
 #gem 'ancestry
 
 gem 'curb'
