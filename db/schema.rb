@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130314211339) do
+ActiveRecord::Schema.define(:version => 20130324083727) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -164,6 +164,16 @@ ActiveRecord::Schema.define(:version => 20130314211339) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], :name => "idx_ckeditor_assetable"
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_ckeditor_assetable_type"
+
+  create_table "cooperations", :force => true do |t|
+    t.string   "email"
+    t.string   "name"
+    t.string   "phone"
+    t.string   "place_name"
+    t.string   "city"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "day_discount_translations", :force => true do |t|
     t.integer  "day_discount_id"
