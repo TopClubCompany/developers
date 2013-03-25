@@ -1,6 +1,6 @@
 #reviews
   h6= I18n.t("place.review_for_place", count: reviews.count, place: place.title)
-  - cache [I18n.locale, 'place', 'reviews', place.id, current_user.id, reviews.count, "show"] do
+  - cache [I18n.locale, 'place', 'reviews', place.id, current_user.try(:id), reviews.count, "show"] do
     .dropdown style="float: right;"
       a#sortby.sortby.dropdown-toggle data-target="#" data-toggle="dropdown" role="button"
         = t('short_strings.sort_by')
