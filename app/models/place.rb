@@ -511,6 +511,17 @@ class Place < ActiveRecord::Base
     path
   end
 
+  def open?
+    time = Time.now
+    current_day = PlaceUtils::PlaceTime.wday(time.wday)
+    week_day = WeekDay.with_place_and_day(id, current_day).first
+    if week_day
+      week_day.range_time.include? time.strftime("%H").to_i
+    else
+      false
+    end
+  end
+
   private
 
   def self.get_star_rating place

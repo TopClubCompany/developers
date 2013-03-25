@@ -52,12 +52,15 @@
             - @place.humanable_schedule.each do |time|
               = time.html_safe
             ' ·
-            b.open Открыт
-            b.closed Закрыт
+            - if @place.open?
+              b.open= I18n.t('open')
+            - else
+              b.closed= I18n.t('closed')
           li.phone
-            strong Phone:
-            |+38 (098) 110-10-10
-              br
+            strong
+              = I18n.t('place.phone')
+            = @place.phone
+            br
           #place_links
             /= link_to t('short_strings.more_detalis'), '#'
             = link_to t('short_strings.view_menu'), '#place_menu', {:class => "show_popup menu"}
@@ -80,8 +83,3 @@
     = render 'place_menu_popup'
     = render 'place_share_popup'
     = render 'links_for_share'
-/script type='text/html' id='review_template'
-/  = render 'review', mustache: @place.reviews.to_json
-
-
-
