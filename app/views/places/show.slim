@@ -48,16 +48,16 @@
           li.cuisine
             strong
             = @place.kitchens.map(&:name).join(', ')
+          li.phone
+            strong
+              ' Phone:
+            | +38 (098) 110-10-10
           li.timing
             - @place.humanable_schedule.each do |time|
               = time.html_safe
             ' ·
             b.open Открыт
             b.closed Закрыт
-          li.phone
-            strong
-              ' Phone:
-              |+38 (098) 110-10-10
             br
           #place_links
             /= link_to t('short_strings.more_detalis'), '#'
