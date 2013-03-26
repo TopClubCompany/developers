@@ -372,7 +372,11 @@ class Place < ActiveRecord::Base
       end
     end
     res[:discount] = offers[0].try{|offer| offer.discount.try(:to_i) }
-    res[:place_url] = "/#{I18n.locale}/#{place.slug}-#{place['city_en'].try{|city| city.downcase.gsub(' ','_')}}"
+    if I18n.locale.to_sym == I18n.default_locale
+      res[:place_url] = "/#{place.slug}-#{place['city_en'].try{|city| city.downcase.gsub(' ','_')}}"
+    else
+      res[:place_url] = "/#{I18n.locale}/#{place.slug}-#{place['city_en'].try{|city| city.downcase.gsub(' ','_')}}"
+    end
     res[:star_rating] = self.get_star_rating(place)
     res[:is_favourite] = UserFavoritePlace.liked?(options[:current_user].try(:id), place.id)
     res[:timing] = self.order_time(place, time, current_day)
@@ -492,24 +496,28 @@ class Place < ActiveRecord::Base
   end
 
   def place_path
-    if location && location.city
-      "/#{I18n.locale}/#{slug}-#{location.city_en.downcase.gsub(' ', '_')}"
+    path = place_path_without_locale()
+    with_locale(path)
+  end
+
+  def with_locale(path)
+    path = "/" + path if path[0] != "/"
+    if I18n.locale.to_sym == I18n.default_locale.to_sym
+      path
     else
-      "/#{I18n.locale}/#{slug}"
+      "/" + I18n.locale.to_s + path
     end
   end
 
   def place_path_without_locale
-    path = if location && location.city
+    if location && location.city
       "/#{slug}-#{location.city_en.downcase.gsub(' ', '_')}"
     else
       "/#{slug}"
     end
-    if I18n.locale.to_sym == I18n.default_locale.to_sym
-      path = "ru" + path
-    end
-    path
   end
+
+
 
   def open?
     time = Time.now

@@ -14,6 +14,9 @@ $ ->
     for language in languagePool
       regexp = new RegExp('\^'+ (language.replace /\//g, '\\/') )
       currentPath = currentPath.replace(regexp, '')
+    console.log currentPath
+    if languageToSet == "ru"
+      languageToSet = ""
     window.location.replace((languageToSet + currentPath).replace(/\/{2,}/g, '/'))
     
     

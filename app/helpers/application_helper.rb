@@ -265,7 +265,11 @@ module ApplicationHelper
   end
 
   def localization_link(resource)
-    "/#{I18n.locale}/#{resource}"
+    if I18n.locale.to_sym == I18n.default_locale.to_sym
+      "/#{resource}"
+    else
+      "/#{I18n.locale}/#{resource}"
+    end
   end
 
   def addcustomjs(*files)
@@ -274,7 +278,11 @@ module ApplicationHelper
 
   def with_locale(path)
     path = "/" + path if path[0] != "/"
-    "/" + I18n.locale.to_s + path
+    if I18n.locale.to_sym == i18n.locale.to_sym
+      path
+    else
+      "/" + I18n.locale.to_s + path
+    end
   end
 
   def place_link(place, prefix="")
