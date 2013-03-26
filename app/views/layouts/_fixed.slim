@@ -2,7 +2,7 @@
   .content
     ul#language
       li.active id=I18n.locale.to_s
-        a href="/#{I18n.locale.to_s}/"= I18n.t("language_title.#{I18n.locale.to_s}")
+        a href=localization_link("") = I18n.t("language_title.#{I18n.locale.to_s}")
       - Globalize.available_locales.each do |locale|
         - unless locale.to_s == I18n.locale.to_s
           li id=locale.to_s

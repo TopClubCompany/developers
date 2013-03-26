@@ -98,7 +98,11 @@ class ApplicationController < ActionController::Base
 
   def with_locale(path)
     path = "/" + path if path[0] != "/"
-    "/" + I18n.locale.to_s + path
+    if I18n.locale.to_sym == :ru
+      path
+    else
+      "/" + I18n.locale.to_s + path
+    end
   end
 
   private
