@@ -49,21 +49,18 @@
             strong
             = @place.kitchens.map(&:name).join(', ')
           li.phone
-            strong
+            /strong
               ' Phone:
             | +38 (098) 110-10-10
           li.timing
             - @place.humanable_schedule.each do |time|
               = time.html_safe
-            ' ·
+            ' &nbsp;·
             - if @place.open?
               b.open= I18n.t('open')
             - else
               b.closed= I18n.t('closed')
-          li.phone
-            strong
-              = I18n.t('place.phone')
-            = @place.phone
+            br
           #place_links
             /= link_to t('short_strings.more_detalis'), '#'
             = link_to t('short_strings.view_menu'), '#place_menu', {:class => "show_popup menu"}
