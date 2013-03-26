@@ -42,6 +42,7 @@ gem 'vkontakte_api', '~> 1.0'
 
 gem 'unicode_utils'
 gem 'gon'
+gem 'sitemap_generator'
 
 group :development do
   if File.exists?('/var/www/top_club/developers/.local_gems')
