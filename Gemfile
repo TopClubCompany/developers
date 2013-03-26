@@ -9,6 +9,8 @@ gem 'dalli'
 
 gem 'globalize3', :git => 'git://github.com/leschenko/globalize3.git', :ref => '586ccbd'
 
+gem 'exception_notification'
+
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
