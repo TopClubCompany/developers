@@ -755,5 +755,8 @@ handleClick = ()->
     language = $('#language .active').attr('id')
     id = $('#place').data('id') || $(e.target).parents('.place').data('id')
     time = $(e.target).data('value').replace(/\s/, '')
-    newLink = "/#{language}/new_reservation/#{result["reserve_date"]},#{id},h=#{time.split(':')[0]}&m=#{time.split(':')[1]},#{result["number_of_people"]}"
+    if language == "ru"
+      newLink = "/new_reservation/#{result["reserve_date"]},#{id},h=#{time.split(':')[0]}&m=#{time.split(':')[1]},#{result["number_of_people"]}"
+    else
+      newLink = "/#{language}/new_reservation/#{result["reserve_date"]},#{id},h=#{time.split(':')[0]}&m=#{time.split(':')[1]},#{result["number_of_people"]}"
     window.location.replace newLink
