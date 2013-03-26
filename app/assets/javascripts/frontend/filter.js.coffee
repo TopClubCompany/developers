@@ -702,7 +702,11 @@ class FilterInput
       $el = $(this)
       type = $el.data('type')
       if type
-        $.getJSON '/search/get_more',{type: type}, (data) => parse_more_objects.call(self, data, $el, type, no_binding)
+        if window.language == "ru"
+          url_locale = ""
+        else        
+          url_locale = "/" + window.language
+        $.getJSON "#{url_locale}/search/get_more",{type: type}, (data) => parse_more_objects.call(self, data, $el, type, no_binding)
 
   #private methods
   parse_more_objects = (data, $el, type, no_binding) ->
