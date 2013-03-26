@@ -25,8 +25,8 @@
           label
             = t('sign_up.diner_name')
             b  *
-          = f.input :first_name, placeholder: "First name", label: false
-          = f.input :last_name, placeholder: "Last name",label: false
+          = f.input :first_name, placeholder: I18n.t('First_name'), label: false
+          = f.input :last_name, placeholder: I18n.t('Last_name'), label: false
           .clear
           = f.input :phone, placeholder: "+38 ( _ _ _ ) _ _ _ - _ _ - _ _", label: get_reg_form_attr_name(:phone, true), required: true
           .clear
