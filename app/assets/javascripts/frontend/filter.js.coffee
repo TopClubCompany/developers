@@ -704,7 +704,7 @@ class FilterInput
       if type
         if window.language == "ru"
           url_locale = ""
-        else        
+        else
           url_locale = "/" + window.language
         $.getJSON "#{url_locale}/search/get_more",{type: type}, (data) => parse_more_objects.call(self, data, $el, type, no_binding)
 

@@ -400,3 +400,5 @@ ru:
   your_email: "Ваш email"
   open: "Открыт"
   closed: "Закрыт"
+  currency:
+    unit: "UAN"
