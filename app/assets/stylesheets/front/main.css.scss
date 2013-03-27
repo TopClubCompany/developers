@@ -943,13 +943,13 @@ h4 .discount_label {
   clear: left;
 }
 
-.place_features li.location { background: image_url('icons2.gif') 0 1px no-repeat; }
-.place_features li.cuisine { background: image_url('icons2.gif') 0 -59px no-repeat; }
-.place_features li.pricing { background: image_url('icons2.gif') 0 -120px no-repeat; }
-.place_features li.timing { background: image_url('icons2.gif') 0 -171px no-repeat; font-size: 11px; line-height: 18px; }
+.place_features li.phone { background: url('icons2.gif') 1px -419px no-repeat; }
+.place_features li.location { background: url('icons2.gif') 0 1px no-repeat; }
+.place_features li.cuisine { background: url('icons2.gif') 0 -109px no-repeat; }
+.place_features li.pricing { background: url('icons2.gif') 0 -220px no-repeat; }
+.place_features li.timing { background: url('icons2.gif') 0 -321px no-repeat; font-size: 11px; line-height: 18px; }
 .place_features li.timing b.open { color:#79AD53; }
 .place_features li.timing b.closed { color:#000; }
-.place_features li.phone { background: url('icons2.gif') 1px -219px no-repeat; }
 
 
 #listing .timing {
