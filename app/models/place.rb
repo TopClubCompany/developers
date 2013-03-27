@@ -552,6 +552,11 @@ class Place < ActiveRecord::Base
   def self.en_to_time(time)
     if time.include?("AM")
       time = time.gsub(" AM",'')
+      time = time.split(":")
+      if time[0].to_i == 12
+        time[0] = (time[0].to_i + 12).to_s
+      end
+      time = time.join(":")
     elsif time.include?("PM")
       time = time.gsub(" PM",'').split(":")
       if time[0].to_i != 12
