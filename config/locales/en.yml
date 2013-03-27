@@ -92,6 +92,8 @@ en:
   cooperation: 
     error: ""
     notice: ""
+  currency: 
+    unit: ""
   explore: 
     index: 
       all: "Browse all ›"

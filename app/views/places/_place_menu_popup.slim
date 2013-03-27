@@ -10,5 +10,5 @@
             span
               = item.title
               small= item.description
-            b= number_to_currency item.price, unit: I18n.t('currency.unit')
+            b= number_to_currency item.price, unit: I18n.t('currency.unit'), format: "%n %u"
             .clear
