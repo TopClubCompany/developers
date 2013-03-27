@@ -79,6 +79,7 @@ ru:
     profile: "Профиль"
     search: "Поиск"
   city: "город"
+  closed: "Закрыт"
   comments: 
     add_comment: "Создать"
     comment: "Комментировать"
@@ -160,6 +161,7 @@ ru:
   message_reset: "Кто-то запросил ссылку для изменения Вашего пароля."
   message_unlock: "Вы можете разблокировать Вашу учётную запись пройдя по следующей ссылке:"
   message_wont_change: "Ваш пароль будет изменен, как только Вы перейдете по ссылке и создадите новый."
+  open: "Открыт"
   order: "[:day, :month, :year]"
   password_change_mesage: "Изменить пароль"
   place: 
@@ -167,12 +169,12 @@ ru:
     average_bill: "Средний чек"
     back_to_search: "Вернуться к выбору времени"
     is: "из"
+    phone: "Phone:"
     reservetion_table: "Забронировать стол"
     review_for_place: "Все %{count} отзыв(а) о %{place}"
     share: "Поделиться"
     up_to: "Скидка до %{discount}%"
     vailability: "Доступное время %{reserve_date} в районе %{reserve_time} для %{number_of_people} человек"
-    phone: "Phone:"
   profile: 
     birthday: "День рождения"
     city_not_specified: "не указан"
@@ -200,12 +202,12 @@ ru:
       connect_social_accounts: "Подключить социальные сети"
       connected: "Ваш %{account} подключен"
       disconnect: "Отключить"
-      facebook: Connect your Facebook account for easy sharing with your friends
-      small_facebook: Connect vs Facebook
-      small_twitter: Connect vs Twitter
-      small_vk: "Connect vs Вконтакте"
-      twitter: Connect your Connect vs Twitter account for easy sharing with your friends
-      vk: "Connect Вконтакте if you are тру юзер"
+      facebook: "Подключите ваш аккаунт на Facebook"
+      small_facebook: "Подключить Facebook"
+      small_twitter: "Подключить Twitter"
+      small_vk: "Подключить Вконтакте"
+      twitter: "Подключите ваш аккаунт на Twitter"
+      vk: "Подключите ваш аккаунт Вконтакте"
     time: "Время"
     upcoming: "Грядущие резервы "
     username: "Имя пользователя"
@@ -216,12 +218,12 @@ ru:
   reservation: 
     address: "Адрес:"
     at: "в"
-    complete: "Заполните форму заказа"
+    complete: "Отправить и завершить бронирование"
     confirmation: "Подтверждение #:"
     confirmed: "Ваш заказ подтверджен"
     confirmed_text: Your reservation is confirmed and saved in the restaurant's computer reservation system. You'll receive an email copy of this confirmation.
     delete: "Удалить"
-    diner_name: "Имя обедающего:"
+    diner_name: "Резерв на:"
     discount: This document guarantees your reservation and <strong>%{discount}% discount</strong> for your bill
     dress_code: "Dress Code:"
     edit: "Править"
@@ -232,7 +234,7 @@ ru:
     message_from_restoran: "Сообщение от ресторана:"
     more_info: "Подробнее:"
     new_reservation: 
-      complete_reservation: "Заполните Ваш заказ"
+      complete_reservation: "Подтвердите Вашу бронь"
     people: 
       one: "1 персоны"
       other: " %{count} персон"
@@ -281,7 +283,7 @@ ru:
       th2: "Нажмите на время для резерва"
     title_or_location: "название или адрес"
   share: 
-    description: "тестовое описание"
+    description: "Бесплатный заказ столика со скидкой до 50% на все меню на TopReserve"
   short_strings: 
     add_to_favorites: "Добавить <br> в избранное"
     edit_reservation: "Редактировать резерв"
@@ -305,14 +307,14 @@ ru:
     submit_a_review: "оставить отзыв:"
     submit_review: "Оставить отзыв"
     view_menu: "Посмотреть меню ›"
-    view_your_reservation: "Посмотреть свои резервации"
+    view_your_reservation: "Детали вашего резерва"
     write_review: "Написать отзыв"
   sign_in: 
     forgot_pass: "Забыли пароль?"
   sign_up: 
     become_member: "Присоединяйтесь"
     by_click: "Нажимая «Зарегистрироваться», Вы подтвреждаете, что принимаете"
-    diner_name: "Имя обедающего"
+    diner_name: "Ваше имя: "
     earn_points: "зарабатывайте очки"
     for_successful_reservations: "за успешные резервации"
     name: "Имя: "
@@ -398,5 +400,3 @@ ru:
     unhelpful: "бесполезный"
     view: "посмотреть"
   your_email: "Ваш email"
-  open: "Открыт"
-  closed: "Закрыт"
