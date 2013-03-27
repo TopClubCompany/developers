@@ -79,6 +79,7 @@ en:
     profile: Profile
     search: Search
   city: city
+  closed: Closed
   comments: 
     add_comment: ""
     comment: ""
@@ -160,6 +161,7 @@ en:
   message_reset: Someone has requested a link to change your password, and you can do this through the link below.
   message_unlock: "Click the link below to unlock your account:"
   message_wont_change: Your password won't change until you access the link above and create a new one.
+  open: Opened
   order: "[:day, :month, :year]"
   password_change_mesage: Change my password
   place: 
@@ -167,7 +169,8 @@ en:
     average_bill: Avarage check
     back_to_search: Back to search
     is: from
-    reservetion_table: ""
+    phone: ""
+    reservetion_table: Reserve
     review_for_place: All %{count} review(s) for %{place}
     share: Share
     up_to: Up to %{discount}% off
