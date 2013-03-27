@@ -79,6 +79,7 @@ ua:
     profile: "Профіль"
     search: "Пошук"
   city: "місто"
+  closed: ""
   comments: 
     add_comment: "Створити"
     comment: "Комментувати"
@@ -160,6 +161,7 @@ ua:
   message_reset: "Хтось зробив запит на посилання для відновлення Вашого паролю."
   message_unlock: "Ви можете розблокувати Ваш аккаунт, перейшовши по даному посиланню:"
   message_wont_change: "Ваш пароль будет змінено, як тільки Ви перейдете по посиланню і створете новий."
+  open: ""
   order: ""
   password_change_mesage: "Змінити пароль"
   place: 
@@ -167,7 +169,8 @@ ua:
     average_bill: ""
     back_to_search: "Повернутися до вибору часу"
     is: ""
-    reservetion_table: ""
+    phone: ""
+    reservetion_table: "Забронювати стіл"
     review_for_place: "Відгуків для %{place}: %{count}"
     share: "Поділитись"
     up_to: "Знижка до %{discount}%"
@@ -215,7 +218,7 @@ ua:
   reservation: 
     address: "Адреса:"
     at: "в"
-    complete: "Заповніть форму замовлення"
+    complete: "Відправити та завершити бронювання"
     confirmation: "Номер підтвердження: #"
     confirmed: "Ваше замовлення підтверджено"
     confirmed_text: "Ваш резерв підтверджено та збережено у системі обліку резервів ресторану. Ви отримаєте копію цього підтвердження."
@@ -389,7 +392,7 @@ ua:
     kitchen: "кухня"
     location: "Адреса"
     menu: "Меню"
-    new_reservation: "Забронювати стол"
+    new_reservation: "Забронювати стіл"
     overall: "Загальна"
     reviews: "відгуків"
     roll_up: "Згорнути"

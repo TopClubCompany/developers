@@ -299,7 +299,7 @@ ru:
         phone: Phone
         place: Place
         place_id: Place
-        special_notes: Special notes
+        special_notes: "Пожелания:"
         time: Time
         updated_at: Updated at
         user: User
