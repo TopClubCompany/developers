@@ -56,7 +56,6 @@
             - @place.humanable_schedule.each do |time|
               = time.html_safe
               br
-            ' &nbsp;·
             - if @place.open?
               b.open= I18n.t('open')
             - else
