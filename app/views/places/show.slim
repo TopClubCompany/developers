@@ -55,13 +55,12 @@
           li.timing
             - @place.humanable_schedule.each do |time|
               = time.html_safe
-              br
+                br
             ' &nbsp;·
             - if @place.open?
               b.open= I18n.t('open')
             - else
               b.closed= I18n.t('closed')
-            br
           #place_links
             /= link_to t('short_strings.more_detalis'), '#'
             = link_to t('short_strings.view_menu'), '#place_menu', {:class => "show_popup menu"}
