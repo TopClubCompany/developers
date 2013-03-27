@@ -1,10 +1,10 @@
 module Users::ProfileHelper
 
   def user_menu_name user = current_user
-    if user.first_name.present? && user.last_name.present?
+    if user && user.first_name.present? && user.last_name.present?
       "#{user.first_name} #{user.last_name[0]}."
     else
-      user.email
+      user.try(:email)
     end
   end
 
@@ -12,7 +12,7 @@ module Users::ProfileHelper
     if user.try(:avatar).present? && user.avatar.url(avatar_size) !~ /(\/images\/defaults\/avatar_sidebar.png)/
        user.avatar.url(avatar_size)
     else
-      if user.accounts.last
+      if user && user.accounts.last
         user.accounts.last.photo
       else
         '/assets/no_avatar.gif'

@@ -295,4 +295,16 @@ module ApplicationHelper
     url
   end
 
+  def to_en_time time
+    if I18n.locale == :en && (!time.to_s.include?("AM") || !time.to_s.include?("PM"))
+      Time.parse(time).strftime("%l:%M %p").sub( /^\s/, '')
+    else
+      if I18n.locale != :en && (time.to_s.include?("AM") || time.to_s.include?("PM"))
+        Place.en_to_time(time)
+      else
+        time
+      end
+    end
+  end
+
 end
