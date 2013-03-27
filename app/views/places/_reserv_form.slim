@@ -1,5 +1,5 @@
 #search_form.place_timing
-  - locales_hash = {reserve_date: params[:reserve_date], reserve_time: params[:reserve_time], number_of_people: params[:number_of_people]}
+  - locales_hash = {reserve_date: params[:reserve_date], reserve_time: to_en_time(params[:reserve_time]), number_of_people: params[:number_of_people]}
   span.header= I18n.t("place.vailability", locales_hash)
   form
     label for="reserve_time"
