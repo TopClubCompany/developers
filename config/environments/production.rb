@@ -81,8 +81,8 @@ Topclub::Application.configure do
 
   config.action_mailer.default_url_options = { :host => 'topreserve.com.ua' }
   config.middleware.use ExceptionNotifier,
-                        :email_prefix => "TOP_RESERV #{Rails.env.capitalize} ",
-                        :sender_address => %{"Application Error" <opak.alexandr@gmail.com>},
+                        :email_prefix => "[TOP]",
+                        :sender_address => %{"TOProd" <opak.alexandr@gmail.com>},
                         :exception_recipients => %w{opak.alexandr@gmail.com}
 
   # Log the query plan for queries taking more than this (works

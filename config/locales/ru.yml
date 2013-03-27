@@ -92,6 +92,8 @@ ru:
   cooperation: 
     error: "Ошибка при создании"
     notice: "Спасибо Ваша заявки принята!"
+  currency: 
+    unit: UAN
   explore: 
     index: 
       all: "Смотреть все ›"
@@ -400,5 +402,3 @@ ru:
     unhelpful: "бесполезный"
     view: "посмотреть"
   your_email: "Ваш email"
-  currency:
-    unit: "UAN"

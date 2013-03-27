@@ -92,6 +92,8 @@ ua:
   cooperation: 
     error: ""
     notice: ""
+  currency: 
+    unit: ""
   explore: 
     index: 
       all: "Дивитись усі ›"
