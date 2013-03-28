@@ -23,8 +23,8 @@
           = f.input :first_name, placeholder: t("First_name"), label: false
           = f.input :last_name, placeholder: locale_cap(t("Last_name")),label: false
           .clear
-          = f.input :phone, placeholder: "+38(___)___-__-__", label: get_reg_form_attr_name(:phone, true), required: true
-          .clear
+          /= f.input :phone, placeholder: "+38(___)___-__-__", label: get_reg_form_attr_name(:phone, true), required: true
+          /.clear
           = f.input :email, label: get_reg_form_attr_name(:email)
           .clear
           = f.input :password, label: get_reg_form_attr_name(:password)
