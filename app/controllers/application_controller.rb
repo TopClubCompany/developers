@@ -41,7 +41,12 @@ class ApplicationController < ActionController::Base
 
   def set_time
     h,m = params[:reserve_time].try(:split,':')
+    @next_day = false
     unless h and m
+      now_time = DateTime.now.strftime("%H.%M").to_f
+      if now_time >= 22.30
+        @next_day = true
+      end
       h,m = (DateTime.now + (90 - DateTime.now.min % 15).minutes).strftime("%k:%M").split(':')
     end
     @time = {:h => h.to_s, :m => m.to_s }

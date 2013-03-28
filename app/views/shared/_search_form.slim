@@ -3,7 +3,10 @@ form action=localization_link("search")
     - unless defined? show_title
       input id='title_or_location' name="title_or_location" data-rightadd="55" placeholder="#{I18n.t('search.title_or_location')}" type="text" value=(params[:title_or_location])
   label for="reserve_date"
-  input class='dateFormatNeeded' name="reserve_date" autocomplete="off" type="text" value=(params[:reserve_date] || Time.now.strftime("%d/%m/%Y"))
+  - date  = (params[:reserve_date] || Time.now.strftime("%d/%m/%Y"))
+  - if @next_day
+    - date = (Time.parse(date) + 1.day).strftime("%d/%m/%Y")
+  input class='dateFormatNeeded' name="reserve_date" autocomplete="off" type="text" value=date
   label for="reserve_time"
   #fixwidth.reserve_time_c
     select name="reserve_time"
