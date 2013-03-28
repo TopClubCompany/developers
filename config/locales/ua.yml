@@ -78,6 +78,8 @@ ua:
     main: "Головна"
     profile: "Профіль"
     search: "Пошук"
+  ceo: 
+    main: ""
   city: "місто"
   closed: "Зачинено"
   comments: 

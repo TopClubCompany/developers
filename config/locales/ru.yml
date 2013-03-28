@@ -78,6 +78,8 @@ ru:
     main: "Главная"
     profile: "Профиль"
     search: "Поиск"
+  ceo: 
+    main: <b> CEO Text </b>
   city: "город"
   closed: "Закрыт"
   comments: 
