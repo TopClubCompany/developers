@@ -107,7 +107,7 @@ class Users::OmniauthCallbacksController < ApplicationController
   def auth_user user
     session[:user_data] = nil
     sign_in user
-    return_path = if session[:return_path].present? && !session[:return_path].include?("user_registration")
+    return_path = if session[:return_path].present?
                     session[:return_path]
                   else
                     root_path
