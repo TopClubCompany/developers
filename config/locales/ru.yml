@@ -93,7 +93,7 @@ ru:
     error: "Ошибка при создании"
     notice: "Спасибо Ваша заявки принята!"
   currency: 
-    unit: UAN
+    unit: "грн."
   explore: 
     index: 
       all: "Смотреть все ›"
@@ -171,7 +171,7 @@ ru:
     average_bill: "Средний чек"
     back_to_search: "Вернуться к выбору времени"
     is: "из"
-    phone: "Phone:"
+    phone: "Телефон:"
     reservetion_table: "Забронировать стол"
     review_for_place: "Все %{count} отзыв(а) о %{place}"
     share: "Поделиться"
@@ -221,7 +221,7 @@ ru:
     address: "Адрес:"
     at: "в"
     complete: "Отправить и завершить бронирование"
-    confirmation: "Подтверждение #:"
+    confirmation: "Подтверждение: #"
     confirmed: "Ваш заказ подтверджен"
     confirmed_text: Your reservation is confirmed and saved in the restaurant's computer reservation system. You'll receive an email copy of this confirmation.
     delete: "Удалить"
@@ -253,8 +253,8 @@ ru:
     view_on_map: "Показать ресторан на карте"
     view_or_change: "Посмотреть детали резерва"
   review: 
-    one: " review"
-    other: " reviews"
+    one: " отзыв"
+    other: " отзывы"
   search: 
     browse_category: "Посмотреть места по категориям"
     category: "Категория"
