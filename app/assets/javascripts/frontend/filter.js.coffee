@@ -152,20 +152,7 @@ class PlacesCollection
         place.lng = coords[1]
       @addBlock place
       @addMarker place
-    @handleLikeClick()
-
-  handleLikeClick: ->
-    $('.add_to_favorites').off 'click' 
-    $('.add_to_favorites').on 'click', ->
-      if gon?.current_user
-        $(this).toggleClass 'i_like_this_place'
-        if $(this).hasClass('i_like_this_place')
-          $(this).parent().css('display', 'block')
-        else
-          $(this).parent().removeAttr('style')
-        $.post("/set_unset_favorite_place/#{$(this).data('id')}")
-      else
-        window.location.replace "/users/sign_in"
+   
 
 
   multipleRemove: (placeIdsToRemove) =>
