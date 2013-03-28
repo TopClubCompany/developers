@@ -70,28 +70,28 @@ $ ->
     $(".place_desc .short_description").toggleClass("active_desc")
     text = (if $(this).hasClass("roll_up") then $(this).data('expand') else $(this).data('rollup'))
     $(this).toggleClass("roll_up").text(text)
-
-  $('.add_to_favorites').click ->
-    if gon?.current_user
-      $(this).toggleClass 'i_like_this_place'
-      if $(this).hasClass('i_like_this_place')
-        message = 'add'
-        $(this).parent().css('display', 'block')
-      else
-        message = 'remove'
-        $(this).parent().removeAttr('style')
-      text = I18n.translations["#{window.language}"].admin_js.like["#{message}"]
-      if $(this).is('.html') 
-        cb = ->
-          location.reload()
-      else 
-        cb = ->
-          $('.top-right').notify({"message": {"text": text}}).show()
-      $.ajax
-        type: "POST"
-        dataType: 'json'
-        url: "/set_unset_favorite_place/#{$(this).data('id')}"
-        success: cb
+  $(document).on 'click', '.add_to_favorites', (e) ->
+    if $(e.target).is '.add_to_favorites'
+      if gon?.current_user
+        $(this).toggleClass 'i_like_this_place'
+        if $(this).hasClass('i_like_this_place')
+          message = 'add'
+          $(this).parent().css('display', 'block')
+        else
+          message = 'remove'
+          $(this).parent().removeAttr('style')
+        text = I18n.translations["#{window.language}"].admin_js.like["#{message}"]
+        if $(this).is('.html') 
+          cb = ->
+            location.reload()
+        else 
+          cb = ->
+            $('.top-right').notify({"message": {"text": text}}).show()
+        $.ajax
+          type: "POST"
+          dataType: 'json'
+          url: "/set_unset_favorite_place/#{$(this).data('id')}"
+          success: cb
           
 
     else
