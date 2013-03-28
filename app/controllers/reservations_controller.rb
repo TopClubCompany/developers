@@ -15,7 +15,7 @@ class ReservationsController < ApplicationController
 
     @reservation = Reservation.create_from_place_and_user(current_user, @place)
     find_page(@reservation)
-    redirect_to new_user_session_path and return unless @reservation.present?
+    redirect_to new_user_registration_path and return unless @reservation.present?
     @reservation.persons = @persons.to_i
   end
 
