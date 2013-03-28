@@ -68,9 +68,6 @@
       =' t('footer.need_clients')
       a href=page_path("restaurateurs") #{t('footer.become_a_prtner')}
 
-- cache [I18n.locale, 'explorer', 'ceo', 'main'] do
-  == I18n.t('ceo.main')
-
 - cache [I18n.locale, 'explorer', 'more_template', 'render'] do
   = render 'shared/more_template'
   script type='text/html' id='place_template'
