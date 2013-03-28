@@ -93,7 +93,7 @@ en:
     error: ""
     notice: ""
   currency: 
-    unit: ""
+    unit: UAH
   explore: 
     index: 
       all: "Browse all ›"
