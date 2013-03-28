@@ -13,9 +13,8 @@ html lang="#{I18n.locale}" xml:lang="#{I18n.locale}" xmlns="http://www.w3.org/19
       = bootstrap_flash
 
       = yield
-        /= render "shared/social_links"
-    - cache [I18n.locale, 'layouts', 'application'] do
-      = render "layouts/footer"
+
+    = render "layouts/footer"
     = render "layouts/fixed"
     = render "fileupload/tmpl"
 javascript:
