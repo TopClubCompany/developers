@@ -88,7 +88,7 @@ class ApplicationController < ActionController::Base
 
   def set_user_path
     if !current_user && !request.env['PATH_INFO'].to_s.include?("user_registration")  &&  !request.env['PATH_INFO'].to_s.include?("/users/") && !request.env['PATH_INFO'].to_s.include?("set_unset_favorite_place")
-      if I18n.locale != I18b.default_locale
+      if I18n.locale.to_sym != I18n.default_locale.to_sym
         session[:return_path] = "/" + I18n.locale.to_s + request.env['PATH_INFO']
       else
         session[:return_path] = request.env['PATH_INFO']
