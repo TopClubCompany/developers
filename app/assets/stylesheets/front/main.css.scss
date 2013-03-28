@@ -5,7 +5,7 @@
   url('/univers_condensedmedium.ttf') format('truetype');
 }
 
-html, body {height: 100%; margin: 0; padding: 0;}
+html, body {margin: 0; padding: 0;}
 
 body {
   background: #fff;
@@ -214,7 +214,12 @@ input[type='submit']:hover {
   height: 20px;
 }
 
-
+#fixed #user_block #user_dropdown li.active {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100px;
+}
 
 #header {
   margin: 0 0 20px 0;
@@ -3157,4 +3162,34 @@ h4 .discount_label {
 
 #food_teaser #search_form #title_or_location:focus {
   color: #333;
+}
+
+/***** SEO STUFF *****/
+
+body {
+  position: relative;
+}
+
+#page_description {
+  font-size: 12px;
+  line-height: 16px;
+  color: #666;
+  overflow-y: auto;
+  height: 110px;
+  width: 940px;
+  position: absolute !important;
+  bottom: 30px;
+  left: 50%;
+  margin-left: -470px;
+  z-index: 100;
+}
+
+#page_description h1 {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+#footer.page_description {
+  padding-bottom: 150px;
 }
