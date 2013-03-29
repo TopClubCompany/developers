@@ -1,0 +1,33 @@
+table.table.table-striped.index_table#list
+  thead
+    tr.pjax_links
+      = batch_action_toggle
+      th= sort_link(@search, :id)
+      th= sort_link(@search, :first_name)
+      th= sort_link(@search, :last_name)
+      th= sort_link(@search, :phone)
+      th= sort_link(@search, :email)
+      th= sort_link(@search, :special_notes)
+      th= sort_link(@search, :time)
+      th= sort_link(@search, :user_id)
+      th= sort_link(@search, :place_id)
+      th= sort_link(@search, :created_at)
+      th= sort_link(@search, :persons)
+      th=t 'admin.table.actions'
+  tbody
+    - collection.each do |item|
+      tr
+        = batch_action_item(item)
+        td= id_link(item)
+        td= pretty_data item.first_name
+        td= pretty_data item.last_name
+        td= pretty_data item.phone
+        td= pretty_data item.email
+        td= pretty_data item.special_notes
+        td= pretty_data item.time
+        td= pretty_data item.user_id
+        td= pretty_data item.place_id
+        td= pretty_data item.created_at
+        td= pretty_data item.persons
+        td.actions= item_index_actions(item)
+

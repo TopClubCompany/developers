@@ -1,0 +1,14 @@
+= admin_form_for @reservation do |f|
+
+  = f.input :first_name
+  = f.input :last_name
+  = f.input :phone
+  = f.input :email
+  = f.input :special_notes, :as => :ckeditor
+  = f.input :time
+  = f.association :user
+  = f.association :place
+  = f.input :persons
+
+
+  = f.save_buttons

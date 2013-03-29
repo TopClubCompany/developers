@@ -175,6 +175,10 @@ Topclub::Application.routes.draw do
       post :batch, :on => :collection
     end
 
+    resources :reservations do
+      post :batch, :on => :collection
+    end
+
   end
   mount Ckeditor::Engine => "/ckeditor"
   mount Resque::Server, :at => "/resque"
