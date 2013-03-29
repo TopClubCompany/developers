@@ -18,7 +18,7 @@
 }
 
 #landing #landing_teaser {
-	width: 940px;
+	width: 940px !important;
 	height: 353px;
 	overflow: hidden;
 	position: relative;
