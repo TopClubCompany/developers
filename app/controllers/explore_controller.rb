@@ -15,7 +15,7 @@ class ExploreController < ApplicationController
       :best_places
      when "new"
       :new_places
-     when "tonight"
+     when "available"
       :tonight_available
    end
     result = Place.send(method, 6, params)
