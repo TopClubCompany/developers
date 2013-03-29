@@ -40,6 +40,8 @@ class Paginator
       # url with parameters for request
       baseUrl: "/explore/get_more?"
       url: () ->
+        if window.language != "ru"
+          self.options.baseUrl = "/" + window.language + "/explore/get_more?"
         self.options.baseUrl + $.param({ type: self.options.type, size: self.options.size, page: self.nextPage})
       # success callback for request  
       success: (data) ->
