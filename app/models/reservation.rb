@@ -9,6 +9,9 @@ class Reservation < ActiveRecord::Base
 
   validates_presence_of :email, :first_name, :last_name, :phone, :time, :persons
 
+  include Utils::Models::Base
+  include Utils::Models::AdminAdds
+
   def discount
     day = PlaceUtils::PlaceTime.wday(created_at.wday)
     discounts = place.week_days.includes(:day_discounts).where(:day_type_id => day).map(&:day_discounts).first
