@@ -18,7 +18,7 @@
 }
 
 #landing #landing_teaser {
-	width: 940px;
+	width: 940px !important;
 	height: 353px;
 	overflow: hidden;
 	position: relative;
@@ -30,6 +30,10 @@
 	z-index: 1;
 	height: 353px;
 	display: block;
+}
+
+#landing #landing_teaser ul li {
+	height:353px;
 }
 
 #landing #landing_teaser .caption {
