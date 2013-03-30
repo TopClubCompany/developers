@@ -2,14 +2,16 @@ window.checkNewUser = (selector, sb_sel) ->
   sub_selector = sb_sel || '#' + selector.slice(5)
   user_pass = $("#{selector} #{sub_selector}_password").tipsy()
   user_email = $("#{selector}  #{sub_selector}_email").tipsy()
-#  user_phone = $("#{selector}  #{sub_selector}_phone").tipsy()
+  user_phone = $("#{selector}  #{sub_selector}_phone").tipsy()
   user_first_name = $("#{selector}  #{sub_selector}_first_name").tipsy()
   user_last_name = $("#{selector} #{sub_selector}_last_name").tipsy()
   patternEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,5}$/i
   patternPhone = /^\+38\(0\d{2}\)\d{3}\-\d{2}\-\d{2}$/
   patternPass = /[^а-я]+/i
   patternNameLastname = /[а-яa-z0-9_-]+/i
-  if patternEmail.test(user_email.val()) and patternPass.test(user_pass.val()) and patternNameLastname.test(user_first_name.val()) and (if user_pass then patternNameLastname.test(user_last_name.val()) else true)
+
+
+  if patternEmail.test(user_email.val()) and (if user_phone.val() then patternPhone.test(user_phone.val()) else true) and patternPass.test(user_pass.val()) and patternNameLastname.test(user_first_name.val()) and (if user_pass then patternNameLastname.test(user_last_name.val()) else true)
     return true
   else
 
@@ -41,14 +43,14 @@ window.checkNewUser = (selector, sb_sel) ->
         user_email.attr "original-title", I18n.translations["#{window.language}"].admin_js.validation_message.email_incorrect
         user_email.tipsy "show"
     setTimeout hideEmail, 1500
-#    if user_phone.length > 0
-#      unless patternPhone.test(user_phone.val())
-#        user_phone.attr "original-title", I18n.translations["#{window.language}"].admin_js.validation_message.phone_incorrect
-#        user_phone.tipsy "show"
-#      else if user_phone.val() is ""
-#        user_phone.attr "original-title", I18n.translations["#{window.language}"].admin_js.validation_message.empty_field
-#        user_phone.tipsy "show"
-#    setTimeout hidePhone, 1500
+    if user_phone.length > 0
+      unless patternPhone.test(user_phone.val())
+        user_phone.attr "original-title", I18n.translations["#{window.language}"].admin_js.validation_message.phone_incorrect
+        user_phone.tipsy "show"
+      else if user_phone.val() is ""
+        user_phone.attr "original-title", I18n.translations["#{window.language}"].admin_js.validation_message.empty_field
+        user_phone.tipsy "show"
+    setTimeout hidePhone, 1500
     if user_pass.length > 0
       unless patternPass.test(user_pass.val())
         user_pass.attr "original-title", I18n.translations["#{window.language}"].admin_js.validation_message.pass_incorrect
