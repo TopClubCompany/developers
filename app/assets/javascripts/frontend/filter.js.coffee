@@ -480,7 +480,8 @@ class FilterInput
 
         $("#refine input[value='#{num}'][data-type='#{filter}']").click() unless $("#refine input[value='#{num}'][data-type='#{filter}']").is(':checked')
         $("#refine input[value='#{num}'][data-type='#{filter}']").one 'click', ->
-          window.history.pushState '', null, "/search" + window.location.search
+          newPathname =  window.location.pathname.split('/').slice(0,-1).join('/')
+          window.history.pushState '', null, newPathname + window.location.search
           self.get 'page', 1
 
 
