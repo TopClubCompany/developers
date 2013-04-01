@@ -79,7 +79,7 @@ en:
     profile: Profile
     search: Search
   ceo: 
-    main: ""
+    main: <div id="page_description"><h1 style="text-transform:uppercase;">Restaurant reservations (booking) Kyiv</h1><p>Make <strong>online restaurant reservations</strong>, pay lower prices, read restaurant reviews, earn points towards free meals. <strong>TopReserve</strong> is a real-time online reservation service for fine dining restaurants.</p><p>More than <a href="http://topreserve.com.ua/en/search">100 restaurants in Kyiv</a>. Book a table online at <a href="http://topreserve.com.ua/en/search/restaurants">restaurants</a>, <a href="http://topreserve.com.ua/en/search/sushi">sushi</a>, <a href="http://topreserve.com.ua/en/search/bars-pubs">bars</a>, <a href="http://topreserve.com.ua/en/search/pizza">pizza</a>, <a href="http://topreserve.com.ua/en/search/night">night clubs</a>, <a href="http://topreserve.com.ua/en/search/karaoke">karaoke</a> and <a href="http://topreserve.com.ua/en/search/cafe">cafes.</a></p></div>
   city: city
   closed: Closed
   comments: 
