@@ -33,7 +33,7 @@
           a#sortby.sortby.dropdown-toggle data-toggle="dropdown" href="#" role="button"
             = I18n.t('search.sort_labeled')
           ul#sortby-list.sortby.dropdown-menu aria-labelledby="sortby" role="menu"
-            - %w(newest overall_mark).each do |name|
+            - %w(newest overall_mark discount).each do |name|
               li
                 a href="#{name}"
                   = I18n.t("search.sort.#{name}")

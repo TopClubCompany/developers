@@ -115,7 +115,10 @@ class Place < ActiveRecord::Base
   def self.search(options = {})
     filters = []
     categories = []
-    sort = self.case_order(options[:sort_by] || 'overall_mark')
+
+    wday = options[:reserve_date].present? ? DateTime.parse(options[:reserve_date]).wday : DateTime.now.wday
+    wday = PlaceUtils::PlaceTime.wday(wday)
+    sort = self.case_order((options[:sort_by] || 'overall_mark'), wday)
 
     if options[:kitchen].present?
       filters << {query: {terms: {kitchen_ids: options[:kitchen].split(',')} }}
@@ -161,9 +164,9 @@ class Place < ActiveRecord::Base
           query do
             flt options[:title_or_location].lucene_escape, :fields => fields, :min_similarity => 0.9
           end
-          sort { by sort, "desc" }
         end
         filter(:and, :filters => filters)
+        sort { by sort, "desc" }
         puts to_curl
       end
     end
@@ -249,6 +252,7 @@ class Place < ActiveRecord::Base
 
       self.week_days.each do |week_day|
         json.set!("week_day_#{week_day.day_type_id}", week_day.range_time)
+        json.set!("week_day_#{week_day.day_type_id}_discount", week_day.day_discount)
       end if self.week_days.any?
 
       json.(self, *related_ids)
@@ -603,14 +607,14 @@ class Place < ActiveRecord::Base
   end
 
 
-  def self.case_order(type)
+  def self.case_order(type, wday)
     case type.to_sym
       when :newest
         "created_at"
       when :overall_mark
         "overall_mark"
       when :discount
-        "discount"
+        "week_day_#{wday.to_s}_discount"
       when :reserving
         "reserving"
       else
