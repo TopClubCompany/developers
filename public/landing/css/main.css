@@ -3465,5 +3465,65 @@ body {
 
 
 
+/******** 404 page ********/
+
+#page404 h1 {
+	font-size: 30px;
+	font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
+	letter-spacing: -0.05em;
+	font-weight: normal;
+	color: #333;
+	margin: -5px 0 5px 0;
+	padding: 0;
+}
+
+#page404 h1 b {
+	color: #08c;
+}
+
+#page404 h2 {
+	color: #08c;
+	font-size: 36px;
+	letter-spacing: -0.05em;
+	margin: -5px 0 10px 0;
+	padding: 0;
+}
+
+#page404 .page_content {
+	padding: 0;
+	border-radius: 3px;
+	overflow: hidden;
+}
+
+#page404 img {
+	float: left;
+}
+
+#page404 #sb {
+	width: 260px;
+	padding: 20px;
+	float: right;
+	background: #dfdeda;
+	min-height: 380px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
