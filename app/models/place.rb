@@ -339,7 +339,6 @@ class Place < ActiveRecord::Base
     current_day = PlaceUtils::PlaceTime.wday(current_day)
     truncated_time_now = Time.at(time_now.to_i - time_now.sec - time_now.min % 15 * 60)
     time = options[:reserve_time].present? ? Time.parse(options[:reserve_time]) : truncated_time_now
-    #options[:reserve_time] = truncated_time_now.strftime("%H:%M") unless options[:reserve_time].present?
     options[:image_url] ||= :slider_url
     res = {}
     res[:id] = place.id

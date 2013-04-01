@@ -254,6 +254,17 @@ ru:
     special_offers: "Спец. предложение:"
     view_on_map: "Показать ресторан на карте"
     view_or_change: "Посмотреть детали резерва"
+    popup:
+      thanks: "Thank you, %{name}"
+      auth_text: "Add a password to get a free TopReserve account where you can create and manage your bookings online, and start earning TopPoints towards free meals!"
+      create_password: "Create a password <br/>"
+      re_enter_pass: "Re-enter a password<br>"
+      subscribe: "Subscribe me for TopReserve news and updates"
+      clicking_text: "By clicking “Create account” you confirm that you accept terms and conditions."
+      sumbit_value: "Create account"
+      nothankyou: "No, thank you"
+
+
   review: 
     one: " отзыв"
     other: " отзывы"

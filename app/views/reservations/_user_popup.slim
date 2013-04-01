@@ -1,0 +1,23 @@
+#popups
+  .popup#signup_quick
+    button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+	h5= I18n.t('reservation.popup.thanks', name: @user.name)
+	div class="popup_content"
+	  p= I18n.t('reservation.popup.auth_text')
+
+      label class="password"
+        == I18n.t('reservation.popup.create_password')
+        input type="password" name="password"
+
+      label class="password"
+        == I18n.t('reservation.popup.re_enter_pass')
+        input type="password" name="reenter_password"
+
+      .clear
+      label class="checkbox"
+        input type="checkbox" checked="true" value="1"= I18n.t('reservation.popup.subscribe')
+
+      small= I18n.t('reservation.popup.clicking_text')
+
+      input type="submit" value=I18n.t('reservation.popup.sumbit_value')
+      a href="#" class="nothankyou"= I18n.t('reservation.popup.nothankyou')
