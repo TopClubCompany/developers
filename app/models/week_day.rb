@@ -42,6 +42,10 @@ class WeekDay < ActiveRecord::Base
     end
   end
 
+  def day_discount
+    day_discounts.discount.first.try(&:discount)
+  end
+
 end
 # == Schema Information
 #

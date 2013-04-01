@@ -280,6 +280,7 @@ ru:
     sort: 
       newest: "Сортировать по дате добавления"
       overall_mark: "Сортировать по популярности"
+      discount: "Сортировать по скидке"
     sort_labeled: "Сортировать"
     special_offers: "Спец. предложения:"
     thead: 
