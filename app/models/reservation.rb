@@ -23,11 +23,10 @@ class Reservation < ActiveRecord::Base
   end
 
   def self.create_from_place_and_user(current_user, place)
-    if current_user
-      new(first_name: current_user.first_name, last_name: current_user.last_name,
-          phone: current_user.phone, user_id: current_user.id, place_id: place.id,
-          email: current_user.email)
-    end
+      new(first_name: current_user.try(:first_name), last_name: current_user.try(:last_name),
+          phone: current_user.try(:phone), user_id: current_user.try(:id), place_id: place.id,
+          email: current_user.try(:email))
+
   end
 
 

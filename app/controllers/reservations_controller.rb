@@ -22,7 +22,8 @@ class ReservationsController < ApplicationController
   def reservation_confirmed
     @reservation = Reservation.find(params[:reservation_id])
     find_page(@reservation, :confirmed_reservation)
-    if current_user.id == @reservation.user_id
+    if current_user.try(:id) == @reservation.user_id || session[:reservation_user] == @reservation.user_id
+      @user = User.find(session[:reservation_user]) unless current_user
       @place = @reservation.try(:place)
       @date  = @reservation.time
       @discount = @place.today_discount_with_time(@date, false).max{|x| x.discount}
@@ -35,8 +36,13 @@ class ReservationsController < ApplicationController
 
   def complete_reservation
     reservation = Reservation.new(params[:reservation])
+    unless current_user
+      user = create_user_from_reservation(reservation)
+      session[:reservation_user] = user.id
+      reservation.user = user
+    end
     if reservation.save
-      add_points
+      add_points(reservation)
       send_messages(reservation, [1,2,3,4,8])
       redirect_to reservation_confirmed_path(reservation.id)
     else
@@ -57,7 +63,7 @@ class ReservationsController < ApplicationController
 
   def print
     @reservation = Reservation.find(params[:id])
-    if current_user.id == @reservation.user_id
+    if current_user.try(:id) == @reservation.user_id || session[:reservation_user] == @reservation.user_id
       @place = @reservation.try(:place)
       @date  = @reservation.time
       @discount = @place.today_discount_with_time(@date, false).max{|x| x.discount}
@@ -71,9 +77,9 @@ class ReservationsController < ApplicationController
 
   private
 
-  def add_points
-    current_user.points =+ Figaro.env.POINTS.to_f
-    current_user.save
+  def add_points reservation
+    reservation.user.points =+ Figaro.env.POINTS.to_f
+    reservation.user.save
   end
 
   def find_page(reservation=nil, type=:new_reservation)
@@ -81,6 +87,18 @@ class ReservationsController < ApplicationController
       structure = Structure.with_position(::PositionType.send(type)).first
       setting_meta_tags structure, reservation.meta_tag(City.find(current_city).name)
     end
+  end
+
+  def create_user_from_reservation reservation
+    user_role_id  = UserRoleType.default.id
+    password = (1..6).to_a.join
+    user = User.new(first_name: reservation.first_name, last_name: reservation.last_name, password: password,
+                    email: reservation.email, phone: reservation.phone)
+
+    user.user_role_id = user_role_id
+    user.activate.skip_confirmation!
+    user.save
+    user
   end
 
 end

@@ -40,7 +40,7 @@ def insert_fake_users(number = 100)
 
     user = User.new(first_name: first_name, last_name: last_name, password: password, birthday: birthday,
              email: email, user_role_id: user_role_id)
-    user.activate.skip_confirmation
+    user.activate.skip_confirmation!
     user.save
 
     puts "User " + first_name + " " + last_name + " added!"

@@ -1,9 +1,9 @@
 module ReservationsHelper
   def send_messages(reservation, types)
-    options = {reservation_path: wrapp_domain(show_profile_reservation_path(current_user.id, reservation.id)),
+    options = {reservation_path: wrapp_domain(show_profile_reservation_path(reservation.user_id, reservation.id)),
                place_path: wrapp_domain(place_path(reservation.place.try(:place_path))),
-               edit_reservation_path: wrapp_domain(edit_profile_reservation_path(current_user.id, reservation.id)),
-               cancel_reservation_path: wrapp_domain(cancel_profile_reservation_path(current_user.id, reservation.id))}
+               edit_reservation_path: wrapp_domain(edit_profile_reservation_path(reservation.user_id, reservation.id)),
+               cancel_reservation_path: wrapp_domain(cancel_profile_reservation_path(reservation.user_id, reservation.id))}
     phone = reservation.phone.try { |ph| ph.gsub(/[\(\)-]/, '') }
     types.each do |type|
       text, caption = ::Utils::LetterParser.parse_params(reservation.to_mail(options).merge({letter_type: type}))
