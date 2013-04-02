@@ -19,5 +19,6 @@
 
       small= I18n.t('reservation.popup.clicking_text')
 
-      input type="submit" value=I18n.t('reservation.popup.sumbit_value')
+      a href=create_account_reservation_path(@reservation)
+        = I18n.t('reservation.popup.sumbit_value')
       a href="#" class="nothankyou"= I18n.t('reservation.popup.nothankyou')

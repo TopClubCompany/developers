@@ -36,7 +36,7 @@ class ReservationsController < ApplicationController
 
   def complete_reservation
     reservation = Reservation.new(params[:reservation])
-    unless current_user
+    unless current_user && User.find_by_email(reservation.email)
       user = create_user_from_reservation(reservation)
       session[:reservation_user] = user.id
       reservation.user = user
@@ -61,6 +61,21 @@ class ReservationsController < ApplicationController
     end
   end
 
+  def create_account
+    @reservation = Reservation.find(params[:id])
+    if params[:password] == params[:reenter_password] && params[:password].present?
+      user = User.find(session[:reservation_user])
+      session[:reservation_user] = nil
+      user.password = params[:password]
+      user.password_confirmation = params[:reenter_password]
+      user.save
+      sign_in(user, by_pass: true)
+      redirect_to profile_path(user)
+    else
+      redirect_to reservation_confirmed_path(@reservation.id)
+    end
+  end
+
   def print
     @reservation = Reservation.find(params[:id])
     if current_user.try(:id) == @reservation.user_id || session[:reservation_user] == @reservation.user_id
@@ -72,7 +87,6 @@ class ReservationsController < ApplicationController
     else
       redirect_to root_path
     end
-
   end
 
   private
@@ -90,17 +104,13 @@ class ReservationsController < ApplicationController
   end
 
   def create_user_from_reservation reservation
-    user = User.find_by_email(reservation.email)
-    unless user
-      user_role_id  = UserRoleType.default.id
-      password = (1..6).to_a.join
-      user = User.new(first_name: reservation.first_name, last_name: reservation.last_name, password: password,
-                      email: reservation.email, phone: reservation.phone)
-
-      user.user_role_id = user_role_id
-      user.activate.skip_confirmation!
-      user.save
-    end
+    user_role_id  = UserRoleType.default.id
+    password = (1..6).to_a.join
+    user = User.new(first_name: reservation.first_name, last_name: reservation.last_name, password: password,
+                    email: reservation.email, phone: reservation.phone)
+    user.user_role_id = user_role_id
+    user.activate.skip_confirmation!
+    user.save
     user
   end
 
