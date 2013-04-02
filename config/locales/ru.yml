@@ -266,6 +266,11 @@ ru:
       clicking_text: "By clicking “Create account” you confirm that you accept terms and conditions."
       sumbit_value: "Create account"
       nothankyou: "No, thank you"
+    join_top_reserv: "Join TopReserve"
+    book_edit_reservations: "Book, edit, cancel your future reservations"
+    get_updates: "Get email news and updates, best discounts"
+    make_a_list: "Make a list of your favorite places for quicker orders"
+    create_acc_now: "Create account now"
 
 
   review: 

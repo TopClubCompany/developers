@@ -64,6 +64,10 @@ $ ->
 
   if $("#signup_quick").size() > 0
     $.fancybox.open($("#signup_quick"), {'padding':0, 'autoDimensions':false})
+    $(".create_account_now").on 'click', (e) ->
+      e.preventDefault()
+      $.fancybox.open($("#signup_quick"), {'padding':0, 'autoDimensions':false})
+
     $(".nothankyou").on 'click', (e) ->
       e.preventDefault()
       $.fancybox.close()

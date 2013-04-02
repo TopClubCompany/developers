@@ -50,34 +50,15 @@
           strong= I18n.t('reservation.more_info')
           br
             == I18n.t('reservation.print_method.questions', title: @place.title, phone: @place.phone)
-    - if signed_in?
-
-    - else
+    - unless signed_in?
       .span4.sidebar.join.promo
-         h3 Join TopReserve
-         .c
-           ul
-             li Book, edit, cancel your future reservations
-             li Get email news and updates, best discounts
-             li Make a list of your favorite places for quicker orders
-           strong
-             a href="#" class="btn" Create account now
-
-    #sidebar.span4.confirmed
-      h3= I18n.t('reservation.i_go')
-      ul
-        li.view
-          a href=show_profile_reservation_path(@reservation.user_id, @reservation.id)
-            = I18n.t('reservation.view_or_change')
-        li.print
-          = link_to I18n.t('reservation.print'), print_reservation_path(@reservation.id), target: '_blank'          
-        li.map
-          a href=place_link(@reservation.place)
-            = I18n.t('reservation.view_on_map')
-        /li.invite
-          a href="#"
-            = I18n.t('reservation.invite_friends')
-        .print_map
-          img src="http://maps.googleapis.com/maps/api/staticmap?center=#{@place.lat_lng}&zoom=14&size=300x300&maptype=roadmap&sensor=false&markers=color:red%7Clabel:A%7C#{@place.lat_lng}"
+        h3= I18n.t('reservation.join_top_reserv')
+        .c
+          ul
+            li= I18n.t('reservation.book_edit_reservations')
+            li= I18n.t('reservation.get_updates')
+            li= I18n.t('reservation.make_a_list')
+          strong
+            a href="#" class="btn create_account_now"= I18n.t('reservation.create_acc_now')
 
 = render "reservations/user_popup" if @user
