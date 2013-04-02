@@ -1,3 +1,4 @@
+#coding: utf-8
 module PlacesHelper
 
   def parse_filters_from options

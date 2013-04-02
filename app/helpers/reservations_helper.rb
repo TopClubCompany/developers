@@ -1,3 +1,4 @@
+#coding: utf-8
 module ReservationsHelper
   def send_messages(reservation, types)
     options = {reservation_path: wrapp_domain(show_profile_reservation_path(reservation.user_id, reservation.id)),
