@@ -2905,13 +2905,13 @@ h4 .discount_label {
 
 
 
-#share {
+#share  {
   width: 500px;
   margin-left: -250px;
   padding: 0 0 15px 0;
 }
 
-#share h5 {
+#share h5, #signup_quick h5 {
   font-size: 18px;
   padding: 10px 20px;
   display: block;
@@ -2920,7 +2920,7 @@ h4 .discount_label {
   line-height: 18px;
 }
 
-#share .shared_content {
+#share .shared_content, #signup_quick .popup_content {
   padding: 15px 20px;
 }
 
@@ -3192,4 +3192,120 @@ body {
 
 #footer.page_description {
   padding-bottom: 150px;
+}
+
+/****** Signup quick popup ******/
+
+#signup_quick {
+  font-size: 13px;
+  width:500px;
+}
+
+#signup_quick label.password {
+  font-weight: bold;
+  font-size: 13px;
+  float: left;
+  margin: 0 10px 0 0;
+  line-height: 24px;
+
+}
+
+#signup_quick label input[type="text"] {
+  display: block;
+}
+
+#signup_quick label.checkbox {
+  margin-top: 20px;
+}
+
+#signup_quick .nothankyou {
+  position: relative;
+  top: 8px;
+  left: 10px;
+  display: inline-block;
+}
+
+.join {
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+.join ul {
+  display: block;
+  margin: 0 0 15px 0;
+}
+
+.join ul li {
+  margin: 0 0 10px 0;
+  padding: 0 0 0 20px;
+  line-height: 18px;
+  display: block;
+  background: url('../img/check1.png') 0 0 no-repeat;
+}
+
+/***** Howto Block *****/
+
+.howto_block {
+  -webkit-box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow:    0px 5px 15px rgba(0, 0, 0, 0.25);
+  box-shadow:         0px 5px 15px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+
+.howto_block .arrow {
+  position: absolute;
+  top: 10px;
+  left: -10px;
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent #ffffff transparent transparent;
+  -webkit-transform:rotate(360deg);
+}
+
+.howto_block h3 {
+  color: #08c;
+  padding-bottom: 8px;
+}
+
+.howto_block ul, .howto_block ul li {
+  list-style-type: decimal;
+  display: block !important;
+  font-weight: bold;
+}
+
+.howto_block ul li {
+  margin: 0 0 10px 0;
+  color: #555;
+  font-size: 13px !important;
+}
+
+.howto_block ul li small {
+  color: #999;
+  font-weight: normal;
+  display: block;
+  position: relative;
+  margin: 0 0 0 27px;
+  line-height: 11px;
+  font-size: 10px !important;
+}
+
+.howto_block a {
+  display: inline-block;
+  padding: 2px 7px;
+  font-weight: bold;
+  background: #f2f0ea;
+  border-radius: 3px;
+  font-size: 11px;
+  margin: 5px 0 0 0;
+}
+
+.howto_block b {
+  display: inline-block;
+  border-radius: 20px;
+  background: #f2f0ea;
+  margin-right: 3px;
+  width: 20px;
+  text-align: center;
 }
