@@ -594,6 +594,9 @@ class FilterInput
       newQuery = newQuery + "&" + $.param({reserve_date: date})
       newQuery = newQuery + "&" + $.param({reserve_time: $('select[name=reserve_time]').val()})
       newQuery = newQuery + "&" + $.param({number_of_people: $('select[name=number_of_people]').val()})
+      sort_needed = checkForSorting.call(@)
+      if sort_needed[0]
+        newQuery = newQuery + "&" + $.param({sort_by: sort_needed[1]})
       baseURL =  window.location.pathname
       newUrl = (baseURL + '/?' + newQuery).replace(/\/*\?+/, '?')
 
@@ -643,7 +646,7 @@ class FilterInput
       # console.log "time = #{time}"
       window.filter.get 'reserve_time', validHourString
 
-
+    $("select[name=number_of_people]").off 'change'
     $("select[name=number_of_people]").on 'change', ->
       number = $(this).val()
       headlineText = $('#map_details > h3:first-child').html().replace(/\d+(?=\speople)/, number)
@@ -651,6 +654,7 @@ class FilterInput
       window.filter.get 'number_of_people', number
 
 
+    $("#sortby-list a").off 'click'
     $("#sortby-list a").on 'click', (e) ->
       e.preventDefault()
       filterSelected = $(e.target)
