@@ -50,6 +50,19 @@
           strong= I18n.t('reservation.more_info')
           br
             == I18n.t('reservation.print_method.questions', title: @place.title, phone: @place.phone)
+    - if signed_in?
+
+    - else
+      .span4.sidebar.join.promo
+         h3 Join TopReserve
+         .c
+           ul
+             li Book, edit, cancel your future reservations
+             li Get email news and updates, best discounts
+             li Make a list of your favorite places for quicker orders
+           strong
+             a href="#" class="btn" Create account now
+
     #sidebar.span4.confirmed
       h3= I18n.t('reservation.i_go')
       ul

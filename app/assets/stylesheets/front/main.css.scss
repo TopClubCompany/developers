@@ -3201,6 +3201,10 @@ body {
   width:500px;
 }
 
+#signup_quick .topreserve_btn{
+  height:auto;
+}
+
 #signup_quick label.password {
   font-weight: bold;
   font-size: 13px;
@@ -3220,7 +3224,7 @@ body {
 
 #signup_quick .nothankyou {
   position: relative;
-  top: 8px;
+  top: -2px;
   left: 10px;
   display: inline-block;
 }
