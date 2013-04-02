@@ -67,4 +67,4 @@
         .print_map
           img src="http://maps.googleapis.com/maps/api/staticmap?center=#{@place.lat_lng}&zoom=14&size=300x300&maptype=roadmap&sensor=false&markers=color:red%7Clabel:A%7C#{@place.lat_lng}"
 
-/= render "reservations/user_popup" if @user
+= render "reservations/user_popup" if @user
