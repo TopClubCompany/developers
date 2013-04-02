@@ -64,5 +64,7 @@ $ ->
 
   if $("#signup_quick").size() > 0
     $.fancybox.open($("#signup_quick"), {'padding':0, 'autoDimensions':false})
-    #$.fancybox.open($("#signup_quick"))
+    $(".nothankyou").on 'click', (e) ->
+      e.preventDefault()
+      $.fancybox.close()
 
