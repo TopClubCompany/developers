@@ -62,6 +62,6 @@ $ ->
   if $("#complete .complete_edit").length
     doMagic()
 
-
-
+  if $("#signup_quick").size() > 0
+    $.fancybox.open($("#signup_quick"))
 
