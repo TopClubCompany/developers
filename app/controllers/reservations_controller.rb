@@ -105,7 +105,7 @@ class ReservationsController < ApplicationController
 
   def create_user_from_reservation reservation
     user_role_id  = UserRoleType.default.id
-    password = (1..6).to_a.join
+    password = Devise.friendly_token.first(6)
     user = User.new(first_name: reservation.first_name, last_name: reservation.last_name, password: password,
                     email: reservation.email, phone: reservation.phone)
     user.user_role_id = user_role_id
