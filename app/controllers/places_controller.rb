@@ -1,37 +1,9 @@
 #coding: utf-8
 class PlacesController < ApplicationController
-  helper_method :group_discounts
   before_filter :find_place, only: [:show, :more, :set_unset_favorite]
   before_filter :find_page, only: :show
   before_filter :find_time, only: [:show]
   before_filter :set_breadcrumbs_front, only: :show
-
-def group_discounts(special_offers)
-  day_names = DayType.all.map {|day| day.title}
-  day_array = special_offers.inject({}) do |res, offer|
-    current_scope = (res["#{offer.from_time}, #{offer.to_time}, #{offer.title}, #{offer.discount}"] ||= '')
-    current_scope << (if current_scope =~ /[А-Яа-яA-Za-z]$|-$/
-      # we are in open scope we either prolong it or close
-      previous_day = current_scope.split(/,|-/).compact[-1]
-      current = offer.week_day.day_type.title
-      if !previous_day.nil? and  day_names.index(previous_day) + 1 == (day_names.index(current))
-        '-' + current
-      else
-        ',' + current
-      end
-    else
-      # it was either , or empty
-      ',' + offer.week_day.day_type.title
-    end)
-    current_scope.sub!(/^,/, '')
-    current_scope.sub!(/-[А-Яа-яA-Za-z]+-/, '-')
-    res["#{offer.from_time}, #{offer.to_time}, #{offer.title}"] = current_scope
-    res
-  end
-  uniq = special_offers.uniq_by {|offer| "#{offer.from_time}, #{offer.to_time}, #{offer.title}, #{offer.discount}"}
-  res = uniq.inject({}){|memo, offer| memo[day_array["#{offer.from_time}, #{offer.to_time}, #{offer.title}, #{offer.discount}"]] = offer; memo}
-  res
-end
 
   def show
     @date = params[:reserve_date] || Date.today.strftime('%d/%m/%Y')
