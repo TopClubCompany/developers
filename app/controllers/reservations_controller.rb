@@ -90,14 +90,17 @@ class ReservationsController < ApplicationController
   end
 
   def create_user_from_reservation reservation
-    user_role_id  = UserRoleType.default.id
-    password = (1..6).to_a.join
-    user = User.new(first_name: reservation.first_name, last_name: reservation.last_name, password: password,
-                    email: reservation.email, phone: reservation.phone)
+    user = User.find_by_email(reservation.email)
+    unless user
+      user_role_id  = UserRoleType.default.id
+      password = (1..6).to_a.join
+      user = User.new(first_name: reservation.first_name, last_name: reservation.last_name, password: password,
+                      email: reservation.email, phone: reservation.phone)
 
-    user.user_role_id = user_role_id
-    user.activate.skip_confirmation!
-    user.save
+      user.user_role_id = user_role_id
+      user.activate.skip_confirmation!
+      user.save
+    end
     user
   end
 
