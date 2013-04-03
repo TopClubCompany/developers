@@ -180,6 +180,15 @@ ru:
     share: "Поделиться"
     up_to: "Скидка до %{discount}%"
     vailability: "Доступное время %{reserve_date} в районе %{reserve_time} для %{number_of_people} человек"
+    promo:
+      how_reserve_table: "Как забронировать стол?"
+      date_people: "Выберите дату, время и кол-во гостей"
+      time_to_reserve: "Старайтесь делать бронь за 2 часа до посещения"
+      press_button: "Нажмите на кнопку «Найти столик»"
+      sevice_confirmation_real_time: "Сервис проверит доступность в реальном времени"
+      press_time_reserve: "Нажмите на время для резерва"
+      input_your_data: "Введите свои контатные данные на след. странице"
+      detail: "Подробнее о том, как забронировать столик »"
   profile: 
     birthday: "День рождения"
     city_not_specified: "не указан"

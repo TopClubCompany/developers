@@ -1,0 +1,18 @@
+.span4.sidebar.howto_block.promo
+  .arrow
+  h3= I18n.t('place.promo.how_reserve_table')
+  .c
+    ul
+      li
+        b 1
+        = I18n.t('place.promo.date_people')
+        small= I18n.t('place.promo.time_to_reserve')
+      li
+        b 2
+        = I18n.t('place.promo.press_button')
+        small= I18n.t('place.promo.sevice_confirmation_real_time')
+      li
+        b 3
+        = I18n.t('place.promo.press_time_reserve')
+        small= I18n.t('place.promo.input_your_data')
+    a target="_blank" href="#{localization_link('pages/help')}" class="howto_more"= I18n.t('place.promo.detail')
