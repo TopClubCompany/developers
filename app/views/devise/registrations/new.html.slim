@@ -15,7 +15,7 @@
           == " #{t('sign_up.for_successful_reservations')}"
           /= t('sign_up.for_suc_reserv')
         - (@user = User.new) unless @user
-        = simple_form_for @user, url: user_registration_path, :wrapper => :front_reg_form, html: {onSubmit: "pageTracker._trackEvent('Регистрация','Успешная','Индекс');"} do |f|
+        = simple_form_for @user, url: user_registration_path, :wrapper => :front_reg_form, html: {onSubmit: "pageTracker._trackEvent('Регистрация','Успешная','Индекс');".html_safe} do |f|
           = f.error_notification
           label
             = t('sign_up.name')
