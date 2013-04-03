@@ -229,7 +229,8 @@ ru:
     view_edit: "Детали"
   registration_form: 
     or: " или "
-  reservation: 
+  reservation:
+    no_such_reservation: "no such reservation"
     address: "Адрес:"
     at: "в"
     complete: "Отправить и завершить бронирование"
