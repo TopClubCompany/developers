@@ -22,12 +22,12 @@ class ReservationsController < ApplicationController
   def reservation_confirmed
     @reservation = Reservation.find(params[:reservation_id])
     find_page(@reservation, :confirmed_reservation)
-    if current_user.try(:id) == @reservation.user_id || session[:reservation_user] == @reservation.user_id
-      @user = User.find(session[:reservation_user]) unless current_user
+    if current_user.try(:id) == @reservation.user_id || session[:reservation_user] == @reservation.user_id || session[:new_reservation_user] == @reservation.user_id
+      @user = User.find(session[:new_reservation_user]) if !current_user && session[:new_reservation_user].present?
       @place = @reservation.try(:place)
       @date  = @reservation.time
       @discount = @place.today_discount_with_time(@date, false).max{|x| x.discount}
-      redirect_to root_path, flash: { error: 'no such reservation' } unless @reservation && @place
+      redirect_to root_path, flash: { error: I18n.t('reservation.no_such_reservation') } unless @reservation && @place
     else
       redirect_to root_path
     end
@@ -36,10 +36,14 @@ class ReservationsController < ApplicationController
 
   def complete_reservation
     reservation = Reservation.new(params[:reservation])
-    unless current_user && User.find_by_email(reservation.email)
-      user = create_user_from_reservation(reservation)
-      session[:reservation_user] = user.id
-      reservation.user = user
+    unless current_user
+      if user = User.find_by_email(reservation.email).presence
+        reservation.user = user
+        session[:reservation_user] = user.id
+      else
+        user = create_user_from_reservation(reservation)
+        session[:new_reservation_user] = user.id
+      end
     end
     if reservation.save
       add_points(reservation)
@@ -64,8 +68,8 @@ class ReservationsController < ApplicationController
   def create_account
     @reservation = Reservation.find(params[:id])
     if params[:password] == params[:reenter_password] && params[:password].present?
-      user = User.find(session[:reservation_user])
-      session[:reservation_user] = nil
+      user = User.find(session[:new_reservation_user])
+      session[:new_reservation_user] = nil
       user.password = params[:password]
       user.password_confirmation = params[:reenter_password]
       if user.save
