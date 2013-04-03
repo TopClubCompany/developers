@@ -266,6 +266,7 @@ ru:
       clicking_text: "By clicking “Create account” you confirm that you accept terms and conditions."
       sumbit_value: "Create account"
       nothankyou: "No, thank you"
+      errors_user_crate: "Ошибка при создания юзера, пароль должен быть больше 5 символов и совпадать с подтвердженным"
     join_top_reserv: "Join TopReserve"
     book_edit_reservations: "Book, edit, cancel your future reservations"
     get_updates: "Get email news and updates, best discounts"
