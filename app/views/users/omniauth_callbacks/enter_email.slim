@@ -6,7 +6,7 @@
           |Введите Email
         - if flash[:error]
           = flash[:error].to_yaml
-        form action=enter_email_path method='GET' onSubmit="pageTracker._trackEvent('Ввод email','Завершение','Индексная');"
+        form action=enter_email_path method='GET' onSubmit="_gaq.push(['_trackEvent', 'Ввод email','Завершение','Индексная']);"
           input#email_for_registration name='email' required='true' type='email' value=(params[:used_email].gsub('#','.') if params[:used_email])
           - if params[:used_email]
             br
