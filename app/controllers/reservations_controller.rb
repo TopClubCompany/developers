@@ -43,6 +43,7 @@ class ReservationsController < ApplicationController
       else
         user = create_user_from_reservation(reservation)
         session[:new_reservation_user] = user.id
+        reservation.user = user
       end
     end
     if reservation.save
