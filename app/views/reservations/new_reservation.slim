@@ -20,7 +20,7 @@
               - offer_title = offer.week_day.try { |week_day| week_day.day_type.title }
               - data = { trigger: 'click', title: offer_title, content: offer.description + offer_time, placement: 'left' }
               = link_to offer.title, '#', class: 'popoverable', data: data
-        = simple_form_for @reservation, url: complete_reservation_path, method: 'post', :wrapper => :front_reg_form do |f|
+        = simple_form_for @reservation, url: complete_reservation_path, method: 'post', :wrapper => :front_reg_form, html: {onSubmit: "_gaq.push(['_trackEvent', 'Резерв столика', 'Успешный', 'Юзер']);".html_safe} do |f|
           = f.error_notification
           label
             = t('sign_up.diner_name')
