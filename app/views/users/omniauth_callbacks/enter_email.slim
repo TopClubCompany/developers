@@ -6,14 +6,14 @@
           |Введите Email
         - if flash[:error]
           = flash[:error].to_yaml
-        form action=enter_email_path method='GET'
-          input#email_for_registration name='email' value=(params[:used_email].gsub('#','.') if params[:used_email])
+        form action=enter_email_path method='GET' onSubmit="pageTracker._trackEvent('Ввод email','Завершение','Индексная');"
+          input#email_for_registration name='email' required='true' type='email' value=(params[:used_email].gsub('#','.') if params[:used_email])
           - if params[:used_email]
             br
             label for='merge'
               = I18n.t('auth.merge')
             input type='checkbox' name='merge'
-          input.btn_sm#enter_email_button type='submit'  value='Завершить регистрацию' onSubmit="pageTracker._trackEvent('Ввод email','Завершение','Индексная');"
+          input.btn_sm#enter_email_button type='submit'  value='Завершить регистрацию'
     .span4#sidebar
       p
         |Введите E-mail адрес для завершения регистрации
