@@ -226,7 +226,7 @@ class PlacesCollection
       place = _.find(placesData, (place) -> parseInt(place.id) == $(el).data('id'))
       $el.add($listEl).find(".special_offers").empty()
 
-      if place.special_offer
+      if place?.special_offer
         $el.add($listEl).find(".special_offers").append("<h5>#{I18n.translations["#{window.language}"].admin_js.special_offers}:</h5>")
 
         for offer in place.special_offers
@@ -664,7 +664,14 @@ class FilterInput
         window.filter.get "sort_by", text
         window.filter.get "page", 1
 
-
+  checkForSorting = () ->
+    res = [false, undefined]
+    set = $("#sortby").text()
+    $("#sortby-list li a").each (index, sorting) ->
+      sorting = $(sorting)
+      if sorting.text() == set
+        res = [true, sorting.attr('href')]
+    res
   askAJAX = (serializedData, placesObj, page) =>
     $.ajaxSetup
 #      cache: false
@@ -712,6 +719,8 @@ class FilterInput
     $el.hide()
 
 $ ->
+  if matchData = window.location.search.match /sort_by=([A-Za-z_]*)/
+    console.log $('#sortby').text($("#sortby-list a[href=#{matchData[1]}]").text())
   if $("[id^='list_place'], [id^='place_']").length > 0
     $("[id^='list_place'], [id^='place_']").find('.timing .na').tooltip({"title": "this time is unavailable, sorry", "placement": "top"})
   if $('#refine').length isnt 0
