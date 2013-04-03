@@ -68,9 +68,12 @@ class ReservationsController < ApplicationController
       session[:reservation_user] = nil
       user.password = params[:password]
       user.password_confirmation = params[:reenter_password]
-      user.save
-      sign_in(user, by_pass: true)
-      redirect_to profile_path(user)
+      if user.save
+        sign_in(user, by_pass: true)
+        redirect_to profile_path(user)
+      else
+        redirect_to reservation_confirmed_path(@reservation.id), flash: { error: I18n.t('reservation.popup.errors_user_crate') }
+      end
     else
       redirect_to reservation_confirmed_path(@reservation.id)
     end

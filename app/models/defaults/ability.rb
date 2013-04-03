@@ -39,7 +39,6 @@ class Ability
 
   def admin
     can :manage, :all
-    can :manage, :all
 
     cannot :destroy, User, :id => @user.id
   end
