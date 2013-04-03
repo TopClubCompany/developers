@@ -13,7 +13,7 @@
             label for='merge'
               = I18n.t('auth.merge')
             input type='checkbox' name='merge'
-          input.btn_sm#enter_email_button type='submit'  value='Завершить регистрацию'
+          input.btn_sm#enter_email_button type='submit'  value='Завершить регистрацию' onSubmit="pageTracker._trackEvent('Ввод email','Завершение','Индексная');"
     .span4#sidebar
       p
         |Введите E-mail адрес для завершения регистрации
