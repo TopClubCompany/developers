@@ -475,7 +475,9 @@ class Place < ActiveRecord::Base
   end
 
   def max_discount
-    day_discounts.special.try { |special| special.max { |x| x.discount if x }.try(:discount) if special }
+    current_day = PlaceUtils::PlaceTime.wday(Time.now.wday)
+    wday = WeekDay.with_place_and_day(id, current_day).first
+    day_discounts.with_day(wday.id, true).max { |x| x.discount }.try(:discount)
   end
 
   def today_discount_with_time(time, discount=true)
