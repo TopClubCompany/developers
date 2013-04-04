@@ -27,7 +27,7 @@ en:
       recover_password: Forgot password?
       sign_in: Sign in
       sign_out: Sign out
-      sign_up: Sign up!
+      sign_up: Become a member
     links_short: 
       cabinet: Cabinet
       sign_in: Sign in
@@ -55,6 +55,7 @@ en:
     merge: Merge my accounts
     new_password: New password
     not_a_user: Not yet a member?
+    not_login_points: ""
     points: 5 points for this reservation.
     remember_me: Remember me
     social: 
@@ -174,6 +175,15 @@ en:
     back_to_search: Back to search
     is: from
     phone: ""
+    promo: 
+      date_people: ""
+      detail: ""
+      how_reserve_table: ""
+      input_your_data: ""
+      press_button: ""
+      press_time_reserve: ""
+      sevice_confirmation_real_time: ""
+      time_to_reserve: ""
     reservetion_table: Reserve
     review_for_place: All %{count} review(s) for %{place}
     share: Share
@@ -222,10 +232,13 @@ en:
   reservation: 
     address: "Address:"
     at: at
+    auth_text: Sign in
+    book_edit_reservations: Book, edit, cancel your future reservations
     complete: Complete reservation
     confirmation: "Confirmation #:"
     confirmed: Your reservation is confirmed
     confirmed_text: Your reservation is confirmed and saved in the restaurant's computer reservation system. You'll receive an email copy of this confirmation.
+    create_acc_now: Create account now
     delete: Delete
     diner_name: Diner name
     discount: This document guarantees your reservation and <strong>%{discount}% discount</strong> for your bill
@@ -233,30 +246,45 @@ en:
     edit: Edit
     edit_with_place: Edit your reservation at %{place}
     for: for
+    get_updates: Get email news and updates, best discounts
     i_go: What next?
     invite_friends: Invite friends
+    join_top_reserv: Join TopReserve
+    make_a_list: Make a list of your favorite places for quicker orders
     message_from_restoran: "Message from restaurant:"
     more_info: "More info:"
     new_reservation: 
       complete_reservation: Complete your reservation
+    no_such_reservation: no such reservation
     people: 
       one: 1 person
       other: "%{count} people"
     phone: "Phone:"
+    popup: 
+      auth_text: Add a password to get a free TopReserve account where you can create and manage your bookings online, and start earning TopPoints towards free meals!
+      clicking_text: "By clicking “Create account” you confirm that you accept terms and conditions."
+      create_password: Create a password <br/>
+      errors_user_crate: "Ошибка при создания юзера, пароль должен быть больше 5 символов и совпадать с подтвердженным"
+      nothankyou: No, thank you
+      re_enter_pass: Re-enter a password<br>
+      subscribe: Subscribe me for TopReserve news and updates
+      sumbit_value: Create account
+      thanks: Thank you, %{name}
     print: Print details
     print_method: 
-      notes: ""
-      place_name: ""
+      notes: "Special notes:"
+      place_name: "Restaurant name: "
       questions: ""
-      special: ""
+      special: "Special offer:"
       thanks: ""
     rewards: All members get rewards for online reservations!
+    rewards_not_auth: <p>All members get rewards for online reservations!<p>
     special_offers: "Special offer:"
     view_on_map: View restaurant on map
     view_or_change: View or change your reservation
   review: 
-    one: ""
-    other: ""
+    one: review
+    other: reviews
   search: 
     browse_category: Browse places by category
     category: Category
@@ -278,6 +306,7 @@ en:
     restorans: restorans
     result_for: Results for
     sort: 
+      discount: ""
       newest: Show newest
       overall_mark: Show popular
     sort_labeled: Sort by

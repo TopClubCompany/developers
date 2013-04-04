@@ -55,8 +55,8 @@ ru:
     merge: "Связать аккаунты"
     new_password: "Новый пароль"
     not_a_user: "Еще не зарегистрированы?"
-    points: "Получите 5 бонусов за этот резерв."
     not_login_points: "Получите 5 бонусов за этот резерв."
+    points: "Получите 5 бонусов за этот резерв."
     remember_me: "Запомнить"
     social: 
       sign_in_with: "Используя "
@@ -80,7 +80,7 @@ ru:
     profile: "Профиль"
     search: "Поиск"
   ceo: 
-    main: "<div id=\"page_description\"><h1 style=\"text-transform:uppercase;\">Резерв столиков онлайн</h1><p><strong>TopReserve</strong> — это бесплатный сервис бронирования столов, который позволяет мгновенно <b>забронировать стол онлайн</b> и получить скидку до -50% на все меню в лучших ресторанах города.</p><p>Вы выбираете любимый ресторан, <b>бронируете столик бесплатно</b> онлайн, и наслаждаетесь ужином в компании близких людей с гарантированной скидкой до -50% на весь ваш фактический счет (еду и напитки!).</p></div>"
+    main: "<div id=\"page_description\"><h1 style=\"text-transform:uppercase;font-size:14px;\">Резерв столиков онлайн</h1><p><strong>TopReserve</strong> — это бесплатный сервис бронирования столов, который позволяет мгновенно <b>забронировать стол онлайн</b> и получить скидку до -50% на все меню в лучших ресторанах города.</p><p>Вы выбираете любимый ресторан, <b>бронируете столик бесплатно</b> онлайн, и наслаждаетесь ужином в компании близких людей с гарантированной скидкой до -50% на весь ваш фактический счет (еду и напитки!).</p></div>"
   city: "город"
   closed: "Закрыт"
   comments: 
@@ -124,7 +124,7 @@ ru:
   footer: 
     become_a_prtner: "Станьте партнером!"
     copy: " &copy; Topreserve, 2013. - "
-    earn_point: "Получайте баллы за успешные резервы!"
+    earn_point: "Бронируйте бесплатно!"
     need_clients: "Для бизнеса —"
     privacy_police: "Политика конфиденциальности"
     terms_of_service: "Публичная оферта"
@@ -142,7 +142,7 @@ ru:
         sizeError: "{file} очень большой, максимальный размер файла {sizeLimit}."
         typeError: "{file} имеет не правильное расширение. Только {extensions} разрешены."
   google: Google
-  head: "Резерв столов онлайн. Бесплатно · Со скидкой"
+  head: "Резерв столиков онлайн. Бесплатно · Экономия до 50%"
   hello: "Приветствуем"
   label: 
     close: "Закрыть"
@@ -175,20 +175,20 @@ ru:
     back_to_search: "Вернуться к выбору времени"
     is: "из"
     phone: "Телефон:"
+    promo: 
+      date_people: " Выберите дату, время и кол-во гостей"
+      detail: "Подробнее о том, как забронировать столик »"
+      how_reserve_table: "Как забронировать стол?"
+      input_your_data: "Введите свои контатные данные на след. странице"
+      press_button: " Нажмите на кнопку «Найти столик»"
+      press_time_reserve: " Нажмите на время для резерва"
+      sevice_confirmation_real_time: "Сервис проверит доступность в реальном времени"
+      time_to_reserve: "Старайтесь делать бронь за 2 часа до посещения"
     reservetion_table: "Забронировать стол"
     review_for_place: "Все %{count} отзыв(а) о %{place}"
     share: "Поделиться"
     up_to: "Скидка до %{discount}%"
     vailability: "Доступное время %{reserve_date} в районе %{reserve_time} для %{number_of_people} человек"
-    promo:
-      how_reserve_table: "Как забронировать стол?"
-      date_people: "Выберите дату, время и кол-во гостей"
-      time_to_reserve: "Старайтесь делать бронь за 2 часа до посещения"
-      press_button: "Нажмите на кнопку «Найти столик»"
-      sevice_confirmation_real_time: "Сервис проверит доступность в реальном времени"
-      press_time_reserve: "Нажмите на время для резерва"
-      input_your_data: "Введите свои контатные данные на след. странице"
-      detail: "Подробнее о том, как забронировать столик »"
   profile: 
     birthday: "День рождения"
     city_not_specified: "не указан"
@@ -229,14 +229,16 @@ ru:
     view_edit: "Детали"
   registration_form: 
     or: " или "
-  reservation:
-    no_such_reservation: "no such reservation"
+  reservation: 
     address: "Адрес:"
     at: "в"
+    auth_text: "Присоеденяйтесь!"
+    book_edit_reservations: "Управляйте своими резервами"
     complete: "Отправить и завершить бронирование"
     confirmation: "Подтверждение: #"
     confirmed: "Ваш заказ подтверджен"
     confirmed_text: Your reservation is confirmed and saved in the restaurant's computer reservation system. You'll receive an email copy of this confirmation.
+    create_acc_now: Create account now
     delete: "Удалить"
     diner_name: "Резерв на:"
     discount: This document guarantees your reservation and <strong>%{discount}% discount</strong> for your bill
@@ -244,46 +246,42 @@ ru:
     edit: "Править"
     edit_with_place: "Изменить резерв в %{place}"
     for: "для"
+    get_updates: "Получайте уведомления о новых местах и скидках"
     i_go: "Что дальше?"
     invite_friends: "Пригласить друзей"
+    join_top_reserv: "Зарегистрироваться"
+    make_a_list: "Создавайте списки любимых ресторанов"
     message_from_restoran: "Сообщение от ресторана:"
     more_info: "Подробнее:"
     new_reservation: 
       complete_reservation: "Подтвердите Вашу бронь"
+    no_such_reservation: no such reservation
     people: 
       one: "1 персоны"
       other: " %{count} персон"
     phone: "Номер телефона:"
+    popup: 
+      auth_text: "Создайте пароль чтобы получить бесплатный аккаунт на TopReserve для управления резервами и накопления бонусных (TopPoints) гривен за каждый резерв!"
+      clicking_text: "Нажимая \"Создать аккаунт\" вы соглашаетесь с условиями Пользовательского соглашения."
+      create_password: "Создайте пароль<br/>"
+      errors_user_crate: "Ошибка при создания пользователя, пароль должен быть больше 5 символов и совпадать с подтвердженным"
+      nothankyou: "Нет, спасибо"
+      re_enter_pass: "Повторите пароль<br>"
+      subscribe: "Подписаться на новости и акции от TopReserve"
+      sumbit_value: "Создать аккаунт"
+      thanks: "Спасибо, %{name}"
     print: "Распечатать детали резерва"
     print_method: 
       notes: "Ваши пожелания:"
-      place_name: "Название ресторана:"
+      place_name: "Название ресторана: "
       questions: "Возникли вопросы по поводу вашей брони? Вы всегда можете связаться с %{title} по номеру %{phone}. Также звоните на нашу горячую линию: <b> (044) 300-00-10</b>"
       special: "Спец. предложение:"
       thanks: "Спасибо что выбрали %{title}. Мы рады сообщить Вам о том, что Ваш резерв через сервис <b>TopReserve.com.ua</b> подтвержден. Если ваши планы поменяются и вы решите изменить время или отменить бронь, пожалуйста предупредите нас об этом. Ждем вас!"
     rewards: "<p>Все пользователи TopReserve получают баллы за успешные резервы столиков!</p><p>Собрав 100 и более, вы сможете обменять их на бесплатный ужин в любимом ресторане.</p>"
-    rewards_not_auth: "<p>All members get rewards for online reservations!<p>"
-    auth_text: "Присоеденяйтесь!"
+    rewards_not_auth: "<p>Все пользователи получают бонусы от TopReserve!<p>"
     special_offers: "Спец. предложение:"
     view_on_map: "Показать ресторан на карте"
     view_or_change: "Посмотреть детали резерва"
-    popup:
-      thanks: "Thank you, %{name}"
-      auth_text: "Add a password to get a free TopReserve account where you can create and manage your bookings online, and start earning TopPoints towards free meals!"
-      create_password: "Create a password <br/>"
-      re_enter_pass: "Re-enter a password<br>"
-      subscribe: "Subscribe me for TopReserve news and updates"
-      clicking_text: "By clicking “Create account” you confirm that you accept terms and conditions."
-      sumbit_value: "Create account"
-      nothankyou: "No, thank you"
-      errors_user_crate: "Ошибка при создания юзера, пароль должен быть больше 5 символов и совпадать с подтвердженным"
-    join_top_reserv: "Join TopReserve"
-    book_edit_reservations: "Book, edit, cancel your future reservations"
-    get_updates: "Get email news and updates, best discounts"
-    make_a_list: "Make a list of your favorite places for quicker orders"
-    create_acc_now: "Create account now"
-
-
   review: 
     one: " отзыв"
     other: " отзывы"
@@ -308,9 +306,9 @@ ru:
     restorans: "ресторанах"
     result_for: "Результаты для"
     sort: 
+      discount: "Сортировать по скидке"
       newest: "Сортировать по дате добавления"
       overall_mark: "Сортировать по популярности"
-      discount: "Сортировать по скидке"
     sort_labeled: "Сортировать"
     special_offers: "Спец. предложения:"
     thead: 
@@ -414,7 +412,7 @@ ru:
       next: "След &raquo;"
       previous: "&laquo; Пред"
       truncate: ...
-  vk: Vkontakte
+  vk: "ВКонтакте"
   welcome: "Приветствуем"
   words: 
     cancel: "отмена"
