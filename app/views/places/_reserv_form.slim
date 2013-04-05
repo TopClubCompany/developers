@@ -13,6 +13,9 @@
         a href="#" data-value="#{reverse[:time]}" class="#{css_class}"= reverse[:time]
       a href="#" data-value=reserv_time[:time] class="#{reserv_time[:css_class]}"= I18n.t('place.reservetion_table')
 
-  a.back style='display:none' href="#"
+  a href="#{@place.place_path}"
+    = I18n.t('place.back_to_search')
+
+  /a.back style='display:none' href="#"
     = I18n.t('place.back_to_search')
     

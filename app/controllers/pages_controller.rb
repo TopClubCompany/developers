@@ -32,7 +32,7 @@ class PagesController < ApplicationController
 
   def set_breadcrumbs_front
     super
-    @breadcrumbs_front << ["<a href=#{page_path(@structure)}>#{@structure.title}&nbsp</a>"]
+    @breadcrumbs_front << ["<a href=#{page_path(@structure)}>#{@structure.title}</a>&nbsp"]
   end
 
 end
