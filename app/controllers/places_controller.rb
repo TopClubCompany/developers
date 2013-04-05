@@ -94,8 +94,8 @@ class PlacesController < ApplicationController
 
   def set_breadcrumbs_front
     super
-    @breadcrumbs_front << ["<a href=#{with_locale("search")}>#{I18n.t('breadcrumbs.search')}&nbsp</a>"]
-    @breadcrumbs_front << ["<a href=#{@place.place_path}>#{@place.title}&nbsp</a>"]
+    @breadcrumbs_front << ["<a href=#{with_locale("search")}>#{I18n.t('breadcrumbs.search')}</a>&nbsp"]
+    @breadcrumbs_front << ["<a href=#{@place.place_path}>#{@place.title}</a>&nbsp"]
   end
 
 end
