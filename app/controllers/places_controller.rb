@@ -7,6 +7,7 @@ class PlacesController < ApplicationController
 
   def show
     @date = params[:reserve_date] || Date.today.strftime('%d/%m/%Y')
+    @date = (Time.parse(@date) + 1.day).strftime("%d/%m/%Y") if @next_day
     @location = @place.lat_lng
     @special_offers = @place.day_discounts.special
     reviews = @place.reviews.includes(:votes, :marks)
