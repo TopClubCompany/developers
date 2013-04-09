@@ -102,7 +102,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_breadcrumbs_front
-    @breadcrumbs_front = ["<a href=#{with_locale("")}>#{I18n.t('breadcrumbs.main')}&nbsp</a>"]
+    @breadcrumbs_front = ["<a href=#{with_locale("")}>#{I18n.t('breadcrumbs.main')}</a>&nbsp"]
   end
 
   def with_locale(path)
