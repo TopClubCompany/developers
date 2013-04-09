@@ -117,10 +117,10 @@ class Users::ProfileController < ApplicationController
 
   def set_breadcrumbs_front
     path = request.env['PATH_INFO'].to_s
-    @breadcrumbs_front = ["<a href=#{profile_path(current_user)}>#{I18n.t('breadcrumbs.profile')}&nbsp</a>"]
+    @breadcrumbs_front = ["<a href=#{profile_path(current_user)}>#{I18n.t('breadcrumbs.profile')}</a>&nbsp"]
 
     if find_tab(path).present?
-      @breadcrumbs_front << ["<a href=#{with_locale(path)}>#{find_tab(path)}&nbsp</a>"]
+      @breadcrumbs_front << ["<a href=#{with_locale(path)}>#{find_tab(path)}</a>&nbsp"]
     end
   end
 

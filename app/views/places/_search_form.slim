@@ -1,4 +1,4 @@
-#search_form
+.green#search_form
   span.header #{t('short_strings.reserve_at')} #{@place.name}
   .header_special= I18n.t("place.up_to", discount: @place.max_discount.to_i)
   form action=place_link(@place)
