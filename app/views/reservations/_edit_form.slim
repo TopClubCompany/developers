@@ -2,7 +2,8 @@
   span.header= I18n.t('reservation.edit_with_place', place: @place.title)
   form action=localization_link("Save")
     label for="reserve_date"
-    input class='dateFormatNeeded' name="reserve_date" autocomplete="off" type="text" value=(@date.strftime('%d/%m/%Y'))
+    - date  = @date.strftime('%d/%m/%Y')
+    input class='dateFormatNeeded' name="reserve_date" autocomplete="off" type="text" value=(date)
     - time = @options[:reserve_time].gsub(/[hm=]/,'').split('&')
     - time[0][0]='' if time[0].match /^0/
     - time_hash = {:h => time[0], :m => time[1]}
