@@ -20,7 +20,7 @@ doMagic = () ->
     " #{days[date.getDay()]}, #{months[date.getMonth()]} #{date.getDate()}, #{date.getFullYear()} #{atText} #{timeString} #{forText} #{person_num} #{if person_num is '1' then person else people}" + 
     $('#complete > .complete_edit')[0].outerHTML
     $('#complete').html(HTMLToSet)
-    $('#reservation_time').val(date.toJSON())
+    $('#reservation_time').val(fromDate.join("/")+" "+timeString)
     $('#reservation_persons').val(person_num)
     $("#search_form, #complete").toggle()
     doMagic()
