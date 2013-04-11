@@ -3355,6 +3355,8 @@ body {
   background: -ms-linear-gradient(top, #515151 1%,#2c2c2c 100%); /* IE10+ */
   background: linear-gradient(to bottom, #515151 1%,#2c2c2c 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#515151', endColorstr='#2c2c2c',GradientType=0 ); /* IE6-9 */
+  max-width: 140px!important;
+  padding: 5px 7px;
 }
 
 #place #search_form.green input[type='submit']:hover {
