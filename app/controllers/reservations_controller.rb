@@ -25,7 +25,7 @@ class ReservationsController < ApplicationController
       @user = User.find(session[:new_reservation_user]) if !current_user && session[:new_reservation_user].present?
       @place = @reservation.try(:place)
       @date  = @reservation.time
-      @discount = @place.today_discount_with_time(@date, false).max{|x| x.discount}
+      @discount = @place.today_discount_with_time(@date, false).select{|x| !x.respond_to?(:empty?)}.max{|x| x.discount}
       redirect_to root_path, flash: { error: I18n.t('reservation.no_such_reservation') } unless @reservation && @place
     else
       redirect_to root_path
@@ -88,7 +88,7 @@ class ReservationsController < ApplicationController
     if current_user.try(:id) == @reservation.user_id || session[:reservation_user] == @reservation.user_id
       @place = @reservation.try(:place)
       @date  = @reservation.time
-      @discount = @place.today_discount_with_time(@date, false).max{|x| x.discount}
+      @discount = @place.today_discount_with_time(@date, false).select{|x| !x.respond_to?(:empty?)}.max{|x| x.discount}
       redirect_to root_path, flash: { error: 'no such reservation' } unless @reservation && @place
       render "print", layout: "print"
     else
