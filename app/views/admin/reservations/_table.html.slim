@@ -9,8 +9,8 @@ table.table.table-striped.index_table#list
       th= sort_link(@search, :email)
       th= sort_link(@search, :special_notes)
       th= sort_link(@search, :time)
-      th= sort_link(@search, :user_id)
-      th= sort_link(@search, :place_id)
+      th= sort_link(@search, :user)
+      th= sort_link(@search, :place)
       th= sort_link(@search, :created_at)
       th= sort_link(@search, :persons)
       th=t 'admin.table.actions'
@@ -25,8 +25,8 @@ table.table.table-striped.index_table#list
         td= pretty_data item.email
         td= pretty_data item.special_notes
         td= pretty_data item.time
-        td= pretty_data item.user_id
-        td= pretty_data item.place_id
+        td= pretty_data item.user.try(:name)
+        td= pretty_data item.place.try(:title)
         td= pretty_data item.created_at
         td= pretty_data item.persons
         td.actions= item_index_actions(item)
