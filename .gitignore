@@ -46,4 +46,5 @@ pickle-email-*.html
 public/uploads/
 public/static
 public/assets
-
+.ruby-version
+.ruby-gemset
