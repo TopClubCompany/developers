@@ -1,0 +1,15 @@
+generate_autocomplete:
+  cron: "30 3 * * *"
+  class: GenerateAutocompleteJob
+  queue: low
+  description: "This generate autocomplete"
+elastic_indexer:
+  cron: "0 4 * * *"
+  class: ElasticIndexerJob
+  queue: low
+  description: "This update elastic index"
+site_map:
+  cron: "0 4 * * *"
+  class: SiteMapJob
+  queue: low
+  description: "This update site map"
