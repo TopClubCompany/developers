@@ -47,7 +47,7 @@ class ReservationsController < ApplicationController
     end
     if reservation.save
       add_points(reservation)
-      send_messages(reservation, [1,2,3,4,8])
+      send_messages(reservation, [1,2,3,4,8]) unless Rails.env.production?
       redirect_to reservation_confirmed_path(reservation.id)
     else
       redirect_to new_reservation_path(@reservation), flash: { error: @reservation.errors.full_messages.join(', ') }
