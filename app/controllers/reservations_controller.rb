@@ -99,12 +99,13 @@ class ReservationsController < ApplicationController
   private
 
   def add_points reservation
-    if reservation.user.reservations.size.zero?
-      reservation.user.points =+ 50
+    user = reservation.user
+    if user.reservations.size == 1
+      user.points =+ 50
     else
-      reservation.user.points =+ Figaro.env.POINTS.to_f
+      user.points =+ Figaro.env.POINTS.to_f
     end
-    reservation.user.save
+    user.save
   end
 
   def find_page(reservation=nil, type=:new_reservation)
