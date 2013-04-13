@@ -35,7 +35,7 @@ window.checkNewUser = (selector, sb_sel) ->
     hideLastName = ->
       user_last_name.tipsy "hide"
 
-    if user_email.length > 0      
+    if user_email.length > 0
       if user_email.val() is ""
         user_email.attr "original-title", I18n.translations["#{window.language}"].admin_js.validation_message.empty_field
         user_email.tipsy "show"
@@ -87,14 +87,25 @@ window.checkNewUser = (selector, sb_sel) ->
     return false
   false
 
-FormValidateTwo = (selector, sb_sel) ->
+FormValidateTwo = (selector, sb_sel, cb) ->
   $("#user_phone").mask "+38(999)999-99-99"
   $("#reservation_phone").mask "+38(999)999-99-99"
   $("#{selector}").off 'submit'
   $("#{selector}").on 'submit', (e) ->
-    e.preventDefault() unless window.checkNewUser(selector, sb_sel)
+    return e.preventDefault() unless window.checkNewUser(selector, sb_sel)
+    cb(selector)
 
 $(document).ready ->
+  successCallback = (formSelector) ->
+    $button = $("#{formSelector} input[type='submit']")
+    $button.css
+      "background-image": "url('/assets/ajax-loader.gif')"
+      "background-repeat": "no-repeat"
+      "background-position": "left"
+      "padding-left": "50px"
+      "background-color": 'white'
+      'color': '#08C'
+
 
   #    validateEmail();
   #    enter_phone();
@@ -103,7 +114,7 @@ $(document).ready ->
   window.language = $("#language .active").attr("id")
 
   new FormValidateTwo("#new_user") if $("#new_user").length > 0
-  new FormValidateTwo("#new_reservation") if $("#new_reservation").length > 0
+  new FormValidateTwo("#new_reservation", undefined, successCallback) if $("#new_reservation").length > 0
   new FormValidateTwo("form[id^='edit_user']", '#user') if $("form[id^='edit_user']").length > 0
   new FormValidateTwo("form[id^='edit_reservation']", '#reservation') if $("form[id^='edit_reservation']").length > 0
-  
+
