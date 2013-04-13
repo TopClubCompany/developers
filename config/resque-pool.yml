@@ -1,0 +1,10 @@
+defaults:
+  max_mem:  1024 # in MB
+  max_time: 18000 # in seconds
+
+development:
+  'critical,high,low': 1
+staging:
+  'critical,high,low': 1
+production:
+  'critical,high,low': 1

@@ -110,6 +110,8 @@ gem 'auto_html'
 gem 'jbuilder'
 gem 'resque', :require => "resque/server"
 gem 'resque-scheduler', :require => 'resque_scheduler'
+gem "resque-pool"
+gem "bluepill"
 #gem 'ancestry
 
 gem 'curb'
