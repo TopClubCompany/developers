@@ -4,7 +4,7 @@ html lang="#{I18n.locale}" xml:lang="#{I18n.locale}" xmlns="http://www.w3.org/19
     = include_gon
     = render "layouts/head_include"
     - ([:en, :ru, :ua] - [I18n.locale]).each do |alterative_locale|
-      link href="#{request.host + '/' + alterative_locale.to_s + request.fullpath}" hreflang="#{alterative_locale}" rel="alternate"
+      link href="http://#{request.host + '/' + alterative_locale.to_s + request.fullpath}" hreflang="#{alterative_locale}" rel="alternate"
     javascript:
        var _gaq = _gaq || [];
        _gaq.push(['_setAccount', 'UA-39194049-1']);
