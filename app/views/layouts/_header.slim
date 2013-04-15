@@ -5,10 +5,21 @@
     .row
       .span9
         #logo
-          a href="#{with_local_link '/'}"
+          a href="#{with_local_link '/'}" alt="TopReserve"
             img src="/assets/topreserve.png"
         span.few-words= I18n.t('head')
       .span3
+        - if user_signed_in?
+          a href=profile_path(current_user) id="top_points"
+            span class="left"
+              | Вы
+              br
+              | собрали
+            strong= @reservation.user.points.to_i
+            span class="right"
+              | top
+              br
+              | бонусов
         - unless user_signed_in?
           a.sign_up href=new_user_registration_path #{I18n.t('auth.links_short.sign_up')}
           a.sign_in href=new_user_session_path #{I18n.t('auth.links_short.sign_in')}
