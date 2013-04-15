@@ -61,6 +61,10 @@ class Reservation < ActiveRecord::Base
     }
   end
 
+  def title
+    id
+  end
+
 
 end
 # == Schema Information

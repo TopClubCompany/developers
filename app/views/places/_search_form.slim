@@ -1,3 +1,5 @@
+javascript src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"
+
 .green#search_form
   span.header #{t('short_strings.reserve_at')} #{@place.name}
   .header_special= I18n.t("place.up_to", discount: @place.max_discount.to_i)
@@ -25,5 +27,9 @@
             option value="#{i}" #{i}
     input type="hidden" name="place_id" value="#{@place.id}"
     input type="hidden" name="title_or_location" value="#{@place.title}"
-    input type="submit" data-title="#{@place.name}" value="Забронировать"
+    input type="submit" data-title="#{@place.name}" value="Забронировать" onClick="$('#loading').show();"
       .clear
+
+#loading style="display:none;"
+  img id="loading-image" src="/assets/topreserve.png" alt="Подождите, TopReserve проверяет наличие столиков на заданное время..."
+    p id="loading-image" style="margin-top:-80px; margin-left:-250px;" Подождите, TopReserve проверяет наличие столиков на заданное время...
