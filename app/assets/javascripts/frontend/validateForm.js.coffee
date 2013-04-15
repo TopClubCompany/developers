@@ -98,13 +98,18 @@ FormValidateTwo = (selector, sb_sel, cb) ->
 $(document).ready ->
   successCallback = (formSelector) ->
     $button = $("#{formSelector} input[type='submit']")
+    $button.val('Подождите TopReserve бронирует столик для Вас')
     $button.css
-      "background-image": "url('/assets/ajax-loader.gif')"
-      "background-repeat": "no-repeat"
-      "background-position": "left"
-      "padding-left": "50px"
-      "background-color": 'white'
+      'background':'url(/assets/topreserve.png) center center no-repeat #fff'
       'color': '#08C'
+      'z-index': '1000'
+      'display': 'block'
+      'width':'100%'
+      'height':'100%'
+      'top': '-10px'
+      'left': '-100px'
+      'position': 'fixed'
+      'opacity': '0.95'
 
 
   #    validateEmail();
