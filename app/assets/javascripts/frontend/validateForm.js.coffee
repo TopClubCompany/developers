@@ -100,7 +100,7 @@ $(document).ready ->
     $button = $("#{formSelector} input[type='submit']")
     $button.val('Подождите TopReserve бронирует столик для Вас')
     $button.css
-      'background':'url(/assets/topreserve.png) center center no-repeat #fff'
+      'background':'#fff'
       'color': '#08C'
       'z-index': '1000'
       'display': 'block'
@@ -110,6 +110,7 @@ $(document).ready ->
       'left': '-100px'
       'position': 'fixed'
       'opacity': '0.95'
+      'filter': 'alpha(opacity=95)'
 
 
   #    validateEmail();
