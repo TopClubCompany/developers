@@ -8,8 +8,8 @@
 #
 ### BEGIN INIT INFO
 # Provides: unicorn_top_c
-# Required-Start: $local_fs $remote_fs $network
-# Required-Stop: $local_fs $remote_fs $network
+# Required-Start: $all
+# Required-Stop: $all
 # Default-Start: 2 3 4 5
 # Default-Stop: 0 1 6
 # Short-Description: start and stop unicorn_top_c
@@ -24,16 +24,15 @@ set -e
 PATH=/usr/local/rvm/bin:$PATH
 APP_ROOT=/var/www/top_c
 PID=$APP_ROOT/tmp/pids/unicorn.pid
-ENV=staging
-#ENV=production
-CMD="$APP_ROOT/bin/unicorn -D -E $ENV -c $APP_ROOT/config/unicorn.staging.conf.rb"
+ENV=production
+CMD="$APP_ROOT/bin/unicorn -D -E $ENV -c $APP_ROOT/config/unicorn.conf.rb"
 
 old_pid="$PID.oldbin"
 
 cd $APP_ROOT || exit 1
+#rvm wrapper ruby-1.9.3-p0@top_c unicorn
 date >> tmp/refs
 git show-ref >> tmp/refs
-#rvm wrapper ruby-1.9.3-p0@top_c unicorn
 
 sig () {
 	test -s "$PID" && kill -$1 `cat $PID`

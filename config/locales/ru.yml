@@ -446,3 +446,8 @@ ru:
     unhelpful: "бесполезный"
     view: "посмотреть"
   your_email: "Ваш email"
+  head_points:
+    you: "Вы"
+    collected: "собрали"
+    top: "top"
+    bonuses: "бонусов"

@@ -3,7 +3,6 @@ APP_ROOT = File.expand_path(File.dirname(File.dirname(__FILE__)))
 ENV['BUNDLE_GEMFILE'] = File.expand_path('../Gemfile', File.dirname(__FILE__))
 require 'bundler/setup'
 
-require "redis"
 worker_processes 1
 
 #user "unprivileged_user", "unprivileged_group"
@@ -23,7 +22,7 @@ stdout_path "#{APP_ROOT}/log/unicorn.stdout.log"
 
 preload_app true
 GC.respond_to?(:copy_on_write_friendly=) and
-  GC.copy_on_write_friendly = true
+    GC.copy_on_write_friendly = true
 
 before_fork do |server, worker|
   defined?(ActiveRecord::Base) and
@@ -49,5 +48,5 @@ after_fork do |server, worker|
   defined?(ActiveRecord::Base) and
       ActiveRecord::Base.establish_connection
 
-  $redis = Redis.connect
+  #$redis = Redis.connect
 end

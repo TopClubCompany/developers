@@ -12,14 +12,14 @@
         - if user_signed_in?
           a href=profile_path(current_user) id="top_points"
             span class="left"
-              | Вы
+              = I18n.t('head_points.you')
               br
-              | собрали
-            strong= @reservation.user.points.to_i
+              = I18n.t('head_points.collected')
+            strong= current_user.points.to_i
             span class="right"
-              | top
+              = I18n.t('head_points.top')
               br
-              | бонусов
+              = I18n.t('head_points.bonuses')
         - unless user_signed_in?
           a.sign_up href=new_user_registration_path #{I18n.t('auth.links_short.sign_up')}
           a.sign_in href=new_user_session_path #{I18n.t('auth.links_short.sign_in')}
