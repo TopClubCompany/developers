@@ -4,9 +4,9 @@ require 'yajl/json_gem'
 require "i18n/backend/fallbacks"
 require "simple_form_hooks"
 
-#require 'resque_scheduler'
-#require 'resque_scheduler/server'
-#Resque.schedule = YAML.load_file(Rails.root.join('config', 'resque_schedule.yml'))
+require 'resque_scheduler'
+require 'resque_scheduler/server'
+Resque.schedule = YAML.load_file(Rails.root.join('config', 'resque_schedule.yml'))
 
 Rails.cache.silence!
 Responders::FlashResponder.flash_keys = [:notice, :error]
