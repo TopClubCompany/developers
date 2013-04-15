@@ -14,11 +14,11 @@
                 i.icon-edit
                 = t('words.edit')
             .place
-              a.place_img_sm href="#"
+              a.place_img_sm href=place_link(@place) target="_blank"
                 img height="100" src=(@place.place_image.url(:place_show)if @place.place_image) width="140"
                   span.discount.minus_5
               h4 style="width: auto;"
-                a href="#"
+                a href=place_link(@place) target="_blank"
                   = @place.title
                   - if @reservation.discount
                     span.discount_label= "-#{@reservation.discount.to_i} %"
@@ -29,9 +29,9 @@
                   .stars_bg
                 small
                   - place_reviews = @place.reviews.count
-                  a href="#"
+                  a href=place_link(@place) target="_blank"
                     = place_reviews
-                    |  #{place_reviews == 1 ? 'review' : 'reviews'}
+                    = I18n.t('review', count: place_reviews)
               ul.place_features
                 li.location= @place.location.address
                 li.cuisine= @place.kitchens.map(&:name).join(', ')

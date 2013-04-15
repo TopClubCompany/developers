@@ -33,7 +33,7 @@
                       - place_reviews = place.reviews.count
                       a href=place_link(place)
                         = place_reviews
-                        |  #{place_reviews == 1 ? 'review' : 'reviews'}
+                        = I18n.t('review', count: place_reviews)
                   ul.place_features
                     li.location= place.address
                     li.cuisine= place.kitchens.map(&:title).join(', ')
