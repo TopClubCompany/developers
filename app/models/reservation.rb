@@ -31,7 +31,7 @@ class Reservation < ActiveRecord::Base
 
 
   def to_mail(opts={})
-    discount = place.today_discount_with_time(time).max{|x| x.discount}.try{|x| x.discount.try(:to_i)}
+    discount = place.today_discount_with_time(time).select{|x| !x.respond_to?(:empty?)}.max{|x| x.discount}.try{|x| x.discount.try(:to_i)}
     skidka = discount.present? ? "Skidka #{discount}%" : ""
     {restaurant_name: place.title, restaurant_name_en: place.name_en,
      restaurant_id: place.id, reservation_id: id, skidka: skidka,
@@ -59,6 +59,10 @@ class Reservation < ActiveRecord::Base
   def meta_tag(city)
     {title: place.title, town: city
     }
+  end
+
+  def title
+    id
   end
 
 

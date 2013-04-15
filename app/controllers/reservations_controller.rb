@@ -25,7 +25,7 @@ class ReservationsController < ApplicationController
       @user = User.find(session[:new_reservation_user]) if !current_user && session[:new_reservation_user].present?
       @place = @reservation.try(:place)
       @date  = @reservation.time
-      @discount = @place.today_discount_with_time(@date, false).max{|x| x.discount}
+      @discount = @place.today_discount_with_time(@date, false).select{|x| !x.respond_to?(:empty?)}.max{|x| x.discount}
       redirect_to root_path, flash: { error: I18n.t('reservation.no_such_reservation') } unless @reservation && @place
     else
       redirect_to root_path
@@ -47,7 +47,7 @@ class ReservationsController < ApplicationController
     end
     if reservation.save
       add_points(reservation)
-      send_messages(reservation, [1,2,3,4,8])
+      send_messages(reservation, [1,2,3,4,8]) if Rails.env.production?
       redirect_to reservation_confirmed_path(reservation.id)
     else
       redirect_to new_reservation_path(@reservation), flash: { error: @reservation.errors.full_messages.join(', ') }
@@ -88,7 +88,7 @@ class ReservationsController < ApplicationController
     if current_user.try(:id) == @reservation.user_id || session[:reservation_user] == @reservation.user_id
       @place = @reservation.try(:place)
       @date  = @reservation.time
-      @discount = @place.today_discount_with_time(@date, false).max{|x| x.discount}
+      @discount = @place.today_discount_with_time(@date, false).select{|x| !x.respond_to?(:empty?)}.max{|x| x.discount}
       redirect_to root_path, flash: { error: 'no such reservation' } unless @reservation && @place
       render "print", layout: "print"
     else
@@ -99,8 +99,13 @@ class ReservationsController < ApplicationController
   private
 
   def add_points reservation
-    reservation.user.points =+ Figaro.env.POINTS.to_f
-    reservation.user.save
+    user = reservation.user
+    if user.reservations.size == 1
+      user.points =+ 50
+    else
+      user.points =+ Figaro.env.POINTS.to_f
+    end
+    user.save
   end
 
   def find_page(reservation=nil, type=:new_reservation)

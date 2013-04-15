@@ -1,0 +1,128 @@
+require 'rubygems'
+require 'bluepill'
+
+conf_data = {
+    :development => {
+        :env => 'development',
+        :working_dir => '/var/www/developers',
+        :foreground => true, :uid => 'root', :gid => 'wheel'
+    },
+    :staging => {
+        :env => 'staging',
+        :working_dir => '/var/www/top_c',
+        :foreground => false, :uid => 'root', :gid => 'root'
+    },
+    :production => {
+        :env => 'production',
+        :working_dir => '/var/www/vhosts/topreserve.com.ua/htdocs',
+        :foreground => false, :uid => 'root', :gid => 'root'
+    }
+}
+
+env = ENV['RAILS_ENV'] || 'development'
+MY_CONF = conf_data[env.to_sym]
+
+module Bluepill
+  module ProcessConditions
+    class RunningTime < ProcessCondition
+      def initialize(options = {})
+        @below = options[:below]
+      end
+
+      def run(pid)
+        `ps -p #{pid} -o etime | tail -1`.strip.split(':').map(&:to_i).reverse.each_with_index.map { |v, i| v*60**i }.inject(&:+)
+      rescue
+        0
+      end
+
+      def check(value)
+        value.seconds < @below
+      end
+    end
+  end
+end
+
+class EmailNotifier < Bluepill::Trigger
+  def initialize(process, options = {})
+    @email = options.delete(:email)
+    @notify_on = options.delete(:notify_on)
+    super
+  end
+
+  def notify(transition)
+    if @notify_on.include?(transition.to_name)
+      IO.popen("sendmail -t", "w") do |x|
+        x.puts "To: #{@email}"
+        x.puts
+        x.puts "Your process #{self.process.name} has restarted at #{Time.now}"
+      end
+    end
+  end
+end
+
+Bluepill.application('Topclub', :log_file => "#{MY_CONF[:working_dir]}/log/bluepill.log", :foreground => MY_CONF[:foreground]) do |app|
+  app.working_dir = MY_CONF[:working_dir]
+  app.environment = MY_CONF[:env]
+
+
+  # Resque Pool
+  app.process "r#{MY_CONF[:env][0]}_p" do |process|
+    process.group = "resque_top_club"
+
+    process.uid = MY_CONF[:uid] if MY_CONF[:uid]
+    process.gid = MY_CONF[:gid] if MY_CONF[:gid]
+
+    process.pid_file = "#{MY_CONF[:working_dir]}/tmp/pids/resque_pool_top_club.pid"
+    process.stdout = process.stderr = "#{MY_CONF[:working_dir]}/log/resque_top_club.log"
+    process.environment = {
+        'RAILS_ENV' => MY_CONF[:env],
+        'VERBOSE' => 1
+    }
+    process.start_command = "bin/rake resque:pool"
+    process.stop_command = "kill -QUIT {{PID}}"
+
+    process.daemonize = true
+    process.start_grace_time = 30.seconds
+    process.restart_grace_time = 45.seconds
+
+    if MY_CONF[:env] != 'development'
+      process.checks :email_notifier, :email => 'opak.alexandr@gmail.com', :notify_on => [:unmonitored]
+      #:notify_on => [:unmonitored, :up, :down, :starting, :stopping, :restarting]
+    end
+  end
+
+  # Resque scheduler
+  app.process("r#{MY_CONF[:env][0]}_s") do |process|
+    process.group = "resque_top_club"
+
+    process.uid = MY_CONF[:uid] if MY_CONF[:uid]
+    process.gid = MY_CONF[:gid] if MY_CONF[:gid]
+
+    process.pid_file = "#{MY_CONF[:working_dir]}/tmp/pids/resque_top_club_schedule.pid"
+    process.stdout = process.stderr = "#{MY_CONF[:working_dir]}/log/resque_top_club.log"
+    process.environment = {
+        'RAILS_ENV' => MY_CONF[:env],
+        'VERBOSE' => 1
+    }
+
+    process.start_command = "bin/rake resque:scheduler"
+    process.stop_command = "kill -QUIT {{PID}}"
+
+    process.start_grace_time = 20.seconds
+    process.stop_grace_time = 30.seconds
+    process.restart_grace_time = 50.seconds
+    process.daemonize = true
+
+    process.monitor_children do |c|
+      c.checks :running_time, :every => 30.seconds, :below => 30.minutes, :fires => :stop
+      c.checks :mem_usage, :every => 2.minutes, :below => 400.megabytes, :fires => :stop, :times => 3
+      c.checks :cpu_usage, :every => 1.minute, :below => 80, :times => 10
+      c.stop_command = "kill -USR1 {{PID}}"
+    end
+
+    if MY_CONF[:env] != 'development'
+      process.checks :email_notifier, :email => 'opak.alexandr@gmail.com', :notify_on => [:unmonitored]
+      #:notify_on => [:unmonitored, :up, :down, :starting, :stopping, :restarting]
+    end
+  end
+end
