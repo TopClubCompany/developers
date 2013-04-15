@@ -47,7 +47,7 @@ class ReservationsController < ApplicationController
     end
     if reservation.save
       add_points(reservation)
-      send_messages(reservation, [1,2,3,4,8])
+      send_messages(reservation, [1,2,3,4,8]) if Rails.env.production?
       redirect_to reservation_confirmed_path(reservation.id)
     else
       redirect_to new_reservation_path(@reservation), flash: { error: @reservation.errors.full_messages.join(', ') }
@@ -99,8 +99,13 @@ class ReservationsController < ApplicationController
   private
 
   def add_points reservation
-    reservation.user.points =+ Figaro.env.POINTS.to_f
-    reservation.user.save
+    user = reservation.user
+    if user.reservations.size == 1
+      user.points =+ 50
+    else
+      user.points =+ Figaro.env.POINTS.to_f
+    end
+    user.save
   end
 
   def find_page(reservation=nil, type=:new_reservation)
