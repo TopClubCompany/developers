@@ -162,19 +162,26 @@ $ ->
   # google map handler
   setTimeout((->
     if $('#map').length > 0
+      console.log '#map was inited'
       initialData = $('#map').data()
       mapOptions =
         center: new google.maps.LatLng(initialData.lat, initialData.lng),
-        zoom: 13,
+        zoom: 14,
         minZoom: 9,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       map = new google.maps.Map(document.getElementById("map"), mapOptions)
+      # scope
+      markerPosition = new google.maps.LatLng(initialData.lat, initialData.lng)
       marker = new google.maps.Marker(
-        position: new google.maps.LatLng(initialData.lat, initialData.lng)
+        icon: "/assets/pin.png"
+        position: markerPosition
         title: "Hello from here!"
       )
       marker.setMap(map)
-      google.maps.event.trigger($("#map")[0], 'resize');
+      $('#map_static').on 'click', (e) ->
+        $.fancybox.open('#map')
+        google.maps.event.trigger($("#map")[0], 'resize');
+        map.setCenter markerPosition
   ), 1000)
 
   # menu popup
