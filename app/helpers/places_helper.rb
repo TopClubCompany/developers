@@ -64,30 +64,41 @@ module PlacesHelper
   end
 
 
-  def group_discounts(special_offers)
+  def group_discounts(special_offers, nested = true)
+    result = {}
+    grouped_by_title = special_offers.group_by {|offer| "#{offer.title}, #{offer.discount}"}
+    compacted_offers = grouped_by_title.map do |different_offer_key, different_offer_offers|
+      initial_key = chain_day_names(different_offer_offers.inject([]){|memo, offer| memo << offer.week_day.day_type.title})
+      grouped_by_time = different_offer_offers.group_by {|offer| "#{offer.from_time}, #{offer.to_time}"}
+      res = grouped_by_time.map do |time, offers|
+        secondary_key = chain_day_names(offers.inject([]){|memo, offer| memo << offer.week_day.day_type.title})
+        Hash[time, secondary_key]
+      end
+      offer_description = Hash[different_offer_offers.uniq_by {|offer| "#{offer.title}, #{offer.discount}"}, Hash[initial_key, res]]
+    end
+  end
+
+  def chain_day_names days_to_chain
     day_names = DayType.all.map {|day| day.title}
-    day_array = special_offers.inject({}) do |res, offer|
-      current_scope = (res["#{offer.from_time}, #{offer.to_time}, #{offer.title}, #{offer.discount}"] ||= '')
+    res = days_to_chain.inject('') do |current_scope, current|
       current_scope << (if current_scope =~ /[А-Яа-яA-Za-z]$|-$/
-                          # we are in open scope we either prolong it or close
-                          previous_day = current_scope.split(/,|-/).compact[-1]
-                          current = offer.week_day.day_type.title
-                          if !previous_day.nil? and  day_names.index(previous_day) + 1 == (day_names.index(current))
-                            '-' + current
-                          else
-                            ',' + current
-                          end
-                        else
-                          # it was either , or empty
-                          ',' + offer.week_day.day_type.title
-                        end)
+          # we are in open scope we either prolong it or close
+          previous_day = current_scope.split(/,|-/).compact[-1]
+          if !previous_day.nil? and  day_names.index(previous_day) + 1 == (day_names.index(current))
+            '-' + current
+          else
+            ',' + current
+          end
+        else
+          # it was either , or empty
+          ',' + current
+        end)
       current_scope.sub!(/^,/, '')
       current_scope.sub!(/-[А-Яа-яA-Za-z]+-/, '-')
-      res["#{offer.from_time}, #{offer.to_time}, #{offer.title}"] = current_scope
-      res
+      current_scope
     end
-    uniq = special_offers.uniq_by {|offer| "#{offer.from_time}, #{offer.to_time}, #{offer.title}, #{offer.discount}"}
-    uniq.inject({}){|memo, offer| memo[day_array["#{offer.from_time}, #{offer.to_time}, #{offer.title}, #{offer.discount}"]] = offer; memo}
+    res
   end
 
 end
+

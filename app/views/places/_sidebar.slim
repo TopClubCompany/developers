@@ -2,8 +2,13 @@
   #sidebar.specials.span4
     h3 #{t('short_strings.special_offers')} #{place.title}
     ul
-      - group_discounts(special_offers).each do |offer_title, offer|
+      - group_discounts(special_offers).each do |offer_description|
         li
-          - offer_time = "<br/>#{t('words.time')}: #{offer.nice_offer_time}"
+          - offer = offer_description.keys.first[0]
+          - offer_title = offer_description.values.first.keys.first
+          - offer_time = offer_description.values.first.values.first.inject('') do |memo, time_days|
+            - days = time_days.values.first
+            - time = time_days.keys.first
+            - memo << "<br/>#{days}: #{float_to_time_with_locale(time.split(', ')[0])}-#{float_to_time_with_locale(time.split(', ')[1])}"
           - data = { trigger: 'hover', title: offer_title, content: offer.description + offer_time, placement: 'left' }
           = link_to offer.title, '#', class: 'popoverable', data: data
