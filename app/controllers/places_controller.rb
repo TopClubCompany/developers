@@ -11,6 +11,8 @@ class PlacesController < ApplicationController
     @location = @place.lat_lng
     @special_offers = @place.day_discounts.special
     reviews = @place.reviews.includes(:votes, :marks)
+    # For icon to be visible in production, we want root_url + "assets/pin.png" to be available from maps.googleapis domain
+    @icon_url = CGI::escape(Rails.env.production? ? root_url + "/assets/pin.png" : "http://chrononsystems.com/wp-content/themes/toolbox/images/pin.png")
     @reviews = case params[:sort_by]
                  when 'date'
                    reviews.order('created_at')
