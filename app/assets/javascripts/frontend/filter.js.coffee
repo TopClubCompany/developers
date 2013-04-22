@@ -32,9 +32,9 @@ class Pagination
     @$el.empty()
     unless $('html').scrollTop() is $('#filters').offset().top - 35
       $('html,body').animate
-        'scrollTop': $('#filters').offset().top - 35
+        'scrollTop': $('#filters').offset().top - 695
       ,
-        "duration": 1000
+        "duration": 500
         "complete": ->
           $.noop()
 
