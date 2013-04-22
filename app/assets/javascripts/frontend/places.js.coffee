@@ -168,6 +168,8 @@ $ ->
         center: new google.maps.LatLng(initialData.lat, initialData.lng),
         zoom: 14,
         minZoom: 9,
+        disableDefaultUI: true,
+        zoomControl: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       map = new google.maps.Map(document.getElementById("map"), mapOptions)
       # scope
