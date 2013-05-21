@@ -3379,3 +3379,83 @@ body {
   background: linear-gradient(to bottom, #666666 0%,#282828 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#666666', endColorstr='#282828',GradientType=0 ); /* IE6-9 */
 }
+
+/******* Index Cities Page ******/
+
+.index_cities {
+  height: 500px;
+}
+
+.index_cities .content {
+  background-color: transparent;
+}
+
+.index_cities .sidebar {
+  z-index: 2;
+  position: relative;
+  -webkit-box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow:    0px 5px 15px rgba(0, 0, 0, 0.25);
+  box-shadow:         0px 5px 15px rgba(0, 0, 0, 0.25);
+  padding: 10px 0;
+  margin-top: 50px;
+}
+
+.index_cities .sidebar h2 {
+  display: block;
+  padding: 0 20px;
+  margin: 0 0 5px 0;
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
+  letter-spacing: -0.05em;
+  font-weight: normal;
+  color: #08c;
+}
+
+.index_cities .sidebar p {
+  display: block;
+  padding: 0 20px 15px 20px;
+  margin: 0 0 20px 0;
+  border-bottom: 1px solid #f2f0ea;
+}
+
+.index_cities .sidebar ul {
+  display: block;
+  padding: 0 0 0 20px;
+  margin: 0;
+  width: 130px;
+  float: left;
+  font-size: 14px;
+  color: #999;
+}
+
+.index_cities .sidebar ul li {
+  display: block;
+  margin: 0 0 5px 0;
+  cursor: default;
+}
+
+.index_cities .sidebar ul li a {
+  font-weight: bold;
+}
+
+.index_cities .sidebar ul h3 {
+  font-size: 24px;
+  padding: 0;
+  margin: 0 0 15px 0;
+  color: #555;
+  font-weight: normal;
+  letter-spacing: -0.05em;
+}
+
+.index_cities #header {
+  z-index: 2;
+  position: relative;
+}
+
+#cities_map {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  width: 100%;
+  height: 93%;
+  z-index: 0;
+}
