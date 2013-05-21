@@ -1,7 +1,6 @@
 class ExploreController < ApplicationController
 
   def index
-    #raise (session[:return_path] || root_path)
     params.merge!(city: current_city)
     places = Place.best_places(6, params)
     new_place = Place.new_places(6, params)
