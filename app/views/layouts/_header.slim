@@ -1,4 +1,4 @@
-- if request.path_parameters[:controller] == "explore" && request.path_parameters[:action] != "choose_city"
+- if request.path_parameters[:controller] == "explore" && !@css_class_cities.present?
   == I18n.t('ceo.main')
 #header
   .content

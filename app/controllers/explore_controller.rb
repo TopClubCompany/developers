@@ -3,6 +3,7 @@ class ExploreController < ApplicationController
   def index
 
     unless current_city.present?
+      @css_class_cities = "index_cities"
       render :choose_city and return
     end
 
