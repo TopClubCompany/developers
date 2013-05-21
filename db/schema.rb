@@ -178,11 +178,14 @@ ActiveRecord::Schema.define(:version => 20130521112012) do
   end
 
   create_table "countries", :force => true do |t|
+    t.string   "slug"
     t.boolean  "is_visible", :default => true
     t.integer  "position",   :default => 0
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
   end
+
+  add_index "countries", ["slug"], :name => "index_countries_on_slug", :unique => true
 
   create_table "country_translations", :force => true do |t|
     t.integer  "country_id"

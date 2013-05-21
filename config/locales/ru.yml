@@ -451,3 +451,6 @@ ru:
     collected: "собрали"
     top: "top"
     bonuses: "бонусов"
+  choose_city:
+    hello: "Добро пожаловать!"
+    bron_text: "<strong>Бронируйте</strong> столики онлайн<br>в лучших заведениях вашего города <strong>со скидкой до 50%</strong>"

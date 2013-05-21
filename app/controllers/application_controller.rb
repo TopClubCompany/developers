@@ -9,13 +9,14 @@ class ApplicationController < ActionController::Base
   before_filter :set_gon_current_user
   before_filter :set_user_path
   before_filter :set_breadcrumbs_front, only: [:index, :show]
+  before_filter :set_css_class
 
   helper_method :current_city, :current_city_plural
 
   protected
 
     def current_city param=:slug
-      current_user.try(:city).try(param) ||  session[:city] || 'kyiv'
+      current_user.try(:city).try(param) ||  cookies[:city]
     end
 
     def current_city_plural name = :plural_name
@@ -112,6 +113,10 @@ class ApplicationController < ActionController::Base
     else
       "/" + I18n.locale.to_s + path
     end
+  end
+
+  def set_css_class
+    @css_class_cities = ""
   end
 
   private

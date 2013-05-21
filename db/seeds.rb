@@ -188,18 +188,36 @@ def insert_mark_types
   puts 'mark types added successfully'
 end
 
-def insert_city
+def insert_city_ukraine
+  Country.full_truncate
+
+  country = Country.create(title: "Ukraine", position: 0)
+
   City.full_truncate
   [{name: "Kyiv", slug: "kyiv"},{name: "Kharkiv", slug: "kharkiv"}, {name: "Odessa", slug: "odessa"},
-  {name: "Dnepropetrivsk", slug: "dnepropetrivsk"}, {name: "Donetsk", slug: "donetsk"}, {name: "Lviv", slug: "lviv"}
+   {name: "Dnepropetrivsk", slug: "dnepropetrivsk"}, {name: "Donetsk", slug: "donetsk"}, {name: "Lviv", slug: "lviv"}
   ].each do |city|
     City.create do |c|
       c.name = city[:name]
       c.slug = city[:slug]
       c.plural_name = city[:name]
+      c.country_id = country.id
     end.save!
   end
   puts 'cities added successfully'
+end
+
+def insert_city_russia
+  country = Country.create(title: "Russia", position: 1)
+  [{name: "Moscow", slug: "moscow"},{name: "Astrakhan", slug: "astrakhan"}
+  ].each do |city|
+    City.create do |c|
+      c.name = city[:name]
+      c.slug = city[:slug]
+      c.plural_name = city[:name]
+      c.country_id = country.id
+    end.save!
+  end
 end
 
 def insert_default_place_pictures
@@ -278,7 +296,8 @@ insert_default_user('user@usr.com')
 #add_test_stuff
 #insert_default_place_pictures
 #insert_group_feature
-#insert_city
+insert_city_ukraine
+insert_city_russia
 #insert_default_reservations
 #insert_default_vote_types
 #insert_slider

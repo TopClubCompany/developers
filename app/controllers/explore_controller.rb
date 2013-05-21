@@ -1,12 +1,18 @@
 class ExploreController < ApplicationController
 
   def index
+
+    unless current_city.present?
+      render :choose_city and return
+    end
+
     params.merge!(city: current_city)
     places = Place.best_places(6, params)
     new_place = Place.new_places(6, params)
     tonight_available = Place.tonight_available(6, params)
     @tabs = {best: places, new: new_place, available: tonight_available}
   end
+
 
   def get_more
     method = case params[:type]
@@ -23,8 +29,15 @@ class ExploreController < ApplicationController
   end
 
 
-  def change_city
+  def choose_city
+    @css_class_cities = "index_cities"
+  end
 
+  def update_city
+    if params[:city].present?
+      cookies[:city] = params[:city]
+    end
+    redirect_to root_path
   end
 
   protected
