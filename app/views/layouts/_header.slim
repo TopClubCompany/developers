@@ -5,8 +5,8 @@
     .row
       .span9
         #logo
-          a href="#{with_local_link '/'}" alt="TopReserve"
-            img src="/assets/topreserve.png"
+          a href="#{with_local_link '/'}" title="TopReserve"
+            img src="/assets/topreserve.png" alt="TopReserve"
         span.few-words= I18n.t('head')
       .span3
         - if user_signed_in?

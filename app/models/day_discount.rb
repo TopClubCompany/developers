@@ -7,6 +7,7 @@ class DayDiscount < ActiveRecord::Base
 
   include Utils::Models::Base
   include Utils::Models::Translations
+  include TimeHelper
 
   scope :special, -> { where(is_discount: false) }
 
@@ -15,7 +16,7 @@ class DayDiscount < ActiveRecord::Base
   scope :with_day, lambda { |week_day_id, discount| where("is_discount = ? AND week_day_id = ?", discount, week_day_id) }
 
   def nice_offer_time
-    [from_time, to_time].map{ |point| Time.strptime(point.to_s, "%H.%M").strftime("%I:%M%p") }.join('-')
+    [float_to_time_with_locale(from_time), float_to_time_with_locale(to_time)].join('-')
   end
 
 end
