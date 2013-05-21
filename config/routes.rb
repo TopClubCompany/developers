@@ -58,9 +58,13 @@ Topclub::Application.routes.draw do
 
   root :to => 'explore#index'
 
+  get '/update_city/:city' => "explore#update_city"
+
   resources :explore do
     collection do
       get :get_more
+      get :choose_city
+      get :update_city
     end
   end
 
