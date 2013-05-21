@@ -1,4 +1,4 @@
-- if request.path_parameters[:controller] == "explore"
+- if request.path_parameters[:controller] == "explore" && !@css_class_cities.present?
   - css_class = "page_description"
 - else
   - css_class = ""
