@@ -15,5 +15,36 @@
             - else
               li city.name
 
-#cities_map
-  iframe width="100%" height="560" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=ru&amp;geocode=&amp;q=%D1%83%D0%BA%D1%80%D0%B0%D0%B8%D0%BD%D0%B0&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=50.644639,68.466797&amp;ie=UTF8&amp;hq=&amp;hnear=%D0%A3%D0%BA%D1%80%D0%B0%D0%B8%D0%BD%D0%B0&amp;t=m&amp;ll=48.385442,31.157227&amp;spn=14.602424,21.972656&amp;z=6&amp;output=embed"
+#cities_map width="100%"
+  /iframe width="100%" height="560" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=ru&amp;geocode=&amp;q=%D1%83%D0%BA%D1%80%D0%B0%D0%B8%D0%BD%D0%B0&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=50.644639,68.466797&amp;ie=UTF8&amp;hq=&amp;hnear=%D0%A3%D0%BA%D1%80%D0%B0%D0%B8%D0%BD%D0%B0&amp;t=m&amp;ll=48.385442,31.157227&amp;spn=14.602424,21.972656&amp;z=6&amp;output=embed"
+
+  javascript:
+    // Создаем карту
+    var map = new google.maps.Map(document.getElementById('cities_map'), {
+      zoom: 6,
+      center: new google.maps.LatLng(48.835797, 36.474609),
+      disableDefaultUI: true,
+      zoomControl: false,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    // Создаем и размещаем маркеры на карте
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(50.460127, 30.5159),
+      icon: '/assets/pin.png',
+      title: 'Киев',
+      map: map
+    });
+      google.maps.event.addListener(marker, 'click', function() {
+        window.location.href = '/update_city/kyiv';
+      });
+
+    var marker = new google.maps.Marker({
+      position: new google.maps.LatLng(46.360671,48.03154),
+      icon: '/assets/pin.png',
+      title: 'Астрахань',
+      map: map
+    });
+      google.maps.event.addListener(marker, 'click', function() {
+        window.location.href = '/update_city/astrakhan';
+      });

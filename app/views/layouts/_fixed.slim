@@ -7,7 +7,7 @@
         - unless locale.to_s == I18n.locale.to_s
           li id=locale.to_s
             a href="/#{locale.to_s}/"= I18n.t("language_title.#{locale.to_s}")
-    /ul#location
+    ul#location
       - City.with_translations.each do |city|
         li class=get_city_class(city.slug)
           = link_to city.name, set_location_path(city.slug), method: 'post'
