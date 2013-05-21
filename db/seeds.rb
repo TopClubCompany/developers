@@ -194,7 +194,7 @@ def insert_city_ukraine
   country = Country.create(title: "Ukraine", position: 0)
 
   City.full_truncate
-  [{name: "Kyiv", slug: "kyiv"},{name: "Kharkiv", slug: "kharkiv"}, {name: "Odessa", slug: "odessa"},
+  [{name: "Kyiv", slug: "kyiv", lat: 50.46, lng: 30.51},{name: "Kharkiv", slug: "kharkiv"}, {name: "Odessa", slug: "odessa"},
    {name: "Dnepropetrivsk", slug: "dnepropetrivsk"}, {name: "Donetsk", slug: "donetsk"}, {name: "Lviv", slug: "lviv"}
   ].each do |city|
     City.create do |c|
@@ -202,6 +202,8 @@ def insert_city_ukraine
       c.slug = city[:slug]
       c.plural_name = city[:name]
       c.country_id = country.id
+      c.latitude = city[:lat]
+      c.longitude = city[:lng]
     end.save!
   end
   puts 'cities added successfully'
@@ -209,13 +211,15 @@ end
 
 def insert_city_russia
   country = Country.create(title: "Russia", position: 1)
-  [{name: "Moscow", slug: "moscow"},{name: "Astrakhan", slug: "astrakhan"}
+  [{name: "Moscow", slug: "moscow"},{name: "Astrakhan", slug: "astrakhan", lat: 46.36, lng: 48.03}
   ].each do |city|
     City.create do |c|
       c.name = city[:name]
       c.slug = city[:slug]
       c.plural_name = city[:name]
       c.country_id = country.id
+      c.latitude = city[:lat]
+      c.longitude = city[:lng]
     end.save!
   end
 end

@@ -1,6 +1,6 @@
 class City < ActiveRecord::Base
 
-  attr_accessible :is_visible, :position, :name, :description, :plural_name, :country_id
+  attr_accessible :is_visible, :position, :name, :description, :plural_name, :country_id, :latitude, :longitude
 
   has_many :users
 
@@ -23,6 +23,8 @@ end
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  country_id :integer
+#  latitude   :float
+#  longitude  :float
 #
 # Indexes
 #

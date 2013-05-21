@@ -7,5 +7,9 @@
   = f.input :is_visible, input_html: {class: 'pretty-slide-checkbox'}
   = f.input :position
 
+  = f.input :latitude, :as => :hidden
+  = f.input :longitude, :as => :hidden
+
+  = geo_input 'city'
 
   = f.save_buttons
