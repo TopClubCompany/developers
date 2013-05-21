@@ -3,3 +3,8 @@ Disallow: /reservations/
 Disallow: /new_reservation/
 Disallow: /profile/
 Disallow: /reservation_confirmed/
+Disallow: /*?reserve_time
+Disallow: /*?sort_by
+Disallow: /newest
+Disallow: /overall_mark
+Disallow: /discount

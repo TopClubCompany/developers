@@ -30,6 +30,14 @@ class Pagination
 
   goTo: (page) ->
     @$el.empty()
+    unless $('html').scrollTop() is $('#filters').offset().top - 35
+      $('html,body').animate
+        'scrollTop': $('#filters').offset().top - 695
+      ,
+        "duration": 500
+        "complete": ->
+          $.noop()
+
     if @total_elements is 0
       @stub()
     else
@@ -61,7 +69,7 @@ class PlacesCollection
       id = $(block).data('id')
       @ids.push id
       $el = $("#place_#{id}")
-      $listEl = $("#list_place_#{id}") 
+      $listEl = $("#list_place_#{id}")
       bindBlockListeners.call @, $listEl, $el
 
       $el.add($listEl).find('.timing').each (index, timeGroup) ->
@@ -74,7 +82,7 @@ class PlacesCollection
             text = timeButton.text()
           timeButton.data('value', timeButton.text())
           timeButton.text(text)
-        
+
     lattitudes = _.pluck objArray, 'lat'
     longtitudes = _.pluck objArray, 'lat'
 
@@ -87,7 +95,7 @@ class PlacesCollection
 
     for obj in objArray
       @addMarker obj
-    setTimeout((=> 
+    setTimeout((=>
       @adjustMap() if @ids.length > 3
     ), 500)
   createMap: () ->
@@ -101,7 +109,7 @@ class PlacesCollection
       minZoom: 8,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     @map = new google.maps.Map(document.getElementById("map_places"), mapOptions)
-    
+
     window.googleMap = @map
 
 
@@ -118,10 +126,10 @@ class PlacesCollection
     if needToAddIds.length > 0
       needToAdd = _.filter(placesData, (place) -> needToAddIds.indexOf(place.id) isnt -1  )
       @multipleAdd($.makeArray(needToAdd))
-      setTimeout((=> 
+      setTimeout((=>
         @adjustMap() if @ids.length > 3
       ), 500)
-      
+
     if needToRemoveIds.length > 0
       @multipleRemove needToRemoveIds
 
@@ -137,7 +145,7 @@ class PlacesCollection
     for marker in @markers
       bounds.extend marker.position
     @map.fitBounds bounds
-  
+
   average = (arr) ->
     _.reduce(arr, (memo, num) ->
       memo + num
@@ -152,8 +160,6 @@ class PlacesCollection
         place.lng = coords[1]
       @addBlock place
       @addMarker place
-   
-
 
   multipleRemove: (placeIdsToRemove) =>
     for removeId in placeIdsToRemove
@@ -186,7 +192,7 @@ class PlacesCollection
           text = timeButton.text()
         timeButton.data('value', timeButton.text())
         timeButton.text(text)
-
+    # $el.add($listEl).find('.popoverable').popover()
     setTimeout(( =>
       bindBlockListeners.call @, $("#list_place_#{place.id}"), $("#place_#{place.id}")
     ), 50)
@@ -273,8 +279,8 @@ class PlacesCollection
     _.each values, (time, index, values) ->
       if index isnt 2
         text = time.time
-        text = text.replace /AM|PM/, ''        
-      else 
+        text = text.replace /AM|PM/, ''
+      else
         text = time.time
       $el.find(".timing a:eq(#{index})").html(text).data('value', time.time)
       $listEl.find(".timing a:eq(#{index})").html(text).data('value', time.time)
@@ -321,7 +327,7 @@ class PlacesCollection
       stub = $('#list_place_' + obj.id).clone(false)
       stub.find('.timing, .special_offers, [id^=favorites_small]').remove()
       newContent = $("<div class='fix-width-p'></div>").append(stub.find('h4, .rating, .place_features').detach())
-      newContent.insertBefore(stub.find('.clear'))  
+      newContent.insertBefore(stub.find('.clear'))
       boxText = document.createElement("div")
       boxText.className = "place popover-content"
       boxText.style.cssText = "border: 1px solid rgba(0,0,0,0.2); margin-top: 8px; padding: 10px; border-radius: 4px; background: white;"
@@ -343,7 +349,7 @@ class PlacesCollection
         isHidden: false
         pane: "floatPane"
         enableEventPropagation: false
-      
+
       google.maps.ib = ib = new InfoBox(myOptions)
 
       google.maps.event.addListener marker, "click", (e) ->
@@ -737,7 +743,7 @@ $ ->
     $("#ajax_loader_overlay").fadeOut ->
       $(@).remove()
 
-  if $('#search_form').length and $('#refine').length      
+  if $('#search_form').length and $('#refine').length
     $('#search_form form').on 'submit', (e) ->
       e.preventDefault()
       categories = if window.location.search.match(/category=(?:\d+,?)+/) then window.location.search.match(/category=(?:\d+,?)+/) + '&' else ''

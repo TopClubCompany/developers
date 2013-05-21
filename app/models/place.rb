@@ -41,6 +41,7 @@ class Place < ActiveRecord::Base
   accepts_nested_attributes_for :location, :reviews, :place_administrators, :week_days, :place_menus,
                                 :allow_destroy => true, :reject_if => :all_blank
 
+  include TimeHelper
 
   translates :name, :description
 
@@ -417,11 +418,7 @@ class Place < ActiveRecord::Base
     groups = week_days.group_by do |day|
       [:start_at, :end_at].map do |point|
         if day.send(point).to_s.present?
-          if I18n.locale.to_sym == :en
-            Time.parse(("%5.2f" % day.send(point).to_s).sub(".",":")).strftime("%I:%M%p")
-          else
-            Time.parse(("%5.2f" % day.send(point).to_s).sub(".",":")).strftime("%H:%M")
-          end
+          float_to_time_with_locale day.send(point)
         end
       end.join('-')
     end

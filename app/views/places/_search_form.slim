@@ -2,7 +2,8 @@ javascript src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"
 
 .green#search_form
   span.header #{t('short_strings.reserve_at')} #{@place.name}
-  .header_special= I18n.t("place.up_to", discount: @place.max_discount.to_i)
+  - if @place.max_discount.present?
+    .header_special= I18n.t("place.up_to", discount: @place.max_discount.to_i)
   form action=place_link(@place)
     label for="reserve_date"
     input class='dateFormatNeeded' type="text" name="reserve_date" autocomplete="off" value="#{@date}"
@@ -31,5 +32,8 @@ javascript src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"
       .clear
 
 #loading style="display:none;"
-  img id="loading-image" src="/assets/topreserve.png" alt="Подождите, TopReserve проверяет наличие столиков на заданное время..."
-    p id="loading-image" style="margin-top:-80px; margin-left:-250px;" Подождите, TopReserve проверяет наличие столиков на заданное время...
+    p id="loading-image" style="margin-top:-80px; margin-left:-240px;color:#08C;font-size:16px;"
+      /img src="/assets/topreserve.png" alt="Подождите, TopReserve проверяет наличие столиков на заданное время"
+      /br
+      | Подождите, TopReserve проверяет наличие столиков на заданное время
+    img id="loading-image" src="/assets/ajax-loader.gif"
