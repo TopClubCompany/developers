@@ -1,24 +1,17 @@
 # == Schema Information
 #
-# Table name: cities
+# Table name: countries
 #
 #  id         :integer          not null, primary key
-#  slug       :string(255)      not null
 #  is_visible :boolean          default(TRUE)
-#  position   :integer
+#  position   :integer          default(0)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  country_id :integer
-#
-# Indexes
-#
-#  index_cities_on_country_id  (country_id)
-#  index_cities_on_slug        (slug) UNIQUE
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :city do
+  factory :country do
   end
 end

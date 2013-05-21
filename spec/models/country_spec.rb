@@ -1,23 +1,16 @@
 require 'spec_helper'
 
-describe City do
+describe Country do
   pending "add some examples to (or delete) #{__FILE__}"
 end
 # == Schema Information
 #
-# Table name: cities
+# Table name: countries
 #
 #  id         :integer          not null, primary key
-#  slug       :string(255)      not null
 #  is_visible :boolean          default(TRUE)
-#  position   :integer
+#  position   :integer          default(0)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  country_id :integer
-#
-# Indexes
-#
-#  index_cities_on_country_id  (country_id)
-#  index_cities_on_slug        (slug) UNIQUE
 #
 

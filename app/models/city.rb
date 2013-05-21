@@ -1,8 +1,10 @@
 class City < ActiveRecord::Base
 
-  attr_accessible :is_visible, :position, :name, :description, :plural_name
+  attr_accessible :is_visible, :position, :name, :description, :plural_name, :country_id
 
   has_many :users
+
+  belongs_to :country
 
   translates :name, :description, :plural_name
 
@@ -20,9 +22,11 @@ end
 #  position   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  country_id :integer
 #
 # Indexes
 #
-#  index_cities_on_slug  (slug) UNIQUE
+#  index_cities_on_country_id  (country_id)
+#  index_cities_on_slug        (slug) UNIQUE
 #
 

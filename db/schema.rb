@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130324083727) do
+ActiveRecord::Schema.define(:version => 20130521112012) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -132,8 +132,10 @@ ActiveRecord::Schema.define(:version => 20130324083727) do
     t.integer  "position"
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
+    t.integer  "country_id"
   end
 
+  add_index "cities", ["country_id"], :name => "index_cities_on_country_id"
   add_index "cities", ["slug"], :name => "index_cities_on_slug", :unique => true
 
   create_table "city_translations", :force => true do |t|
@@ -174,6 +176,25 @@ ActiveRecord::Schema.define(:version => 20130324083727) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "countries", :force => true do |t|
+    t.boolean  "is_visible", :default => true
+    t.integer  "position",   :default => 0
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
+
+  create_table "country_translations", :force => true do |t|
+    t.integer  "country_id"
+    t.string   "locale"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "country_translations", ["country_id"], :name => "index_country_translations_on_country_id"
+  add_index "country_translations", ["locale"], :name => "index_country_translations_on_locale"
 
   create_table "day_discount_translations", :force => true do |t|
     t.integer  "day_discount_id"
