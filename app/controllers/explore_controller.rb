@@ -4,6 +4,7 @@ class ExploreController < ApplicationController
 
     unless current_city.present?
       @css_class_cities = "index_cities"
+      set_cities_to_gon
       render :choose_city and return
     end
 
@@ -51,6 +52,12 @@ class ExploreController < ApplicationController
   def find_page
     structure = Structure.with_position(::PositionType.index).first
     setting_meta_tags structure
+  end
+
+  def set_cities_to_gon
+    gon.cities = City.visible.map{|city| {latitude: city.latitude, longitude: city.longitude,
+                                          slug: city.slug, title: city.title}}
+
   end
 
 end

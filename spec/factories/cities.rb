@@ -9,6 +9,8 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  country_id :integer
+#  latitude   :float
+#  longitude  :float
 #
 # Indexes
 #
