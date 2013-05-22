@@ -8,9 +8,9 @@
           li id=locale.to_s
             a href="/#{locale.to_s}/"= I18n.t("language_title.#{locale.to_s}")
     ul#location
-      - City.with_translations.each do |city|
+      - City.visible.with_translations.each do |city|
         li class=get_city_class(city.slug)
-          = link_to city.name, set_location_path(city.slug), method: 'post'
+          a href="/update_city/#{city.slug}"= city.name
 
     #header_links
       a.first href="#{localization_link('pages/help')}"= Structure.find('help').name
