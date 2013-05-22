@@ -20,9 +20,7 @@ class ApplicationController < ActionController::Base
       if request.subdomain.present?
         cookies[:city] = request.subdomain
       else
-        if cookies[:city].present?
-          cookies[:city] = "kyiv"
-        end
+        cookies[:city] = nil
       end
     end
 
