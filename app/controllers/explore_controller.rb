@@ -38,7 +38,11 @@ class ExploreController < ApplicationController
   def update_city
     if params[:city].present?
       cookies[:city] = params[:city]
-      path = "http://" + params[:city] +"." + request.domain
+      if cookies[:city] == "kyiv"
+        path = "http://" + request.domain
+      else
+        path = "http://" + params[:city] +"." + request.domain
+      end
     else
       path = root_path
     end
