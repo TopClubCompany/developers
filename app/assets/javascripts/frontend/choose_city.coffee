@@ -20,15 +20,14 @@ class ChooseCityMap
 
     for city in window.gon.cities
       if city.latitude && city.longitude
-        marker = new google.maps.Marker({
+        google.maps.event.addListener(new google.maps.Marker({
           position: new google.maps.LatLng(city.latitude, city.longitude),
           icon: '/assets/pin.png',
           title: city.title,
+          slug: city.slug,
           map: @map
-        })
-
-        google.maps.event.addListener(marker, 'click', ->
-          window.location.href = "/update_city/#{city.slug}"
+        }), 'click', ->
+          window.location.href = url = "/update_city/#{@slug}"
         )
 
 $ ->

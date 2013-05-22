@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     end
 
     def current_city param=:slug
-      current_sub_domain ||  cookies[:city]
+      cookies[:city] || current_sub_domain
     end
 
     def current_city_plural name = :plural_name
