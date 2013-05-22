@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery except: [:save_cooperation]
 
+  before_filter :current_sub_domain
   before_filter :set_locale
   before_filter :current_city
   before_filter :set_time
@@ -16,11 +17,17 @@ class ApplicationController < ActionController::Base
   protected
 
     def current_sub_domain
-      request.subdomain
+      if request.subdomain.present?
+        cookies[:city] = request.subdomain
+      else
+        if cookies[:city].present?
+          cookies[:city] = "kyiv"
+        end
+      end
     end
 
     def current_city param=:slug
-      cookies[:city] || current_sub_domain
+      cookies[:city]
     end
 
     def current_city_plural name = :plural_name
