@@ -18,9 +18,17 @@ class ApplicationController < ActionController::Base
 
     def current_sub_domain
       if request.subdomain.present?
-        cookies[:city] = request.subdomain
+        cookies[:city] = {
+            :value => request.subdomain,
+            :expires => 7.day.from_now,
+            :domain => request.domain
+        }
       else
-        cookies[:city] = nil
+
+        
+        if cookies[:city].present?
+          redirect_to  "http://"+cookies[:city] + "." + request.domain
+        end
       end
     end
 

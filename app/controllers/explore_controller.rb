@@ -1,7 +1,6 @@
 class ExploreController < ApplicationController
 
   def index
-
     unless current_city.present?
       @css_class_cities = "index_cities"
       set_cities_to_gon
@@ -37,7 +36,11 @@ class ExploreController < ApplicationController
 
   def update_city
     if params[:city].present?
-      cookies[:city] = params[:city]
+      cookies[:city] = {
+          :value => params[:city],
+          :expires => 7.day.from_now,
+          :domain => request.domain
+      }
       path = "http://" + params[:city] +"." + request.domain
     else
       path = root_path
