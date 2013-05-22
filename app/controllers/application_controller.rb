@@ -15,8 +15,12 @@ class ApplicationController < ActionController::Base
 
   protected
 
+    def current_sub_domain
+      request.subdomain
+    end
+
     def current_city param=:slug
-      current_user.try(:city).try(param) ||  cookies[:city]
+      current_sub_domain ||  cookies[:city]
     end
 
     def current_city_plural name = :plural_name
