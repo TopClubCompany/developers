@@ -3,43 +3,57 @@ class Autocomplete < ActiveRecord::Base
   elasticsearch
 
   def to_indexed_json
-    {:term => term, :freq => freq}.to_json
+    {term: term, freq: freq, city: city}.to_json
   end
 
-  def self.search(query)
+  def self.search(query, params={})
     return [] if query.blank?
+    filters = []
+    if params[:city].present?
+      filters << {query: {text: {city: params[:city]}}}
+    end
     tire.search :per_page => 30 do
-      query { match :term, query.lucene_escape, 'type' => 'phrase_prefix' }
+      query do
+        match :term, query.lucene_escape, 'type' => 'phrase_prefix'
+      end
+
+      filter(:and, :filters => filters)
       sort { by 'freq', 'desc' }
+      puts to_json
     end.map(&:term).uniq
   end
 
   def self.perform
-    columns = [:term, :freq]
+    columns = [:term, :city, :freq]
     words = []
+    _words = []
 
     Autocomplete.full_truncate
 
     Place.with_translations.find_each do |place|
-      words +=  Globalize.available_locales.map do |locale|
+      _words += Globalize.available_locales.map do |locale|
         place.send("name_#{locale}")
-      end.zip(Globalize.available_locales.map{|locale|place.city(locale)})
+      end.zip(Globalize.available_locales.map { |locale| place.city(:en) })
     end
 
-    raise words.inspect
-    #raise Place.const_get(:Translation).value_of(:name).zip
-
-    [[Place, :name]].each do |m|
-      words += m[0].build_stops(m[0].const_get(:Translation).value_of(m[1]).join(' '))
+    _words.each do |word|
+      tmp_words = Place.build_stops(word[0])
+      words += tmp_words.zip(tmp_words.map { word[1] })
     end
 
-    [[Location, :street],[Location, :city], [Location, :county], [Location, :country]].each do |m|
-      words += m[0].const_get(:Translation).value_of(m[1])
+    [[Location, :street], [Location, :city], [Location, :county], [Location, :country]].each do |m|
+      m[0].with_translations.find_each do |obj|
+        words += Globalize.available_locales.map do |locale|
+          obj.send("#{m[1]}_#{locale}")
+        end.zip(Globalize.available_locales.map { |locale| obj.send("city_en") })
+      end
     end
 
-    raise words.compact.word_count.to_a.inspect
+    words = words.compact.word_count.map do |obj|
+      obj.flatten
+    end
 
-    import(columns, words.compact.word_count.to_a)
+    import(columns, words)
     count
   end
 end
@@ -52,5 +66,6 @@ end
 #  freq       :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  city       :string(255)
 #
 
