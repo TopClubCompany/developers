@@ -99,12 +99,20 @@ class Place < ActiveRecord::Base
 
   def self.for_slider options={}
     tire.search(page: options[:page], per_page: options[:per_page] || 4) do
+      filters  = []
+      if options[:city].present?
+        filters << {query: {flt: {like_text: options[:city], fields: I18n.available_locales.map { |l| "city_#{l}" }} }}
+      end
+
+      filters << {query: {constant_score: {filter: {exists: {field: "is_has_slider_image"}}}}}
+
       query do
         custom_score({script: "random()*20"}) do
           all {}
         end
       end
-      filter :exists, :field => :is_has_slider_image
+
+      filter(:and, :filters => filters)
       sort { by("_score", "desc") }
       puts to_curl
     end
