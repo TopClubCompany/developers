@@ -20,6 +20,7 @@ class Autocomplete < ActiveRecord::Base
 
     Autocomplete.full_truncate
 
+
     [[Place, :name]].each do |m|
       words += m[0].build_stops(m[0].const_get(:Translation).value_of(m[1]).join(' '))
     end
