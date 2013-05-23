@@ -451,13 +451,18 @@ class Place < ActiveRecord::Base
 
   def self.count_visible options={}
     model = self
+    filters =  model.visible_filter
+    if options[:category].present?
+      filters << {query: {terms: {category_ids: options[:category].to_s.split(",")} }}
+    end
+
     tire.search(search_type: "scan", scroll: "10m") do
       if options[:city]
         query do
           flt options[:city].lucene_escape, :fields => I18n.available_locales.map { |l| "city_#{l}" }, :min_similarity => 0.5
         end
       end
-      filter(:and, :filters => model.visible_filter)
+      filter(:and, :filters => filters)
     end.total
   end
 
