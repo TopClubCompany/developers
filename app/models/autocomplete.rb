@@ -20,6 +20,14 @@ class Autocomplete < ActiveRecord::Base
 
     Autocomplete.full_truncate
 
+    Place.with_translations.find_each do |place|
+      words +=  Globalize.available_locales.map do |locale|
+        place.send("name_#{locale}")
+      end.zip(Globalize.available_locales.map{|locale|place.city(locale)})
+    end
+
+    raise words.inspect
+    #raise Place.const_get(:Translation).value_of(:name).zip
 
     [[Place, :name]].each do |m|
       words += m[0].build_stops(m[0].const_get(:Translation).value_of(m[1]).join(' '))
@@ -28,6 +36,8 @@ class Autocomplete < ActiveRecord::Base
     [[Location, :street],[Location, :city], [Location, :county], [Location, :country]].each do |m|
       words += m[0].const_get(:Translation).value_of(m[1])
     end
+
+    raise words.compact.word_count.to_a.inspect
 
     import(columns, words.compact.word_count.to_a)
     count

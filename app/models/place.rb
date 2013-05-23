@@ -114,7 +114,6 @@ class Place < ActiveRecord::Base
 
       filter(:and, :filters => filters)
       sort { by("_score", "desc") }
-      puts to_curl
     end
   end
 
@@ -450,19 +449,20 @@ class Place < ActiveRecord::Base
 
 
   def self.count_visible options={}
-    model = self
-    filters =  model.visible_filter
+    _filters = []
+    _filters.push(*self.visible_filter)
+
     if options[:category].present?
-      filters << {query: {terms: {category_ids: options[:category].to_s.split(",")} }}
+      _filters << {terms: {category_ids: options[:category].to_s.split(",")} }
     end
 
-    tire.search(search_type: "scan", scroll: "10m") do
+    tire.search page: options[:page], per_page: options[:per_page] do
       if options[:city]
         query do
           flt options[:city].lucene_escape, :fields => I18n.available_locales.map { |l| "city_#{l}" }, :min_similarity => 0.5
         end
       end
-      filter(:and, :filters => filters)
+      filter(:and, {:filters => _filters, _cache: false})
     end.total
   end
 
@@ -556,6 +556,11 @@ class Place < ActiveRecord::Base
     else
       false
     end
+  end
+
+
+  def city locale="en"
+    location.try("city_#{locale}")
   end
 
   private
