@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
         }
       else
         if cookies[:city].present?
-          redirect_to  "http://"+cookies[:city] + "." + request.domain
+          redirect_to  "http://"+cookies[:city] + "." + request.domain + request.path
         end
       end
     end
