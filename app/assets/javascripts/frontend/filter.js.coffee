@@ -357,6 +357,8 @@ class PlacesCollection
         ib.open map, this
         bindBlockListeners.call @, $(''), $(ib.content_)
         google.maps.ib = ib
+        map.setZoom(12);
+        map.setCenter(marker.getPosition());
 
       google.maps.event.addListener marker, "mouseover", ->
         selector = '#place_' + obj.id
@@ -376,6 +378,8 @@ class PlacesCollection
           google.maps.ib.close()
           ib.open map, marker
           google.maps.ib = ib
+          map.setZoom(12);
+          map.setCenter(marker.getPosition());
       ), 50)
 
       google.maps.event.addListener marker, "mouseout", ->
