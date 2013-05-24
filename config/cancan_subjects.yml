@@ -3,12 +3,6 @@
   :collection: true
   :is_own: true
   :model: User
-:place:
-  :resource: true
-  :collection: true
-  :is_own: true
-  :model: Place
-
 :reservation:
   :resource: false
   :collection: true
@@ -16,3 +10,9 @@
   :is_visibility: true
   :model: Reservation
   :assocs: [:place]
+  
+:place:
+  :resource: true
+  :collection: true
+  :is_own: true
+  :model: Place
