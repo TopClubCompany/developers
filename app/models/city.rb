@@ -11,6 +11,9 @@ class City < ActiveRecord::Base
   include Utils::Models::Base
   include Utils::Models::Translations
   include Utils::Models::AdminAdds
+
+
+  ac_field
 end
 # == Schema Information
 #
