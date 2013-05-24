@@ -26,14 +26,14 @@ header.navbar.revers
                   = "System"
                   b.caret
                 ul.dropdown-menu
-                  -[Category, Kitchen, Place, GroupFeature, FeatureItem, Locator, MarkType, City, Country, Structure, Letter, UserNotification, Cooperation, Reservation, Role].each do |m|
+                  -[Category, Kitchen, Place, GroupFeature, FeatureItem, Locator, MarkType, City, Country, Structure, Letter, UserNotification, Cooperation, Role].each do |m|
                     = admin_menu_link(m)
             li.dropdown
               a.dropdown-toggle data-toggle="dropdown" href="#"
                 = "Pace And Users"
                 b.caret
               ul.dropdown-menu
-                -[Place, User].each do |m|
+                -[Place, User, Reservation].each do |m|
                   =admin_menu_link(m)
 
 
