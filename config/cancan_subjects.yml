@@ -3,7 +3,6 @@
   :collection: true
   :is_own: true
   :model: User
-  :assocs: [:groups]
 :place:
   :resource: true
   :collection: true
