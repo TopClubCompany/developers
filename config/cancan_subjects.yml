@@ -13,6 +13,7 @@
 
 :place:
   :resource: true
-  :collection: false
+  :collection: true
   :is_own: true
   :model: Place
+  :assocs: [:city]
