@@ -24,6 +24,8 @@ class Ability
 
   def moderator
     can [:read], User, :id => @user.id
+    can [:manage], User, :city_id => @user.city.try(:id)
+
     # temp fix assets
     can :manage, Asset
     @rules += @user.fetch_rules
