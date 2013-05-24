@@ -12,7 +12,7 @@
   :model: User
   :assocs: [:groups]
 :place:
-  :resource: false
+  :resource: true
   :collection: true
   :is_own: true
   :model: Place
