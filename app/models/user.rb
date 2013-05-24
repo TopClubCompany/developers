@@ -39,6 +39,13 @@ class User < ActiveRecord::Base
 
   has_many :user_notifications, :through => :u_user_notifications
 
+  has_many :group_users, :dependent => :destroy
+  has_many :groups, :through => :group_users
+  has_many :group_roles, :through => :groups, :source => :roles
+
+  has_many :user_roles, :dependent => :destroy
+  has_many :roles, :through => :user_roles
+
   alias_attribute :name, :title
 
   before_validation :generate_login
@@ -53,6 +60,8 @@ class User < ActiveRecord::Base
 
   has_many :facebook_friends, :dependent => :destroy
   has_many :vk_friends, :dependent => :destroy
+
+  as_token_ids :role, :content_kind
 
   after_create :create_notifications
 
@@ -146,6 +155,10 @@ class User < ActiveRecord::Base
     has_role?(:admin)
   end
 
+  def content_manager?
+    (moderator? || admin?)
+  end
+
   def has_role?(role_name)
     user_role_type.try(:code) == role_name
   end
@@ -155,6 +168,21 @@ class User < ActiveRecord::Base
     if ::UserRoleType.legal?(value)
       self.user_role_type = ::UserRoleType.find(value)
     end
+  end
+
+  def fetch_rules
+    Rails.cache.fetch(cache_key) { get_rules }
+  end
+
+  def get_rules
+    rules = []
+    perms = roles.map(&:get_perms).sum
+    return rules if perms == 0
+    perms.map do |p|
+      opts = p[2] || {}
+      rules << ::CanCan::Rule.new(true, p[0], p[1], opts, nil)
+    end
+    rules
   end
 
   def state
@@ -196,6 +224,14 @@ class User < ActiveRecord::Base
     user_favorite_places.pluck(:place_id).include? place.id
   end
 
+  def to_indexed_json
+    attrs = [:id, :created_at, :full_name, :email]
+    Jbuilder.encode do |json|
+      json.(self, *attrs)
+      json.(self, *self.class.ac_search_attrs)
+    end
+  end
+
   protected
 
   #def set_default_role
@@ -210,6 +246,8 @@ class User < ActiveRecord::Base
       end
     end
   end
+
+
 
 
 
