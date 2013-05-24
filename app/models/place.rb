@@ -58,6 +58,8 @@ class Place < ActiveRecord::Base
 
   as_token_ids :category, :kitchen
 
+  ac_field
+
   class_attribute :visible_filter, :instance_writer => false
 
   self.visible_filter = [
