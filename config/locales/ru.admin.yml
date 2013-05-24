@@ -41,6 +41,9 @@ ru:
       perms: 
         link: "Права"
         title: "Редактирование прав доступа"
+        assocs:
+          place: "Плейс"
+          city: "Город"
       preview: 
         link: "Предпросмотр"
       show: 
@@ -218,6 +221,8 @@ ru:
         company: "компанию"
         group: "группу"
         groups: "группы"
+        place: "Место"
+        city: "Город"
       form: 
         actions: "Может"
         add: "Добавить"
