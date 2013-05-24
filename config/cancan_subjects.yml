@@ -1,10 +1,3 @@
-:category:
-  :resource: true
-  :collection: true
-  :is_own: true
-  :model: Category
-  :collection_actions: [:read, :create, :update, :delete]
-  :member_actions: [:read, :update, :delete, :rebuild]
 :user:
   :resource: false
   :collection: true
@@ -16,16 +9,11 @@
   :collection: true
   :is_own: true
   :model: Place
-:structure:
-  :resource: true
+
+:reservation:
+  :resource: false
   :collection: true
   :is_own: true
   :is_visibility: true
-  :model: Structure
-:static_page:
-  :resource: true
-  :collection: true
-  :is_own: true
-  :is_visibility: true
-  :model: StaticPage
-  :assocs: [:structure]
+  :model: Reservation
+  :assocs: [:place]
