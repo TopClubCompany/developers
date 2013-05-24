@@ -1,13 +1,3 @@
-#:locator:
-#  :resource: false
-#  :collection: true
-#  :model: Locator
-#  :collection_actions: [:update]
-#:configuration:
-#  :resource: false
-#  :collection: true
-#  :model: Configuration
-#  :collection_actions: [:update]
 :category:
   :resource: true
   :collection: true
@@ -21,16 +11,11 @@
   :is_own: true
   :model: User
   :assocs: [:groups]
-#:group:
-#  :resource: true
-#  :collection: true
-#  :is_own: true
-#  :model: Group
-#:role:
-#  :resource: false
-#  :collection: true
-#  :is_own: true
-#  :model: Role
+:place:
+  :resource: false
+  :collection: true
+  :is_own: true
+  :model: Place
 :structure:
   :resource: true
   :collection: true

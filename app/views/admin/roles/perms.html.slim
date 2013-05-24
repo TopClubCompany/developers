@@ -1,0 +1,34 @@
+= javascript_include_tag 'http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0.beta6/handlebars.min.js'
+= javascript_include_tag 'admin/components/permissions'
+= admin_form_for @role, :url => update_perms_admin_role_path(@role), :html => {:class => 'simple_form perms_form', :data => {:perms => @role.for_form, :subjects => SubjectType.for_form}} do |f|
+  = input_set t('admin.perms.form.resources') do
+    .panel_contents
+      table.collection_perms.table.table-striped
+        thead
+          tr
+            th= t 'admin.perms.form.subject'
+            th= t 'admin.perms.form.actions'
+            th= t 'admin.perms.form.is_own'
+            -#%th= t 'admin.perms.form.is_visibility'
+            th= t 'admin.perms.form.is_work'
+            th= t 'admin.perms.form.assoc'
+            th= t 'admin.perms.form.assoc_ids'
+            th= t 'admin.perms.form.destroy'
+        tbody#collection_perms
+      .btn.btn-primary.btn-mini#add_collection_perm= t 'admin.perms.form.add'
+
+  = input_set t('admin.perms.form.per_resource') do
+    .panel_contents
+      table.resource_perms.table.table-striped
+        thead
+          tr
+            th= t 'admin.perms.form.subject'
+            th= t 'admin.perms.form.resource'
+            th= t 'admin.perms.form.actions'
+            -#%th= t 'admin.perms.form.is_work'
+            th= t 'admin.perms.form.destroy'
+        tbody#resource_perms
+      .btn.btn-primary.btn-mini#add_resource_perm= t 'admin.perms.form.add'
+
+  = f.button :wrapped, t('admin.form.save')
+= render 'tmpl'

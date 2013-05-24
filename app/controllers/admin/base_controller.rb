@@ -2,7 +2,7 @@ class Admin::BaseController < ::InheritedResources::Base
   include Utils::Controllers::Callbacks
 
   before_filter :authenticate_user!
-  before_filter :check_admin, :unless => :admin?
+  before_filter :check_admin, :unless => :content_manager?
   before_filter :add_breadcrumbs, :set_title, :set_user_vars, :unless => :xhr?
 
   class_attribute :csv_builder
@@ -225,6 +225,10 @@ class Admin::BaseController < ::InheritedResources::Base
 
   def get_subject
     params[:id] ? resource : resource_class
+  end
+
+  def content_manager?
+    user_signed_in? && current_user.content_manager?
   end
 
 end

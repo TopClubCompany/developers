@@ -3,9 +3,11 @@ class Place < ActiveRecord::Base
 
   attr_accessible :phone, :is_visible, :user_id, :url, :location_attributes, :week_days_attributes,
                   :avg_bill, :feature_item_ids, :place_administrators_attributes, :place_menus_attributes,
-                  :name, :description, :week_days_ids
+                  :name, :description, :week_days_ids, :city_id
 
   belongs_to :user
+
+  belongs_to :city
 
   has_many :place_categories, :dependent => :destroy
   has_many :categories, :through => :place_categories
@@ -563,6 +565,10 @@ class Place < ActiveRecord::Base
     location.try("city_#{locale}")
   end
 
+  def can_city? user_city
+    city =~ /#{user_city}/i
+  end
+
   private
 
   def self.get_star_rating place
@@ -643,6 +649,8 @@ class Place < ActiveRecord::Base
 
 
 
+
+
 end
 # == Schema Information
 #
@@ -657,6 +665,7 @@ end
 #  avg_bill   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  city_id    :integer
 #
 # Indexes
 #

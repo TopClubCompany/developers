@@ -188,6 +188,15 @@ Topclub::Application.routes.draw do
       post :batch, :on => :collection
     end
 
+    resources :roles do
+      post :batch, :on => :collection
+      resources(:users) { post :batch, :on => :collection }
+      member do
+        get :perms
+        put :update_perms
+      end
+    end
+
   end
   mount Ckeditor::Engine => "/ckeditor"
   mount Resque::Server, :at => "/resque"
