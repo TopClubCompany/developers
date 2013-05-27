@@ -1,5 +1,6 @@
 class Reservation < ActiveRecord::Base
-  attr_accessible :email, :first_name, :last_name, :phone, :special_notes, :user_id, :time, :place_id, :persons
+  attr_accessible :email, :first_name, :last_name, :phone, :special_notes, :user_id, :time, :place_id,
+                  :persons, :is_sms_send
 
   belongs_to :user
   scope :coming, lambda { |user_id| includes(:place).where("reservations.time<=? AND reservations.user_id=?","#{DateTime.now}", "#{user_id}") }
@@ -11,6 +12,8 @@ class Reservation < ActiveRecord::Base
 
   include Utils::Models::Base
   include Utils::Models::AdminAdds
+
+  scope :with_time, lambda{|time| where("time <= ? AND is_sms_send = ?", time, false)}
 
   def discount
     day = PlaceUtils::PlaceTime.wday(created_at.wday)
@@ -83,6 +86,7 @@ end
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  persons       :integer
+#  is_sms_send   :boolean          default(FALSE)
 #
 # Indexes
 #

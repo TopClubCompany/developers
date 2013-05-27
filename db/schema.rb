@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130524084836) do
+ActiveRecord::Schema.define(:version => 20130527105258) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -628,9 +628,10 @@ ActiveRecord::Schema.define(:version => 20130524084836) do
     t.datetime "time"
     t.integer  "user_id"
     t.integer  "place_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.integer  "persons"
+    t.boolean  "is_sms_send",   :default => false
   end
 
   add_index "reservations", ["place_id"], :name => "index_reservations_on_place_id"
