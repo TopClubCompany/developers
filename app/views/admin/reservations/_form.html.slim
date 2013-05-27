@@ -2,6 +2,7 @@
 
   = f.input :first_name
   = f.input :last_name
+  = f.input :phone_code_id, :collection => PhoneCodeType.all, :include_blank => false
   = f.input :phone
   = f.input :email
   = f.input :special_notes, :as => :ckeditor

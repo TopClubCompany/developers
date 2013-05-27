@@ -24,7 +24,8 @@
                 li
                   = f.input :city_id, collection: City.all, include_blank: false
                 li
-                  = f.input :phone
+                  = f.input :phone_code_id, :collection => PhoneCodeType.all, :include_blank => false, label: get_reg_form_attr_name(:phone, true)
+                  = f.input :phone,  label:false
                   small
                     b.secure
                     = I18n.t('profile.private_for_sms')
