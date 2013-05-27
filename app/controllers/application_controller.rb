@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   before_filter :find_page, except: [:save_cooperation]
   before_filter :set_gon_current_user
   before_filter :set_user_path
-  before_filter :set_breadcrumbs_front, only: [:index, :show]
+  before_filter :set_breadcrumbs_front, only: [:index, :show, :new_reservation]
   before_filter :set_css_class
 
   helper_method :current_city, :current_city_plural
