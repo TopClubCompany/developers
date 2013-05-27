@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130527105258) do
+ActiveRecord::Schema.define(:version => 20130527124750) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -136,6 +136,7 @@ ActiveRecord::Schema.define(:version => 20130527105258) do
     t.integer  "country_id"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "phone_code"
   end
 
   add_index "cities", ["country_id"], :name => "index_cities_on_country_id"
@@ -632,6 +633,7 @@ ActiveRecord::Schema.define(:version => 20130527105258) do
     t.datetime "updated_at",                       :null => false
     t.integer  "persons"
     t.boolean  "is_sms_send",   :default => false
+    t.integer  "phone_code_id"
   end
 
   add_index "reservations", ["place_id"], :name => "index_reservations_on_place_id"

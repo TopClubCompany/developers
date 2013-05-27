@@ -11,8 +11,14 @@ class SendSmsJob
   end
 
   def self.send_sms(reservation)
+    phone = reservation.phone.try { |ph| ph.gsub(/[\(\)-]/, '') }
+
+    if !(phone =~ /\+/) && reservation.phone_code.present?
+      phone = "#{reservation.phone_code.get_code}#{phone}"
+    end
+
     text = I18n.t('sms_text', name: reservation.first_name, surname: reservation.last_name,
                   restaurant_name: reservation.place.name)
-    Utils::Soap::TurboSms.send_sms(reservation.phone, text.no_html) if reservation.phone
+    Utils::Soap::TurboSms.send_sms(phone, text.no_html) if phone
   end
 end

@@ -16,6 +16,7 @@ end
 #  country_id :integer
 #  latitude   :float
 #  longitude  :float
+#  phone_code :string(255)
 #
 # Indexes
 #
