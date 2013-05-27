@@ -10,7 +10,7 @@
       = current_user.city.try(:title) or I18n.t('profile.city_not_specified')
     li
       label= User.human_attribute_name(:phone)
-      = current_user.phone
+      = "#{current_user.phone_code.try(:title)} #{current_user.phone}"
     li
       label= User.human_attribute_name(:gender)
       = current_user.gender_title or I18n.t('profile.city_not_specified')
