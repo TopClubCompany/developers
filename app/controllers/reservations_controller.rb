@@ -126,4 +126,13 @@ class ReservationsController < ApplicationController
     user
   end
 
+  private
+  def set_breadcrumbs_front
+    super
+    @place   = Place.find(params[:place_id])
+    @breadcrumbs_front << ["<a href=#{with_locale("search")}>#{I18n.t('breadcrumbs.search')}</a>&nbsp"]
+    @breadcrumbs_front << ["<a href=#{@place.place_path}>#{@place.title}</a>&nbsp"]
+    @breadcrumbs_front << ["<a href=#{request.path}>#{I18n.t('breadcrumbs.you_reserve')}</a>&nbsp"]
+  end
+
 end
