@@ -8,7 +8,8 @@ class User < ActiveRecord::Base
 
   attr_accessible :login, :email, :password, :password_confirmation, :remember_me,
                   :first_name, :last_name, :patronymic, :phone, :address, :birthday,
-                  :city_id, :gender, :kind, :time_zone, :locale, :user_notification_ids, :points
+                  :city_id, :gender, :kind, :time_zone, :locale, :user_notification_ids, :points,
+                  :phone_code_id
 
   attr_accessible :user_role_id, :trust_state, :as => :admin
 
@@ -22,6 +23,7 @@ class User < ActiveRecord::Base
   enumerated_attribute :gender_type, :id_attribute => :gender, :class => ::GenderType
   enumerated_attribute :user_role_type, :id_attribute => :user_role_id, :class => ::UserRoleType
   enumerated_attribute :trust_state_type, :id_attribute => :trust_state, :class => ::UserState
+  enumerated_attribute :phone_code, :id_attribute => :phone_code_id, :class => ::PhoneCodeType
 
   belongs_to :city
 
