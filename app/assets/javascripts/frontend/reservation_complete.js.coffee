@@ -55,7 +55,7 @@ initDatepicker = ->
     $('.Zebra_DatePicker').css('top', magic_number)
 
 $ ->
-  window.language = $('#language .active').attr('id')
+  window.language = $('#lang a:first').data('id')
   window.months = I18n.translations[window.language].admin_js.month
   window.days = I18n.translations[window.language].admin_js.day_names.map (word) -> word.charAt(0).toUpperCase() + word.slice(1);
 

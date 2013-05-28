@@ -1,7 +1,7 @@
 #fixed
   .content
-    .dropdown
-      a class="dropdown-toggle #{I18n.locale.to_s}" id="dLabel" role="button" data-toggle="dropdown" data-target="#"
+    .dropdown#lang
+      a class="dropdown-toggle #{I18n.locale.to_s}" data-id="#{I18n.locale.to_s}" role="button" data-toggle="dropdown" data-target="#"
         = I18n.t("language_title.#{locale.to_s}")
         b.caret
       ul id="language" role="menu" aria-labelledby="dLabel" class="dropdown-menu"
@@ -11,7 +11,7 @@
 
 
     div class="dropdown" id="cities_dd"
-      a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#"
+      a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#"
         = City.find(current_city).name if current_city
     	b class="caret"
       ul id="cities" role="menu" aria-labelledby="dLabel" class="dropdown-menu"
