@@ -2,7 +2,7 @@
   .content
     .dropdown
       a class="dropdown-toggle #{I18n.locale.to_s}" id="dLabel" role="button" data-toggle="dropdown" data-target="#"
-        | English
+        = I18n.t("language_title.#{locale.to_s}")
         b.caret
       ul id="language" role="menu" aria-labelledby="dLabel" class="dropdown-menu"
         - Globalize.available_locales.each do |locale|
