@@ -117,7 +117,7 @@ $(document).ready ->
   #    enter_phone();
   #    validPass();
   #    validNameLastname();
-  window.language = $("#language .active").attr("id")
+  window.language = $('#lang a:first').data('id')
 
   new FormValidateTwo("#new_user") if $("#new_user").length > 0
   new FormValidateTwo("#new_reservation", undefined, successCallback) if $("#new_reservation").length > 0
