@@ -9,10 +9,19 @@
           li class=locale.to_s
             a href="/#{locale.to_s}/"= I18n.t("language_title.#{locale.to_s}")
 
-    ul#location
-      - City.visible.with_translations.each do |city|
-        li class=get_city_class(city.slug)
-          a href="/update_city/#{city.slug}"= city.name
+
+    div class="dropdown" id="cities_dd"
+      a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#"
+        = City.find(current_city).name if current_city
+    	b class="caret"
+      ul id="cities" role="menu" aria-labelledby="dLabel" class="dropdown-menu"
+        - Country.includes(:cities).visible.order('position').each do |country|
+          div id="cities_#{country.slug}" class="cities_list"
+            strong= country.name
+            - country.cities.order('position').each do |city|
+              - if city.is_visible
+                li
+                  a href="/update_city/#{city.slug}"= city.name
 
     #header_links
       a.first href="#{localization_link('pages/help')}"= Structure.find('help').name
