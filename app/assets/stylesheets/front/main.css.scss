@@ -123,60 +123,59 @@ input[type='submit']:hover {
   z-index: 10;
 }
 
-#fixed ul {
-  display: block;
+#fixed .dropdown {
   float: left;
-  padding: 5px;
-  margin: -5px 0 0 -5px;
-  color: #ccc;
+  margin-right: 15px;
 }
 
-#fixed #language li {
-  padding: 0 0 0 20px;
+#fixed .dropdown .caret {
+  border-top: 3px solid #ccc;
+  border-right: 3px solid transparent;
+  border-left: 3px solid transparent;
 }
 
-#fixed ul li {
-  display: none;
-}
-
-#fixed ul li:hover a {
-  color: #fff;
+#fixed .dropdown .dropdown-toggle {
   text-decoration: none;
-}
-
-#fixed ul:hover {
-  background: rgba(0,0,0,0.8);
-  border-radius: 0 0 3px 3px;
-}
-
-#fixed ul:hover li {
-  display: block;
-}
-
-#fixed ul li a {
-  color: #ccc;
-}
-
-#fixed ul li a:hover {
-  color: #fff !important;
-}
-
-#fixed ul li.active {
-  display: block;
-  cursor: default;
-}
-
-#fixed ul li.active a {
-  background: image_url('arr1.gif') right 5px no-repeat;
-  padding: 0 10px 0 0;
+  cursor: pointer;
+  padding-bottom: 5px;
   color: #fff;
 }
 
-#fixed #language #eng { background: image_url('language.png') 0 4px no-repeat; }
-#fixed #language #rus { background: image_url('language.png') 0 -16px no-repeat; }
-#fixed #language #ukr { background: image_url('language.png') 0 -38px no-repeat; }
+
+#fixed .dropdown-menu {
+  box-shadow: none;
+  border: none;
+  background: #000;
+  background: rgba(0,0,0,0.8);
+  margin-left: -10px;
+  border-radius: 0 0 3px 3px;
+  margin-top: 5px;
+  padding: 0 10px 5px 0;
+  min-width: 0;
+}
+
+#fixed #language a {
+  color: #eee;
+}
+
+#fixed .dropdown-menu a:hover {
+  color: #fff;
+}
+
+#fixed .eng { background: url('../img/language.png') 10px 4px no-repeat; padding: 0 0 0 30px; }
+#fixed .rus { background: url('../img/language.png') 10px -16px no-repeat; padding: 0 0 0 30px; }
+#fixed .ukr { background: url('../img/language.png') 10px -38px no-repeat; padding: 0 0 0 30px; }
+
+#fixed #dLabel.eng { background: url('../img/language.png') 0 1px no-repeat; padding: 0 0 0 20px; }
+#fixed #dLabel.rus { background: url('../img/language.png') 0 -20px no-repeat; padding: 0 0 0 20px; }
+#fixed #dLabel.ukr { background: url('../img/language.png') 0 -42px no-repeat; padding: 0 0 0 20px; }
 
 #fixed #location { margin: -5px 0 0 10px; }
+
+#fixed #header_links {
+  float: left;
+  margin-right: 30px;
+}
 
 #fixed #header_links a {
   color: #ccc;
@@ -186,15 +185,9 @@ input[type='submit']:hover {
 
 #fixed #user_block {
   float: right;
-  padding-right: 8px;
-  background: image_url('arr1.gif') right 9px no-repeat;
   position: relative;
   z-index: 50;
-}
-
-#fixed #user_block a.active {
-  color: #ccc;
-  font-weight: bold;
+  margin-right: 0;
 }
 
 #fixed #user_block #user_dropdown {
@@ -202,8 +195,29 @@ input[type='submit']:hover {
   right: 0;
   float: none;
   z-index: 5;
-  min-width: 90px;
-  margin-top: -6px;
+  min-width: 120px;
+  margin-top: 4px;
+  padding-right: 0;
+}
+
+#fixed #user_block #user_dropdown li {
+  width: 120px;
+}
+
+#fixed #user_block #user_dropdown li a {
+  color: #eee;
+  padding: 1px 10px;
+}
+
+#fixed #user_block #user_dropdown li a:hover {
+  color: #fff;
+}
+
+#fixed #user_block .dropdown-toggle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100px;
 }
 
 #fixed #user_block img {
@@ -214,11 +228,53 @@ input[type='submit']:hover {
   height: 20px;
 }
 
-#fixed #user_block #user_dropdown li.active {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 100px;
+#fixed #cities_dd {
+  float: left;
+}
+
+#fixed #cities_dd .dropdown-toggle {
+  color: #fff;
+}
+
+#fixed #cities_dd .dropdown-menu {
+  color: #000;
+  background: #fff;
+  border-radius: 0 0 3px 3px;
+  border-width: 0 1px 1px 1px;
+  border-style: solid;
+  border-color: #565656;
+  padding: 5px 10px;
+  min-width: 190px;
+}
+
+#fixed #cities_dd .dropdown-menu .cities_list {
+  float: left;
+}
+
+#fixed #cities_dd .dropdown-menu #cities_russia.cities_list {
+  margin-left: 10px;
+}
+
+#fixed #cities_dd .dropdown-menu li a {
+  padding: 0 5px;
+  background: none;
+  color: #df5b49;
+  font-weight: bold;
+  margin-left: -5px;
+  border-radius: 2px;
+  margin-bottom: 2px;
+}
+
+#fixed #cities_dd .dropdown-menu li a:hover {
+  background: #08c;
+  color: #fff;
+}
+
+#fixed #cities_dd .dropdown-menu strong {
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
+  font-size: 16px;
+  color: #333;
+  font-weight: normal;
 }
 
 #header {
