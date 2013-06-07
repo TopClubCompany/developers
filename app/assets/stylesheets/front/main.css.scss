@@ -132,6 +132,7 @@ input[type='submit']:hover {
   border-top: 3px solid #ccc;
   border-right: 3px solid transparent;
   border-left: 3px solid transparent;
+  margin-left: 4px;
 }
 
 #fixed .dropdown .dropdown-toggle {
@@ -149,7 +150,7 @@ input[type='submit']:hover {
   background: rgba(0,0,0,0.8);
   margin-left: -10px;
   border-radius: 0 0 3px 3px;
-  margin-top: 5px;
+  margin-top: 0;
   padding: 0 10px 5px 0;
   min-width: 0;
 }
@@ -162,13 +163,16 @@ input[type='submit']:hover {
   color: #fff;
 }
 
-#fixed .eng { background: url('../img/language.png') 10px 4px no-repeat; padding: 0 0 0 30px; }
-#fixed .rus { background: url('../img/language.png') 10px -16px no-repeat; padding: 0 0 0 30px; }
-#fixed .ukr { background: url('../img/language.png') 10px -38px no-repeat; padding: 0 0 0 30px; }
+#fixed a.en { background: url('../img/language.png') 10px 4px no-repeat; padding: 0 0 0 30px; }
+#fixed a.ru { background: url('../img/language.png') 10px -16px no-repeat; padding: 0 0 0 30px; }
+#fixed a.ua { background: url('../img/language.png') 10px -38px no-repeat; padding: 0 0 0 30px; }
 
-#fixed #dLabel.eng { background: url('../img/language.png') 0 1px no-repeat; padding: 0 0 0 20px; }
-#fixed #dLabel.rus { background: url('../img/language.png') 0 -20px no-repeat; padding: 0 0 0 20px; }
-#fixed #dLabel.ukr { background: url('../img/language.png') 0 -42px no-repeat; padding: 0 0 0 20px; }
+#fixed #lang .en a { background: url('../img/language.png') 10px 4px no-repeat; padding: 0 0 0 30px; }
+#fixed #lang .ru a { background: url('../img/language.png') 10px -16px no-repeat; padding: 0 0 0 30px; }
+#fixed #lang .ua a { background: url('../img/language.png') 10px -38px no-repeat; padding: 0 0 0 30px; }
+
+#fixed #language { margin-left: 0;  }
+#fixed #language li, #fixed a { display: block; }
 
 #fixed #location { margin: -5px 0 0 10px; }
 
@@ -196,7 +200,7 @@ input[type='submit']:hover {
   float: none;
   z-index: 5;
   min-width: 120px;
-  margin-top: 4px;
+  margin-top: -1px;
   padding-right: 0;
 }
 

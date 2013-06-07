@@ -27,12 +27,12 @@
       a.first href="#{localization_link('pages/help')}"= Structure.find('help').name
       a href="#{localization_link('pages/contact')}"= Structure.find('contact').name
     - if user_signed_in?
-      #user_block
-        ul#user_dropdown
-          li.active
-            img height="20" src=get_user_avatar width="20"
-              a href=profile_path(current_user)
-                nobr
-                  = user_menu_name
+      .dropdown#user_block
+        a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#" href="/profile/"
+          img height="20" src=get_user_avatar width="20"
+          nobr
+            = user_menu_name
+          b class="caret"
+        ul.dropdown-menu#user_dropdown role="menu" aria-labelledby="dLabel"
           = render 'shared/user_links'
           li= link_to I18n.t('auth.logout'), quit_path, method: 'delete'
