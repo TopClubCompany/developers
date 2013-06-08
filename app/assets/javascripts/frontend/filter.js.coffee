@@ -767,7 +767,7 @@ handleClick = ()->
 
     result = _.extend {}, defaults, params
     result["reserve_date"] = result["reserve_date"].replace(/\//g,'-')
-    language = $('#language .active').attr('id')
+    window.language = $('#lang a:first').data('id')
     id = $('#place').data('id') || $(e.target).parents('.place').data('id')
     time = $(e.target).data('value').replace(/\s/, '')
     if language == "ru"
