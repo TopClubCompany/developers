@@ -766,7 +766,7 @@ handleClick = ()->
       "number_of_people": $("select[name=number_of_people]").val()
 
     result = _.extend {}, defaults, params
-    result["reserve_date"] = result["reserve_date"].replace(/\//g,'-')
+    result["reserve_date"] = result["reserve_date"].replace(/\//g,'-') d q
     window.language = $('#lang a:first').data('id')
     id = $('#place').data('id') || $(e.target).parents('.place').data('id')
     time = $(e.target).data('value').replace(/\s/, '')
