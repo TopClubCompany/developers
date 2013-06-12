@@ -13,6 +13,8 @@ class City < ActiveRecord::Base
   include Utils::Models::Translations
   include Utils::Models::AdminAdds
 
+  include Utils::Models::Headerable
+
 
   ac_field
 end

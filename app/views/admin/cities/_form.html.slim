@@ -1,4 +1,4 @@
-= admin_form_for @city do |f|
+= admin_form_for @city, {nested: true} do |f|
   = f.locale_tabs do |l|
     = f.input :name, :locale => l
     = f.input :description, :locale => l, :as => :ckeditor
@@ -6,6 +6,12 @@
 
   = f.input :is_visible, input_html: {class: 'pretty-slide-checkbox'}
   = f.input :position
+
+  = input_set t('admin.keywords') do
+    .nested_fields
+      = f.simple_fields_for :headers do |object|
+        = render 'admin/headers/form', :f => object
+    = f.link_to_add t('admin.add'), :headers, :class => 'btn btn-primary'
 
   = f.input :latitude, :as => :hidden
   = f.input :longitude, :as => :hidden

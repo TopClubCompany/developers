@@ -3,7 +3,7 @@ class Og
     @bind_click()
 
   bind_click: ->
-    $(".header .tag_type_header").on 'change', (e) ->
+    $(document).on "change", ".header .tag_type_header", (e) ->
       $el = $(this)
       $parent = $el.parents('.header:first')
       if $el.val() == '7'
@@ -12,9 +12,6 @@ class Og
       else
         $($parent.find(".nested_fields .fields")).remove()
         $($parent.find(".locale_tabs:first")).show()
-
-
-
 
 $ ->
   new Og()

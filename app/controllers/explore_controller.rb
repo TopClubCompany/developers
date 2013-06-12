@@ -56,8 +56,12 @@ class ExploreController < ApplicationController
 
   private
   def find_page
-    structure = Structure.with_position(::PositionType.index).first
-    setting_meta_tags structure
+    if current_city
+      page = City.find(current_city)
+    else
+      page = Structure.with_position(::PositionType.index).first
+    end
+    setting_meta_tags page
   end
 
   def set_cities_to_gon
