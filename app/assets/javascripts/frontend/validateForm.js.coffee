@@ -6,7 +6,7 @@ window.checkNewUser = (selector, sb_sel) ->
   user_first_name = $("#{selector}  #{sub_selector}_first_name").tipsy()
   user_last_name = $("#{selector} #{sub_selector}_last_name").tipsy()
   patternEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,5}$/i
-  patternPhone = /^\+38\(0\d{2}\)\d{3}\-\d{2}\-\d{2}$/
+  patternPhone = /^\(0\d{2}\)\d{3}\-\d{2}\-\d{2}$/
   patternPass = /[^а-я]+/i
   patternNameLastname = /[а-яa-z0-9_-]+/i
 
@@ -88,8 +88,8 @@ window.checkNewUser = (selector, sb_sel) ->
   false
 
 FormValidateTwo = (selector, sb_sel, cb) ->
-  $("#user_phone").mask "+38(999)999-99-99"
-  $("#reservation_phone").mask "+38(999)999-99-99"
+  $("#user_phone").mask "(999)999-99-99"
+  $("#reservation_phone").mask "(999)999-99-99"
   $("#{selector}").off 'submit'
   $("#{selector}").on 'submit', (e) ->
     return e.preventDefault() unless window.checkNewUser(selector, sb_sel)
@@ -117,7 +117,7 @@ $(document).ready ->
   #    enter_phone();
   #    validPass();
   #    validNameLastname();
-  window.language = $("#language .active").attr("id")
+  window.language = $('#lang a:first').data('id')
 
   new FormValidateTwo("#new_user") if $("#new_user").length > 0
   new FormValidateTwo("#new_reservation", undefined, successCallback) if $("#new_reservation").length > 0

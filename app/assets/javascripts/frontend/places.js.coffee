@@ -1,6 +1,6 @@
 # developers / app / assets / javascripts / frontend / places.js.coffee
 $ ->
-  window.language ||= $('#language .active').attr('id')
+  window.language ||= $('#lang a:first').data('id')
 
   if $('#search_form.place_timing').length
     if document.referrer

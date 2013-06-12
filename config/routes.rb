@@ -58,9 +58,13 @@ Topclub::Application.routes.draw do
 
   root :to => 'explore#index'
 
+  get '/update_city/:city' => "explore#update_city"
+
   resources :explore do
     collection do
       get :get_more
+      get :choose_city
+      get :update_city
     end
   end
 
@@ -178,6 +182,19 @@ Topclub::Application.routes.draw do
 
     resources :reservations do
       post :batch, :on => :collection
+    end
+
+    resources :countries do
+      post :batch, :on => :collection
+    end
+
+    resources :roles do
+      post :batch, :on => :collection
+      resources(:users) { post :batch, :on => :collection }
+      member do
+        get :perms
+        put :update_perms
+      end
     end
 
   end

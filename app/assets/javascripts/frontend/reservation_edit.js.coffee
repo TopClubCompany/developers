@@ -31,6 +31,6 @@ initDatePicker = ->
   $('.Zebra_DatePicker').css('top', magic_number)
 
 $ ->
-  window.language ||= $('#language .active').attr('id')
+  window.language ||= $('#lang a:first').data('id')
   if $("#edit_reservation").length > 0
     initDatePicker()

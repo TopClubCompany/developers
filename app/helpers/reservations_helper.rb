@@ -6,6 +6,11 @@ module ReservationsHelper
                edit_reservation_path: wrapp_domain(edit_profile_reservation_path(reservation.user_id, reservation.id)),
                cancel_reservation_path: wrapp_domain(cancel_profile_reservation_path(reservation.user_id, reservation.id))}
     phone = reservation.phone.try { |ph| ph.gsub(/[\(\)-]/, '') }
+
+    if !(phone =~ /\+/) && reservation.phone_code.present?
+      phone = "#{reservation.phone_code.get_code}#{phone}"
+    end
+
     types.each do |type|
       text, caption = ::Utils::LetterParser.parse_params(reservation.to_mail(options).merge({letter_type: type}))
       administrators = reservation.place.place_administrators

@@ -2,7 +2,7 @@ $ ->
   $datepicker = $('input[name="reserve_date"]')
   if $datepicker.length > 0
     offset = [-180, 0]
-    window.language = $('#language .active').attr('id')
+    window.language = $('#lang a:first').data('id')
     $datepicker.Zebra_DatePicker(
       "offset": offset
       "format": 'd/m/Y'

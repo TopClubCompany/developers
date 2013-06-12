@@ -1,0 +1,104 @@
+<script id="collection_perm_template" type="text/x-handlebars-template">
+  <tr data-id="{{id}}" id="perm_{{id}}">
+    <td class="subject_select">
+      {{^new_record}}
+      <input type="hidden" name="role[permissions_attributes][{{id}}][id]" value="{{id}}">
+      {{/new_record}}
+      <select id="role_permissions_attributes_{{id}}_subject" name="role[permissions_attributes][{{id}}][subject]" class="perm_subject">
+        <%= options_for_select SubjectType.per_collection.map { |s| [s.title, s.id] } %>
+      </select>
+    </td>
+    <td colspan="5" class="big_col">
+      <table>
+        <tr class="actions">
+          {{> collection_actions}}
+        </tr>
+      </table>
+    </td>
+    <td>
+      <input id="role_destroy_{{id}}" name="role[permissions_attributes][{{id}}][_destroy]" type="checkbox" value="1">
+    </td>
+  </tr>
+</script>
+
+<script id="collection_actions_template" type="text/x-handlebars-template">
+  <td>
+    {{#each actions}}
+    <input class="perm_action" id="role_actions_{{../id}}_{{key}}" name="role[permissions_attributes][{{../id}}][actions][]"
+           type="checkbox" value="{{key}}" {{prop is_checked}} >
+    <label class="perm_action_label" for="role_actions_{{../id}}_{{key}}">{{title}}</label>
+    <br>
+    {{/each}}
+  </td>
+  <td>
+    <input name="role[permissions_attributes][{{id}}][is_own]" type="hidden" value="0">
+    <input id="role_is_own_{{id}}" name="role[permissions_attributes][{{id}}][is_own]"
+           type="checkbox" value="true" {{prop is_own}} >
+  </td>
+  <!--
+  <td>
+    <input name="role[permissions_attributes][{{id}}][is_visibility]" type="hidden" value="0">
+    <input id="role_is_visibility_{{id}}" name="role[permissions_attributes][{{id}}][is_visibility]"
+           type="checkbox" value="true" {{prop is_visibility}} >
+  </td>
+  -->
+  <td>
+    <input name="role[permissions_attributes][{{id}}][is_work]" type="hidden" value="0">
+    <input id="role_is_work_{{id}}" name="role[permissions_attributes][{{id}}][is_work]"
+           type="checkbox" value="true" {{prop is_work}} >
+  </td>
+  <td>
+    <select name="role[permissions_attributes][{{id}}][assoc]" class="assoc_select"></select>
+  </td>
+  <td class="assoc_token">
+    <!--{{> token_template}}-->
+  </td>
+</script>
+
+<script id="collection_token_template" type="text/x-handlebars-template">
+    <input type="text" name="role[permissions_attributes][{{id}}][assoc_ids]" class="ac_token"
+           data-pre='{{{assoc_pre}}}' data-class="{{assoc_klass}}">
+</script>
+
+<script id="resource_perm_template" type="text/x-handlebars-template">
+  <tr data-id="{{id}}" id="perm_{{id}}">
+    <td class="subject_select">
+      {{^new_record}}
+      <input type="hidden" name="role[permissions_attributes][{{id}}][id]" value="{{id}}">
+      {{/new_record}}
+      <select id="role_permissions_attributes_{{id}}_subject" name="role[permissions_attributes][{{id}}][subject]" class="perm_subject">
+        <%= options_for_select SubjectType.per_resource.map { |s| [s.title, s.id] } %>
+      </select>
+    </td>
+    <td colspan="2" class="big_col">
+      <table>
+        <tr class="actions">
+          {{> resource_actions}}
+        </tr>
+      </table>
+    </td>
+    <td>
+      <input id="role_destroy_{{id}}" name="role[permissions_attributes][{{id}}][_destroy]" type="checkbox" value="1">
+    </td>
+  </tr>
+</script>
+
+<script id="resource_actions_template" type="text/x-handlebars-template">
+  <td>
+    <input type="text" name="role[permissions_attributes][{{id}}][subject_id]" class="ac_token"
+           data-pre='{{{subject_pre}}}' data-class="{{class}}" data-limit="1">
+  </td>
+  <td>
+  {{#each actions}}
+    <input class="perm_action" id="role_actions_{{../id}}_{{key}}" name="role[permissions_attributes][{{../id}}][actions][]"
+           type="checkbox" value="{{key}}" {{prop is_checked}} >
+    <label class="perm_action_label" for="role_actions_{{../id}}_{{key}}">{{title}}</label>
+    <br>
+  {{/each}}
+  </td>
+<!--  <td>
+    <input name="role[permissions_attributes][{{id}}][is_work]" type="hidden" value="0">
+    <input id="role_is_work_{{id}}" name="role[permissions_attributes][{{id}}][is_work]"
+           type="checkbox" value="true" {{prop is_work}} >
+  </td> -->
+</script>

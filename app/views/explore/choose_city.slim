@@ -1,0 +1,18 @@
+.content.index_cities
+  .row
+    .span4.offset8.sidebar
+      h2 = I18n.t('choose_city.hello')
+      p
+        == I18n.t('choose_city.bron_text')
+
+      - Country.includes(:cities).visible.order('position').each do |country|
+        ul id=country.slug
+          h3 = country.title
+          - country.cities.order('position').each do |city|
+            - if city.is_visible
+              li
+                a href="/update_city/#{city.slug}"= city.name
+            - else
+              li city.name
+
+#cities_map width="100%"

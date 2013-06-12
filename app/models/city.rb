@@ -1,14 +1,22 @@
 class City < ActiveRecord::Base
 
-  attr_accessible :is_visible, :position, :name, :description, :plural_name
+  attr_accessible :is_visible, :position, :name, :description, :plural_name, :country_id, :latitude, :longitude,
+                  :phone_code
 
   has_many :users
+
+  belongs_to :country
 
   translates :name, :description, :plural_name
 
   include Utils::Models::Base
   include Utils::Models::Translations
   include Utils::Models::AdminAdds
+
+  include Utils::Models::Headerable
+
+
+  ac_field
 end
 # == Schema Information
 #
@@ -20,9 +28,14 @@ end
 #  position   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  country_id :integer
+#  latitude   :float
+#  longitude  :float
+#  phone_code :string(255)
 #
 # Indexes
 #
-#  index_cities_on_slug  (slug) UNIQUE
+#  index_cities_on_country_id  (country_id)
+#  index_cities_on_slug        (slug) UNIQUE
 #
 

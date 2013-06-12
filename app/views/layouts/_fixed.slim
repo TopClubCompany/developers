@@ -1,27 +1,38 @@
 #fixed
   .content
-    ul#language
-      li.active id=I18n.locale.to_s
-        a href=localization_link("") = I18n.t("language_title.#{I18n.locale.to_s}")
-      - Globalize.available_locales.each do |locale|
-        - unless locale.to_s == I18n.locale.to_s
-          li id=locale.to_s
+    .dropdown#lang
+      a class="dropdown-toggle #{I18n.locale.to_s}" data-id="#{I18n.locale.to_s}" role="button" data-toggle="dropdown" data-target="#"
+        = I18n.t("language_title.#{locale.to_s}")
+        b.caret
+      ul id="language" role="menu" aria-labelledby="dLabel" class="dropdown-menu"
+        - Globalize.available_locales.each do |locale|
+          li class=locale.to_s
             a href="/#{locale.to_s}/"= I18n.t("language_title.#{locale.to_s}")
-    /ul#location
-      - City.with_translations.each do |city|
-        li class=get_city_class(city.slug)
-          = link_to city.name, set_location_path(city.slug), method: 'post'
+
+
+    div class="dropdown" id="cities_dd"
+      a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#"
+        = City.find(current_city).name if current_city
+    	b class="caret"
+      ul id="cities" role="menu" aria-labelledby="dLabel" class="dropdown-menu"
+        - Country.includes(:cities).visible.order('position').each do |country|
+          div id="cities_#{country.slug}" class="cities_list"
+            strong= country.name
+            - country.cities.order('position').each do |city|
+              - if city.is_visible
+                li
+                  a href="/update_city/#{city.slug}"= city.name
 
     #header_links
       a.first href="#{localization_link('pages/help')}"= Structure.find('help').name
       a href="#{localization_link('pages/contact')}"= Structure.find('contact').name
     - if user_signed_in?
-      #user_block
-        ul#user_dropdown
-          li.active
-            img height="20" src=get_user_avatar width="20"
-              a href=profile_path(current_user)
-                nobr
-                  = user_menu_name
+      .dropdown#user_block
+        a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#" href="/profile/"
+          img height="20" src=get_user_avatar width="20"
+          nobr
+            = user_menu_name
+          b class="caret"
+        ul.dropdown-menu#user_dropdown role="menu" aria-labelledby="dLabel"
           = render 'shared/user_links'
           li= link_to I18n.t('auth.logout'), quit_path, method: 'delete'

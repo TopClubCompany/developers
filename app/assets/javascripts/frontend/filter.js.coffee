@@ -357,6 +357,8 @@ class PlacesCollection
         ib.open map, this
         bindBlockListeners.call @, $(''), $(ib.content_)
         google.maps.ib = ib
+        map.setZoom(12);
+        map.setCenter(marker.getPosition());
 
       google.maps.event.addListener marker, "mouseover", ->
         selector = '#place_' + obj.id
@@ -376,6 +378,8 @@ class PlacesCollection
           google.maps.ib.close()
           ib.open map, marker
           google.maps.ib = ib
+          map.setZoom(12);
+          map.setCenter(marker.getPosition());
       ), 50)
 
       google.maps.event.addListener marker, "mouseout", ->
@@ -762,8 +766,8 @@ handleClick = ()->
       "number_of_people": $("select[name=number_of_people]").val()
 
     result = _.extend {}, defaults, params
-    result["reserve_date"] = result["reserve_date"].replace(/\//g,'-')
-    language = $('#language .active').attr('id')
+    result["reserve_date"] = result["reserve_date"].replace(/\//g,'-') d q
+    window.language = $('#lang a:first').data('id')
     id = $('#place').data('id') || $(e.target).parents('.place').data('id')
     time = $(e.target).data('value').replace(/\s/, '')
     if language == "ru"

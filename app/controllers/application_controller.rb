@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery except: [:save_cooperation]
 
+  before_filter :current_sub_domain
   before_filter :set_locale
   before_filter :current_city
   before_filter :set_time
@@ -8,14 +9,29 @@ class ApplicationController < ActionController::Base
   before_filter :find_page, except: [:save_cooperation]
   before_filter :set_gon_current_user
   before_filter :set_user_path
-  before_filter :set_breadcrumbs_front, only: [:index, :show]
+  before_filter :set_breadcrumbs_front, only: [:index, :show, :new_reservation]
+  before_filter :set_css_class
 
   helper_method :current_city, :current_city_plural
 
   protected
 
+    def current_sub_domain
+      if request.subdomain.present?
+        cookies[:city] = {
+            :value => request.subdomain,
+            :expires => 7.day.from_now,
+            :domain => request.domain
+        }
+      else
+        if cookies[:city].present?
+          redirect_to  "http://"+cookies[:city] + "." + request.domain + request.path
+        end
+      end
+    end
+
     def current_city param=:slug
-      current_user.try(:city).try(param) ||  session[:city] || 'kyiv'
+      cookies[:city]
     end
 
     def current_city_plural name = :plural_name
@@ -112,6 +128,10 @@ class ApplicationController < ActionController::Base
     else
       "/" + I18n.locale.to_s + path
     end
+  end
+
+  def set_css_class
+    @css_class_cities = ""
   end
 
   private

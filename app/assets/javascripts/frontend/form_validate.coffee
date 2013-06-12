@@ -215,7 +215,7 @@ class FormValidate
     $el.attr "original-title", I18n.translations[window.language].admin_js.validation_message.chars_permited
 
 $ ->
-  window.language = $('#language .active').attr('id')
+  window.language = $('#lang a:first').data('id')
   new FormValidate("#new_user") if $("#new_user").length
   new FormValidate("#new_reservation") if $("#new_reservation").length
   new FormValidate("form[id^='edit_user']", '#user') if $("form[id^='edit_user']").length

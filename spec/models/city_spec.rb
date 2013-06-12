@@ -13,9 +13,14 @@ end
 #  position   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  country_id :integer
+#  latitude   :float
+#  longitude  :float
+#  phone_code :string(255)
 #
 # Indexes
 #
-#  index_cities_on_slug  (slug) UNIQUE
+#  index_cities_on_country_id  (country_id)
+#  index_cities_on_slug        (slug) UNIQUE
 #
 

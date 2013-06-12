@@ -13,6 +13,8 @@ class Location < ActiveRecord::Base
 
   before_save :prepare_location
 
+  after_save :set_city_to_place
+
   translates :street, :city, :country, :county
 
   include Utils::Models::Base
@@ -23,6 +25,10 @@ class Location < ActiveRecord::Base
 
   def address
     "#{street} #{house_number}"
+  end
+
+  def place
+    locationable_type.constantize.find(locationable_id)
   end
 
   private
@@ -42,6 +48,16 @@ class Location < ActiveRecord::Base
       self.zip = geo_res.send(languages[0]).address.try(:postcode)
       self.house_number = geo_res.send(languages[0]).address.try(:house_number)
       self.country_code = geo_res.send(languages[0]).address.try(:country_code)
+    end
+  end
+
+  def set_city_to_place
+    if city_en.include?(",")
+      puts city_en.split(" ")[1].downcase
+      place.update_attributes(city_id: City.find(city_en.split(" ")[1].downcase).id)
+    else
+      puts city_en.split(" ")[0].downcase
+      place.update_attributes(city_id: City.find(city_en.split(" ")[0].downcase).id)
     end
   end
 

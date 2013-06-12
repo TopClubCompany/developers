@@ -4,11 +4,13 @@
   = f.input :last_name
   = f.input :patronymic
   = f.input :phone
-  = f.input :address
+  = f.input :phone_code_id, :collection => PhoneCodeType.all, :include_blank => false
+  = f.association :city
   = f.input :birthday, :as => :date
   - if can? :permissions, @user
     = f.input :user_role_id, :collection => UserRoleType.all, :include_blank => false, :as => :radio_buttons, :item_wrapper_class => 'inline'
     = f.input :trust_state, :collection => UserState.all, :include_blank => false, :as => :radio, :as => :radio_buttons, :item_wrapper_class => 'inline'
+    = f.input :token_role_ids, as: :string, label: User.han(:roles), input_html: @user.token_data(:roles)
   = f.input :password, :input_html => {:autocomplete=>"off"}
   = f.input :password_confirmation, :input_html => {:autocomplete=>"off"}
 

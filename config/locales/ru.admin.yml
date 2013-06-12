@@ -41,6 +41,9 @@ ru:
       perms: 
         link: "Права"
         title: "Редактирование прав доступа"
+        assocs:
+          place: "Плейс"
+          city: "Город"
       preview: 
         link: "Предпросмотр"
       show: 
@@ -54,6 +57,10 @@ ru:
       sign_out: "Выход"
     avatar: "Аватар"
     batch_actions: "Действия"
+    phone_code:
+      kind:
+        ukraine: "Украина +38"
+        russia: "Россия +7"
     bill: 
       code: 
         cheap: "Недорогой"
@@ -218,6 +225,8 @@ ru:
         company: "компанию"
         group: "группу"
         groups: "группы"
+        place: "Место"
+        city: "Город"
       form: 
         actions: "Может"
         add: "Добавить"
@@ -357,3 +366,4 @@ ru:
         zero: "Ничего не найдено"
     page_gap: "&hellip;"
     previous_label: "&#8592; Пред."
+

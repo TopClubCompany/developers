@@ -19,6 +19,8 @@ end
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  persons       :integer
+#  is_sms_send   :boolean          default(FALSE)
+#  phone_code_id :integer
 #
 # Indexes
 #

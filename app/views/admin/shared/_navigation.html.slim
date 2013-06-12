@@ -20,21 +20,21 @@ header.navbar.revers
 
 
           ul.nav
-            li.dropdown
-              a.dropdown-toggle data-toggle="dropdown" href="#"
-                = "System"
-                b.caret
-              ul.dropdown-menu
-                -[Category, Kitchen, Place, GroupFeature, FeatureItem, Locator, MarkType, City, Structure, Letter, User, UserNotification, Cooperation, Reservation].each do |m|
-                  = admin_menu_link(m)
-            /- if admin?
+            - if admin?
               li.dropdown
                 a.dropdown-toggle data-toggle="dropdown" href="#"
-                  = t 'admin.navigation.users'
+                  = "System"
                   b.caret
                 ul.dropdown-menu
-                  -[User].each do |m|
-                    =admin_menu_link(m)
+                  -[Category, Kitchen, Place, GroupFeature, FeatureItem, Locator, MarkType, City, Country, Structure, Letter, UserNotification, Cooperation, Role].each do |m|
+                    = admin_menu_link(m)
+            li.dropdown
+              a.dropdown-toggle data-toggle="dropdown" href="#"
+                = "Pace And Users"
+                b.caret
+              ul.dropdown-menu
+                -[Place, User, Reservation].each do |m|
+                  =admin_menu_link(m)
 
 
               /%li.dropdown

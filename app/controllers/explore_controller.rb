@@ -1,13 +1,19 @@
 class ExploreController < ApplicationController
 
   def index
-    #raise (session[:return_path] || root_path)
+    unless current_city.present?
+      @css_class_cities = "index_cities"
+      set_cities_to_gon
+      render :choose_city and return
+    end
+
     params.merge!(city: current_city)
     places = Place.best_places(6, params)
     new_place = Place.new_places(6, params)
     tonight_available = Place.tonight_available(6, params)
     @tabs = {best: places, new: new_place, available: tonight_available}
   end
+
 
   def get_more
     method = case params[:type]
@@ -24,8 +30,22 @@ class ExploreController < ApplicationController
   end
 
 
-  def change_city
+  def choose_city
+    @css_class_cities = "index_cities"
+  end
 
+  def update_city
+    if params[:city].present?
+      cookies[:city] = {
+          :value => params[:city],
+          :expires => 7.day.from_now,
+          :domain => request.domain
+      }
+      path = "http://" + params[:city] +"." + request.domain
+    else
+      path = root_path
+    end
+    redirect_to path
   end
 
   protected
@@ -36,8 +56,18 @@ class ExploreController < ApplicationController
 
   private
   def find_page
-    structure = Structure.with_position(::PositionType.index).first
-    setting_meta_tags structure
+    if current_city
+      page = City.find(current_city)
+    else
+      page = Structure.with_position(::PositionType.index).first
+    end
+    setting_meta_tags page
+  end
+
+  def set_cities_to_gon
+    gon.cities = City.visible.map{|city| {latitude: city.latitude, longitude: city.longitude,
+                                          slug: city.slug, title: city.title}}
+
   end
 
 end

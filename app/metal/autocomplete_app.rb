@@ -1,19 +1,20 @@
 # -*- encoding : utf-8 -*-
 class AutocompleteApp
   def self.call(env)
+    city =  Rack::Request.new(env).cookies["city"]
     params = Rack::Request.new(env).params
     if params['q'].present?
-      entries = Autocomplete.search(params['q'])
+      entries = Autocomplete.search(params['q'], city: city)
 
       if entries.empty?
-        entries = Autocomplete.search(params['q'].tr_lang)
+        entries = Autocomplete.search(params['q'].tr_lang, city: city)
       end
 
       if entries.size < 5
         words = params['q'].split(/\s+/)
         words.each_with_index do |w, i|
           next if i.zero?
-          w_entries = Autocomplete.search(w)
+          w_entries = Autocomplete.search(w, city: city)
           w_entries.each do |w_e|
             entries << words.dup.tap{|ws| ws[i] = w_e }.join(' ')
           end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130324083727) do
+ActiveRecord::Schema.define(:version => 20130527130058) do
 
   create_table "account_email_confirmations", :force => true do |t|
     t.string   "confirmation_token"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20130324083727) do
     t.integer  "freq"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "city"
   end
 
   create_table "categories", :force => true do |t|
@@ -132,8 +133,13 @@ ActiveRecord::Schema.define(:version => 20130324083727) do
     t.integer  "position"
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
+    t.integer  "country_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "phone_code"
   end
 
+  add_index "cities", ["country_id"], :name => "index_cities_on_country_id"
   add_index "cities", ["slug"], :name => "index_cities_on_slug", :unique => true
 
   create_table "city_translations", :force => true do |t|
@@ -174,6 +180,28 @@ ActiveRecord::Schema.define(:version => 20130324083727) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "countries", :force => true do |t|
+    t.string   "slug"
+    t.boolean  "is_visible", :default => true
+    t.integer  "position",   :default => 0
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
+
+  add_index "countries", ["slug"], :name => "index_countries_on_slug", :unique => true
+
+  create_table "country_translations", :force => true do |t|
+    t.integer  "country_id"
+    t.string   "locale"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "country_translations", ["country_id"], :name => "index_country_translations_on_country_id"
+  add_index "country_translations", ["locale"], :name => "index_country_translations_on_locale"
 
   create_table "day_discount_translations", :force => true do |t|
     t.integer  "day_discount_id"
@@ -270,6 +298,38 @@ ActiveRecord::Schema.define(:version => 20130324083727) do
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
   end
+
+  create_table "group_roles", :force => true do |t|
+    t.integer  "group_id"
+    t.integer  "role_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "group_roles", ["group_id"], :name => "index_group_roles_on_group_id"
+  add_index "group_roles", ["role_id"], :name => "index_group_roles_on_role_id"
+
+  create_table "group_users", :force => true do |t|
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.boolean  "is_chief",   :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "group_users", ["group_id"], :name => "index_group_users_on_group_id"
+  add_index "group_users", ["user_id"], :name => "index_group_users_on_user_id"
+
+  create_table "groups", :force => true do |t|
+    t.integer  "group_type_id", :limit => 2, :default => 1
+    t.integer  "user_id"
+    t.boolean  "is_visible",                 :default => true, :null => false
+    t.boolean  "delta",                      :default => true, :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+  end
+
+  add_index "groups", ["user_id"], :name => "index_groups_on_user_id"
 
   create_table "header_translations", :force => true do |t|
     t.integer  "header_id"
@@ -427,6 +487,25 @@ ActiveRecord::Schema.define(:version => 20130324083727) do
 
   add_index "og_tags", ["header_id"], :name => "index_og_tags_on_header_id"
 
+  create_table "permissions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "actions_mask"
+    t.integer  "context",       :limit => 1, :default => 1
+    t.integer  "subject",       :limit => 2, :default => 1
+    t.integer  "subject_id"
+    t.string   "assoc"
+    t.string   "assoc_ids"
+    t.boolean  "is_visibility",              :default => false
+    t.boolean  "is_own",                     :default => false
+    t.boolean  "is_work",                    :default => false
+    t.integer  "role_id"
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+  end
+
+  add_index "permissions", ["subject", "subject_id"], :name => "index_permissions_on_subject_and_subject_id"
+  add_index "permissions", ["user_id"], :name => "index_permissions_on_user_id"
+
   create_table "place_administrators", :force => true do |t|
     t.integer  "place_id"
     t.string   "name"
@@ -530,6 +609,7 @@ ActiveRecord::Schema.define(:version => 20130324083727) do
     t.integer  "avg_bill"
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
+    t.integer  "city_id"
   end
 
   add_index "places", ["slug"], :name => "index_places_on_slug", :unique => true
@@ -549,9 +629,11 @@ ActiveRecord::Schema.define(:version => 20130324083727) do
     t.datetime "time"
     t.integer  "user_id"
     t.integer  "place_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.integer  "persons"
+    t.boolean  "is_sms_send",   :default => false
+    t.integer  "phone_code_id"
   end
 
   add_index "reservations", ["place_id"], :name => "index_reservations_on_place_id"
@@ -569,6 +651,28 @@ ActiveRecord::Schema.define(:version => 20130324083727) do
 
   add_index "reviews", ["reviewable_id", "reviewable_type"], :name => "index_reviews_on_reviewable_id_and_reviewable_type"
   add_index "reviews", ["user_id"], :name => "index_reviews_on_user_id"
+
+  create_table "role_translations", :force => true do |t|
+    t.integer  "role_id"
+    t.string   "locale"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "role_translations", ["locale"], :name => "index_role_translations_on_locale"
+  add_index "role_translations", ["role_id"], :name => "index_role_translations_on_role_id"
+
+  create_table "roles", :force => true do |t|
+    t.integer  "role_type_id", :limit => 2, :default => 1
+    t.integer  "user_id"
+    t.boolean  "is_visible",                :default => true, :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+  end
+
+  add_index "roles", ["user_id"], :name => "index_roles_on_user_id"
 
   create_table "selections", :force => true do |t|
     t.string   "picture"
@@ -716,6 +820,7 @@ ActiveRecord::Schema.define(:version => 20130324083727) do
     t.datetime "created_at",                                            :null => false
     t.datetime "updated_at",                                            :null => false
     t.float    "points",                               :default => 0.0
+    t.integer  "phone_code_id"
   end
 
   add_index "users", ["city_id"], :name => "index_users_on_city_id"

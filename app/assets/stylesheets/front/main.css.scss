@@ -123,60 +123,63 @@ input[type='submit']:hover {
   z-index: 10;
 }
 
-#fixed ul {
-  display: block;
+#fixed .dropdown {
   float: left;
-  padding: 5px;
-  margin: -5px 0 0 -5px;
-  color: #ccc;
+  margin-right: 15px;
 }
 
-#fixed #language li {
-  padding: 0 0 0 20px;
+#fixed .dropdown .caret {
+  border-top: 3px solid #ccc;
+  border-right: 3px solid transparent;
+  border-left: 3px solid transparent;
+  margin-left: 4px;
 }
 
-#fixed ul li {
-  display: none;
-}
-
-#fixed ul li:hover a {
-  color: #fff;
+#fixed .dropdown .dropdown-toggle {
   text-decoration: none;
-}
-
-#fixed ul:hover {
-  background: rgba(0,0,0,0.8);
-  border-radius: 0 0 3px 3px;
-}
-
-#fixed ul:hover li {
-  display: block;
-}
-
-#fixed ul li a {
-  color: #ccc;
-}
-
-#fixed ul li a:hover {
-  color: #fff !important;
-}
-
-#fixed ul li.active {
-  display: block;
-  cursor: default;
-}
-
-#fixed ul li.active a {
-  background: image_url('arr1.gif') right 5px no-repeat;
-  padding: 0 10px 0 0;
+  cursor: pointer;
+  padding-bottom: 5px;
   color: #fff;
 }
 
-#fixed #language #eng { background: image_url('language.png') 0 4px no-repeat; }
-#fixed #language #rus { background: image_url('language.png') 0 -16px no-repeat; }
-#fixed #language #ukr { background: image_url('language.png') 0 -38px no-repeat; }
+
+#fixed .dropdown-menu {
+  box-shadow: none;
+  border: none;
+  background: #000;
+  background: rgba(0,0,0,0.8);
+  margin-left: -10px;
+  border-radius: 0 0 3px 3px;
+  margin-top: 0;
+  padding: 0 10px 5px 0;
+  min-width: 0;
+}
+
+#fixed #language a {
+  color: #eee;
+}
+
+#fixed .dropdown-menu a:hover {
+  color: #fff;
+}
+
+#fixed a.en { background: url('../img/language.png') 10px 4px no-repeat; padding: 0 0 0 30px; }
+#fixed a.ru { background: url('../img/language.png') 10px -16px no-repeat; padding: 0 0 0 30px; }
+#fixed a.ua { background: url('../img/language.png') 10px -38px no-repeat; padding: 0 0 0 30px; }
+
+#fixed #lang .en a { background: url('../img/language.png') 10px 4px no-repeat; padding: 0 0 0 30px; }
+#fixed #lang .ru a { background: url('../img/language.png') 10px -16px no-repeat; padding: 0 0 0 30px; }
+#fixed #lang .ua a { background: url('../img/language.png') 10px -38px no-repeat; padding: 0 0 0 30px; }
+
+#fixed #language { margin-left: 0;  }
+#fixed #language li, #fixed a { display: block; }
 
 #fixed #location { margin: -5px 0 0 10px; }
+
+#fixed #header_links {
+  float: left;
+  margin-right: 30px;
+}
 
 #fixed #header_links a {
   color: #ccc;
@@ -186,15 +189,9 @@ input[type='submit']:hover {
 
 #fixed #user_block {
   float: right;
-  padding-right: 8px;
-  background: image_url('arr1.gif') right 9px no-repeat;
   position: relative;
   z-index: 50;
-}
-
-#fixed #user_block a.active {
-  color: #ccc;
-  font-weight: bold;
+  margin-right: 0;
 }
 
 #fixed #user_block #user_dropdown {
@@ -202,8 +199,29 @@ input[type='submit']:hover {
   right: 0;
   float: none;
   z-index: 5;
-  min-width: 90px;
-  margin-top: -6px;
+  min-width: 120px;
+  margin-top: -1px;
+  padding-right: 0;
+}
+
+#fixed #user_block #user_dropdown li {
+  width: 120px;
+}
+
+#fixed #user_block #user_dropdown li a {
+  color: #eee;
+  padding: 1px 10px;
+}
+
+#fixed #user_block #user_dropdown li a:hover {
+  color: #fff;
+}
+
+#fixed #user_block .dropdown-toggle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100px;
 }
 
 #fixed #user_block img {
@@ -214,11 +232,53 @@ input[type='submit']:hover {
   height: 20px;
 }
 
-#fixed #user_block #user_dropdown li.active {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 100px;
+#fixed #cities_dd {
+  float: left;
+}
+
+#fixed #cities_dd .dropdown-toggle {
+  color: #fff;
+}
+
+#fixed #cities_dd .dropdown-menu {
+  color: #000;
+  background: #fff;
+  border-radius: 0 0 3px 3px;
+  border-width: 0 1px 1px 1px;
+  border-style: solid;
+  border-color: #565656;
+  padding: 5px 10px;
+  min-width: 190px;
+}
+
+#fixed #cities_dd .dropdown-menu .cities_list {
+  float: left;
+}
+
+#fixed #cities_dd .dropdown-menu #cities_russia.cities_list {
+  margin-left: 10px;
+}
+
+#fixed #cities_dd .dropdown-menu li a {
+  padding: 0 5px;
+  background: none;
+  color: #df5b49;
+  font-weight: bold;
+  margin-left: -5px;
+  border-radius: 2px;
+  margin-bottom: 2px;
+}
+
+#fixed #cities_dd .dropdown-menu li a:hover {
+  background: #08c;
+  color: #fff;
+}
+
+#fixed #cities_dd .dropdown-menu strong {
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
+  font-size: 16px;
+  color: #333;
+  font-weight: normal;
 }
 
 #header {
@@ -3378,4 +3438,88 @@ body {
   background: -ms-linear-gradient(top, #666666 0%,#282828 100%); /* IE10+ */
   background: linear-gradient(to bottom, #666666 0%,#282828 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#666666', endColorstr='#282828',GradientType=0 ); /* IE6-9 */
+}
+
+/******* Index Cities Page ******/
+
+.index_cities {
+  height: 550px;
+}
+
+.index_cities .content {
+  background-color: transparent;
+}
+
+.index_cities .sidebar {
+  z-index: 2;
+  position: relative;
+  -webkit-box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow:    0px 5px 15px rgba(0, 0, 0, 0.25);
+  box-shadow:         0px 5px 15px rgba(0, 0, 0, 0.25);
+  padding: 10px 0;
+  margin-top: 50px;
+  background-color: #fff;
+  background-color: rgba(255,255,255,0.98);
+  opacity: 0.98;
+  filter:alpha(opacity=98);
+}
+
+.index_cities .sidebar h2 {
+  display: block;
+  padding: 0 20px;
+  margin: 0 0 5px 0;
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
+  letter-spacing: -0.05em;
+  font-weight: normal;
+  color: #08c;
+}
+
+.index_cities .sidebar p {
+  display: block;
+  padding: 0 20px 15px 20px;
+  margin: 0 0 20px 0;
+  border-bottom: 1px solid #f2f0ea;
+}
+
+.index_cities .sidebar ul {
+  display: block;
+  padding: 0 0 0 20px;
+  margin: 0;
+  width: 130px;
+  float: left;
+  font-size: 14px;
+  color: #999;
+}
+
+.index_cities .sidebar ul li {
+  display: block;
+  margin: 0 0 5px 0;
+  cursor: default;
+}
+
+.index_cities .sidebar ul li a {
+  font-weight: bold;
+}
+
+.index_cities .sidebar ul h3 {
+  font-size: 24px;
+  padding: 0;
+  margin: 0 0 15px 0;
+  color: #555;
+  font-weight: normal;
+  letter-spacing: -0.05em;
+}
+
+.index_cities #header {
+  z-index: 2;
+  position: relative;
+}
+
+#cities_map {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  width: 100%;
+  height: 560px;
+  z-index: 0;
 }

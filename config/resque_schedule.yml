@@ -8,6 +8,11 @@ elastic_indexer:
   class: ElasticIndexerJob
   queue: low
   description: "This update elastic index"
+send_sms:
+  cron: "0 10,12,14,16,18,20 * * *"
+  class: SendSmsJob
+  queue: low
+  description: "This send sms for reserve done"
 site_map:
   cron: "0 4 * * *"
   class: SiteMapJob

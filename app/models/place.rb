@@ -3,9 +3,11 @@ class Place < ActiveRecord::Base
 
   attr_accessible :phone, :is_visible, :user_id, :url, :location_attributes, :week_days_attributes,
                   :avg_bill, :feature_item_ids, :place_administrators_attributes, :place_menus_attributes,
-                  :name, :description, :week_days_ids
+                  :name, :description, :week_days_ids, :city_id
 
   belongs_to :user
+
+  belongs_to :city
 
   has_many :place_categories, :dependent => :destroy
   has_many :categories, :through => :place_categories
@@ -56,6 +58,8 @@ class Place < ActiveRecord::Base
 
   as_token_ids :category, :kitchen
 
+  ac_field
+
   class_attribute :visible_filter, :instance_writer => false
 
   self.visible_filter = [
@@ -99,14 +103,21 @@ class Place < ActiveRecord::Base
 
   def self.for_slider options={}
     tire.search(page: options[:page], per_page: options[:per_page] || 4) do
+      filters  = []
+      if options[:city].present?
+        filters << {query: {flt: {like_text: options[:city], fields: I18n.available_locales.map { |l| "city_#{l}" }} }}
+      end
+
+      filters << {query: {constant_score: {filter: {exists: {field: "is_has_slider_image"}}}}}
+
       query do
         custom_score({script: "random()*20"}) do
           all {}
         end
       end
-      filter :exists, :field => :is_has_slider_image
+
+      filter(:and, :filters => filters)
       sort { by("_score", "desc") }
-      puts to_curl
     end
   end
 
@@ -442,14 +453,20 @@ class Place < ActiveRecord::Base
 
 
   def self.count_visible options={}
-    model = self
-    tire.search(search_type: "scan", scroll: "10m") do
+    _filters = []
+    _filters.push(*self.visible_filter)
+
+    if options[:category].present?
+      _filters << {terms: {category_ids: options[:category].to_s.split(",")} }
+    end
+
+    tire.search page: options[:page], per_page: options[:per_page] do
       if options[:city]
         query do
           flt options[:city].lucene_escape, :fields => I18n.available_locales.map { |l| "city_#{l}" }, :min_similarity => 0.5
         end
       end
-      filter(:and, :filters => model.visible_filter)
+      filter(:and, {:filters => _filters, _cache: false})
     end.total
   end
 
@@ -545,6 +562,15 @@ class Place < ActiveRecord::Base
     end
   end
 
+
+  def city locale="en"
+    location.try("city_#{locale}")
+  end
+
+  def can_city? user_city
+    city =~ /#{user_city}/i
+  end
+
   private
 
   def self.get_star_rating place
@@ -625,6 +651,8 @@ class Place < ActiveRecord::Base
 
 
 
+
+
 end
 # == Schema Information
 #
@@ -639,6 +667,7 @@ end
 #  avg_bill   :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  city_id    :integer
 #
 # Indexes
 #

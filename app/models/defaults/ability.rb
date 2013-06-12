@@ -6,40 +6,33 @@ class Ability
     alias_action :destroy, :to => :delete
     @user = (user || User.new) # guest user (not logged in)
 
-    admin
-    #case @user.user_role_type.id
-    #  when ::UserRoleType.default.id then default
-    #  when ::UserRoleType.redactor.id then redactor
-    #  when ::UserRoleType.moderator.id then moderator
-    #  when ::UserRoleType.admin.id then admin
-    #end
+    case @user.user_role_type.id
+      when ::UserRoleType.default.id then default
+      when ::UserRoleType.redactor.id then redactor
+      when ::UserRoleType.moderator.id then moderator
+      when ::UserRoleType.admin.id then admin
+    end
   end
 
-  #def default
-  #  can :manage, Comment, :user_id => @user.id
-  #  can :create, Comment
-  #end
+  def default
 
-  #def redactor
-  #  can :manage, Comment, :user_id => @user.id
-  #  can :create, Comment
-  #end
+  end
+
+  def redactor
+
+  end
 
   def moderator
-    #can [:read, :create], AdminComment
-    #can :destroy, AdminComment, :author_id => @user.id
-    #can [:read, :create], Comment
-
-    can [:read, :update], User, :id => @user.id
+    can [:read], User, :id => @user.id
     # temp fix assets
     can :manage, Asset
     @rules += @user.fetch_rules
     cannot :destroy, User, :id => @user.id
+    can :manage, Place, :city_id => @user.city.try(:id)
   end
 
   def admin
     can :manage, :all
-
     cannot :destroy, User, :id => @user.id
   end
 end
