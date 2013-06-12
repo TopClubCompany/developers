@@ -142,7 +142,12 @@ ru:
         sizeError: "{file} очень большой, максимальный размер файла {sizeLimit}."
         typeError: "{file} имеет не правильное расширение. Только {extensions} разрешены."
   google: Google
-  head: "Резерв столиков онлайн. Бесплатно · Экономия до 50%"
+  head: "Резерв столиков онлайн · Скидка до 50% на все меню"
+  head_points: 
+    bonuses: "бонусов"
+    collected: "собрали"
+    top: top
+    you: "Вы"
   hello: "Приветствуем"
   label: 
     close: "Закрыть"
@@ -446,8 +451,3 @@ ru:
     unhelpful: "бесполезный"
     view: "посмотреть"
   your_email: "Ваш email"
-  head_points:
-    you: "Вы"
-    collected: "собрали"
-    top: "top"
-    bonuses: "бонусов"
