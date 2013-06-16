@@ -16,9 +16,9 @@
       - BillType.all.first(4).each do |bill|
         label.checkbox
           input type="checkbox"  data-type="price" value=bill.id
-            = bill.code_title
+            = bill.code_title(current_city)
             |&nbsp;
-            b= bill.title_image
+            b= bill.title_image(current_city)
       .clear
 
     - cache [I18n.locale, 'search', 'kitchens', Kitchen.max_time, "search"] do

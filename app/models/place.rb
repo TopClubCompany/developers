@@ -256,8 +256,6 @@ class Place < ActiveRecord::Base
         end
       end
 
-      json.set!("avg_bill", bill.id) if bill
-
       json.set!("discounts", self.discounts_index)
 
       self.week_days.each do |week_day|
@@ -325,8 +323,7 @@ class Place < ActiveRecord::Base
 
   def self.avg_bill_title(bill_id, city)
     bill = BillType.find(bill_id)
-    bill.scope = city
-    bill.title
+    bill.title(city)
   end
 
   def all_images

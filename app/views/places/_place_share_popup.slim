@@ -11,7 +11,7 @@
             = link_to category.title, '#'
             = ', ' if (i + 1) < categories.count
           '  ·
-          - data = { trigger: 'hover', title: I18n.t('place.average_bill'), content: @place.bill.try(:title), placement: 'top' }
+          - data = { trigger: 'hover', title: I18n.t('place.average_bill'), content: @place.bill.try(:title, current_city), placement: 'top' }
           = content_tag :span, class: 'pricing popoverable', data: data do
             = get_pricing @place
         ul.place_features
