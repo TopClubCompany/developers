@@ -253,6 +253,7 @@ input[type='submit']:hover {
 
 #fixed #cities_dd .dropdown-menu .cities_list {
   float: left;
+  margin-right: 20px;
 }
 
 #fixed #cities_dd .dropdown-menu #cities_russia.cities_list {
@@ -891,6 +892,17 @@ input[type='submit']:hover {
   position: relative;
 }
 
+.place_img .zoom {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  background: url('../img/zoom.png') no-repeat;
+  z-index: 20;
+  display: block;
+}
+
 /**
 Обозначение размера скидки на фотографии ресторана
 
@@ -1199,6 +1211,7 @@ h4 .discount_label {
   float: left;
   margin: 0 10px 10px 0;
   text-align: center;
+  position: relative;
 }
 
 .place_img img {
@@ -3393,7 +3406,7 @@ body {
 #place #search_form.green .header {
   font-size: 22px;
   color: #fff;
-  max-width: 450px;
+  max-width: 350px;
   display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -3401,14 +3414,25 @@ body {
 }
 
 #place #search_form.green .header_special {
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
   color: #fff;
-  letter-spacing: -0.04em;
-  font-size: 16px;
-  background: #648849;
-  display: inline-block;
-  padding: 3px 5px;
-  border-radius: 3px;
   font-weight: normal;
+  letter-spacing: -0.05;
+  background: url('../img/label.png') top left no-repeat;
+  font-size: 24px;
+  padding: 7px 15px 7px 20px;
+  position: absolute;
+  bottom: 60px;
+  right: -4px;
+}
+
+#place #search_form.green .header_special b {
+  width: 4px;
+  height: 4px;
+  position: absolute;
+  bottom: -4px;
+  right: 0;
+  background: url('../img/corner.png') top left no-repeat;
 }
 
 #place #search_form.green label {

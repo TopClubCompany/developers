@@ -6,7 +6,7 @@ window.checkNewUser = (selector, sb_sel) ->
   user_first_name = $("#{selector}  #{sub_selector}_first_name").tipsy()
   user_last_name = $("#{selector} #{sub_selector}_last_name").tipsy()
   patternEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,5}$/i
-  patternPhone = /^\(0\d{2}\)\d{3}\-\d{2}\-\d{2}$/
+  patternPhone = /^\(\d{3}\)\d{3}\-\d{2}\-\d{2}$/
   patternPass = /[^а-я]+/i
   patternNameLastname = /[а-яa-z0-9_-]+/i
 
