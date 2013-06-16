@@ -1,7 +1,7 @@
 class City < ActiveRecord::Base
 
   attr_accessible :is_visible, :position, :name, :description, :plural_name, :country_id, :latitude, :longitude,
-                  :phone_code
+                  :phone_code, :support_phone
 
   has_many :users
 
