@@ -560,7 +560,7 @@ class Place < ActiveRecord::Base
   end
 
 
-  def city locale="en"
+  def get_city locale="en"
     location.try("city_#{locale}")
   end
 

@@ -11,6 +11,16 @@ class PhoneCodeType
     builder.member :russia, :object => new("russia")
   end
 
+  def self.all(city=nil)
+    codes = @enum_builder.all
+    case city.to_s
+      when "astrakhan"
+        codes.reverse
+      else
+        codes
+    end
+  end
+
   def title(locale=I18n.locale.to_sym)
     I18n.t(@code, :scope => [:admin, :phone_code, :kind], :locale => locale)
   end

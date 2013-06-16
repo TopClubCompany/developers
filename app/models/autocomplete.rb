@@ -33,7 +33,7 @@ class Autocomplete < ActiveRecord::Base
     Place.with_translations.find_each do |place|
       _words += Globalize.available_locales.map do |locale|
         place.send("name_#{locale}")
-      end.zip(Globalize.available_locales.map { |locale| place.city(:en) })
+      end.zip(Globalize.available_locales.map { |locale| place.get_city(:en) })
     end
 
     _words.each do |word|
