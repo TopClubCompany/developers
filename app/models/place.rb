@@ -256,9 +256,7 @@ class Place < ActiveRecord::Base
         end
       end
 
-      I18n.available_locales.each do |locale|
-        json.set!("avg_bill_title_#{locale.to_s}", self.avg_bill_title(locale))
-      end
+      json.set!("avg_bill", bill.id) if bill
 
       json.set!("discounts", self.discounts_index)
 
@@ -325,8 +323,10 @@ class Place < ActiveRecord::Base
     marks.values.select { |mark| MarkType.find(mark[:id]).included_in_overall }.map { |mark| mark[:avg] }.avg.round(1)
   end
 
-  def avg_bill_title(locale=I18n.locale.to_sym)
-    bill.title(locale) if bill
+  def self.avg_bill_title(bill_id, city)
+    bill = BillType.find(bill_id)
+    bill.scope = city
+    bill.title
   end
 
   def all_images
@@ -367,7 +367,7 @@ class Place < ActiveRecord::Base
     res[:street] = place["street_#{I18n.locale}"]
     res[:county] = place["county_#{I18n.locale}"]
     res[:house_number] = place["house_number"]
-    res[:avg_bill_title] = place["avg_bill_title_#{I18n.locale}"]
+    res[:avg_bill_title] =  avg_bill_title(place["avg_bill"], options[:city])
     res[:overall_mark] = place["overall_mark"]
     res[:star_rating] = "left: #{place["overall_mark"] * 20}%"
     res[:marks] = place["marks"]
