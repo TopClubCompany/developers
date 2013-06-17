@@ -62,8 +62,7 @@
             - else
               b.closed= I18n.t('closed')
           #place_links
-            /= link_to t('short_strings.more_detalis'), '#'
-            = link_to t('short_strings.view_menu'), '#place_menu', {:class => "show_popup menu"}
+            = link_to t('short_strings.view_menu'), '#place_menu', {:class => "show_popup menu"} if @place.place_menus.count > 0
         .clear
         .place_desc
           h5 #{t('short_strings.few_words')} #{@place.title}
@@ -75,7 +74,7 @@
           = link_to t('words.expand'), '#', class: 'desc_expand', data: { expand: t('words.expand'), rollup: t('words.roll_up') }
         = render partial: "review_form", locals: {review: @review}
 
-        = render partial: "reviews", locals: {place: @place, reviews: @reviews}
+        = render partial: "reviews", locals: {place: @place, reviews: @reviews} if @reviews.size > 0
 
     = render "places/promo"
 

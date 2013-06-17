@@ -24,9 +24,9 @@
                   a href="/update_city/#{city.slug}"= city.name
 
     .phone_support
-      ' Поддержка:
+      = I18n.t('explore.index.support')
       strong
-        | (044) 3000 993
+        = support_phone
     .place_search
       form action=localization_link("search")
         - unless defined? show_title
