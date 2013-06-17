@@ -23,7 +23,17 @@
                 li
                   a href="/update_city/#{city.slug}"= city.name
 
-    #header_links
+    .phone_support
+      ' Поддержка:
+      strong
+        | (044) 3000 993
+    .place_search
+      form action=localization_link("search")
+        - unless defined? show_title
+          input id='title_or_location' name="title_or_location" data-rightadd="55" placeholder="#{I18n.t('search.title_or_location')}" type="text" value=(params[:title_or_location])
+    	  input type="image" src="img/search1.png"
+
+    /#header_links
       a.first href="#{localization_link('pages/help')}"= Structure.find('help').name
       a href="#{localization_link('pages/contact')}"= Structure.find('contact').name
     - if user_signed_in?

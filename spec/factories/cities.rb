@@ -2,16 +2,17 @@
 #
 # Table name: cities
 #
-#  id         :integer          not null, primary key
-#  slug       :string(255)      not null
-#  is_visible :boolean          default(TRUE)
-#  position   :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  country_id :integer
-#  latitude   :float
-#  longitude  :float
-#  phone_code :string(255)
+#  id            :integer          not null, primary key
+#  slug          :string(255)      not null
+#  is_visible    :boolean          default(TRUE)
+#  position      :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  country_id    :integer
+#  latitude      :float
+#  longitude     :float
+#  phone_code    :string(255)
+#  support_phone :string(255)
 #
 # Indexes
 #

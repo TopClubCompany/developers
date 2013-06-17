@@ -116,7 +116,7 @@ input[type='submit']:hover {
   background: #333;
   height: 25px;
   padding: 5px 0 0 0;
-  font-size: 11px;
+  font-size: 12px;
   position: fixed;
   top: 0;
   width: 100%;
@@ -153,6 +153,7 @@ input[type='submit']:hover {
   margin-top: 0;
   padding: 0 10px 5px 0;
   min-width: 0;
+  font-size: 11px;
 }
 
 #fixed #language a {
@@ -171,8 +172,10 @@ input[type='submit']:hover {
 #fixed #lang .ru a { background: url('../img/language.png') 10px -16px no-repeat; padding: 0 0 0 30px; }
 #fixed #lang .ua a { background: url('../img/language.png') 10px -38px no-repeat; padding: 0 0 0 30px; }
 
-#fixed #language { margin-left: 0;  }
+#fixed #language { margin-left: 0; padding: 0 0 3px 0; overflow: hidden; min-width: 104px;}
 #fixed #language li, #fixed a { display: block; }
+#fixed #language li { padding: 1px 10px 1px 0 !important;}
+#fixed #language li:hover { background: #08c; }
 
 #fixed #location { margin: -5px 0 0 10px; }
 
@@ -202,6 +205,7 @@ input[type='submit']:hover {
   min-width: 120px;
   margin-top: -1px;
   padding-right: 0;
+  font-size: 11px;
 }
 
 #fixed #user_block #user_dropdown li {
@@ -222,6 +226,7 @@ input[type='submit']:hover {
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 100px;
+  min-width: 100px;
 }
 
 #fixed #user_block img {
@@ -279,6 +284,45 @@ input[type='submit']:hover {
   font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
   font-size: 16px;
   color: #333;
+  font-weight: normal;
+}
+
+#fixed .place_search {
+  float: right;
+  background: #111;
+  border-left: 1px solid #707070;
+  border-right: 1px solid #707070;
+  height: 29px;
+  overflow: hidden;
+  margin: -5px 0 0 10px;
+}
+
+#fixed .place_search form {
+  margin: 0;
+  padding: 0;
+}
+
+#fixed .place_search form input[type='text'] {
+  color: #fff;
+  font-size: 12px;
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 2px 9px;
+  width: 120px;
+}
+
+#fixed .place_search form input:focus {
+  outline: none !important;
+}
+
+#fixed .phone_support {
+  float: left;
+  color: #ccc;
+}
+
+#fixed .phone_support strong {
+  color: #fff;
   font-weight: normal;
 }
 
@@ -3219,14 +3263,43 @@ h4 .discount_label {
 }
 
 #food_teaser #search_form {
-  width: 920px;
-  padding: 5px 10px 8px 10px;
-  background: #333333;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.75);
+  width: 940px;
+  padding: 10px;
+  background: #fff;
+  background: rgba(255,255,255,0.3);
   position: absolute;
   top: 40%;
   left: 50%;
-  margin-left: -470px;
+  margin-left: -480px;
+  border-radius: 6px;
+}
+
+#food_teaser #search_form .container {
+  height: 40px;
+  padding: 10px 10px 10px 20px;
+  background: #000;
+  background: rgba(0,0,0,0.7);
+  border-radius: 5px;
+  width: 910px;
+  font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
+  color: #fff;
+  font-size: 28px;
+  line-height: 38px;
+}
+
+#food_teaser #search_form .container .text {
+  float: left;
+}
+
+#food_teaser #search_form .container form {
+  float: right;
+  margin: 0;
+  width: 580px;
+  height: 40px;
+}
+
+#food_teaser #search_form input[type='submit'] {
+  min-width: 123px;
 }
 
 #food_teaser #search_form input[name='reserve_date'], #search_form button {

@@ -3,7 +3,10 @@
     h5= I18n.t('explore.index.main_slider_text')
     p= I18n.t('explore.index.second_big_text', count: Place.count_visible(city: current_city), city: current_city_plural(:plural_name), discount: 50)
   #search_form
-    = render :partial => 'shared/search_form'
+    .container
+      span class="text"
+        | Make a free table reservation at:
+      = render :partial => 'shared/search_form_index'
   .arrows
     .left
     .right
