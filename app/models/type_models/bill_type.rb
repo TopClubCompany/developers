@@ -13,7 +13,7 @@ class BillType
     builder.member :splurge, :object => new("splurge")
   end
 
-  def title(scope, locale=I18n.locale.to_sym)
+  def title(scope=:kyiv, locale=I18n.locale.to_sym)
     I18n.t(@code, :scope => [:admin, :bill, scope, :kind], :locale => locale)
   end
 
