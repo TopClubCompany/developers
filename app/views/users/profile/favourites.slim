@@ -37,7 +37,7 @@
                   ul.place_features
                     li.location= place.address
                     li.cuisine= place.kitchens.map(&:title).join(', ')
-                    li.pricing= place.avg_bill_title
+                    li.pricing= avg_bill_title(place.bill.try(:id))
                   .btns
                     = link_to t('words.new_reservation'), place_link(place)
 
