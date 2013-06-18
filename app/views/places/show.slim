@@ -50,9 +50,8 @@
             strong
             = @place.kitchens.map(&:name).join(', ')
           li.phone
-            /strong
-              ' Phone:
-            | +38 (099) 142-70-36
+            strong
+              = support_phone
           li.timing
             - @place.humanable_schedule.each do |time|
               = time.html_safe

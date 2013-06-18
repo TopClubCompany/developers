@@ -1,6 +1,6 @@
 form action=localization_link("search")
-  #tol_c
-    /- unless defined? show_title
+  /#tol_c
+    - unless defined? show_title
       input id='title_or_location' name="title_or_location" data-rightadd="55" placeholder="#{I18n.t('search.title_or_location')}" type="text" value=(params[:title_or_location])
   label for="reserve_date"
   - date  = (params[:reserve_date] || Time.now.strftime("%d/%m/%Y"))
