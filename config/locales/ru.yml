@@ -102,7 +102,8 @@ ru:
   currency: 
     unit: "грн."
   explore: 
-    index: 
+    index:
+      support: "Поддержка:"
       all: "Смотреть все ›"
       available: "Столики, доступные вечером"
       best: "Популярные рестораны"
@@ -113,6 +114,7 @@ ru:
       new: "Новые рестораны"
       reserv_online: Reserve your table online for free
       save_up: Save up to 30% off all food and drinks
+      make_free_table: "Make a free table reservation at:"
       second_big_text: "Выбирайте из более чем %{count} ресторанов %{city}а и экономьте до %{discount}% от вашего счета."
   facebook: Facebook
   flash: 

@@ -24,7 +24,7 @@ class ExploreController < ApplicationController
      when "available"
       :tonight_available
    end
-    result = Place.send(method, 6, params)
+    result = Place.send(method, 6, params.merge(city: current_city))
     render :json => {result: result.map{|e| Place.for_mustache(e, params.update(image_url: :main_url)) },
                      total:  result.total}
   end

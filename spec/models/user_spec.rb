@@ -96,6 +96,7 @@ end# == Schema Information
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  points                 :float            default(0.0)
+#  phone_code_id          :integer
 #
 # Indexes
 #

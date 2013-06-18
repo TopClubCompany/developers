@@ -1,9 +1,12 @@
 #food_teaser
   .teaser_heading
     h5= I18n.t('explore.index.main_slider_text')
-    p= I18n.t('explore.index.second_big_text', count: Place.count_visible(city: current_city), city: current_city_plural(:name), discount: 50)
+    p= I18n.t('explore.index.second_big_text', count: Place.count_visible(city: current_city), city: current_city_plural(:plural_name), discount: 50)
   #search_form
-    = render :partial => 'shared/search_form'
+    .container
+      span class="text"
+        = I18n.t("explore.index.make_free_table")
+      = render :partial => 'shared/search_form_index'
   .arrows
     .left
     .right
@@ -15,7 +18,6 @@
         img.place_food src=place.slider.try(:url)
         .caption
           a href="/#{I18n.locale}/#{place.slug}-#{place['city_en'].downcase.gsub(' ','_')}"
-            /img src="assets/gfx/4.jpg"
             img src="#{place.place_image.show_place_image}" width="74px" height="54px"
             .caption_c
               h6

@@ -25,7 +25,7 @@
             = link_to category.title, with_local_link("/search/#{category.slug}")
             = ', ' if (i + 1) < categories.count
           '  ·
-          - data = { trigger: 'hover', title: I18n.t('place.average_bill'), content: @place.bill.try(:title), placement: 'top' }
+          - data = { trigger: 'hover', title: I18n.t('place.average_bill'), content: @place.bill.try(:title, current_city), placement: 'top' }
           = content_tag :span, class: 'pricing popoverable', data: data do
             = get_pricing @place
         span itemprop="pricerange" style="display:none"
@@ -50,9 +50,8 @@
             strong
             = @place.kitchens.map(&:name).join(', ')
           li.phone
-            /strong
-              ' Phone:
-            | +38 (099) 142-70-36
+            strong
+              = support_phone
           li.timing
             - @place.humanable_schedule.each do |time|
               = time.html_safe
@@ -62,8 +61,7 @@
             - else
               b.closed= I18n.t('closed')
           #place_links
-            /= link_to t('short_strings.more_detalis'), '#'
-            = link_to t('short_strings.view_menu'), '#place_menu', {:class => "show_popup menu"}
+            = link_to t('short_strings.view_menu'), '#place_menu', {:class => "show_popup menu"} if @place.place_menus.count > 0
         .clear
         .place_desc
           h5 #{t('short_strings.few_words')} #{@place.title}
@@ -75,7 +73,7 @@
           = link_to t('words.expand'), '#', class: 'desc_expand', data: { expand: t('words.expand'), rollup: t('words.roll_up') }
         = render partial: "review_form", locals: {review: @review}
 
-        = render partial: "reviews", locals: {place: @place, reviews: @reviews}
+        = render partial: "reviews", locals: {place: @place, reviews: @reviews} if @reviews.size > 0
 
     = render "places/promo"
 

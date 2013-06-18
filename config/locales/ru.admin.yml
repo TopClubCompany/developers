@@ -61,22 +61,40 @@ ru:
       kind:
         ukraine: "Украина +38"
         russia: "Россия +7"
-    bill: 
-      code: 
-        cheap: "Недорогой"
-        moderate: "Средний"
-        spendy: "Умеренный"
-        splurge: "Премиум"
-      image: 
-        cheap: $
-        moderate: $$
-        spendy: $$$
-        splurge: $$$$
-      kind: 
-        cheap: "до 100 грн."
-        moderate: "100 - 200 грн."
-        spendy: "200 - 500 грн."
-        splurge: "более 500 грн."
+    bill:
+      kyiv:
+        code:
+          cheap: "Недорогой"
+          moderate: "Средний"
+          spendy: "Умеренный"
+          splurge: "Премиум"
+        image:
+          cheap: $
+          moderate: $$
+          spendy: $$$
+          splurge: $$$$
+        kind:
+          cheap: "до 100 грн."
+          moderate: "100 - 200 грн."
+          spendy: "200 - 500 грн."
+          splurge: "более 500 грн."
+      astrakhan:
+        code:
+          cheap: "Недорогой"
+          moderate: "Средний"
+          spendy: "Умеренный"
+          splurge: "Премиум"
+        image:
+          cheap: $
+          moderate: $$
+          spendy: $$$
+          splurge: $$$$
+        kind:
+          cheap: "до 100 руб."
+          moderate: "100 - 200 руб."
+          spendy: "200 - 500 руб."
+          splurge: "более 500 руб."
+
     cant_be_deleted: "Удаление невозможно"
     choose: "Выберите %{attr}"
     clear_cache: "Очистить кеш"

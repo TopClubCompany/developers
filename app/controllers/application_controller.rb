@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
     end
 
     def current_city_plural name = :plural_name
-      City.find(current_city).send(name)
+      City.find(current_city).send(name).no_html
     end
 
     def set_locale

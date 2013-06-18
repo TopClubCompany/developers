@@ -31,7 +31,7 @@ module PlacesHelper
   end
 
   def avg_bill_title avg_id
-    BillType.find(avg_id).title rescue ''
+    Place.avg_bill_title(avg_id, current_city) || ""
   end
 
   def get_pricing place

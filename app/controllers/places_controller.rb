@@ -72,6 +72,10 @@ class PlacesController < ApplicationController
 
   def find_place
     @place = Place.find Place.deparam(params[:id])
+    unless current_city.to_s == @place.city.slug.to_s
+      url = request.url.sub(current_city.to_s, @place.city.slug.to_s)
+      redirect_to url
+    end
   end
 
   def find_page
