@@ -187,7 +187,7 @@ ua:
     reservetion_table: "Забронювати стіл"
     review_for_place: "Відгуків для %{place}: %{count}"
     share: "Поділитись"
-    up_to: "Знижка до %{discount}%"
+    up_to: "Знижка до %{discount}% на все меню"
     vailability: "Доступно для бронювання %{reserve_date} близько %{reserve_time} для %{number_of_people} персон"
   profile: 
     birthday: "День народження"
@@ -331,7 +331,7 @@ ua:
     phone_number: "Номер телефону"
     print_this_page: "Роздрукувати деталі"
     remove_from_favorites: "Видалити з обраного"
-    reserve_at: "Забронювати у"
+    reserve_at: "Забронювати столик"
     share_on: "Поділитись у"
     share_with_friends: "Поділитись з друзями"
     sort_by: "Сортувати по"

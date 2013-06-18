@@ -187,7 +187,7 @@ en:
     reservetion_table: Reserve
     review_for_place: All %{count} review(s) for %{place}
     share: Share
-    up_to: Up to %{discount}% off
+    up_to: Up to %{discount}% off your bill
     vailability: Availability on %{reserve_date} around %{reserve_time} for %{number_of_people} people
   profile: 
     birthday: Birthday
@@ -331,7 +331,7 @@ en:
     phone_number: Phone number
     print_this_page: Print this page
     remove_from_favorites: Remove from favourites
-    reserve_at: Reserve at
+    reserve_at: Reserve a table online
     share_on: Share on
     share_with_friends: Share with friends
     sort_by: Sort by

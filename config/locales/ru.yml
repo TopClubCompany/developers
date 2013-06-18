@@ -82,6 +82,9 @@ ru:
     you_reserve: "Ваш резерв"
   ceo: 
     main: "<div id=\"page_description\"><h1 style=\"text-transform:uppercase;font-size:14px;\">Резерв столиков онлайн</h1><p><strong>TopReserve</strong> — это бесплатный сервис бронирования столов, который позволяет мгновенно <b>забронировать стол онлайн</b> и получить скидку до -50% на все меню в лучших ресторанах города.</p><p>Вы выбираете любимый ресторан, <b>бронируете столик бесплатно</b> онлайн, и наслаждаетесь ужином в компании близких людей с гарантированной скидкой до -50% на весь ваш фактический счет (еду и напитки!).</p></div>"
+  choose_city: 
+    bron_text: "<strong>Бронируйте</strong> столики онлайн<br>в лучших заведениях вашего города <strong>со скидкой до 50%</strong>"
+    hello: "Добро пожаловать!"
   city: "город"
   closed: "Закрыт"
   comments: 
@@ -193,7 +196,7 @@ ru:
     reservetion_table: "Подтвердить ваш резерв"
     review_for_place: "Все %{count} отзыв(а) о %{place}"
     share: "Поделиться"
-    up_to: "Скидка до %{discount}%"
+    up_to: "Скидка до %{discount}% на все меню<b></b>"
     vailability: "Доступное время %{reserve_date} в районе %{reserve_time} для %{number_of_people} человек"
   profile: 
     birthday: "День рождения"
@@ -350,7 +353,7 @@ ru:
     phone_number: "Телефонный номер"
     print_this_page: "Распечатать детали"
     remove_from_favorites: "Убрать из избранного"
-    reserve_at: "Забронировать столик в"
+    reserve_at: "Забронировать столик"
     share_on: "Делится на"
     share_with_friends: "Поделится с друзьями"
     sort_by: "Сортировать по"
@@ -379,6 +382,7 @@ ru:
   simple_form: 
     error_notification: 
       default_message: "При сохранении возникли ошибки"
+  sms_text: "Ув. %{name} %{surname}, оставьте отзыв о вашем посещении %{restaurant_name}"
   sort_by: 
     date: "дате"
     overall_mark: "общей оценке"
@@ -452,12 +456,3 @@ ru:
     unhelpful: "бесполезный"
     view: "посмотреть"
   your_email: "Ваш email"
-  head_points:
-    you: "Вы"
-    collected: "собрали"
-    top: "top"
-    bonuses: "бонусов"
-  choose_city:
-    hello: "Добро пожаловать!"
-    bron_text: "<strong>Бронируйте</strong> столики онлайн<br>в лучших заведениях вашего города <strong>со скидкой до 50%</strong>"
-  sms_text: "Ув. %{name} %{surname}, оставьте отзыв о вашем посещении %{restaurant_name}"
