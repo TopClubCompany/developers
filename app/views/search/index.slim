@@ -3,10 +3,10 @@
     .span12
       #search_form
         - if @category
-          h1= I18n.t('search.main_text', type: @category.plural_name, count: Place.count_visible(city: current_city, category: @category.id), city: current_city_plural(:name))
+          h1= I18n.t('search.main_text', type: @category.plural_name, count: Place.count_visible(city: current_city, category: @category.id), city: current_city_plural(:plural_name))
         - else
           - type = I18n.t('search.restorans')
-          h1= I18n.t('search.main_text' , type: type, count: Place.count_visible(city: current_city), city: current_city_plural(:name))
+          h1= I18n.t('search.main_text' , type: type, count: Place.count_visible(city: current_city), city: current_city_plural(:plural_name))
         form.shorten action=localization_link("search")
           = render :partial => 'shared/search_form'
         #view_switch
