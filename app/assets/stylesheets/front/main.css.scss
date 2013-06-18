@@ -293,7 +293,6 @@ input[type='submit']:hover {
   border-left: 1px solid #707070;
   border-right: 1px solid #707070;
   height: 29px;
-  overflow: hidden;
   margin: -5px 0 0 10px;
 }
 
@@ -309,7 +308,7 @@ input[type='submit']:hover {
   border: none;
   margin: 0;
   padding: 2px 9px;
-  width: 120px;
+  width: 146px;
 }
 
 #fixed .place_search form input:focus {

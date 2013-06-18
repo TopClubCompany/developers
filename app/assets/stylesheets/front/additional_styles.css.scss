@@ -140,6 +140,12 @@
   }
 }
 
+.place_search [id^=AutocompleteContainter] [class^=autocomplete-] {
+  top: 1px !important;
+  width: 192px;
+  left: -1px;
+}
+
 .span8#new_reserve_center {
   margin-left: 150px;
 }
