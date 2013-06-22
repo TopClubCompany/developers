@@ -1,6 +1,6 @@
 class SearchController < ApplicationController
 
-
+  before_filter :check_city
   before_filter :search, only: [:index, :show]
   before_filter :find_page, only: [:index, :show]
 
@@ -90,6 +90,10 @@ class SearchController < ApplicationController
       setting_meta_tags structure, {}
     end
 
+  end
+
+  def check_city
+    redirect_to root_path unless current_city
   end
 
 end
