@@ -71,7 +71,7 @@ module Topclub
     # parameters by using an attr_accessible or attr_protected declaration.
     # config.active_record.whitelist_attributes = true
     # back
-    config.assets.precompile += %w(admin/application.js jquery.ui.nestedSortable.js ckeditor/init.js)
+    config.assets.precompile += %w(admin/application.js jquery.ui.nestedSortable.js admin/components/permissions.js ckeditor/init.js)
 
     config.assets.precompile += %w(admin/application.css nested_set.css the_sortable_tree.css)
 
