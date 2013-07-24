@@ -61,7 +61,10 @@
           strong
             a href="#" class="btn create_account_now"= I18n.t('reservation.create_acc_now')
 
+
     #sidebar.span4.confirmed
+      - if current_city == "astrakhan"
+        img src="/img/topreserve_beloetaxi.jpg" style="border-bottom:20px solid #f2f0ea;" width="300" height="250"
       h3= I18n.t('reservation.i_go')
       ul
         li.view
@@ -75,7 +78,7 @@
         /li.invite
           a href="#"
             = I18n.t('reservation.invite_friends')
+
         .print_map
           img src="http://maps.googleapis.com/maps/api/staticmap?center=#{@place.lat_lng}&zoom=14&size=300x300&maptype=roadmap&sensor=false&markers=color:red%7Clabel:A%7C#{@place.lat_lng}"
-
 = render "reservations/user_popup" if @user
