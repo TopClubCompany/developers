@@ -2,7 +2,7 @@ class SendSmsJob
   @queue = :low
 
   def self.perform
-    time = DateTime.now + 12.hourse
+    time = DateTime.now + 12.hours
     Reservation.with_time(time).each do |reservation|
       reservation.is_sms_send = true
       self.send_sms(reservation)
