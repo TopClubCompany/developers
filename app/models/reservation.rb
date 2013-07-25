@@ -13,7 +13,7 @@ class Reservation < ActiveRecord::Base
   include Utils::Models::Base
   include Utils::Models::AdminAdds
 
-  scope :with_time, lambda{|time| where("time <= ? AND is_sms_send = ?", time, false)}
+  scope :with_time, lambda{ |time| where("time <= ? AND is_sms_send = ?", time, false)}
 
   enumerated_attribute :phone_code, :id_attribute => :phone_code_id, :class => ::PhoneCodeType
 
