@@ -1,10 +1,10 @@
 generate_autocomplete:
-  cron: "30 3 * * *"
+  cron: "30 4 * * *"
   class: GenerateAutocompleteJob
   queue: low
   description: "This generate autocomplete"
 elastic_indexer:
-  cron: "0 4 * * *"
+  cron: "0 5 * * *"
   class: ElasticIndexerJob
   queue: low
   description: "This update elastic index"
