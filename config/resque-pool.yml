@@ -7,4 +7,4 @@ development:
 staging:
   'critical,high,low': 1
 production:
-  'critical,high,low': 1
+  'critical,high,low': 4
