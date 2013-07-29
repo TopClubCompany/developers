@@ -142,7 +142,7 @@ class Users::OmniauthCallbacksController < ApplicationController
     html_email = html_email.gsub("{current_user}", user.title)
     html_email = html_email.gsub("{support_phone}", city.support_phone)
     html_email = html_email.gsub("{support_phone}", city.support_phone)
-    html_email = html_email.gsub("{сшен}", city.name)
+    html_email = html_email.gsub("{city}", city.name)
     if html_email.present?
       AccountMailer.registration_email(email, I18n.t('registration_subject'), html_email)
     end
