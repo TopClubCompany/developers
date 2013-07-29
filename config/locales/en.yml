@@ -1,5 +1,6 @@
 --- 
-en: 
+en:
+  registration_subject: "Registration Subject"
   First_name: Name
   Last_name: Last name
   account_confirm: Confirm my account

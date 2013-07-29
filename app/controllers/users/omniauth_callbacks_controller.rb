@@ -105,6 +105,7 @@ class Users::OmniauthCallbacksController < ApplicationController
   end
 
   def auth_user user
+    send_letter(user)
     session[:user_data] = nil
     sign_in user
     return_path = if session[:return_path].present?
@@ -132,6 +133,19 @@ class Users::OmniauthCallbacksController < ApplicationController
 
   def format_birthday(hash_date)
     3.times.map { |n| hash_date.delete("birthday(#{n + 1}i)") }.reverse.join('.')
+  end
+
+  def send_letter user
+    email = user.email
+    city =  City.find(current_city)
+    html_email = city.letter
+    html_email = html_email.gsub("{current_user}", user.title)
+    html_email = html_email.gsub("{support_phone}", city.support_phone)
+    html_email = html_email.gsub("{support_phone}", city.support_phone)
+    html_email = html_email.gsub("{сшен}", city.name)
+    if html_email.present?
+      AccountMailer.registration_email(email, I18n.t('registration_subject'), html_email)
+    end
   end
 
 end

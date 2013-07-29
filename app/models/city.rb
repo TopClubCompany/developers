@@ -7,7 +7,7 @@ class City < ActiveRecord::Base
 
   belongs_to :country
 
-  translates :name, :description, :plural_name
+  translates :name, :description, :plural_name, :city_translations
 
   include Utils::Models::Base
   include Utils::Models::Translations

@@ -1,5 +1,6 @@
 --- 
-ru: 
+ru:
+  registration_subject: "Registration Subject"
   First_name: "Имя"
   Last_name: "Фамилия"
   account_confirm: "Подтвердить мою учетную запись"
