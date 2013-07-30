@@ -23,4 +23,9 @@ class AccountMailer < ActionMailer::Base
     mail(to: email, subject: subject)
   end
 
+  def registration_email email, subject, text
+    @text = text
+    mail(to: email, subject: subject)
+  end
+
 end

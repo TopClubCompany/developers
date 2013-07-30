@@ -1,5 +1,6 @@
 --- 
-ua: 
+ua:
+  registration_subject: "Registration Subject"
   First_name: "Ім'я"
   Last_name: "Фамілія"
   account_confirm: "Підтвердити мій аккаунт"
