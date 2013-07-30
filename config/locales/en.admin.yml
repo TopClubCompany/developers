@@ -39,6 +39,9 @@ en:
         link: ""
         title: ""
       perms: 
+        assocs: 
+          city: ""
+          place: ""
         link: ""
         title: ""
       preview: 
@@ -55,21 +58,38 @@ en:
     avatar: ""
     batch_actions: ""
     bill: 
-      code: 
-        cheap: Cheap
-        moderate: Medium
-        spendy: Reasonable
-        splurge: Premium
-      image: 
-        cheap: $
-        moderate: $$
-        spendy: $$$
-        splurge: $$$$
-      kind: 
-        cheap: Under $10
-        moderate: $11 - $30
-        spendy: $31 - $60
-        splurge: over $61
+      astrakhan: 
+        code: 
+          cheap: ""
+          moderate: ""
+          spendy: ""
+          splurge: ""
+        image: 
+          cheap: ""
+          moderate: ""
+          spendy: ""
+          splurge: ""
+        kind: 
+          cheap: ""
+          moderate: ""
+          spendy: ""
+          splurge: ""
+      kyiv: 
+        code: 
+          cheap: ""
+          moderate: ""
+          spendy: ""
+          splurge: ""
+        image: 
+          cheap: ""
+          moderate: ""
+          spendy: ""
+          splurge: ""
+        kind: 
+          cheap: ""
+          moderate: ""
+          spendy: ""
+          splurge: ""
     cant_be_deleted: ""
     choose: ""
     clear_cache: ""
@@ -215,9 +235,11 @@ en:
         update: ""
       assocs: 
         catalogues: ""
+        city: ""
         company: ""
         group: ""
         groups: ""
+        place: ""
       form: 
         actions: ""
         add: ""
@@ -233,6 +255,10 @@ en:
         resource: ""
         resources: ""
         subject: ""
+    phone_code: 
+      kind: 
+        russia: ""
+        ukraine: ""
     photo: ""
     pictures: ""
     preview: ""

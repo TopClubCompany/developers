@@ -55,8 +55,8 @@ ru:
     merge: "Связать аккаунты"
     new_password: "Новый пароль"
     not_a_user: "Еще не зарегистрированы?"
-    not_login_points: "Стоимость резерва: бесплатно"
-    points: "Стоимость резерва: бесплатно"
+    not_login_points: "Услуга бесплатна"
+    points: "Услуга бесплатна"
     remember_me: "Запомнить"
     social: 
       sign_in_with: "Используя "
@@ -102,8 +102,7 @@ ru:
   currency: 
     unit: "грн."
   explore: 
-    index:
-      support: "Поддержка:"
+    index: 
       all: "Смотреть все ›"
       available: "Столики, доступные вечером"
       best: "Популярные рестораны"
@@ -111,11 +110,12 @@ ru:
       find_restorants: Find a restaurants
       how_it_works: "Как это работает?"
       main_slider_text: "Платите меньше в любимых ресторанах"
+      make_free_table: "Забронировать столик онлайн на:"
       new: "Новые рестораны"
       reserv_online: Reserve your table online for free
       save_up: Save up to 30% off all food and drinks
-      make_free_table: "Make a free table reservation at:"
-      second_big_text: "Выбирайте из более чем %{count} ресторанов %{city}а и экономьте до %{discount}% от вашего счета."
+      second_big_text: "Выбирайте из более чем %{count} ресторанов %{city} и экономьте до %{discount}% от вашего счета."
+      support: "Поддержка и заказ:"
   facebook: Facebook
   flash: 
     auth: 
@@ -198,7 +198,7 @@ ru:
     reservetion_table: "Подтвердить ваш резерв"
     review_for_place: "Все %{count} отзыв(а) о %{place}"
     share: "Поделиться"
-    up_to: "Скидка до %{discount}% на все меню<b></b>"
+    up_to: "Скидка -%{discount}% на все меню<b></b>"
     vailability: "Доступное время %{reserve_date} в районе %{reserve_time} для %{number_of_people} человек"
   profile: 
     birthday: "День рождения"
@@ -247,9 +247,9 @@ ru:
     book_edit_reservations: "Управляйте своими резервами"
     complete: "Подтвердить резерв"
     confirmation: "Подтверждение: #"
-    confirmed: "Ваш заказ подтверджен"
-    confirmed_text: Your reservation is confirmed and saved in the restaurant's computer reservation system. You'll receive an email copy of this confirmation.
-    create_acc_now: Create account now
+    confirmed: "Ваш заказ подтвержден"
+    confirmed_text: "Ваш резерв подтвержден и внесен в систему учета ресторана. Вы получите копию данного подтверждения на указанный e-mail адрес."
+    create_acc_now: "Зарегистрироваться"
     delete: "Удалить"
     diner_name: "Резерв на:"
     discount: This document guarantees your reservation and <strong>%{discount}% discount</strong> for your bill
@@ -288,20 +288,19 @@ ru:
       questions: "Возникли вопросы по поводу вашей брони? Вы всегда можете связаться с %{title} по номеру %{phone}. Также звоните на нашу горячую линию: <b> (044) 300-00-10</b>"
       special: "Спец. предложение:"
       thanks: "Спасибо что выбрали %{title}. Мы рады сообщить Вам о том, что Ваш резерв через сервис <b>TopReserve.com.ua</b> подтвержден. Если ваши планы поменяются и вы решите изменить время или отменить бронь, пожалуйста предупредите нас об этом. Ждем вас!"
-    rewards: "<p style=\"font-size:12px;\">С этой брони Вы получите <b>5 бонусов ≈ 5 грн.</b><br>\r\n\
-      При первой брони у нас Вы получите ещё <b>50 бонусов ≈ 50 грн.</b> Прочитать <a href=\"javascript: void(0);\" class=\"popoverable\"  data-html=\"true\" data-content=\"<span style='font-size:12px;'>С каждой брони столика в любом ресторане у нас на сайте, Вы получаете бонусы TopReserve в размере 5.\r\n\
+    rewards: "<p style=\"font-size:12px;\">С этой брони Вы получите <b>5 бонусов ≈ 0,5 $</b><br>\r\n\
+      При первой брони у нас Вы получите ещё <b>50 бонусов ≈ 5 $</b> Прочитать <a href=\"javascript: void(0);\" class=\"popoverable\"  data-html=\"true\" data-content=\"<span style='font-size:12px;'>С каждой брони столика в любом ресторане у нас на сайте, Вы получаете бонусы TopReserve в размере 5.\r\n\
       <br><br>\r\n\
-      Используйте бонусы для обмена на сертификаты в любимые рестораны. Для первого использования вам необходимо накопить 100 бонусов (≈100 грн.).\r\n\
+      Используйте бонусы для обмена на сертификаты в любимые рестораны. Для первого использования вам необходимо накопить 100 бонусов (≈10 $).\r\n\
       <br><br>\r\n\
       Бонусы нельзя передавать другому пользователю, нельзя суммировать и дарить. При отмене брони, начисленные за нее бонусы аннулируются. </span>\" data-placement=\"bottom\" data-title=\"<b>Бонусы TopReserve</b>\" data-trigger=\"click\" data-original-title=\"\">подробнее о бонусах TopReserve</a>.</p>\r\n\
       <p style=\"font-size:12px;\">Собрав <b>100 бонусов</b> и более, вы сможете обменять их на <b>бесплатный ужин</b> в любимом ресторане.</p>"
-    rewards_not_auth: "<p style=\"font-size:12px;\">С этой брони Вы получите <b>5 бонусов ≈ 5 грн.</b><br>\r\n\
-      При первой брони у нас Вы получите ещё <b>50 бонусов ≈ 50 грн.</b> Прочитать <a href=\"javascript: void(0);\" class=\"popoverable\"  data-html=\"true\" data-content=\"<span style='font-size:12px;'>С каждой брони столика в любом ресторане у нас на сайте, Вы получаете бонусы TopReserve в размере 5.\r\n\
+    rewards_not_auth: "<p style=\"font-size:12px;\">С этой брони Вы получите <b>5 бонусов ≈ 0,5 $</b><br>\r\n\
+      При первой брони у нас Вы получите ещё <b>50 бонусов ≈ 5 $</b> Прочитать <a href=\"javascript: void(0);\" class=\"popoverable\"  data-html=\"true\" data-content=\"<span style='font-size:12px;'>С каждой брони столика в любом ресторане у нас на сайте, Вы получаете бонусы TopReserve в размере 5.\r\n\
       <br><br>\r\n\
-      Используйте бонусы для обмена на сертификаты в любимые рестораны. Для первого использования вам необходимо накопить 100 бонусов (≈100 грн.).\r\n\
+      Используйте бонусы для обмена на сертификаты в любимые рестораны. Для первого использования вам необходимо накопить 100 бонусов (≈10 $).\r\n\
       <br><br>\r\n\
-      Бонусы нельзя передавать другому пользователю, нельзя суммировать и дарить. При отмене брони, начисленные за нее бонусы аннулируются. </span>\" data-placement=\"bottom\" data-title=\"<b>Бонусы TopReserve</b>\" data-trigger=\"click\" data-original-title=\"\">подробнее о бонусах TopReserve</a>.<br><br>\r\n\
-      Если вы ранее бронировали столики на <b>TopReserve</b>, то для суммирования бонусов, пожалуйста <a href=\"/users/sign_in\">авторизуйтесь сейчас</a>.</p>\r\n\
+      Бонусы нельзя передавать другому пользователю, нельзя суммировать и дарить. При отмене брони, начисленные за нее бонусы аннулируются. </span>\" data-placement=\"bottom\" data-title=\"<b>Бонусы TopReserve</b>\" data-trigger=\"click\" data-original-title=\"\">подробнее о бонусах TopReserve</a>.</p>\r\n\
       <p style=\"font-size:12px;\">Собрав <b>100 бонусов</b> и более, вы сможете обменять их на <b>бесплатный ужин</b> в любимом ресторане.</p>"
     special_offers: "Спец. предложение:"
     view_on_map: "Показать ресторан на карте"
@@ -314,12 +313,12 @@ ru:
     category: "Категория"
     current_opened: "Доступные сейчас"
     filters: "Фильтры:"
-    find_a_table: "Искать ✓"
+    find_a_table: "Найти"
     grid_view: Grid view
     kitchen: "Кухня"
     load: "Грузим самые свежие результаты"
     location: "Местоположение"
-    main_text: "Бесплатный резерв столика в %{count} %{type} %{city}а"
+    main_text: "Бесплатный резерв столика в %{count} %{type} %{city}"
     map_view: Map view
     more: "еще >"
     next: "след. ›"
@@ -338,7 +337,7 @@ ru:
     thead: 
       th1: "Ресторан"
       th2: "Нажмите на время для резерва"
-    title_or_location: "название, адрес (необязательно)"
+    title_or_location: "Название, адрес..."
   share: 
     description: "Бесплатный заказ столика со скидкой до 50% на все меню на TopReserve"
   short_strings: 

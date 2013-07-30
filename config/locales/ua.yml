@@ -79,8 +79,12 @@ ua:
     main: "Головна"
     profile: "Профіль"
     search: "Пошук"
+    you_reserve: ""
   ceo: 
     main: ""
+  choose_city: 
+    bron_text: ""
+    hello: ""
   city: "місто"
   closed: "Зачинено"
   comments: 
@@ -106,10 +110,12 @@ ua:
       find_restorants: "Знайти ресторан"
       how_it_works: "Як це працює?"
       main_slider_text: "Відкрийте для себе кращі ресторани та економте гроші"
+      make_free_table: "Забронювати столик онлайн на:"
       new: "Нові місця"
       reserv_online: "Забронюйте столик онлайн безкоштовно"
       save_up: "Збережіть до 30% від чеку на кухню та напої"
       second_big_text: "Оберіть один із %{count} ресторанів у %{city} і зекономте до %{discount}% від загального чеку"
+      support: "Підтримка та замовлення:"
   facebook: Facebook
   flash: 
     auth: 
@@ -143,6 +149,11 @@ ua:
         typeError: "{file} має некоректне розширення. Дозволені наступни розширення файлів: {extensions}."
   google: Google
   head: "Резерв столів онлайн. Безкоштовно · Зі знижкою"
+  head_points: 
+    bonuses: ""
+    collected: ""
+    top: ""
+    you: ""
   hello: "Вітаємо"
   label: 
     close: "Закрити"
@@ -290,7 +301,7 @@ ua:
     category: "Категорія"
     current_opened: "Відкритий зараз"
     filters: "Фільтри:"
-    find_a_table: "Знайти стіл"
+    find_a_table: "Знайти"
     grid_view: "Списком"
     kitchen: "Кухня"
     load: "Завантажуємо результати пошуку"
@@ -360,6 +371,7 @@ ua:
   simple_form: 
     error_notification: 
       default_message: "При збереженні виникли помилки"
+  sms_text: ""
   sort_by: 
     date: "даті"
     overall_mark: "загальній оцінці"

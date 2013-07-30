@@ -79,8 +79,12 @@ en:
     main: Main
     profile: Profile
     search: Search
+    you_reserve: ""
   ceo: 
     main: <div id="page_description"><h1 style="text-transform:uppercase;">Restaurant reservations (booking) Kyiv</h1><p>Make <strong>online restaurant reservations</strong>, pay lower prices, read restaurant reviews, earn points towards free meals. <strong>TopReserve</strong> is a real-time online reservation service for fine dining restaurants.</p><p>More than <a href="http://topreserve.com.ua/en/search">100 restaurants in Kyiv</a>. Book a table online at <a href="http://topreserve.com.ua/en/search/restaurants">restaurants</a>, <a href="http://topreserve.com.ua/en/search/sushi">sushi</a>, <a href="http://topreserve.com.ua/en/search/bars-pubs">bars</a>, <a href="http://topreserve.com.ua/en/search/pizza">pizza</a>, <a href="http://topreserve.com.ua/en/search/night">night clubs</a>, <a href="http://topreserve.com.ua/en/search/karaoke">karaoke</a> and <a href="http://topreserve.com.ua/en/search/cafe">cafes.</a></p></div>
+  choose_city: 
+    bron_text: ""
+    hello: ""
   city: city
   closed: Closed
   comments: 
@@ -106,10 +110,12 @@ en:
       find_restorants: Find a restaurants
       how_it_works: How it works?
       main_slider_text: Find a perfect restaurant and pay lower prices.
+      make_free_table: "Make a free table reservation at:"
       new: New restaurants
       reserv_online: Reserve your table online for free
       save_up: Save up to 30% off all food and drinks
       second_big_text: Select one of %{count} restaurants in %{city} and save up to %{discount}% off your total bill.
+      support: "Support:"
   facebook: Facebook
   flash: 
     auth: 
@@ -143,6 +149,11 @@ en:
         typeError: ""
   google: Google
   head: "Restaurant Reservations. Free · Fat · Instant"
+  head_points: 
+    bonuses: ""
+    collected: ""
+    top: ""
+    you: ""
   hello: Hello
   label: 
     close: Close
@@ -290,7 +301,7 @@ en:
     category: Category
     current_opened: Currently opened
     filters: "Filters:"
-    find_a_table: Find a table
+    find_a_table: Find table
     grid_view: Grid view
     kitchen: Cuisine
     load: Loading results
@@ -360,6 +371,7 @@ en:
   simple_form: 
     error_notification: 
       default_message: ""
+  sms_text: ""
   sort_by: 
     date: date
     overall_mark: overall mark
