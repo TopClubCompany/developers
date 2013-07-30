@@ -115,7 +115,7 @@ en:
       reserv_online: Reserve your table online for free
       save_up: Save up to 30% off all food and drinks
       second_big_text: Select one of %{count} restaurants in %{city} and save up to %{discount}% off your total bill.
-      more_main: "Show more"
+      more_main: Show more
       support: "Support:"
   facebook: Facebook
   flash: 

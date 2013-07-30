@@ -54,7 +54,7 @@
             - if place_batch.size == 0 and place_batch.size 
               h2 Nothing here today, sorry.
             - elsif place_batch.size == 6
-              a.load_more data-clear="true" data-type=places_id.to_s data-displayed=place_batch.size href="#"= t(".more_main")
+              a.load_more data-clear="true" data-type=places_id.to_s data-displayed=place_batch.size href="#"= I18n.t("explore.index.more_main")
               
 .content
   .row
