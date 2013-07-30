@@ -1,6 +1,5 @@
 --- 
-ru:
-  registration_subject: "Registration Subject"
+ru: 
   First_name: "Имя"
   Last_name: "Фамилия"
   account_confirm: "Подтвердить мою учетную запись"
@@ -112,11 +111,11 @@ ru:
       how_it_works: "Как это работает?"
       main_slider_text: "Платите меньше в любимых ресторанах"
       make_free_table: "Забронировать столик онлайн на:"
+      more_main: "Загрузить еще"
       new: "Новые рестораны"
       reserv_online: Reserve your table online for free
       save_up: Save up to 30% off all food and drinks
       second_big_text: "Выбирайте из более чем %{count} ресторанов %{city} и экономьте до %{discount}% от вашего счета."
-      more_main: Show more
       support: "Поддержка и заказ:"
   facebook: Facebook
   flash: 
@@ -242,6 +241,7 @@ ru:
     view_edit: "Детали"
   registration_form: 
     or: " или "
+  registration_subject: Registration Subject
   reservation: 
     address: "Адрес:"
     at: "в"
