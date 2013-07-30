@@ -1,0 +1,447 @@
+--- 
+en: 
+  First_name: Name
+  Last_name: Last name
+  account_confirm: Confirm my account
+  activerecord: 
+    attributes: 
+      user: 
+        password: Password
+        password_confirmation: Password confirmation
+        remember_me: Remember me
+  admin: 
+    gender: 
+      gender: Gender
+  auth: 
+    change_my_password: Change my password
+    change_password: Change password
+    confirm_you_password: Confirm your password
+    edit_passwords: 
+      confirm_new_password: Confirm your password
+      new_password: New password
+    enter: Sign in
+    enter_with: "Sign in using:"
+    links: 
+      join_reserve: Join TopReserve
+      receive_confirmation: ""
+      recover_password: Forgot password?
+      sign_in: Sign in
+      sign_out: Sign out
+      sign_up: Become a member
+    links_short: 
+      cabinet: Cabinet
+      sign_in: Sign in
+      sign_out: Sign out
+      sign_up: Sign up
+    logout: Logout
+    mailer: 
+      confirmation: 
+        after_notes: ""
+        body: ""
+        confirm_link: ""
+        confirm_notes: ""
+        title: ""
+      passwords: 
+        after_notes: ""
+        body: ""
+        confirm_link: ""
+        confirm_notes: ""
+        title: ""
+      welcome: 
+        after_notes: ""
+        body: ""
+        subject: ""
+        title: ""
+    merge: Merge my accounts
+    new_password: New password
+    not_a_user: Not yet a member?
+    not_login_points: ""
+    points: 5 points for this reservation.
+    remember_me: Remember me
+    social: 
+      sign_in_with: Sign in with
+    submit: 
+      change_password: Change password
+      receive_confirmation: Receive confirmation
+      recover_password: Recover password
+      sign_in: Sign in
+      sign_out: Sign out
+      sign_up: Sign up
+    successfully_sing_in: Successfully sign in
+    title: 
+      change_password: Change password
+      receive_confirmation: ""
+      recover_password: Forgot password?
+      sign_in: Sign in
+      sign_out: Sign out
+      sign_up: Sign up
+  breadcrumbs: 
+    main: Main
+    profile: Profile
+    search: Search
+    you_reserve: ""
+  ceo: 
+    main: <div id="page_description"><h1 style="text-transform:uppercase;">Restaurant reservations (booking) Kyiv</h1><p>Make <strong>online restaurant reservations</strong>, pay lower prices, read restaurant reviews, earn points towards free meals. <strong>TopReserve</strong> is a real-time online reservation service for fine dining restaurants.</p><p>More than <a href="http://topreserve.com.ua/en/search">100 restaurants in Kyiv</a>. Book a table online at <a href="http://topreserve.com.ua/en/search/restaurants">restaurants</a>, <a href="http://topreserve.com.ua/en/search/sushi">sushi</a>, <a href="http://topreserve.com.ua/en/search/bars-pubs">bars</a>, <a href="http://topreserve.com.ua/en/search/pizza">pizza</a>, <a href="http://topreserve.com.ua/en/search/night">night clubs</a>, <a href="http://topreserve.com.ua/en/search/karaoke">karaoke</a> and <a href="http://topreserve.com.ua/en/search/cafe">cafes.</a></p></div>
+  choose_city: 
+    bron_text: ""
+    hello: ""
+  city: city
+  closed: Closed
+  comments: 
+    add_comment: ""
+    comment: ""
+    confirm_delete: ""
+    create: ""
+    delete_comment: ""
+    edit_comment: ""
+  confirm_message: "You can confirm your account email through the link below:"
+  confirmation_resend: Resend confirmation instructions
+  cooperation: 
+    error: ""
+    notice: ""
+  currency: 
+    unit: UAH
+  explore: 
+    index: 
+      all: "Browse all ›"
+      available: Available tonight
+      best: Best restaurants
+      best_restaurants: Best restaurants
+      find_restorants: Find a restaurants
+      how_it_works: How it works?
+      main_slider_text: Find a perfect restaurant and pay lower prices.
+      make_free_table: "Make a free table reservation at:"
+      new: New restaurants
+      reserv_online: Reserve your table online for free
+      save_up: Save up to 30% off all food and drinks
+      second_big_text: Select one of %{count} restaurants in %{city} and save up to %{discount}% off your total bill.
+      support: "Support:"
+  facebook: Facebook
+  flash: 
+    auth: 
+      failure: ""
+      logout: ""
+      success: Successfully logged in
+      success_again: ""
+    users: 
+      update: 
+        error: ""
+        notice: ""
+  footer: 
+    become_a_prtner: Become a partner!
+    copy: " &copy; Topreserve, 2013. - "
+    earn_point: Earn points and get discounts!
+    need_clients: Need more clients?
+    privacy_police: Privacy Policy
+    terms_of_service: Terms of Service
+  forgot_password: 
+    description: ""
+    reset_pass: Reset password
+  front_js: 
+    comments: 
+      chat_title: ""
+    fileupload: 
+      messages: 
+        emptyError: ""
+        minSizeError: ""
+        onLeave: ""
+        sizeError: ""
+        typeError: ""
+  google: Google
+  head: "Restaurant Reservations. Free · Fat · Instant"
+  head_points: 
+    bonuses: ""
+    collected: ""
+    top: ""
+    you: ""
+  hello: Hello
+  label: 
+    close: Close
+  langs: 
+    en: eng
+    ru: rus
+    uk: uk
+  language_title: 
+    en: English
+    ru: "Русский"
+    ua: "Украинский"
+  like_place: I like this place
+  links: 
+    en: eng
+    ru: "рус"
+    uk: "укр"
+  lock_message: Your account has been locked due to an excessive amount of unsuccessful sign in attempts.
+  long_strings: 
+    review_placeholder: Have you been here? Tell us your story about dinner at this place!
+  message_fraud: If you didn't request this, please ignore this email.
+  message_reset: Someone has requested a link to change your password, and you can do this through the link below.
+  message_unlock: "Click the link below to unlock your account:"
+  message_wont_change: Your password won't change until you access the link above and create a new one.
+  open: Opened
+  order: "[:day, :month, :year]"
+  password_change_mesage: Change my password
+  place: 
+    add_comment: Add a comment...
+    average_bill: Avarage check
+    back_to_search: Back to search
+    is: from
+    phone: ""
+    promo: 
+      date_people: ""
+      detail: ""
+      how_reserve_table: ""
+      input_your_data: ""
+      press_button: ""
+      press_time_reserve: ""
+      sevice_confirmation_real_time: ""
+      time_to_reserve: ""
+    reservetion_table: Reserve
+    review_for_place: All %{count} review(s) for %{place}
+    share: Share
+    up_to: Up to %{discount}% off your bill
+    vailability: Availability on %{reserve_date} around %{reserve_time} for %{number_of_people} people
+  profile: 
+    birthday: Birthday
+    city_not_specified: not specified
+    date: Date
+    edit: edit
+    first_name: First name
+    gourmand: GOURMAND
+    last_name: Last name
+    my_favourites: My Favourites
+    my_reviews: My reviews
+    no_reservation: You havent reserved any restaurant yet
+    no_reviews: You havent left any review yet
+    nothing_favourites: Nothing here. You should eat out. Then come and like the place.
+    notifications: Notifications
+    personal_information: Personal Information
+    private_for_email: Private. For E-mail notifications about your reservations. only
+    private_for_sms: Private. For SMS notifications about your reservations only
+    private_statistics: Private. This data is confidential and used for statistics only
+    read_all_reviews: Read all reviews
+    read_more: "read more ›"
+    save_changes: Save changes
+    send_email: Send email
+    settings: Settings
+    social: 
+      connect_social_accounts: Connect social accounts
+      connected: Your %{account} is connected
+      disconnect: Disconnect
+      facebook: ""
+      small_facebook: ""
+      small_twitter: ""
+      small_vk: ""
+      twitter: ""
+      vk: ""
+    time: Time
+    upcoming: Upcoming reservations
+    username: Username
+    view_all_reservations: View all reservations
+    view_edit: View / Edit
+  registration_form: 
+    or: " or "
+  reservation: 
+    address: "Address:"
+    at: at
+    auth_text: Sign in
+    book_edit_reservations: Book, edit, cancel your future reservations
+    complete: Complete reservation
+    confirmation: "Confirmation #:"
+    confirmed: Your reservation is confirmed
+    confirmed_text: Your reservation is confirmed and saved in the restaurant's computer reservation system. You'll receive an email copy of this confirmation.
+    create_acc_now: Create account now
+    delete: Delete
+    diner_name: Diner name
+    discount: This document guarantees your reservation and <strong>%{discount}% discount</strong> for your bill
+    dress_code: Dress code
+    edit: Edit
+    edit_with_place: Edit your reservation at %{place}
+    for: for
+    get_updates: Get email news and updates, best discounts
+    i_go: What next?
+    invite_friends: Invite friends
+    join_top_reserv: Join TopReserve
+    make_a_list: Make a list of your favorite places for quicker orders
+    message_from_restoran: "Message from restaurant:"
+    more_info: "More info:"
+    new_reservation: 
+      complete_reservation: Complete your reservation
+    no_such_reservation: no such reservation
+    people: 
+      one: 1 person
+      other: "%{count} people"
+    phone: "Phone:"
+    popup: 
+      auth_text: Add a password to get a free TopReserve account where you can create and manage your bookings online, and start earning TopPoints towards free meals!
+      clicking_text: "By clicking “Create account” you confirm that you accept terms and conditions."
+      create_password: Create a password <br/>
+      errors_user_crate: "Ошибка при создания юзера, пароль должен быть больше 5 символов и совпадать с подтвердженным"
+      nothankyou: No, thank you
+      re_enter_pass: Re-enter a password<br>
+      subscribe: Subscribe me for TopReserve news and updates
+      sumbit_value: Create account
+      thanks: Thank you, %{name}
+    print: Print details
+    print_method: 
+      notes: "Special notes:"
+      place_name: "Restaurant name: "
+      questions: ""
+      special: "Special offer:"
+      thanks: ""
+    rewards: All members get rewards for online reservations!
+    rewards_not_auth: <p>All members get rewards for online reservations!<p>
+    special_offers: "Special offer:"
+    view_on_map: View restaurant on map
+    view_or_change: View or change your reservation
+  review: 
+    one: review
+    other: reviews
+  search: 
+    browse_category: Browse places by category
+    category: Category
+    current_opened: Currently opened
+    filters: "Filters:"
+    find_a_table: Find table
+    grid_view: Grid view
+    kitchen: Cuisine
+    load: Loading results
+    location: Location
+    main_text: Free reservations at %{count} %{type} in %{city}
+    map_view: Map view
+    more: more >
+    next: "next ›"
+    number_of_people: Number of people
+    people: people
+    price: Price Range
+    refine: Refine your results
+    restorans: restorans
+    result_for: Results for
+    sort: 
+      discount: ""
+      newest: Show newest
+      overall_mark: Show popular
+    sort_labeled: Sort by
+    special_offers: "Special offers:"
+    thead: 
+      th1: Restaurant
+      th2: Availability (click time to reserve)
+    title_or_location: title or location
+  share: 
+    description: Up to 50% off free restaurant reservations - reviews, price, map
+  short_strings: 
+    add_to_favorites: Add to <br> favorite
+    edit_reservation: Edit reservation
+    edit_your_reservation: Edit your reservation
+    few_words: A few words from
+    first_name: First name
+    invite_friends: Invite friends
+    last_name: Last name
+    more_detalis: "More detalis ›"
+    my_reservations: My Reservations
+    number_of_people: Number of people
+    phone_number: Phone number
+    print_this_page: Print this page
+    remove_from_favorites: Remove from favourites
+    reserve_at: Reserve a table online
+    share_on: Share on
+    share_with_friends: Share with friends
+    sort_by: Sort by
+    special_notes: Special notes
+    special_offers: Special offers from
+    submit_a_review: "submit a review:"
+    submit_review: Submit review
+    view_menu: "View menu ›"
+    view_your_reservation: View your reservation
+    write_review: Write a review
+  sign_in: 
+    forgot_pass: Forgot pass?
+  sign_up: 
+    become_member: Become a member
+    by_click: "By clicking “Join” you confirm that you accept"
+    diner_name: Diner name
+    earn_points: Earn points
+    for_successful_reservations: for succesfull reservations!
+    name: Name
+    profile_photo: Profile photo
+    sign_in: Sign in
+    sign_in_acc: Sign in
+    sign_up_and: Sign up and
+    sign_up_or: " or"
+    term_cond: Terms and conditions
+  simple_form: 
+    error_notification: 
+      default_message: ""
+  sms_text: ""
+  sort_by: 
+    date: date
+    overall_mark: overall mark
+    usefulness_count: usefulness count
+  styles: 
+    show: 
+      about: Description
+  time: 
+    am: AM
+    formats: 
+      datepicker: "%d-%m-%Y"
+      day: "%d"
+      day_name: "%A"
+      dm: "%d.%m"
+      hour_min: "%H:%M %p"
+      long: "%d-%m-%Y"
+      month: "%B"
+      year: "%Y"
+      ymd: "%d %B %Y"
+    pm: PM
+  twitter: Twitter
+  unauthorized: 
+    default: Unauthorized
+  unlock: Unlock my account
+  update: Update
+  uploader: 
+    add_file: Add file
+    max_size: Max size
+    upload: Upload
+    upload_avatar: Upload avatar
+    upload_image: Upload image
+  user_sidebar: 
+    account: My account
+    diner_style: Diner style
+    edit_settings: Settings
+    favourites: My favourites
+    h3_link: Admin
+    invite_friends: Invite friends
+    reservations: My reservations
+    reviews: My reviews
+    self_reviews: My reviews
+    settings: Settings
+    top_points: TOP points
+    view_places: View places
+    view_reservations: View reservations
+  views: 
+    pagination: 
+      first: First
+      last: Last
+      next: Next &raquo;
+      previous: "&laquo; Previous"
+      truncate: ...
+  vk: Vkontakte
+  welcome: Welcome
+  words: 
+    cancel: cancel
+    date: date
+    edit: edit
+    email: email
+    expand: expand
+    helpful: helpful
+    invite: invite
+    kitchen: cuisine
+    location: Location
+    menu: Menu
+    new_reservation: Reserve a table
+    overall: overall
+    reviews: reviews
+    roll_up: roll up
+    time: time
+    unhelpful: unhelpful
+    view: view
+  your_email: Your email
