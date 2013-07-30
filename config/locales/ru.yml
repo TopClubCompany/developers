@@ -116,6 +116,7 @@ ru:
       reserv_online: Reserve your table online for free
       save_up: Save up to 30% off all food and drinks
       second_big_text: "Выбирайте из более чем %{count} ресторанов %{city} и экономьте до %{discount}% от вашего счета."
+      more_main: Show more
       support: "Поддержка и заказ:"
   facebook: Facebook
   flash: 

@@ -116,6 +116,7 @@ ua:
       reserv_online: "Забронюйте столик онлайн безкоштовно"
       save_up: "Збережіть до 30% від чеку на кухню та напої"
       second_big_text: "Оберіть один із %{count} ресторанів у %{city} і зекономте до %{discount}% від загального чеку"
+      more_main: Show more
       support: "Підтримка та замовлення:"
   facebook: Facebook
   flash: 
