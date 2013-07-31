@@ -1,13 +1,13 @@
 class City < ActiveRecord::Base
 
-  attr_accessible :is_visible, :position, :name, :description, :plural_name, :country_id, :latitude, :longitude,
+  attr_accessible :is_visible, :position, :name, :letter, :description, :plural_name, :country_id, :latitude, :longitude,
                   :phone_code, :support_phone
 
   has_many :users
 
   belongs_to :country
 
-  translates :name, :description, :plural_name, :city_translations
+  translates :name, :description, :plural_name, :letter
 
   include Utils::Models::Base
   include Utils::Models::Translations
