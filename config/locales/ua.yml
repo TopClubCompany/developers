@@ -1,6 +1,5 @@
 --- 
-ua:
-  registration_subject: "Registration Subject"
+ua: 
   First_name: "Ім'я"
   Last_name: "Фамілія"
   account_confirm: "Підтвердити мій аккаунт"
@@ -80,8 +79,12 @@ ua:
     main: "Головна"
     profile: "Профіль"
     search: "Пошук"
+    you_reserve: ""
   ceo: 
     main: ""
+  choose_city: 
+    bron_text: ""
+    hello: ""
   city: "місто"
   closed: "Зачинено"
   comments: 
@@ -107,10 +110,13 @@ ua:
       find_restorants: "Знайти ресторан"
       how_it_works: "Як це працює?"
       main_slider_text: "Відкрийте для себе кращі ресторани та економте гроші"
+      make_free_table: "Забронювати столик онлайн на:"
+      more_main: "Показати більше"
       new: "Нові місця"
       reserv_online: "Забронюйте столик онлайн безкоштовно"
       save_up: "Збережіть до 30% від чеку на кухню та напої"
       second_big_text: "Оберіть один із %{count} ресторанів у %{city} і зекономте до %{discount}% від загального чеку"
+      support: "Підтримка та замовлення:"
   facebook: Facebook
   flash: 
     auth: 
@@ -144,6 +150,11 @@ ua:
         typeError: "{file} має некоректне розширення. Дозволені наступни розширення файлів: {extensions}."
   google: Google
   head: "Резерв столів онлайн. Безкоштовно · Зі знижкою"
+  head_points: 
+    bonuses: ""
+    collected: ""
+    top: ""
+    you: ""
   hello: "Вітаємо"
   label: 
     close: "Закрити"
@@ -188,7 +199,7 @@ ua:
     reservetion_table: "Забронювати стіл"
     review_for_place: "Відгуків для %{place}: %{count}"
     share: "Поділитись"
-    up_to: "Знижка до %{discount}%"
+    up_to: "Знижка до %{discount}% на все меню"
     vailability: "Доступно для бронювання %{reserve_date} близько %{reserve_time} для %{number_of_people} персон"
   profile: 
     birthday: "День народження"
@@ -230,6 +241,7 @@ ua:
     view_edit: "Деталі"
   registration_form: 
     or: " або "
+  registration_subject: Registration Subject
   reservation: 
     address: "Адреса:"
     at: "в"
@@ -291,7 +303,7 @@ ua:
     category: "Категорія"
     current_opened: "Відкритий зараз"
     filters: "Фільтри:"
-    find_a_table: "Знайти стіл"
+    find_a_table: "Знайти"
     grid_view: "Списком"
     kitchen: "Кухня"
     load: "Завантажуємо результати пошуку"
@@ -332,7 +344,7 @@ ua:
     phone_number: "Номер телефону"
     print_this_page: "Роздрукувати деталі"
     remove_from_favorites: "Видалити з обраного"
-    reserve_at: "Забронювати у"
+    reserve_at: "Забронювати столик"
     share_on: "Поділитись у"
     share_with_friends: "Поділитись з друзями"
     sort_by: "Сортувати по"
@@ -361,6 +373,7 @@ ua:
   simple_form: 
     error_notification: 
       default_message: "При збереженні виникли помилки"
+  sms_text: ""
   sort_by: 
     date: "даті"
     overall_mark: "загальній оцінці"

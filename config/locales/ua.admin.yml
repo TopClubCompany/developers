@@ -39,6 +39,9 @@ ua:
         link: "Створити"
         title: "Створення"
       perms: 
+        assocs: 
+          city: ""
+          place: ""
         link: "Права"
         title: "Редагування прав доступу"
       preview: 
@@ -55,21 +58,38 @@ ua:
     avatar: "Аватар"
     batch_actions: "Дії"
     bill: 
-      code: 
-        cheap: "Недорогий"
-        moderate: "Середній"
-        spendy: "Помірний"
-        splurge: "Преміум"
-      image: 
-        cheap: $
-        moderate: $$
-        spendy: $$$
-        splurge: $$$$
-      kind: 
-        cheap: "до 100 грн."
-        moderate: "100 - 200 грн."
-        spendy: "200 - 500 грн."
-        splurge: "более 500 грн."
+      astrakhan: 
+        code: 
+          cheap: ""
+          moderate: ""
+          spendy: ""
+          splurge: ""
+        image: 
+          cheap: ""
+          moderate: ""
+          spendy: ""
+          splurge: ""
+        kind: 
+          cheap: ""
+          moderate: ""
+          spendy: ""
+          splurge: ""
+      kyiv: 
+        code: 
+          cheap: ""
+          moderate: ""
+          spendy: ""
+          splurge: ""
+        image: 
+          cheap: ""
+          moderate: ""
+          spendy: ""
+          splurge: ""
+        kind: 
+          cheap: ""
+          moderate: ""
+          spendy: ""
+          splurge: ""
     cant_be_deleted: "Видалення неможливе"
     choose: "Оберіть %{attr}"
     clear_cache: "Очистити кеш"
@@ -215,9 +235,11 @@ ua:
         update: ""
       assocs: 
         catalogues: ""
+        city: ""
         company: ""
         group: ""
         groups: ""
+        place: ""
       form: 
         actions: ""
         add: ""
@@ -233,6 +255,10 @@ ua:
         resource: ""
         resources: ""
         subject: ""
+    phone_code: 
+      kind: 
+        russia: ""
+        ukraine: ""
     photo: ""
     pictures: ""
     preview: ""
