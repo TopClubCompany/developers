@@ -144,7 +144,7 @@ class Users::OmniauthCallbacksController < ApplicationController
       html_email = html_email.gsub("{support_phone}", city.support_phone)
       html_email = html_email.gsub("{support_phone}", city.support_phone)
       html_email = html_email.gsub("{city}", city.name)
-      AccountMailer.registration_email(email, I18n.t('registration_subject'), html_email)
+      AccountMailer.registration_email(email, I18n.t('registration_subject'), html_email).deliver
     end
   end
 
