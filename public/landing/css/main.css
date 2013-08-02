@@ -2664,22 +2664,22 @@ h4 .discount_label {
 
 
 
-#index #browse_by_category {
+#browse_by_category {
 	width: 940px;
 	margin: 0 0 40px 0;
 }
 
-#index #browse_by_category h6 {
+#browse_by_category h6 {
 	font-size: 18px;
 	color: #333;
 }
 
-#index #browse_by_category ul {
+#browse_by_category ul {
 	display: block;
 	width: 960px;
 }
 
-#index #browse_by_category li {
+#browse_by_category li {
 	display: block;
 	float: left;
 	width: 100px;
@@ -2689,7 +2689,7 @@ h4 .discount_label {
 	font-size: 12px;
 }
 
-#index #browse_by_category li .cat_icon {
+#browse_by_category li .cat_icon {
 	display: block;
 	width: 100px;
 	height: 100px;
@@ -2699,7 +2699,7 @@ h4 .discount_label {
 	position: relative;
 }
 
-#index #browse_by_category li .cat_icon b {
+#browse_by_category li .cat_icon b {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -2720,27 +2720,27 @@ h4 .discount_label {
 	background-repeat: no-repeat;
 }
 
-#index #browse_by_category li:hover .cat_icon b {
+#browse_by_category li:hover .cat_icon b {
 	display: none;
 }
 
-#index #browse_by_category li#coffee .cat_icon { background-position: 0 0; }
-#index #browse_by_category li#bars_and_pubs .cat_icon { background-position: -120px 0; }
-#index #browse_by_category li#pizza .cat_icon { background-position: -240px 0; }
-#index #browse_by_category li#sushi .cat_icon { background-position: -360px 0; }
-#index #browse_by_category li#cafe .cat_icon { background-position: -480px 0; }
-#index #browse_by_category li#restaurants .cat_icon { background-position: -600px 0; }
-#index #browse_by_category li#night_clubs .cat_icon { background-position: -720px 0; }
-#index #browse_by_category li#karaoke .cat_icon { background-position: -840px 0; }
+#browse_by_category li#coffee .cat_icon { background-position: 0 0; }
+#browse_by_category li#bars_and_pubs .cat_icon { background-position: -120px 0; }
+#browse_by_category li#pizza .cat_icon { background-position: -240px 0; }
+#browse_by_category li#sushi .cat_icon { background-position: -360px 0; }
+#browse_by_category li#cafe .cat_icon { background-position: -480px 0; }
+#browse_by_category li#restaurants .cat_icon { background-position: -600px 0; }
+#browse_by_category li#night_clubs .cat_icon { background-position: -720px 0; }
+#browse_by_category li#karaoke .cat_icon { background-position: -840px 0; }
 
-#index #browse_by_category li#coffee .cat_icon b { background-position: 24px 17px; }
-#index #browse_by_category li#bars_and_pubs .cat_icon b { background-position: -94px 17px; }
-#index #browse_by_category li#pizza .cat_icon b { background-position: -215px 17px; }
-#index #browse_by_category li#sushi .cat_icon b { background-position: -336px 17px; }
-#index #browse_by_category li#cafe .cat_icon b { background-position: -455px 17px; }
-#index #browse_by_category li#restaurants .cat_icon b { background-position: -576px 17px; }
-#index #browse_by_category li#night_clubs .cat_icon b { background-position: -695px 17px; }
-#index #browse_by_category li#karaoke .cat_icon b { background-position: -816px 17px; }
+#browse_by_category li#coffee .cat_icon b { background-position: 24px 17px; }
+#browse_by_category li#bars_and_pubs .cat_icon b { background-position: -94px 17px; }
+#browse_by_category li#pizza .cat_icon b { background-position: -215px 17px; }
+#browse_by_category li#sushi .cat_icon b { background-position: -336px 17px; }
+#browse_by_category li#cafe .cat_icon b { background-position: -455px 17px; }
+#browse_by_category li#restaurants .cat_icon b { background-position: -576px 17px; }
+#browse_by_category li#night_clubs .cat_icon b { background-position: -695px 17px; }
+#browse_by_category li#karaoke .cat_icon b { background-position: -816px 17px; }
 
 
 
@@ -3460,66 +3460,6 @@ body {
 #footer.page_description {
 	padding-bottom: 150px;
 }
-
-
-
-
-
-/******** 404 page ********/
-
-#page404 h1 {
-	font-size: 30px;
-	font-family: 'univers_condensedmedium', 'Arial Narrow', sans-serif;
-	letter-spacing: -0.05em;
-	font-weight: normal;
-	color: #333;
-	margin: -5px 0 5px 0;
-	padding: 0;
-}
-
-#page404 h1 b {
-	color: #08c;
-}
-
-#page404 h2 {
-	color: #08c;
-	font-size: 36px;
-	letter-spacing: -0.05em;
-	margin: -5px 0 10px 0;
-	padding: 0;
-}
-
-#page404 .page_content {
-	padding: 0;
-	border-radius: 3px;
-	overflow: hidden;
-}
-
-#page404 img {
-	float: left;
-}
-
-#page404 #sb {
-	width: 260px;
-	padding: 20px;
-	float: right;
-	background: #dfdeda;
-	min-height: 380px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
