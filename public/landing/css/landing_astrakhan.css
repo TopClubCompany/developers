@@ -36,6 +36,12 @@
 	display: block;
 }
 
+#landing #landing_teaser ul li {
+	position: relative;
+	overflow: visible !important;
+	height: 353px; !important
+}
+
 #landing #landing_teaser .caption {
 	position: absolute;
 	bottom: 0;
