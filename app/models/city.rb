@@ -17,6 +17,11 @@ class City < ActiveRecord::Base
 
 
   ac_field
+
+  def self.for_reg(current_city_id)
+    cities = City.where("slug != ?",current_city_id)
+    cities.unshift(find(current_city_id))
+  end
 end
 # == Schema Information
 #
