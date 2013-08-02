@@ -6,15 +6,17 @@ html lang="#{I18n.locale}" xml:lang="#{I18n.locale}" xmlns="http://www.w3.org/19
     - ([:en, :ru, :ua] - [I18n.locale]).each do |alterative_locale|
       link href="http://#{request.host + '/' + alterative_locale.to_s + request.fullpath}" hreflang="#{alterative_locale}" rel="alternate"
     javascript:
-       var _gaq = _gaq || [];
-       _gaq.push(['_setAccount', 'UA-39194049-1']);
-       _gaq.push(['_trackPageview']);
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-39194049-1']);
+      _gaq.push(['_setDomainName', 'topreserve.net']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
 
-       (function() {
-         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-       })();
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
   body
     javascript:
       (function (d, w, c) {
