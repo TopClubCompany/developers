@@ -39,7 +39,8 @@
 #landing #landing_teaser ul li {
 	position: relative;
 	overflow: visible !important;
-	height: 353px; !important
+	height: 353px; !important;
+	width: 940px;
 }
 
 #landing #landing_teaser .caption {
