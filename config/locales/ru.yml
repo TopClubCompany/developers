@@ -109,13 +109,13 @@ ru:
       best_restaurants: "Популярные рестораны"
       find_restorants: Find a restaurants
       how_it_works: "Как это работает?"
-      main_slider_text: "Платите меньше в любимых ресторанах"
+      main_slider_text: "Платите меньше в любимых заведениях"
       make_free_table: "Забронировать столик онлайн на:"
       more_main: "Загрузить еще"
       new: "Новые рестораны"
       reserv_online: Reserve your table online for free
       save_up: Save up to 30% off all food and drinks
-      second_big_text: "Выбирайте из более чем %{count} ресторанов %{city} и экономьте до %{discount}% от вашего счета."
+      second_big_text: "Выбирайте из более чем %{count} кафе и ресторанов %{city} и экономьте до %{discount}% от вашего счета."
       support: "Поддержка и заказ:"
   facebook: Facebook
   flash: 
