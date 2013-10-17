@@ -53,15 +53,19 @@ class Location < ActiveRecord::Base
 
   def set_city_to_place
     if city_en.include?(",")
-      puts city_en.split(" ")[1].downcase
-      place.update_attributes(city_id: City.find(city_en.split(" ")[1].downcase).id)
+      city = city_en.split(" ")[1].downcase
+      if city == "kiev"
+        city = "kyiv"
+      end
+      place.update_attributes(city_id: City.find(city).id)
     else
-      puts city_en.split(" ")[0].downcase
-      place.update_attributes(city_id: City.find(city_en.split(" ")[0].downcase).id)
+      city = city_en.split(" ")[1].downcase
+      if city == "kiev"
+        city = "kyiv"
+      end
+      place.update_attributes(city_id: City.find(city).id)
     end
   end
-
-
 
 end
 # == Schema Information
