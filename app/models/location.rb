@@ -59,7 +59,7 @@ class Location < ActiveRecord::Base
       end
       place.update_attributes(city_id: City.find(city).id)
     else
-      city = city_en.split(" ")[1].downcase
+      city = city_en.split(" ")[0].downcase
       if city == "kiev"
         city = "kyiv"
       end
