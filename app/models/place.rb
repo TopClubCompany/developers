@@ -471,7 +471,9 @@ class Place < ActiveRecord::Base
 
   def self.deparam(url)
     replace_url = url
-    City.all.map{|obj| obj.slug}.map{|i| [i].zip("#{i}_oblast")}.flatten.each do |slug|
+    cities = City.all.map{|obj| obj.slug}.map{|i| [i].zip("#{i}_oblast")}.flatten
+    cities.push('kiev_oblast')
+    cities.each do |slug|
       replace_url = url.to_s.sub(/-#{slug}$/,'')
       if replace_url != url
         break
