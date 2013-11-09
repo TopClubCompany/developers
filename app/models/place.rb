@@ -167,7 +167,8 @@ class Place < ActiveRecord::Base
     else
 
       if options[:city].present?
-        filters << {query: {flt: {like_text: options[:city], fields: I18n.available_locales.map { |l| "city_#{l}" }} }}
+        filters << {query: {term: {city_id: City.find_by_slug(options[:city]).try(:id)}}}
+        #filters << {query: {flt: {like_text: options[:city], fields: I18n.available_locales.map { |l| "city_#{l}" }} }}
       end
 
       tire.search(page: options[:page], per_page: options[:per_page] || 10) do
@@ -236,7 +237,7 @@ class Place < ActiveRecord::Base
   end
 
   def to_indexed_json
-    attrs = [:id, :slug, :avg_bill, :url, :created_at, :is_visible]
+    attrs = [:id, :slug, :avg_bill, :url, :created_at, :is_visible, :city_id]
     related_ids = [:kitchen_ids, :category_ids, :place_feature_item_ids, :review_ids, :week_day_ids,
                    :day_discount_ids
     ]
