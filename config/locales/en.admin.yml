@@ -90,6 +90,22 @@ en:
           moderate: ""
           spendy: ""
           splurge: ""
+      odessa:
+        code:
+          cheap: ""
+          moderate: ""
+          spendy: ""
+          splurge: ""
+        image:
+          cheap: ""
+          moderate: ""
+          spendy: ""
+          splurge: ""
+        kind:
+          cheap: ""
+          moderate: ""
+          spendy: ""
+          splurge: ""
     cant_be_deleted: ""
     choose: ""
     clear_cache: ""
