@@ -106,6 +106,22 @@ ru:
           moderate: "100 - 200 грн."
           spendy: "200 - 500 грн."
           splurge: "более 500 грн."
+      kharkiv:
+        code:
+          cheap: "Недорогой"
+          moderate: "Средний"
+          spendy: "Умеренный"
+          splurge: "Премиум"
+        image:
+          cheap: $
+          moderate: $$
+          spendy: $$$
+          splurge: $$$$
+        kind:
+          cheap: "до 100 грн."
+          moderate: "100 - 200 грн."
+          spendy: "200 - 500 грн."
+          splurge: "более 500 грн."
     cant_be_deleted: "Удаление невозможно"
     choose: "Выберите %{attr}"
     clear_cache: "Очистить кеш"

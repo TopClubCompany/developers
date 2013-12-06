@@ -106,6 +106,22 @@ ua:
           moderate: ""
           spendy: ""
           splurge: ""
+      kharkiv:
+        code:
+          cheap: ""
+          moderate: ""
+          spendy: ""
+          splurge: ""
+        image:
+          cheap: ""
+          moderate: ""
+          spendy: ""
+          splurge: ""
+        kind:
+          cheap: ""
+          moderate: ""
+          spendy: ""
+          splurge: ""
     cant_be_deleted: "Видалення неможливе"
     choose: "Оберіть %{attr}"
     clear_cache: "Очистити кеш"
