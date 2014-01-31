@@ -9,11 +9,11 @@
   :is_own: true
   :is_visibility: true
   :model: Reservation
-  :assocs: [:place]
+  :assocs: [place]
 
 :place:
   :resource: true
   :collection: true
   :is_own: true
   :model: Place
-  :assocs: [:city]
+  :assocs: [city]
