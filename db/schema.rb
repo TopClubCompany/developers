@@ -149,9 +149,9 @@ ActiveRecord::Schema.define(:version => 20130729103418) do
     t.string   "name"
     t.text     "description"
     t.string   "plural_name"
+    t.text     "letter"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    t.text     "letter"
   end
 
   add_index "city_translations", ["city_id"], :name => "index_city_translations_on_city_id"
