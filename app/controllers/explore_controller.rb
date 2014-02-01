@@ -1,5 +1,7 @@
 class ExploreController < ApplicationController
 
+  layout :choose_layout
+
   def index
     unless current_city.present?
       @css_class_cities = "index_cities"
@@ -68,6 +70,11 @@ class ExploreController < ApplicationController
     gon.cities = City.visible.map{|city| {latitude: city.latitude, longitude: city.longitude,
                                           slug: city.slug, title: city.title}}
 
+  end
+
+  def choose_layout
+    return "choose_city" unless current_city.present?
+    'application'
   end
 
 end
