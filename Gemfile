@@ -24,7 +24,7 @@ gem 'jquery-rails', "< 2.1.8"
 gem 'ffaker'
 
 gem 'geokit'
-gem 'geokit-rails3'
+gem 'geokit-rails'
 gem 'geokit-nominatim'
 gem 'tire'
 gem 'figaro'
@@ -148,7 +148,7 @@ gem "factory_girl", '>=4.0.0'
 #for templating 
 gem 'mustache'
 #work with soap
-gem 'soap4r', :git => 'git://github.com/felipec/soap4r.git'
+gem 'soap2r', :git => 'git://github.com/felipec/soap4r.git'
 
 #meta tag
 gem 'meta-tags', :require => 'meta_tags'
