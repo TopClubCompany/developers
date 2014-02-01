@@ -47,11 +47,7 @@ gem 'gon'
 gem 'sitemap_generator'
 
 group :development do
-  if File.exists?('/var/www/top_club/developers/.local_gems')
-    gem 'annotate', :path => '/var/www/gems/annotate_models'
-  else
-    gem 'annotate', :git => 'git://github.com/OpakAlex/annotate_models.git', :ref => '887923f'
-  end
+  gem 'annotate', :git => 'git://github.com/OpakAlex/annotate_models.git', :ref => '887923f'
   gem 'pry-rails'
   gem 'pry-doc'
 end
@@ -124,14 +120,6 @@ group :development do
 end
 
 group :test do
-  if RUBY_PLATFORM.downcase.include?("darwin")
-    gem 'rb-fsevent', '~> 0.9.1'
-    gem 'terminal-notifier-guard'
-    gem 'growl'
-    gem 'growl_notify'
-    gem 'rack-mini-profiler'
-  end
-
   gem "better_errors"
   gem "binding_of_caller"
 
@@ -152,7 +140,6 @@ group :test do
   gem 'guard-livereload'
   gem 'guard-jasmine'
   gem 'jasminerice'
-  gem 'rb-inotify' if RUBY_PLATFORM.downcase.include?("linux")
 end
 
 #for seed in production
