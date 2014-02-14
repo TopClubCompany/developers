@@ -102,8 +102,9 @@ class Place < ActiveRecord::Base
   end
 
   def self.for_slider options={}
+    filters  = []
+    filters.push(*self.visible_filter)
     tire.search(page: options[:page], per_page: options[:per_page] || 4) do
-      filters  = []
       if options[:city].present?
         filters << {query: {flt: {like_text: options[:city], fields: I18n.available_locales.map { |l| "city_#{l}" }} }}
       end
@@ -127,6 +128,8 @@ class Place < ActiveRecord::Base
   def self.search(options = {})
     filters = []
     categories = []
+
+    filters.push(*self.visible_filter)
 
     wday = options[:reserve_date].present? ? DateTime.parse(options[:reserve_date]).wday : DateTime.now.wday
     wday = PlaceUtils::PlaceTime.wday(wday)
@@ -191,6 +194,8 @@ class Place < ActiveRecord::Base
   end
 
   def self.best_places amount, options={}
+    filters = []
+    filters.push(*self.visible_filter)
     tire.search(page: options[:page] || 1, per_page: amount) do
       sort { by "overall_mark", "desc" }
       if options[:city]
@@ -198,10 +203,13 @@ class Place < ActiveRecord::Base
           flt options[:city].lucene_escape, :fields => I18n.available_locales.map { |l| "city_#{l}" }, :min_similarity => 0.5
         end
       end
+      filter(:and, :filters => filters)
     end
   end
 
   def self.new_places amount, options={}
+    filters = []
+    filters.push(*self.visible_filter)
     tire.search(page: options[:page] || 1, per_page: amount) do
       sort do
          by("created_at", "desc")
@@ -212,6 +220,7 @@ class Place < ActiveRecord::Base
           flt options[:city].lucene_escape, :fields => I18n.available_locales.map { |l| "city_#{l}" }, :min_similarity => 0.5
         end
       end
+      filter(:and, :filters => filters)
     end
   end
 
@@ -219,6 +228,7 @@ class Place < ActiveRecord::Base
     current_day = PlaceUtils::PlaceTime.wday(DateTime.now.wday) + 1
     field = "week_day_#{current_day}"
     filters = []
+    filters.push(*self.visible_filter)
     filters << {query: {terms: {:"#{field}" => [19, 3], minimum_match: 2} }}
     tire.search(page: options[:page] || 1, per_page: amount) do
       sort { by("overall_mark", "desc") }
