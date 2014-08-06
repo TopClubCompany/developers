@@ -52,6 +52,7 @@ class Location < ActiveRecord::Base
   end
 
   def set_city_to_place
+    return true unless city_en
     if city_en.include?(",")
       city = city_en.split(" ")[1].downcase
       if city == "kiev"
