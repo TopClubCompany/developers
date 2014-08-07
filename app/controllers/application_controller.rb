@@ -28,6 +28,7 @@ class ApplicationController < ActionController::Base
           redirect_to  "http://"+cookies[:city] + "." + request.domain + request.path
         end
       end
+      @subdomain = cookies[:city] || 'kyiv'
     end
 
     def current_city param=:slug
