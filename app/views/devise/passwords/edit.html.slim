@@ -10,7 +10,6 @@
         = simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put, :id => 'reset_password' }) do |f|
           = f.error_notification
           = f.input :reset_password_token, :as => :hidden
-          = f.full_error :reset_password_token
           = f.input :password, :label => I18n.t('auth.new_password'), :required => true
           = f.input :password_confirmation, :label => I18n.t('auth.confirm_you_password'), :required => true
           .clear
