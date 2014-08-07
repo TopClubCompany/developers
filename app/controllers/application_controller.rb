@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
   before_filter :set_breadcrumbs_front, only: [:index, :show, :new_reservation]
   before_filter :set_css_class
 
+  around_filter :set_subdomain
+
   helper_method :current_city, :current_city_plural
 
   protected
@@ -28,7 +30,6 @@ class ApplicationController < ActionController::Base
           redirect_to  "http://"+cookies[:city] + "." + request.domain + request.path
         end
       end
-      @subdomain = cookies[:city] || 'kyiv'
     end
 
     def current_city param=:slug
@@ -133,6 +134,13 @@ class ApplicationController < ActionController::Base
 
   def set_css_class
     @css_class_cities = ""
+  end
+
+  def set_subdomain
+    Thread.current[:subdomain] = cookies[:city] || 'kyiv'
+    yield
+  ensure
+    Thread.current[:subdomain] = nil
   end
 
   private
