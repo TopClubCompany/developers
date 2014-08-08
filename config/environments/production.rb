@@ -79,7 +79,7 @@ Topclub::Application.configure do
       enable_starttls_auto:  true }
 
 
-  config.action_mailer.default_url_options = { :host => 'topreserve.com.ua' }
+  config.action_mailer.default_url_options = { :host => 'topreserve.net' }
   config.middleware.use ExceptionNotifier,
                         :email_prefix => "[TOP]",
                         :sender_address => %{"TOProd" <noreply@topreserve.com.ua>},
@@ -90,4 +90,4 @@ Topclub::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 end
 
-Rails.application.routes.default_url_options[:host] = "topreserve.com.ua"
+Rails.application.routes.default_url_options[:host] = "topreserve.net"
