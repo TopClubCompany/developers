@@ -22,7 +22,7 @@ set -e
 
 # Feel free to change any of the following variables for your app:
 PATH=/usr/local/rvm/bin:$PATH
-APP_ROOT=/var/www/vhosts/topreserve.com.ua/htdocs
+APP_ROOT=/var/www/developers
 PID=$APP_ROOT/tmp/pids/unicorn.pid
 ENV=production
 CMD="$APP_ROOT/bin/unicorn -D -E $ENV -c $APP_ROOT/config/unicorn.conf.rb"
