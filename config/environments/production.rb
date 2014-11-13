@@ -71,7 +71,7 @@ Topclub::Application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       address:              "smtp.yandex.ru",
-      port:                  465,
+      port:                  587,
       domain:               'topreserve.com.ua',
       user_name:             "noreply@topreserve.com.ua",
       password:              198666,
