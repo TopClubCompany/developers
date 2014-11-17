@@ -39,7 +39,7 @@ gem 'omniauth-vkontakte'
 gem 'omniauth-openid'
 gem 'omniauth-google-oauth2'
 gem 'cancan'
-gem 'fb_graph'
+gem 'fb_graph', '2.7.17'
 gem 'vkontakte_api', '~> 1.0'
 
 gem 'unicode_utils'
