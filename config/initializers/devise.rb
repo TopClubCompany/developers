@@ -25,7 +25,7 @@ Devise.setup do |config|
   require 'devise/orm/active_record'
 
 
-  config.omniauth :facebook,  Figaro.env.facebook_app_id, Figaro.env.facebook_app_secret, { scope: 'user_birthday, email' }
+  config.omniauth :facebook,  Figaro.env.facebook_app_id, Figaro.env.facebook_app_secret, { scope: 'user_birthday, email', {:client_options => {:ssl => {:ca_path => "/etc/ssl/certs"}}} }
   config.omniauth :vkontakte, Figaro.env.vk_app_id, Figaro.env.vk_app_secret
   config.omniauth :twitter, Figaro.env.twitter_app_id, Figaro.env.twitter_app_secret
   config.omniauth :open_id, :store => OpenID::Store::Filesystem.new('/tmp'), :name => :google, :identifier => 'https://www.google.com/accounts/o8/id', :require => 'omniauth-openid'
